@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과학 기술의 활용 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학2</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅲ-1 · 과학과 미래 사회</div>
+      <h1 class="display">과학 기술의<br>활용</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 과학 기술의 발전</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 빅데이터의 활용</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 과학이 사회를 바꿔온 과정</div>
+        <h2 class="display">과학 기술 발전의 흐름</h2>
+        <p>타임라인의 각 지점을 클릭해 과학 기술이 인류 사회를 어떻게 변화시켜 왔는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
+        <div class="info-card" id="c0-info">타임라인의 점을 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 데이터가 곧 자원인 시대</div>
+        <h2 class="display">빅데이터는 어떻게 활용될까?</h2>
+        <p>빅데이터가 수집되어 활용되기까지의 과정과, 실제 활용 사례를 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="info-card" id="c1-info">단계나 카드를 클릭해 보세요.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 과학기술 타임라인 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0-info");
+  var events = [
+    { year: "18세기", name: "증기 기관", desc: "동력을 인력·축력에서 기계로 전환해 산업 혁명을 이끌었습니다.", frac: 0.05 },
+    { year: "19세기", name: "전기의 활용", desc: "발전과 송전 기술로 조명, 통신, 각종 기기 사용이 가능해졌습니다.", frac: 0.28 },
+    { year: "20세기 중반", name: "컴퓨터의 등장", desc: "복잡한 계산과 정보 처리를 자동화하며 정보화 사회의 기반이 되었습니다.", frac: 0.55 },
+    { year: "20세기 말", name: "인터넷의 보급", desc: "전 세계가 연결되어 정보와 지식이 실시간으로 공유되기 시작했습니다.", frac: 0.75 },
+    { year: "21세기", name: "인공지능(AI)", desc: "스스로 학습하고 판단하는 기술로 다양한 산업과 생활 전반에 영향을 주고 있습니다.", frac: 0.95 }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var x0 = 60, x1 = W - 60;
+    events.forEach(function (ev) { if (Math.abs((x0 + ev.frac * (x1 - x0)) - mx) < 22) info.innerHTML = "<b>" + ev.year + " · " + ev.name + "</b> — " + ev.desc; });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var x0 = 60, x1 = W - 60, y = H / 2;
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+    events.forEach(function (ev, i) {
+      var x = x0 + ev.frac * (x1 - x0);
+      var up = i % 2 === 0;
+      ctx.save(); ctx.fillStyle = cssVar("--teal"); ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill(); ctx.restore();
+      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
+      ctx.fillText(ev.name, x, up ? y - 40 : y + 50);
+      ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+      ctx.fillText(ev.year, x, up ? y - 22 : y + 32);
+    });
+  }
+  render();
+})();
+
+/* TAB1 빅데이터 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c1-info");
+  var steps = [
+    { icon: "📥", name: "수집", desc: "센서, SNS, 거래 기록 등 다양한 경로에서 방대한 데이터를 모읍니다." },
+    { icon: "🗂️", name: "저장·정리", desc: "수집한 데이터를 분석 가능한 형태로 저장하고 정리합니다." },
+    { icon: "🔍", name: "분석", desc: "통계와 인공지능 기법으로 데이터 속 규칙과 패턴을 찾아냅니다." },
+    { icon: "💡", name: "활용", desc: "분석 결과를 바탕으로 예측하거나 더 나은 의사 결정을 합니다." }
+  ];
+  var cases = [
+    { icon: "🚑", name: "감염병 확산 예측", x: 150 },
+    { icon: "🛒", name: "맞춤형 상품 추천", x: 450 },
+    { icon: "🌦️", name: "정밀 기상 예보", x: 750 }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
+    if (my < 200) {
+      var cellW = W / steps.length;
+      var idx = Math.floor(mx / cellW);
+      if (steps[idx]) info.innerHTML = "<b>" + steps[idx].icon + " " + steps[idx].name + "</b> — " + steps[idx].desc;
+    } else {
+      cases.forEach(function (c) { if (Math.abs(mx - c.x) < 100) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> 사례는 빅데이터 분석을 통해 더 정확한 예측과 맞춤형 서비스를 가능하게 합니다."; });
+    }
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var cellW = W / steps.length;
+    steps.forEach(function (s, i) {
+      var x = i * cellW;
+      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x + 8, 30, cellW - 16, 140);
+      ctx.font = "30px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(s.icon, x + cellW / 2, 90);
+      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(s.name, x + cellW / 2, 130);
+      if (i < steps.length - 1) {
+        ctx.save(); ctx.strokeStyle = cssVar("--teal"); ctx.fillStyle = cssVar("--teal"); ctx.lineWidth = 2;
+        drawArrow(ctx, x + cellW - 14, 90, x + cellW + 14, 90, 7);
+        ctx.restore();
+      }
+    });
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("활용 사례", W / 2, 210);
+    cases.forEach(function (c) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
+      ctx.fillRect(c.x - 100, 230, 200, 110);
+      ctx.strokeRect(c.x - 100, 230, 200, 110);
+      ctx.restore();
+      ctx.font = "30px Segoe UI"; ctx.fillText(c.icon, c.x, 280);
+      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, 315);
+    });
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

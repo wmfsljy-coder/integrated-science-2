@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>통합과학2 — 관측 스테이션</title>
+<link rel="stylesheet" href="assets/theme.css">
+<style>
+  body { display: block; }
+  .hero { padding: 64px 30px 30px; max-width: 1080px; margin: 0 auto; }
+  .hero .eyebrow { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .hero h1 { font-size: clamp(30px, 5vw, 46px); margin: 10px 0 14px; text-wrap: balance; }
+  .hero p { color: var(--mist); font-size: 15.5px; line-height: 1.7; max-width: 640px; margin: 0; }
+  .hero a.back { color: var(--mist); font-size: 12.5px; text-decoration: none; }
+  .hero a.back:hover { color: var(--teal); }
+  .grid { max-width: 1080px; margin: 30px auto 80px; padding: 0 30px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+  .unit-card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; text-decoration: none; color: inherit; transition: border-color .15s, transform .15s; position: relative; overflow: hidden; }
+  .unit-card:hover { border-color: var(--teal-dim); transform: translateY(-2px); }
+  .unit-card .chapter { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--teal); font-weight: 700; margin-bottom: 6px; }
+  .unit-card h3 { font-size: 19px; margin: 0 0 8px; }
+  .unit-card p { color: var(--mist); font-size: 13px; line-height: 1.6; margin: 0 0 14px; min-height: 60px; }
+  .unit-card .topics { display: flex; flex-wrap: wrap; gap: 6px; }
+  .unit-card .topics span { font-size: 10.5px; padding: 3px 8px; border-radius: 999px; background: var(--panel-2); border: 1px solid var(--line); color: var(--mist); }
+  .unit-card .go { position: absolute; top: 22px; right: 22px; color: var(--mist); font-size: 18px; }
+  .part-label { max-width: 1080px; margin: 0 auto; padding: 30px 30px 0; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--mist); font-weight: 700; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <a class="back" href="https://wmfsljy-coder.github.io/science-teacher-hub/">← 지구과학 교사 웹툴 모음</a>
+  <div class="eyebrow" style="margin-top:14px">고등학교 통합과학2 · 인터랙티브 학습 도구</div>
+  <h1 class="display">통합과학2<br>관측 스테이션</h1>
+  <p>변화와 다양성, 환경과 에너지, 과학과 미래 사회 3개 대단원, 6개 단원을 직접 조작하며 배웁니다.</p>
+</div>
+
+<div class="part-label">Ⅰ. 변화와 다양성</div>
+<div class="grid">
+  <a class="unit-card" href="1-1/">
+    <div class="chapter">Ⅰ-1</div>
+    <h3 class="display">지구 환경 변화와 생물다양성</h3>
+    <p>지질시대와 대멸종, 자연선택과 진화, 생물다양성의 세 층위를 다룹니다.</p>
+    <div class="topics"><span>대멸종</span><span>자연선택</span><span>생물다양성</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="1-2/">
+    <div class="chapter">Ⅰ-2</div>
+    <h3 class="display">화학 변화</h3>
+    <p>산화와 환원, 산과 염기, 화학 반응에서의 에너지 출입을 다룹니다.</p>
+    <div class="topics"><span>산화·환원</span><span>산과 염기</span><span>발열·흡열</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<div class="part-label">Ⅱ. 환경과 에너지</div>
+<div class="grid">
+  <a class="unit-card" href="2-1/">
+    <div class="chapter">Ⅱ-1</div>
+    <h3 class="display">생태계와 환경 변화</h3>
+    <p>생태계의 구성 요소, 생태계 평형(개체수 변동), 지구 환경 변화와 인간 생활을 다룹니다.</p>
+    <div class="topics"><span>먹이 사슬</span><span>개체수 변동</span><span>환경 문제</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="2-2/">
+    <div class="chapter">Ⅱ-2</div>
+    <h3 class="display">에너지 전환과 활용</h3>
+    <p>태양 에너지의 전환, 발전과 에너지원, 에너지 효율을 다룹니다.</p>
+    <div class="topics"><span>에너지 흐름</span><span>발전 방식</span><span>에너지 효율</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<div class="part-label">Ⅲ. 과학과 미래 사회</div>
+<div class="grid">
+  <a class="unit-card" href="3-1/">
+    <div class="chapter">Ⅲ-1</div>
+    <h3 class="display">과학 기술의 활용</h3>
+    <p>과학 기술 발전의 흐름과 빅데이터의 수집·분석·활용 과정을 다룹니다.</p>
+    <div class="topics"><span>기술 발전사</span><span>빅데이터</span></div>
+    <div class="go">→</div>
+  </a>
+  <a class="unit-card" href="3-2/">
+    <div class="chapter">Ⅲ-2</div>
+    <h3 class="display">과학 기술의 발전과 쟁점</h3>
+    <p>미래를 바꿀 과학 기술과, 그 기술을 둘러싼 사회적 쟁점·윤리를 다룹니다.</p>
+    <div class="topics"><span>미래 기술</span><span>과학 윤리</span></div>
+    <div class="go">→</div>
+  </a>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="assets/theme.js"></script>
+</body>
+</html>

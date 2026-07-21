@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>생태계와 환경 변화 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학2</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅱ-1 · 환경과 에너지</div>
+      <h1 class="display">생태계와<br>환경 변화</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 생태계의 구성</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 생태계 평형</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 지구 환경 변화</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 생물과 환경이 얽힌 그물</div>
+        <h2 class="display">생태계의 구성 요소</h2>
+        <p>먹이 사슬의 각 단계를 클릭해 생산자, 소비자, 분해자의 역할을 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="360"></canvas></div>
+        <div class="info-card" id="c0-info">단계를 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 포식자와 피식자의 균형</div>
+        <h2 class="display">생태계 평형</h2>
+        <p>초기 개체수를 조절하며 포식자(늑대)와 피식자(토끼) 개체수가 시간에 따라 어떻게 주기적으로 변동하는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">초기 토끼(피식자) 개체수<span class="val" id="c1-prey-val">100</span></div>
+            <input type="range" id="c1-prey" min="50" max="150" step="5" value="100">
+          </div>
+        </div>
+        <div class="info-card">먹이가 많으면(피식자 증가) → 포식자가 늘어남 → 피식자가 줄어듦 → 포식자도 줄어듦 → 다시 피식자가 늘어나는 <b>주기적 변동</b>이 반복되며 장기적으로 생태계는 평형을 이룹니다.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 인간 활동이 만든 변화</div>
+        <h2 class="display">지구 환경 변화와 인간 생활</h2>
+        <p>환경 문제 카드를 클릭해 원인과 그로 인한 영향을 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
+        <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 생태계 구성 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0-info");
+  var steps = [
+    { name: "생산자", icon: "🌾", desc: "광합성으로 무기물에서 유기물을 스스로 만드는 생물입니다. 예) 식물, 식물성 플랑크톤." },
+    { name: "1차 소비자", icon: "🐇", desc: "생산자를 먹이로 하는 초식 동물입니다." },
+    { name: "2차 소비자", icon: "🦊", desc: "1차 소비자를 먹이로 하는 육식 동물입니다." },
+    { name: "분해자", icon: "🍄", desc: "생물의 사체나 배설물을 분해해 무기물로 되돌리는 생물입니다. 예) 세균, 곰팡이." }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var cellW = W / steps.length;
+    var idx = Math.floor(mx / cellW);
+    if (steps[idx]) info.innerHTML = "<b>" + steps[idx].icon + " " + steps[idx].name + "</b> — " + steps[idx].desc;
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var cellW = W / steps.length;
+    steps.forEach(function (s, i) {
+      var x = i * cellW;
+      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x + 10, 60, cellW - 20, 200);
+      ctx.font = "44px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(s.icon, x + cellW / 2, 160);
+      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(s.name, x + cellW / 2, 220);
+      if (i < steps.length - 1) {
+        ctx.save(); ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
+        drawArrow(ctx, x + cellW - 16, 160, x + cellW + 16, 160, 8);
+        ctx.restore();
+      }
+    });
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("에너지와 물질의 흐름 →", W / 2, 300);
+  }
+  render();
+})();
+
+/* TAB1 개체수 변동 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var prey0 = 100;
+  document.getElementById("c1-prey").addEventListener("input", function (e) { prey0 = +e.target.value; document.getElementById("c1-prey-val").textContent = prey0; render(); });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var x0 = 60, x1 = W - 60, y0 = 40, y1 = H - 60;
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("시간 →", (x0 + x1) / 2, y1 + 26);
+
+    // Lotka-Volterra style oscillation, amplitude scaled with prey0 deviation from 100
+    var amp = (prey0 - 100) / 50; // -1..1
+    var baseFreq = 0.6;
+    ctx.beginPath();
+    for (var px = 0; px <= 300; px++) {
+      var tt = px / 300 * 10;
+      var prey = 0.5 + 0.35 * Math.sin(tt * baseFreq) * (1 + amp * 0.4) + 0.1;
+      var xx = x0 + px / 300 * (x1 - x0);
+      var yy = y1 - prey * (y1 - y0);
+      if (px === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+    }
+    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
+
+    ctx.beginPath();
+    for (var px2 = 0; px2 <= 300; px2++) {
+      var tt2 = px2 / 300 * 10;
+      var pred = 0.5 + 0.3 * Math.sin(tt2 * baseFreq - 1.1) * (1 + amp * 0.4);
+      var xx2 = x0 + px2 / 300 * (x1 - x0);
+      var yy2 = y1 - pred * (y1 - y0);
+      if (px2 === 0) ctx.moveTo(xx2, yy2); else ctx.lineTo(xx2, yy2);
+    }
+    ctx.strokeStyle = cssVar("--coral"); ctx.lineWidth = 2.5; ctx.stroke();
+
+    ctx.font = "12px Segoe UI"; ctx.textAlign = "left";
+    ctx.fillStyle = cssVar("--teal"); ctx.fillText("🐇 토끼(피식자)", x0, y0 - 10);
+    ctx.fillStyle = cssVar("--coral"); ctx.fillText("🦊 여우(포식자)", x0 + 140, y0 - 10);
+  }
+  render();
+})();
+
+/* TAB2 지구환경변화 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c2-info");
+  var cards = [
+    { icon: "🌡️", name: "지구 온난화", cause: "화석 연료 사용으로 인한 온실 기체 증가", effect: "해수면 상승, 이상 기후, 생태계 서식지 변화", x: 130 },
+    { icon: "🏜️", name: "사막화", cause: "과도한 개간·방목, 기후 변화로 인한 강수량 감소", effect: "농경지 손실, 식량 부족, 황사 증가", x: 380 },
+    { icon: "☀️", name: "오존층 파괴", cause: "프레온 가스(CFC) 등 오존층 파괴 물질의 배출", effect: "자외선 투과량 증가, 피부암·백내장 발생률 증가", x: 630 }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    cards.forEach(function (c) {
+      if (Math.abs(mx - c.x) < 110) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b><br>원인: " + c.cause + "<br>영향: " + c.effect;
+    });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    cards.forEach(function (c) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
+      ctx.fillRect(c.x - 110, 80, 220, 180);
+      ctx.strokeRect(c.x - 110, 80, 220, 180);
+      ctx.restore();
+      ctx.font = "44px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, 160);
+      ctx.font = "700 14px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, 210);
+      ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.fillText("클릭해서 자세히 보기", c.x, 240);
+    });
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>지구 환경 변화와 생물다양성 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학2</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅰ-1 · 변화와 다양성</div>
+      <h1 class="display">지구 환경 변화와<br>생물다양성</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 지질시대와 대멸종</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 자연선택과 진화</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 생물다양성의 의미</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 지구 생물의 흥망성쇠</div>
+        <h2 class="display">지질시대와 대멸종</h2>
+        <p>시간 막대의 지점을 클릭해 지구 역사상 있었던 5차례의 대멸종에 대해 알아보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
+        <div class="info-card" id="c0-info">대멸종 지점(●)을 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 환경에 적합한 형질이 살아남는다</div>
+        <h2 class="display">자연선택과 진화</h2>
+        <p>가뭄으로 딱딱한 씨앗이 많아진 환경을 가정해 보세요. 부리 크기 분포가 다른 핀치 개체군에서, 여러 세대가 지나면 어떤 부리를 가진 개체가 늘어날까요?</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">세대 진행<span class="val" id="c1-gen-val">0세대</span></div>
+            <input type="range" id="c1-gen" min="0" max="10" step="1" value="0">
+          </div>
+        </div>
+        <div class="info-card" id="c1-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 세 층위의 다양성</div>
+        <h2 class="display">생물다양성이란?</h2>
+        <p>생물다양성은 유전적 다양성, 종다양성, 생태계다양성 세 층위로 나누어 이해할 수 있습니다. 각 카드를 클릭해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="340"></canvas></div>
+        <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 대멸종 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0-info");
+  var events = [
+    { name: "오르도비스기 대멸종", ago: "약 4.4억 년 전", frac: 0.15, desc: "해양 생물 종의 약 85%가 사라진 것으로 추정됩니다. 급격한 빙하기가 원인으로 지목됩니다." },
+    { name: "데본기 대멸종", ago: "약 3.7억 년 전", frac: 0.32, desc: "해양 생물이 큰 타격을 입었으며, 화산 활동과 해양 산소 부족이 원인으로 추정됩니다." },
+    { name: "페름기 대멸종", ago: "약 2.5억 년 전", frac: 0.52, desc: "지구 역사상 가장 큰 규모의 멸종으로, 생물 종의 약 96%가 사라졌습니다. 대규모 화산 활동이 주원인으로 추정됩니다." },
+    { name: "트라이아스기 대멸종", ago: "약 2억 년 전", frac: 0.68, desc: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 되었습니다." },
+    { name: "백악기 대멸종", ago: "약 6600만 년 전", frac: 0.92, desc: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종했습니다. 이후 포유류가 번성했습니다." }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    var x0 = 60, x1 = W - 60;
+    events.forEach(function (ev) {
+      var x = x0 + ev.frac * (x1 - x0);
+      if (Math.abs(x - mx) < 20) info.innerHTML = "<b>" + ev.name + "</b> (" + ev.ago + ") — " + ev.desc;
+    });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var x0 = 60, x1 = W - 60, y = H / 2;
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
+    ctx.fillText("먼 과거", x0, y + 40);
+    ctx.textAlign = "right"; ctx.fillText("현재", x1, y + 40);
+    events.forEach(function (ev) {
+      var x = x0 + ev.frac * (x1 - x0);
+      ctx.save();
+      ctx.fillStyle = cssVar("--coral");
+      ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill();
+      ctx.restore();
+      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+      wrapText(ctx, ev.name, x, y - 20, 100, 12);
+    });
+    function wrapText(ctx, text, x, y, maxW, lh) {
+      var line = "", lines = [];
+      for (var i = 0; i < text.length; i++) {
+        var test = line + text[i];
+        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
+      }
+      lines.push(line);
+      lines.reverse().forEach(function (l, i) { ctx.fillText(l, x, y - i * lh); });
+    }
+  }
+  render();
+})();
+
+/* TAB1 자연선택 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var gen = 0;
+  var info = document.getElementById("c1-info");
+  document.getElementById("c1-gen").addEventListener("input", function (e) { gen = +e.target.value; document.getElementById("c1-gen-val").textContent = gen + "세대"; render(); });
+
+  var seed = 12345;
+  function rand() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
+  var initial = [];
+  for (var i = 0; i < 40; i++) initial.push(10 + rand() * 20); // beak size 10-30
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    // selection pressure favors larger beaks (harder seeds) over generations
+    var survival = initial.map(function (size) {
+      var bias = gen * 0.03;
+      return size + bias * (size - 15);
+    });
+
+    var x0 = 60, x1 = W - 60, y0 = 60, y1 = H - 60;
+    survival.forEach(function (size, i) {
+      var x = x0 + (i / survival.length) * (x1 - x0);
+      var y = y1 - ((size - 5) / 30) * (y1 - y0);
+      ctx.save();
+      ctx.fillStyle = size > 20 ? cssVar("--coral") : cssVar("--cold");
+      ctx.globalAlpha = .8;
+      ctx.beginPath(); ctx.arc(x, y, 6, 0, 7); ctx.fill();
+      ctx.restore();
+    });
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("개체(각 점 = 핀치 한 마리)", (x0 + x1) / 2, y1 + 30);
+    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("부리 크기 ↑", 0, 0); ctx.restore();
+
+    var avgSize = survival.reduce(function (a, b) { return a + b; }, 0) / survival.length;
+    info.innerHTML = gen === 0
+      ? "초기 개체군은 부리 크기가 다양하게 분포합니다 (평균 " + avgSize.toFixed(1) + "mm)."
+      : gen + "세대가 지나며, 딱딱한 씨앗을 먹기 유리한 <b>큰 부리를 가진 개체의 비율이 늘어났습니다</b> (평균 부리 크기 " + avgSize.toFixed(1) + "mm). 이것이 <b>자연선택</b>에 의한 진화입니다 — 환경에 유리한 형질을 가진 개체가 더 잘 살아남아 자손을 남깁니다.";
+  }
+  render();
+})();
+
+/* TAB2 생물다양성 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c2-info");
+  var cards = [
+    { name: "유전적 다양성", icon: "🧬", desc: "같은 종 내에서도 개체마다 유전자가 달라 다양한 형질이 나타납니다. 예) 사람마다 다른 혈액형, 눈동자 색.", x: 150 },
+    { name: "종다양성", icon: "🐾", desc: "한 생태계에 얼마나 많은 종류의 생물종이 얼마나 고르게 분포하는지를 나타냅니다.", x: 450 },
+    { name: "생태계다양성", icon: "🌳", desc: "숲, 습지, 갯벌, 사막 등 다양한 환경의 생태계가 존재하는 정도를 나타냅니다.", x: 750 }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width;
+    var mx = (e.clientX - rect.left) * scaleX;
+    cards.forEach(function (c) { if (Math.abs(mx - c.x) < 120) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc; });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    cards.forEach(function (c) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
+      ctx.fillRect(c.x - 110, 80, 220, 160);
+      ctx.strokeRect(c.x - 110, 80, 220, 160);
+      ctx.restore();
+      ctx.font = "40px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, 150);
+      ctx.font = "700 14px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, 200);
+    });
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

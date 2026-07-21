@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>과학 기술의 발전과 쟁점 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학2</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅲ-2 · 과학과 미래 사회</div>
+      <h1 class="display">과학 기술의<br>발전과 쟁점</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 미래를 바꿀 과학 기술</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 과학 기술과 사회적 쟁점</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 다가오는 미래의 기술</div>
+        <h2 class="display">과학 기술과 미래 사회</h2>
+        <p>미래 사회를 바꿀 것으로 기대되는 과학 기술 카드를 클릭해 특징을 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
+        <div class="info-card" id="c0-info">카드를 클릭해 보세요.</div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 과학 기술은 가치중립적이지 않다</div>
+        <h2 class="display">과학 관련 사회적 쟁점과 윤리</h2>
+        <p>쟁점을 선택해, 그 기술이 가진 기대와 우려의 양면을 균형 있게 살펴보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">쟁점 선택</div>
+            <div class="seg" id="c1-topic">
+              <button class="on" data-t="gene">유전자 편집</button>
+              <button data-t="ai">인공지능과 일자리</button>
+              <button data-t="nuclear">원자력 발전</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c1-info"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 미래기술 카드 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0-info");
+  var cards = [
+    { icon: "🤖", name: "인공지능(AI)", desc: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용됩니다.", x: 150, y: 100 },
+    { icon: "🧬", name: "유전자 편집 기술", desc: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용됩니다.", x: 450, y: 100 },
+    { icon: "🚀", name: "우주 산업", desc: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있습니다.", x: 750, y: 100 },
+    { icon: "🔬", name: "나노 기술", desc: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용됩니다.", x: 150, y: 280 },
+    { icon: "🔋", name: "신재생 에너지 저장", desc: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이 발전하고 있습니다.", x: 450, y: 280 },
+    { icon: "🩺", name: "맞춤형 의료", desc: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있습니다.", x: 750, y: 280 }
+  ];
+  canvas.addEventListener("click", function (e) {
+    var rect = canvas.getBoundingClientRect();
+    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
+    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
+    cards.forEach(function (c) { if (mx > c.x - 110 && mx < c.x + 110 && my > c.y - 70 && my < c.y + 70) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc; });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    cards.forEach(function (c) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
+      ctx.fillRect(c.x - 110, c.y - 70, 220, 140);
+      ctx.strokeRect(c.x - 110, c.y - 70, 220, 140);
+      ctx.restore();
+      ctx.font = "36px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, c.y - 10);
+      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, c.y + 30);
+    });
+  }
+  render();
+})();
+
+/* TAB1 사회적 쟁점 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var topic = "gene";
+  var info = document.getElementById("c1-info");
+  var data = {
+    gene: { name: "유전자 편집 기술", pro: ["유전 질환 치료 가능성", "농작물 품종 개량으로 식량 문제 완화"], con: ["의도치 않은 유전적 부작용 우려", "인간 배아 편집의 윤리적 문제"] },
+    ai: { name: "인공지능과 일자리", pro: ["반복적·위험한 업무의 자동화", "생산성과 효율성 향상"], con: ["기존 일자리 감소와 고용 불안", "알고리즘 편향으로 인한 차별 가능성"] },
+    nuclear: { name: "원자력 발전", pro: ["적은 연료로 대량의 전력 생산", "발전 과정에서 온실 기체 배출이 적음"], con: ["방사성 폐기물 처리 문제", "사고 발생 시 피해 규모가 큼"] }
+  };
+  document.querySelectorAll("#c1-topic button").forEach(function (b) {
+    b.addEventListener("click", function () { topic = b.getAttribute("data-t"); document.querySelectorAll("#c1-topic button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var d = data[topic];
+    ctx.font = "700 16px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
+    ctx.fillText(d.name, W / 2, 40);
+
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(W / 2, 60); ctx.lineTo(W / 2, H - 30); ctx.stroke();
+
+    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--teal"); ctx.textAlign = "left";
+    ctx.fillText("기대되는 점", 60, 90);
+    d.pro.forEach(function (t, i) {
+      ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+      wrapText(ctx, "• " + t, 60, 120 + i * 50, 340, 18);
+    });
+
+    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--coral");
+    ctx.fillText("우려되는 점", W / 2 + 60, 90);
+    d.con.forEach(function (t, i) {
+      ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
+      wrapText(ctx, "• " + t, W / 2 + 60, 120 + i * 50, 340, 18);
+    });
+    function wrapText(ctx, text, x, y, maxW, lh) {
+      var words = text.split(""), line = "", lines = [];
+      for (var i = 0; i < text.length; i++) {
+        var test = line + text[i];
+        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
+      }
+      lines.push(line);
+      lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
+    }
+    info.innerHTML = "과학 기술은 그 자체로 좋고 나쁨이 정해져 있지 않습니다. 사회적 합의와 제도적 보완을 통해 <b>기대되는 점은 살리고 우려되는 점은 줄이는 방향</b>으로 활용하는 것이 중요합니다.";
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>

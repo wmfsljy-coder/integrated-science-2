@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>화학 변화 — 관측 스테이션</title>
+<link rel="stylesheet" href="../assets/theme.css">
+</head>
+<body>
+
+<div class="app">
+  <nav class="rail" id="rail">
+    <div class="brand">
+      <a class="home" href="../">← 통합과학2</a>
+      <div class="eyebrow" style="margin-top:8px">Ⅰ-2 · 변화와 다양성</div>
+      <h1 class="display">화학<br>변화</h1>
+    </div>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 산화와 환원</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 산과 염기</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 반응과 에너지 출입</button>
+  </nav>
+
+  <main>
+    <section class="tab-panel" data-panel="0">
+      <div class="stage-head">
+        <div class="eyebrow">01 · 전자를 잃고 얻는 반응</div>
+        <h2 class="display">산화와 환원</h2>
+        <p>금속의 반응성 순서를 이용해, 금속이 수용액 속 다른 금속 이온과 만났을 때 전자를 주고받는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c0" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">금속(고체)</div>
+            <div class="seg" id="c0-metal">
+              <button class="on" data-m="Mg">Mg</button>
+              <button data-m="Zn">Zn</button>
+              <button data-m="Cu">Cu</button>
+            </div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">수용액(이온)</div>
+            <div class="seg" id="c0-ion">
+              <button data-i="Zn">Zn²⁺</button>
+              <button class="on" data-i="Cu">Cu²⁺</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c0-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="1" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">02 · 수소 이온과 수산화 이온</div>
+        <h2 class="display">산과 염기, 그리고 중화</h2>
+        <p>pH 슬라이더를 조절해 용액의 액성과 지시약 색깔이 어떻게 달라지는지 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">pH<span class="val" id="c1-ph-val">7.0</span></div>
+            <input type="range" id="c1-ph" min="0" max="14" step="0.5" value="7">
+          </div>
+        </div>
+        <div class="info-card" id="c1-info"></div>
+      </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 반응이 일어날 때 드나드는 에너지</div>
+        <h2 class="display">발열 반응과 흡열 반응</h2>
+        <p>반응 종류를 선택해 반응물과 생성물의 에너지 차이, 그리고 주변 온도 변화를 확인해 보세요.</p>
+      </div>
+      <div class="stage-card">
+        <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">반응 종류</div>
+            <div class="seg" id="c2-type">
+              <button class="on" data-t="exo">발열 반응 (연소 등)</button>
+              <button data-t="endo">흡열 반응 (질산암모늄 용해 등)</button>
+            </div>
+          </div>
+        </div>
+        <div class="info-card" id="c2-info"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="theme-toggle" id="themeToggle">라이트 모드</button>
+<script src="../assets/theme.js"></script>
+<script>
+(function () {
+"use strict";
+
+/* TAB0 산화환원 */
+(function () {
+  var canvas = document.getElementById("c0");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var metal = "Mg", ion = "Cu";
+  var info = document.getElementById("c0-info");
+  var reactivity = { Mg: 3, Zn: 2, Cu: 1 };
+  document.querySelectorAll("#c0-metal button").forEach(function (b) {
+    b.addEventListener("click", function () { metal = b.getAttribute("data-m"); document.querySelectorAll("#c0-metal button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
+  document.querySelectorAll("#c0-ion button").forEach(function (b) {
+    b.addEventListener("click", function () { ion = b.getAttribute("data-i"); document.querySelectorAll("#c0-ion button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var reacts = reactivity[metal] > reactivity[ion];
+
+    ctx.save();
+    ctx.strokeStyle = cssVar("--cold"); ctx.lineWidth = 2;
+    ctx.strokeRect(250, 60, 400, 260);
+    ctx.fillStyle = "rgba(111,168,224,0.12)"; ctx.fillRect(250, 60, 400, 260);
+    ctx.restore();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText(ion + "²⁺ 수용액", 450, 45);
+
+    ctx.fillStyle = cssVar("--violet");
+    ctx.fillRect(430, 150, 40, 100);
+    ctx.font = "700 14px Segoe UI"; ctx.fillStyle = cssVar("--abyss");
+    ctx.fillText(metal, 450, 205);
+
+    if (reacts) {
+      ctx.save();
+      ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
+      drawArrow(ctx, 470, 120, 520, 90, 7);
+      ctx.restore();
+      ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--coral"); ctx.textAlign = "left";
+      ctx.fillText("전자 e⁻ 이동", 525, 88);
+
+      info.innerHTML = "<b>반응이 일어납니다.</b> " + metal + "이 " + ion + "²⁺보다 반응성이 커서 " + metal + "은 전자를 잃고 산화되어 " + metal + "²⁺가 되고, " + ion + "²⁺는 전자를 얻어 환원되어 " + ion + " 금속으로 석출됩니다.";
+    } else {
+      info.innerHTML = "<b>반응이 일어나지 않습니다.</b> " + metal + "은 " + ion + "보다 반응성이 작아 전자를 내줄 수 없습니다.";
+    }
+    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
+    ctx.fillText("금속 반응성: Mg > Zn > Cu", 20, H - 16);
+  }
+  render();
+})();
+
+/* TAB1 산과 염기 */
+(function () {
+  var canvas = document.getElementById("c1");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var ph = 7;
+  var info = document.getElementById("c1-info");
+  document.getElementById("c1-ph").addEventListener("input", function (e) { ph = +e.target.value; document.getElementById("c1-ph-val").textContent = ph.toFixed(1); render(); });
+
+  function phColor(p) {
+    if (p < 3) return "#e0453f";
+    if (p < 6) return "#f2965c";
+    if (p < 8) return "#e8d766";
+    if (p < 11) return "#6fcf97";
+    return "#3fc9b0";
+  }
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    // pH scale bar
+    var x0 = 60, x1 = W - 60, y = 80;
+    for (var i = 0; i <= 14; i++) {
+      var x = x0 + (i / 14) * (x1 - x0);
+      ctx.fillStyle = phColor(i);
+      ctx.fillRect(x - 4, y, 8, 20);
+    }
+    var markX = x0 + (ph / 14) * (x1 - x0);
+    ctx.strokeStyle = cssVar("--foam"); ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(markX, y - 10); ctx.lineTo(markX, y + 32); ctx.stroke();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left"; ctx.fillText("0 (강산)", x0, y + 50);
+    ctx.textAlign = "center"; ctx.fillText("7 (중성)", (x0 + x1) / 2, y + 50);
+    ctx.textAlign = "right"; ctx.fillText("14 (강염기)", x1, y + 50);
+
+    // beaker with color
+    var bx = W / 2, by = 220, bw = 140, bh = 120;
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
+    ctx.strokeRect(bx - bw / 2, by, bw, bh);
+    ctx.fillStyle = phColor(ph); ctx.globalAlpha = .8;
+    ctx.fillRect(bx - bw / 2, by + 20, bw, bh - 20);
+    ctx.globalAlpha = 1;
+
+    var acidity = ph < 6.5 ? "산성" : ph > 7.5 ? "염기성" : "중성";
+    info.innerHTML = "pH " + ph.toFixed(1) + "은 <b>" + acidity + "</b>입니다. pH가 낮을수록 수소 이온(H⁺) 농도가 높은 산성, pH가 높을수록 수산화 이온(OH⁻) 농도가 높은 염기성입니다. 산과 염기가 만나면 H⁺와 OH⁻가 결합해 물이 되는 <b>중화 반응</b>이 일어나 pH가 7에 가까워집니다.";
+  }
+  render();
+})();
+
+/* TAB2 반응과 에너지 */
+(function () {
+  var canvas = document.getElementById("c2");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var type = "exo";
+  var info = document.getElementById("c2-info");
+  document.querySelectorAll("#c2-type button").forEach(function (b) {
+    b.addEventListener("click", function () { type = b.getAttribute("data-t"); document.querySelectorAll("#c2-type button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
+
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var isExo = type === "exo";
+    var x0 = 100, x1 = 500, y0 = 60, y1 = 260;
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center"; ctx.fillText("에너지", 0, 0); ctx.restore();
+
+    var reactY = isExo ? y0 + 40 : y1 - 40;
+    var prodY = isExo ? y1 - 40 : y0 + 40;
+    ctx.beginPath();
+    ctx.moveTo(x0 + 40, reactY);
+    ctx.quadraticCurveTo((x0 + x1) / 2, Math.min(reactY, prodY) - 30, x1 - 40, prodY);
+    ctx.strokeStyle = cssVar(isExo ? "--coral" : "--cold"); ctx.lineWidth = 2.5; ctx.stroke();
+
+    ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
+    ctx.fillText("반응물", x0, reactY - 10);
+    ctx.fillText("생성물", x1 - 60, prodY - 10);
+
+    // thermometer
+    var tx = 700, ty0 = 60, ty1 = 260;
+    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 3;
+    ctx.beginPath(); ctx.moveTo(tx, ty0); ctx.lineTo(tx, ty1); ctx.stroke();
+    var level = isExo ? 0.8 : 0.25;
+    ctx.fillStyle = cssVar(isExo ? "--coral" : "--cold");
+    ctx.fillRect(tx - 8, ty1 - level * (ty1 - ty0), 16, level * (ty1 - ty0));
+    ctx.beginPath(); ctx.arc(tx, ty1 + 14, 16, 0, 7); ctx.fill();
+    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("주변 온도", tx, ty0 - 14);
+
+    info.innerHTML = isExo
+      ? "<b>발열 반응</b>: 반응물의 에너지가 생성물보다 높아, 반응이 진행되며 그 차이만큼 에너지를 <b>방출</b>합니다. 주변 온도가 <b>올라갑니다</b>. 예) 연소, 산과 금속의 반응."
+      : "<b>흡열 반응</b>: 생성물의 에너지가 반응물보다 높아, 반응이 진행되려면 주변에서 에너지를 <b>흡수</b>해야 합니다. 주변 온도가 <b>내려갑니다</b>. 예) 질산 암모늄이 물에 녹는 반응, 광합성.";
+  }
+  render();
+})();
+
+})();
+</script>
+</body>
+</html>
