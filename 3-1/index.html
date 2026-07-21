@@ -36,11 +36,22 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 데이터가 곧 자원인 시대</div>
         <h2 class="display">빅데이터는 어떻게 활용될까?</h2>
-        <p>빅데이터가 수집되어 활용되기까지의 과정과, 실제 활용 사례를 확인해 보세요.</p>
+        <p>빅데이터가 수집되어 활용되기까지의 과정과, 실제 활용 사례를 확인해 보세요. 아래에서는 데이터 양을 직접 조절하며 예측 정확도가 어떻게 달라지는지 실험해 볼 수 있습니다.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
         <div class="info-card" id="c1-info">단계나 카드를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card" style="margin-top:20px">
+        <div class="ctrl-label">데이터 양이 예측 정확도에 미치는 영향 — 슬라이더로 데이터 수집량을 조절해 보세요</div>
+        <div class="controls">
+          <div class="ctrl-group" style="min-width:100%">
+            <div class="ctrl-label">수집한 데이터 양<span class="val" id="c1-data-val">20</span>%</div>
+            <input type="range" id="c1-data" min="5" max="100" step="1" value="20">
+          </div>
+        </div>
+        <div class="canvas-wrap" style="margin-top:10px; height:200px"><canvas id="c1-sim" width="900" height="200"></canvas></div>
+        <div class="info-card" id="c1-sim-info"></div>
       </div>
     </section>
   </main>
@@ -148,6 +159,52 @@
     });
   }
   render();
+})();
+
+/* TAB1 데이터 양 -> 예측 정확도 시뮬레이션 */
+(function () {
+  var canvas = document.getElementById("c1-sim");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var slider = document.getElementById("c1-data");
+  var val = document.getElementById("c1-data-val");
+  var info = document.getElementById("c1-sim-info");
+  var seed = 42;
+  function rand() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed % 1000) / 1000; }
+  function accuracyFor(pct) { return 50 + 48 * (1 - Math.exp(-pct / 35)); }
+  function render(pct) {
+    seed = 42;
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var n = Math.round(6 + pct * 1.2);
+    var acc = accuracyFor(pct);
+    var noise = (100 - acc) / 100;
+    var x0 = 40, x1 = W - 40, y0 = 20, y1 = H - 40;
+    for (var i = 0; i < n; i++) {
+      var x = x0 + (x1 - x0) * (i / (n - 1 || 1));
+      var trueY = y1 - (y1 - y0) * (i / (n - 1 || 1));
+      var y = trueY + (rand() - 0.5) * noise * (y1 - y0) * 0.8;
+      ctx.fillStyle = cssVar("--teal"); ctx.globalAlpha = .8;
+      ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
+    }
+    ctx.strokeStyle = cssVar("--coral"); ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x0, y1); ctx.lineTo(x1, y0); ctx.stroke();
+    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
+    ctx.fillText("예측 정확도 ≈ " + Math.round(acc) + "%", x0, 15);
+  }
+  function update() {
+    var pct = +slider.value;
+    val.textContent = pct;
+    render(pct);
+    var acc = Math.round(accuracyFor(pct));
+    var msg;
+    if (pct < 25) msg = "데이터가 적으면 우연한 오차나 특이값의 영향을 크게 받아 예측이 들쭉날쭉합니다.";
+    else if (pct < 65) msg = "데이터가 늘어날수록 우연한 오차들이 서로 상쇄되어 전체적인 경향(패턴)이 더 뚜렷하게 드러납니다.";
+    else msg = "데이터가 충분히 많아지면 예측 정확도는 점점 높아지지만, 어느 수준 이상에서는 데이터를 늘려도 정확도 향상 폭이 작아집니다(수확 체감).";
+    info.innerHTML = "<b>예측 정확도 " + acc + "%</b> — " + msg;
+  }
+  slider.addEventListener("input", update);
+  update();
 })();
 
 })();
