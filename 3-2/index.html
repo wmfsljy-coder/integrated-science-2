@@ -24,11 +24,25 @@
       <div class="stage-head">
         <div class="eyebrow">01 · 다가오는 미래의 기술</div>
         <h2 class="display">과학 기술과 미래 사회</h2>
-        <p>미래 사회를 바꿀 것으로 기대되는 과학 기술 카드를 클릭해 특징을 확인해 보세요.</p>
+        <p>카드를 클릭해 특징을 확인하고, 아래 연도 슬라이더를 움직여 각 기술이 대중화될 것으로 예상되는 시기를 함께 살펴보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
         <div class="info-card" id="c0-info">카드를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 기술 성숙도 타임라인</div>
+          <h2 class="display" style="font-size:18px;">언제쯤 일상이 될까?</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">연도<span class="val" id="c0b-year-val">2025</span></div>
+            <input type="range" id="c0b-year" min="2025" max="2050" step="1" value="2025">
+          </div>
+        </div>
+        <div class="info-card" id="c0b-info"></div>
       </div>
     </section>
 
@@ -36,7 +50,7 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 과학 기술은 가치중립적이지 않다</div>
         <h2 class="display">과학 관련 사회적 쟁점과 윤리</h2>
-        <p>쟁점을 선택해, 그 기술이 가진 기대와 우려의 양면을 균형 있게 살펴보세요.</p>
+        <p>쟁점을 선택해 기대와 우려의 양면을 살펴보고, 저울 슬라이더로 편익과 위험 중 무엇을 더 중요하게 볼지 직접 조정하며 균형점을 탐색해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
@@ -51,6 +65,20 @@
           </div>
         </div>
         <div class="info-card" id="c1-info"></div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 편익-위험 저울</div>
+          <h2 class="display" style="font-size:18px;">나는 어느 쪽에 더 무게를 둘까?</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c1b" width="900" height="240"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">편익 중시 ↔ 위험 중시<span class="val" id="c1b-w-val">중립</span></div>
+            <input type="range" id="c1b-w" min="-5" max="5" step="1" value="0">
+          </div>
+        </div>
+        <div class="info-card" id="c1b-info"></div>
       </div>
     </section>
   </main>
@@ -69,12 +97,12 @@
   var W = canvas._w, H = canvas._h;
   var info = document.getElementById("c0-info");
   var cards = [
-    { icon: "🤖", name: "인공지능(AI)", desc: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용됩니다.", x: 150, y: 100 },
-    { icon: "🧬", name: "유전자 편집 기술", desc: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용됩니다.", x: 450, y: 100 },
-    { icon: "🚀", name: "우주 산업", desc: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있습니다.", x: 750, y: 100 },
-    { icon: "🔬", name: "나노 기술", desc: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용됩니다.", x: 150, y: 280 },
-    { icon: "🔋", name: "신재생 에너지 저장", desc: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이 발전하고 있습니다.", x: 450, y: 280 },
-    { icon: "🩺", name: "맞춤형 의료", desc: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있습니다.", x: 750, y: 280 }
+    { icon: "🤖", name: "인공지능(AI)", desc: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용됩니다.", x: 150, y: 100, mature: 2027 },
+    { icon: "🧬", name: "유전자 편집 기술", desc: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용됩니다.", x: 450, y: 100, mature: 2033 },
+    { icon: "🚀", name: "우주 산업", desc: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있습니다.", x: 750, y: 100, mature: 2038 },
+    { icon: "🔬", name: "나노 기술", desc: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용됩니다.", x: 150, y: 280, mature: 2035 },
+    { icon: "🔋", name: "신재생 에너지 저장", desc: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이 발전하고 있습니다.", x: 450, y: 280, mature: 2030 },
+    { icon: "🩺", name: "맞춤형 의료", desc: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있습니다.", x: 750, y: 280, mature: 2032 }
   ];
   canvas.addEventListener("click", function (e) {
     var rect = canvas.getBoundingClientRect();
@@ -96,6 +124,35 @@
     });
   }
   render();
+
+  /* 심화: 성숙도 타임라인 */
+  var canvas2 = document.getElementById("c0b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c0b-info");
+  var year = 2025;
+  document.getElementById("c0b-year").addEventListener("input", function (e) { year = +e.target.value; document.getElementById("c0b-year-val").textContent = year; renderTimeline(); });
+
+  function renderTimeline() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var x0 = 220, x1 = W2 - 40;
+    cards.forEach(function (c, i) {
+      var y = 15 + i * 38;
+      var arrived = year >= c.mature;
+      ctx2.font = "12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
+      ctx2.fillText(c.icon + " " + c.name, x0 - 10, y + 16);
+      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 24);
+      var w = Math.min(1, Math.max(0, (year - 2025) / (c.mature - 2025))) * (x1 - x0);
+      ctx2.fillStyle = arrived ? cssVar("--teal") : cssVar("--coral");
+      ctx2.fillRect(x0, y, w, 24);
+      ctx2.font = "700 11px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
+      ctx2.fillText(arrived ? "대중화 (예상 " + c.mature + "년)" : "개발 중 (예상 " + c.mature + "년)", x0 + 8, y + 17);
+    });
+    var arrivedCount = cards.filter(function (c) { return year >= c.mature; }).length;
+    info2.innerHTML = year + "년 기준으로 6개 기술 중 <b>" + arrivedCount + "개</b>가 대중화되었을 것으로 예상해 볼 수 있습니다. (제시된 예상 시기는 학습용 가상의 값이며, 실제 기술 발전 속도는 연구 투자, 사회적 수용성 등에 따라 크게 달라질 수 있습니다.)";
+  }
+  renderTimeline();
 })();
 
 /* TAB1 사회적 쟁점 */
@@ -111,7 +168,7 @@
     nuclear: { name: "원자력 발전", pro: ["적은 연료로 대량의 전력 생산", "발전 과정에서 온실 기체 배출이 적음"], con: ["방사성 폐기물 처리 문제", "사고 발생 시 피해 규모가 큼"] }
   };
   document.querySelectorAll("#c1-topic button").forEach(function (b) {
-    b.addEventListener("click", function () { topic = b.getAttribute("data-t"); document.querySelectorAll("#c1-topic button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+    b.addEventListener("click", function () { topic = b.getAttribute("data-t"); document.querySelectorAll("#c1-topic button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); renderScale(); });
   });
   function render() {
     ctx.clearRect(0, 0, W, H);
@@ -136,7 +193,7 @@
       wrapText(ctx, "• " + t, W / 2 + 60, 120 + i * 50, 340, 18);
     });
     function wrapText(ctx, text, x, y, maxW, lh) {
-      var words = text.split(""), line = "", lines = [];
+      var line = "", lines = [];
       for (var i = 0; i < text.length; i++) {
         var test = line + text[i];
         if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
@@ -147,6 +204,53 @@
     info.innerHTML = "과학 기술은 그 자체로 좋고 나쁨이 정해져 있지 않습니다. 사회적 합의와 제도적 보완을 통해 <b>기대되는 점은 살리고 우려되는 점은 줄이는 방향</b>으로 활용하는 것이 중요합니다.";
   }
   render();
+
+  /* 심화: 편익-위험 저울 */
+  var canvas2 = document.getElementById("c1b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c1b-info");
+  var weight = 0;
+  document.getElementById("c1b-w").addEventListener("input", function (e) {
+    weight = +e.target.value;
+    var label = weight === 0 ? "중립" : weight < 0 ? "편익 중시 " + Math.abs(weight) : "위험 중시 " + weight;
+    document.getElementById("c1b-w-val").textContent = label;
+    renderScale();
+  });
+
+  function renderScale() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var cx = W2 / 2, pivotY = 90, armLen = 260;
+    var angle = weight * 0.06; // radians tilt
+    var leftX = cx - armLen * Math.cos(angle), leftY = pivotY - armLen * Math.sin(angle);
+    var rightX = cx + armLen * Math.cos(angle), rightY = pivotY + armLen * Math.sin(angle);
+
+    ctx2.strokeStyle = cssVar("--mist"); ctx2.lineWidth = 4;
+    ctx2.beginPath(); ctx2.moveTo(cx, pivotY); ctx2.lineTo(cx, pivotY + 90); ctx2.stroke();
+    ctx2.beginPath(); ctx2.moveTo(leftX, leftY); ctx2.lineTo(rightX, rightY); ctx2.stroke();
+
+    var panR = 34;
+    ctx2.fillStyle = cssVar("--teal"); ctx2.globalAlpha = .85;
+    ctx2.beginPath(); ctx2.arc(leftX, leftY + 20, panR, 0, Math.PI * 2); ctx2.fill();
+    ctx2.fillStyle = cssVar("--coral");
+    ctx2.beginPath(); ctx2.arc(rightX, rightY + 20, panR, 0, Math.PI * 2); ctx2.fill();
+    ctx2.globalAlpha = 1;
+
+    ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--abyss"); ctx2.textAlign = "center";
+    ctx2.fillText("편익", leftX, leftY + 24);
+    ctx2.fillText("위험", rightX, rightY + 24);
+
+    var d = data[topic];
+    var emphasis = weight < -1 ? d.pro[0] : weight > 1 ? d.con[0] : "양쪽을 비슷한 비중으로 고려";
+    info2.innerHTML = weight === 0
+      ? "저울이 수평입니다 — 편익과 위험을 동등하게 고려하는 중립적인 관점입니다."
+      : (weight < 0
+        ? "편익 쪽에 더 무게를 두는 관점입니다. 예: '" + d.pro[0] + "'와 같은 기대 효과를 중요하게 볼 수 있습니다."
+        : "위험 쪽에 더 무게를 두는 관점입니다. 예: '" + d.con[0] + "'와 같은 우려를 중요하게 볼 수 있습니다.") +
+      " 실제 사회적 의사 결정에서는 이처럼 다양한 입장을 가진 사람들이 <b>근거를 바탕으로 토론하고 합의</b>를 이루어 가는 과정이 중요합니다.";
+  }
+  renderScale();
 })();
 
 })();

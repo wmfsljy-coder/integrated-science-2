@@ -24,11 +24,33 @@
       <div class="stage-head">
         <div class="eyebrow">01 · 과학이 사회를 바꿔온 과정</div>
         <h2 class="display">과학 기술 발전의 흐름</h2>
-        <p>타임라인의 각 지점을 클릭해 과학 기술이 인류 사회를 어떻게 변화시켜 왔는지 확인해 보세요.</p>
+        <p>타임라인의 각 지점을 클릭해 확인하고, 아래에서 기술을 골라 도입 이후 시간이 지나며 보급률이 어떻게 S자 곡선을 그리며 증가하는지 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
         <div class="info-card" id="c0-info">타임라인의 점을 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 기술 확산 곡선</div>
+          <h2 class="display" style="font-size:18px;">새로운 기술은 S자 모양으로 퍼진다</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">기술 선택</div>
+            <div class="seg" id="c0b-tech">
+              <button class="on" data-k="0.35" data-name="스마트폰">스마트폰(빠른 확산)</button>
+              <button data-k="0.15" data-name="전기">전기(느린 확산)</button>
+              <button data-k="0.25" data-name="인터넷">인터넷(중간 확산)</button>
+            </div>
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">도입 후 경과 연수<span class="val" id="c0b-year-val">10</span>년</div>
+            <input type="range" id="c0b-year" min="0" max="40" step="1" value="10">
+          </div>
+        </div>
+        <div class="info-card" id="c0b-info"></div>
       </div>
     </section>
 
@@ -98,6 +120,49 @@
       ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist");
       ctx.fillText(ev.year, x, up ? y - 22 : y + 32);
     });
+  }
+  render();
+})();
+
+/* TAB0-B 기술 확산 곡선(로지스틱) */
+(function () {
+  var canvas = document.getElementById("c0b");
+  var ctx = setupCanvas(canvas);
+  var W = canvas._w, H = canvas._h;
+  var info = document.getElementById("c0b-info");
+  var k = 0.35, name = "스마트폰", year = 10;
+  document.querySelectorAll("#c0b-tech button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      k = +b.getAttribute("data-k"); name = b.getAttribute("data-name");
+      document.querySelectorAll("#c0b-tech button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      render();
+    });
+  });
+  document.getElementById("c0b-year").addEventListener("input", function (e) { year = +e.target.value; document.getElementById("c0b-year-val").textContent = year; render(); });
+
+  function adoption(t, kk) { return 100 / (1 + Math.exp(-kk * (t - 15))); }
+  function render() {
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
+    var x0 = 60, x1 = W - 40, y0 = 20, y1 = 200;
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
+    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("도입 후 경과 연수 →", (x0 + x1) / 2, y1 + 20);
+    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("보급률(%)", 0, 0); ctx.restore();
+
+    ctx.beginPath();
+    for (var i = 0; i <= 40; i++) {
+      var xx = x0 + i / 40 * (x1 - x0), yy = y1 - (adoption(i, k) / 100) * (y1 - y0);
+      if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+    }
+    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
+
+    var curX = x0 + year / 40 * (x1 - x0), curY = y1 - (adoption(year, k) / 100) * (y1 - y0);
+    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curX, curY, 6, 0, Math.PI * 2); ctx.fill();
+
+    var pct = adoption(year, k);
+    var phase = pct < 15 ? "초기 도입기(소수의 혁신 수용자만 사용)" : pct < 50 ? "급속 확산기(대중이 빠르게 받아들이는 단계)" : pct < 90 ? "성숙기(보급률 증가세가 둔화)" : "포화기(거의 모든 사람이 사용)";
+    info.innerHTML = "<b>" + name + "</b>은(는) 도입 " + year + "년 후 보급률이 약 <b>" + pct.toFixed(1) + "%</b>로 추정됩니다 — 현재는 <b>" + phase + "</b>에 해당합니다. 대부분의 혁신 기술은 처음엔 천천히 퍼지다가, 어느 시점(변곡점)부터 폭발적으로 확산된 뒤, 다시 완만해지는 <b>S자형(로지스틱) 곡선</b>을 따릅니다.";
   }
   render();
 })();
