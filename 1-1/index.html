@@ -25,11 +25,19 @@
       <div class="stage-head">
         <div class="eyebrow">01 · 지구 생물의 흥망성쇠</div>
         <h2 class="display">지질시대와 대멸종</h2>
-        <p>시간 막대의 지점을 클릭해 지구 역사상 있었던 5차례의 대멸종에 대해 알아보세요.</p>
+        <p>시간 막대의 지점을 클릭해 지구 역사상 있었던 5차례의 대멸종에 대해 알아보고, 아래 막대그래프에서 사건별 멸종 심각도(종 손실 비율)를 비교해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
         <div class="info-card" id="c0-info">대멸종 지점(●)을 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 심각도 비교</div>
+          <h2 class="display" style="font-size:18px;">사건마다 다른 멸종 규모</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
+        <div class="info-card" id="c0b-info"></div>
       </div>
     </section>
 
@@ -37,14 +45,25 @@
       <div class="stage-head">
         <div class="eyebrow">02 · 환경에 적합한 형질이 살아남는다</div>
         <h2 class="display">자연선택과 진화</h2>
-        <p>가뭄으로 딱딱한 씨앗이 많아진 환경을 가정해 보세요. 부리 크기 분포가 다른 핀치 개체군에서, 여러 세대가 지나면 어떤 부리를 가진 개체가 늘어날까요?</p>
+        <p>환경을 선택하고 세대를 진행시켜, 핀치 개체군의 부리 크기 분포가 환경에 따라 어느 방향으로 바뀌는지 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
+            <div class="ctrl-label">환경 변화</div>
+            <div class="seg" id="c1-env">
+              <button class="on" data-e="drought">가뭄 → 딱딱하고 큰 씨앗만 남음</button>
+              <button data-e="rain">폭우 → 작고 부드러운 씨앗이 풍부해짐</button>
+            </div>
+          </div>
+          <div class="ctrl-group">
             <div class="ctrl-label">세대 진행<span class="val" id="c1-gen-val">0세대</span></div>
             <input type="range" id="c1-gen" min="0" max="10" step="1" value="0">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">선택압 강도<span class="val" id="c1-pressure-val">1.0×</span></div>
+            <input type="range" id="c1-pressure" min="0.2" max="2" step="0.1" value="1">
           </div>
         </div>
         <div class="info-card" id="c1-info"></div>
@@ -55,11 +74,37 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 세 층위의 다양성</div>
         <h2 class="display">생물다양성이란?</h2>
-        <p>생물다양성은 유전적 다양성, 종다양성, 생태계다양성 세 층위로 나누어 이해할 수 있습니다. 각 카드를 클릭해 보세요.</p>
+        <p>각 카드를 클릭해 세 층위의 다양성을 확인하고, 아래에서 세 종의 개체수 비율을 직접 조절하며 종다양성 지수(심슨 지수)가 어떻게 달라지는지 계산해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c2" width="900" height="340"></canvas></div>
         <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 종다양성 지수 계산기</div>
+          <h2 class="display" style="font-size:18px;">균등할수록 다양성이 높다</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c2b" width="900" height="200"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">종 A 개체수<span class="val" id="c2b-a-val">30</span></div>
+            <input type="range" id="c2b-a" min="1" max="90" step="1" value="30">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">종 B 개체수<span class="val" id="c2b-b-val">30</span></div>
+            <input type="range" id="c2b-b" min="1" max="90" step="1" value="30">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">종 C 개체수<span class="val" id="c2b-c-val">30</span></div>
+            <input type="range" id="c2b-c" min="1" max="90" step="1" value="30">
+          </div>
+        </div>
+        <div class="readout" style="margin:0 20px 14px;">
+          <span class="dot" style="background:var(--teal)"></span>
+          <span class="txt" id="c2b-index"></span>
+        </div>
+        <div class="info-card" id="c2b-info"></div>
       </div>
     </section>
   </main>
@@ -78,20 +123,21 @@
   var W = canvas._w, H = canvas._h;
   var info = document.getElementById("c0-info");
   var events = [
-    { name: "오르도비스기 대멸종", ago: "약 4.4억 년 전", frac: 0.15, desc: "해양 생물 종의 약 85%가 사라진 것으로 추정됩니다. 급격한 빙하기가 원인으로 지목됩니다." },
-    { name: "데본기 대멸종", ago: "약 3.7억 년 전", frac: 0.32, desc: "해양 생물이 큰 타격을 입었으며, 화산 활동과 해양 산소 부족이 원인으로 추정됩니다." },
-    { name: "페름기 대멸종", ago: "약 2.5억 년 전", frac: 0.52, desc: "지구 역사상 가장 큰 규모의 멸종으로, 생물 종의 약 96%가 사라졌습니다. 대규모 화산 활동이 주원인으로 추정됩니다." },
-    { name: "트라이아스기 대멸종", ago: "약 2억 년 전", frac: 0.68, desc: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 되었습니다." },
-    { name: "백악기 대멸종", ago: "약 6600만 년 전", frac: 0.92, desc: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종했습니다. 이후 포유류가 번성했습니다." }
+    { name: "오르도비스기 대멸종", ago: "약 4.4억 년 전", frac: 0.15, loss: 85, desc: "해양 생물 종의 약 85%가 사라진 것으로 추정됩니다. 급격한 빙하기가 원인으로 지목됩니다." },
+    { name: "데본기 대멸종", ago: "약 3.7억 년 전", frac: 0.32, loss: 75, desc: "해양 생물이 큰 타격을 입었으며, 화산 활동과 해양 산소 부족이 원인으로 추정됩니다." },
+    { name: "페름기 대멸종", ago: "약 2.5억 년 전", frac: 0.52, loss: 96, desc: "지구 역사상 가장 큰 규모의 멸종으로, 생물 종의 약 96%가 사라졌습니다. 대규모 화산 활동이 주원인으로 추정됩니다." },
+    { name: "트라이아스기 대멸종", ago: "약 2억 년 전", frac: 0.68, loss: 80, desc: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 되었습니다." },
+    { name: "백악기 대멸종", ago: "약 6600만 년 전", frac: 0.92, loss: 75, desc: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종했습니다. 이후 포유류가 번성했습니다." }
   ];
+  var selected = -1;
   canvas.addEventListener("click", function (e) {
     var rect = canvas.getBoundingClientRect();
     var scaleX = canvas._w / rect.width;
     var mx = (e.clientX - rect.left) * scaleX;
     var x0 = 60, x1 = W - 60;
-    events.forEach(function (ev) {
+    events.forEach(function (ev, i) {
       var x = x0 + ev.frac * (x1 - x0);
-      if (Math.abs(x - mx) < 20) info.innerHTML = "<b>" + ev.name + "</b> (" + ev.ago + ") — " + ev.desc;
+      if (Math.abs(x - mx) < 20) { info.innerHTML = "<b>" + ev.name + "</b> (" + ev.ago + ") — " + ev.desc; selected = i; renderBar(); }
     });
   });
   function render() {
@@ -122,7 +168,30 @@
       lines.reverse().forEach(function (l, i) { ctx.fillText(l, x, y - i * lh); });
     }
   }
+  var canvas2 = document.getElementById("c0b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c0b-info");
+  function renderBar() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var x0 = 260, x1 = W2 - 40;
+    events.forEach(function (ev, i) {
+      var y = 20 + i * 42;
+      ctx2.font = "11.5px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
+      ctx2.fillText(ev.name, x0 - 10, y + 16);
+      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 24);
+      ctx2.fillStyle = i === selected ? cssVar("--coral") : cssVar("--teal");
+      ctx2.fillRect(x0, y, (x1 - x0) * ev.loss / 100, 24);
+      ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
+      ctx2.fillText(ev.loss + "%", x0 + 8, y + 17);
+    });
+    info2.innerHTML = selected >= 0
+      ? "<b>" + events[selected].name + "</b>은(는) 생물 종의 약 " + events[selected].loss + "%를 사라지게 한 사건입니다."
+      : "위에서 사건을 클릭하면 여기서 강조됩니다. 페름기 대멸종(96%)이 지구 역사상 가장 규모가 큰 멸종 사건입니다.";
+  }
   render();
+  renderBar();
 })();
 
 /* TAB1 자연선택 */
@@ -130,9 +199,13 @@
   var canvas = document.getElementById("c1");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var gen = 0;
+  var gen = 0, env = "drought", pressure = 1;
   var info = document.getElementById("c1-info");
   document.getElementById("c1-gen").addEventListener("input", function (e) { gen = +e.target.value; document.getElementById("c1-gen-val").textContent = gen + "세대"; render(); });
+  document.getElementById("c1-pressure").addEventListener("input", function (e) { pressure = +e.target.value; document.getElementById("c1-pressure-val").textContent = pressure.toFixed(1) + "×"; render(); });
+  document.querySelectorAll("#c1-env button").forEach(function (b) {
+    b.addEventListener("click", function () { env = b.getAttribute("data-e"); document.querySelectorAll("#c1-env button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
+  });
 
   var seed = 12345;
   function rand() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
@@ -142,9 +215,9 @@
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    // selection pressure favors larger beaks (harder seeds) over generations
+    var dir = env === "drought" ? 1 : -1;
     var survival = initial.map(function (size) {
-      var bias = gen * 0.03;
+      var bias = gen * 0.03 * pressure * dir;
       return size + bias * (size - 15);
     });
 
@@ -155,7 +228,7 @@
       ctx.save();
       ctx.fillStyle = size > 20 ? cssVar("--coral") : cssVar("--cold");
       ctx.globalAlpha = .8;
-      ctx.beginPath(); ctx.arc(x, y, 6, 0, 7); ctx.fill();
+      ctx.beginPath(); ctx.arc(x, Math.max(y0, Math.min(y1, y)), 6, 0, 7); ctx.fill();
       ctx.restore();
     });
     ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
@@ -164,9 +237,10 @@
     ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("부리 크기 ↑", 0, 0); ctx.restore();
 
     var avgSize = survival.reduce(function (a, b) { return a + b; }, 0) / survival.length;
+    var trait = env === "drought" ? "큰 부리" : "작고 정교한 부리";
     info.innerHTML = gen === 0
       ? "초기 개체군은 부리 크기가 다양하게 분포합니다 (평균 " + avgSize.toFixed(1) + "mm)."
-      : gen + "세대가 지나며, 딱딱한 씨앗을 먹기 유리한 <b>큰 부리를 가진 개체의 비율이 늘어났습니다</b> (평균 부리 크기 " + avgSize.toFixed(1) + "mm). 이것이 <b>자연선택</b>에 의한 진화입니다 — 환경에 유리한 형질을 가진 개체가 더 잘 살아남아 자손을 남깁니다.";
+      : gen + "세대가 지나며(선택압 " + pressure.toFixed(1) + "×), " + (env === "drought" ? "딱딱한 씨앗을 먹기 유리한" : "작고 부드러운 씨앗을 먹기 유리한") + " <b>" + trait + "를 가진 개체의 비율이 늘어났습니다</b> (평균 부리 크기 " + avgSize.toFixed(1) + "mm). 이것이 <b>자연선택</b>에 의한 진화입니다 — 환경이 바뀌면 유리한 형질의 방향도 바뀝니다.";
   }
   render();
 })();
@@ -202,6 +276,46 @@
     });
   }
   render();
+
+  /* 심화: 심슨 다양성 지수 계산기 */
+  var canvas2 = document.getElementById("c2b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c2b-info");
+  var indexTxt = document.getElementById("c2b-index");
+  var nA = 30, nB = 30, nC = 30;
+  document.getElementById("c2b-a").addEventListener("input", function (e) { nA = +e.target.value; document.getElementById("c2b-a-val").textContent = nA; renderIndex(); });
+  document.getElementById("c2b-b").addEventListener("input", function (e) { nB = +e.target.value; document.getElementById("c2b-b-val").textContent = nB; renderIndex(); });
+  document.getElementById("c2b-c").addEventListener("input", function (e) { nC = +e.target.value; document.getElementById("c2b-c-val").textContent = nC; renderIndex(); });
+
+  function renderIndex() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var total = nA + nB + nC;
+    var pA = nA / total, pB = nB / total, pC = nC / total;
+    var D = 1 - (pA * pA + pB * pB + pC * pC); // Simpson's diversity index
+
+    var x0 = 60, x1 = W2 - 60, y = 60, barH = 50;
+    var xA = x0 + pA * (x1 - x0);
+    var xB = xA + pB * (x1 - x0);
+    ctx2.fillStyle = cssVar("--teal"); ctx2.fillRect(x0, y, xA - x0, barH);
+    ctx2.fillStyle = cssVar("--coral"); ctx2.fillRect(xA, y, xB - xA, barH);
+    ctx2.fillStyle = cssVar("--cold"); ctx2.fillRect(xB, y, x1 - xB, barH);
+    ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, barH);
+    ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--abyss"); ctx2.textAlign = "center";
+    if (xA - x0 > 30) ctx2.fillText("A " + (pA * 100).toFixed(0) + "%", (x0 + xA) / 2, y + barH / 2 + 4);
+    if (xB - xA > 30) ctx2.fillText("B " + (pB * 100).toFixed(0) + "%", (xA + xB) / 2, y + barH / 2 + 4);
+    if (x1 - xB > 30) ctx2.fillText("C " + (pC * 100).toFixed(0) + "%", (xB + x1) / 2, y + barH / 2 + 4);
+
+    ctx2.font = "11px Segoe UI"; ctx2.fillStyle = cssVar("--mist"); ctx2.textAlign = "left";
+    ctx2.fillText("전체 개체수 " + total + "마리 중 종 구성 비율", x0, y + barH + 24);
+
+    indexTxt.innerHTML = "심슨 다양성 지수 D = 1 − Σp<sub>i</sub>² = <b>" + D.toFixed(3) + "</b> (0에 가까울수록 한 종이 우세, 1에 가까울수록 균등하고 다양함)";
+    info2.innerHTML = D > 0.6
+      ? "세 종의 개체수가 비교적 균등해서 다양성 지수가 높습니다. 특정 종 하나가 사라져도 생태계 전체 기능이 유지되기 쉽습니다."
+      : "한 종의 비율이 매우 높아 다양성 지수가 낮습니다. 이런 생태계는 우점종에게 문제가 생기면(질병, 환경 변화 등) 전체 생태계가 크게 흔들릴 위험이 있습니다.";
+  }
+  renderIndex();
 })();
 
 })();
