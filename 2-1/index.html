@@ -24,30 +24,56 @@
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
         <div class="eyebrow">01 · 생물과 환경이 얽힌 그물</div>
-        <h2 class="display">생태계의 구성 요소</h2>
-        <p>먹이 사슬의 각 단계를 클릭해 생산자, 소비자, 분해자의 역할을 확인해 보세요.</p>
+        <h2 class="display">생태계의 구성 요소와 에너지 흐름</h2>
+        <p>먹이 사슬의 각 단계를 클릭해 역할을 확인하고, 아래에서 생산자의 에너지량을 조절하며 영양 단계를 거칠 때마다 에너지가 얼마나 줄어드는지(생태 피라미드) 확인해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="360"></canvas></div>
         <div class="info-card" id="c0-info">단계를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 생태 피라미드 계산기</div>
+          <h2 class="display" style="font-size:18px;">단계마다 약 10%만 전달되는 에너지</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c0b" width="900" height="280"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">생산자의 에너지량(상대값)<span class="val" id="c0b-e-val">100000</span></div>
+            <input type="range" id="c0b-e" min="10000" max="1000000" step="10000" value="100000">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">단계별 전달 효율(%)<span class="val" id="c0b-eff-val">10</span></div>
+            <input type="range" id="c0b-eff" min="5" max="20" step="1" value="10">
+          </div>
+        </div>
+        <div class="info-card" id="c0b-info"></div>
       </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
         <div class="eyebrow">02 · 포식자와 피식자의 균형</div>
-        <h2 class="display">생태계 평형</h2>
-        <p>초기 개체수를 조절하며 포식자(늑대)와 피식자(토끼) 개체수가 시간에 따라 어떻게 주기적으로 변동하는지 확인해 보세요.</p>
+        <h2 class="display">생태계 평형 — 실제 수식 기반 시뮬레이션</h2>
+        <p>로트카-볼테라 방정식으로 포식자·피식자 개체수를 직접 계산합니다. 초기 개체수와 번식·포식 속도를 조절하며 시간에 따른 변동과 위상 평면(개체수 순환 궤적)을 확인해 보세요.</p>
       </div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
+        <div class="canvas-wrap"><canvas id="c1" width="900" height="420"></canvas></div>
         <div class="controls">
           <div class="ctrl-group">
             <div class="ctrl-label">초기 토끼(피식자) 개체수<span class="val" id="c1-prey-val">100</span></div>
-            <input type="range" id="c1-prey" min="50" max="150" step="5" value="100">
+            <input type="range" id="c1-prey" min="20" max="200" step="5" value="100">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">초기 여우(포식자) 개체수<span class="val" id="c1-pred-val">20</span></div>
+            <input type="range" id="c1-pred" min="5" max="60" step="1" value="20">
+          </div>
+          <div class="ctrl-group">
+            <div class="ctrl-label">포식 강도<span class="val" id="c1-rate-val">1.0×</span></div>
+            <input type="range" id="c1-rate" min="0.3" max="2" step="0.1" value="1">
           </div>
         </div>
-        <div class="info-card">먹이가 많으면(피식자 증가) → 포식자가 늘어남 → 피식자가 줄어듦 → 포식자도 줄어듦 → 다시 피식자가 늘어나는 <b>주기적 변동</b>이 반복되며 장기적으로 생태계는 평형을 이룹니다.</div>
+        <div class="info-card" id="c1-info"></div>
       </div>
     </section>
 
@@ -55,11 +81,25 @@
       <div class="stage-head">
         <div class="eyebrow">03 · 인간 활동이 만든 변화</div>
         <h2 class="display">지구 환경 변화와 인간 생활</h2>
-        <p>환경 문제 카드를 클릭해 원인과 그로 인한 영향을 확인해 보세요.</p>
+        <p>환경 문제 카드를 클릭해 원인과 영향을 확인하고, 아래에서 대기 중 이산화 탄소 농도를 조절해 예상되는 지구 평균 기온 상승을 계산해 보세요.</p>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c2" width="900" height="380"></canvas></div>
         <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+      </div>
+      <div class="stage-card">
+        <div class="stage-head" style="padding:20px 20px 0;">
+          <div class="eyebrow">심화 · 온난화 계산기</div>
+          <h2 class="display" style="font-size:18px;">CO₂ 농도와 기온 상승의 관계</h2>
+        </div>
+        <div class="canvas-wrap"><canvas id="c2b" width="900" height="240"></canvas></div>
+        <div class="controls">
+          <div class="ctrl-group">
+            <div class="ctrl-label">대기 중 CO₂ 농도(ppm)<span class="val" id="c2b-co2-val">420</span></div>
+            <input type="range" id="c2b-co2" min="280" max="1000" step="10" value="420">
+          </div>
+        </div>
+        <div class="info-card" id="c2b-info"></div>
       </div>
     </section>
   </main>
@@ -110,50 +150,110 @@
     ctx.fillText("에너지와 물질의 흐름 →", W / 2, 300);
   }
   render();
+
+  /* 심화: 생태 피라미드 계산기 */
+  var canvas2 = document.getElementById("c0b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c0b-info");
+  var energy0 = 100000, eff = 10;
+  document.getElementById("c0b-e").addEventListener("input", function (e) { energy0 = +e.target.value; document.getElementById("c0b-e-val").textContent = energy0.toLocaleString(); renderPyramid(); });
+  document.getElementById("c0b-eff").addEventListener("input", function (e) { eff = +e.target.value; document.getElementById("c0b-eff-val").textContent = eff; renderPyramid(); });
+
+  function renderPyramid() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var levels = ["생산자", "1차 소비자", "2차 소비자", "3차 소비자"];
+    var values = [energy0];
+    for (var i = 1; i < levels.length; i++) values.push(values[i - 1] * (eff / 100));
+
+    var maxW = 700, x0 = W2 / 2, yTop = 30, rowH = 55;
+    levels.forEach(function (name, i) {
+      var w = Math.max(20, maxW * (values[i] / energy0));
+      var y = yTop + i * rowH;
+      ctx2.fillStyle = ["--teal", "--coral", "--cold", "--violet"][i];
+      ctx2.fillStyle = cssVar(["--teal", "--coral", "--cold", "--violet"][i]);
+      ctx2.fillRect(x0 - w / 2, y, w, rowH - 10);
+      ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--abyss"); ctx2.textAlign = "center";
+      ctx2.fillText(name + " · " + values[i].toLocaleString(undefined, { maximumFractionDigits: 0 }), x0, y + (rowH - 10) / 2 + 4);
+    });
+
+    info2.innerHTML = "생산자 에너지량 " + energy0.toLocaleString() + "에서 단계별 전달 효율 " + eff + "%를 적용하면, 2차 소비자에 도달하는 에너지는 원래의 약 <b>" + (eff / 100 * eff / 100 * 100).toFixed(2) + "%</b>에 불과합니다. 이렇게 영양 단계가 올라갈수록 이용 가능한 에너지가 급격히 줄어들기 때문에, 상위 포식자로 갈수록 개체수가 적어지는 <b>생태 피라미드</b> 구조가 나타납니다.";
+  }
+  renderPyramid();
 })();
 
-/* TAB1 개체수 변동 */
+/* TAB1 개체수 변동 — 실제 로트카-볼테라 수치 시뮬레이션 */
 (function () {
   var canvas = document.getElementById("c1");
   var ctx = setupCanvas(canvas);
   var W = canvas._w, H = canvas._h;
-  var prey0 = 100;
+  var prey0 = 100, pred0 = 20, rateMul = 1;
   document.getElementById("c1-prey").addEventListener("input", function (e) { prey0 = +e.target.value; document.getElementById("c1-prey-val").textContent = prey0; render(); });
+  document.getElementById("c1-pred").addEventListener("input", function (e) { pred0 = +e.target.value; document.getElementById("c1-pred-val").textContent = pred0; render(); });
+  document.getElementById("c1-rate").addEventListener("input", function (e) { rateMul = +e.target.value; document.getElementById("c1-rate-val").textContent = rateMul.toFixed(1) + "×"; render(); });
+  var info = document.getElementById("c1-info");
+
+  function simulate() {
+    // Lotka-Volterra: dPrey/dt = a*Prey - b*Prey*Pred, dPred/dt = c*Prey*Pred - d*Pred
+    var a = 0.5, b = 0.02 * rateMul, c = 0.01 * rateMul, d = 0.4;
+    var dt = 0.02, steps = 1500;
+    var prey = prey0, pred = pred0;
+    var preyArr = [prey], predArr = [pred];
+    for (var i = 0; i < steps; i++) {
+      var dPrey = a * prey - b * prey * pred;
+      var dPred = c * prey * pred - d * pred;
+      prey = Math.max(0, prey + dPrey * dt);
+      pred = Math.max(0, pred + dPred * dt);
+      preyArr.push(prey); predArr.push(pred);
+    }
+    return { prey: preyArr, pred: predArr };
+  }
 
   function render() {
     ctx.clearRect(0, 0, W, H);
     ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = W - 60, y0 = 40, y1 = H - 60;
+    var sim = simulate();
+    var maxPrey = Math.max.apply(null, sim.prey) || 1;
+    var maxPred = Math.max.apply(null, sim.pred) || 1;
+
+    // time series (left)
+    var x0 = 50, x1 = 470, y0 = 30, y1 = 210;
     ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("시간 →", (x0 + x1) / 2, y1 + 26);
+    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("시간 →", (x0 + x1) / 2, y1 + 20);
 
-    // Lotka-Volterra style oscillation, amplitude scaled with prey0 deviation from 100
-    var amp = (prey0 - 100) / 50; // -1..1
-    var baseFreq = 0.6;
-    ctx.beginPath();
-    for (var px = 0; px <= 300; px++) {
-      var tt = px / 300 * 10;
-      var prey = 0.5 + 0.35 * Math.sin(tt * baseFreq) * (1 + amp * 0.4) + 0.1;
-      var xx = x0 + px / 300 * (x1 - x0);
-      var yy = y1 - prey * (y1 - y0);
-      if (px === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+    function plot(arr, maxV, color) {
+      ctx.strokeStyle = cssVar(color); ctx.lineWidth = 2; ctx.beginPath();
+      arr.forEach(function (v, i) {
+        var xx = x0 + i / (arr.length - 1) * (x1 - x0), yy = y1 - (v / maxV) * (y1 - y0);
+        if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+      });
+      ctx.stroke();
     }
-    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
-
-    ctx.beginPath();
-    for (var px2 = 0; px2 <= 300; px2++) {
-      var tt2 = px2 / 300 * 10;
-      var pred = 0.5 + 0.3 * Math.sin(tt2 * baseFreq - 1.1) * (1 + amp * 0.4);
-      var xx2 = x0 + px2 / 300 * (x1 - x0);
-      var yy2 = y1 - pred * (y1 - y0);
-      if (px2 === 0) ctx.moveTo(xx2, yy2); else ctx.lineTo(xx2, yy2);
-    }
-    ctx.strokeStyle = cssVar("--coral"); ctx.lineWidth = 2.5; ctx.stroke();
-
+    plot(sim.prey, Math.max(maxPrey, maxPred) * 1.1, "--teal");
+    plot(sim.pred, Math.max(maxPrey, maxPred) * 1.1, "--coral");
     ctx.font = "12px Segoe UI"; ctx.textAlign = "left";
-    ctx.fillStyle = cssVar("--teal"); ctx.fillText("🐇 토끼(피식자)", x0, y0 - 10);
-    ctx.fillStyle = cssVar("--coral"); ctx.fillText("🦊 여우(포식자)", x0 + 140, y0 - 10);
+    ctx.fillStyle = cssVar("--teal"); ctx.fillText("🐇 토끼(피식자)", x0, y0 - 8);
+    ctx.fillStyle = cssVar("--coral"); ctx.fillText("🦊 여우(포식자)", x0 + 140, y0 - 8);
+
+    // phase plane (right)
+    var px0 = 560, px1 = 860, py0 = 30, py1 = 210;
+    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(px0, py0); ctx.lineTo(px0, py1); ctx.lineTo(px1, py1); ctx.stroke();
+    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
+    ctx.fillText("토끼(피식자) 개체수 →", (px0 + px1) / 2, py1 + 20);
+    ctx.save(); ctx.translate(px0 - 30, (py0 + py1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("여우(포식자) 개체수", 0, 0); ctx.restore();
+    ctx.strokeStyle = cssVar("--violet"); ctx.lineWidth = 1.8; ctx.beginPath();
+    sim.prey.forEach(function (pv, i) {
+      var pd = sim.pred[i];
+      var xx = px0 + (pv / maxPrey) * (px1 - px0), yy = py1 - (pd / maxPred) * (py1 - py0);
+      if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
+    });
+    ctx.stroke();
+    ctx.fillStyle = cssVar("--foam");
+    ctx.beginPath(); ctx.arc(px0 + (prey0 / maxPrey) * (px1 - px0), py1 - (pred0 / maxPred) * (py1 - py0), 5, 0, Math.PI * 2); ctx.fill();
+
+    info.innerHTML = "왼쪽 그래프는 시간에 따른 실제 개체수 변화(로트카-볼테라 방정식 수치 계산), 오른쪽은 두 개체수의 <b>위상 평면 궤적</b>입니다. 닫힌 곡선을 그리며 순환하는 것은 개체수가 특정 평형 주기를 따라 계속 진동함을 의미합니다. 포식 강도를 높이면(현재 " + rateMul.toFixed(1) + "×) 진동의 형태와 주기가 달라집니다.";
   }
   render();
 })();
@@ -192,6 +292,43 @@
     });
   }
   render();
+
+  /* 심화: CO2-기온 계산기 */
+  var canvas2 = document.getElementById("c2b");
+  var ctx2 = setupCanvas(canvas2);
+  var W2 = canvas2._w, H2 = canvas2._h;
+  var info2 = document.getElementById("c2b-info");
+  var co2 = 420;
+  document.getElementById("c2b-co2").addEventListener("input", function (e) { co2 = +e.target.value; document.getElementById("c2b-co2-val").textContent = co2; renderClimate(); });
+
+  function deltaT(c) {
+    var lambda = 3.0; // 기후 민감도(℃, 산업화 이전 대비 CO2 두 배일 때 근사값)
+    return lambda * (Math.log(c / 280) / Math.log(2));
+  }
+  function renderClimate() {
+    ctx2.clearRect(0, 0, W2, H2);
+    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
+    var x0 = 60, x1 = W2 - 40, y0 = 20, y1 = 170;
+    ctx2.strokeStyle = cssVar("--line"); ctx2.beginPath(); ctx2.moveTo(x0, y0); ctx2.lineTo(x0, y1); ctx2.lineTo(x1, y1); ctx2.stroke();
+    ctx2.font = "10.5px Segoe UI"; ctx2.fillStyle = cssVar("--mist"); ctx2.textAlign = "center";
+    ctx2.fillText("CO₂ 농도(ppm) →", (x0 + x1) / 2, y1 + 20);
+    ctx2.save(); ctx2.translate(24, (y0 + y1) / 2); ctx2.rotate(-Math.PI / 2); ctx2.fillText("기온 상승(℃)", 0, 0); ctx2.restore();
+
+    var maxDT = deltaT(1000);
+    ctx2.beginPath();
+    for (var i = 0; i <= 100; i++) {
+      var cc = 280 + i / 100 * (1000 - 280);
+      var dt = deltaT(cc);
+      var xx = x0 + i / 100 * (x1 - x0), yy = y1 - (dt / maxDT) * (y1 - y0);
+      if (i === 0) ctx2.moveTo(xx, yy); else ctx2.lineTo(xx, yy);
+    }
+    ctx2.strokeStyle = cssVar("--coral"); ctx2.lineWidth = 2.5; ctx2.stroke();
+    var curX = x0 + (co2 - 280) / (1000 - 280) * (x1 - x0), curY = y1 - (deltaT(co2) / maxDT) * (y1 - y0);
+    ctx2.fillStyle = cssVar("--teal"); ctx2.beginPath(); ctx2.arc(curX, curY, 6, 0, Math.PI * 2); ctx2.fill();
+
+    info2.innerHTML = "산업화 이전 농도(280ppm) 대비 현재 " + co2 + "ppm이면, 간단한 로그 모델(ΔT = 3℃ × log₂(CO₂/280))로 추정한 지구 평균 기온 상승은 약 <b>" + deltaT(co2).toFixed(2) + "℃</b>입니다. 실제 2024년 기준 대기 중 CO₂ 농도는 약 420ppm으로, 이미 산업화 이전보다 50% 가까이 증가했습니다. (이 계산은 교육용 단순화 모델이며, 실제 기후 시스템은 되먹임 등으로 훨씬 복잡합니다.)";
+  }
+  renderClimate();
 })();
 
 })();
