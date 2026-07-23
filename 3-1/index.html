@@ -64,6 +64,25 @@
         <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
         <div class="info-card" id="c1-info">단계나 카드를 클릭해 보세요.</div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 빅데이터 활용 단계 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 설명은 어느 단계에 해당할까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data"></div>
+        <div class="seg" id="c1m-choices">
+          <button data-c="collect">수집</button>
+          <button data-c="store">저장·정리</button>
+          <button data-c="analyze">분석</button>
+          <button data-c="use">활용</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c1m-check">정답 확인</button>
+          <button class="btn" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info"></div>
+      </div>
       <div class="stage-card" style="margin-top:20px">
         <div class="ctrl-label">데이터 양이 예측 정확도에 미치는 영향 — 슬라이더로 데이터 수집량을 조절해 보세요</div>
         <div class="controls">
@@ -224,6 +243,55 @@
     });
   }
   render();
+})();
+
+/* TAB1 미션 — 빅데이터 활용 단계 맞히기 */
+(function () {
+  var qa = [
+    { txt: "센서, SNS, 거래 기록 등 다양한 경로에서 방대한 데이터를 모으는 단계", key: "collect" },
+    { txt: "수집한 데이터를 분석하기 좋은 형태로 저장하고 정리하는 단계", key: "store" },
+    { txt: "통계와 인공지능 기법으로 데이터 속 규칙과 패턴을 찾아내는 단계", key: "analyze" },
+    { txt: "분석 결과를 바탕으로 미래를 예측하거나 더 나은 의사 결정을 내리는 단계", key: "use" },
+    { txt: "감염병 확산 지역을 예측해 방역 자원을 배치하는 것은 이 단계의 결과를 활용한 사례이다", key: "use" },
+    { txt: "쇼핑몰 서버에 쌓인 방대한 구매 기록 원본 데이터를 데이터베이스에 옮겨 정리하는 것", key: "store" }
+  ];
+  var labels = { collect: "수집", store: "저장·정리", analyze: "분석", use: "활용" };
+  var dataBox = document.getElementById("c1m-data");
+  var seg = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  var info = document.getElementById("c1m-info");
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = qa[Math.floor(Math.random() * qa.length)];
+    picked = null;
+    dataBox.innerHTML = current.txt;
+    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "' 단계입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 데이터 양 -> 예측 정확도 시뮬레이션 */

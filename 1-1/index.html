@@ -39,6 +39,20 @@
         <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
         <div class="info-card" id="c0b-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 원인으로 대멸종 사건 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 원인·특징은 어떤 대멸종에 해당할까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c0m-data"></div>
+        <div class="seg" id="c0m-choices"></div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c0m-check">정답 확인</button>
+          <button class="btn" id="c0m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c0m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -192,6 +206,57 @@
   }
   render();
   renderBar();
+})();
+
+/* TAB0 미션 — 원인으로 대멸종 사건 맞히기 */
+(function () {
+  var qa = [
+    { hint: "해양 생물 종의 약 85%가 사라졌고, 급격한 빙하기가 원인으로 지목되는 사건", key: "ordo" },
+    { hint: "해양 생물이 큰 타격을 입었고, 화산 활동과 해양 산소 부족이 원인으로 추정되는 사건", key: "devo" },
+    { hint: "생물 종의 약 96%가 사라진, 지구 역사상 가장 큰 규모의 대멸종. 대규모 화산 활동이 주원인으로 추정됨", key: "perm" },
+    { hint: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 된 사건", key: "tri" },
+    { hint: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종하고, 이후 포유류가 번성한 사건", key: "cret" }
+  ];
+  var labels = { ordo: "오르도비스기 대멸종", devo: "데본기 대멸종", perm: "페름기 대멸종", tri: "트라이아스기 대멸종", cret: "백악기 대멸종" };
+  var dataBox = document.getElementById("c0m-data");
+  var seg = document.getElementById("c0m-choices");
+  var checkBtn = document.getElementById("c0m-check");
+  var newBtn = document.getElementById("c0m-new");
+  var info = document.getElementById("c0m-info");
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = qa[Math.floor(Math.random() * qa.length)];
+    picked = null;
+    dataBox.innerHTML = current.hint;
+    seg.innerHTML = "";
+    Object.keys(labels).forEach(function (k) {
+      var b = document.createElement("button");
+      b.textContent = labels[k];
+      b.dataset.k = k;
+      b.addEventListener("click", function () {
+        picked = k;
+        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      });
+      seg.appendChild(b);
+    });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 자연선택 */

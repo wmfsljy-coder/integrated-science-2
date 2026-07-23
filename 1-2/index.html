@@ -95,6 +95,23 @@
         </div>
         <div class="info-card" id="c2-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 발열/흡열 반응 구별하기</div>
+        <h2 class="display" style="font-size:18px;">이 현상은 발열 반응일까, 흡열 반응일까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c2m-data"></div>
+        <div class="seg" id="c2m-choices">
+          <button data-c="exo">발열 반응(주변 온도 상승)</button>
+          <button data-c="endo">흡열 반응(주변 온도 하강)</button>
+        </div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c2m-check">정답 확인</button>
+          <button class="btn" id="c2m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c2m-info"></div>
+      </div>
     </section>
   </main>
 </div>
@@ -291,6 +308,55 @@
       : "<b>흡열 반응</b>(질산암모늄 용해, ΔH ≈ +" + dH.endo + " kJ/mol): 반응이 진행될수록(현재 " + progress + "%) 약 " + releasedEnergy.toFixed(1) + " kJ/mol만큼의 에너지를 주변에서 흡수해 온도가 내려갑니다.");
   }
   render();
+})();
+
+/* TAB2 미션 — 발열/흡열 구별하기 */
+(function () {
+  var cases = [
+    { txt: "얼음 위에 소금을 뿌리면 주변 물이 매우 차가워진다.", key: "endo" },
+    { txt: "손난로(철가루 산화 발열팩)를 흔들면 따뜻해진다.", key: "exo" },
+    { txt: "물에 질산암모늄을 녹이면 컵 표면에 물방울이 맺힐 정도로 차가워진다.", key: "endo" },
+    { txt: "나무나 천연가스가 연소하면 주변이 뜨거워진다.", key: "exo" },
+    { txt: "탄산수소나트륨과 구연산을 물에 녹이면 컵이 시원해진다.", key: "endo" },
+    { txt: "묽은 염산에 마그네슘 리본을 넣으면 반응 후 용액의 온도가 올라간다.", key: "exo" }
+  ];
+  var labels = { exo: "발열 반응(주변 온도 상승)", endo: "흡열 반응(주변 온도 하강)" };
+  var dataBox = document.getElementById("c2m-data");
+  var seg = document.getElementById("c2m-choices");
+  var checkBtn = document.getElementById("c2m-check");
+  var newBtn = document.getElementById("c2m-new");
+  var info = document.getElementById("c2m-info");
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = cases[Math.floor(Math.random() * cases.length)];
+    picked = null;
+    dataBox.innerHTML = current.txt;
+    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  seg.querySelectorAll("button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      picked = btn.dataset.c;
+      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
+    });
+  });
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 })();

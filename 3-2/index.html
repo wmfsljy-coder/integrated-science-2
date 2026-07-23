@@ -44,6 +44,20 @@
         </div>
         <div class="info-card" id="c0b-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 설명으로 미래 기술 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 설명은 어떤 미래 기술일까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c0m-data"></div>
+        <div class="seg" id="c0m-choices"></div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c0m-check">정답 확인</button>
+          <button class="btn" id="c0m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c0m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -153,6 +167,57 @@
     info2.innerHTML = year + "년 기준으로 6개 기술 중 <b>" + arrivedCount + "개</b>가 대중화되었을 것으로 예상해 볼 수 있습니다. (제시된 예상 시기는 학습용 가상의 값이며, 실제 기술 발전 속도는 연구 투자, 사회적 수용성 등에 따라 크게 달라질 수 있습니다.)";
   }
   renderTimeline();
+})();
+
+/* TAB0 미션 — 설명으로 미래 기술 맞히기 */
+(function () {
+  var labels = { ai: "인공지능(AI)", gene: "유전자 편집 기술", space: "우주 산업", nano: "나노 기술", storage: "신재생 에너지 저장", medi: "맞춤형 의료" };
+  var qa = [
+    { txt: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용된다.", key: "ai" },
+    { txt: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용된다.", key: "gene" },
+    { txt: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있다.", key: "space" },
+    { txt: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용된다.", key: "nano" },
+    { txt: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이다.", key: "storage" },
+    { txt: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있다.", key: "medi" }
+  ];
+  var dataBox = document.getElementById("c0m-data");
+  var seg = document.getElementById("c0m-choices");
+  var checkBtn = document.getElementById("c0m-check");
+  var newBtn = document.getElementById("c0m-new");
+  var info = document.getElementById("c0m-info");
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = qa[Math.floor(Math.random() * qa.length)];
+    picked = null;
+    dataBox.innerHTML = current.txt;
+    seg.innerHTML = "";
+    Object.keys(labels).forEach(function (k) {
+      var b = document.createElement("button");
+      b.textContent = labels[k];
+      b.addEventListener("click", function () {
+        picked = k;
+        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      });
+      seg.appendChild(b);
+    });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB1 사회적 쟁점 */

@@ -77,6 +77,20 @@
         <div class="canvas-wrap"><canvas id="c1b" width="900" height="260"></canvas></div>
         <div class="info-card" id="c1b-info"></div>
       </div>
+
+      <div class="stage-head">
+        <div class="eyebrow">🔎 미션 · 에너지 전환 과정으로 발전 방식 맞히기</div>
+        <h2 class="display" style="font-size:18px;">이 에너지 전환 과정은 어떤 발전 방식일까?</h2>
+      </div>
+      <div class="stage-card">
+        <div class="info-card" id="c1m-data"></div>
+        <div class="seg" id="c1m-choices"></div>
+        <div class="toggle-row" style="margin:14px 20px;">
+          <button class="btn" id="c1m-check">정답 확인</button>
+          <button class="btn" id="c1m-new">새 문제</button>
+        </div>
+        <div class="info-card" id="c1m-info"></div>
+      </div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -264,6 +278,57 @@
       : "1kWh를 생산할 때 배출되는 CO₂는 <b>화력 발전(약 820g)</b>이 압도적으로 많고, 풍력(약 11g)·원자력(약 12g)이 매우 적습니다. 신재생 에너지로의 전환이 강조되는 이유입니다.";
   }
   renderCompare();
+})();
+
+/* TAB1 미션 — 에너지 전환 과정으로 발전 방식 맞히기 */
+(function () {
+  var qa = [
+    { hint: "화학 에너지 → 열에너지 → 운동 에너지 → 전기 에너지 순으로 전환되며, 이산화 탄소를 많이 배출한다.", key: "fire" },
+    { hint: "위치 에너지 → 운동 에너지 → 전기 에너지로 전환되며, 댐을 이용해 발전한다.", key: "hydro" },
+    { hint: "핵분열 반응으로 얻은 열로 증기를 만들어 터빈을 돌리며, 방사성 폐기물 처리가 과제이다.", key: "nuclear" },
+    { hint: "빛 에너지를 광전 효과로 직접 전기 에너지로 전환하며, 날씨와 낮/밤의 영향을 크게 받는다.", key: "solar" },
+    { hint: "바람의 운동 에너지로 날개를 돌려 전기를 만들며, 바람의 세기에 따라 발전량이 달라진다.", key: "wind" },
+    { hint: "지구 내부의 열에너지로 증기를 만들어 터빈을 돌리며, 화산 활동이 활발한 지역에서 유리하다.", key: "geo" }
+  ];
+  var labels = { fire: "화력 발전", hydro: "수력 발전", nuclear: "원자력 발전", solar: "태양광 발전", wind: "풍력 발전", geo: "지열 발전" };
+  var dataBox = document.getElementById("c1m-data");
+  var seg = document.getElementById("c1m-choices");
+  var checkBtn = document.getElementById("c1m-check");
+  var newBtn = document.getElementById("c1m-new");
+  var info = document.getElementById("c1m-info");
+  var current = null, picked = null;
+
+  function newQuestion() {
+    current = qa[Math.floor(Math.random() * qa.length)];
+    picked = null;
+    dataBox.innerHTML = current.hint;
+    seg.innerHTML = "";
+    Object.keys(labels).forEach(function (k) {
+      var b = document.createElement("button");
+      b.textContent = labels[k];
+      b.addEventListener("click", function () {
+        picked = k;
+        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      });
+      seg.appendChild(b);
+    });
+    info.innerHTML = "";
+    info.style.color = "";
+  }
+
+  checkBtn.addEventListener("click", function () {
+    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
+    if (picked === current.key) {
+      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
+      info.style.color = "var(--teal)";
+    } else {
+      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
+      info.style.color = "var(--coral)";
+    }
+  });
+
+  newBtn.addEventListener("click", newQuestion);
+  newQuestion();
 })();
 
 /* TAB2 에너지 효율 — 2단계 직렬 */
