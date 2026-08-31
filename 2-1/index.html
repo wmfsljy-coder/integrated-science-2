@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 생태계의 구성</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 생태계 평형</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 지구 환경 변화</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 생물과 환경이 얽힌 그물</div>
         <h2 class="display">생태계의 구성 요소와 에너지 흐름</h2>
         <p>먹이 사슬의 각 단계를 클릭해 역할을 확인하고, 아래에서 생산자의 에너지량을 조절하며 영양 단계를 거칠 때마다 에너지가 얼마나 줄어드는지(생태 피라미드) 확인해 보세요.</p>
+      
+        <div class="std-note"><b>학습 목표</b> 생태계의 구성 요소와 상호 작용을 이해하고, 생태계 평형이 유지되는 과정을 설명할 수 있다.  성취기준 코드가 교사용 교과서에서 추출되지 않았습니다. 확인 후 채워 넣으세요.</div><div class="terms"><b>생물적 요인</b><b>비생물적 요인</b><b>생태계 평형</b><b>개체수 변동</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="360"></canvas></div>
@@ -63,6 +66,7 @@
         </div>
         <div class="info-card" id="c0m-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>양엽과 음엽은 식물의 종류가 아니다</b><br>학생들은 <b>양지식물의 잎을 양엽, 음지식물의 잎을 음엽</b>이라고 생각할 수 있다. <b>한 식물에서도 양엽과 음엽이 모두 나타난다.</b> 실제로 하나의 양지식물에서도 빛이 충분히 들지 않는 쪽에는 음엽이 생긴다. 강한 빛을 받는 잎이 두꺼운 것은 울타리조직이 발달했기 때문이다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -115,6 +119,15 @@
         </div>
         <div class="info-card" id="c2b-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -398,6 +411,36 @@
   renderClimate();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is2-2-1");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학2 Ⅱ-1] 생태계와 환경 변화",
+    items: [
+      {
+            "id": "w1",
+            "label": "한 나무에 두 가지 잎",
+            "hint": "같은 나무의 위쪽 잎과 아래쪽 잎이 다른 까닭을 빛의 세기와 조직으로 설명하세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "평형이 되돌아오는 과정",
+            "hint": "포식자가 늘었을 때 개체수가 다시 균형을 찾는 과정을 순서대로 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

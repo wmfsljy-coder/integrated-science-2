@@ -18,6 +18,7 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 지질시대와 대멸종</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 자연선택과 진화</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 생물다양성의 의미</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
   </nav>
 
   <main>
@@ -26,6 +27,8 @@
         <div class="eyebrow">01 · 지구 생물의 흥망성쇠</div>
         <h2 class="display">지질시대와 대멸종</h2>
         <p>시간 막대의 지점을 클릭해 지구 역사상 있었던 5차례의 대멸종에 대해 알아보고, 아래 막대그래프에서 사건별 멸종 심각도(종 손실 비율)를 비교해 보세요.</p>
+      
+        <span class="std-chip">10통과2-01-01</span><span class="std-chip">10통과2-01-02</span><div class="std-note"><b>[10통과2-01-01]</b> 지질시대를 통해 지구 환경이 끊임없이 변화해 왔으며 이러한 환경 변화가 생물다양성에 미치는 영향을 추론할 수 있다.<br><b>[10통과2-01-02]</b> 변이의 발생과 자연선택 과정을 통해 생물의 진화가 일어나고, 진화의 과정을 통해 생물다양성이 형성되었음을 추론할 수 있다.</div><div class="terms"><b>지질시대</b><b>대멸종</b><b>변이</b><b>자연선택</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
@@ -53,6 +56,7 @@
         </div>
         <div class="info-card" id="c0m-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>화석은 뼈가 아니다</b><br><b>공룡 뼈 화석을 실제 공룡의 뼈로 오해</b>하는 경우가 있다. 동물의 뼈가 보존되는 기간은 동물의 종류와 환경에 따라 다르며, 대부분의 화석은 원래의 물질이 그대로 남은 것이 아니다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="1" hidden>
@@ -82,6 +86,7 @@
         </div>
         <div class="info-card" id="c1-info"></div>
       </div>
+      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>형질은 한쪽만의 결과가 아니다</b><br>학생들은 특정 형질이 <b>유전적 영향만 받거나 환경의 영향만 받는다</b>고 생각할 수 있다. 피부색, 키, 몸무게, 지능 등 형질의 차이는 <b>유전적 영향과 환경의 영향이 모두 작용</b>하여 나타난다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
     </section>
 
     <section class="tab-panel" data-panel="2" hidden>
@@ -120,6 +125,15 @@
         </div>
         <div class="info-card" id="c2b-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -383,6 +397,36 @@
   renderIndex();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is2-1-1");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학2 Ⅰ-1] 지구 환경 변화와 생물다양성",
+    items: [
+      {
+            "id": "w1",
+            "label": "환경 변화와 생물다양성",
+            "hint": "대멸종 하나를 골라, 그때 환경이 어떻게 바뀌었고 생물다양성이 어떻게 달라졌는지 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "자연선택이 일어나는 순서",
+            "hint": "변이 → 선택 → 유전의 순서를 예 하나로 풀어 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>

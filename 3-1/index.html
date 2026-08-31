@@ -17,6 +17,7 @@
     </div>
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 과학 기술의 발전</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 빅데이터의 활용</button>
+    <button class="tab-btn" data-tab="2"><span class="num">03</span> 정리하기</button>
   </nav>
 
   <main>
@@ -25,6 +26,8 @@
         <div class="eyebrow">01 · 과학이 사회를 바꿔온 과정</div>
         <h2 class="display">과학 기술 발전의 흐름</h2>
         <p>타임라인의 각 지점을 클릭해 확인하고, 아래에서 기술을 골라 도입 이후 시간이 지나며 보급률이 어떻게 S자 곡선을 그리며 증가하는지 확인해 보세요.</p>
+      
+        <div class="std-note"><b>학습 목표</b> 과학 기술의 발전 과정을 이해하고, 빅데이터의 수집·분석·활용 과정을 설명할 수 있다.  성취기준 코드가 교사용 교과서에서 추출되지 않았습니다. 확인 후 채워 넣으세요.</div><div class="terms"><b>빅데이터</b><b>정보 산출</b><b>과학 기술 발전</b></div>
       </div>
       <div class="stage-card">
         <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
@@ -94,6 +97,15 @@
         <div class="canvas-wrap" style="margin-top:10px; height:200px"><canvas id="c1-sim" width="900" height="200"></canvas></div>
         <div class="info-card" id="c1-sim-info"></div>
       </div>
+    </section>
+
+    <section class="tab-panel" data-panel="2" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">03 · 오늘 알아낸 것을 문장으로</div>
+        <h2 class="display">정리하기</h2>
+        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+      </div>
+      <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
     </section>
   </main>
 </div>
@@ -340,6 +352,36 @@
   update();
 })();
 
+})();
+</script>
+
+<script>
+(function () {
+  window.sthUnit("is2-3-1");
+  window.sthWork({
+    mount: "wk",
+    unitLabel: "[통합과학2 Ⅲ-1] 과학 기술의 활용",
+    items: [
+      {
+            "id": "w1",
+            "label": "데이터에서 결론까지",
+            "hint": "이 단원에서 본 사례 하나를 골라, 어떤 데이터를 모아 어떤 결론을 냈는지 순서대로 쓰세요.",
+            "ph": ""
+      },
+      {
+            "id": "w2",
+            "label": "데이터가 거짓말할 때",
+            "hint": "같은 데이터로 다른 결론이 나올 수 있는 경우를 하나 들어 보세요.",
+            "ph": ""
+      },
+      {
+            "id": "w3",
+            "label": "아직 헷갈리는 것",
+            "hint": "다음 시간에 여기서부터 시작합니다.",
+            "ph": ""
+      }
+]
+  });
 })();
 </script>
 </body>
