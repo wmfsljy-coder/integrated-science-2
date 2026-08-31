@@ -65,8 +65,9 @@
         <h2 class="display">발전 방식과 에너지원</h2>
         <p>카드를 클릭해 각 방식의 에너지 전환 과정을 확인하고, 아래에서 발전 효율과 이산화 탄소 배출량을 실제 수치로 비교해 보세요.</p>
       </div>
+      <div class="gate loose" id="gt"></div>
       <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="420"></canvas></div>
+        <div class="canvas-wrap" style="position:relative"><canvas id="c1" width="900" height="420"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
         <div class="info-card" id="c1-info">카드를 클릭해 보세요.</div>
       </div>
       <div class="stage-card">
@@ -414,6 +415,26 @@
             "ph": ""
       }
 ]
+  });
+})();
+</script>
+
+<script>
+(function () {
+  window.sthGate({
+    gate: "gt", veil: "vl", key: "ghg",
+    question: "지구의 <b>온실 효과에 가장 크게 기여하는</b> 기체는 무엇일까요?",
+    options: ["㉠ 이산화 탄소", "㉡ 메테인", "㉢ 수증기", "㉣ 오존"],
+    onPick: function (i) {
+      var ok = (i === 2);
+      window.sthState("ghgOK", ok ? "맞음" : "어긋남");
+      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉢ 입니다.</b> ") + "온실 효과 자체에 가장 크게 기여하는 것은 <b>수증기</b>입니다." + " " + "그런데도 기후변화 논의에서 이산화 탄소를 주로 다루는 까닭은, 수증기의 양은 <b>기온이 정하는 결과</b>인 반면 이산화 탄소는 <b>사람이 늘리는 원인</b>이기 때문입니다.";
+      var g = document.getElementById("gt");
+      var box = g.parentNode.querySelector(".info-card");
+      if (box) box.innerHTML = msg;
+      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
+             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
+    }
   });
 })();
 </script>
