@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>에너지 전환과 활용 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,424 +20,356 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 발전과 에너지원</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 에너지 효율</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 태양 에너지의 생성과 전환 — 이야기 「태양은 석탄 덩어리일까」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 모든 에너지의 근원</div>
-        <h2 class="display">태양 에너지의 생성과 전환</h2>
-        <p>흐름도의 각 단계를 클릭해 확인하고, 아래에서 단계별 전환 효율을 조절하며 태양 에너지가 화석 연료로 저장되기까지 얼마나 줄어드는지 계산해 보세요.</p>
-      
-        <span class="std-chip">10통과2-02-04</span><span class="std-chip">10통과2-02-05</span><span class="std-chip">10통과2-02-06</span><div class="std-note"><b>[10통과2-02-04]</b> 태양에서 수소 핵융합 반응을 통해 질량 일부가 에너지로 바뀌고, 그중 일부가 지구에서 에너지 흐름을 일으키며 다양한 에너지로 전환되는 과정을 추론할 수 있다.<br><b>[10통과2-02-05]</b> 발전기에서 운동 에너지가 전기 에너지로 전환되는 과정을 이해하고, 열원으로서 화석 연료, 핵에너지를 이용하는 발전소가 인간 생활에 미치는 영향을 조사·발표할 수 있다.<br><b>[10통과2-02-06]</b> 에너지 효율의 의미와 중요성을 이해하고, 지속가능한 발전과 지구 환경 문제 해결에 신재생에너지 기술을 활용하는 방안을 탐색할 수 있다.</div><div class="terms"><b>에너지 전환</b><b>에너지 효율</b><b>온실 기체</b><b>신재생 에너지</b></div>
+        <div class="eyebrow">01 · 태양 에너지의 생성과 전환 · 이야기 한 편</div>
+        <h2 class="display">태양은 석탄 덩어리일까</h2>
+        <p>19세기 과학자들을 괴롭힌 수수께끼입니다. 태양은 도대체 무엇을 태우기에 이렇게 오래 빛날까요? 연료의 수명을 직접 계산하고, 사라진 질량을 찾아내고, 그 에너지가 지구에서 어디로 흘러가는지 끝까지 추적하세요.</p>
+        <span class="std-chip">10통과2-02-04</span><div class="std-note"><b>[10통과2-02-04]</b> 태양에서 수소 핵융합 반응을 통해 질량 일부가 에너지로 바뀌고, 그중 일부가 지구에서 에너지 흐름을 일으키며 다양한 에너지로 전환되는 과정을 추론할 수 있다.</div><div class="terms"><b>수소 핵융합</b><b>질량 결손</b><b>에너지 전환</b><b>에너지 흐름</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="380"></canvas></div>
-        <div class="info-card" id="c0-info">단계를 클릭해 보세요.</div>
+
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="1850년대, 어느 천문대의 논쟁">
+          <div class="story narr"><div class="who">☀️</div><div class="say"><span class="name">이야기</span>증기 기관이 세상을 바꾸던 19세기, 사람들이 아는 가장 강력한 연료는 <b>석탄</b>이었습니다. 그래서 과학자들은 진지하게 물었습니다. “태양도 거대한 석탄 덩어리가 타고 있는 것 아닐까?”</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">천문대 조수 에밀</span>“계산원님, 마침 잘 오셨어요. 태양의 질량과 태양이 1초마다 내보내는 에너지는 이미 재 두었습니다. 이 숫자만 있으면 ‘석탄 태양’이 얼마나 오래 탈 수 있는지 알 수 있지 않을까요?”</div></div>
+          <div class="case-file"><b class="k">태양의 질량</b> 약 <b>2.0×10³⁰ kg</b> &nbsp;|&nbsp; <b class="k">태양이 1초에 내보내는 에너지</b> 약 <b>3.8×10²⁶ J</b> &nbsp;|&nbsp; <b class="k">석탄 1 kg이 탈 때 나오는 에너지</b> 약 <b>3×10⁷ J</b></div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="계산 — 연료가 바닥나는 날">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">에밀</span>“수명은 간단해요. <b>(태양의 질량 × 연료 1 kg이 내는 에너지) ÷ 1초에 내보내는 에너지</b>. 연료가 얼마나 ‘진한지’를 바꿔 가며 태양의 수명을 구해 봅시다. 눈금이 1 올라가면 에너지는 10배예요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-a-fuel" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">연료 1 kg이 내는 에너지 (10의 거듭제곱 눈금)<span class="val" id="a-fuel-x-val">눈금 9.0</span></div>
+                <input type="range" id="a-fuel-x" min="7" max="15" step="0.1" value="9">
+              </div>
+            </div>
+            <div class="info-card" id="a-fuel-info"></div>
+          </div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>지질학자들은 암석의 나이로 지구가 <b>약 46억 년</b> 되었다고 말합니다. 태양은 적어도 그만큼은 빛났어야 합니다.<ul><li id="m1-2a">눈금을 <b>7.5</b>(석탄)에 맞춰 ‘석탄 태양’의 수명을 확인하세요.</li><li id="m1-2b">태양의 수명이 46억 년을 넘는 <b>가장 작은</b> 눈금을 찾으세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="사라진 0.7% — 수소 핵융합">
+          <div class="story narr"><div class="who">⚛️</div><div class="say"><span class="name">이야기</span>답은 20세기에 나왔습니다. 1905년 아인슈타인은 질량과 에너지가 서로 바뀔 수 있다는 <b>E = mc²</b>을 내놓았고, 1920년 에딩턴은 “수소 원자핵 4개의 질량이 헬륨 원자핵 1개보다 조금 무겁다”는 측정값에 주목했습니다. 1930년대 말, 한스 베테가 태양 중심부(약 1,500만 ℃)에서 수소 원자핵이 헬륨 원자핵으로 합쳐지는 <b>수소 핵융합</b> 과정을 밝혀냅니다.</div></div>
+          <div class="case-file"><b class="k">수소 원자핵 4개</b> 4 × 1.0073 = <b>4.0292</b> &nbsp;|&nbsp; <b class="k">헬륨 원자핵 1개</b> <b>4.0015</b> &nbsp;|&nbsp; <b class="k">줄어든 질량</b> 0.0277 → 처음 질량의 <b>약 0.7%</b> (질량 단위 u)</div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-a-fus" width="900" height="340"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">태양 중심부에서 1초에 핵융합하는 수소의 질량<span class="val" id="a-fus-m-val">1.0억 톤</span></div>
+                <input type="range" id="a-fus-m" min="0" max="12" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="a-fus-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="a-q1"></div></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>줄어든 질량 Δm 은 E = Δm × c² (c = 3.0×10⁸ m/s) 만큼의 에너지가 됩니다.<ul><li id="m1-3a">태양이 실제로 내보내는 에너지(1초에 3.8×10²⁶ J, 오차 ±2%)와 맞아떨어지는 핵융합량을 찾으세요. 모자라면 지구가 얼고, 넘치면 지구가 끓습니다.</li><li id="m1-3b">아래 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="추적 — 지구에 온 햇빛은 어디로 갔나">
+          <div class="story"><div class="who">🛰️</div><div class="say"><span class="name">이야기</span>태양이 사방으로 내보내는 에너지 가운데 지구가 받는 것은 <b>약 22억분의 1</b>뿐입니다. 그래도 1초에 약 1.7×10¹⁷ J, 인류가 쓰는 에너지의 수천 배입니다. 이 가운데 약 30%는 구름과 지표에서 반사되어 우주로 돌아가고, 약 70%가 대기와 지표에 흡수되어 지구의 <b>에너지 흐름</b>을 일으킵니다.</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-a-flow" width="900" height="300"></canvas></div>
+          </div>
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">에너지 탐정단 선생님</span>“우리가 쓰는 에너지의 <b>근원</b>을 거슬러 올라가 봅시다. 대부분은 태양에 닿지만, 태양과 상관없는 것도 섞여 있어요. 속지 마세요.”</div></div>
+          <div class="stage-card"><div id="a-sort"></div></div>
+          <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">선생님</span>“이번에는 석탄 한 덩어리가 되기까지의 길을 숫자로 따라가요. 조사해 보니 햇빛의 <b>약 50%</b>가 지표에 닿고, 식물은 받은 빛의 <b>1% 안팎</b>만 화학 에너지로 저장해요. 죽은 생물이 썩지 않고 묻혀 화석 연료가 되는 일은 아주 드물어서, 여기서는 <b>0.1%</b>라고 가정합시다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-a-chain" width="900" height="220"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">지표에 도달하는 비율(%)<span class="val" id="a-ch-a-val">70</span></div>
+                <input type="range" id="a-ch-a" min="30" max="90" step="1" value="70">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">광합성 효율(%)<span class="val" id="a-ch-b-val">2.0</span></div>
+                <input type="range" id="a-ch-b" min="0.5" max="5" step="0.1" value="2">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">화석 연료로 보존되는 비율(%)<span class="val" id="a-ch-c-val">0.10</span></div>
+                <input type="range" id="a-ch-c" min="0.01" max="1" step="0.01" value="0.1">
+              </div>
+            </div>
+            <div class="info-card" id="a-ch-info"></div>
+          </div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span><ul><li id="m1-4a">에너지 9가지의 근원을 추적해 분류하세요.</li><li id="m1-4b">선생님이 알려 준 값으로 맞추어, 화석 연료 <b>1 J</b>이 만들어지는 데 햇빛이 <b>약 20만 J</b>(19만~21만) 들었음을 확인하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 태양은 타는 것이 아니었다">
+          <div class="ending">
+            <h4>☀️ 태양은 ‘타는’ 것이 아니라 ‘가벼워지고’ 있었다</h4>
+            <p>태양이 석탄이라면 고작 <b>5천 년 남짓</b>이면 다 타 버립니다. 어떤 화학 연료로도 46억 년을 설명할 수 없습니다. 태양의 에너지는 연소가 아니라 <b>수소 핵융합</b>에서 나옵니다. 수소 원자핵 4개가 헬륨 원자핵 1개로 합쳐질 때 질량의 약 0.7%가 줄어들고, 그 질량이 E = mc² 에 따라 에너지로 바뀝니다. 태양은 지금도 1초에 약 420만 톤씩 가벼워지고 있습니다.</p>
+            <p>그 에너지의 아주 작은 일부가 지구에 닿아 대기와 바다를 데우고(열에너지), 바람과 해류를 일으키고(운동 에너지), 물을 증발시켜 높은 곳으로 올리고(위치 에너지), 광합성으로 양분에 저장됩니다(화학 에너지). 석탄과 석유는 먼 옛날 생물이 저장한 <b>햇빛의 화석</b>입니다.</p>
+            <div class="vs" id="e1-vs"></div>
+            <span class="stamp">사건 파일 ① 해결</span>
+          </div>
+          <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 실제 핵융합은 수소 원자핵 4개가 한꺼번에 부딪치는 것이 아니라 여러 단계를 거쳐 일어나고, 핵융합이 일어날 만큼 뜨거운 곳은 <b>중심부</b>뿐이라 태양 전체 수소의 약 10%만 쓰입니다. 그래서 태양의 수명은 약 100억 년으로 계산됩니다. 또 장면 4의 ‘화석 연료 보존 비율 0.1%’는 계산을 위해 둔 <b>가정값</b>이며, 실제 값은 시대와 환경에 따라 크게 다릅니다.</div>
+          <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 직렬 효율 계산기</div>
-          <h2 class="display" style="font-size:18px;">단계를 거칠 때마다 곱해지는 효율</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="200"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">대기 투과율(%)<span class="val" id="c0b-a-val">70</span></div>
-            <input type="range" id="c0b-a" min="30" max="90" step="1" value="70">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">광합성 효율(%)<span class="val" id="c0b-b-val">2</span></div>
-            <input type="range" id="c0b-b" min="0.5" max="5" step="0.1" value="2">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">화석화 보존율(%)<span class="val" id="c0b-c-val">0.1</span></div>
-            <input type="range" id="c0b-c" min="0.01" max="1" step="0.01" value="0.1">
-          </div>
-        </div>
-        <div class="info-card" id="c0b-info"></div>
-      </div>
-      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>수증기도 온실 기체다</b><br>보통 온실 기체의 종류 중 <b>수증기가 많이 언급되지 않아</b> 학생들이 수증기는 온실 효과에 미치는 영향이 작다는 오해를 할 수 있다. 실제로 지구의 온실 효과에 미치는 영향은 <b>수증기가 가장 크다.</b><cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 발전 방식과 에너지원 — 이야기 「불 꺼진 섬」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 전기를 만드는 다양한 방법</div>
-        <h2 class="display">발전 방식과 에너지원</h2>
-        <p>카드를 클릭해 각 방식의 에너지 전환 과정을 확인하고, 아래에서 발전 효율과 이산화 탄소 배출량을 실제 수치로 비교해 보세요.</p>
-      </div>
-      <div class="gate loose" id="gt"></div>
-      <div class="stage-card">
-        <div class="canvas-wrap" style="position:relative"><canvas id="c1" width="900" height="420"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
-        <div class="info-card" id="c1-info">카드를 클릭해 보세요.</div>
-      </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 발전 방식 비교</div>
-          <h2 class="display" style="font-size:18px;">효율 vs 탄소 배출량</h2>
-        </div>
-        <div class="seg" id="c1b-mode" style="margin:0 20px 14px;">
-          <button class="on" data-m="eff">발전 효율(%) 비교</button>
-          <button data-m="co2">CO₂ 배출량(g/kWh) 비교</button>
-        </div>
-        <div class="canvas-wrap"><canvas id="c1b" width="900" height="260"></canvas></div>
-        <div class="info-card" id="c1b-info"></div>
+        <div class="eyebrow">02 · 발전 방식과 에너지원 · 이야기 한 편</div>
+        <h2 class="display">불 꺼진 섬</h2>
+        <p>태풍으로 전기가 끊긴 섬마을에 기술 지원단으로 파견되었습니다. 창고의 자석과 코일로 전기를 만드는 원리를 알아내고, 마을에 맞는 발전기를 설계하고, 그 발전기를 무엇으로 돌릴지 주민들과 함께 따져 보세요.</p>
+        <span class="std-chip">10통과2-02-05</span><div class="std-note"><b>[10통과2-02-05]</b> 발전기에서 운동 에너지가 전기 에너지로 전환되는 과정을 이해하고, 열원으로서 화석 연료, 핵에너지를 이용하는 발전소가 인간 생활에 미치는 영향을 조사·발표할 수 있다.</div><div class="terms"><b>전자기 유도</b><b>발전기</b><b>터빈</b><b>화석 연료·핵에너지</b><b>온실 기체</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 에너지 전환 과정으로 발전 방식 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 에너지 전환 과정은 어떤 발전 방식일까?</h2>
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="태풍이 지나간 밤">
+          <div class="story narr"><div class="who">🌀</div><div class="say"><span class="name">이야기</span>태풍이 지나간 뒤, 육지와 이어진 해저 전선이 끊겨 <b>누리섬</b>(가상의 섬) 전체가 정전되었습니다. 냉장고의 생선도, 보건소의 약품 냉장고도 위험합니다. 수리선이 오려면 일주일이 걸립니다.</div></div>
+          <div class="story"><div class="who">👵</div><div class="say"><span class="name">이장님</span>“학교 과학실 창고에 <b>강한 자석</b>하고 <b>구리선 코일</b>이 잔뜩 있다오. 자석이 그렇게 세다니, 코일 옆에 딱 붙여 두기만 하면 전기가 나오지 않겠소?”</div></div>
+          <div class="case-file"><b class="k">창고 물품</b> 네오디뮴 자석, 에나멜선 코일(100·200·300회), 검류계, 자전거, 낡은 물레방아 &nbsp;|&nbsp; <b class="k">마을이 쓰는 전기</b> 교류 <b>220 V · 60 Hz</b></div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="실험 — 자석을 넣었다 뺐다">
+          <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“말보다 실험이지. 코일에 검류계를 연결했어. 아래 손잡이를 끌어서 <b>자석을 직접 움직여 봐.</b> 빠르게도, 천천히도, 그리고 코일 속에 넣은 채 가만히도 있어 보고.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-b-ind" width="900" height="300"></canvas></div>
+            <div class="seg" id="b-ind-n" style="margin:0 20px 14px;">
+              <button class="on" data-n="1" type="button">코일 100회</button>
+              <button data-n="2" type="button">코일 200회</button>
+              <button data-n="3" type="button">코일 300회</button>
+            </div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">자석의 위치 (끌어서 움직이세요: 왼쪽 = 코일 밖, 오른쪽 = 코일 속)<span class="val" id="b-ind-x-val">코일 밖</span></div>
+                <input type="range" id="b-ind-x" min="0" max="100" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="b-ind-info">자석을 움직이며 검류계 바늘을 지켜보세요.</div>
+          </div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span>검류계로 세 가지를 모두 관찰하세요.<ul><li id="m2-2a">자석을 코일 속으로 <b>빠르게 넣어</b> 바늘을 오른쪽(+)으로 10칸 이상 움직이기</li><li id="m2-2b">자석을 <b>빠르게 빼서</b> 바늘을 왼쪽(−)으로 10칸 이상 움직이기</li><li id="m2-2c">자석을 코일 속에 넣은 채 <b>2초 동안 가만히</b> 두고 바늘 확인하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="설계 — 220 V, 60 Hz 를 맞춰라">
+          <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“넣었다 뺐다 하는 대신, 자석 사이에서 코일을 <b>계속 회전</b>시키면 코일을 지나는 자기장이 쉬지 않고 변해. 그게 <b>발전기</b>야. 운동 에너지가 전기 에너지로 바뀌는 거지. 전압은 <b>코일 감은 수 × 자석 세기 × 회전 속도</b>에 비례해. 단, 마을 가전제품은 220 V, 60 Hz 에 맞춰져 있어. 모자라도, 넘쳐도 안 돼.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-b-gen" width="900" height="340"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">코일 감은 수<span class="val" id="b-gen-n-val">100회</span></div>
+                <input type="range" id="b-gen-n" min="20" max="400" step="10" value="100">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">자석의 세기(자기장)<span class="val" id="b-gen-b-val">0.20 T</span></div>
+                <input type="range" id="b-gen-b" min="0.1" max="1" step="0.05" value="0.2">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">1초 동안 회전수<span class="val" id="b-gen-f-val">20회</span></div>
+                <input type="range" id="b-gen-f" min="0" max="90" step="1" value="20">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-gen-run" type="button">⚡ 이 설계로 마을에 송전하기</button></div>
+            <div class="info-card" id="b-gen-info">세 값을 정하고 송전해 보세요. 여러 번 시도할 수 있습니다.</div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span>두 조건을 모두 만족하는 발전기를 설계하세요.<ul><li>전압 <b>210~230 V</b> (낮으면 전등이 희미하고, 높으면 가전제품이 타 버립니다)</li><li>주파수 <b>59~61 Hz</b> (1초 동안 회전수가 곧 주파수입니다)</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="회의 — 무엇으로 터빈을 돌릴까">
+          <div class="story"><div class="who">👵</div><div class="say"><span class="name">이장님</span>“자전거로 1초에 60바퀴를 일주일 내내 돌릴 수는 없지 않소. 이참에 섬에 작은 발전소를 하나 두려 하오. 발전기에 날개(<b>터빈</b>)를 달고 그걸 무엇으로 돌릴지, 방식마다 따져 주시오. 우리 섬은 1년에 전기를 <b>1,000만 kWh</b>쯤 쓴다오.”</div></div>
+          <div class="stage-card">
+            <div class="seg" id="b-src-pick" style="margin:16px 20px 10px;">
+              <button class="on" data-k="0" type="button">🔥 화력</button>
+              <button data-k="1" type="button">☢️ 원자력</button>
+              <button data-k="2" type="button">💧 수력</button>
+              <button data-k="3" type="button">💨 풍력</button>
+              <button data-k="4" type="button">☀️ 태양광</button>
+              <button data-k="5" type="button">🌋 지열</button>
+            </div>
+            <div class="canvas-wrap"><canvas id="c-b-src" width="900" height="420"></canvas></div>
+            <div class="seg" id="b-src-mode" style="margin:0 20px 14px;">
+              <button class="on" data-m="eff" type="button">발전 효율(%) 비교</button>
+              <button data-m="co2" type="button">CO₂ 배출량(g/kWh) 비교</button>
+            </div>
+            <div class="info-card" id="b-src-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="b-q1"></div></div>
+          <div class="stage-card" style="margin-top:14px"><div id="b-sort1"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span><ul><li id="m2-4a">여섯 가지 발전 방식을 모두 눌러 에너지 전환 과정과 섬의 1년 계산서를 확인하세요.</li><li id="m2-4b">CO₂ 배출량 비교 그래프를 읽고 물음에 답하세요.</li><li id="m2-4c">발전 방식 8가지를 ‘터빈을 무엇이 돌리는가’로 분류하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 발전소와 우리 생활">
+          <div class="story"><div class="who">🧑‍🌾</div><div class="say"><span class="name">주민</span>“화력 발전소 굴뚝에서 나오는 <b>이산화 탄소가 온실 기체</b>라 지구를 덥힌다면서요? 그럼 온실 효과는 전부 이산화 탄소 탓인가요?”</div></div>
+          <div class="gate loose" id="b-gt"></div>
+          <div class="info-card" id="b-ghg-info" style="margin:0 0 14px" hidden></div>
+          <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>수증기도 온실 기체다</b><br>보통 온실 기체의 종류 중 <b>수증기가 많이 언급되지 않아</b> 학생들이 수증기는 온실 효과에 미치는 영향이 작다는 오해를 할 수 있다. 실제로 지구의 온실 효과에 미치는 영향은 <b>수증기가 가장 크다.</b><cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+          <div class="story"><div class="who">👵</div><div class="say"><span class="name">이장님</span>“우리나라 전기의 대부분은 <b>화석 연료</b>와 <b>핵에너지</b>를 열원으로 물을 끓여 만든다지요. 주민 설명회에 쓸 수 있게, 두 발전소가 우리 생활에 미치는 영향을 정리해 주시오.”</div></div>
+          <div class="stage-card"><div id="b-sort2"></div></div>
+          <div class="mission" id="m2-5"><span class="m-tag">미션</span><ul><li id="m2-5a">위 물음에 예상 답을 고르세요.</li><li id="m2-5b">발전소의 영향 9가지를 분류하세요.</li></ul></div>
+          <div id="b-end" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>💡 섬에 다시 불이 켜졌습니다</h4>
+              <p>센 자석을 코일 옆에 <b>가만히</b> 두어서는 전류가 흐르지 않습니다. 코일을 지나는 자기장이 <b>변할 때</b>에만 전류가 흐르고(<b>전자기 유도</b>), 빠르게 변할수록, 코일을 많이 감을수록, 자석이 셀수록 큰 전압이 생깁니다. 발전기는 자석 사이에서 코일을 돌려 <b>운동 에너지를 전기 에너지로</b> 바꾸는 장치입니다.</p>
+              <p>화력·원자력·지열 발전은 열원만 다를 뿐 모두 <b>물을 끓여 증기로 터빈을 돌립니다.</b> 화석 연료는 이산화 탄소와 대기 오염 물질을, 핵에너지는 방사성 폐기물과 사고 위험이라는 숙제를 남깁니다. 어느 쪽도 공짜는 아닙니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 장면 3의 발전기는 ‘코일 하나가 균일한 자기장 속에서 도는’ <b>단순화한 모형</b>입니다(코일 넓이 약 206 cm², 전압은 교류의 실횻값). 실제 발전소는 코일 대신 전자석을 돌리고, 전기를 많이 쓸수록 터빈이 무거워지므로 회전 속도를 60 Hz 로 지키는 제어 장치가 따로 있습니다. CO₂ 배출량은 발전소를 짓고 연료를 캐는 과정까지 합친 값(IPCC 2014 중앙값)입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c1m-data"></div>
-        <div class="seg" id="c1m-choices"></div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c1m-check">정답 확인</button>
-          <button class="btn" id="c1m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c1m-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 에너지 효율 — 이야기 「사라진 98」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 에너지는 항상 일부가 손실된다</div>
-        <h2 class="display">에너지 효율 — 여러 단계를 거치면?</h2>
-        <p>발전소(1단계)와 가정용 기기(2단계) 효율을 각각 조절해, 두 단계를 모두 거친 뒤 최종적으로 남는 에너지가 얼마나 되는지 확인해 보세요.</p>
+        <div class="eyebrow">03 · 에너지 효율 · 이야기 한 편</div>
+        <h2 class="display">사라진 98</h2>
+        <p>발전소에 넣은 에너지 100 가운데 우리 집 전구의 빛이 된 것은 얼마일까요? 새어 나간 에너지를 단계마다 추적하고, 전구를 바꿔 보고, 마지막으로 에너지 자립 마을의 전원을 직접 설계하세요.</p>
+        <span class="std-chip">10통과2-02-06</span><div class="std-note"><b>[10통과2-02-06]</b> 에너지 효율의 의미와 중요성을 이해하고, 지속가능한 발전과 지구 환경 문제 해결에 신재생에너지 기술을 활용하는 방안을 탐색할 수 있다.</div><div class="terms"><b>에너지 효율</b><b>에너지 보존</b><b>신재생 에너지</b><b>지속가능한 발전</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="340"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">1단계: 발전 효율(%)<span class="val" id="c2-eff-val">40</span></div>
-            <input type="range" id="c2-eff" min="5" max="95" step="1" value="40">
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="전기 요금 고지서의 수수께끼">
+          <div class="story narr"><div class="who">🏘️</div><div class="say"><span class="name">이야기</span>햇살 마을이 ‘에너지 자립 마을’ 공모에 도전합니다. 에너지 조사원으로 뽑힌 여러분에게 위원장님이 첫 질문을 던집니다.</div></div>
+          <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“마을 회관에는 아직 <b>백열전구</b>가 달려 있습니다. 석탄 화력 발전소에서 석탄의 에너지 <b>100</b>을 넣었다면, 전선을 타고 와 우리 회관 백열전구의 <b>빛</b>이 되는 것은 얼마쯤일까요?”</div></div>
+          <div class="case-file"><b class="k">에너지 효율</b> = (쓸모 있게 쓰인 에너지 ÷ 공급한 에너지) × 100 (%) &nbsp;|&nbsp; <b class="k">경로</b> 석탄 → 발전소 → 송전·배전 → 백열전구 → 빛</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="추적 — 단계마다 새는 에너지">
+          <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“조사해 보니 석탄 화력 발전소의 효율은 <b>약 40%</b>, 송전·배전 과정의 효율은 <b>약 96%</b>, 백열전구가 전기 에너지를 빛으로 바꾸는 효율은 <b>약 5%</b>랍니다. 단계를 거칠 때마다 효율이 <b>곱해진다</b>는 점을 눈으로 확인해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-c-loss" width="900" height="340"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">1단계: 발전 효율(%)<span class="val" id="c-l1-val">50</span></div>
+                <input type="range" id="c-l1" min="5" max="95" step="1" value="50">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">2단계: 송전·배전 효율(%)<span class="val" id="c-l2-val">90</span></div>
+                <input type="range" id="c-l2" min="80" max="100" step="1" value="90">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">3단계: 전기 기구 효율(%)<span class="val" id="c-l3-val">50</span></div>
+                <input type="range" id="c-l3" min="5" max="95" step="1" value="50">
+              </div>
+            </div>
+            <div class="readout" style="margin:0 20px 14px;">
+              <span class="dot" style="background:var(--coral)"></span>
+              <span class="txt" id="c-loss-total"></span>
+            </div>
+            <div class="info-card" id="c-loss-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">2단계: 가정용 기기 효율(%)<span class="val" id="c2-eff2-val">90</span></div>
-            <input type="range" id="c2-eff2" min="5" max="95" step="1" value="90">
+          <div class="stage-card" style="margin-top:14px"><div id="c-q1"></div></div>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span><ul><li id="m3-2a">위원장이 알려 준 세 값(40%, 96%, 5%)을 넣어 백열전구의 빛이 되는 에너지를 구하세요.</li><li id="m3-2b">슬라이더로 실험한 뒤 아래 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="교체 — 같은 밝기, 다른 전구">
+          <div class="story"><div class="who">👩‍🔧</div><div class="say"><span class="name">전기 기사</span>“회관 전구는 60 W 백열전구, 밝기는 약 <b>800 lm</b>(루멘)이에요. 전구의 종류를 바꿔 가며 <b>같은 밝기</b>를 내는 데 전력이 얼마나 필요한지 찾아보세요. 어두워도 안 되고, 쓸데없이 밝아도 낭비예요.”</div></div>
+          <div class="stage-card">
+            <div class="seg" id="c-lamp-type" style="margin:16px 20px 10px;">
+              <button class="on" data-k="inc" type="button">💡 백열전구</button>
+              <button data-k="cfl" type="button">🌀 전구형 형광등</button>
+              <button data-k="led" type="button">✨ LED 전구</button>
+            </div>
+            <div class="canvas-wrap"><canvas id="c-c-lamp" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">전구의 소비 전력<span class="val" id="c-lamp-w-val">30 W</span></div>
+                <input type="range" id="c-lamp-w" min="1" max="100" step="1" value="30">
+              </div>
+            </div>
+            <div class="info-card" id="c-lamp-info"></div>
           </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--coral)"></span>
-          <span class="txt" id="c2-total"></span>
-        </div>
-        <div class="info-card" id="c2-info"></div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span>세 전구 모두 밝기를 <b>760~840 lm</b>에 맞추세요.<ul><li id="m3-3a">백열전구</li><li id="m3-3b">전구형 형광등</li><li id="m3-3c">LED 전구</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="설계 — 에너지 자립 마을">
+          <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“새는 에너지를 막았으니, 이제 <b>어떻게 만들지</b>를 정할 차례입니다. 지금 우리 마을은 경유 발전기만으로 전기를 만듭니다. 태양광·풍력·배터리·경유 발전기를 얼마나 둘지 정해 주세요. <b>맑고 바람 부는 날</b>과 <b>흐리고 바람 없는 날</b>, 이틀을 연달아 버텨야 합니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-c-vill" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">☀️ 태양광 (100 kW에 1.5억 원)<span class="val" id="c-v-s-val">500 kW</span></div>
+                <input type="range" id="c-v-s" min="0" max="3000" step="100" value="500">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">💨 풍력 (100 kW에 3억 원)<span class="val" id="c-v-w-val">0 kW</span></div>
+                <input type="range" id="c-v-w" min="0" max="2000" step="100" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">🔋 배터리 (500 kWh에 2.5억 원)<span class="val" id="c-v-b-val">0 kWh</span></div>
+                <input type="range" id="c-v-b" min="0" max="8000" step="500" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">🛢️ 경유 발전기 (50 kW에 0.25억 원)<span class="val" id="c-v-d-val">0 kW</span></div>
+                <input type="range" id="c-v-d" min="0" max="1000" step="50" value="0">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="c-v-run" type="button">🏘️ 이 설계를 위원회에 제출하기</button></div>
+            <div class="info-card" id="c-v-info"></div>
+          </div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span>세 조건을 모두 만족하는 설계를 찾아 제출하세요.<ul><li>이틀 동안 정전 <b>0시간</b> (안정성)</li><li>설치비 <b>55억 원 이하</b> (예산)</li><li>이산화 탄소 배출량이 지금(경유 발전기만 쓸 때)의 <b>40% 이하</b> (환경)</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 덜 버리고, 깨끗하게 만든다">
+          <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“설계안이 통과됐습니다! 공모 신청서에는 기술 목록을 두 갈래로 나눠 적어야 합니다. 같은 일을 더 적은 에너지로 하는 <b>효율 향상 기술</b>과, 고갈되지 않고 온실 기체를 거의 내지 않는 <b>신재생 에너지 기술</b>입니다.”</div></div>
+          <div class="stage-card"><div id="c-sort"></div></div>
+          <div id="c-end" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🏘️ 에너지는 사라지지 않는다, 쓸모없어질 뿐</h4>
+              <p>석탄의 에너지 100 가운데 백열전구의 빛이 된 것은 <b>2도 안 됩니다.</b> 나머지 98은 없어진 것이 아니라 발전소의 폐열, 전선의 열, 전구의 열로 <b>흩어졌습니다.</b> 에너지의 총량은 보존되지만, 한번 열로 흩어진 에너지는 다시 모아 쓰기 어렵습니다. 그래서 효율 100%인 기구는 만들 수 없고, 우리가 쓸 수 있는 에너지는 계속 줄어듭니다. <b>에너지 효율</b>을 높여야 하는 까닭입니다.</p>
+              <p>덜 버리는 것만으로는 부족합니다. 화석 연료는 고갈되고 온실 기체를 내보내므로, 지금 세대의 필요를 채우면서 미래 세대의 몫을 남기는 <b>지속가능한 발전</b>을 위해서는 신재생 에너지로 바꿔 가야 합니다. 다만 햇빛과 바람은 날씨를 타므로 저장 장치나 보조 전원과 함께 설계해야 한다는 것을 여러분은 직접 확인했습니다.</p>
+              <div class="vs" id="e3-vs"></div>
+              <span class="stamp">사건 파일 ③ 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 전구의 ‘빛 효율’은 백열전구를 5%로 놓고 같은 밝기를 내는 데 드는 전력으로 환산한 값입니다. 마을 설계 화면은 이틀치 날씨와 <b>가상의 단가</b>로 만든 <b>단순화한 모형</b>입니다. 실제 설계에서는 1년치 기상 자료, 연료비와 유지비, 배터리의 충전·방전 손실과 수명까지 따집니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 설계를 우리 반에 올리고, 친구들은 어떤 발전기와 마을을 설계했는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 태양에너지 흐름 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var steps = [
-    { icon: "☀️", name: "태양 내부 핵융합", desc: "태양 중심부에서 수소 원자핵이 헬륨으로 융합되며 막대한 에너지를 방출합니다." },
-    { icon: "🌍", name: "지구 도달 복사 에너지", desc: "태양 복사 에너지가 우주를 가로질러 지구 대기와 지표에 도달합니다." },
-    { icon: "🌬️", name: "대기·해수의 운동", desc: "태양 에너지가 대기와 해양을 데워 바람과 해류(운동 에너지)를 만듭니다." },
-    { icon: "🌱", name: "광합성(화학 에너지)", desc: "식물이 태양 에너지를 이용해 화학 에너지(유기물)로 저장합니다." },
-    { icon: "🛢️", name: "화석 연료", desc: "고대 생물의 화학 에너지가 오랜 시간에 걸쳐 화석 연료로 저장됩니다." }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width;
-    var mx = (e.clientX - rect.left) * scaleX;
-    var cellW = W / steps.length;
-    var idx = Math.floor(mx / cellW);
-    if (steps[idx]) info.innerHTML = "<b>" + steps[idx].icon + " " + steps[idx].name + "</b> — " + steps[idx].desc;
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var cellW = W / steps.length;
-    steps.forEach(function (s, i) {
-      var x = i * cellW;
-      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x + 8, 80, cellW - 16, 200);
-      ctx.font = "36px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(s.icon, x + cellW / 2, 170);
-      ctx.font = "700 11px Segoe UI"; ctx.fillStyle = cssVar("--foam");
-      wrapText(ctx, s.name, x + cellW / 2, 210, cellW - 24, 14);
-      if (i < steps.length - 1) {
-        ctx.save(); ctx.strokeStyle = cssVar("--coral"); ctx.fillStyle = cssVar("--coral"); ctx.lineWidth = 2;
-        drawArrow(ctx, x + cellW - 14, 170, x + cellW + 14, 170, 7);
-        ctx.restore();
-      }
-    });
-    function wrapText(ctx, text, x, y, maxW, lh) {
-      var line = "", lines = [];
-      for (var i = 0; i < text.length; i++) {
-        var test = line + text[i];
-        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
-      }
-      lines.push(line);
-      lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
-    }
-  }
-  render();
-
-  /* 심화: 직렬 효율 계산기 */
-  var canvas2 = document.getElementById("c0b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c0b-info");
-  var atmP = 70, photoP = 2, fossilP = 0.1;
-  document.getElementById("c0b-a").addEventListener("input", function (e) { atmP = +e.target.value; document.getElementById("c0b-a-val").textContent = atmP; renderChain(); });
-  document.getElementById("c0b-b").addEventListener("input", function (e) { photoP = +e.target.value; document.getElementById("c0b-b-val").textContent = photoP; renderChain(); });
-  document.getElementById("c0b-c").addEventListener("input", function (e) { fossilP = +e.target.value; document.getElementById("c0b-c-val").textContent = fossilP; renderChain(); });
-
-  function renderChain() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var stages = [
-      { label: "태양 복사", pct: 100 },
-      { label: "지표 도달(대기투과)", pct: 100 * (atmP / 100) },
-    ];
-    stages.push({ label: "광합성 저장", pct: stages[1].pct * (photoP / 100) });
-    stages.push({ label: "화석 연료화", pct: stages[2].pct * (fossilP / 100) });
-
-    var x0 = 40, x1 = W2 - 40, rowH = 40;
-    stages.forEach(function (s, i) {
-      var y = 10 + i * rowH;
-      var w = Math.max(2, (x1 - x0) * (s.pct / 100));
-      ctx2.fillStyle = cssVar(["--coral", "--teal", "--cold", "--violet"][i]);
-      ctx2.fillRect(x0, y, w, rowH - 10);
-      ctx2.font = "11px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
-      ctx2.fillText(s.label + " — " + s.pct.toExponential(2) + "%", x0 + Math.min(w + 8, x1 - x0 - 150), y + (rowH - 10) / 2 + 4);
-    });
-
-    var finalPct = stages[3].pct;
-    info2.innerHTML = "원래 태양 복사 에너지 중 화석 연료로 최종 저장되는 비율은 약 <b>" + finalPct.toExponential(2) + "%</b>에 불과합니다 (각 단계 효율을 모두 곱한 값). 이렇게 여러 단계를 거칠 때마다 효율이 곱해져 급격히 줄어들기 때문에, 화석 연료는 매우 오랜 시간에 걸쳐 아주 작은 비율만 저장된 귀중한 자원입니다.";
-  }
-  renderChain();
-})();
-
-/* TAB1 발전방식 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c1-info");
-  var plants = [
-    { icon: "🔥", name: "화력 발전", desc: "화석 연료를 연소해 물을 끓이고, 증기로 터빈을 돌려 발전합니다. 화학 에너지 → 열에너지 → 운동 에너지 → 전기 에너지. 이산화 탄소를 많이 배출합니다.", x: 130, y: 100, eff: 40, co2: 820 },
-    { icon: "💧", name: "수력 발전", desc: "높은 곳의 물이 떨어지며 터빈을 돌립니다. 위치 에너지 → 운동 에너지 → 전기 에너지. 온실 기체 배출이 적지만 댐 건설로 생태계에 영향을 줍니다.", x: 380, y: 100, eff: 90, co2: 24 },
-    { icon: "☢️", name: "원자력 발전", desc: "핵분열 반응의 열로 증기를 만들어 터빈을 돌립니다. 적은 연료로 많은 에너지를 얻지만, 방사성 폐기물 처리가 과제입니다.", x: 630, y: 100, eff: 33, co2: 12 },
-    { icon: "☀️", name: "태양광 발전", desc: "태양 전지가 빛 에너지를 직접 전기 에너지로 전환합니다(광전 효과). 날씨와 낮/밤에 따라 발전량이 달라집니다.", x: 130, y: 280, eff: 20, co2: 48 },
-    { icon: "💨", name: "풍력 발전", desc: "바람의 운동 에너지로 날개를 돌려 발전합니다. 바람의 세기에 따라 발전량이 달라집니다.", x: 380, y: 280, eff: 35, co2: 11 },
-    { icon: "🌋", name: "지열 발전", desc: "지구 내부의 열에너지로 증기를 만들어 터빈을 돌립니다. 화산 활동이 활발한 지역에서 유리합니다.", x: 630, y: 280, eff: 16, co2: 38 }
-  ];
-  var selected = -1;
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    plants.forEach(function (p, i) { if (mx > p.x - 105 && mx < p.x + 105 && my > p.y - 70 && my < p.y + 70) { info.innerHTML = "<b>" + p.icon + " " + p.name + "</b> — " + p.desc; selected = i; render(); renderCompare(); } });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    plants.forEach(function (p, i) {
-      ctx.save();
-      ctx.strokeStyle = i === selected ? cssVar("--teal") : cssVar("--line"); ctx.lineWidth = i === selected ? 2.5 : 1;
-      ctx.fillStyle = cssVar("--panel-2");
-      ctx.fillRect(p.x - 105, p.y - 70, 210, 140);
-      ctx.strokeRect(p.x - 105, p.y - 70, 210, 140);
-      ctx.restore();
-      ctx.font = "34px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(p.icon, p.x, p.y - 10);
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(p.name, p.x, p.y + 30);
-    });
-  }
-  render();
-
-  var canvas2 = document.getElementById("c1b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c1b-info");
-  var mode = "eff";
-  document.querySelectorAll("#c1b-mode button").forEach(function (b) {
-    b.addEventListener("click", function () { mode = b.getAttribute("data-m"); document.querySelectorAll("#c1b-mode button").forEach(function (x) { x.classList.toggle("on", x === b); }); renderCompare(); });
-  });
-  function renderCompare() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var x0 = 160, x1 = W2 - 60;
-    var maxV = mode === "eff" ? 100 : 900;
-    plants.forEach(function (p, i) {
-      var y = 12 + i * 40;
-      var v = mode === "eff" ? p.eff : p.co2;
-      ctx2.font = "12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
-      ctx2.fillText(p.icon + " " + p.name, x0 - 10, y + 18);
-      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 26);
-      ctx2.fillStyle = i === selected ? cssVar("--coral") : cssVar("--teal");
-      ctx2.fillRect(x0, y, (x1 - x0) * v / maxV, 26);
-      ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
-      ctx2.fillText(mode === "eff" ? v + "%" : v + "g", x0 + 8, y + 18);
-    });
-    info2.innerHTML = mode === "eff"
-      ? "발전 효율은 <b>수력(90%)</b>이 가장 높고, 태양광(20%)이 낮은 편입니다. 다만 효율이 낮다고 나쁜 것은 아니며, 연료비·탄소 배출·설치 조건 등을 종합적으로 고려해야 합니다."
-      : "1kWh를 생산할 때 배출되는 CO₂는 <b>화력 발전(약 820g)</b>이 압도적으로 많고, 풍력(약 11g)·원자력(약 12g)이 매우 적습니다. 신재생 에너지로의 전환이 강조되는 이유입니다.";
-  }
-  renderCompare();
-})();
-
-/* TAB1 미션 — 에너지 전환 과정으로 발전 방식 맞히기 */
-(function () {
-  var qa = [
-    { hint: "화학 에너지 → 열에너지 → 운동 에너지 → 전기 에너지 순으로 전환되며, 이산화 탄소를 많이 배출한다.", key: "fire" },
-    { hint: "위치 에너지 → 운동 에너지 → 전기 에너지로 전환되며, 댐을 이용해 발전한다.", key: "hydro" },
-    { hint: "핵분열 반응으로 얻은 열로 증기를 만들어 터빈을 돌리며, 방사성 폐기물 처리가 과제이다.", key: "nuclear" },
-    { hint: "빛 에너지를 광전 효과로 직접 전기 에너지로 전환하며, 날씨와 낮/밤의 영향을 크게 받는다.", key: "solar" },
-    { hint: "바람의 운동 에너지로 날개를 돌려 전기를 만들며, 바람의 세기에 따라 발전량이 달라진다.", key: "wind" },
-    { hint: "지구 내부의 열에너지로 증기를 만들어 터빈을 돌리며, 화산 활동이 활발한 지역에서 유리하다.", key: "geo" }
-  ];
-  var labels = { fire: "화력 발전", hydro: "수력 발전", nuclear: "원자력 발전", solar: "태양광 발전", wind: "풍력 발전", geo: "지열 발전" };
-  var dataBox = document.getElementById("c1m-data");
-  var seg = document.getElementById("c1m-choices");
-  var checkBtn = document.getElementById("c1m-check");
-  var newBtn = document.getElementById("c1m-new");
-  var info = document.getElementById("c1m-info");
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = qa[Math.floor(Math.random() * qa.length)];
-    picked = null;
-    dataBox.innerHTML = current.hint;
-    seg.innerHTML = "";
-    Object.keys(labels).forEach(function (k) {
-      var b = document.createElement("button");
-      b.textContent = labels[k];
-      b.addEventListener("click", function () {
-        picked = k;
-        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      });
-      seg.appendChild(b);
-    });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB2 에너지 효율 — 2단계 직렬 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var eff = 40, eff2 = 90;
-  var info = document.getElementById("c2-info");
-  var totalTxt = document.getElementById("c2-total");
-  document.getElementById("c2-eff").addEventListener("input", function (e) { eff = +e.target.value; document.getElementById("c2-eff-val").textContent = eff; render(); });
-  document.getElementById("c2-eff2").addEventListener("input", function (e) { eff2 = +e.target.value; document.getElementById("c2-eff2-val").textContent = eff2; render(); });
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, barW = 780, barH = 50;
-    var y1 = 80, y2 = 180;
-
-    var stage1W = barW * eff / 100;
-    ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x0, y1, barW, barH);
-    ctx.fillStyle = cssVar("--teal"); ctx.fillRect(x0, y1, stage1W, barH);
-    ctx.fillStyle = cssVar("--coral"); ctx.fillRect(x0 + stage1W, y1, barW - stage1W, barH);
-    ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("1단계(발전소, 효율 " + eff + "%) 이후", x0, y1 - 10);
-
-    var totalEff = eff / 100 * eff2 / 100 * 100;
-    var stage2W = barW * totalEff / 100;
-    ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x0, y2, barW, barH);
-    ctx.fillStyle = cssVar("--violet"); ctx.fillRect(x0, y2, stage2W, barH);
-    ctx.fillStyle = cssVar("--coral"); ctx.globalAlpha = .4; ctx.fillRect(x0 + stage2W, y2, barW - stage2W, barH); ctx.globalAlpha = 1;
-    ctx.fillText("2단계(가정용 기기, 효율 " + eff2 + "%)까지 거친 후", x0, y2 - 10);
-
-    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--abyss"); ctx.textAlign = "center";
-    if (stage1W > 60) ctx.fillText(eff + "%", x0 + stage1W / 2, y1 + 32);
-    if (stage2W > 40) ctx.fillText(totalEff.toFixed(1) + "%", x0 + stage2W / 2, y2 + 32);
-
-    totalTxt.innerHTML = "전체 효율 = " + eff + "% × " + eff2 + "% = <b>" + totalEff.toFixed(1) + "%</b> — 두 단계를 거치면 최종적으로 유용하게 쓰이는 에너지 비율은 각 단계 효율보다 훨씬 낮아집니다.";
-    info.innerHTML = "발전소(1단계)에서 " + (100 - eff) + "%가 손실되고, 가정용 기기(2단계)에서 다시 " + (100 - eff2) + "%가 손실됩니다. 실제 사회에서는 송전·변전 과정의 손실까지 더해져 처음 투입한 에너지 중 실제로 활용되는 비율은 이보다 더 낮은 경우가 많습니다. 이것이 에너지 절약과 효율 개선이 중요한 이유입니다.";
-  }
-  render();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is2-2-2");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학2 Ⅱ-2] 에너지 전환과 활용",
-    items: [
-      {
-            "id": "w1",
-            "label": "에너지는 어디로 갔나",
-            "hint": "고른 기기 하나에서 들어간 에너지가 어떤 형태로 얼마씩 나뉘는지 쓰세요.",
-            "ph": "들어간 에너지: … → 쓸모 있는 …%, 버려지는 …%"
-      },
-      {
-            "id": "w2",
-            "label": "온실 기체 다시 보기",
-            "hint": "수증기가 온실 효과에 가장 큰 영향을 주는데도 기후변화 논의에서 이산화 탄소를 주로 다루는 까닭을 생각해 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
-
-<script>
-(function () {
-  window.sthGate({
-    gate: "gt", veil: "vl", key: "ghg",
-    question: "지구의 <b>온실 효과에 가장 크게 기여하는</b> 기체는 무엇일까요?",
-    options: ["㉠ 이산화 탄소", "㉡ 메테인", "㉢ 수증기", "㉣ 오존"],
-    onPick: function (i) {
-      var ok = (i === 2);
-      window.sthState("ghgOK", ok ? "맞음" : "어긋남");
-      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉢ 입니다.</b> ") + "온실 효과 자체에 가장 크게 기여하는 것은 <b>수증기</b>입니다." + " " + "그런데도 기후변화 논의에서 이산화 탄소를 주로 다루는 까닭은, 수증기의 양은 <b>기온이 정하는 결과</b>인 반면 이산화 탄소는 <b>사람이 늘리는 원인</b>이기 때문입니다.";
-      var g = document.getElementById("gt");
-      var box = g.parentNode.querySelector(".info-card");
-      if (box) box.innerHTML = msg;
-      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
-             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
-    }
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
