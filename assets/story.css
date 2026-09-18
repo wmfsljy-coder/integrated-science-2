@@ -111,3 +111,31 @@
   .ep-dot span.t { display: none; }
   .scene-head h3 { font-size: 19px; }
 }
+
+/* =========================================================================
+   우리 반 공유 탭 (share.js)
+   ========================================================================= */
+.share { padding: 18px 20px 22px; }
+.share h4 { font-family: "Jua"; font-weight: 400; font-size: 17px; margin: 18px 0 10px; color: var(--ink); }
+.share-id { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; }
+.share-id label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 800; color: var(--mist); }
+.share-id input { border: 2px solid var(--line); border-radius: 12px; padding: 8px 12px; font-size: 14px; font-family: inherit;
+  background: var(--card-2); color: var(--ink); width: 150px; }
+.share-id input:focus { outline: none; border-color: var(--brand); }
+.sm-row { display: flex; gap: 10px; flex-wrap: wrap; padding: 9px 12px; border-radius: 12px; background: var(--card-2);
+  border: 2px solid var(--line); margin-bottom: 6px; font-size: 13px; color: var(--mist); }
+.sm-row b { color: var(--ink); }
+.sm-row.ok { background: var(--teal-100); border-color: var(--teal-100); color: var(--teal-700); }
+.share-act { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 14px; }
+.sh-check { font-size: 12.5px; color: var(--mist); width: 100%; }
+.sh-note { font-size: 13px; color: var(--mist); line-height: 1.7; margin: 16px 0 0; }
+.sh-bar { font-size: 12.5px; color: var(--ink); margin-bottom: 8px; }
+.sh-bar i { display: block; height: 8px; border-radius: 999px; background: var(--card-2); border: 1px solid var(--line); overflow: hidden; margin-top: 4px; }
+.sh-bar i b { display: block; height: 100%; background: var(--teal); }
+.sh-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 10px; margin-top: 14px; }
+.sh-card { border: 2px solid var(--line); border-radius: 16px; padding: 12px 14px; background: var(--card); font-size: 12.5px; line-height: 1.65; color: var(--ink); }
+.sh-card.me { border-color: var(--brand); }
+.sh-card .sh-nick { font-family: "Jua"; font-size: 15px; margin-bottom: 4px; }
+.sh-card p { margin: 0 0 4px; color: var(--mist); }
+.sh-card p b { color: var(--ink); }
+.sh-card blockquote { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--amber-100); color: #3a2a00; }
