@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>과학 기술의 발전과 쟁점 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -18,349 +19,236 @@
     <button class="tab-btn active" data-tab="0"><span class="num">01</span> 미래를 바꿀 과학 기술</button>
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 과학 기술과 사회적 쟁점</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 정리하기</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 과학 기술과 미래 사회 — 이야기 「할머니의 딸기 온실」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 다가오는 미래의 기술</div>
-        <h2 class="display">과학 기술과 미래 사회</h2>
-        <p>카드를 클릭해 특징을 확인하고, 아래 연도 슬라이더를 움직여 각 기술이 대중화될 것으로 예상되는 시기를 함께 살펴보세요.</p>
-      
-        <span class="std-chip">10통과2-03-03</span><span class="std-chip">10통과2-03-04</span><div class="std-note"><b>[10통과2-03-03]</b> 인공지능 로봇, 사물인터넷 등과 같이 과학기술의 발전을 인간 삶과 환경 개선에 활용하는 사례를 찾고, 이러한 과학기술의 발전이 미래 사회에 미치는 유용성과 한계를 예측할 수 있다.<br><b>[10통과2-03-04]</b> 과학기술의 발전 과정에서 발생할 수 있는 과학 관련 사회적 쟁점(SSI)과 과학기술 이용에서 과학 윤리의 중요성에 대해 논증할 수 있다.</div><div class="terms"><b>미래 기술</b><b>과학 윤리</b><b>사회적 쟁점</b></div>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="420"></canvas></div>
-        <div class="info-card" id="c0-info">카드를 클릭해 보세요.</div>
-      </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 기술 성숙도 타임라인</div>
-          <h2 class="display" style="font-size:18px;">언제쯤 일상이 될까?</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">연도<span class="val" id="c0b-year-val">2025</span></div>
-            <input type="range" id="c0b-year" min="2025" max="2050" step="1" value="2025">
-          </div>
-        </div>
-        <div class="info-card" id="c0b-info"></div>
+        <div class="eyebrow">01 · 과학 기술과 미래 사회 · 이야기 한 편</div>
+        <h2 class="display">할머니의 딸기 온실</h2>
+        <p>밤낮없이 온실을 지키는 할머니를 위해 스마트팜을 직접 설계합니다. 센서로 움직이는 규칙을 짜고, 익은 딸기를 가려내는 인공지능을 훈련하고, 그 인공지능이 어디에서 틀리는지까지 찾아내세요. 장면마다 미션을 끝내야 다음 장면이 열립니다.</p>
+        <span class="std-chip">10통과2-03-03</span><div class="std-note"><b>[10통과2-03-03]</b> 인공지능 로봇, 사물인터넷 등과 같이 과학기술의 발전을 인간 삶과 환경 개선에 활용하는 사례를 찾고, 이러한 과학기술의 발전이 미래 사회에 미치는 유용성과 한계를 예측할 수 있다.</div><div class="terms"><b>미래 기술</b><b>사물 인터넷(IoT)</b><b>인공지능과 기계 학습</b><b>유용성과 한계</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 설명으로 미래 기술 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 설명은 어떤 미래 기술일까?</h2>
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="새벽 세 시의 온실">
+          <div class="story narr"><div class="who">🍓</div><div class="say"><span class="name">이야기</span>할머니는 30년째 딸기 농사를 짓습니다. 낮에는 온실이 찜통이 될까 봐 환기창을 여닫고, 밤에는 흙이 마를까 봐 손전등을 들고 나갑니다. 허리를 다친 뒤로는 그 일이 점점 버거워졌습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">손녀 다인</span>“학교에서 <b>사물 인터넷(IoT)</b>이랑 <b>인공지능</b>을 배웠거든요. 온실에 센서를 달고, 익은 딸기만 골라 따는 로봇까지 들이면 할머니가 밤에 푹 주무실 수 있지 않을까요? 설계자님, 같이 만들어 봐요!”</div></div>
+          <div class="case-file"><b class="k">설치할 것</b> 센서 — 온도, 토양 수분, 카메라 &nbsp;|&nbsp; 움직이는 장치 — 환기창 모터, 물 주는 밸브, 수확 로봇 팔 &nbsp;|&nbsp; 연결 — 무선 통신으로 모두 인터넷에 묶어 스마트폰에서 확인<br><b class="k">사물 인터넷(IoT)</b> 사물에 센서와 통신 기능을 넣어 서로 정보를 주고받게 하는 기술 &nbsp;|&nbsp; <b class="k">인공지능(AI)</b> 데이터에서 규칙을 스스로 학습해 판단·예측하는 기술</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="사물 인터넷 — 센서가 읽고 규칙이 움직인다">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“센서는 달았어요. 이제 <b>‘센서 값이 얼마면 장치를 움직인다’</b>는 규칙을 정해야 해요. 환기창은 온도가 몇 ℃를 넘으면 열고, 물은 흙의 수분이 몇 % 아래로 떨어지면 줄까요? 맑은 봄날 하루(24시간)를 돌려 보면서 찾아봐요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-farm" width="900" height="400"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">규칙 ① 온도가 이 값 이상이면 환기창을 연다<span class="val" id="a-ton-val">35℃</span></div>
+                <input type="range" id="a-ton" min="10" max="40" step="1" value="35">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">규칙 ② 토양 수분이 이 값 이하이면 물을 준다<span class="val" id="a-mon-val">30%</span></div>
+                <input type="range" id="a-mon" min="20" max="90" step="5" value="30">
+              </div>
+            </div>
+            <div class="info-card" id="a-farm-info"></div>
+          </div>
+          <div class="mission" id="m-a2"><span class="m-tag">미션</span>하루 동안 네 조건을 모두 지키는 규칙을 찾으세요. 환기창을 너무 일찍 열면 온실이 식고, 너무 늦게 열면 찜통이 됩니다. 물도 마찬가지입니다.<ul><li id="m-a2a">고온 피해(30℃ 초과) 0시간</li><li id="m-a2b">알맞은 온도(18~28℃)가 14시간 이상</li><li id="m-a2c">흙이 마른 시간(수분 45% 미만) 0시간</li><li id="m-a2d">과습(수분 80% 초과) 0시간</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="인공지능 — 익은 딸기를 가려내는 선">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“환기와 물은 ‘몇 ℃면 연다’처럼 <b>사람이 규칙을 정해 줄 수</b> 있었어요. 그런데 ‘익었다’는 건 규칙으로 쓰기가 어렵네요. 그래서 할머니가 직접 <b>익음/안 익음을 표시해 준 딸기 40개</b>를 카메라로 찍어 왔어요. 가로는 붉은 정도, 세로는 크기예요. 선 하나로 둘을 갈라 볼래요?”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-cls" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">선의 기울기<span class="val" id="a-sl-val">0.00</span></div>
+                <input type="range" id="a-sl" min="-3" max="0.5" step="0.05" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">선의 높이(세로축과 만나는 값, mm)<span class="val" id="a-ic-val">30</span></div>
+                <input type="range" id="a-ic" min="0" max="150" step="1" value="30">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="a-learn" type="button">🤖 기계가 스스로 선을 찾게 하기 (학습)</button></div>
+            <div class="info-card" id="a-cls-info"></div>
+          </div>
+          <div class="mission" id="m-a3"><span class="m-tag">미션</span>선보다 위쪽(오른쪽 위)에 있는 열매를 로봇은 ‘익음’으로 판단합니다.<ul><li id="m-a3a">기울기와 높이를 조절해 40개 가운데 <b>잘못 가른 열매를 2개 이하</b>로 줄이세요.</li><li id="m-a3b">같은 일을 기계에게 시키고 학습이 끝날 때까지 지켜보세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="반전 — 처음 보는 딸기">
+          <div class="story"><div class="who">👵</div><div class="say"><span class="name">할머니</span>“로봇이 참 기특하구나. 그런데 올해는 저쪽 두 이랑에 <b>흰 딸기</b>를 심었단다. 다 익어도 빨개지지 않고 하얗거나 연분홍빛인 품종이지. 로봇이 그것도 잘 따 주겠지?”</div></div>
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“어… 로봇이 학습한 40개는 전부 빨간 품종이었는데요. 일단 시험해 봐요. 로봇이 한 번도 본 적 없는 열매들로요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-test" width="900" height="420"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">시험할 열매</div>
+                <div class="seg" id="a-set">
+                  <button class="on" data-s="A" type="button">같은 빨간 품종의 새 열매 40개</button>
+                  <button data-s="B" type="button">흰 딸기 품종 30개</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">학습 데이터에 추가할 흰 딸기 표본 수<span class="val" id="a-add-val">0개</span></div>
+                <input type="range" id="a-add" min="0" max="40" step="4" value="0">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="a-retrain" type="button">↻ 이 데이터로 다시 학습시키기</button></div>
+            <div class="info-card" id="a-test-info"></div>
+          </div>
+          <div class="mission" id="m-a4"><span class="m-tag">미션</span><ul><li id="m-a4a">흰 딸기를 추가하지 않은 로봇(표본 0개)으로 <b>흰 딸기 품종</b>을 시험해 정확도를 확인하세요.</li><li id="m-a4b">할머니가 표시해 준 흰 딸기 표본을 학습 데이터에 더해, <b>두 시험 모두 정확도 85% 이상</b>이 되게 하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 유용성과 한계를 함께 보다">
+          <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“온실 하나에서 본 일이 다른 기술에서도 똑같이 일어나요. 미래 기술 보고서에 실을 사례들을 <b>삶의 개선, 환경 개선, 그리고 한계·우려</b>로 나눠 주세요.”</div></div>
+          <div class="stage-card"><div id="a-sort"></div></div>
+          <div id="e1-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🍓 할머니는 이제 밤에 주무십니다. 하지만 로봇의 선생님은 여전히 할머니입니다</h4>
+              <p>센서와 통신으로 사물을 잇는 <b>사물 인터넷</b>은 사람이 밤새 지키던 일을 대신하고, 필요한 때에 필요한 만큼만 물을 주어 <b>자원 낭비를 줄입니다</b>. 데이터에서 규칙을 스스로 찾는 <b>인공지능</b>은 사람이 말로 쓰기 어려운 판단까지 해냅니다. 인공지능 로봇, 맞춤형 의료, 에너지 저장 장치, 나노 기술, 우주 산업처럼 미래를 바꿀 기술들은 이렇게 삶과 환경을 개선합니다.</p>
+              <p>그러나 인공지능은 <b>학습한 데이터의 범위 안에서만</b> 믿을 수 있습니다. 빨간 딸기만 본 로봇은 다 익은 흰 딸기를 모두 ‘안 익음’으로 판단했습니다. 데이터가 치우치면 판단도 치우칩니다. 무엇이 빠졌는지 알아채고, 결과를 점검하고, 책임을 지는 일은 <b>사람의 몫</b>으로 남습니다.</p>
+              <div class="vs" id="e1-vs"></div>
+              <span class="stamp">설계 파일 ① 완성</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 이 화면의 온실은 바깥 기온과 햇빛만으로 온도가 정해지는 <b>단순화한 모형</b>이고, 온도·수분의 기준값도 이 이야기 속 온실의 목표값입니다. 실제 스마트팜은 습도, 이산화 탄소 농도, 양액 농도까지 함께 제어합니다. 또 실제 수확 로봇의 인공지능은 직선 하나가 아니라 수많은 사진으로 학습한 심층 신경망을 쓰지만, <b>‘학습 데이터에 없던 상황에서는 틀리기 쉽다’</b>는 한계는 똑같이 나타납니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c0m-data"></div>
-        <div class="seg" id="c0m-choices"></div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c0m-check">정답 확인</button>
-          <button class="btn" id="c0m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c0m-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 과학 관련 사회적 쟁점과 윤리 — 이야기 「공청회에 서다」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 과학 기술은 가치중립적이지 않다</div>
-        <h2 class="display">과학 관련 사회적 쟁점과 윤리</h2>
-        <p>쟁점을 선택해 기대와 우려의 양면을 살펴보고, 저울 슬라이더로 편익과 위험 중 무엇을 더 중요하게 볼지 직접 조정하며 균형점을 탐색해 보세요.</p>
+        <div class="eyebrow">02 · 과학 관련 사회적 쟁점과 윤리 · 이야기 한 편</div>
+        <h2 class="display">공청회에 서다</h2>
+        <p>시의회가 통학로 CCTV에 안면 인식 기능을 넣을지 묻는 공청회를 엽니다. 당신은 학생 대표 발언자입니다. 주장을 가려 듣고, 숫자를 직접 계산하고, 위험과 편익을 저울질한 뒤, 근거를 갖춘 입장문을 완성하세요. 이 이야기에는 정해진 정답 입장이 없습니다. 평가받는 것은 <b>논증의 형식</b>입니다.</p>
+        <span class="std-chip">10통과2-03-04</span><div class="std-note"><b>[10통과2-03-04]</b> 과학기술의 발전 과정에서 발생할 수 있는 과학 관련 사회적 쟁점(SSI)과 과학기술 이용에서 과학 윤리의 중요성에 대해 논증할 수 있다.</div><div class="terms"><b>과학 관련 사회적 쟁점(SSI)</b><b>사실 주장과 가치 주장</b><b>위험과 편익</b><b>과학 윤리</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="360"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">쟁점 선택</div>
-            <div class="seg" id="c1-topic">
-              <button class="on" data-t="gene">유전자 편집</button>
-              <button data-t="ai">인공지능과 일자리</button>
-              <button data-t="nuclear">원자력 발전</button>
+
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="시의회에서 온 초대장">
+          <div class="story narr"><div class="who">🏛️</div><div class="say"><span class="name">이야기</span>가상의 도시 한빛시. 시의회에 안건 하나가 올라왔습니다. <b>“통학로와 학교 주변 CCTV 600대에 안면 인식 기능을 도입한다.”</b> 실종 아동을 빨리 찾을 수 있다는 기대와, 모든 시민의 얼굴이 기록된다는 걱정이 맞서자 시의회는 공청회를 열기로 했습니다.</div></div>
+          <div class="story"><div class="who">👩‍💼</div><div class="say"><span class="name">시의회 의장</span>“통학로를 매일 걷는 당사자는 학생들이죠. 그래서 학생 대표에게 발언을 부탁합니다. 찬성이든 반대든 좋습니다. 다만 <b>근거를 갖춰서</b> 말해 주세요.”</div></div>
+          <div class="case-file"><b class="k">실제 연구 ①</b> 2018년 한 연구에서 상용 얼굴 분석 프로그램 세 가지의 성별 판별 오류율을 쟀더니, 밝은 피부의 남성은 1% 미만이었지만 어두운 피부의 여성은 최대 약 35%였습니다. 학습에 쓴 얼굴 사진이 한쪽으로 치우쳐 있었기 때문입니다.<br><b class="k">실제 연구 ②</b> 2019년 미국 국립표준기술연구소(NIST)가 안면 인식 알고리즘 189개를 시험한 결과, 다수의 알고리즘에서 아시아계·아프리카계 얼굴을 다른 사람으로 잘못 알아보는 비율이 백인 얼굴보다 10~100배 높았습니다.</div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="주장 가려 듣기 — 사실인가, 가치인가">
+          <div class="story"><div class="who">👩‍💼</div><div class="say"><span class="name">의장</span>“먼저 발언 신청자들의 주장을 들어 보죠. <b>사실 주장</b>은 조사하면 참·거짓을 가릴 수 있는 말이고, <b>가치 주장</b>은 무엇이 옳고 중요한지에 대한 말입니다. 사실 주장이라면 <b>근거를 댔는지</b>도 따져야 합니다.”</div></div>
+          <div class="stage-card"><div id="b-sort1"></div></div>
+          <div class="stage-card" style="margin-top:14px"><div id="b-sort2"></div></div>
+          <div class="mission" id="m-b2"><span class="m-tag">미션</span><ul><li id="m-b2a">발언 8개를 사실 주장과 가치 주장으로 나누세요.</li><li id="m-b2b">사실 주장 5개를 ‘근거를 댐’과 ‘근거 없음’으로 다시 나누세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="숫자 확인 — 정확도 99%면 안심일까">
+          <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">업체 영업 사원</span>“저희 제품은 <b>오인식률이 1%</b>밖에 안 됩니다. 100명 중 99명은 정확히 구분한다는 뜻이죠. 경보가 울리면 99%는 진짜라고 보시면 됩니다.”</div></div>
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">통계학자</span>“정말 그럴까요? 직접 계산해 봅시다. 하루에 카메라 앞을 지나는 사람 가운데 <b>찾는 사람은 단 1명</b>이라고 합시다. 나머지는 모두 아무 관계 없는 시민입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-base" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">하루에 카메라 앞을 지나는 사람 수<span class="val" id="b-n-val">10,000명</span></div>
+                <input type="range" id="b-n" min="1000" max="50000" step="1000" value="10000">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">오인식률(관계 없는 사람을 찾는 사람으로 착각할 확률)<span class="val" id="b-f-val">1%</span></div>
+                <input type="range" id="b-f" min="0" max="7" step="1" value="2">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">집단 B의 오인식률이 집단 A의 몇 배인가<span class="val" id="b-k-val">1배 (차이 없음)</span></div>
+                <input type="range" id="b-k" min="1" max="100" step="1" value="1">
+              </div>
             </div>
+            <div class="info-card" id="b-base-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c1-info"></div>
-      </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 편익-위험 저울</div>
-          <h2 class="display" style="font-size:18px;">나는 어느 쪽에 더 무게를 둘까?</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c1b" width="900" height="240"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">편익 중시 ↔ 위험 중시<span class="val" id="c1b-w-val">중립</span></div>
-            <input type="range" id="c1b-w" min="-5" max="5" step="1" value="0">
+          <div class="stage-card" style="margin-top:14px"><div id="b-q1"></div></div>
+          <div class="mission" id="m-b3"><span class="m-tag">미션</span><ul><li id="m-b3a">경보가 울렸을 때 <b>진짜일 확률이 50% 이상</b>이 되는 조건을 찾으세요.</li><li id="m-b3b">집단 B의 오인식률을 <b>10배 이상</b>으로 놓고, 두 집단이 받는 억울한 경보 수를 비교하세요.</li><li id="m-b3c">아래 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="저울질 — 위험과 편익에 무게 달기">
+          <div class="story"><div class="who">👩‍💼</div><div class="say"><span class="name">의장</span>“사실을 확인했다고 결론이 저절로 나오지는 않습니다. 같은 사실을 놓고도 <b>무엇을 더 중요하게 여기느냐</b>에 따라 입장이 갈리니까요. 편익과 위험 하나하나에 당신의 무게를 달아 보세요. 그리고 <b>안전장치</b>를 걸면 저울이 어떻게 달라지는지도 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="controls" style="padding-bottom:0">
+              <div class="ctrl-group">
+                <div class="ctrl-label">쟁점 (공청회 안건은 첫 번째입니다. 나머지는 같은 방법으로 더 해 볼 수 있습니다)</div>
+                <div class="seg" id="b-topic">
+                  <button class="on" data-t="cctv" type="button">안면 인식 CCTV</button>
+                  <button data-t="gene" type="button">유전자 가위</button>
+                  <button data-t="car" type="button">자율 주행차</button>
+                  <button data-t="nuke" type="button">원자력 발전</button>
+                </div>
+              </div>
+            </div>
+            <div class="canvas-wrap"><canvas id="b-scale" width="900" height="330"></canvas></div>
+            <div class="controls" id="b-weights"></div>
+            <div class="info-card" id="b-scale-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c1b-info"></div>
+          <div class="mission" id="m-b4"><span class="m-tag">미션</span>안면 인식 CCTV 쟁점에서<ul><li id="m-b4a">편익 3개와 위험 3개 <b>모두에</b> 1 이상의 무게를 다세요. (상대편의 근거도 0으로 두지 않고 검토합니다.)</li><li id="m-b4b">안전장치를 하나 이상 켜 보고, 저울과 나의 입장이 어떻게 달라지는지 확인하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="과학 윤리 — 기술보다 먼저 지켜야 할 것">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">통계학자</span>“공청회에서 오간 숫자들을 믿을 수 있었던 건, 연구자들이 데이터를 정직하게 다루고 그 결과를 공개했기 때문입니다. 그 믿음이 깨진 사례들이 있습니다. 과학자와 기술자가 지켜야 할 <b>과학 윤리</b>가 무엇인지, 실제 사건을 나눠 보며 확인하세요.”</div></div>
+          <div class="stage-card"><div id="b-eth"></div></div>
+          <div class="mission" id="m-b5"><span class="m-tag">미션</span>실제 사건 6개를 어떤 윤리가 무너진 사례인지에 따라 나누세요.</div>
+        </section>
+
+        <section class="scene" data-title="결말 — 입장문을 완성하다">
+          <div class="story"><div class="who">👩‍💼</div><div class="say"><span class="name">의장</span>“이제 학생 대표의 차례입니다. 좋은 논증은 네 가지를 갖춥니다. <b>① 분명한 주장 ② 확인된 근거 ③ 상대편의 가장 강한 반론 ④ 그 반론에 대한 답.</b> 재료를 골라 입장문을 조립하세요.”</div></div>
+          <div class="stage-card"><div id="b-build" style="padding:16px 18px 18px"></div></div>
+          <div class="mission" id="m-b6"><span class="m-tag">미션</span>주장·근거·예상 반론·반론에 대한 답을 모두 갖춘 입장문을 완성하세요. 어느 입장을 골라도 됩니다.</div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🏛️ 발언이 끝나자, 반대편 자리에서도 박수가 나왔습니다</h4>
+              <p>안면 인식 CCTV, 유전자 가위, 자율 주행차처럼 과학 기술이 사회에 들어올 때 생기는 논쟁을 <b>과학 관련 사회적 쟁점(SSI)</b>이라고 합니다. 이런 쟁점은 과학적 사실만으로 결론이 나지 않습니다. 사실은 조사해서 확인하고, 가치는 서로 드러내어 저울질하며, 안전장치와 제도를 함께 설계해 <b>사회적 합의</b>를 만들어 가야 합니다.</p>
+              <p>그 출발점이 <b>과학 윤리</b>입니다. 데이터를 조작하지 않는 연구 진실성, 연구 대상자와 다음 세대를 보호하는 생명 윤리, 데이터와 알고리즘의 편향을 점검하는 책임이 무너지면, 사회는 과학이 내놓는 어떤 숫자도 믿고 토론할 수 없게 됩니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 장면 3의 계산은 ‘찾는 사람이 하루 1명 지나가고 그 사람은 99% 확률로 알아본다’고 가정한 <b>단순화한 모형</b>입니다. 실제 오인식률은 조명, 각도, 마스크, 찾는 사람 명단의 크기에 따라 크게 달라집니다. 장면 4의 저울은 무게를 더하고 빼는 셈일 뿐이고, 안전장치가 위험을 절반으로 줄인다는 것도 가정입니다. 저울은 <b>결론을 내 주는 기계가 아니라 내 생각을 드러내는 도구</b>입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 03 정리하기 -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">03 · 두 이야기를 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>두 이야기의 결과가 아래에 모입니다. 두 이야기를 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 04 우리 반 -->
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 설계한 온실과 공청회에서 밝힌 입장을 우리 반에 올리고, 친구들은 어떤 입장을 골랐는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 미래기술 카드 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var cards = [
-    { icon: "🤖", name: "인공지능(AI)", desc: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용됩니다.", x: 150, y: 100, mature: 2027 },
-    { icon: "🧬", name: "유전자 편집 기술", desc: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용됩니다.", x: 450, y: 100, mature: 2033 },
-    { icon: "🚀", name: "우주 산업", desc: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있습니다.", x: 750, y: 100, mature: 2038 },
-    { icon: "🔬", name: "나노 기술", desc: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용됩니다.", x: 150, y: 280, mature: 2035 },
-    { icon: "🔋", name: "신재생 에너지 저장", desc: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이 발전하고 있습니다.", x: 450, y: 280, mature: 2030 },
-    { icon: "🩺", name: "맞춤형 의료", desc: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있습니다.", x: 750, y: 280, mature: 2032 }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    cards.forEach(function (c) { if (mx > c.x - 110 && mx < c.x + 110 && my > c.y - 70 && my < c.y + 70) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc; });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    cards.forEach(function (c) {
-      ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
-      ctx.fillRect(c.x - 110, c.y - 70, 220, 140);
-      ctx.strokeRect(c.x - 110, c.y - 70, 220, 140);
-      ctx.restore();
-      ctx.font = "36px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, c.y - 10);
-      ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, c.y + 30);
-    });
-  }
-  render();
-
-  /* 심화: 성숙도 타임라인 */
-  var canvas2 = document.getElementById("c0b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c0b-info");
-  var year = 2025;
-  document.getElementById("c0b-year").addEventListener("input", function (e) { year = +e.target.value; document.getElementById("c0b-year-val").textContent = year; renderTimeline(); });
-
-  function renderTimeline() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var x0 = 220, x1 = W2 - 40;
-    cards.forEach(function (c, i) {
-      var y = 15 + i * 38;
-      var arrived = year >= c.mature;
-      ctx2.font = "12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
-      ctx2.fillText(c.icon + " " + c.name, x0 - 10, y + 16);
-      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 24);
-      var w = Math.min(1, Math.max(0, (year - 2025) / (c.mature - 2025))) * (x1 - x0);
-      ctx2.fillStyle = arrived ? cssVar("--teal") : cssVar("--coral");
-      ctx2.fillRect(x0, y, w, 24);
-      ctx2.font = "700 11px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
-      ctx2.fillText(arrived ? "대중화 (예상 " + c.mature + "년)" : "개발 중 (예상 " + c.mature + "년)", x0 + 8, y + 17);
-    });
-    var arrivedCount = cards.filter(function (c) { return year >= c.mature; }).length;
-    info2.innerHTML = year + "년 기준으로 6개 기술 중 <b>" + arrivedCount + "개</b>가 대중화되었을 것으로 예상해 볼 수 있습니다. (제시된 예상 시기는 학습용 가상의 값이며, 실제 기술 발전 속도는 연구 투자, 사회적 수용성 등에 따라 크게 달라질 수 있습니다.)";
-  }
-  renderTimeline();
-})();
-
-/* TAB0 미션 — 설명으로 미래 기술 맞히기 */
-(function () {
-  var labels = { ai: "인공지능(AI)", gene: "유전자 편집 기술", space: "우주 산업", nano: "나노 기술", storage: "신재생 에너지 저장", medi: "맞춤형 의료" };
-  var qa = [
-    { txt: "스스로 학습해 판단과 예측을 수행하며, 의료·교통·산업 전반에 활용된다.", key: "ai" },
-    { txt: "특정 유전자를 정밀하게 교정해 질병 치료, 품종 개량 등에 활용된다.", key: "gene" },
-    { txt: "민간 우주 탐사와 위성 기술이 발전하며 새로운 산업 영역을 열고 있다.", key: "space" },
-    { txt: "원자·분자 크기의 물질을 다뤄 신소재, 정밀 의료 기술 등에 활용된다.", key: "nano" },
-    { txt: "태양광·풍력의 간헐성을 보완하는 대용량 에너지 저장 기술이다.", key: "storage" },
-    { txt: "개인의 유전 정보를 바탕으로 한 정밀 의료가 확대되고 있다.", key: "medi" }
-  ];
-  var dataBox = document.getElementById("c0m-data");
-  var seg = document.getElementById("c0m-choices");
-  var checkBtn = document.getElementById("c0m-check");
-  var newBtn = document.getElementById("c0m-new");
-  var info = document.getElementById("c0m-info");
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = qa[Math.floor(Math.random() * qa.length)];
-    picked = null;
-    dataBox.innerHTML = current.txt;
-    seg.innerHTML = "";
-    Object.keys(labels).forEach(function (k) {
-      var b = document.createElement("button");
-      b.textContent = labels[k];
-      b.addEventListener("click", function () {
-        picked = k;
-        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      });
-      seg.appendChild(b);
-    });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB1 사회적 쟁점 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var topic = "gene";
-  var info = document.getElementById("c1-info");
-  var data = {
-    gene: { name: "유전자 편집 기술", pro: ["유전 질환 치료 가능성", "농작물 품종 개량으로 식량 문제 완화"], con: ["의도치 않은 유전적 부작용 우려", "인간 배아 편집의 윤리적 문제"] },
-    ai: { name: "인공지능과 일자리", pro: ["반복적·위험한 업무의 자동화", "생산성과 효율성 향상"], con: ["기존 일자리 감소와 고용 불안", "알고리즘 편향으로 인한 차별 가능성"] },
-    nuclear: { name: "원자력 발전", pro: ["적은 연료로 대량의 전력 생산", "발전 과정에서 온실 기체 배출이 적음"], con: ["방사성 폐기물 처리 문제", "사고 발생 시 피해 규모가 큼"] }
-  };
-  document.querySelectorAll("#c1-topic button").forEach(function (b) {
-    b.addEventListener("click", function () { topic = b.getAttribute("data-t"); document.querySelectorAll("#c1-topic button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); renderScale(); });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var d = data[topic];
-    ctx.font = "700 16px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
-    ctx.fillText(d.name, W / 2, 40);
-
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(W / 2, 60); ctx.lineTo(W / 2, H - 30); ctx.stroke();
-
-    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--teal"); ctx.textAlign = "left";
-    ctx.fillText("기대되는 점", 60, 90);
-    d.pro.forEach(function (t, i) {
-      ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      wrapText(ctx, "• " + t, 60, 120 + i * 50, 340, 18);
-    });
-
-    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--coral");
-    ctx.fillText("우려되는 점", W / 2 + 60, 90);
-    d.con.forEach(function (t, i) {
-      ctx.font = "12px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      wrapText(ctx, "• " + t, W / 2 + 60, 120 + i * 50, 340, 18);
-    });
-    function wrapText(ctx, text, x, y, maxW, lh) {
-      var line = "", lines = [];
-      for (var i = 0; i < text.length; i++) {
-        var test = line + text[i];
-        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
-      }
-      lines.push(line);
-      lines.forEach(function (l, i) { ctx.fillText(l, x, y + i * lh); });
-    }
-    info.innerHTML = "과학 기술은 그 자체로 좋고 나쁨이 정해져 있지 않습니다. 사회적 합의와 제도적 보완을 통해 <b>기대되는 점은 살리고 우려되는 점은 줄이는 방향</b>으로 활용하는 것이 중요합니다.";
-  }
-  render();
-
-  /* 심화: 편익-위험 저울 */
-  var canvas2 = document.getElementById("c1b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c1b-info");
-  var weight = 0;
-  document.getElementById("c1b-w").addEventListener("input", function (e) {
-    weight = +e.target.value;
-    var label = weight === 0 ? "중립" : weight < 0 ? "편익 중시 " + Math.abs(weight) : "위험 중시 " + weight;
-    document.getElementById("c1b-w-val").textContent = label;
-    renderScale();
-  });
-
-  function renderScale() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var cx = W2 / 2, pivotY = 90, armLen = 260;
-    var angle = weight * 0.06; // radians tilt
-    var leftX = cx - armLen * Math.cos(angle), leftY = pivotY - armLen * Math.sin(angle);
-    var rightX = cx + armLen * Math.cos(angle), rightY = pivotY + armLen * Math.sin(angle);
-
-    ctx2.strokeStyle = cssVar("--mist"); ctx2.lineWidth = 4;
-    ctx2.beginPath(); ctx2.moveTo(cx, pivotY); ctx2.lineTo(cx, pivotY + 90); ctx2.stroke();
-    ctx2.beginPath(); ctx2.moveTo(leftX, leftY); ctx2.lineTo(rightX, rightY); ctx2.stroke();
-
-    var panR = 34;
-    ctx2.fillStyle = cssVar("--teal"); ctx2.globalAlpha = .85;
-    ctx2.beginPath(); ctx2.arc(leftX, leftY + 20, panR, 0, Math.PI * 2); ctx2.fill();
-    ctx2.fillStyle = cssVar("--coral");
-    ctx2.beginPath(); ctx2.arc(rightX, rightY + 20, panR, 0, Math.PI * 2); ctx2.fill();
-    ctx2.globalAlpha = 1;
-
-    ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--abyss"); ctx2.textAlign = "center";
-    ctx2.fillText("편익", leftX, leftY + 24);
-    ctx2.fillText("위험", rightX, rightY + 24);
-
-    var d = data[topic];
-    var emphasis = weight < -1 ? d.pro[0] : weight > 1 ? d.con[0] : "양쪽을 비슷한 비중으로 고려";
-    info2.innerHTML = weight === 0
-      ? "저울이 수평입니다 — 편익과 위험을 동등하게 고려하는 중립적인 관점입니다."
-      : (weight < 0
-        ? "편익 쪽에 더 무게를 두는 관점입니다. 예: '" + d.pro[0] + "'와 같은 기대 효과를 중요하게 볼 수 있습니다."
-        : "위험 쪽에 더 무게를 두는 관점입니다. 예: '" + d.con[0] + "'와 같은 우려를 중요하게 볼 수 있습니다.") +
-      " 실제 사회적 의사 결정에서는 이처럼 다양한 입장을 가진 사람들이 <b>근거를 바탕으로 토론하고 합의</b>를 이루어 가는 과정이 중요합니다.";
-  }
-  renderScale();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is2-3-2");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학2 Ⅲ-2] 과학 기술의 발전과 쟁점",
-    items: [
-      {
-            "id": "w1",
-            "label": "내가 고른 기술",
-            "hint": "기술 하나를 골라 무엇을 가능하게 하는지, 그리고 무엇을 위험하게 하는지 각각 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "반대편의 가장 강한 주장",
-            "hint": "내 입장과 반대되는 쪽의 가장 설득력 있는 주장을 한 문장으로 옮겨 적고, 그에 대한 답을 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
