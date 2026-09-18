@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>과학 기술의 활용 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -15,374 +16,290 @@
       <div class="eyebrow" style="margin-top:8px">Ⅲ-1 · 과학과 미래 사회</div>
       <h1 class="display">과학 기술의<br>활용</h1>
     </div>
-    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 과학 기술의 발전</button>
-    <button class="tab-btn" data-tab="1"><span class="num">02</span> 빅데이터의 활용</button>
+    <button class="tab-btn active" data-tab="0"><span class="num">01</span> 감염병을 추적하라</button>
+    <button class="tab-btn" data-tab="1"><span class="num">02</span> 기술 발전과 빅데이터</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 정리하기</button>
+    <button class="tab-btn" data-tab="3"><span class="num">04</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 감염병을 추적하라 — 이야기 「펌프의 손잡이를 떼어라」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 과학이 사회를 바꿔온 과정</div>
-        <h2 class="display">과학 기술 발전의 흐름</h2>
-        <p>타임라인의 각 지점을 클릭해 확인하고, 아래에서 기술을 골라 도입 이후 시간이 지나며 보급률이 어떻게 S자 곡선을 그리며 증가하는지 확인해 보세요.</p>
-      
-        <span class="std-chip">10통과2-03-01</span><span class="std-chip">10통과2-03-02</span><div class="std-note"><b>[10통과2-03-01]</b> 감염병의 진단, 추적 등을 사례로 과학의 유용성을 설명하고, 미래 사회 문제 해결에서 과학의 필요성에 대해 논증할 수 있다.<br><b>[10통과2-03-02]</b> 빅데이터를 과학기술사회에서 사용하고 있는 사례를 조사하고, 빅데이터 활용의 장점과 문제점을 추론할 수 있다.</div><div class="terms"><b>빅데이터</b><b>정보 산출</b><b>과학 기술 발전</b></div>
+        <div class="eyebrow">01 · 감염병의 진단과 추적 · 이야기 한 편</div>
+        <h2 class="display">펌프의 손잡이를 떼어라</h2>
+        <p>1854년 런던에서 실제로 있었던 일로 시작합니다. 지도 한 장으로 감염원을 찾아내고, 170년 뒤의 진단 기술(PCR·신속항원검사)과 전파 모형으로 새 감염병의 유행 곡선을 의료 역량 아래로 눌러 보세요. 장면마다 미션을 끝내야 다음 장면이 열립니다.</p>
+        <span class="std-chip">10통과2-03-01</span><div class="std-note"><b>[10통과2-03-01]</b> 감염병의 진단, 추적 등을 사례로 과학의 유용성을 설명하고, 미래 사회 문제 해결에서 과학의 필요성에 대해 논증할 수 있다.</div><div class="terms"><b>감염병의 진단</b><b>역학 조사(추적)</b><b>PCR과 Ct 값</b><b>민감도·특이도</b><b>감염 재생산 지수 R</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c0" width="900" height="320"></canvas></div>
-        <div class="info-card" id="c0-info">타임라인의 점을 클릭해 보세요.</div>
-      </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 기술 확산 곡선</div>
-          <h2 class="display" style="font-size:18px;">새로운 기술은 S자 모양으로 퍼진다</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">기술 선택</div>
-            <div class="seg" id="c0b-tech">
-              <button class="on" data-k="0.35" data-name="스마트폰">스마트폰(빠른 확산)</button>
-              <button data-k="0.15" data-name="전기">전기(느린 확산)</button>
-              <button data-k="0.25" data-name="인터넷">인터넷(중간 확산)</button>
+
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="1854년 8월, 런던 소호">
+          <div class="story narr"><div class="who">🕯️</div><div class="say"><span class="name">이야기</span>1854년 8월 31일 밤, 런던 소호의 <b>브로드가(Broad Street)</b> 일대에서 콜레라가 터졌습니다. 멀쩡하던 사람이 심한 설사와 탈수로 하루 만에 숨졌고, <b>열흘 사이에 500명 넘게</b> 목숨을 잃었습니다. 세균이 병을 일으킨다는 사실이 밝혀지기 전이라, 당시 의사들 대부분은 썩은 것에서 피어오르는 <b>나쁜 공기(악취)</b>가 병을 옮긴다고 믿었습니다.</div></div>
+          <div class="story"><div class="who">🎩</div><div class="say"><span class="name">의사 존 스노</span>“새로 온 조수로군. 나는 공기 탓이라는 말을 믿지 않네. 콜레라 환자는 폐가 아니라 <b>장</b>부터 탈이 나거든. 집집을 돌며 사망자가 나온 주소를 모두 적어 왔으니, 자네가 이걸 지도에 옮겨 주게. 그 전에, 자네 생각은 어떤가?”</div></div>
+          <div class="case-file"><b class="k">사건 기록</b> 1854년 8월 31일 시작 · 열흘 동안 사망 500명 이상(최종 616명) · 주민 상당수가 동네를 떠남 &nbsp;|&nbsp; <b class="k">단서</b> 주민들은 집에 수도가 없어 <b>길거리의 공동 펌프</b>에서 물을 길어 마심</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="지도 위의 검은 막대 — 어느 펌프인가">
+          <div class="story"><div class="who">🎩</div><div class="say"><span class="name">존 스노</span>“사망자 한 명을 막대 하나로, 죽은 사람이 살던 집 앞에 그려 넣었네. 이 동네에는 공동 펌프가 다섯 개 있지. 사람들은 보통 <b>가장 가까운 펌프</b>에서 물을 긷는다네. 펌프를 하나씩 골라, 그 펌프가 가장 가까운 집들에서 몇 명이 죽었는지 세어 보게.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-map" width="900" height="430"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">조사할 펌프 (지도의 펌프를 눌러도 됩니다)</div>
+                <div class="seg" id="a-pumps">
+                  <button type="button" data-i="0">브로드가</button>
+                  <button type="button" data-i="1">말버러가</button>
+                  <button type="button" data-i="2">워릭가</button>
+                  <button type="button" data-i="3">루퍼트가</button>
+                  <button type="button" data-i="4">딘가</button>
+                </div>
+              </div>
             </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="a-handle" type="button">🔧 이 펌프의 손잡이를 떼자고 건의하기</button></div>
+            <div class="info-card" id="a-map-info">펌프를 하나 골라 조사를 시작하세요.</div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">도입 후 경과 연수<span class="val" id="c0b-year-val">10</span>년</div>
-            <input type="range" id="c0b-year" min="0" max="40" step="1" value="10">
+          <div class="stage-card" style="margin-top:14px"><div id="a-q1"></div></div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span>오염된 펌프를 찾아내세요.<ul><li id="m1-2a">다섯 펌프를 모두 조사해 ‘집 100채당 사망자 수’를 비교하기</li><li id="m1-2b">범인 펌프를 골라 손잡이를 떼자고 건의하기</li><li id="m1-2c">지도의 이상한 점(펌프 바로 옆인데 사망자가 없는 곳)을 설명하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="170년 뒤 — 보이지 않는 것을 2배씩 불려라">
+          <div class="story narr"><div class="who">🧬</div><div class="say"><span class="name">이야기</span>스노는 병원체를 끝내 보지 못했습니다. 지금은 다릅니다. 당신은 20XX년, 신종 호흡기 감염병 ‘X’가 번지기 시작한 도시의 <b>질병 대응 센터</b>에 배치되었습니다. 첫 일은 <b>진단</b>입니다. 면봉에 묻은 바이러스 유전자는 너무 적어서 그대로는 검출되지 않습니다.</div></div>
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">진단 팀장 서윤</span>“그래서 <b>PCR(중합 효소 연쇄 반응)</b>을 써요. 온도를 올렸다 내리는 주기를 한 번 돌 때마다 표적 유전자가 <b>2배</b>로 복제돼요. 형광 신호가 검출 기준선을 넘는 순간의 주기 수가 <b>Ct 값</b>이에요. 처음 양과 주기 수를 바꿔 가며 직접 확인해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-pcr" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">검체 속 처음 유전자 수<span class="val" id="a-pcr-n-val">1,000개</span></div>
+                <input type="range" id="a-pcr-n" min="1" max="7" step="0.1" value="3">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">증폭 주기 수<span class="val" id="a-pcr-c-val">0회</span></div>
+                <input type="range" id="a-pcr-c" min="0" max="45" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="a-pcr-info"></div>
           </div>
-        </div>
-        <div class="info-card" id="c0b-info"></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span>Ct 값을 읽어 내세요.<ul><li id="m1-3a">유전자가 <b>10개</b>뿐인 검체: 신호가 기준선을 <b>처음 넘는</b> 주기(Ct)에 정확히 멈추기</li><li id="m1-3b">Ct 값이 그보다 정확히 <b>10 작은</b> 검체 만들기: 처음 유전자 수를 조절하고, 그 Ct 주기에 멈추기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="15분 검사의 함정 — 양성이면 정말 감염일까">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“PCR은 정확하지만 몇 시간이 걸려요. 그래서 15분이면 되는 <b>신속항원검사</b>를 시민 1만 명에게 돌리려 해요. 이 검사의 <b>민감도</b>(감염자를 양성으로 잡아내는 비율)는 80%, <b>특이도</b>(비감염자를 음성으로 판정하는 비율)는 98%라고 가정합시다. 지금 시민의 <b>1%</b>가 감염되어 있다면, 결과표는 어떻게 나올까요? 직접 계산해 채워 보세요.”</div></div>
+          <div class="stage-card" style="padding:16px 18px">
+            <div style="overflow-x:auto">
+              <table class="obs">
+                <thead><tr><th>시민 10,000명</th><th>검사 양성</th><th>검사 음성</th><th>합계</th></tr></thead>
+                <tbody>
+                  <tr><td class="l">실제 감염자</td><td><input type="number" id="a-tp" style="width:84px" aria-label="감염자 중 양성"> 명</td><td><input type="number" id="a-fn" style="width:84px" aria-label="감염자 중 음성"> 명 <span style="color:var(--mist)">(위음성)</span></td><td class="num">100</td></tr>
+                  <tr><td class="l">비감염자</td><td><input type="number" id="a-fp" style="width:84px" aria-label="비감염자 중 양성"> 명 <span style="color:var(--mist)">(위양성)</span></td><td><input type="number" id="a-tn" style="width:84px" aria-label="비감염자 중 음성"> 명</td><td class="num">9,900</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="toggle-row" style="margin:14px 0 0"><button class="btn primary" id="a-rt-check" type="button">표 확인하기</button></div>
+            <div class="info-card" id="a-rt-msg" style="margin:14px 0 0">민감도 80% = 감염자 100명 중 양성이 나오는 사람의 비율, 특이도 98% = 비감염자 9,900명 중 음성이 나오는 사람의 비율입니다.</div>
+          </div>
+          <div class="stage-card" style="margin-top:14px">
+            <div class="canvas-wrap"><canvas id="a-rt" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">유병률 (지금 감염되어 있는 시민의 비율)<span class="val" id="a-rt-p-val">1%</span></div>
+                <input type="range" id="a-rt-p" min="1" max="50" step="1" value="1">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">민감도<span class="val" id="a-rt-se-val">80%</span></div>
+                <input type="range" id="a-rt-se" min="50" max="100" step="1" value="80">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">특이도<span class="val" id="a-rt-sp-val">98%</span></div>
+                <input type="range" id="a-rt-sp" min="80" max="100" step="1" value="98">
+              </div>
+            </div>
+            <div class="info-card" id="a-rt-info"></div>
+          </div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span><ul><li id="m1-4a">결과표의 네 칸을 직접 계산해 채우기</li><li id="m1-4b">민감도 80%·특이도 98%는 그대로 두고, ‘양성인 사람이 진짜 감염자일 확률’이 <b>90% 이상</b>이 되는 <b>가장 낮은</b> 유병률 찾기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="유행 곡선을 눌러라 — 감염 재생산 지수 R">
+          <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">센터장</span>“역학 조사 결과가 나왔습니다. 감염병 X는 아무 대책이 없을 때 환자 한 명이 평균 <b>3명</b>을 감염시킵니다. 이 값을 <b>기초 감염 재생산 지수(R₀)</b>라고 하지요. 인구 10만 명인 우리 시의 병상과 의료진으로는 <b>동시에 앓는 환자 5,000명</b>까지만 감당할 수 있습니다. 그대로 두면 어떻게 되는지 보고, 대책을 세워 주십시오.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-sir" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">접촉 감소 (거리 두기·마스크·격리)<span class="val" id="a-sir-c-val">0%</span></div>
+                <input type="range" id="a-sir-c" min="0" max="80" step="5" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">백신 접종률<span class="val" id="a-sir-v-val">0%</span></div>
+                <input type="range" id="a-sir-v" min="0" max="90" step="5" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="a-sir-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="a-q2"></div></div>
+          <div class="mission" id="m1-5"><span class="m-tag">미션</span>방역 대책을 설계하세요.<ul><li id="m1-5a">동시 환자의 최대치를 의료 역량(<b>5,000명</b>) 아래로 누르기. 단, 일상이 멈추지 않도록 접촉 감소는 <b>40% 이하</b>로!</li><li id="m1-5b">실제 재생산 지수 R을 <b>1 미만</b>으로 만들어 유행이 스스로 꺼지는 것 확인하기 (방법은 자유)</li><li id="m1-5c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 과학은 무엇을 해냈나">
+          <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">센터장</span>“유행이 잡히고 있습니다. 보고서를 쓰기 전에, 1854년의 스노와 우리가 쓴 과학의 도구들을 역할별로 정리해 주세요. 병에 걸렸는지 알아내는 <b>진단</b>, 어디서 어떻게 퍼지는지 밝히는 <b>추적</b>, 앞일을 내다보고 막는 <b>예측·예방</b>입니다.”</div></div>
+          <div class="stage-card"><div id="a-sort"></div></div>
+          <div id="e1-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🔧 손잡이 하나가 도시를 구했다</h4>
+              <p>1854년 9월 7일 스노는 지역 위원회에 자료를 내밀었고, 다음 날 <b>브로드가 펌프의 손잡이가 떼어졌습니다.</b> 뒤이은 조사에서 펌프 우물 바로 옆, 브로드가 40번지의 정화조가 새고 있었고 그 집에서 콜레라에 걸린 아기의 기저귀를 빤 물이 흘러들었다는 사실이 밝혀졌습니다. 콜레라균이 확인된 것은 그로부터 약 30년 뒤(1883년, 로베르트 코흐)입니다. 스노는 <b>병원체를 보지 못하고도 데이터만으로 감염원을 찾아낸</b> 셈이고, 이 일은 <b>역학</b>의 출발점으로 꼽힙니다.</p>
+              <p>오늘날에는 PCR이 보이지 않는 병원체를 몇 시간 만에 찾아내고, 검사의 민감도·특이도를 따져 결과를 해석하며, 전파 모형으로 유행을 미리 계산해 대책을 고릅니다. 감염병·기후 변화·식량 문제처럼 <b>미래 사회의 문제는 ‘느낌’이 아니라 측정과 데이터, 모형으로 풀어야</b> 합니다. 과학이 필요한 까닭입니다.</p>
+              <div class="vs" id="e1-vs"></div>
+              <span class="stamp">사건 파일 ① 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 스노 자신도 기록했듯, 손잡이를 뗄 무렵에는 주민이 많이 떠나 유행이 이미 수그러들고 있었습니다. 그래도 물이 원인이라는 그의 결론은 옳았습니다. 장면 2의 지도는 실제 지도의 경향을 본떠 만든 <b>단순화한 가상 분포</b>이고, PCR의 기준선·고원 값, 검사의 민감도·특이도, 전파 모형(접종자는 모두 면역, 모든 사람이 고르게 섞임, 감염 기간 7일)도 원리를 보이려고 <b>단순화한 값</b>입니다. 실제 Ct 값은 검사 장비와 시약에 따라 달라 서로 다른 검사끼리 그대로 비교할 수 없습니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk1"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 기술 발전과 빅데이터 — 이야기 「240만 장의 엽서」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 데이터가 곧 자원인 시대</div>
-        <h2 class="display">빅데이터는 어떻게 활용될까?</h2>
-        <p>빅데이터가 수집되어 활용되기까지의 과정과, 실제 활용 사례를 확인해 보세요. 아래에서는 데이터 양을 직접 조절하며 예측 정확도가 어떻게 달라지는지 실험해 볼 수 있습니다.</p>
-      </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="info-card" id="c1-info">단계나 카드를 클릭해 보세요.</div>
+        <div class="eyebrow">02 · 과학 기술의 발전과 빅데이터 · 이야기 한 편</div>
+        <h2 class="display">240만 장의 엽서</h2>
+        <p>1936년 미국, 240만 명에게 물은 조사가 5만 명에게 물은 조사에 참패했습니다. 데이터는 많을수록 좋은 것 아니었을까요? 새 기술이 퍼지는 S자 곡선에서 실마리를 찾고, 표본을 직접 뽑아 보고, 오늘날 빅데이터의 쓸모와 그림자까지 따라가 봅니다.</p>
+        <span class="std-chip">10통과2-03-02</span><div class="std-note"><b>[10통과2-03-02]</b> 빅데이터를 과학기술사회에서 사용하고 있는 사례를 조사하고, 빅데이터 활용의 장점과 문제점을 추론할 수 있다.</div><div class="terms"><b>빅데이터</b><b>정보 산출</b><b>과학 기술 발전</b><b>기술 확산(S자 곡선)</b><b>편향된 데이터</b><b>개인 정보</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 빅데이터 활용 단계 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 설명은 어느 단계에 해당할까?</h2>
-      </div>
-      <div class="stage-card">
-        <div class="info-card" id="c1m-data"></div>
-        <div class="seg" id="c1m-choices">
-          <button data-c="collect">수집</button>
-          <button data-c="store">저장·정리</button>
-          <button data-c="analyze">분석</button>
-          <button data-c="use">활용</button>
-        </div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c1m-check">정답 확인</button>
-          <button class="btn" id="c1m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c1m-info"></div>
-      </div>
-      <div class="stage-card" style="margin-top:20px">
-        <div class="ctrl-label">데이터 양이 예측 정확도에 미치는 영향 — 슬라이더로 데이터 수집량을 조절해 보세요</div>
-        <div class="controls">
-          <div class="ctrl-group" style="min-width:100%">
-            <div class="ctrl-label">수집한 데이터 양<span class="val" id="c1-data-val">20</span>%</div>
-            <input type="range" id="c1-data" min="5" max="100" step="1" value="20">
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="사상 최대의 여론 조사">
+          <div class="story narr"><div class="who">📮</div><div class="say"><span class="name">이야기</span>1936년 미국 대통령 선거. 인기 주간지 <b>《리터러리 다이제스트》</b>는 <b>1,000만 명</b>에게 모의 투표 엽서를 보내 <b>약 240만 장</b>을 돌려받았습니다. 당시로서는 상상하기 힘든 ‘빅데이터’였죠. 결과는 공화당 랜던 후보 57%, 현직 대통령 루스벨트 43%. 한편 신생 조사 회사를 차린 <b>조지 갤럽</b>은 고작 <b>약 5만 명</b>을 조사하고는 정반대로 루스벨트의 승리를 예고했습니다.</div></div>
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">데이터 분석가 지안</span>“신입 분석가님, 환영해요. 우리 팀 첫 교육은 늘 이 사건으로 시작합니다. 주소는 <b>전화번호부, 자동차 등록 명부, 잡지 구독자 명단</b>에서 뽑았대요. 결과를 보기 전에 먼저 걸어 보세요.”</div></div>
+          <div class="case-file"><b class="k">다이제스트</b> 응답 약 240만 명 → 랜던 57% : 루스벨트 43% 예측 &nbsp;|&nbsp; <b class="k">갤럽</b> 약 5만 명 → 루스벨트 승리 예측 &nbsp;|&nbsp; <b class="k">명부</b> 전화번호부 · 자동차 등록 명부 · 구독자 명단</div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="단서 — 새 기술은 S자로 퍼진다">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“결과부터 말하면 루스벨트가 <b>약 61%</b>를 얻어 48개 주 가운데 46개 주에서 이겼어요. 240만 명이 틀린 거죠. 실마리는 ‘전화’와 ‘자동차’에 있어요. 먼저 과학 기술이 사회를 바꿔 온 큰 흐름부터 순서대로 놓아 보고, 새 기술 하나가 사람들 사이에 <b>어떤 모양으로 퍼지는지</b> 봅시다.”</div></div>
+          <div class="stage-card"><div id="b-order"></div></div>
+          <div class="stage-card" style="margin-top:14px">
+            <div class="canvas-wrap"><canvas id="b-scurve" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">기술 선택 (확산 속도가 다른 세 가지 모형)</div>
+                <div class="seg" id="b-tech">
+                  <button type="button" class="on" data-i="0">스마트폰(빠른 확산)</button>
+                  <button type="button" data-i="1">전기(느린 확산)</button>
+                  <button type="button" data-i="2">인터넷(중간 확산)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">도입 후 경과 연수<span class="val" id="b-year-val">10년</span></div>
+                <input type="range" id="b-year" min="0" max="40" step="1" value="10">
+              </div>
+            </div>
+            <div class="info-card" id="b-scurve-info"></div>
           </div>
-        </div>
-        <div class="canvas-wrap" style="margin-top:10px; height:200px"><canvas id="c1-sim" width="900" height="200"></canvas></div>
-        <div class="info-card" id="c1-sim-info"></div>
+          <div class="stage-card" style="margin-top:14px"><div id="b-q1"></div></div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span><ul><li id="m2-2a">과학 기술 발전의 다섯 장면을 시대 순서대로 놓기</li><li id="m2-2b">세 기술 각각에서 보급률이 <b>처음 90%를 넘는 해</b>를 찾아 멈추기 <span id="b-scv-prog"></span></li><li id="m2-2c">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="재현 실험 — 240만 명 대 5만 명">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“1936년은 대공황 한가운데였고, 전화나 자동차가 있는 집은 <b>형편이 넉넉한 쪽</b>이었어요. 가상의 유권자 집단으로 재현해 봅시다. 전체 유권자 가운데 <b>전화·자동차 보유층은 35%</b>, 이들의 루스벨트 지지율은 40%이고, 나머지 65%인 비보유층의 지지율은 72%라고 하죠. 표본의 <b>크기</b>와 <b>구성</b>을 바꿔 가며 뽑아 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-poll" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">표본의 크기<span class="val" id="b-poll-n-val">1,000명</span></div>
+                <input type="range" id="b-poll-n" min="0" max="7" step="1" value="2">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">표본 속 전화·자동차 보유층의 비율<span class="val" id="b-poll-s-val">90%</span></div>
+                <input type="range" id="b-poll-s" min="0" max="100" step="5" value="90">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-poll-run" type="button">📮 이 조건으로 표본 뽑기</button><button class="btn" id="b-poll-clear" type="button">기록 지우기</button></div>
+            <div class="info-card" id="b-poll-info">조건을 정하고 표본을 뽑아 보세요. 같은 조건으로 여러 번 뽑으면 예측이 얼마나 흔들리는지 보입니다.</div>
+          </div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span>두 조사를 재현하세요.<ul><li id="m2-3a"><b>다이제스트식</b>: 보유층 비율 85% 이상인 명부에서 <b>240만 명</b>을 뽑기 → 예측이 어디에 찍히는지 확인</li><li id="m2-3b"><b>갤럽식</b>: <b>5만 명 이하</b>의 표본으로 ‘치우침 2%p 이하’이면서 ‘오차 범위 ±1%p 이하’인 조사 설계하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="오늘의 빅데이터 — 수집에서 활용까지">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“지금 우리는 엽서 대신 센서, 누리 소통망(SNS), 카드 결제, 위치 기록에서 데이터를 모아요. 너무 크고 빠르고 다양해서 예전 방식으로는 다룰 수 없는 데이터, 그게 <b>빅데이터</b>죠. 빅데이터에서 쓸모 있는 정보가 나오기까지는 <b>수집 → 저장·정리 → 분석 → 활용</b>의 단계를 거칩니다. 우리 팀의 업무 기록을 단계별로 나눠 보세요.”</div></div>
+          <div class="stage-card"><div id="b-sort1"></div></div>
+          <div class="stage-card" style="margin-top:14px"><div id="b-q2"></div></div>
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span><ul><li id="m2-4a">업무 기록 8건을 네 단계로 분류하기</li><li id="m2-4b">아래 물음에 답하기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="이름을 지웠는데 — 익명 데이터의 함정">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“마지막 과제예요. 가상의 도시 주민 <b>2,000명의 진료 기록</b>을 감염병 연구자들에게 공개하려 합니다. 이름과 주민 번호는 지웠어요. 그런데 1990년대 미국에서 연구자 라타냐 스위니가, ‘익명’으로 공개된 진료 기록을 선거인 명부와 맞춰 보아 주지사의 기록을 찾아낸 일이 있어요. 그는 <b>우편 번호·성별·생년월일 세 가지만으로 미국인의 약 87%가 단 한 명으로 특정된다</b>는 것도 보였죠. 어떤 항목을 얼마나 자세히 공개할지 정해 주세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-priv" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">사는 곳</div>
+                <div class="seg" id="b-pv-loc"><button type="button" class="on" data-l="0">공개 안 함</button><button type="button" data-l="1">구(5개)</button><button type="button" data-l="2">동(40개)</button></div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">태어난 날</div>
+                <div class="seg" id="b-pv-bir"><button type="button" class="on" data-l="0">공개 안 함</button><button type="button" data-l="1">출생 연도</button><button type="button" data-l="2">연·월·일</button></div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">성별</div>
+                <div class="seg" id="b-pv-sex"><button type="button" class="on" data-l="0">공개 안 함</button><button type="button" data-l="1">공개</button></div>
+              </div>
+            </div>
+            <div class="info-card" id="b-priv-info"></div>
+          </div>
+          <div class="mission" id="m2-5"><span class="m-tag">미션</span>쓸모와 안전 사이의 균형을 찾으세요.<ul><li id="m2-5a">세 항목을 모두 가장 자세히 공개하면 몇 %가 ‘단 한 명’으로 좁혀지는지 확인하기</li><li id="m2-5b">연구에 쓸 수 있도록 <b>정보량 3점 이상</b>을 지키면서, 단 한 명으로 특정되는 사람을 <b>1% 이하</b>로 만들기</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 빅데이터의 두 얼굴">
+          <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“교육은 여기까지예요. 끝으로, 빅데이터 활용의 <b>장점</b>과 <b>문제점</b>을 갈라서 정리해 봅시다. 오늘 직접 겪은 일들이 섞여 있을 거예요.”</div></div>
+          <div class="stage-card"><div id="b-sort2"></div></div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>📮 많다고 옳은 것은 아니다</h4>
+              <p>《리터러리 다이제스트》는 240만 명의 응답으로도 결과를 크게 빗나갔고, 이 일로 신뢰를 잃어 얼마 뒤 다른 잡지에 합쳐졌습니다. 표본이 커지면 <b>우연한 오차</b>는 줄어들지만, 데이터를 모으는 길목이 한쪽으로 치우쳐 생긴 <b>편향</b>은 아무리 많이 모아도 그대로 남습니다. 새 기술은 S자 곡선을 그리며 퍼지므로, 곡선의 중간쯤에서는 그 기술의 사용자(전화 가입자, 특정 앱 이용자)가 사회 전체를 대표하지 못한다는 점도 기억해야 합니다.</p>
+              <p>빅데이터는 감염병 확산 예측, 정밀한 기상 예보, 맞춤형 추천처럼 <b>더 빠르고 정확한 예측과 의사 결정</b>을 가능하게 합니다. 동시에 <b>개인 정보 침해</b>, <b>편향된 데이터가 만드는 잘못된 결론</b>, 데이터를 가진 쪽으로 힘이 쏠리는 문제도 함께 옵니다. 데이터가 <b>어디서, 누구에게서, 어떻게</b> 모였는지 묻는 일이 분석의 첫걸음입니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 재현 실험의 집단 비율(35%)과 지지율(40%·72%)은 결과가 실제 선거와 비슷하게 나오도록 정한 <b>가상의 값</b>입니다. 실제 다이제스트 조사에서는 명부의 치우침과 더불어, 엽서를 <b>돌려보낸 사람만</b> 집계된 ‘무응답 편향’도 컸다고 분석됩니다. 갤럽이 쓴 방법도 오늘날의 무작위 추출과는 달랐고, 그 역시 1948년 선거 예측에서는 틀렸습니다. S자 곡선과 익명 데이터 화면도 원리를 보이기 위한 <b>단순화한 모형</b>입니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 03 정리하기 -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">03 · 두 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>두 이야기의 결과가 아래에 모입니다. 두 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 04 우리 반 -->
+    <section class="tab-panel" data-panel="3" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">04 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 답을 우리 반에 올리고, 친구들은 어떤 대책과 설계를 골랐는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 과학기술 타임라인 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var events = [
-    { year: "18세기", name: "증기 기관", desc: "동력을 인력·축력에서 기계로 전환해 산업 혁명을 이끌었습니다.", frac: 0.05 },
-    { year: "19세기", name: "전기의 활용", desc: "발전과 송전 기술로 조명, 통신, 각종 기기 사용이 가능해졌습니다.", frac: 0.28 },
-    { year: "20세기 중반", name: "컴퓨터의 등장", desc: "복잡한 계산과 정보 처리를 자동화하며 정보화 사회의 기반이 되었습니다.", frac: 0.55 },
-    { year: "20세기 말", name: "인터넷의 보급", desc: "전 세계가 연결되어 정보와 지식이 실시간으로 공유되기 시작했습니다.", frac: 0.75 },
-    { year: "21세기", name: "인공지능(AI)", desc: "스스로 학습하고 판단하는 기술로 다양한 산업과 생활 전반에 영향을 주고 있습니다.", frac: 0.95 }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width;
-    var mx = (e.clientX - rect.left) * scaleX;
-    var x0 = 60, x1 = W - 60;
-    events.forEach(function (ev) { if (Math.abs((x0 + ev.frac * (x1 - x0)) - mx) < 22) info.innerHTML = "<b>" + ev.year + " · " + ev.name + "</b> — " + ev.desc; });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = W - 60, y = H / 2;
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
-    events.forEach(function (ev, i) {
-      var x = x0 + ev.frac * (x1 - x0);
-      var up = i % 2 === 0;
-      ctx.save(); ctx.fillStyle = cssVar("--teal"); ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill(); ctx.restore();
-      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "center";
-      ctx.fillText(ev.name, x, up ? y - 40 : y + 50);
-      ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist");
-      ctx.fillText(ev.year, x, up ? y - 22 : y + 32);
-    });
-  }
-  render();
-})();
-
-/* TAB0-B 기술 확산 곡선(로지스틱) */
-(function () {
-  var canvas = document.getElementById("c0b");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0b-info");
-  var k = 0.35, name = "스마트폰", year = 10;
-  document.querySelectorAll("#c0b-tech button").forEach(function (b) {
-    b.addEventListener("click", function () {
-      k = +b.getAttribute("data-k"); name = b.getAttribute("data-name");
-      document.querySelectorAll("#c0b-tech button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      render();
-    });
-  });
-  document.getElementById("c0b-year").addEventListener("input", function (e) { year = +e.target.value; document.getElementById("c0b-year-val").textContent = year; render(); });
-
-  function adoption(t, kk) { return 100 / (1 + Math.exp(-kk * (t - 15))); }
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = W - 40, y0 = 20, y1 = 200;
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
-    ctx.font = "10.5px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("도입 후 경과 연수 →", (x0 + x1) / 2, y1 + 20);
-    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("보급률(%)", 0, 0); ctx.restore();
-
-    ctx.beginPath();
-    for (var i = 0; i <= 40; i++) {
-      var xx = x0 + i / 40 * (x1 - x0), yy = y1 - (adoption(i, k) / 100) * (y1 - y0);
-      if (i === 0) ctx.moveTo(xx, yy); else ctx.lineTo(xx, yy);
-    }
-    ctx.strokeStyle = cssVar("--teal"); ctx.lineWidth = 2.5; ctx.stroke();
-
-    var curX = x0 + year / 40 * (x1 - x0), curY = y1 - (adoption(year, k) / 100) * (y1 - y0);
-    ctx.fillStyle = cssVar("--coral"); ctx.beginPath(); ctx.arc(curX, curY, 6, 0, Math.PI * 2); ctx.fill();
-
-    var pct = adoption(year, k);
-    var phase = pct < 15 ? "초기 도입기(소수의 혁신 수용자만 사용)" : pct < 50 ? "급속 확산기(대중이 빠르게 받아들이는 단계)" : pct < 90 ? "성숙기(보급률 증가세가 둔화)" : "포화기(거의 모든 사람이 사용)";
-    info.innerHTML = "<b>" + name + "</b>은(는) 도입 " + year + "년 후 보급률이 약 <b>" + pct.toFixed(1) + "%</b>로 추정됩니다 — 현재는 <b>" + phase + "</b>에 해당합니다. 대부분의 혁신 기술은 처음엔 천천히 퍼지다가, 어느 시점(변곡점)부터 폭발적으로 확산된 뒤, 다시 완만해지는 <b>S자형(로지스틱) 곡선</b>을 따릅니다.";
-  }
-  render();
-})();
-
-/* TAB1 빅데이터 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c1-info");
-  var steps = [
-    { icon: "📥", name: "수집", desc: "센서, SNS, 거래 기록 등 다양한 경로에서 방대한 데이터를 모읍니다." },
-    { icon: "🗂️", name: "저장·정리", desc: "수집한 데이터를 분석 가능한 형태로 저장하고 정리합니다." },
-    { icon: "🔍", name: "분석", desc: "통계와 인공지능 기법으로 데이터 속 규칙과 패턴을 찾아냅니다." },
-    { icon: "💡", name: "활용", desc: "분석 결과를 바탕으로 예측하거나 더 나은 의사 결정을 합니다." }
-  ];
-  var cases = [
-    { icon: "🚑", name: "감염병 확산 예측", x: 150 },
-    { icon: "🛒", name: "맞춤형 상품 추천", x: 450 },
-    { icon: "🌦️", name: "정밀 기상 예보", x: 750 }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width, scaleY = canvas._h / rect.height;
-    var mx = (e.clientX - rect.left) * scaleX, my = (e.clientY - rect.top) * scaleY;
-    if (my < 200) {
-      var cellW = W / steps.length;
-      var idx = Math.floor(mx / cellW);
-      if (steps[idx]) info.innerHTML = "<b>" + steps[idx].icon + " " + steps[idx].name + "</b> — " + steps[idx].desc;
-    } else {
-      cases.forEach(function (c) { if (Math.abs(mx - c.x) < 100) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> 사례는 빅데이터 분석을 통해 더 정확한 예측과 맞춤형 서비스를 가능하게 합니다."; });
-    }
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var cellW = W / steps.length;
-    steps.forEach(function (s, i) {
-      var x = i * cellW;
-      ctx.strokeStyle = cssVar("--line"); ctx.strokeRect(x + 8, 30, cellW - 16, 140);
-      ctx.font = "30px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(s.icon, x + cellW / 2, 90);
-      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(s.name, x + cellW / 2, 130);
-      if (i < steps.length - 1) {
-        ctx.save(); ctx.strokeStyle = cssVar("--teal"); ctx.fillStyle = cssVar("--teal"); ctx.lineWidth = 2;
-        drawArrow(ctx, x + cellW - 14, 90, x + cellW + 14, 90, 7);
-        ctx.restore();
-      }
-    });
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("활용 사례", W / 2, 210);
-    cases.forEach(function (c) {
-      ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
-      ctx.fillRect(c.x - 100, 230, 200, 110);
-      ctx.strokeRect(c.x - 100, 230, 200, 110);
-      ctx.restore();
-      ctx.font = "30px Segoe UI"; ctx.fillText(c.icon, c.x, 280);
-      ctx.font = "700 12px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, 315);
-    });
-  }
-  render();
-})();
-
-/* TAB1 미션 — 빅데이터 활용 단계 맞히기 */
-(function () {
-  var qa = [
-    { txt: "센서, SNS, 거래 기록 등 다양한 경로에서 방대한 데이터를 모으는 단계", key: "collect" },
-    { txt: "수집한 데이터를 분석하기 좋은 형태로 저장하고 정리하는 단계", key: "store" },
-    { txt: "통계와 인공지능 기법으로 데이터 속 규칙과 패턴을 찾아내는 단계", key: "analyze" },
-    { txt: "분석 결과를 바탕으로 미래를 예측하거나 더 나은 의사 결정을 내리는 단계", key: "use" },
-    { txt: "감염병 확산 지역을 예측해 방역 자원을 배치하는 것은 이 단계의 결과를 활용한 사례이다", key: "use" },
-    { txt: "쇼핑몰 서버에 쌓인 방대한 구매 기록 원본 데이터를 데이터베이스에 옮겨 정리하는 것", key: "store" }
-  ];
-  var labels = { collect: "수집", store: "저장·정리", analyze: "분석", use: "활용" };
-  var dataBox = document.getElementById("c1m-data");
-  var seg = document.getElementById("c1m-choices");
-  var checkBtn = document.getElementById("c1m-check");
-  var newBtn = document.getElementById("c1m-new");
-  var info = document.getElementById("c1m-info");
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = qa[Math.floor(Math.random() * qa.length)];
-    picked = null;
-    dataBox.innerHTML = current.txt;
-    seg.querySelectorAll("button").forEach(function (x) { x.classList.remove("on"); });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  seg.querySelectorAll("button").forEach(function (btn) {
-    btn.addEventListener("click", function () {
-      picked = btn.dataset.c;
-      seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === btn); });
-    });
-  });
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! '" + labels[current.key] + "' 단계입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB1 데이터 양 -> 예측 정확도 시뮬레이션 */
-(function () {
-  var canvas = document.getElementById("c1-sim");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var slider = document.getElementById("c1-data");
-  var val = document.getElementById("c1-data-val");
-  var info = document.getElementById("c1-sim-info");
-  var seed = 42;
-  function rand() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return (seed % 1000) / 1000; }
-  function accuracyFor(pct) { return 50 + 48 * (1 - Math.exp(-pct / 35)); }
-  function render(pct) {
-    seed = 42;
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var n = Math.round(6 + pct * 1.2);
-    var acc = accuracyFor(pct);
-    var noise = (100 - acc) / 100;
-    var x0 = 40, x1 = W - 40, y0 = 20, y1 = H - 40;
-    for (var i = 0; i < n; i++) {
-      var x = x0 + (x1 - x0) * (i / (n - 1 || 1));
-      var trueY = y1 - (y1 - y0) * (i / (n - 1 || 1));
-      var y = trueY + (rand() - 0.5) * noise * (y1 - y0) * 0.8;
-      ctx.fillStyle = cssVar("--teal"); ctx.globalAlpha = .8;
-      ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fill(); ctx.globalAlpha = 1;
-    }
-    ctx.strokeStyle = cssVar("--coral"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(x0, y1); ctx.lineTo(x1, y0); ctx.stroke();
-    ctx.font = "700 13px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.textAlign = "left";
-    ctx.fillText("예측 정확도 ≈ " + Math.round(acc) + "%", x0, 15);
-  }
-  function update() {
-    var pct = +slider.value;
-    val.textContent = pct;
-    render(pct);
-    var acc = Math.round(accuracyFor(pct));
-    var msg;
-    if (pct < 25) msg = "데이터가 적으면 우연한 오차나 특이값의 영향을 크게 받아 예측이 들쭉날쭉합니다.";
-    else if (pct < 65) msg = "데이터가 늘어날수록 우연한 오차들이 서로 상쇄되어 전체적인 경향(패턴)이 더 뚜렷하게 드러납니다.";
-    else msg = "데이터가 충분히 많아지면 예측 정확도는 점점 높아지지만, 어느 수준 이상에서는 데이터를 늘려도 정확도 향상 폭이 작아집니다(수확 체감).";
-    info.innerHTML = "<b>예측 정확도 " + acc + "%</b> — " + msg;
-  }
-  slider.addEventListener("input", update);
-  update();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is2-3-1");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학2 Ⅲ-1] 과학 기술의 활용",
-    items: [
-      {
-            "id": "w1",
-            "label": "데이터에서 결론까지",
-            "hint": "이 단원에서 본 사례 하나를 골라, 어떤 데이터를 모아 어떤 결론을 냈는지 순서대로 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "데이터가 거짓말할 때",
-            "hint": "같은 데이터로 다른 결론이 나올 수 있는 경우를 하나 들어 보세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
