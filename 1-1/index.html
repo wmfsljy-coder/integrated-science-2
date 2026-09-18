@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>지구 환경 변화와 생물다양성 — 관측 스테이션</title>
 <link rel="stylesheet" href="../assets/theme.css">
+<link rel="stylesheet" href="../assets/story.css">
 </head>
 <body>
 
@@ -19,436 +20,367 @@
     <button class="tab-btn" data-tab="1"><span class="num">02</span> 자연선택과 진화</button>
     <button class="tab-btn" data-tab="2"><span class="num">03</span> 생물다양성의 의미</button>
     <button class="tab-btn" data-tab="3"><span class="num">04</span> 정리하기</button>
+    <button class="tab-btn" data-tab="4"><span class="num">05</span> 우리 반</button>
   </nav>
 
   <main>
+    <!-- =====================================================================
+         01 지질시대와 대멸종 — 이야기 「1센티미터의 점토층」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="0">
       <div class="stage-head">
-        <div class="eyebrow">01 · 지구 생물의 흥망성쇠</div>
-        <h2 class="display">지질시대와 대멸종</h2>
-        <p>시간 막대의 지점을 클릭해 지구 역사상 있었던 5차례의 대멸종에 대해 알아보고, 아래 막대그래프에서 사건별 멸종 심각도(종 손실 비율)를 비교해 보세요.</p>
-      
-        <span class="std-chip">10통과2-01-01</span><span class="std-chip">10통과2-01-02</span><div class="std-note"><b>[10통과2-01-01]</b> 지질시대를 통해 지구 환경이 끊임없이 변화해 왔으며 이러한 환경 변화가 생물다양성에 미치는 영향을 추론할 수 있다.<br><b>[10통과2-01-02]</b> 변이의 발생과 자연선택 과정을 통해 생물의 진화가 일어나고, 진화의 과정을 통해 생물다양성이 형성되었음을 추론할 수 있다.</div><div class="terms"><b>지질시대</b><b>대멸종</b><b>변이</b><b>자연선택</b></div>
-      </div>
-      <div class="gate loose" id="gt"></div>
-      <div class="stage-card">
-        <div class="canvas-wrap" style="position:relative"><canvas id="c0" width="900" height="320"></canvas><div class="veil" id="vl"><p>예상을 고르면 화면이 열립니다.</p></div></div>
-        <div class="info-card" id="c0-info">대멸종 지점(●)을 클릭해 보세요.</div>
-      </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 심각도 비교</div>
-          <h2 class="display" style="font-size:18px;">사건마다 다른 멸종 규모</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c0b" width="900" height="260"></canvas></div>
-        <div class="info-card" id="c0b-info"></div>
+        <div class="eyebrow">01 · 지질시대와 대멸종 · 이야기 한 편</div>
+        <h2 class="display">1센티미터의 점토층</h2>
+        <p>공룡을 사라지게 한 범인은 공룡 뼈가 아니라 손가락 한 마디 두께의 진흙층에서 밝혀졌습니다. 지층 탐정이 되어 증거를 분석하고, 46억 년의 달력과 다섯 번의 대멸종까지 추적하세요. 장면마다 미션을 끝내야 다음 장면이 열립니다.</p>
+        <span class="std-chip">10통과2-01-01</span><div class="std-note"><b>[10통과2-01-01]</b> 지질시대를 통해 지구 환경이 끊임없이 변화해 왔으며 이러한 환경 변화가 생물다양성에 미치는 영향을 추론할 수 있다.</div><div class="terms"><b>지질시대</b><b>표준 화석</b><b>대멸종</b><b>이리듐층</b></div>
       </div>
 
-      <div class="stage-head">
-        <div class="eyebrow">🔎 미션 · 원인으로 대멸종 사건 맞히기</div>
-        <h2 class="display" style="font-size:18px;">이 원인·특징은 어떤 대멸종에 해당할까?</h2>
+      <div class="episode" id="ep1">
+        <section class="scene" data-title="사건 접수 — 화석이 사라진 경계">
+          <div class="story narr"><div class="who">⛰️</div><div class="say"><span class="name">이야기</span>1970년대 말, 이탈리아 중부의 작은 도시 <b>구비오</b>. 지질학자 월터 알바레즈는 골짜기의 석회암 절벽에서 이상한 줄무늬를 발견합니다. 중생대 백악기 석회암과 신생대 석회암 사이에, 두께가 겨우 <b>1 cm</b>쯤 되는 붉은 <b>점토층</b>이 끼어 있었던 것입니다.</div></div>
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">지층 조사원 서윤</span>“탐정님, 현미경으로 본 결과부터 보세요. 점토층 아래와 위의 바다가 완전히 딴 세상이에요. 약 <b>6600만 년 전</b>, 공룡이 사라진 바로 그 시기의 지층입니다. 이 1 cm가 쌓이는 동안 대체 무슨 일이 있었던 걸까요?”</div></div>
+          <div class="case-file"><b class="k">위 석회암(신생대)</b> 아주 작은 유공충 몇 종만 드물게 나옴<br><b class="k">점토층 1 cm</b> 화석이 거의 없음<br><b class="k">아래 석회암(중생대 백악기)</b> 크고 다양한 유공충(바다에 떠서 사는 플랑크톤) 화석이 빽빽함</div>
+          <div class="gate loose" id="g1"></div>
+        </section>
+
+        <section class="scene" data-title="증거 분석 — 이리듐이 말해 주는 것">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“알바레즈 연구팀은 점토층이 쌓이는 데 걸린 시간을 알고 싶었어요. 그래서 고른 것이 <b>이리듐</b>입니다. 이리듐은 지구가 만들어질 때 철과 함께 핵으로 가라앉아 지각에는 거의 없고, 우주 먼지와 운석에는 훨씬 많아요. 우주 먼지는 늘 일정하게 떨어지니, 이리듐이 많을수록 오래 쌓인 층이라고 생각한 거죠. 절벽의 높이를 바꿔 가며 시료를 떠서 분석해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-c-ir" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">시료를 뜨는 높이 (점토층 기준)<span class="val" id="a-ir-z-val">−30 cm</span></div>
+                <input type="range" id="a-ir-z" min="-40" max="40" step="1" value="-30">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="a-ir-pick" type="button">🧪 이 높이의 시료 분석하기</button></div>
+            <div class="info-card" id="a-ir-info">높이를 정하고 시료를 분석하세요. 분석한 값은 오른쪽 그래프에 점으로 찍힙니다.</div>
+          </div>
+          <div class="story" style="margin-top:16px"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“우주 먼지만으로는 도저히 설명할 수 없는 양이죠? 그래서 연구팀은 거꾸로 계산했어요. <b>이만한 이리듐을 지구 전체에 뿌리려면 얼마나 큰 소행성이 필요할까?</b> 구비오 점토층에 쌓인 이리듐은 1 cm²에 약 <b>8 ng</b>(나노그램)입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-c-ast" width="900" height="260"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">충돌한 소행성의 지름<span class="val" id="a-ast-d-val">2.0 km</span></div>
+                <input type="range" id="a-ast-d" min="1" max="20" step="0.5" value="2">
+              </div>
+            </div>
+            <div class="info-card" id="a-ast-info"></div>
+          </div>
+          <div class="mission" id="m1-2"><span class="m-tag">미션</span><ul><li id="m1-2a">시료를 5개 이상 분석해 이리듐 농도 그래프를 그리세요.</li><li id="m1-2b">이리듐이 <b>6 ppb 이상</b> 나오는 높이를 찾아내세요.</li><li id="m1-2c">지표에 쌓이는 이리듐이 측정값(<b>8 ± 1 ng/cm²</b>)과 맞는 소행성의 지름을 찾으세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="46억 년을 1년 달력으로">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“사건이 일어난 ‘6600만 년 전’이 지구 역사에서 어디쯤인지 감이 오세요? 지구가 태어난 46억 년 전을 <b>1월 1일 0시</b>, 지금을 <b>12월 31일 자정</b>으로 놓은 달력을 만들었어요. 지구에 생물이 나타난 뒤부터 인류의 역사 기록이 시작되기 전까지가 <b>지질시대</b>이고, 화석으로 나오는 생물이 크게 바뀌는 때를 경계로 시대를 나눕니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-c-cal" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">달력의 날짜<span class="val" id="a-cal-d-val">1월 1일</span></div>
+                <input type="range" id="a-cal-d" min="1" max="365" step="1" value="1">
+              </div>
+            </div>
+            <div class="info-card" id="a-cal-info"></div>
+          </div>
+          <div class="case-file"><b class="k">선캄브리아 시대</b> 화석이 드물다. 남세균의 광합성으로 바다와 대기에 산소가 늘었다 (스트로마톨라이트)<br><b class="k">고생대</b> 대체로 온난, 말기에 빙하기. 오존층이 두꺼워져 생물이 육상으로 진출. 말기에 대륙이 모여 판게아 형성 — 삼엽충, 방추충, 양치식물<br><b class="k">중생대</b> 빙하기 없이 온난. 판게아가 갈라지기 시작 — 암모나이트, 공룡, 겉씨식물<br><b class="k">신생대</b> 전기는 온난, 후기에 빙하기와 간빙기 반복. 지금과 비슷한 수륙 분포 — 화폐석, 매머드, 속씨식물</div>
+          <div class="gate loose" id="gt"></div>
+          <div class="info-card" id="a-dino-info" style="margin:12px 0 14px" hidden></div>
+          <div class="stage-card"><div id="s1-fossil"></div></div>
+          <div class="mission" id="m1-3"><span class="m-tag">미션</span><ul><li id="m1-3a">달력에서 <b>고생대가 시작되는 날</b>을 찾으세요.</li><li id="m1-3b">달력에서 <b>공룡이 사라진 날</b>(중생대의 마지막 날)을 찾으세요.</li><li id="m1-3c">화석 8개를 시대별로 분류하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="다섯 번의 위기 — 대멸종 비교">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“6600만 년 전 같은 일이 처음이었을까요? 화석으로 남은 해양 생물 무리의 수를 시간에 따라 그려 보면, 곡선이 갑자기 푹 꺼지는 곳이 다섯 군데 있어요. 시간 커서를 움직여 <b>다섯 번의 대멸종</b>을 모두 찾아보세요. 찾아낸 사건은 아래 막대그래프에 규모가 기록됩니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-c-ext" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">시간 커서<span class="val" id="a-ext-t-val">5.40억 년 전</span></div>
+                <input type="range" id="a-ext-t" min="0" max="540" step="1" value="0">
+              </div>
+            </div>
+            <div class="info-card" id="a-ext-info"></div>
+          </div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="a-c-bar" width="900" height="250"></canvas></div>
+          </div>
+          <div class="stage-card"><div id="s1-cause"></div></div>
+          <div class="mission" id="m1-4"><span class="m-tag">미션</span><ul><li id="m1-4a">곡선이 꺼지는 다섯 사건을 모두 찾으세요. (<span id="a-ext-n">0</span>/5)</li><li id="m1-4b">조사 기록 6개를 알맞은 대멸종에 연결하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 범인은 하늘에서 왔다">
+          <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">서윤</span>“마지막으로 사건을 재구성해 봅시다. 지름 약 10 km의 소행성이 떨어진 뒤, 환경 변화가 어떻게 생물의 멸종으로 이어졌을까요? 일어난 <b>순서대로</b> 놓아 보세요.”</div></div>
+          <div class="stage-card"><div id="s1-order"></div></div>
+          <div id="e1-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>☄️ 1 cm의 점토층은 충돌의 재였다</h4>
+              <p>1980년 알바레즈 연구팀은 “약 6600만 년 전 지름 10 km 안팎의 소행성이 충돌했다”고 발표했습니다. 같은 이리듐층이 덴마크, 뉴질랜드 등 세계 곳곳의 같은 시기 지층에서 발견되었고, 1991년에는 멕시코 유카탄반도 땅속에서 지름 약 180 km의 <b>칙술루브 충돌구</b>가 확인되었습니다. 충돌의 압력으로만 생기는 충격 석영과 녹았다 굳은 유리 알갱이도 함께 나왔습니다.</p>
+              <p>지질시대 내내 지구 환경은 끊임없이 변했고, 변화가 급격할 때마다 <b>대멸종</b>이 일어나 생물다양성이 크게 줄었습니다. 하지만 살아남은 생물은 비어 있는 환경으로 퍼져 나가며 다시 다양해졌습니다. 공룡이 사라진 뒤 신생대에 <b>포유류</b>가 번성한 것처럼, 대멸종은 생물다양성의 끝이 아니라 <b>주인공이 바뀌는 전환점</b>이었습니다.</p>
+              <div class="vs" id="e1-vs"></div>
+              <span class="stamp">사건 파일 ① 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 소행성 지름 계산은 1980년 논문의 방식(지표에 쌓인 이리듐 양 → 소행성 질량)을 단순화한 것입니다. 연구팀은 이 방법 말고도 세 가지 방법을 더 써서 <b>10 ± 4 km</b>라고 추정했습니다. 또 같은 시기에 인도 데칸고원에서 일어난 대규모 화산 분출이 멸종에 얼마나 영향을 주었는지는 지금도 연구 중입니다. 대멸종의 ‘종 손실 비율’과 생물 무리 수 곡선은 화석 기록으로 <b>추정</b>한 값이며, 곡선은 개략도입니다.</div>
+            <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>화석은 뼈가 아니다</b><br><b>공룡 뼈 화석을 실제 공룡의 뼈로 오해</b>하는 경우가 있다. 동물의 뼈가 보존되는 기간은 동물의 종류와 환경에 따라 다르며, 대부분의 화석은 원래의 물질이 그대로 남은 것이 아니다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+            <div class="stage-card" style="padding:6px 0 4px;margin-top:16px"><div id="wk1"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="info-card" id="c0m-data"></div>
-        <div class="seg" id="c0m-choices"></div>
-        <div class="toggle-row" style="margin:14px 20px;">
-          <button class="btn" id="c0m-check">정답 확인</button>
-          <button class="btn" id="c0m-new">새 문제</button>
-        </div>
-        <div class="info-card" id="c0m-info"></div>
-      </div>
-      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>화석은 뼈가 아니다</b><br><b>공룡 뼈 화석을 실제 공룡의 뼈로 오해</b>하는 경우가 있다. 동물의 뼈가 보존되는 기간은 동물의 종류와 환경에 따라 다르며, 대부분의 화석은 원래의 물질이 그대로 남은 것이 아니다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         02 자연선택과 진화 — 이야기 「가뭄이 지나간 섬」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="1" hidden>
       <div class="stage-head">
-        <div class="eyebrow">02 · 환경에 적합한 형질이 살아남는다</div>
-        <h2 class="display">자연선택과 진화</h2>
-        <p>환경을 선택하고 세대를 진행시켜, 핀치 개체군의 부리 크기 분포가 환경에 따라 어느 방향으로 바뀌는지 확인해 보세요.</p>
+        <div class="eyebrow">02 · 자연선택과 진화 · 이야기 한 편</div>
+        <h2 class="display">가뭄이 지나간 섬</h2>
+        <p>1977년 갈라파고스의 작은 섬 다프네메이저에서 핀치 열 마리 중 여덟 마리 이상이 굶어 죽었습니다. 그랜트 부부의 실제 연구를 따라가며, 살아남은 새와 그 자손에게 무슨 일이 일어났는지 직접 세대를 돌려 확인하세요.</p>
+        <span class="std-chip">10통과2-01-02</span><div class="std-note"><b>[10통과2-01-02]</b> 변이의 발생과 자연선택 과정을 통해 생물의 진화가 일어나고, 진화의 과정을 통해 생물다양성이 형성되었음을 추론할 수 있다.</div><div class="terms"><b>변이</b><b>자연선택</b><b>유전</b><b>진화</b><b>항생제 내성</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c1" width="900" height="380"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">환경 변화</div>
-            <div class="seg" id="c1-env">
-              <button class="on" data-e="drought">가뭄 → 딱딱하고 큰 씨앗만 남음</button>
-              <button data-e="rain">폭우 → 작고 부드러운 씨앗이 풍부해짐</button>
+
+      <div class="episode" id="ep2">
+        <section class="scene" data-title="사건 접수 — 비가 오지 않은 해">
+          <div class="story narr"><div class="who">🏝️</div><div class="say"><span class="name">이야기</span>갈라파고스 제도의 <b>다프네메이저섬</b>은 걸어서 한 바퀴 도는 데 한 시간도 안 걸리는 화산섬입니다. 피터·로즈메리 그랜트 부부는 1973년부터 이 섬의 <b>중간땅핀치</b>를 한 마리씩 붙잡아 발목에 고리를 끼우고 부리를 쟀습니다. 그러던 <b>1977년</b>, 우기에 비가 거의 오지 않았습니다.</div></div>
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">현장 연구원 마루</span>“조사원님, 섬이 바싹 말랐어요. 풀과 작은 나무가 씨앗을 거의 맺지 못했습니다. 작고 부드러운 씨앗은 금방 동났고, 땅에는 <b>남가새</b>의 크고 딱딱한 가시투성이 씨앗만 굴러다녀요. 핀치들이 하나둘 굶어 죽고 있습니다.”</div></div>
+          <div class="case-file"><b class="k">1977년 강수량</b> 약 24 mm (평년의 5분의 1 수준)<br><b class="k">중간땅핀치</b> 가뭄 전 약 1,200마리 → 가뭄 뒤 약 180마리 (약 <b>15%</b>만 생존)<br><b class="k">먹이</b> 작고 부드러운 씨앗 고갈, 크고 딱딱한 씨앗만 남음</div>
+          <div class="gate loose" id="g2"></div>
+        </section>
+
+        <section class="scene" data-title="단서 ① — 같은 종인데 부리가 다 다르다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마루</span>“가뭄 전에 잰 기록부터 확인하죠. 그물을 쳐서 핀치를 잡고, 부리의 <b>두께</b>(위아래 높이)를 재 보세요. 같은 종이라도 개체마다 형질이 조금씩 다른 것을 <b>변이</b>라고 해요. 변이는 <b>돌연변이</b>로 새로운 유전자가 생기고, 유성 생식 과정에서 부모의 유전자가 <b>다양하게 조합</b>되어 자손에게 전달되기 때문에 나타납니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-c-var" width="900" height="320"></canvas></div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-var-catch" type="button">🪤 그물로 20마리 잡아 재기</button></div>
+            <div class="info-card" id="b-var-info">버튼을 눌러 핀치를 잡으세요. 잰 값이 0.5 mm 간격의 막대로 쌓입니다.</div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q1"></div></div>
+          <div class="mission" id="m2-2"><span class="m-tag">미션</span><ul><li id="m2-2a">핀치를 <b>100마리 이상</b> 재서 부리 두께의 분포를 그리세요.</li><li id="m2-2b">분포를 읽고 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="단서 ② — 가뭄은 누구를 남겼나">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마루</span>“이제 가뭄을 재현해 봅시다. 가뭄이 심할수록 작은 씨앗이 빨리 동나서, 딱딱한 남가새 씨앗을 깰 수 있는 <b>두꺼운 부리</b>가 아니면 버티기 어려워요. 점 하나가 핀치 한 마리입니다. 가뭄의 세기를 조절해서 <b>1977년의 기록(약 15% 생존)</b>을 재현해 보세요.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-c-sel" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">가뭄의 세기<span class="val" id="b-sel-x-val">20</span></div>
+                <input type="range" id="b-sel-x" min="0" max="100" step="1" value="20">
+              </div>
             </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-sel-run" type="button">☀️ 가뭄 한 해 보내기</button></div>
+            <div class="info-card" id="b-sel-info">가뭄의 세기를 정하고 실행하세요. 여러 번 시도할 수 있습니다.</div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">세대 진행<span class="val" id="c1-gen-val">0세대</span></div>
-            <input type="range" id="c1-gen" min="0" max="10" step="1" value="0">
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q2"></div></div>
+          <div class="mission" id="m2-3"><span class="m-tag">미션</span><ul><li id="m2-3a">생존율이 <b>12~18%</b>가 되는 가뭄을 찾으세요. 너무 약하면 거의 다 살아남고, 너무 강하면 개체군이 사라집니다.</li><li id="m2-3b">결과를 보고 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="단서 ③ — 자손에게 전해질까">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마루</span>“살아남은 새의 부리가 평균적으로 두껍다는 건 확인했어요. 그런데 이게 <b>진화</b>가 되려면 조건이 하나 더 필요합니다. 부리 두께의 차이가 <b>자손에게 유전</b>되어야 해요. 부리 두께의 개체 차이 가운데 유전으로 설명되는 비율(유전율)을 바꿔 가며 세대를 진행해 보세요. 1983년에는 반대로 엘니뇨로 큰비가 내려 작고 부드러운 씨앗이 넘쳐 났으니, 환경도 바꿔 볼 수 있습니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-c-gen" width="900" height="360"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">환경 변화</div>
+                <div class="seg" id="b-gen-env">
+                  <button class="on" data-e="drought" type="button">가뭄 → 딱딱하고 큰 씨앗만 남음</button>
+                  <button data-e="rain" type="button">폭우 → 작고 부드러운 씨앗이 풍부해짐</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">부리 두께 차이 중 유전되는 비율<span class="val" id="b-gen-h-val">40%</span></div>
+                <input type="range" id="b-gen-h" min="0" max="1" step="0.05" value="0.4">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">선택압 강도<span class="val" id="b-gen-p-val">1.0×</span></div>
+                <input type="range" id="b-gen-p" min="0.2" max="2" step="0.1" value="1">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-gen-step" type="button">🐣 한 세대 진행</button><button class="btn" id="b-gen-reset" type="button">↺ 처음 개체군으로</button></div>
+            <div class="info-card" id="b-gen-info"></div>
           </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">선택압 강도<span class="val" id="c1-pressure-val">1.0×</span></div>
-            <input type="range" id="c1-pressure" min="0.2" max="2" step="0.1" value="1">
+          <div class="mission" id="m2-4"><span class="m-tag">미션</span>세 가지 실험을 모두 해 보세요. 실험을 바꿀 때는 ‘처음 개체군으로’를 누르면 편합니다.<ul><li id="m2-4a">유전되는 비율을 <b>0%</b>로 두고 가뭄을 3세대 이상 — 평균이 변하나요?</li><li id="m2-4b">비율을 실제 측정값인 <b>80%</b>로 맞추고 가뭄 세대를 거듭해 평균 부리 두께를 <b>10.4 mm 이상</b>으로.</li><li id="m2-4c">이어서 환경을 <b>폭우</b>로 바꿔, 평균이 최고값보다 <b>0.3 mm 이상</b> 다시 줄어드는 것을 확인.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="같은 원리 — 항생제가 듣지 않는 세균">
+          <div class="story"><div class="who">👩‍⚕️</div><div class="say"><span class="name">감염내과 의사 다온</span>“핀치 이야기를 들었어요. 병원에서도 똑같은 일이 훨씬 빠르게 일어납니다. 세균은 20~30분마다 분열하니까요. 세균 100만 마리가 있는 배양 접시에 항생제를 넣는 실험을 해 보세요. 열쇠는 <b>항생제를 넣기 전에, 내성 돌연변이를 가진 세균이 이미 섞여 있었느냐</b>입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="b-c-abx" width="900" height="320"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">처음부터 섞여 있던 내성 세균 수<span class="val" id="b-abx-r-val">0마리</span></div>
+                <input type="range" id="b-abx-r" min="0" max="1000" step="10" value="0">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">배양 조건</div>
+                <div class="seg" id="b-abx-drug">
+                  <button class="on" data-d="0" type="button">항생제 없음</button>
+                  <button data-d="1" type="button">💊 항생제 투여</button>
+                </div>
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-abx-run" type="button">▶ 12시간 배양하기</button></div>
+            <div class="info-card" id="b-abx-info">조건을 정하고 배양하세요. 세로축은 10배씩 커지는 눈금입니다.</div>
           </div>
-        </div>
-        <div class="info-card" id="c1-info"></div>
+          <div class="stage-card" style="margin-top:14px"><div id="s2-q3"></div></div>
+          <div class="mission" id="m2-5"><span class="m-tag">미션</span><ul><li id="m2-5a">내성 세균 <b>0마리</b> + 항생제 투여 → 어떻게 되나요?</li><li id="m2-5b">내성 세균이 <b>조금 섞인</b> 접시 + 항생제 없음 → 내성 세균의 비율은?</li><li id="m2-5c">내성 세균이 <b>조금 섞인</b> 접시 + 항생제 투여 → 내성 세균의 비율은?</li><li id="m2-5d">세 실험을 비교해 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 새가 변한 것이 아니라 집단이 변했다">
+          <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">마루</span>“보고서를 씁시다. 다프네메이저섬에서 일어난 일을 <b>순서대로</b> 놓아 보세요.”</div></div>
+          <div class="stage-card"><div id="s2-order"></div></div>
+          <div id="e2-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🐦 가뭄은 부리를 키우지 않았다. 골랐을 뿐이다</h4>
+              <p>그랜트 부부의 기록에 따르면, 가뭄에서 살아남은 중간땅핀치의 평균 부리 두께는 가뭄 전 집단보다 <b>약 0.5 mm</b> 컸고, 이듬해 태어난 자손의 부리도 가뭄 전 세대보다 두꺼웠습니다. 한 마리 한 마리의 부리가 자란 것이 아닙니다. 원래 있던 <b>변이</b> 가운데 그 환경에서 살아남기 유리한 형질을 가진 개체가 더 많이 살아남아(<b>자연선택</b>) 그 형질을 자손에게 물려주었고(<b>유전</b>), 그 결과 집단의 구성이 달라진 것입니다(<b>진화</b>). 1983년 큰비가 내린 뒤에는 거꾸로 부리가 작은 새가 유리해졌습니다. 어떤 형질이 유리한지는 <b>환경이 정합니다.</b></p>
+              <p>이런 과정이 서로 다른 환경에서 오랜 세월 되풀이되면 한 조상에서 갈라져 나온 집단들이 서로 다른 종이 됩니다. 갈라파고스의 핀치 10여 종이 섬마다 먹이에 맞는 부리를 갖게 된 것처럼, 지구의 <b>생물다양성은 변이와 자연선택이 쌓여 만들어진 결과</b>입니다.</p>
+              <div class="vs" id="e2-vs"></div>
+              <span class="stamp">사건 파일 ② 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 세대 진행 화면은 “자손 평균의 변화 = 유전되는 비율 × (살아남은 부모 평균 − 전체 평균)”이라는 관계만 쓴 <b>단순화한 모형</b>입니다. 실제 섬에서는 몸 크기, 암수 차이, 다른 종과의 먹이 경쟁, 우연도 함께 작용합니다. 핀치 부리 두께의 유전되는 비율은 부모와 자손을 비교해 약 0.8로 측정되었습니다. 나머지는 자라는 동안의 먹이 같은 환경의 몫입니다.</div>
+            <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>형질은 한쪽만의 결과가 아니다</b><br>학생들은 특정 형질이 <b>유전적 영향만 받거나 환경의 영향만 받는다</b>고 생각할 수 있다. 피부색, 키, 몸무게, 지능 등 형질의 차이는 <b>유전적 영향과 환경의 영향이 모두 작용</b>하여 나타난다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+            <div class="stage-card" style="padding:6px 0 4px;margin-top:16px"><div id="wk2"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="miscon loose"><span class="tag">오개념 지도</span><br><b>형질은 한쪽만의 결과가 아니다</b><br>학생들은 특정 형질이 <b>유전적 영향만 받거나 환경의 영향만 받는다</b>고 생각할 수 있다. 피부색, 키, 몸무게, 지능 등 형질의 차이는 <b>유전적 영향과 환경의 영향이 모두 작용</b>하여 나타난다.<cite>통합과학2 교사용 교과서, 오개념 지도</cite></div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- =====================================================================
+         03 생물다양성의 의미 — 이야기 「한 가지만 심은 밭」
+         ===================================================================== -->
     <section class="tab-panel" data-panel="2" hidden>
       <div class="stage-head">
-        <div class="eyebrow">03 · 세 층위의 다양성</div>
-        <h2 class="display">생물다양성이란?</h2>
-        <p>각 카드를 클릭해 세 층위의 다양성을 확인하고, 아래에서 세 종의 개체수 비율을 직접 조절하며 종다양성 지수(심슨 지수)가 어떻게 달라지는지 계산해 보세요.</p>
+        <div class="eyebrow">03 · 생물다양성의 의미 · 이야기 한 편</div>
+        <h2 class="display">한 가지만 심은 밭</h2>
+        <p>1845년 아일랜드의 감자밭과 1950년대 중앙아메리카의 바나나 농장은 같은 이유로 무너졌습니다. 직접 밭을 설계하고, 숲의 다양성 지수를 계산하고, 먹이 그물을 끊어 보면서 생물다양성의 세 층위가 왜 중요한지 밝혀내세요.</p>
+        <span class="std-chip">10통과2-01-02</span><div class="std-note"><b>[10통과2-01-02]</b> 변이의 발생과 자연선택 과정을 통해 생물의 진화가 일어나고, 진화의 과정을 통해 생물다양성이 형성되었음을 추론할 수 있다.</div><div class="terms"><b>유전적 다양성</b><b>종 다양성</b><b>생태계 다양성</b><b>종 풍부도와 균등도</b></div>
       </div>
-      <div class="stage-card">
-        <div class="canvas-wrap"><canvas id="c2" width="900" height="340"></canvas></div>
-        <div class="info-card" id="c2-info">카드를 클릭해 보세요.</div>
+
+      <div class="episode" id="ep3">
+        <section class="scene" data-title="사건 접수 — 사라진 바나나, 굶주린 섬">
+          <div class="story narr"><div class="who">🍌</div><div class="say"><span class="name">이야기</span>1950년대까지 세계인이 먹던 바나나는 지금의 바나나가 아니었습니다. 더 달고 향이 진했다는 <b>그로 미셸</b> 품종이었죠. 그런데 흙 속 곰팡이가 일으키는 <b>파나마병</b>이 농장에서 농장으로 번지자 그로 미셸은 상업 재배가 불가능해졌고, 1960년대에 지금의 <b>캐번디시</b> 품종으로 교체되었습니다.</div></div>
+          <div class="story"><div class="who">👩‍🌾</div><div class="say"><span class="name">종자 은행 연구원 이랑</span>“100년 전 아일랜드에서는 더 끔찍한 일이 있었어요. 1845년 <b>감자 역병</b>이 돌자 나라 전체의 감자밭이 한꺼번에 썩었습니다. 당시 아일랜드 농민 대부분은 수확량이 많은 <b>‘럼퍼’ 한 품종</b>만, 그것도 씨감자를 잘라 심는 방식으로 길렀어요. 조사관님, 감자의 고향 안데스에는 수천 가지 품종이 있는데도 그곳 감자밭은 통째로 무너진 적이 없습니다. 왜일까요?”</div></div>
+          <div class="case-file"><b class="k">아일랜드 대기근(1845~1852)</b> 약 100만 명 사망, 100만 명 이상이 나라를 떠남<br><b class="k">공통점</b> 감자는 씨감자로, 바나나는 뿌리에서 나온 새순으로 번식시킨다 → 밭 전체가 유전적으로 같은 <b>복제</b> 개체</div>
+          <div class="gate loose" id="g3"></div>
+        </section>
+
+        <section class="scene" data-title="밭 설계 — 몇 품종을 섞어 심을까">
+          <div class="story"><div class="who">👩‍🌾</div><div class="say"><span class="name">이랑</span>“1843년의 아일랜드로 돌아가 밭 240칸을 직접 설계해 보세요. 품종 ①이 수확량이 가장 많은 럼퍼이고, 번호가 커질수록 수확량이 5%씩 적습니다. 대신 품종마다 <b>병에 대한 저항성 유전자</b>가 달라요. 역병균 A는 품종 ①만, 역병균 B는 품종 ③만 감염시키고, 병은 <b>이웃한 같은 품종</b>으로 번집니다. 6년 동안 마을을 굶기지 않아야 합니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-c-farm" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">섞어 심는 품종 수<span class="val" id="c-farm-n-val">1품종</span></div>
+                <input type="range" id="c-farm-n" min="1" max="10" step="1" value="1">
+              </div>
+            </div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="c-farm-run" type="button">🌱 6년 농사짓기 (1843~1848)</button></div>
+            <div class="info-card" id="c-farm-info">품종 수를 정하고 실행하세요. 여러 번 시도할 수 있습니다.</div>
+          </div>
+          <div class="mission" id="m3-2"><span class="m-tag">미션</span><ul><li id="m3-2a">먼저 <b>1품종</b>(럼퍼만)으로 6년을 지어 1845년을 재현하세요.</li><li id="m3-2b">6년 동안 <b>한 해도 기근(수확 60 미만) 없이</b>, 6년 평균 수확이 <b>87 이상</b>인 설계를 찾으세요. 너무 적게 섞으면 병에 무너지고, 너무 많이 섞으면 수확량이 모자랍니다.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="숲 조사 — 종 수만 세면 될까">
+          <div class="story"><div class="who">👩‍🌾</div><div class="say"><span class="name">이랑</span>“밭에서 본 건 한 종 안의 <b>유전적 다양성</b>이었어요. 이번엔 한 지역에 얼마나 다양한 종이 사는지, <b>종 다양성</b>을 볼 차례입니다. 종 다양성은 종의 수(<b>종 풍부도</b>)만이 아니라 각 종이 얼마나 고르게 있는지(<b>종 균등도</b>)까지 함께 따져요. 숲의 나무 네 종의 그루 수를 바꿔 가며 다양성 지수를 계산해 보세요. 지수 D는 ‘숲에서 아무렇게나 두 그루를 골랐을 때 서로 다른 종일 확률’입니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-c-div" width="900" height="300"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">🌳 참나무<span class="val" id="c-div-0-val">40</span></div>
+                <input type="range" id="c-div-0" min="0" max="50" step="1" value="40">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">🌲 소나무<span class="val" id="c-div-1-val">25</span></div>
+                <input type="range" id="c-div-1" min="0" max="50" step="1" value="25">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">🍁 단풍나무<span class="val" id="c-div-2-val">10</span></div>
+                <input type="range" id="c-div-2" min="0" max="50" step="1" value="10">
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">🌸 벚나무<span class="val" id="c-div-3-val">5</span></div>
+                <input type="range" id="c-div-3" min="0" max="50" step="1" value="5">
+              </div>
+            </div>
+            <div class="readout" style="margin:0 20px 14px;">
+              <span class="dot" style="background:var(--teal)"></span>
+              <span class="txt" id="c-div-index"></span>
+            </div>
+            <div class="info-card" id="c-div-info"></div>
+          </div>
+          <div class="stage-card" style="margin-top:14px"><div id="s3-q1"></div></div>
+          <div class="mission" id="m3-3"><span class="m-tag">미션</span>세 가지 숲을 차례로 만들어 보세요.<ul><li id="m3-3a">네 종이 다 있는데도 다양성 지수가 <b>0.30 이하</b>인 숲</li><li id="m3-3b"><b>세 종뿐인데</b> 다양성 지수가 <b>0.60 이상</b>인 숲</li><li id="m3-3c">네 종으로 만들 수 있는 <b>가장 높은</b> 다양성 지수의 숲</li><li id="m3-3d">아래 물음에 답하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="먹이 그물 — 한 종이 사라지면">
+          <div class="story"><div class="who">👩‍🌾</div><div class="say"><span class="name">이랑</span>“종 다양성이 높으면 뭐가 좋을까요? 들판 두 곳을 비교해 봅시다. 한 곳은 종이 적어 먹이 관계가 <b>한 줄</b>이고, 다른 곳은 종이 많아 <b>그물</b>처럼 얽혀 있어요. 두 들판에서 똑같이 <b>개구리</b>를 없애 보세요. 먹이를 모두 잃은 동물은 그 들판에서 사라집니다.”</div></div>
+          <div class="stage-card">
+            <div class="canvas-wrap"><canvas id="c-c-web" width="900" height="380"></canvas></div>
+            <div class="controls">
+              <div class="ctrl-group">
+                <div class="ctrl-label">들판 고르기</div>
+                <div class="seg" id="c-web-kind">
+                  <button class="on" data-k="simple" type="button">종이 적은 들판 (5종)</button>
+                  <button data-k="complex" type="button">종이 많은 들판 (9종)</button>
+                </div>
+              </div>
+              <div class="ctrl-group">
+                <div class="ctrl-label">없앨 종 고르기 (다시 누르면 되돌아옵니다)</div>
+                <div class="seg" id="c-web-sp"></div>
+              </div>
+            </div>
+            <div class="info-card" id="c-web-info"></div>
+          </div>
+          <div class="mission" id="m3-4"><span class="m-tag">미션</span><ul><li id="m3-4a">종이 적은 들판에서 <b>개구리만</b> 없애고 결과를 확인하세요.</li><li id="m3-4b">종이 많은 들판에서 <b>개구리만</b> 없애고 결과를 비교하세요.</li></ul></div>
+        </section>
+
+        <section class="scene" data-title="결말 — 다양성은 보험이다">
+          <div class="story"><div class="who">👩‍🌾</div><div class="say"><span class="name">이랑</span>“밭, 숲, 들판에서 본 것을 정리합시다. 생물다양성은 세 층위로 나눠요. 같은 종 안에서 유전자가 다양한 <b>유전적 다양성</b>, 한 지역에 여러 종이 고르게 사는 <b>종 다양성</b>, 숲·갯벌·습지·사막처럼 생태계 자체가 다양한 <b>생태계 다양성</b>. 조사 카드를 층위별로 나눠 주세요.”</div></div>
+          <div class="stage-card"><div id="s3-sort"></div></div>
+          <div id="e3-wrap" hidden>
+            <div class="ending" style="margin-top:16px">
+              <h4>🥔 범인은 병원균이 아니라 ‘똑같음’이었다</h4>
+              <p>럼퍼 감자도 그로 미셸 바나나도 밭 전체가 <b>유전적으로 같은 복제 개체</b>였습니다. 병원균 하나가 저항성이 없는 한 개체를 뚫으면 나머지도 모두 뚫립니다. 안데스의 밭은 품종이 섞여 있어 어떤 병이 와도 일부는 살아남습니다. <b>유전적 다양성</b>이 높은 집단은 환경이 급변해도 살아남는 개체가 있어 멸종할 위험이 낮고, 그 변이가 바로 자연선택의 재료입니다.</p>
+              <p><b>종 다양성</b>이 높은 생태계는 먹이 그물이 복잡해서 한 종이 사라져도 평형이 쉽게 깨지지 않습니다. 그리고 <b>생태계 다양성</b>이 높을수록 서로 다른 환경에 적응한 더 많은 종과 유전자가 깃들 수 있습니다. 세 층위는 서로를 떠받칩니다. 오늘날 세계의 수출용 바나나는 다시 캐번디시 한 품종에 기대고 있고, 새로운 파나마병(TR4)이 퍼지고 있습니다. 노르웨이 스발바르의 국제 종자 저장고(2008년 개관)처럼 세계 곳곳에서 작물의 다양한 품종을 보존하는 까닭입니다.</p>
+              <div class="vs" id="e3-vs"></div>
+              <span class="stamp">사건 파일 ③ 해결</span>
+            </div>
+            <div class="info-card" style="margin:0 0 14px">📎 과학자의 눈: 밭 화면은 “역병균 하나가 품종 하나만 감염시키고, 품종 번호마다 수확량이 5%씩 준다”고 가정한 <b>단순화한 모형</b>입니다. 실제 저항성은 여러 유전자가 관여하고, 병원균도 진화합니다. 다양성 지수(심슨 지수)는 여러 지수 가운데 하나이며, 먹이 그물 화면은 ‘먹이가 하나도 없으면 사라진다’는 규칙만 넣었습니다. 실제로는 먹이가 줄기만 해도 개체수가 흔들립니다.</div>
+            <div class="stage-card" style="padding:6px 0 4px"><div id="wk3"></div></div>
+          </div>
+        </section>
       </div>
-      <div class="stage-card">
-        <div class="stage-head" style="padding:20px 20px 0;">
-          <div class="eyebrow">심화 · 종다양성 지수 계산기</div>
-          <h2 class="display" style="font-size:18px;">균등할수록 다양성이 높다</h2>
-        </div>
-        <div class="canvas-wrap"><canvas id="c2b" width="900" height="200"></canvas></div>
-        <div class="controls">
-          <div class="ctrl-group">
-            <div class="ctrl-label">종 A 개체수<span class="val" id="c2b-a-val">30</span></div>
-            <input type="range" id="c2b-a" min="1" max="90" step="1" value="30">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">종 B 개체수<span class="val" id="c2b-b-val">30</span></div>
-            <input type="range" id="c2b-b" min="1" max="90" step="1" value="30">
-          </div>
-          <div class="ctrl-group">
-            <div class="ctrl-label">종 C 개체수<span class="val" id="c2b-c-val">30</span></div>
-            <input type="range" id="c2b-c" min="1" max="90" step="1" value="30">
-          </div>
-        </div>
-        <div class="readout" style="margin:0 20px 14px;">
-          <span class="dot" style="background:var(--teal)"></span>
-          <span class="txt" id="c2b-index"></span>
-        </div>
-        <div class="info-card" id="c2b-info"></div>
-      </div>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a> 을 붙이면 모든 장면이 열립니다.</p>
     </section>
 
+    <!-- ===================================================================== 04 정리하기 -->
     <section class="tab-panel" data-panel="3" hidden>
       <div class="stage-head">
-        <div class="eyebrow">04 · 오늘 알아낸 것을 문장으로</div>
+        <div class="eyebrow">04 · 세 사건을 하나로</div>
         <h2 class="display">정리하기</h2>
-        <p>조작한 것을 말이나 글로 옮기지 않으면 남지 않습니다. 아래를 채우고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
+        <p>세 이야기의 결과가 아래에 모입니다. 세 사건을 꿰는 한 문장을 쓰고 <b>답안 복사</b>를 눌러 제출하세요. 쓰는 동안 자동으로 저장됩니다.</p>
       </div>
       <div class="stage-card" style="padding:6px 0 4px"><div id="wk"></div></div>
+    </section>
+
+    <!-- ===================================================================== 05 우리 반 -->
+    <section class="tab-panel" data-panel="4" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">05 · 같은 반 친구들과 나누기</div>
+        <h2 class="display">우리 반</h2>
+        <p>내가 해결한 사건과 찾아낸 답을 우리 반에 올리고, 친구들은 어떤 설계를 했는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
+      </div>
+      <div class="stage-card"><div id="share"></div></div>
     </section>
   </main>
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
 <script src="../assets/theme.js"></script>
-<script>
-(function () {
-"use strict";
-
-/* TAB0 대멸종 */
-(function () {
-  var canvas = document.getElementById("c0");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c0-info");
-  var events = [
-    { name: "오르도비스기 대멸종", ago: "약 4.4억 년 전", frac: 0.15, loss: 85, desc: "해양 생물 종의 약 85%가 사라진 것으로 추정됩니다. 급격한 빙하기가 원인으로 지목됩니다." },
-    { name: "데본기 대멸종", ago: "약 3.7억 년 전", frac: 0.32, loss: 75, desc: "해양 생물이 큰 타격을 입었으며, 화산 활동과 해양 산소 부족이 원인으로 추정됩니다." },
-    { name: "페름기 대멸종", ago: "약 2.5억 년 전", frac: 0.52, loss: 96, desc: "지구 역사상 가장 큰 규모의 멸종으로, 생물 종의 약 96%가 사라졌습니다. 대규모 화산 활동이 주원인으로 추정됩니다." },
-    { name: "트라이아스기 대멸종", ago: "약 2억 년 전", frac: 0.68, loss: 80, desc: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 되었습니다." },
-    { name: "백악기 대멸종", ago: "약 6600만 년 전", frac: 0.92, loss: 75, desc: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종했습니다. 이후 포유류가 번성했습니다." }
-  ];
-  var selected = -1;
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width;
-    var mx = (e.clientX - rect.left) * scaleX;
-    var x0 = 60, x1 = W - 60;
-    events.forEach(function (ev, i) {
-      var x = x0 + ev.frac * (x1 - x0);
-      if (Math.abs(x - mx) < 20) { info.innerHTML = "<b>" + ev.name + "</b> (" + ev.ago + ") — " + ev.desc; selected = i; renderBar(); }
-    });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var x0 = 60, x1 = W - 60, y = H / 2;
-    ctx.strokeStyle = cssVar("--line"); ctx.lineWidth = 2;
-    ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "left";
-    ctx.fillText("먼 과거", x0, y + 40);
-    ctx.textAlign = "right"; ctx.fillText("현재", x1, y + 40);
-    events.forEach(function (ev) {
-      var x = x0 + ev.frac * (x1 - x0);
-      ctx.save();
-      ctx.fillStyle = cssVar("--coral");
-      ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fill();
-      ctx.restore();
-      ctx.font = "10px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-      wrapText(ctx, ev.name, x, y - 20, 100, 12);
-    });
-    function wrapText(ctx, text, x, y, maxW, lh) {
-      var line = "", lines = [];
-      for (var i = 0; i < text.length; i++) {
-        var test = line + text[i];
-        if (ctx.measureText(test).width > maxW && line.length > 0) { lines.push(line); line = text[i]; } else line = test;
-      }
-      lines.push(line);
-      lines.reverse().forEach(function (l, i) { ctx.fillText(l, x, y - i * lh); });
-    }
-  }
-  var canvas2 = document.getElementById("c0b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c0b-info");
-  function renderBar() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var x0 = 260, x1 = W2 - 40;
-    events.forEach(function (ev, i) {
-      var y = 20 + i * 42;
-      ctx2.font = "11.5px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "right";
-      ctx2.fillText(ev.name, x0 - 10, y + 16);
-      ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, 24);
-      ctx2.fillStyle = i === selected ? cssVar("--coral") : cssVar("--teal");
-      ctx2.fillRect(x0, y, (x1 - x0) * ev.loss / 100, 24);
-      ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--foam"); ctx2.textAlign = "left";
-      ctx2.fillText(ev.loss + "%", x0 + 8, y + 17);
-    });
-    info2.innerHTML = selected >= 0
-      ? "<b>" + events[selected].name + "</b>은(는) 생물 종의 약 " + events[selected].loss + "%를 사라지게 한 사건입니다."
-      : "위에서 사건을 클릭하면 여기서 강조됩니다. 페름기 대멸종(96%)이 지구 역사상 가장 규모가 큰 멸종 사건입니다.";
-  }
-  render();
-  renderBar();
-})();
-
-/* TAB0 미션 — 원인으로 대멸종 사건 맞히기 */
-(function () {
-  var qa = [
-    { hint: "해양 생물 종의 약 85%가 사라졌고, 급격한 빙하기가 원인으로 지목되는 사건", key: "ordo" },
-    { hint: "해양 생물이 큰 타격을 입었고, 화산 활동과 해양 산소 부족이 원인으로 추정되는 사건", key: "devo" },
-    { hint: "생물 종의 약 96%가 사라진, 지구 역사상 가장 큰 규모의 대멸종. 대규모 화산 활동이 주원인으로 추정됨", key: "perm" },
-    { hint: "많은 파충류가 멸종했고, 이후 공룡이 번성하는 계기가 된 사건", key: "tri" },
-    { hint: "소행성 충돌로 공룡을 포함한 생물 종의 약 75%가 멸종하고, 이후 포유류가 번성한 사건", key: "cret" }
-  ];
-  var labels = { ordo: "오르도비스기 대멸종", devo: "데본기 대멸종", perm: "페름기 대멸종", tri: "트라이아스기 대멸종", cret: "백악기 대멸종" };
-  var dataBox = document.getElementById("c0m-data");
-  var seg = document.getElementById("c0m-choices");
-  var checkBtn = document.getElementById("c0m-check");
-  var newBtn = document.getElementById("c0m-new");
-  var info = document.getElementById("c0m-info");
-  var current = null, picked = null;
-
-  function newQuestion() {
-    current = qa[Math.floor(Math.random() * qa.length)];
-    picked = null;
-    dataBox.innerHTML = current.hint;
-    seg.innerHTML = "";
-    Object.keys(labels).forEach(function (k) {
-      var b = document.createElement("button");
-      b.textContent = labels[k];
-      b.dataset.k = k;
-      b.addEventListener("click", function () {
-        picked = k;
-        seg.querySelectorAll("button").forEach(function (x) { x.classList.toggle("on", x === b); });
-      });
-      seg.appendChild(b);
-    });
-    info.innerHTML = "";
-    info.style.color = "";
-  }
-
-  checkBtn.addEventListener("click", function () {
-    if (!picked) { info.innerHTML = "먼저 보기를 하나 선택하세요."; info.style.color = "var(--coral)"; return; }
-    if (picked === current.key) {
-      info.innerHTML = "✅ 정답! '" + labels[current.key] + "'에 대한 설명입니다.";
-      info.style.color = "var(--teal)";
-    } else {
-      info.innerHTML = "❌ 틀렸습니다. 정답은 '" + labels[current.key] + "' 입니다.";
-      info.style.color = "var(--coral)";
-    }
-  });
-
-  newBtn.addEventListener("click", newQuestion);
-  newQuestion();
-})();
-
-/* TAB1 자연선택 */
-(function () {
-  var canvas = document.getElementById("c1");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var gen = 0, env = "drought", pressure = 1;
-  var info = document.getElementById("c1-info");
-  document.getElementById("c1-gen").addEventListener("input", function (e) { gen = +e.target.value; document.getElementById("c1-gen-val").textContent = gen + "세대"; render(); });
-  document.getElementById("c1-pressure").addEventListener("input", function (e) { pressure = +e.target.value; document.getElementById("c1-pressure-val").textContent = pressure.toFixed(1) + "×"; render(); });
-  document.querySelectorAll("#c1-env button").forEach(function (b) {
-    b.addEventListener("click", function () { env = b.getAttribute("data-e"); document.querySelectorAll("#c1-env button").forEach(function (x) { x.classList.toggle("on", x === b); }); render(); });
-  });
-
-  var seed = 12345;
-  function rand() { seed = (seed * 1103515245 + 12345) & 0x7fffffff; return seed / 0x7fffffff; }
-  var initial = [];
-  for (var i = 0; i < 40; i++) initial.push(10 + rand() * 20); // beak size 10-30
-
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    var dir = env === "drought" ? 1 : -1;
-    var survival = initial.map(function (size) {
-      var bias = gen * 0.03 * pressure * dir;
-      return size + bias * (size - 15);
-    });
-
-    var x0 = 60, x1 = W - 60, y0 = 60, y1 = H - 60;
-    survival.forEach(function (size, i) {
-      var x = x0 + (i / survival.length) * (x1 - x0);
-      var y = y1 - ((size - 5) / 30) * (y1 - y0);
-      ctx.save();
-      ctx.fillStyle = size > 20 ? cssVar("--coral") : cssVar("--cold");
-      ctx.globalAlpha = .8;
-      ctx.beginPath(); ctx.arc(x, Math.max(y0, Math.min(y1, y)), 6, 0, 7); ctx.fill();
-      ctx.restore();
-    });
-    ctx.strokeStyle = cssVar("--line"); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x0, y1); ctx.lineTo(x1, y1); ctx.stroke();
-    ctx.font = "11px Segoe UI"; ctx.fillStyle = cssVar("--mist"); ctx.textAlign = "center";
-    ctx.fillText("개체(각 점 = 핀치 한 마리)", (x0 + x1) / 2, y1 + 30);
-    ctx.save(); ctx.translate(24, (y0 + y1) / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("부리 크기 ↑", 0, 0); ctx.restore();
-
-    var avgSize = survival.reduce(function (a, b) { return a + b; }, 0) / survival.length;
-    var trait = env === "drought" ? "큰 부리" : "작고 정교한 부리";
-    info.innerHTML = gen === 0
-      ? "초기 개체군은 부리 크기가 다양하게 분포합니다 (평균 " + avgSize.toFixed(1) + "mm)."
-      : gen + "세대가 지나며(선택압 " + pressure.toFixed(1) + "×), " + (env === "drought" ? "딱딱한 씨앗을 먹기 유리한" : "작고 부드러운 씨앗을 먹기 유리한") + " <b>" + trait + "를 가진 개체의 비율이 늘어났습니다</b> (평균 부리 크기 " + avgSize.toFixed(1) + "mm). 이것이 <b>자연선택</b>에 의한 진화입니다 — 환경이 바뀌면 유리한 형질의 방향도 바뀝니다.";
-  }
-  render();
-})();
-
-/* TAB2 생물다양성 */
-(function () {
-  var canvas = document.getElementById("c2");
-  var ctx = setupCanvas(canvas);
-  var W = canvas._w, H = canvas._h;
-  var info = document.getElementById("c2-info");
-  var cards = [
-    { name: "유전적 다양성", icon: "🧬", desc: "같은 종 내에서도 개체마다 유전자가 달라 다양한 형질이 나타납니다. 예) 사람마다 다른 혈액형, 눈동자 색.", x: 150 },
-    { name: "종다양성", icon: "🐾", desc: "한 생태계에 얼마나 많은 종류의 생물종이 얼마나 고르게 분포하는지를 나타냅니다.", x: 450 },
-    { name: "생태계다양성", icon: "🌳", desc: "숲, 습지, 갯벌, 사막 등 다양한 환경의 생태계가 존재하는 정도를 나타냅니다.", x: 750 }
-  ];
-  canvas.addEventListener("click", function (e) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas._w / rect.width;
-    var mx = (e.clientX - rect.left) * scaleX;
-    cards.forEach(function (c) { if (Math.abs(mx - c.x) < 120) info.innerHTML = "<b>" + c.icon + " " + c.name + "</b> — " + c.desc; });
-  });
-  function render() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = cssVar("--panel"); ctx.fillRect(0, 0, W, H);
-    cards.forEach(function (c) {
-      ctx.save();
-      ctx.strokeStyle = cssVar("--line"); ctx.fillStyle = cssVar("--panel-2");
-      ctx.fillRect(c.x - 110, 80, 220, 160);
-      ctx.strokeRect(c.x - 110, 80, 220, 160);
-      ctx.restore();
-      ctx.font = "40px Segoe UI"; ctx.textAlign = "center"; ctx.fillText(c.icon, c.x, 150);
-      ctx.font = "700 14px Segoe UI"; ctx.fillStyle = cssVar("--foam"); ctx.fillText(c.name, c.x, 200);
-    });
-  }
-  render();
-
-  /* 심화: 심슨 다양성 지수 계산기 */
-  var canvas2 = document.getElementById("c2b");
-  var ctx2 = setupCanvas(canvas2);
-  var W2 = canvas2._w, H2 = canvas2._h;
-  var info2 = document.getElementById("c2b-info");
-  var indexTxt = document.getElementById("c2b-index");
-  var nA = 30, nB = 30, nC = 30;
-  document.getElementById("c2b-a").addEventListener("input", function (e) { nA = +e.target.value; document.getElementById("c2b-a-val").textContent = nA; renderIndex(); });
-  document.getElementById("c2b-b").addEventListener("input", function (e) { nB = +e.target.value; document.getElementById("c2b-b-val").textContent = nB; renderIndex(); });
-  document.getElementById("c2b-c").addEventListener("input", function (e) { nC = +e.target.value; document.getElementById("c2b-c-val").textContent = nC; renderIndex(); });
-
-  function renderIndex() {
-    ctx2.clearRect(0, 0, W2, H2);
-    ctx2.fillStyle = cssVar("--panel"); ctx2.fillRect(0, 0, W2, H2);
-    var total = nA + nB + nC;
-    var pA = nA / total, pB = nB / total, pC = nC / total;
-    var D = 1 - (pA * pA + pB * pB + pC * pC); // Simpson's diversity index
-
-    var x0 = 60, x1 = W2 - 60, y = 60, barH = 50;
-    var xA = x0 + pA * (x1 - x0);
-    var xB = xA + pB * (x1 - x0);
-    ctx2.fillStyle = cssVar("--teal"); ctx2.fillRect(x0, y, xA - x0, barH);
-    ctx2.fillStyle = cssVar("--coral"); ctx2.fillRect(xA, y, xB - xA, barH);
-    ctx2.fillStyle = cssVar("--cold"); ctx2.fillRect(xB, y, x1 - xB, barH);
-    ctx2.strokeStyle = cssVar("--line"); ctx2.strokeRect(x0, y, x1 - x0, barH);
-    ctx2.font = "700 12px Segoe UI"; ctx2.fillStyle = cssVar("--abyss"); ctx2.textAlign = "center";
-    if (xA - x0 > 30) ctx2.fillText("A " + (pA * 100).toFixed(0) + "%", (x0 + xA) / 2, y + barH / 2 + 4);
-    if (xB - xA > 30) ctx2.fillText("B " + (pB * 100).toFixed(0) + "%", (xA + xB) / 2, y + barH / 2 + 4);
-    if (x1 - xB > 30) ctx2.fillText("C " + (pC * 100).toFixed(0) + "%", (xB + x1) / 2, y + barH / 2 + 4);
-
-    ctx2.font = "11px Segoe UI"; ctx2.fillStyle = cssVar("--mist"); ctx2.textAlign = "left";
-    ctx2.fillText("전체 개체수 " + total + "마리 중 종 구성 비율", x0, y + barH + 24);
-
-    indexTxt.innerHTML = "심슨 다양성 지수 D = 1 − Σp<sub>i</sub>² = <b>" + D.toFixed(3) + "</b> (0에 가까울수록 한 종이 우세, 1에 가까울수록 균등하고 다양함)";
-    info2.innerHTML = D > 0.6
-      ? "세 종의 개체수가 비교적 균등해서 다양성 지수가 높습니다. 특정 종 하나가 사라져도 생태계 전체 기능이 유지되기 쉽습니다."
-      : "한 종의 비율이 매우 높아 다양성 지수가 낮습니다. 이런 생태계는 우점종에게 문제가 생기면(질병, 환경 변화 등) 전체 생태계가 크게 흔들릴 위험이 있습니다.";
-  }
-  renderIndex();
-})();
-
-})();
-</script>
-
-<script>
-(function () {
-  window.sthUnit("is2-1-1");
-  window.sthWork({
-    mount: "wk",
-    unitLabel: "[통합과학2 Ⅰ-1] 지구 환경 변화와 생물다양성",
-    items: [
-      {
-            "id": "w1",
-            "label": "환경 변화와 생물다양성",
-            "hint": "대멸종 하나를 골라, 그때 환경이 어떻게 바뀌었고 생물다양성이 어떻게 달라졌는지 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w2",
-            "label": "자연선택이 일어나는 순서",
-            "hint": "변이 → 선택 → 유전의 순서를 예 하나로 풀어 쓰세요.",
-            "ph": ""
-      },
-      {
-            "id": "w3",
-            "label": "아직 헷갈리는 것",
-            "hint": "다음 시간에 여기서부터 시작합니다.",
-            "ph": ""
-      }
-]
-  });
-})();
-</script>
-
-<script>
-(function () {
-  window.sthGate({
-    gate: "gt", veil: "vl", key: "dino",
-    question: "하늘을 날던 <b>익룡</b>은 공룡일까요?",
-    options: ["㉠ 공룡이다", "㉡ 공룡이 아니다", "㉢ 공룡의 조상이다", "㉣ 공룡이 진화한 것이다"],
-    onPick: function (i) {
-      var ok = (i === 1);
-      window.sthState("dinoOK", ok ? "맞음" : "어긋남");
-      var msg = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "공룡은 <b>중생대 육상에서 살았던 공룡상목 파충류</b>만을 가리킵니다." + " " + "익룡, 어룡, 수장룡은 모두 중생대에 살았지만 <b>공룡이 아닙니다.</b> 중생대 파충류가 모두 공룡인 것은 아닙니다.";
-      var g = document.getElementById("gt");
-      var box = g.parentNode.querySelector(".info-card");
-      if (box) box.innerHTML = msg;
-      else { var d = document.createElement("div"); d.className = "info-card"; d.style.margin = "18px 0 0";
-             d.innerHTML = msg; g.insertAdjacentElement("afterend", d); }
-    }
-  });
-})();
-</script>
+<script src="../assets/story.js"></script>
+<script src="../assets/share-config.js"></script>
+<script src="../assets/share.js"></script>
+<script src="episodes.js"></script>
 </body>
 </html>
