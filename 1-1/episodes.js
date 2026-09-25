@@ -12,6 +12,8 @@ function v(name) { return window.cssVar(name); }
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function lerp(a, b, t) { return a + (b - a) * t; }
 function done(id) { var e = $(id); if (e) e.classList.add("done"); }
+/* 미션 상자는 완료되면 내용이 통째로 바뀐다. 그 안에 있던 자리를 뒤늦게 건드리면 오류가 나므로 확인하고 쓴다. */
+function put(id, html) { var e = $(id); if (e) e.innerHTML = html; }
 function paper(ctx, W, H) { ctx.clearRect(0, 0, W, H); ctx.fillStyle = v("--panel"); ctx.fillRect(0, 0, W, H); }
 function text(ctx, s, x, y, o) {
   o = o || {};
@@ -321,7 +323,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
       });
     }
     function mission() {
-      $("a-ext-n").textContent = nFound();
+      put("a-ext-n", nFound());
       if (nFound() === 5) done("m1-4a");
       if (sorted) done("m1-4b");
       if (nFound() === 5 && sorted) {
@@ -805,7 +807,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
       if (rows.length) $("c-farm-info").innerHTML = "<b>설계 기록</b><br>" + rows.join("<br>");
     }
     function check() {
-      if (okA) { done("m3-2a"); $("m3-2a").innerHTML = "1품종 밭은 2년 동안 최고의 수확을 냈지만, 역병이 온 해에는 <b>240포기가 전멸</b>했습니다."; }
+      if (okA) { done("m3-2a"); put("m3-2a", "1품종 밭은 2년 동안 최고의 수확을 냈지만, 역병이 온 해에는 <b>240포기가 전멸</b>했습니다."); }
       if (okB) done("m3-2b");
       if (okA && okB) {
         window.sthMission("m3-2", true, "<span class='m-tag'>미션 완료</span>" + (window.sthState("farmBest") || "") + " 품종이 섞여 있으면 병에 걸리는 포기가 일부에 그치고, 사이사이의 다른 품종이 <b>병이 번지는 길</b>도 끊어 줍니다. 이것이 <b>유전적 다양성</b>의 힘입니다.");

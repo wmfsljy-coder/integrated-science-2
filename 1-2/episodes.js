@@ -12,6 +12,8 @@ function v(name) { return window.cssVar(name); }
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function lerp(a, b, t) { return a + (b - a) * t; }
 function done(id) { var e = $(id); if (e) e.classList.add("done"); }
+/* 미션 상자는 완료되면 내용이 통째로 바뀐다. 그 안에 있던 자리를 뒤늦게 건드리면 오류가 나므로 확인하고 쓴다. */
+function put(id, html) { var e = $(id); if (e) e.innerHTML = html; }
 function paper(ctx, W, H) { ctx.clearRect(0, 0, W, H); ctx.fillStyle = v("--panel"); ctx.fillRect(0, 0, W, H); }
 function text(ctx, s, x, y, o) {
   o = o || {};
@@ -267,8 +269,8 @@ function seg(id, cb) {
       if (ch) { window.sthState("metal", got); mission(); }
     }
     function mission() {
-      if (got.a) { done("a-m4a"); $("a-m4a").innerHTML = "철 못 + Cu²⁺ 수용액 → 철 못에 구리가 입혀집니다."; }
-      if (got.b) { done("a-m4b"); $("a-m4b").innerHTML = "구리 선 + Ag⁺ 수용액 → 구리 선에 은이 자라납니다."; }
+      if (got.a) { done("a-m4a"); put("a-m4a", "철 못 + Cu²⁺ 수용액 → 철 못에 구리가 입혀집니다."); }
+      if (got.b) { done("a-m4b"); put("a-m4b", "구리 선 + Ag⁺ 수용액 → 구리 선에 은이 자라납니다."); }
       if (got.c) done("a-m4c");
       if (got.q) done("a-m4d");
       if (got.a && got.b && got.c && got.q) {
@@ -409,7 +411,7 @@ function seg(id, cb) {
     }
     function mission() {
       var n = 0, k; for (k in SUB) if (tested[k]) n++;
-      $("b-m2n").textContent = n;
+      put("b-m2n", n);
       if (n >= 6) done("b-m2a");
       if (sorted) done("b-m2b");
       if (n >= 6 && sorted) {
@@ -483,7 +485,7 @@ function seg(id, cb) {
             "H⁺ 8개와 OH⁻ 8개가 <b>1:1로 모두 반응</b>했습니다. 여기가 <b>중화점</b>입니다. 남은 것은 Na⁺과 Cl⁻뿐입니다."));
     }
     function mission() {
-      $("b-m3n").textContent = Math.min(7, seen.length);
+      put("b-m3n", Math.min(7, seen.length));
       var both = seen.some(function (a) { return a < 16; }) && seen.some(function (a) { return a > 16; });
       if (st.a) done("b-m3a");
       if (seen.length >= 7 && both) done("b-m3b");
