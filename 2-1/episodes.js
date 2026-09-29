@@ -635,6 +635,7 @@ window.sthWork({
     { key: "r1", label: "① 한 나무, 두 가지 잎" },
     { key: "r2", label: "② 늑대가 돌아왔다" },
     { key: "r3", label: "③ 2℃의 문턱" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -650,6 +651,7 @@ window.sthShare({
     { key: "r1", label: "① 한 나무, 두 가지 잎" },
     { key: "r2", label: "② 늑대가 돌아왔다" },
     { key: "r3", label: "③ 2℃의 문턱" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }

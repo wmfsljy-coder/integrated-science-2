@@ -769,6 +769,7 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 펌프의 손잡이를 떼어라" },
     { key: "r2", label: "② 240만 장의 엽서" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -783,6 +784,7 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 펌프의 손잡이를 떼어라" },
     { key: "r2", label: "② 240만 장의 엽서" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "두 사건을 꿰는 한 문장" }

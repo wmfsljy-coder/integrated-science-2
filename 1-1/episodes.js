@@ -1054,6 +1054,7 @@ window.sthWork({
     { key: "r1", label: "① 1센티미터의 점토층" },
     { key: "r2", label: "② 가뭄이 지나간 섬" },
     { key: "r3", label: "③ 한 가지만 심은 밭" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -1069,6 +1070,7 @@ window.sthShare({
     { key: "r1", label: "① 1센티미터의 점토층" },
     { key: "r2", label: "② 가뭄이 지나간 섬" },
     { key: "r3", label: "③ 한 가지만 심은 밭" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }

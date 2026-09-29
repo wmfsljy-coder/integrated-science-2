@@ -745,6 +745,7 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 할머니의 딸기 온실" },
     { key: "r2", label: "② 공청회에 서다" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -759,6 +760,7 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 할머니의 딸기 온실" },
     { key: "r2", label: "② 공청회에 서다" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "두 이야기를 꿰는 한 문장" }

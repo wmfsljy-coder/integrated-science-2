@@ -859,6 +859,7 @@ window.sthWork({
     { key: "r1", label: "① 붉은 돌에서 철을 꺼내라" },
     { key: "r2", label: "② 물고기가 사라진 호수" },
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   items: [
@@ -874,6 +875,7 @@ window.sthShare({
     { key: "r1", label: "① 붉은 돌에서 철을 꺼내라" },
     { key: "r2", label: "② 물고기가 사라진 호수" },
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
+    { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
