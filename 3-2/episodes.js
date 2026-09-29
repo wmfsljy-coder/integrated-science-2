@@ -744,7 +744,8 @@ window.sthWork({
   mount: "wk", unitLabel: "[통합과학2 Ⅲ-2] 과학 기술의 발전과 쟁점 — 정리",
   recap: [
     { key: "r1", label: "① 할머니의 딸기 온실" },
-    { key: "r2", label: "② 공청회에 서다" }
+    { key: "r2", label: "② 공청회에 서다" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "두 이야기를 꿰는 한 문장", hint: "흰 딸기를 못 알아본 로봇과 특정 집단을 더 자주 오인식하는 CCTV. 두 이야기에 공통으로 들어 있는 생각을 ‘유용성’, ‘한계’, ‘사람의 책임’이라는 말을 넣어 쓰세요." },
@@ -757,7 +758,8 @@ window.sthShare({
   mount: "share", unit: "is2-3-2", unitLabel: "[통합과학2 Ⅲ-2] 과학 기술의 발전과 쟁점",
   rows: [
     { key: "r1", label: "① 할머니의 딸기 온실" },
-    { key: "r2", label: "② 공청회에 서다" }
+    { key: "r2", label: "② 공청회에 서다" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "두 이야기를 꿰는 한 문장" }
 });

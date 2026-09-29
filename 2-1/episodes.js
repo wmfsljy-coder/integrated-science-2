@@ -634,7 +634,8 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 한 나무, 두 가지 잎" },
     { key: "r2", label: "② 늑대가 돌아왔다" },
-    { key: "r3", label: "③ 2℃의 문턱" }
+    { key: "r3", label: "③ 2℃의 문턱" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "잎과 빛, 늑대와 숲, 온실 기체와 기온. 세 이야기에 공통으로 들어 있는 생각을 ‘생물’과 ‘환경’이라는 말을 넣어 쓰세요." },
@@ -648,7 +649,8 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 한 나무, 두 가지 잎" },
     { key: "r2", label: "② 늑대가 돌아왔다" },
-    { key: "r3", label: "③ 2℃의 문턱" }
+    { key: "r3", label: "③ 2℃의 문턱" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

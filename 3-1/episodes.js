@@ -768,7 +768,8 @@ window.sthWork({
   mount: "wk", unitLabel: "[통합과학2 Ⅲ-1] 과학 기술의 활용 — 정리",
   recap: [
     { key: "r1", label: "① 펌프의 손잡이를 떼어라" },
-    { key: "r2", label: "② 240만 장의 엽서" }
+    { key: "r2", label: "② 240만 장의 엽서" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "두 사건을 꿰는 한 문장", hint: "스노의 지도와 다이제스트의 엽서. 하나는 데이터로 도시를 구했고 하나는 데이터로 망신을 당했습니다. 둘의 차이를 ‘데이터’와 ‘과학’이라는 말을 넣어 한 문장으로 쓰세요." },
@@ -781,7 +782,8 @@ window.sthShare({
   mount: "share", unit: "is2-3-1", unitLabel: "[통합과학2 Ⅲ-1] 과학 기술의 활용",
   rows: [
     { key: "r1", label: "① 펌프의 손잡이를 떼어라" },
-    { key: "r2", label: "② 240만 장의 엽서" }
+    { key: "r2", label: "② 240만 장의 엽서" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "두 사건을 꿰는 한 문장" }
 });

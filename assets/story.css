@@ -150,3 +150,48 @@
 .sh-log-row i { font-style: normal; font-size: 11.5px; }
 .sh-log-row.now { border-color: var(--brand); background: var(--brand-100); }
 .sh-when { margin-top: 6px; font-size: 11px; color: var(--mist); }
+
+/* =========================================================================
+   응용 실험실 (lab.js) — 예측 → 조작 → 판정 → 설명
+   ========================================================================= */
+.lab-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 14px 18px; border-radius: 18px;
+  background: var(--card); border: 2px solid var(--line); margin-bottom: 18px; }
+.lab-top-t { font-size: 13.5px; color: var(--mist); }
+.lab-top-t b { color: var(--teal-700); font-size: 16px; }
+.lab-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.lab-chip { font-size: 12px; font-weight: 800; padding: 5px 11px; border-radius: 999px; background: var(--card-2);
+  border: 2px solid var(--line); color: var(--mist); text-decoration: none; }
+.lab-chip.go { border-color: var(--amber); color: var(--amber-700); }
+.lab-chip.ok { background: var(--green-100); border-color: var(--green); color: var(--green-700); }
+.lab-case { border: 3px solid var(--line); border-radius: 26px; padding: 18px 20px 20px; margin-bottom: 24px; background: var(--panel);
+  scroll-margin-top: 16px; }
+.lab-case.ok { border-color: var(--green); }
+.lab-head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.lab-head h3 { font-family: "Jua"; font-weight: 400; font-size: 20px; margin: 0; flex: 1 1 240px; }
+.lab-no { width: 28px; height: 28px; border-radius: 50%; background: var(--brand); color: var(--on-accent); font-weight: 900;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 13px; }
+.lab-tag { font-size: 11px; font-weight: 800; padding: 3px 10px; border-radius: 999px; background: var(--teal-100); color: var(--teal-700); }
+.lab-step { font-size: 12px; font-weight: 800; color: var(--mist); margin: 16px 0 -8px; letter-spacing: .03em; }
+.lab-body { position: relative; }
+.lab-body.locked > :not(.lab-veil) { filter: blur(1.5px) grayscale(.6); opacity: .45; pointer-events: none; user-select: none; }
+.lab-veil { display: none; }
+.lab-body.locked .lab-veil { display: flex; position: absolute; inset: 40px 0 0; z-index: 2; align-items: flex-start; justify-content: center;
+  padding-top: 70px; font-weight: 800; font-size: 14px; color: var(--ink); }
+.lab-btns { padding: 0 22px 18px; }
+.lab-task { margin-top: 16px; padding: 14px 18px; border-radius: 16px; border: 2px dashed var(--amber); background: var(--card); }
+.lab-task-t { font-size: 13.5px; line-height: 1.7; margin-bottom: 10px; color: var(--ink); }
+.lab-task-t b { color: var(--amber-700); }
+.lab-verdict { font-size: 13px; font-weight: 800; }
+.lab-verdict.no { color: var(--rose-700); }
+.lab-verdict.ok { color: var(--green-700); }
+.lab-hint { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--amber-100); color: #3a2a00; font-size: 13px; line-height: 1.7; }
+.lab-sol { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--card-2); border: 2px solid var(--line);
+  font-size: 13px; line-height: 1.7; color: var(--ink); }
+.lab-task > .btn { margin-top: 10px; }
+.lab-why { margin-top: 16px; padding: 16px 18px; border-radius: 18px; background: linear-gradient(135deg, var(--teal-100), var(--brand-100));
+  font-size: 13.5px; line-height: 1.8; color: var(--ink); }
+.lab-why h4 { font-family: "Jua"; font-weight: 400; font-size: 17px; margin: 0 0 6px; }
+.lab-cmp { margin: 0 0 8px; font-size: 13px; }
+.lab-cmp.ok b { color: var(--green-700); }
+.lab-cmp.no b { color: var(--rose-700); }
+.lab-why-t b { color: var(--brand-700); }

@@ -834,7 +834,8 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 태양은 석탄 덩어리일까" },
     { key: "r2", label: "② 불 꺼진 섬" },
-    { key: "r3", label: "③ 사라진 98" }
+    { key: "r3", label: "③ 사라진 98" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "태양의 핵융합, 섬의 발전기, 새어 나간 98. 세 이야기에 공통으로 들어 있는 생각을 ‘전환’과 ‘효율’이라는 말을 넣어 쓰세요." },
@@ -848,7 +849,8 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 태양은 석탄 덩어리일까" },
     { key: "r2", label: "② 불 꺼진 섬" },
-    { key: "r3", label: "③ 사라진 98" }
+    { key: "r3", label: "③ 사라진 98" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

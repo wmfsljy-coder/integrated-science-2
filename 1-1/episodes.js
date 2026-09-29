@@ -1053,7 +1053,8 @@ window.sthWork({
   recap: [
     { key: "r1", label: "① 1센티미터의 점토층" },
     { key: "r2", label: "② 가뭄이 지나간 섬" },
-    { key: "r3", label: "③ 한 가지만 심은 밭" }
+    { key: "r3", label: "③ 한 가지만 심은 밭" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "소행성과 공룡, 가뭄과 핀치, 역병과 감자. 세 이야기에 공통으로 들어 있는 생각을 ‘환경 변화’, ‘변이’, ‘생물다양성’이라는 말을 넣어 쓰세요." },
@@ -1067,7 +1068,8 @@ window.sthShare({
   rows: [
     { key: "r1", label: "① 1센티미터의 점토층" },
     { key: "r2", label: "② 가뭄이 지나간 섬" },
-    { key: "r3", label: "③ 한 가지만 심은 밭" }
+    { key: "r3", label: "③ 한 가지만 심은 밭" },
+    { key: "rLab", label: "응용 실험실" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });
