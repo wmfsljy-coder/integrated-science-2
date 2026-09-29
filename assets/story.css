@@ -44,7 +44,7 @@
 
 /* ---- 미션 상자 ---- */
 .mission { margin: 14px 0 0; padding: 14px 18px; border-radius: 16px; border: 2px solid var(--amber);
-  background: var(--amber-100); color: #3a2a00; font-size: 13.5px; line-height: 1.75; }
+  background: var(--amber-100); color: var(--ink); font-size: 13.5px; line-height: 1.75; }
 .mission .m-tag { font-weight: 900; margin-right: 6px; }
 .mission.ok { border-color: var(--green); background: var(--green-100); color: var(--green-700); }
 .mission ul { margin: 6px 0 0; padding-left: 18px; }
@@ -138,7 +138,7 @@
 .sh-card .sh-nick { font-family: "Jua"; font-size: 15px; margin-bottom: 4px; }
 .sh-card p { margin: 0 0 4px; color: var(--mist); }
 .sh-card p b { color: var(--ink); }
-.sh-card blockquote { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--amber-100); color: #3a2a00; }
+.sh-card blockquote { margin: 8px 0 0; padding: 8px 10px; border-radius: 10px; background: var(--amber-100); color: var(--ink); }
 
 /* 우리 반 활동 기록 (share.js 의 classlog) */
 .share-log { margin-top: 22px; }
@@ -184,7 +184,7 @@
 .lab-verdict { font-size: 13px; font-weight: 800; }
 .lab-verdict.no { color: var(--rose-700); }
 .lab-verdict.ok { color: var(--green-700); }
-.lab-hint { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--amber-100); color: #3a2a00; font-size: 13px; line-height: 1.7; }
+.lab-hint { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--amber-100); color: var(--ink); font-size: 13px; line-height: 1.7; }
 .lab-sol { margin-top: 10px; padding: 10px 14px; border-radius: 12px; background: var(--card-2); border: 2px solid var(--line);
   font-size: 13px; line-height: 1.7; color: var(--ink); }
 .lab-task > .btn { margin-top: 10px; }
@@ -278,7 +278,7 @@
 .qz-verdict.ok { color: var(--green-700); }
 .qz-verdict.no { color: var(--rose-700); }
 .qz-fb { margin-top: 10px; }
-.qz-hint { padding: 10px 14px; border-radius: 12px; background: var(--amber-100); color: #3a2a00; font-size: 13px; line-height: 1.7; }
+.qz-hint { padding: 10px 14px; border-radius: 12px; background: var(--amber-100); color: var(--ink); font-size: 13px; line-height: 1.7; }
 .qz-a { margin: 0 0 8px; font-size: 13.5px; }
 .qz-a b, .qz-why > b:first-child { color: var(--teal-700); margin-right: 4px; }
 .qz-why { padding: 10px 14px; border-radius: 12px; background: linear-gradient(135deg, var(--teal-100), var(--brand-100));
