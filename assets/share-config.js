@@ -2,7 +2,7 @@
    배포 방법은 science-teacher-hub 저장소의 share-backend/README.md 참고. */
 window.STH_SHARE_URL = "https://script.google.com/macros/s/AKfycbxIFfvQS-gIVKYCan11Bpr0I35KWyRZUD7gOvUGl2fJCC08nXpLGYQ5OKZfJcbSXMjF/exec";
 
-/* 반 목록 — 통합과학은 1학년 1 ~ 7반. 목록이 있으면 반 코드를 직접 치지 않고 고른다. */
+/* 반 목록 — 1학년 1 ~ 7반. 목록이 있으면 반 코드를 직접 치지 않고 고른다. 시트의 '반목록' 탭과 같아야 올라간다. */
 window.STH_CLASSES = [
   { v: "1-1", t: "1학년 1반" }, { v: "1-2", t: "1학년 2반" }, { v: "1-3", t: "1학년 3반" }, { v: "1-4", t: "1학년 4반" },
   { v: "1-5", t: "1학년 5반" }, { v: "1-6", t: "1학년 6반" }, { v: "1-7", t: "1학년 7반" }
