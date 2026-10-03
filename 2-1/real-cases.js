@@ -44,7 +44,7 @@ window.sthLab({
         H.rows(ctx, 680, 40, [[YL + "년", co2(YL).toFixed(1) + " ppm"], [(YL - 10) + "년", co2(YL - 10).toFixed(1) + " ppm"], ["1959 ~ 1969 한 해 증가", ((co2(1969) - co2(1959)) / 10).toFixed(2) + " ppm"], ["내 2050년 예상", p + " ppm", "--coral-700", true]], 52);
       }
       cv.canvas._redraw = draw;
-      api.slider({ label: "2050년 예상 농도", min: 420, max: 540, step: 1, value: 440, fmt: function (x) { return x + " ppm"; }, onInput: function (x) { p = x; api.changed(); draw(); } });
+      api.slider({ label: "2050년 예상 농도", min: 420, max: 520, step: 1, value: 440, fmt: function (x) { return x + " ppm"; }, onInput: function (x) { p = x; api.changed(); draw(); } });
       api.info("한 해 증가량 = (나중 값 − 처음 값) ÷ 햇수. 예상 = " + YL + "년 값 + 증가량 × 남은 햇수. " + SRC1
         + "<div data-link='{\"id\":\"gml-trends\",\"title\":\"마우나로아 이산화 탄소 최신 그래프\",\"src\":\"NOAA 지구감시연구소\",\"url\":\"https://gml.noaa.gov/ccgg/trends/\",\"ask\":\"가장 최근 달의 월평균 농도(ppm)와 그 달을 찾아 오세요.\"}'></div>"
         + "<div data-map='{\"id\":\"mlo\",\"name\":\"마우나로아 관측소\",\"lat\":19.536,\"lng\":-155.576,\"zoom\":14,\"ask\":\"관측소 둘레에 무엇이 있나요? 도시·숲·공장과 멀리 떨어진 해발 3,400 m 화산 비탈에서 재는 까닭을 한 문장으로 적어 보세요.\"}'></div>");
@@ -60,7 +60,7 @@ window.sthLab({
     },
     hints: ["(" + YL + "년 값 − " + (YL - 10) + "년 값) ÷ 10 = 한 해 증가량", "그 증가량에 " + (2050 - YL) + "(년)을 곱해 " + YL + "년 값에 더하세요."],
     solution: "한 해 약 " + RATE.toFixed(2) + " ppm × " + (2050 - YL) + "년 → <b>약 " + PROJ.toFixed(0) + " ppm</b>.",
-    why: "1960년대에는 한 해 1 ppm 남짓 늘던 이산화 탄소가 요즘은 한 해 2.5 ppm 넘게 늘고 있습니다. 화석 연료를 태우는 양이 늘었기 때문이에요. 산업 혁명 전(약 280 ppm)과 비교하면 이미 1.5 배를 넘었습니다.<br>"
+    why: "1960년대에는 한 해 1 ppm 이 채 안 되게(약 0.9 ppm) 늘던 이산화 탄소가 요즘은 한 해 2.5 ppm 넘게 늘고 있습니다. 화석 연료를 태우는 양이 늘었기 때문이에요. 산업 혁명 전(약 280 ppm)과 비교하면 이미 1.5 배를 넘었습니다.<br>"
       + "다만 이 예상은 ‘지금 속도가 그대로’라는 가정 위의 값입니다. 배출을 줄이면 곡선은 꺾이고, 더 늘리면 더 가팔라집니다. 미래는 그래프가 아니라 우리의 선택이 정해요."
   },
   {
@@ -92,7 +92,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "직선의 기울기", min: 0, max: 2, step: 0.05, value: 0.5, fmt: function (x) { return x.toFixed(2) + " °C / 100 ppm"; }, onInput: function (x) { m = x; api.changed(); draw(); } });
       api.info("‘점과 선의 평균 거리’가 가장 작아지는 기울기를 찾으세요. " + SRC2
-        + "<div data-link='{\"id\":\"gistemp\",\"title\":\"NASA GISTEMP 지구 기온 자료\",\"src\":\"NASA 고다드 우주연구소\",\"url\":\"https://data.giss.nasa.gov/gistemp/\",\"ask\":\"가장 최근 해의 전 지구 기온 편차(°C)를 찾아, 이 그래프의 마지막 점과 비교해 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"gistemp\",\"title\":\"NASA GISTEMP 지구 기온 자료\",\"src\":\"NASA 고다드 우주연구소\",\"url\":\"https://data.giss.nasa.gov/gistemp/graphs_v4/\",\"ask\":\"가장 최근 해의 전 지구 기온 편차(°C)를 찾아, 이 그래프의 마지막 점과 비교해 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {
@@ -103,8 +103,8 @@ window.sthLab({
       };
     },
     hints: ["기울기를 0.05 씩 바꾸며 ‘평균 거리’ 숫자를 보세요.", "1 °C 근처에서 가장 작아집니다."],
-    solution: "약 <b>" + (FIT.m * 100).toFixed(2) + " °C / 100 ppm</b> (" + (FIT.m * 100 - 0.1).toFixed(2) + " ~ " + (FIT.m * 100 + 0.1).toFixed(2) + ").",
-    why: "지난 60여 년 동안 이산화 탄소가 100 ppm 늘 때마다 지구 평균 기온은 약 1 °C 올랐습니다. 두 값이 함께 오른다는 것(<b>상관</b>)만으로는 원인을 단정할 수 없지만, 이산화 탄소가 지표가 내는 적외선을 흡수한다는 실험실 측정(온실 효과), 위성으로 잰 지구 복사의 변화, 밤 기온이 낮 기온보다 더 빨리 오르는 현상 같은 여러 증거가 같은 방향을 가리켜 과학자들은 원인으로 결론 내렸습니다.<br>"
+    solution: "약 <b>" + (FIT.m * 100).toFixed(2) + " °C / 100 ppm</b> (" + (Math.ceil((FIT.m * 100 - 0.1) * 20) / 20).toFixed(2) + " ~ " + (Math.floor((FIT.m * 100 + 0.1) * 20) / 20).toFixed(2) + ").",
+    why: "지난 60여 년 동안 이산화 탄소가 100 ppm 늘 때마다 지구 평균 기온은 약 1 °C 올랐습니다. 두 값이 함께 오른다는 것(<b>상관</b>)만으로는 원인을 단정할 수 없지만, 이산화 탄소가 지표가 내는 적외선을 흡수한다는 실험실 측정(온실 효과), 위성으로 잰 지구 복사의 변화, 대류권은 데워지는데 성층권은 식는 현상 같은 여러 증거가 같은 방향을 가리켜 과학자들은 원인으로 결론 내렸습니다.<br>"
       + "점이 직선에서 위아래로 흩어진 것은 엘니뇨·화산 폭발처럼 해마다 달라지는 요인 때문입니다. 한 해의 값보다 긴 기간의 흐름을 보아야 하는 까닭이에요."
   }
   ]
