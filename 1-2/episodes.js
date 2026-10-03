@@ -860,7 +860,8 @@ window.sthWork({
     { key: "r2", label: "② 물고기가 사라진 호수" },
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "세 사건을 꿰는 한 문장", hint: "산소와 전자, H⁺과 OH⁻, 열. 세 이야기에서 화학 변화가 일어날 때마다 무엇인가가 ‘옮겨 갔고’ 그 양이 ‘딱 맞아떨어졌습니다’. 이 공통점을 넣어 한 문장으로 쓰세요." },
@@ -876,7 +877,8 @@ window.sthShare({
     { key: "r2", label: "② 물고기가 사라진 호수" },
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }
 });

@@ -17,9 +17,9 @@ function bars(H, ctx, W, CH, pick, showClear) {
   H.paper(ctx, W, CH);
   var x0 = 60, x1 = 640, y0 = 24, y1 = CH - 36;
   function X(m) { return x0 + (m - 0.5) / 12 * (x1 - x0); }
-  function Y(v) { return y1 - v / 8 * (y1 - y0); }
+  function Y(v) { return y1 - v / 10 * (y1 - y0); }
   H.axes(ctx, x0, y0, x1, y1);
-  [0, 2, 4, 6, 8].forEach(function (v) { H.text(ctx, v, x0 - 8, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
+  [0, 2, 4, 6, 8, 10].forEach(function (v) { H.text(ctx, v, x0 - 8, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
   H.text(ctx, "하루 동안 1 m² 에 닿는 햇빛 에너지 (kWh)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
   for (var m = 1; m <= 12; m++) {
     var on = m === pick;
@@ -28,7 +28,7 @@ function bars(H, ctx, W, CH, pick, showClear) {
     H.text(ctx, m + "월", X(m), y1 + 15, { s: 10.5, w: on ? "900" : "500", a: "center", c: on ? H.v("--amber-700") : H.v("--mist") });
     if (showClear) H.text(ctx, PR[m].toFixed(1), X(m), y0 + 12, { s: 9.5, a: "center", c: H.v("--teal-700") });
   }
-  if (showClear) H.text(ctx, "위 숫자 = 하루 강수량(mm) · 회색 = 구름이 없을 때의 햇빛", x0 + 6, y0 + 28, { s: 10.5, w: "700", c: H.v("--teal-700") });
+  if (showClear) H.text(ctx, "위 숫자 = 하루 평균 강수량(mm) · 회색 = 구름이 없을 때의 햇빛", x0 + 6, y0 + 28, { s: 10.5, w: "700", c: H.v("--teal-700") });
 }
 
 window.sthLab({
@@ -49,14 +49,14 @@ window.sthLab({
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, k = 7, clear = false;
       function draw() {
         bars(H, ctx, W, cv.H, k, clear);
-        H.rows(ctx, 680, 50, [["고른 달", k + "월", "--amber-700", true], ["하루 일사량", SW[k].toFixed(2) + " kWh/m²"], ["구름 없을 때", CL[k].toFixed(2) + " kWh/m²"], ["하루 강수량", PR[k].toFixed(1) + " mm"]], 50);
+        H.rows(ctx, 680, 50, [["고른 달", k + "월", "--amber-700", true], ["하루 일사량", SW[k].toFixed(2) + " kWh/m²"], ["구름 없을 때", CL[k].toFixed(2) + " kWh/m²"], ["하루 평균 강수량", PR[k].toFixed(1) + " mm"]], 50);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "달", min: 1, max: 12, step: 1, value: 7, fmt: function (x) { return x + "월"; }, onInput: function (x) { k = x; api.changed(); draw(); } });
       api.seg({ label: "보기", value: "real", options: [{ v: "real", t: "실제(구름 포함)" }, { v: "clear", t: "구름 없을 때도 함께" }], onPick: function (x) { clear = x === "clear"; draw(); } });
       api.info("막대는 구름 낀 날까지 모두 넣은 실제 값입니다. " + SRC
-        + "<div data-link='{\"id\":\"nasa-power\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"NASA 랭글리 연구소\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"지도에서 우리 학교 근처를 눌러 보고, 한 해 평균 일사량(kWh/m²/일)이 몇인지 찾아 오세요(Solar Fluxes and Related → All Sky Surface Shortwave Downward Irradiance).\"}'></div>"
-        + "<div data-map='{\"id\":\"school-roof\",\"name\":\"창원 웅천 일대\",\"lat\":35.13,\"lng\":128.70,\"zoom\":16,\"ask\":\"위성 사진에서 지붕에 태양광 패널이 있는 건물을 찾아보세요. 패널은 대부분 어느 쪽을 향해 있나요?\"}'></div>");
+        + "<div data-link='{\"id\":\"nasa-power\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"NASA 랭글리 연구소\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"① User Community 는 Renewable Energy, Temporal Level 은 Climatology 를 고르고 ② 지도에서 우리 학교 근처를 찍은 뒤 ③ Solar Fluxes and Related → All Sky Surface Shortwave Downward Irradiance 를 골라 Submit 하세요. 결과의 ANN(연평균) 값이 몇 kWh/m²/일인지 찾아 오세요. 기간이 달라 이 화면의 값(약 4.1)과 조금 다를 수 있어요.\"}'></div>"
+        + "<div data-map='{\"id\":\"school-roof\",\"name\":\"창원 웅천 일대\",\"lat\":35.13,\"lng\":128.70,\"zoom\":15,\"ask\":\"위성 사진에서 지붕에 태양광 패널이 있는 건물을 찾아보세요. 패널은 대부분 어느 쪽을 향해 있나요?\"}'></div>");
       draw();
       return {
         judge: function () {
@@ -67,7 +67,7 @@ window.sthLab({
     },
     hints: ["가장 높은 파란 막대를 찾으세요.", "‘구름 없을 때도 함께’를 켜면 5 ~ 7월이 모두 높지만, 실제로는 장마가 시작되기 전이 가장 많습니다."],
     solution: "<b>" + BEST + "월</b> (하루 약 " + SW[BEST].toFixed(1) + " kWh/m²).",
-    why: "구름이 없다면 해가 높고 낮이 긴 5 ~ 7월(하지 무렵)에 햇빛이 가장 많이 닿습니다. 그러나 우리나라는 6월 말부터 장마가 시작되고 7 ~ 9월에는 비구름이 잦아, 지표에 실제로 닿는 햇빛은 맑은 날이 많은 늦봄(5월)에 가장 많습니다. 태양에서 온 에너지가 지구에서 날씨를 만들고, 그 날씨가 다시 우리가 쓸 수 있는 햇빛의 양을 바꾸는 셈이에요.<br>"
+    why: "구름이 없다면 해가 높고 낮이 긴 5 ~ 7월(하지 무렵)에 햇빛이 가장 많이 닿습니다. 그러나 우리나라는 6월 말부터 장마가 시작되고 7 ~ 9월에는 비구름이 잦아, 지표에 실제로 닿는 햇빛은 맑은 날이 많은 늦봄(5월)에 가장 많습니다(해마다 조금 다르지만 10년 중 6번이 5월). 태양에서 온 에너지가 지구에서 날씨를 만들고, 그 날씨가 다시 우리가 쓸 수 있는 햇빛의 양을 바꾸는 셈이에요.<br>"
       + "태양광 발전소를 세울 때는 이렇게 그 지역의 실제 관측 자료로 발전량을 미리 계산합니다. 교과서의 ‘평균적인’ 값이 아니라 우리 동네 값이 필요한 까닭입니다."
   },
   {
@@ -84,11 +84,11 @@ window.sthLab({
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, g = 10000;
       function draw() {
         bars(H, ctx, W, cv.H, 0, false);
-        H.rows(ctx, 680, 40, [["한 해 일사량", Math.round(YEAR) + " kWh/m²"], ["내 답 (한 해 발전량)", g.toLocaleString() + " kWh", "--amber-700", true], ["= 집 몇 채 몫 (한 집 한 해 약 3,600 kWh)", (g / 3600).toFixed(1) + " 채"]], 62);
+        H.rows(ctx, 680, 40, [["한 해 일사량", Math.round(YEAR) + " kWh/m²"], ["내 답 (한 해 발전량)", g.toLocaleString() + " kWh", "--amber-700", true], ["집 몇 채 몫 (한 집 3,600 kWh/년)", (g / 3600).toFixed(1) + " 채"]], 62);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "한 해 발전량", min: 2000, max: 60000, step: 500, value: 10000, fmt: function (x) { return x.toLocaleString() + " kWh"; }, onInput: function (x) { g = x; api.changed(); draw(); } });
-      api.info("한 해 일사량 = 달마다 (하루 일사량 × 그 달의 날수) 를 더한 값 ≈ " + Math.round(YEAR) + " kWh/m². 집 한 채가 한 달에 약 300 kWh 를 쓴다고 보았습니다. " + SRC);
+      api.info("한 해 일사량 = 달마다 (하루 일사량 × 그 달의 날수) 를 더한 값 ≈ " + Math.round(YEAR) + " kWh/m². 4인 가구가 한 달에 약 300 kWh 를 쓴다고 보았습니다. " + SRC);
       draw();
       return {
         judge: function () {
@@ -98,9 +98,9 @@ window.sthLab({
         }
       };
     },
-    hints: ["한 해 일사량은 안내 칸에 있습니다(약 " + Math.round(YEAR) + " kWh/m²).", Math.round(YEAR) + " × 100 = " + Math.round(YEAR * 100).toLocaleString() + " kWh 가 패널에 닿고, × 0.2 × 0.8 을 하세요."],
+    hints: ["한 해 일사량은 안내 칸에 있습니다(약 " + Math.round(YEAR) + " kWh/m²).", Math.round(YEAR) + " × 100 = " + (Math.round(YEAR) * 100).toLocaleString() + " kWh 가 패널에 닿고, × 0.2 × 0.8 을 하세요."],
     solution: "약 " + Math.round(YEAR) + " × 100 × 0.2 × 0.8 ≈ <b>" + Math.round(OUT).toLocaleString() + " kWh</b>.",
-    why: "패널에 닿은 햇빛 에너지 가운데 전기로 바뀌는 것은 약 16%(0.2 × 0.8) 뿐이고, 나머지는 대부분 패널을 데우는 열이 됩니다. 에너지는 사라지지 않지만(에너지 보존) 쓸모 있는 형태로 바뀌는 몫이 <b>효율</b>입니다. 그래서 효율을 1%p 만 올려도 같은 지붕에서 얻는 전기가 크게 늘어요.<br>"
+    why: "패널에 닿은 햇빛 에너지 가운데 전기로 바뀌는 것은 약 16%(0.2 × 0.8) 뿐이고, 나머지는 대부분 열이 되고 일부는 반사됩니다. 에너지는 사라지지 않지만(에너지 보존) 쓸모 있는 형태로 바뀌는 몫이 <b>효율</b>입니다. 효율을 20% 에서 21% 로 1%p 만 올려도 같은 지붕에서 한 해 약 1,200 kWh(5%) 를 더 얻어요.<br>"
       + "태양광 전기는 발전하는 동안 온실 기체를 내지 않지만, 밤과 흐린 날에는 만들 수 없어 저장 장치나 다른 발전 방식과 함께 써야 합니다. ※ 실제 발전량은 패널의 방향·기울기·그늘에 따라 달라집니다."
   }
   ]
