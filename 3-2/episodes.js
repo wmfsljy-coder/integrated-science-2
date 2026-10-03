@@ -746,7 +746,8 @@ window.sthWork({
     { key: "r1", label: "① 할머니의 딸기 온실" },
     { key: "r2", label: "② 공청회에 서다" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   items: [
     { id: "all", label: "두 이야기를 꿰는 한 문장", hint: "흰 딸기를 못 알아본 로봇과 특정 집단을 더 자주 오인식하는 CCTV. 두 이야기에 공통으로 들어 있는 생각을 ‘유용성’, ‘한계’, ‘사람의 책임’이라는 말을 넣어 쓰세요." },
@@ -761,7 +762,8 @@ window.sthShare({
     { key: "r1", label: "① 할머니의 딸기 온실" },
     { key: "r2", label: "② 공청회에 서다" },
     { key: "rQuiz", label: "수준별 문제" },
-    { key: "rLab", label: "응용 실험실" }
+    { key: "rLab", label: "응용 실험실" },
+    { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "두 이야기를 꿰는 한 문장" }
 });
