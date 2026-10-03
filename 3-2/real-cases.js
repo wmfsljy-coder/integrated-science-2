@@ -1,10 +1,10 @@
 /* 통합과학2 Ⅲ 과학 기술의 발전과 쟁점 — 실제 자료
    r1 겨울 딸기 온실의 햇빛 — 12월에 땅에 닿는 햇빛은 6월의 몇 %
-   r2 가장 흐린 달 — 맑은 날 기준에 비해 햇빛이 가장 많이 가려지는 달
-   자료: data/seoul-sun.js (NASA POWER 서울 일사량 2001 ~ 2024) */
+   r2 보조 난방기를 켜는 문턱 — 논산의 지난겨울 최저 기온으로 제어 규칙 정하기
+   자료: data/seoul-sun.js (NASA POWER 서울 일사량 2001 ~ 2024), data/nonsan-winter.js (ERA5 논산 2024 ~ 2025 겨울) */
 (function () {
 "use strict";
-var S = window.REAL_SUN || { monthly: [] };
+var S = window.REAL_SUN || { monthly: [] }, N = window.REAL_NONSAN || { days: [] };
 var NY = {}; S.monthly.forEach(function (r) { NY[r[0]] = 1; });
 function mavg(m, i) { var a = S.monthly.filter(function (r) { return r[1] === m && r[i] != null && r[i] >= 0; }); return a.length ? a.reduce(function (s, r) { return s + r[i]; }, 0) / a.length : 0; }
 var ALL = [], CLR = [];
@@ -12,14 +12,17 @@ for (var m = 1; m <= 12; m++) { ALL.push(mavg(m, 2)); CLR.push(mavg(m, 3)); }
 var PCT = ALL[5] ? ALL[11] / ALL[5] * 100 : 40;
 var CL = 0; for (var k = 1; k < 12; k++) if (ALL[k] / CLR[k] < ALL[CL] / CLR[CL]) CL = k;
 var SRC = "<small>출처: 미국 항공우주국(NASA) POWER 자료 서비스 — 서울(북위 37.57°, 동경 126.98°) 수평면에 하루 동안 닿은 햇빛 에너지(kWh/m²/일)의 달 평균을 2001 ~ 2024년 " + Object.keys(NY).length + "해로 평균. 짙은 막대는 구름까지 포함한 실제 값, 옅은 막대는 구름이 없다고 친 값입니다. 사본은 data/seoul-sun.js.</small>";
+var COLD = (N.days || []).reduce(function (b, r) { return r[1] < b[1] ? r : b; }, (N.days || [])[0] || ["2025-02-05", -11.7]);
+var TH30 = (function () { var a = (N.days || []).map(function (r) { return r[1]; }).sort(function (x, y) { return x - y; }); return a.length > 30 ? (a[29] + a[30]) / 2 : -5; })();
+var SRC2 = "<small>출처: 유럽 중기예보센터 ERA5 재분석(Open-Meteo 과거 날씨 API) — 충남 논산 부근(북위 36.20°, 동경 127.10°)의 하루 최저 기온, 2024년 12월 1일 ~ 2025년 2월 28일. 약 25 km 격자 값이라 들판의 실제 기온과 1 ~ 2 °C 다를 수 있습니다. 사본은 data/nonsan-winter.js.</small>";
 var MN = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 
 function chart(H, ctx, W, CH, pick) {
   H.paper(ctx, W, CH);
   var x0 = 60, x1 = 600, y0 = 26, y1 = CH - 36, bw = (x1 - x0) / 12;
-  function Y(v) { return y1 - v / 28 * (y1 - y0); }
+  function Y(v) { return y1 - v / 8 * (y1 - y0); }
   H.axes(ctx, x0, y0, x1, y1);
-  [0, 10, 20].forEach(function (v) { H.text(ctx, v, x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
+  [0, 2, 4, 6].forEach(function (v) { H.text(ctx, v, x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
   for (var i = 0; i < 12; i++) {
     var x = x0 + i * bw;
     H.box(ctx, x + 6, Y(CLR[i]), bw - 12, y1 - Y(CLR[i]), H.v("--amber-700"), 0.25);
@@ -67,38 +70,52 @@ window.sthLab({
       + "그래서 겨울 온실은 햇빛을 최대한 받도록 비닐을 깨끗이 하고, 흐린 날에는 보광등을, 밤에는 보온을 씁니다. 스마트 온실의 조도 센서는 ‘햇빛이 얼마나 모자란지’를 재어 이런 장치를 켜고 끄는 근거가 돼요."
   },
   {
-    id: "r2", tag: "실제 자료 · 구름", title: "가장 흐린 달", short: "흐린 달",
-    who: "☁️", name: "온실 센서 설계팀",
-    say: "“구름이 없다면 받을 햇빛(옅은 막대)에 비해 실제로 받은 햇빛(짙은 막대)이 <b>가장 적은 비율</b>인 달을 찾아 주세요. 그달에 온실의 햇빛 센서가 가장 바빠질 거예요. 그리고 그 까닭을 골라 주세요.”",
+    id: "r2", tag: "실제 자료 · 제어 규칙", title: "보조 난방기를 켜는 문턱", short: "난방 문턱",
+    who: "🌡️", name: "스마트팜 설계팀",
+    say: "“딸기는 밤에도 온실 안이 5 ~ 8 °C 아래로 내려가지 않아야 해요. 온실은 비닐 두 겹과 보온 커튼으로 버티지만, 바깥이 아주 추운 밤에는 <b>보조 난방기</b>를 켜야 합니다. 딸기 산지 논산의 지난겨울 <b>실제 최저 기온</b>으로, 겨울 " + (N.days || []).length + "일 가운데 <b>약 30일만</b> 난방기가 켜지도록 바깥 기온 문턱을 정해 주세요.”",
     predict: {
-      q: "햇빛이 가장 센 계절과 땅에 닿는 햇빛이 가장 많은 달은 늘 같을까요?",
-      options: ["㉠ 늘 같다", "㉡ 다를 수 있다 — 구름이 많은 달은 햇빛이 가려진다", "㉢ 구름은 햇빛과 상관없다"],
-      answer: 1
+      q: "문턱을 높게(덜 추운 값으로) 잡으면 어떻게 될까요?",
+      options: ["㉠ 난방기가 더 자주 켜져 연료는 더 들지만 딸기는 안전해진다", "㉡ 난방기가 덜 켜진다", "㉢ 아무 차이가 없다"],
+      answer: 0
     },
-    task: "실제 ÷ 구름 없을 때 비율이 가장 작은 달을 고르고, 그 까닭을 고르세요.",
+    task: "바깥 최저 기온이 문턱보다 낮은 날이 27 ~ 33일이 되도록 문턱을 맞추세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, i = 0, why = "none";
+      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, th = 0;
+      var D = N.days || [];
+      function cnt(t) { return D.filter(function (r) { return r[1] < t; }).length; }
       function draw() {
-        chart(H, ctx, W, cv.H, i);
-        H.rows(ctx, 640, 30, [["고른 달", MN[i], "--amber-700"], ["실제 · 구름 없을 때", ALL[i].toFixed(1) + " · " + CLR[i].toFixed(1)], ["실제 ÷ 구름 없을 때", (ALL[i] / CLR[i] * 100).toFixed(0) + "%", null, true]], 62);
+        H.paper(ctx, W, cv.H);
+        var x0 = 60, x1 = 600, y0 = 26, y1 = cv.H - 36, bw = (x1 - x0) / Math.max(1, D.length);
+        function Y(v) { return y0 + (6 - v) / 20 * (y1 - y0); }
+        H.axes(ctx, x0, y0, x1, y1);
+        [5, 0, -5, -10].forEach(function (v) { H.text(ctx, v + "°", x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
+        H.dash(ctx, x0, Y(0), x1, Y(0), H.v("--line"), 1);
+        D.forEach(function (r, i) {
+          var on = r[1] < th;
+          H.box(ctx, x0 + i * bw + 0.5, Y(Math.max(r[1], 0)), Math.max(1, bw - 1), Math.abs(Y(r[1]) - Y(0)), on ? H.v("--rose-700") : H.v("--brand"), 0.85);
+          if (r[0].slice(8) === "01") H.text(ctx, (+r[0].slice(5, 7)) + "월", x0 + i * bw + 8, y1 + 15, { s: 10, c: H.v("--mist") });
+        });
+        H.dash(ctx, x0, Y(th), x1, Y(th), H.v("--amber-700"), 2);
+        H.text(ctx, "문턱 " + th.toFixed(1) + "°", x1 - 4, Y(th) - 6, { s: 10.5, w: "800", a: "right", c: H.v("--amber-700") });
+        H.text(ctx, "논산 부근 하루 최저 기온 (°C) — 빨강: 난방기가 켜지는 날", x0 + 6, y0 - 10, { s: 11, w: "700", c: H.v("--mist") });
+        H.rows(ctx, 640, 40, [["문턱", th.toFixed(1) + " °C", "--amber-700"], ["난방기 켜지는 날", cnt(th) + " 일", null, true], ["겨울 전체", D.length + " 일"]], 62);
       }
       cv.canvas._redraw = draw;
-      api.slider({ label: "달", min: 0, max: 11, step: 1, value: 0, fmt: function (x) { return MN[x]; }, onInput: function (x) { i = x; api.changed(); draw(); } });
-      api.seg({ label: "그달이 흐린 까닭", value: "none", options: [{ v: "rain", t: "장마 전선이 머물러서" }, { v: "snow", t: "눈이 많이 와서" }, { v: "dust", t: "황사가 와서" }], onPick: function (x) { why = x; api.changed(); } });
-      api.info(SRC);
+      api.slider({ label: "바깥 기온 문턱", min: -12, max: 5, step: 0.1, value: 0, fmt: function (x) { return x.toFixed(1) + " °C"; }, onInput: function (x) { th = x; api.changed(); draw(); } });
+      api.info(SRC2);
       draw();
       return {
         judge: function () {
-          if (i !== CL) return { ok: false, msg: MN[i] + " 은 " + (ALL[i] / CLR[i] * 100).toFixed(0) + "% 입니다. 더 많이 가려지는 달이 있어요." };
-          if (why !== "rain") return { ok: false, msg: "달은 맞았습니다. 그달 우리나라에 오래 머무는 것은 무엇일까요?" };
-          return { ok: true, msg: MN[CL] + " — 구름이 없을 때의 " + (ALL[CL] / CLR[CL] * 100).toFixed(0) + "% 만 땅에 닿습니다. 장마 때문에 6월보다 햇빛이 크게 줄어요." };
+          var c = cnt(th);
+          if (c >= 27 && c <= 33) return { ok: true, msg: "문턱 " + th.toFixed(1) + " °C — " + D.length + "일 가운데 " + c + "일 켜집니다. 지난겨울 가장 추운 밤은 " + (+COLD[0].slice(5, 7)) + "월 " + (+COLD[0].slice(8, 10)) + "일 " + COLD[1].toFixed(1) + " °C 였어요." };
+          return { ok: false, msg: "문턱 " + th.toFixed(1) + " °C 에서는 " + c + "일 켜집니다. " + (c > 33 ? "너무 자주 켜져요. 문턱을 더 낮추세요." : "너무 드물어요. 문턱을 더 높이세요.") };
         }
       };
     },
-    hints: ["짙은 막대와 옅은 막대의 차이가 가장 큰 달을 찾으세요.", "여름 한가운데, 비가 가장 많이 오는 달입니다."],
-    solution: "<b>" + MN[CL] + "</b>, 장마 전선 때문.",
-    why: "우리나라는 6월 말 ~ 7월에 장마 전선이 머물러 구름과 비가 많습니다. 그래서 낮이 가장 긴 하지(6월) 무렵보다 7월에 땅에 닿는 햇빛이 오히려 적어요. 태양광 발전량이 5월에 가장 많은 것도 같은 까닭입니다.<br>"
-      + "스마트 온실을 설계할 때 ‘평균’만 보지 말고, 이렇게 햇빛이 가장 모자란 달과 가장 남는 달(차광이 필요한 때)을 함께 따져야 장치가 실제 상황에 맞게 움직입니다."
+    hints: ["문턱 선을 내리면 빨간 막대(켜지는 날)가 줄어듭니다.", "오른쪽 ‘난방기 켜지는 날’이 30 근처가 될 때까지 옮기세요(−5 °C 근처부터 보세요)."],
+    solution: "문턱 약 <b>" + TH30.toFixed(1) + " °C</b> 안팎(켜지는 날 27 ~ 33일).",
+    why: "스마트팜의 제어 규칙은 ‘센서 값이 문턱을 넘으면 장치를 켠다’는 단순한 형식이지만, 문턱을 어디에 두느냐에 따라 작물의 안전과 연료비가 맞바뀝니다(트레이드오프). 실제 자료로 ‘몇 번 켜질지’를 미리 세어 보면 근거 있게 문턱을 정할 수 있어요. 오늘날 스마트팜은 바깥 기온 대신 온실 안 온도 센서를 쓰고, 일기 예보를 받아 미리 보온 커튼을 닫기도 합니다.<br>"
+      + "또 한 해의 자료만으로 정한 규칙은 더 추운 해에 맞지 않을 수 있습니다. 여러 해의 자료를 보고, 가장 추운 밤에도 견디도록 안전장치(경보·예비 난방)를 함께 두는 것이 공학적 설계의 기본이에요."
   }
   ]
 });
