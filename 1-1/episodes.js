@@ -220,7 +220,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
     }
     function mission() {
       if (got.a) { done("m1-3a"); $("m1-3a").innerHTML = "고생대는 <b>11월 19일</b>에야 시작됩니다. 그 앞 322일이 선캄브리아 시대입니다."; }
-      if (got.b) { done("m1-3b"); $("m1-3b").innerHTML = "공룡이 사라진 날은 <b>12월 26일</b>. 중생대는 약 2주, 신생대는 엿새가 채 안 됩니다."; }
+      if (got.b) { done("m1-3b"); $("m1-3b").innerHTML = "공룡이 사라진 날은 <b>12월 26일</b>. 중생대는 약 2주, 신생대는 약 5일입니다."; }
       if (sorted) done("m1-3c");
       if (got.a && got.b && sorted) { window.sthMission("m1-3", true); ep.clear(2); }
     }
@@ -235,7 +235,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
         var ok = (i === 1);
         window.sthState("dinoOK", ok ? "맞음" : "어긋남");
         var box = $("a-dino-info"); box.hidden = false;
-        box.innerHTML = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "공룡은 <b>중생대 육상에서 살았던 공룡상목 파충류</b>만을 가리킵니다. 익룡, 어룡, 수장룡은 모두 중생대에 살았지만 <b>공룡이 아닙니다.</b> 중생대 파충류가 모두 공룡인 것은 아닙니다.";
+        box.innerHTML = (ok ? "<b>맞았습니다.</b> " : "<b>정답은 ㉡ 입니다.</b> ") + "공룡은 <b>중생대 육지에 살았던 특정 파충류 무리</b>만을 가리킵니다. 익룡, 어룡, 수장룡은 모두 중생대에 살았지만 <b>공룡이 아닙니다.</b> 중생대 파충류가 모두 공룡인 것은 아닙니다.";
       }
     });
 

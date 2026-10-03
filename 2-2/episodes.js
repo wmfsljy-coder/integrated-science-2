@@ -247,7 +247,7 @@ function segBind(id, attr, fn) {
     /* (나) 직렬 전환 계산기 — 기존 화면을 로그 눈금으로 고쳤다 */
     (function () {
       var canvas = $("c-a-chain"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
-      var a = 70, b = 2, c = 0.1;
+      var a = 30, b = 2, c = 0.1;
       function draw() {
         paper(ctx, W, H);
         var s1 = a, s2 = s1 * b / 100, s3 = s2 * c / 100;

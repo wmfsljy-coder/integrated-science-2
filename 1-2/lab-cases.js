@@ -26,7 +26,7 @@ window.sthLab({
       function removed(t) { return 1 - Math.exp(-MET[met].k * Math.pow(2, (T - 25) / 10) * t); }
       function draw() {
         H.paper(ctx, W, cv.H);
-        H.text(ctx, "뜨거운 소금물 속 — 은수저와 " + MET[met].t, 40, 30, { s: 14, w: "900" });
+        H.text(ctx, "소금물 속 — 은수저와 " + MET[met].t, 40, 30, { s: 14, w: "900" });
         ctx.fillStyle = H.v("--brand"); ctx.globalAlpha = 0.18; ctx.fillRect(80, 110, 360, 180); ctx.globalAlpha = 1;
         ctx.strokeStyle = H.v("--line"); ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(80, 70); ctx.lineTo(80, 290); ctx.lineTo(440, 290); ctx.lineTo(440, 70); ctx.stroke();
         var r = removed(tNow), g = Math.round(40 + r * 170);
@@ -78,7 +78,7 @@ window.sthLab({
 
   /* ------------------------------------------------------------------ 2. 중화 반응의 양적 관계 */
   {
-    id: "c2", tag: "중화 반응", title: "식초 라벨을 믿어도 될까", short: "식초 적정",
+    id: "c2", tag: "중화 반응 · 더 나아가기", title: "식초 라벨을 믿어도 될까", short: "식초 적정",
     who: "🧪", name: "소비자 보호원",
     say: "“라벨 없는 식초 샘플이 들어왔어요. 식초 속 아세트산이 얼마나 진한지 알아야 합니다. <b>식초 10 mL</b> 에 페놀프탈레인을 두 방울 넣고, 뷰렛으로 <b>0.20 M 수산화 나트륨</b> 수용액을 떨어뜨려 보세요. 붉은빛이 처음 돌아 사라지지 않는 순간이 기준입니다.”",
     predict: {

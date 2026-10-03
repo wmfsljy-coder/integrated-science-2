@@ -482,7 +482,7 @@ function seg(id, cb) {
       $("b-ion-info").innerHTML = "NaOH 수용액 <b>" + vol + " mL</b> (OH⁻ " + n + "개) → H⁺ " + Math.min(8, n) + "개와 만나 물 " + water + "개 생성, 온도 <b>" + neutT(vol).toFixed(1) + "℃</b>, 전체 이온 수 " + total + "개. " +
         (hLeft > 0 ? "아직 H⁺이 " + hLeft + "개 남아 <b>산성</b>입니다. Na⁺은 반응에 끼지 않고 그대로 남는 구경꾼 이온입니다." :
           (ohLeft > 0 ? "H⁺이 모두 없어져 더는 물이 생기지 않습니다. 남는 OH⁻ " + ohLeft + "개 때문에 <b>염기성</b>입니다. 열은 더 나오지 않는데 20℃의 용액만 늘어나 온도가 내려갑니다." :
-            "H⁺ 8개와 OH⁻ 8개가 <b>1:1로 모두 반응</b>했습니다. 여기가 <b>중화점</b>입니다. 남은 것은 Na⁺과 Cl⁻뿐입니다."));
+            "H⁺ 8개와 OH⁻ 8개가 <b>1:1로 모두 반응</b>했습니다. 여기가 <b>중화점</b>입니다. 남은 것은 Na⁺과 Cl⁻뿐이고, 물을 증발시키면 이들이 염화 나트륨, 곧 <b>염</b>으로 남습니다."));
     }
     function mission() {
       put("b-m3n", Math.min(7, seen.length));
@@ -632,7 +632,7 @@ function seg(id, cb) {
     var canvas = $("c-energy"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var RX = {
       ch4: { name: "메테인의 연소", eq: "CH₄ + 2O₂ → CO₂ + 2H₂O", dH: -890, per: "메테인 1몰이 탈 때", gap: 150 },
-      fe:  { name: "철 가루의 산화", eq: "4Fe + 3O₂ → 2Fe₂O₃", dH: -824, per: "산화 철(Ⅲ) 1몰이 생길 때", gap: 140 },
+      fe:  { name: "철 가루의 산화", eq: "2Fe + 3/2 O₂ → Fe₂O₃", dH: -824, per: "산화 철(Ⅲ) 1몰이 생길 때", gap: 140 },
       an:  { name: "질산 암모늄의 용해", eq: "NH₄NO₃(고체) → NH₄⁺ + NO₃⁻ (수용액)", dH: 26, per: "질산 암모늄 1몰이 녹을 때", gap: -70 }
     };
     var type = "ch4", prog = 0, st = window.sthState("energy") || { a: false, b: false, q: false };
@@ -734,7 +734,7 @@ function seg(id, cb) {
       text(ctx, "최고 " + s.mx.toFixed(1) + "℃ · 50℃ 이상 " + s.h50.toFixed(1) + "시간 · 방출한 열 모두 " + Math.round(m * 7.38) + " kJ", x0, 30, { s: 13.5, w: "900", c: ok ? v("--green-700") : v("--ink") });
 
       $("c-warm-info").innerHTML = "철 가루 <b>" + m + " g</b>, 공기 구멍 <b>" + lv + "단계</b>(1시간에 철 " + (0.5 * lv).toFixed(1) + " g 산화) → 최고 <b>" + s.mx.toFixed(1) + "℃</b>, 50℃ 이상 <b>" + s.h50.toFixed(1) + "시간</b>. " +
-        (s.mx > 60 ? "🔥 너무 뜨겁습니다. 산소가 빨리 들어와 열이 한꺼번에 나옵니다. 저온 화상 위험!" :
+        (s.mx > 60 ? "🔥 너무 뜨겁습니다. 산소가 빨리 들어와 열이 한꺼번에 나옵니다. 화상 위험!" :
           (s.mx < 50 ? "미지근합니다. 1시간에 나오는 열이 주변으로 빠져나가는 열을 이기지 못합니다." :
             (s.h50 < 8 ? "온도는 알맞지만 철 가루가 일찍 떨어집니다." : (m > 30 ? "성능은 좋지만 철 가루가 30 g을 넘습니다." : "✅ 온도도 지속 시간도 알맞습니다.")))) +
         " <b>온도</b>는 열이 나오는 <b>빠르기</b>(구멍)가, <b>지속 시간</b>은 철 가루의 <b>양</b>이 정합니다.";
@@ -827,7 +827,7 @@ function seg(id, cb) {
   function finish() { window.sthState("r3", "해결 · 손난로 " + (window.sthState("warmBest") || "-") + " · 냉찜질 팩 " + (window.sthState("coldBest") || "-")); }
   window.sthSort({
     mount: "c-sort",
-    buckets: [{ id: "exo", label: "🔥 발열 반응", sub: "에너지 방출 → 주변 온도 상승" }, { id: "endo", label: "❄️ 흡열 반응", sub: "에너지 흡수 → 주변 온도 하강" }],
+    buckets: [{ id: "exo", label: "🔥 발열 반응", sub: "에너지 방출 → 주변 온도 상승" }, { id: "endo", label: "❄️ 열을 흡수하는 변화", sub: "에너지 흡수 → 주변 온도 하강" }],
     items: [
       { t: "손난로(철 가루)를 흔들면 따뜻해진다", a: "exo", why: "철의 산화는 발열 반응입니다." },
       { t: "물에 질산 암모늄을 녹이면 컵 표면에 물방울이 맺힐 만큼 차가워진다", a: "endo", why: "질산 암모늄의 용해는 주변의 열을 흡수합니다." },

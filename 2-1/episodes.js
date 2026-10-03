@@ -313,7 +313,7 @@ function text(ctx, s, x, y, o) {
       $("gone-run").disabled = true;
       animate(canvas, sim, 1926, [], function () {
         watched = true; window.sthState("goneSeen", 1); $("gone-run").disabled = false; $("gone-run").textContent = "↻ 다시 보기";
-        $("gone-info").innerHTML = "엘크는 약 3,800마리에서 한때 <b>1만 6천 마리</b>까지 늘었다가 1만 2천 마리쯤에서 멈췄습니다. 식생은 <b>75% → 20%</b>로 무너진 뒤 70년이 지나도 회복되지 않았습니다.";
+        $("gone-info").innerHTML = "엘크는 약 3,800마리에서 한때 <b>1만 7천 마리</b>까지 늘었다가 1만 2천 마리쯤에서 멈췄습니다. 식생은 <b>75% → 20%</b>로 무너진 뒤 70년이 지나도 회복되지 않았습니다.";
         check();
       });
     });
@@ -379,7 +379,7 @@ function text(ctx, s, x, y, o) {
     mount: "wk2", unitLabel: "[통합과학2 Ⅱ-1] 이야기 ② 늑대가 돌아왔다",
     items: [
       { id: "w2", label: "공원 보고서: 평형이 되돌아오는 과정", hint: "포식자가 늘었을 때 개체수가 다시 균형을 찾는 과정을 순서대로 쓰세요." },
-      { id: "e2b", label: "우리 주변의 사례", hint: "외래종 유입, 서식지 파괴처럼 평형을 깨뜨리는 환경 변화 하나를 골라, 먹이 관계를 따라 어떤 영향이 퍼질지 예상해 쓰세요." }
+      { id: "e2b", label: "우리 주변의 사례", hint: "외래종 유입, 서식지 파괴처럼 평형을 깨뜨리는 환경 변화 하나를 골라, 먹이 관계를 따라 어떤 영향이 퍼질지 예상해 쓰세요. 모둠 친구들의 예상과 비교해 서로 다른 점을 적고, 함께 합의한 대책 하나를 덧붙이세요." }
     ]
   });
 })();
