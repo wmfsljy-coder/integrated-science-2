@@ -1,6 +1,6 @@
 /* 통합과학2 Ⅱ-1 생태계와 환경 변화 — 실제 자료
    r1 킬링 곡선: 최근 10년 속도가 이어지면 2050년의 이산화 탄소 농도는?
-   r2 이산화 탄소 농도와 지구 평균 기온 — 100 ppm 마다 몇 °C?
+   r2 이산화 탄소 농도와 지구 평균 기온 — 100 ppm마다 몇 °C?
    자료: data/co2-mlo.js (NOAA 지구감시연구소, 마우나로아), data/gistemp.js (NASA GISTEMP v4) — 공공 영역 */
 (function () {
 "use strict";
@@ -12,7 +12,7 @@ var RATE = (co2(YL) - co2(YL - 10)) / 10, PROJ = co2(YL) + (2050 - YL) * RATE;
 var PAIRS = AN.map(function (a) { var g = null; GT.forEach(function (r) { if (r[0] === a[0]) g = r[1]; }); return g == null ? null : [a[1], g, a[0]]; }).filter(function (p) { return p; });
 var FIT = (function () { var n = PAIRS.length, sx = 0, sy = 0, sxx = 0, sxy = 0; PAIRS.forEach(function (p) { sx += p[0]; sy += p[1]; sxx += p[0] * p[0]; sxy += p[0] * p[1]; }); var m = (n * sxy - sx * sy) / (n * sxx - sx * sx); return { m: m, b: (sy - m * sx) / n }; })();
 var SRC1 = "<small>출처: 미국 해양대기청(NOAA) 지구감시연구소 GML, 마우나로아 관측소 이산화 탄소 연평균(" + Y0 + " ~ " + YL + "). 사본은 이 단원의 data/co2-mlo.js.</small>";
-var SRC2 = "<small>출처: NASA 고다드 우주연구소 GISTEMP v4 전 지구 육지·해양 연평균 기온 편차(1951 ~ 1980 평균 기준), NOAA 마우나로아 이산화 탄소. 사본은 data/gistemp.js, data/co2-mlo.js.</small>";
+var SRC2 = "<small>출처: NASA 고다드 우주연구소 GISTEMP v4 전 지구 육지·해양 연평균 기온 편차(1951~1980 평균 기준), NOAA 마우나로아 이산화 탄소. 사본은 data/gistemp.js, data/co2-mlo.js.</small>";
 
 window.sthLab({
   mount: "real", key: "real", result: "rReal", label: "실제 자료",
@@ -21,7 +21,7 @@ window.sthLab({
   {
     id: "r1", tag: "실제 자료 · 킬링 곡선", title: "2050년의 이산화 탄소 농도", short: "2050년 예상",
     who: "🌋", name: "마우나로아 관측소",
-    say: "“1958년부터 하와이 마우나로아 산 위에서 공기 속 이산화 탄소를 재 왔어요. 아래는 " + Y0 + " ~ " + YL + "년의 <b>실제 연평균</b>입니다. <b>최근 10년(" + (YL - 10) + " ~ " + YL + ")의 증가 속도</b>가 그대로 이어진다면 <b>2050년</b>에는 몇 ppm 이 될지 예상해 주세요.”",
+    say: "“1958년부터 하와이 마우나로아 산 위에서 공기 속 이산화 탄소를 재 왔어요. 아래는 " + Y0 + " ~ " + YL + "년의 <b>실제 연평균</b>입니다. <b>최근 10년(" + (YL - 10) + " ~ " + YL + ")의 증가 속도</b>가 그대로 이어진다면 <b>2050년</b>에는 몇 ppm이 될지 예상해 주세요.”",
     predict: {
       q: "이산화 탄소가 늘어나는 속도는 어떻게 변해 왔을까요?",
       options: ["㉠ 해마다 같은 양씩 일정하게 늘었다", "㉡ 점점 더 빨리 늘고 있다", "㉢ 요즘은 줄어들기 시작했다"],
@@ -41,7 +41,7 @@ window.sthLab({
         H.line(ctx, AN.map(function (a) { return [X(a[0]), Y(a[1])]; }), H.v("--brand"), 2.5);
         H.dash(ctx, X(YL), Y(co2(YL)), X(2050), Y(p), H.v("--coral-700"), 2);
         H.dot(ctx, X(2050), Y(p), 7, H.v("--coral-700"));
-        H.rows(ctx, 680, 40, [[YL + "년", co2(YL).toFixed(1) + " ppm"], [(YL - 10) + "년", co2(YL - 10).toFixed(1) + " ppm"], ["1959 ~ 1969 한 해 증가", ((co2(1969) - co2(1959)) / 10).toFixed(2) + " ppm"], ["내 2050년 예상", p + " ppm", "--coral-700", true]], 52);
+        H.rows(ctx, 680, 40, [[YL + "년", co2(YL).toFixed(1) + " ppm"], [(YL - 10) + "년", co2(YL - 10).toFixed(1) + " ppm"], ["1959~1969 한 해 증가", ((co2(1969) - co2(1959)) / 10).toFixed(2) + " ppm"], ["내 2050년 예상", p + " ppm", "--coral-700", true]], 52);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "2050년 예상 농도", min: 420, max: 520, step: 1, value: 440, fmt: function (x) { return x + " ppm"; }, onInput: function (x) { p = x; api.changed(); draw(); } });
@@ -51,22 +51,22 @@ window.sthLab({
       draw();
       return {
         judge: function () {
-          if (Math.abs(p - PROJ) <= 4) return { ok: true, msg: "최근 10년 한 해 " + RATE.toFixed(2) + " ppm 씩 → " + co2(YL).toFixed(1) + " + " + RATE.toFixed(2) + " × " + (2050 - YL) + " ≈ " + PROJ.toFixed(0) + " ppm 입니다." };
+          if (Math.abs(p - PROJ) <= 4) return { ok: true, msg: "최근 10년 한 해 " + RATE.toFixed(2) + " ppm씩 → " + co2(YL).toFixed(1) + " + " + RATE.toFixed(2) + " × " + (2050 - YL) + " ≈ " + PROJ.toFixed(0) + " ppm입니다." };
           var all = co2(YL) + (2050 - YL) * (co2(YL) - co2(Y0)) / (YL - Y0);
-          if (Math.abs(p - all) <= 4) return { ok: false, msg: "전체 기간의 평균 속도를 썼네요. 최근 10년은 그보다 훨씬 빠릅니다." };
-          return { ok: false, msg: p + " ppm 은 " + (p < PROJ ? "낮습니다" : "높습니다") + ". 먼저 최근 10년의 한 해 증가량을 구하세요." };
+          if (Math.abs(p - all) <= 4) return { ok: false, msg: "전체 기간의 평균 속도를 썼습니다. 최근 10년은 그보다 훨씬 빠릅니다." };
+          return { ok: false, msg: p + " ppm은 " + (p < PROJ ? "낮습니다" : "높습니다") + ". 먼저 최근 10년의 한 해 증가량을 구하세요." };
         }
       };
     },
     hints: ["(" + YL + "년 값 − " + (YL - 10) + "년 값) ÷ 10 = 한 해 증가량", "그 증가량에 " + (2050 - YL) + "(년)을 곱해 " + YL + "년 값에 더하세요."],
     solution: "한 해 약 " + RATE.toFixed(2) + " ppm × " + (2050 - YL) + "년 → <b>약 " + PROJ.toFixed(0) + " ppm</b>.",
-    why: "1960년대에는 한 해 1 ppm 이 채 안 되게(약 0.9 ppm) 늘던 이산화 탄소가 요즘은 한 해 2.5 ppm 넘게 늘고 있습니다. 화석 연료를 태우는 양이 늘었기 때문이에요. 산업 혁명 전(약 280 ppm)과 비교하면 이미 1.5 배를 넘었습니다.<br>"
-      + "다만 이 예상은 ‘지금 속도가 그대로’라는 가정 위의 값입니다. 배출을 줄이면 곡선은 꺾이고, 더 늘리면 더 가팔라집니다. 미래는 그래프가 아니라 우리의 선택이 정해요."
+    why: "1960년대에는 한 해 1 ppm이 채 안 되게(약 0.9 ppm) 늘던 이산화 탄소가 요즘은 한 해 2.5 ppm 넘게 늘고 있습니다. 화석 연료를 태우는 양이 늘었기 때문입니다. 산업 혁명 전(약 280 ppm)과 비교하면 이미 1.5 배를 넘었습니다.<br>"
+      + "다만 이 예상은 ‘지금 속도가 그대로’라는 가정 위의 값입니다. 배출을 줄이면 곡선은 꺾이고, 더 늘리면 더 가팔라집니다. 미래는 그래프가 아니라 우리의 선택이 정합니다."
   },
   {
-    id: "r2", tag: "실제 자료 · 기온과 이산화 탄소", title: "100 ppm 마다 지구는 몇 °C 따뜻해졌나", short: "기온 기울기",
+    id: "r2", tag: "실제 자료 · 기온과 이산화 탄소", title: "100 ppm마다 지구는 몇 °C 따뜻해졌나", short: "기온 기울기",
     who: "🌡️", name: "기후 자료 분석실",
-    say: "“점 하나가 한 해입니다. 가로는 그해의 이산화 탄소 농도, 세로는 지구 평균 기온 편차(1951 ~ 1980 평균보다 몇 °C 높은지)예요. 점들을 가장 잘 지나는 직선을 그려, <b>이산화 탄소가 100 ppm 늘 때 기온이 몇 °C 올랐는지</b> 구해 주세요.”",
+    say: "“점 하나가 한 해입니다. 가로는 그해의 이산화 탄소 농도, 세로는 지구 평균 기온 편차(1951~1980 평균보다 몇 °C 높은지)예요. 점들을 가장 잘 지나는 직선을 그려, <b>이산화 탄소가 100 ppm 늘 때 기온이 몇 °C 올랐는지</b> 구해 주세요.”",
     predict: {
       q: "두 값이 함께 오른다는 것만으로 ‘이산화 탄소가 기온을 올렸다’고 말할 수 있을까요?",
       options: ["㉠ 함께 오르면 그것으로 충분한 증거다", "㉡ 함께 오르는 것은 단서이고, 온실 효과라는 원리와 다른 증거가 있어야 원인이라 말할 수 있다", "㉢ 두 값은 아무 관계가 없다"],
@@ -97,15 +97,15 @@ window.sthLab({
       return {
         judge: function () {
           var t = FIT.m * 100;
-          if (Math.abs(m - t) <= 0.1) return { ok: true, msg: PAIRS.length + "년치 자료의 가장 잘 맞는 기울기는 약 " + t.toFixed(2) + " °C / 100 ppm 입니다." };
+          if (Math.abs(m - t) <= 0.1) return { ok: true, msg: PAIRS.length + "년치 자료의 가장 잘 맞는 기울기는 약 " + t.toFixed(2) + " °C / 100 ppm입니다." };
           return { ok: false, msg: m.toFixed(2) + " 는 " + (m < t ? "너무 완만합니다" : "너무 가파릅니다") + ". 평균 거리가 더 작아지는 쪽으로 옮겨 보세요." };
         }
       };
     },
-    hints: ["기울기를 0.05 씩 바꾸며 ‘평균 거리’ 숫자를 보세요.", "1 °C 근처에서 가장 작아집니다."],
+    hints: ["기울기를 0.05씩 바꾸며 ‘평균 거리’ 숫자를 보세요.", "1 °C 근처에서 가장 작아집니다."],
     solution: "약 <b>" + (FIT.m * 100).toFixed(2) + " °C / 100 ppm</b> (" + (Math.ceil((FIT.m * 100 - 0.1) * 20) / 20).toFixed(2) + " ~ " + (Math.floor((FIT.m * 100 + 0.1) * 20) / 20).toFixed(2) + ").",
     why: "지난 60여 년 동안 이산화 탄소가 100 ppm 늘 때마다 지구 평균 기온은 약 1 °C 올랐습니다. 두 값이 함께 오른다는 것(<b>상관</b>)만으로는 원인을 단정할 수 없지만, 이산화 탄소가 지표가 내는 적외선을 흡수한다는 실험실 측정(온실 효과), 위성으로 잰 지구 복사의 변화, 대류권은 데워지는데 성층권은 식는 현상 같은 여러 증거가 같은 방향을 가리켜 과학자들은 원인으로 결론 내렸습니다.<br>"
-      + "점이 직선에서 위아래로 흩어진 것은 엘니뇨·화산 폭발처럼 해마다 달라지는 요인 때문입니다. 한 해의 값보다 긴 기간의 흐름을 보아야 하는 까닭이에요."
+      + "점이 직선에서 위아래로 흩어진 것은 엘니뇨·화산 폭발처럼 해마다 달라지는 요인 때문입니다. 한 해의 값보다 긴 기간의 흐름을 보아야 하는 까닭입니다."
   }
   ]
 });

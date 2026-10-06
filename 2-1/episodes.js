@@ -184,7 +184,7 @@ function text(ctx, s, x, y, o) {
     if (i !== 4) return;
     var p = window.sthState("p1") || "";
     $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉢") === 0 ? "처음부터 정확히 짚었습니다. 이제 증거까지 갖췄네요." : "처음 생각과 달랐지요? 추리를 증거로 고쳐 나가는 것이 과학입니다.");
+      (p.indexOf("㉢") === 0 ? "처음부터 정확히 짚었습니다. 이제 증거까지 갖췄습니다." : "처음 생각과 달랐지요? 추리를 증거로 고쳐 나가는 것이 과학입니다.");
   });
   window.sthWork({
     mount: "wk1", unitLabel: "[통합과학2 Ⅱ-1] 이야기 ① 한 나무, 두 가지 잎",
@@ -262,7 +262,7 @@ function text(ctx, s, x, y, o) {
     (function step() {
       i = Math.min(n, i + Math.ceil(n / 120));
       chart(ctx, W, H, sim, i, startYear, marks);
-      if (i < n) window.setTimeout(step, 25); else if (onEnd) onEnd();   // rAF 는 가려진 탭에서 멈추므로 쓰지 않는다
+      if (i < n) window.setTimeout(step, 25); else if (onEnd) onEnd();   // rAF는 가려진 탭에서 멈추므로 쓰지 않는다
     })();
   }
 

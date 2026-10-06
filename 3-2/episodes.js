@@ -19,7 +19,7 @@ function text(ctx, s, x, y, o) {
   ctx.fillText(s, x, y);
 }
 
-/*MODEL-BEGIN — 계산 모형 (node 로 따로 검증한다) */
+/*MODEL-BEGIN — 계산 모형 (node로 따로 검증한다) */
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function rng(seed) { var s = seed; return function () { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
 
@@ -45,7 +45,7 @@ function farmSim(Ton, Mon) {
   return o;
 }
 function farmOk(o) { return o.hot === 0 && o.good >= 14 && o.dry === 0 && o.wet === 0; }
-var TIMER_WATER = 240;   // 3시간마다 무조건 30 L 씩 주는 타이머 방식의 하루 물 사용량
+var TIMER_WATER = 240;   // 3시간마다 무조건 30 L씩 주는 타이머 방식의 하루 물 사용량
 
 /* 빨간 품종: 익을수록 붉고 커진다(숨은 값 u). r 붉은 정도 0~100, s 크기 mm, y 익음 1/0 */
 function makeRed(seed, n) {
@@ -95,7 +95,7 @@ function errorsOf(pts, a, b) {             // 선보다 위 = 익음으로 판�
 var TRAIN = makeRed(6, 40), TEST_A = makeRed(106, 40), TEST_B = makeWhite(5, 30), WHITE_POOL = makeWhite(99, 40);
 function robotLine(nWhite) { return lineOf(trainStep(TRAIN.concat(WHITE_POOL.slice(0, nWhite)), [0, 0, 0], 1500)); }
 
-/* 오인식의 산수: 하루 N명(절반씩 집단 A·B), 찾는 사람 1명(99% 알아봄), 오인식률 fpr%, 집단 B 는 ratio 배 */
+/* 오인식의 산수: 하루 N명(절반씩 집단 A·B), 찾는 사람 1명(99% 알아봄), 오인식률 fpr%, 집단 B는 ratio 배 */
 var FPRS = [5, 2, 1, 0.5, 0.1, 0.05, 0.01, 0.001];
 function baseRate(N, fpr, ratio) {
   var fA = fpr / 100, fB = Math.min(1, fA * ratio);
@@ -111,7 +111,7 @@ function scaleNet(wb, wr, safe) {
 function stance(net) { return net >= 3 ? "도입 찬성 쪽" : (net <= -3 ? "도입 반대 쪽" : "팽팽함(판단 유보)"); }
 /*MODEL-END*/
 
-/* 산점도 한 장 — 장면 3·4 가 함께 쓴다 */
+/* 산점도 한 장 — 장면 3·4가 함께 쓴다 */
 function drawScatter(ctx, W, H, pts, lines, title, side) {
   paper(ctx, W, H);
   var x0 = 70, x1 = 610, y0 = 44, y1 = 370;
@@ -339,7 +339,7 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
     $("e1-wrap").hidden = false;
     var p = window.sthState("p1") || "", g = window.sthState("gen") || {};
     $("e1-vs").innerHTML = "<b>나의 첫 예상</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉡") === 0 ? "처음부터 정확히 내다봤습니다. 이제 그 까닭을 직접 확인했네요." : "로봇은 빨간 딸기는 90% 넘게 맞혔지만, 처음 보는 흰 딸기 앞에서는 절반밖에 맞히지 못했습니다. 쓸모없지도, 완벽하지도 않았습니다.") +
+      (p.indexOf("㉡") === 0 ? "처음부터 정확히 내다봤습니다. 이제 그 까닭을 직접 확인했습니다." : "로봇은 빨간 딸기는 90% 넘게 맞혔지만, 처음 보는 흰 딸기 앞에서는 절반밖에 맞히지 못했습니다. 쓸모없지도, 완벽하지도 않았습니다.") +
       "<br><b>내가 짠 규칙</b> " + (window.sthState("farmBest") || "-") + " &nbsp;|&nbsp; <b>흰 딸기 표본</b> " + (g.n != null && g.b ? g.n + "개 추가 → " + (g.acc || "") : "-");
   }
   function finish() {

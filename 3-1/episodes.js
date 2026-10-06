@@ -5,7 +5,7 @@
 "use strict";
 
 /* =========================================================================
-   계산 모형 (화면과 분리 — node 로 따로 돌려 미션 판정을 검증할 수 있다)
+   계산 모형 (화면과 분리 — node로 따로 돌려 미션 판정을 검증할 수 있다)
    ========================================================================= */
 function rng(seed) {                                   // mulberry32
   var a = seed >>> 0;
@@ -423,10 +423,10 @@ function segOn(box, btn) { Array.prototype.forEach.call(box.querySelectorAll("bu
     $("a-sir-v").addEventListener("input", function (e) { vac = +e.target.value; $("a-sir-v-val").textContent = vac + "%"; draw(); });
     window.sthPick({
       mount: "a-q2",
-      q: "면역을 가진 사람의 비율이 1 − 1/R₀ 을 넘으면 접촉을 줄이지 않아도 R이 1 아래로 내려갑니다(집단 면역). R₀ = 3인 감염병 X는 약 67%입니다. 그렇다면 R₀가 약 15나 되는 홍역은 인구의 몇 %가 면역을 가져야 할까요?",
+      q: "면역을 가진 사람의 비율이 1 − 1/R₀을 넘으면 접촉을 줄이지 않아도 R이 1 아래로 내려갑니다(집단 면역). R₀ = 3인 감염병 X는 약 67%입니다. 그렇다면 R₀가 약 15나 되는 홍역은 인구의 몇 %가 면역을 가져야 할까요?",
       options: ["약 50%", "약 67%", "약 80%", "약 93%"],
       answer: 3,
-      why: ["1 − 1/15 을 계산해 보세요.", "67%는 R₀ = 3일 때의 값입니다.", "1/15 ≈ 0.067 입니다. 1에서 빼 보세요.", "1 − 1/15 ≈ 0.93. 전파력이 큰 감염병일수록 훨씬 높은 접종률이 필요합니다. 홍역 예방 접종률을 95% 수준으로 유지하려는 까닭입니다."],
+      why: ["1 − 1/15을 계산해 보세요.", "67%는 R₀ = 3일 때의 값입니다.", "1/15 ≈ 0.067입니다. 1에서 빼 보세요.", "1 − 1/15 ≈ 0.93. 전파력이 큰 감염병일수록 훨씬 높은 접종률이 필요합니다. 홍역 예방 접종률을 95% 수준으로 유지하려는 까닭입니다."],
       onDone: function () { quiz = true; window.sthState("sirQuiz", 1); mission(); }
     });
     draw(); mission();
@@ -437,7 +437,7 @@ function segOn(box, btn) { Array.prototype.forEach.call(box.querySelectorAll("bu
   function reveal() {
     $("e1-wrap").hidden = false;
     var p = window.sthState("p1") || "";
-    $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉡") === 0 ? " — 스노와 같은 생각이었습니다. 이제 지도라는 증거까지 갖췄네요." : " — 당시 의사들 대부분도 그렇게 믿었습니다. 생각을 바꾼 것은 권위가 아니라 지도 위의 데이터였습니다.") +
+    $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉡") === 0 ? " — 스노와 같은 생각이었습니다. 이제 지도라는 증거까지 갖췄습니다." : " — 당시 의사들 대부분도 그렇게 믿었습니다. 생각을 바꾼 것은 권위가 아니라 지도 위의 데이터였습니다.") +
       "<br><b>나의 방역 대책</b> " + (window.sthState("sirBest") || "-");
   }
   function finish() { window.sthState("r1", "해결 · 브로드가 펌프 · " + (window.sthState("sirBest") || "-")); }
@@ -566,7 +566,7 @@ function segOn(box, btn) { Array.prototype.forEach.call(box.querySelectorAll("bu
       }
       return (bin(nO, 0.40) + bin(nN, 0.72)) / n * 100;
     }
-    function X(p) { return 60 + (p - 30) / 50 * 800; }           // 30% ~ 80%
+    function X(p) { return 60 + (p - 30) / 50 * 800; }           // 30%~80%
     function draw() {
       paper(ctx, W, H);
       var n = M.NS[ni], r = M.poll(n, share);
@@ -745,7 +745,7 @@ function segOn(box, btn) { Array.prototype.forEach.call(box.querySelectorAll("bu
       { t: "사람이 일일이 볼 수 없는 방대한 자료에서 숨은 규칙을 찾아낸다", a: "g", why: "새로운 정보와 지식을 산출할 수 있습니다." },
       { t: "개인의 취향과 건강 상태에 맞춘 추천·의료 서비스를 받는다", a: "g", why: "맞춤형 서비스가 가능해집니다." },
       { t: "경험과 감이 아니라 근거 자료를 바탕으로 정책을 결정한다", a: "g", why: "합리적인 의사 결정을 돕습니다." },
-      { t: "이름을 지운 자료도 다른 정보와 결합하면 누구인지 드러난다", a: "b", why: "개인 정보 침해 문제입니다. 방금 직접 확인했지요.", hint: "익명 데이터 장면을 떠올려 보세요." },
+      { t: "이름을 지운 자료도 다른 정보와 결합하면 누구인지 드러난다", a: "b", why: "개인 정보 침해 문제입니다. 방금 직접 확인했습니다.", hint: "익명 데이터 장면을 떠올려 보세요." },
       { t: "특정 집단에 치우쳐 모인 데이터로 전체에 대한 잘못된 결론을 낸다", a: "b", why: "편향된 데이터의 문제입니다. 240만 장의 엽서가 그랬습니다." },
       { t: "치우친 데이터로 학습한 인공지능이 특정 사람들에게 불리한 판단을 되풀이한다", a: "b", why: "데이터의 편향은 그것을 학습한 인공지능에도 그대로 옮겨 갑니다." },
       { t: "내 위치와 검색·구매 기록이 나도 모르게 수집되어 이용된다", a: "b", why: "사생활 침해와 정보 오남용의 위험입니다." }

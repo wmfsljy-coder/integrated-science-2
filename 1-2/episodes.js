@@ -59,7 +59,7 @@ function seg(id, cb) {
   });
 
   /* 장면 2 — 용광로 : Fe₂O₃ + 3CO → 2Fe + 3CO₂ , 2C + O₂ → 2CO
-     Fe₂O₃ 160 kg(1 kmol) 에 C 36 kg(3 kmol) → Fe 112 kg, CO₂ 132 kg */
+     Fe₂O₃ 160 kg(1 kmol)에 C 36 kg(3 kmol) → Fe 112 kg, CO₂ 132 kg */
   (function () {
     var canvas = $("a-furn"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var ore = 160, coke = 10;
@@ -332,8 +332,8 @@ function seg(id, cb) {
 
   window.sthGate({
     gate: "gt", key: "acidbase", title: "조사관의 첫 판단",
-    question: "에탄올의 화학식은 C₂H₅<b>OH</b> 입니다. 에탄올은 염기일까요?",
-    options: ["㉠ OH 가 있으므로 염기다", "㉡ 염기가 아니다", "㉢ 물에 녹으면 염기가 된다", "㉣ 산이면서 염기다"],
+    question: "에탄올의 화학식은 C₂H₅<b>OH</b>입니다. 에탄올은 염기일까요?",
+    options: ["㉠ OH가 있으므로 염기다", "㉡ 염기가 아니다", "㉢ 물에 녹으면 염기가 된다", "㉣ 산이면서 염기다"],
     onPick: function (i) { window.sthState("acidbaseOK", i === 1 ? "맞음" : "어긋남"); ep.clear(0); }
   });
 
@@ -766,7 +766,7 @@ function seg(id, cb) {
       ctx.strokeStyle = v("--line"); ctx.lineWidth = 3; ctx.beginPath(); ctx.roundRect(px, py, pw, ph, 26); ctx.stroke();
       text(ctx, "냉찜질 팩  " + (w + a) + " g", 210, 60, { s: 12.5, w: "800", a: "center", c: w + a > 150 ? v("--rose-700") : v("--ink") });
       text(ctx, Tf.toFixed(1) + "℃", 210, py + ph / 2 + 12, { s: 30, w: "900", a: "center", c: ok ? v("--green-700") : v("--ink") });
-      text(ctx, "NH₄⁺ · NO₃⁻ 이 물속으로 퍼짐", 210, py + ph - 16, { s: 10.5, a: "center", c: v("--mist") });
+      text(ctx, "NH₄⁺ · NO₃⁻이 물속으로 퍼짐", 210, py + ph - 16, { s: 10.5, a: "center", c: v("--mist") });
       if (a > 0) {
         ctx.strokeStyle = v("--coral"); ctx.fillStyle = v("--coral"); ctx.lineWidth = 2 + Math.min(6, q / 3);
         window.drawArrow(ctx, 210, 78, 210, py - 4, 11); window.drawArrow(ctx, 210, 322, 210, py + ph + 4, 11);

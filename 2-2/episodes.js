@@ -84,7 +84,7 @@ function segBind(id, attr, fn) {
       ctx.fillStyle = v("--brand"); ctx.beginPath(); ctx.moveTo(px, ay - 2); ctx.lineTo(px - 9, ay - 58); ctx.lineTo(px + 9, ay - 58); ctx.closePath(); ctx.fill();
       text(ctx, sci(e) + " J", clamp(px, 110, 800), ay - 64, { s: 12.5, w: "900", c: v("--brand-700"), a: "center" });
 
-      /* 수명 막대 (로그 눈금 10³ ~ 10¹¹ 년) */
+      /* 수명 막대 (로그 눈금 10³~10¹¹ 년) */
       var by = 190, bh = 34;
       text(ctx, "이 연료로 태양이 빛날 수 있는 시간", x0, by - 12, { s: 12.5, w: "800" });
       box(ctx, x0, by, x1 - x0, bh, v("--card-2"), 8);
@@ -218,7 +218,7 @@ function segBind(id, attr, fn) {
     function check() {
       if (sorted) done("m1-4a"); if (chained) done("m1-4b");
       if (sorted && chained) {
-        window.sthMission("m1-4", true, "<span class='m-tag'>미션 완료</span>바람도, 댐의 물도, 밥도, 석탄도 거슬러 올라가면 <b>태양</b>입니다. 그리고 화석 연료 1 J 에는 햇빛 약 20만 J 과 수억 년의 시간이 들어 있습니다. 단, 지열·조력·핵에너지의 근원은 태양이 아닙니다.");
+        window.sthMission("m1-4", true, "<span class='m-tag'>미션 완료</span>바람도, 댐의 물도, 밥도, 석탄도 거슬러 올라가면 <b>태양</b>입니다. 그리고 화석 연료 1 J 에는 햇빛 약 20만 J과 수억 년의 시간이 들어 있습니다. 단, 지열·조력·핵에너지의 근원은 태양이 아닙니다.");
         ep.clear(3); ep.clear(4);
       }
     }
@@ -232,14 +232,14 @@ function segBind(id, attr, fn) {
       ],
       items: [
         { t: "💨 풍력 발전기를 돌리는 바람", a: "k", why: "태양이 지표를 고르지 않게 데워 생긴 기압 차가 바람을 일으킵니다." },
-        { t: "🌊 서핑하는 파도", a: "k", why: "파도는 대부분 바람이 일으킵니다. 바람의 근원이 태양이지요.", hint: "파도를 일으키는 것은 무엇인가요?" },
+        { t: "🌊 서핑하는 파도", a: "k", why: "파도는 대부분 바람이 일으킵니다. 바람의 근원이 태양입니다.", hint: "파도를 일으키는 것은 무엇인가요?" },
         { t: "🏞️ 댐에 고인 물", a: "p", why: "태양 에너지로 증발한 물이 높은 곳에 비로 내려 위치 에너지를 갖습니다." },
         { t: "🍚 밥 한 공기", a: "c", why: "벼가 광합성으로 저장한 화학 에너지입니다." },
         { t: "🪨 석탄", a: "c", why: "수억 년 전 식물이 광합성으로 저장한 에너지입니다.", hint: "석탄은 무엇이 묻혀서 만들어졌나요?" },
         { t: "🛢️ 석유·천연가스", a: "c", why: "옛 바다 생물(플랑크톤)의 유해입니다. 그 에너지도 광합성에서 왔습니다." },
         { t: "🌋 지열 발전", a: "x", why: "지구 내부의 열(방사성 원소의 붕괴열 등)이 근원입니다.", hint: "땅속의 열은 햇빛이 데운 것이 아닙니다." },
         { t: "🌗 조력 발전(밀물과 썰물)", a: "x", why: "밀물과 썰물은 주로 달의 인력 때문에 생깁니다.", hint: "밀물과 썰물은 왜 생기나요?" },
-        { t: "☢️ 원자력 발전의 우라늄", a: "x", why: "우라늄 원자핵에 저장된 핵에너지입니다. 태양보다 먼저 있던 별들이 만든 원소이지요." }
+        { t: "☢️ 원자력 발전의 우라늄", a: "x", why: "우라늄 원자핵에 저장된 핵에너지입니다. 태양보다 먼저 있던 별들이 만든 원소입니다." }
       ],
       onDone: function () { sorted = true; window.sthState("flowSort", 1); check(); }
     });
@@ -261,7 +261,7 @@ function segBind(id, attr, fn) {
         });
         text(ctx, "막대는 로그 눈금 (한 칸 줄면 10분의 1)", W - 20, H - 10, { s: 10.5, c: v("--mist"), a: "right" });
         var need = 100 / s3, ok = need >= 190000 && need <= 210000;
-        $("a-ch-info").innerHTML = "100 × " + a + "% × " + b.toFixed(1) + "% × " + c.toFixed(2) + "% = <b>" + s3.toFixed(6) + "%</b>. 화석 연료 1 J 이 만들어지려면 햇빛이 <b>약 " + (Math.round(need / 1000) * 1000).toLocaleString() + " J</b> 필요합니다. " +
+        $("a-ch-info").innerHTML = "100 × " + a + "% × " + b.toFixed(1) + "% × " + c.toFixed(2) + "% = <b>" + s3.toFixed(6) + "%</b>. 화석 연료 1 J이 만들어지려면 햇빛이 <b>약 " + (Math.round(need / 1000) * 1000).toLocaleString() + " J</b> 필요합니다. " +
           (ok ? "✅ 조사한 값과 일치합니다. 우리는 수억 년 동안 아주 조금씩 모인 햇빛을 단 몇백 년 만에 태우고 있는 셈입니다." : "단계를 거칠 때마다 <b>효율이 곱해져</b> 급격히 줄어듭니다.");
         if (ok && !chained) { chained = true; window.sthState("chainOK", 1); check(); }
       }
@@ -426,7 +426,7 @@ function segBind(id, attr, fn) {
     }
     function loop() {
       if (canvas.offsetParent !== null && f > 0) { th += f / 60 * 0.45; draw(); }
-      window.setTimeout(loop, 70);                       // rAF 는 가려진 탭에서 멈추므로 쓰지 않는다
+      window.setTimeout(loop, 70);                       // rAF는 가려진 탭에서 멈추므로 쓰지 않는다
     }
     function report() {
       var rows = tries.slice(-5).map(function (t) { return "코일 " + t.N + "회 · " + t.B + " T · " + t.f + "회전 → <b>" + t.V + " V, " + t.f + " Hz</b> " + (t.ok ? "✅" : "❌ " + t.why); });
@@ -437,12 +437,12 @@ function segBind(id, attr, fn) {
     $("b-gen-f").addEventListener("input", function (ev) { f = +ev.target.value; $("b-gen-f-val").textContent = f + "회"; draw(); });
     $("b-gen-run").addEventListener("click", function () {
       var V = genVolt(N, B, f), okV = V >= 210 && V <= 230, okF = f >= 59 && f <= 61, ok = okV && okF;
-      var why = !okV ? (V < 210 ? "전압이 낮아 전등이 희미하고 냉장고가 돌지 않음" : "전압이 높아 가전제품이 타 버림") : "주파수가 60 Hz 가 아니라 모터와 시계가 제 속도로 돌지 않음";
+      var why = !okV ? (V < 210 ? "전압이 낮아 전등이 희미하고 냉장고가 돌지 않음" : "전압이 높아 가전제품이 타 버림") : "주파수가 60 Hz가 아니라 모터와 시계가 제 속도로 돌지 않음";
       tries.push({ N: N, B: B.toFixed(2), f: f, V: Math.round(V), ok: ok, why: why });
       window.sthState("genTries", tries.slice(-8)); report();
       if (ok) {
         window.sthState("genBest", "코일 " + N + "회 · " + B.toFixed(2) + " T · 1초에 " + f + "회전 → " + Math.round(V) + " V");
-        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>코일 " + N + "회, 자석 " + B.toFixed(2) + " T, 1초에 " + f + "회전으로 <b>" + Math.round(V) + " V · " + f + " Hz</b>를 만들었습니다. 회전수는 60으로 묶여 있으니 전압은 <b>감은 수 × 자석 세기</b>로 맞춰야 했지요. 다른 조합도 찾아보세요.");
+        window.sthMission("m2-3", true, "<span class='m-tag'>미션 완료</span>코일 " + N + "회, 자석 " + B.toFixed(2) + " T, 1초에 " + f + "회전으로 <b>" + Math.round(V) + " V · " + f + " Hz</b>를 만들었습니다. 회전수는 60으로 묶여 있으니 전압은 <b>감은 수 × 자석 세기</b>로 맞춰야 했습니다. 다른 조합도 찾아보세요.");
         ep.clear(2);
       }
     });
@@ -510,7 +510,7 @@ function segBind(id, attr, fn) {
       q: "같은 양의 전기를 만들 때, 화력 발전이 내보내는 CO₂는 원자력 발전의 약 몇 배일까요? (CO₂ 배출량 비교 그래프를 보세요.)",
       options: ["약 7배", "약 70배", "약 700배", "거의 같다"],
       answer: 1,
-      why: ["그래프의 숫자로 직접 나눠 보세요. 820 ÷ 12 는?", "820 ÷ 12 ≈ 68, 약 70배입니다. 화석 연료는 <b>태우는 과정 자체</b>에서 이산화 탄소가 나오기 때문입니다.", "820 ÷ 12 를 다시 계산해 보세요.", "CO₂ 비교 그래프로 바꿔 막대 길이를 비교해 보세요."],
+      why: ["그래프의 숫자로 직접 나눠 보세요. 820 ÷ 12는?", "820 ÷ 12 ≈ 68, 약 70배입니다. 화석 연료는 <b>태우는 과정 자체</b>에서 이산화 탄소가 나오기 때문입니다.", "820 ÷ 12를 다시 계산해 보세요.", "CO₂ 비교 그래프로 바꿔 막대 길이를 비교해 보세요."],
       onDone: function () { okQ = true; window.sthState("srcQ", 1); check(); }
     });
     window.sthSort({
@@ -542,7 +542,7 @@ function segBind(id, attr, fn) {
   function reveal() {
     $("b-end").hidden = false;
     var p = window.sthState("p2") || "";
-    $("e2-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉢") === 0 ? " — 정확했습니다. 검류계로 직접 확인했지요." : " — 실험해 보니 자석이 가만히 있으면 바늘은 0이었습니다. 필요한 것은 센 자석이 아니라 <b>변하는 자기장</b>입니다.") +
+    $("e2-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉢") === 0 ? " — 정확했습니다. 검류계로 직접 확인했습니다." : " — 실험해 보니 자석이 가만히 있으면 바늘은 0이었습니다. 필요한 것은 센 자석이 아니라 <b>변하는 자기장</b>입니다.") +
       "<br><b>내가 설계한 발전기</b> " + (window.sthState("genBest") || "-");
   }
   function check5() {
@@ -680,7 +680,7 @@ function segBind(id, attr, fn) {
       ctx.fillStyle = v("--green"); ctx.globalAlpha = .45; ctx.fillRect(gx + gw * 760 / 1600, 40, gw * 80 / 1600, 38); ctx.globalAlpha = 1;
       box(ctx, gx, 51, clamp(lm / 1600, 0.004, 1) * gw, 16, ok ? v("--green-700") : v("--amber"), 5);
       /* 전기 에너지가 간 곳 */
-      text(ctx, "들어간 전기 에너지 100 은 어디로 갔나", gx, 116, { s: 12.5, w: "800" });
+      text(ctx, "들어간 전기 에너지 100은 어디로 갔나", gx, 116, { s: 12.5, w: "800" });
       var lw = gw * effPct / 100;
       box(ctx, gx, 128, lw, 40, v("--amber"), 6); box(ctx, gx + lw + 3, 128, gw - lw - 3, 40, v("--coral"), 6);
       text(ctx, "빛 " + effPct.toFixed(0), gx + 6, 190, { s: 12, w: "900", c: v("--amber-700") });
@@ -794,7 +794,7 @@ function segBind(id, attr, fn) {
   function reveal() {
     $("c-end").hidden = false;
     var p = window.sthState("p3") || "";
-    $("e3-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉢") === 0 ? " — 정확했습니다. 40% × 96% × 5% ≈ 1.9 입니다." : " — 실제로는 40% × 96% × 5% ≈ <b>1.9</b>. 단계마다 효율이 곱해지기 때문입니다.") +
+    $("e3-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + (p.indexOf("㉢") === 0 ? " — 정확했습니다. 40% × 96% × 5% ≈ 1.9입니다." : " — 실제로는 40% × 96% × 5% ≈ <b>1.9</b>. 단계마다 효율이 곱해지기 때문입니다.") +
       "<br><b>전구 교체</b> " + (window.sthState("lampSave") || "-") + "<br><b>내가 설계한 마을</b> " + (window.sthState("villBest") || "-");
   }
   function finish() { window.sthState("r3", ("해결 · " + (window.sthState("villBest") || "-")).slice(0, 118)); }

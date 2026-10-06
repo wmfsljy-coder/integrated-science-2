@@ -186,7 +186,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
       text(ctx, "선캄브리아 시대", xd(160), 69, { s: 13, w: "800", a: "center", c: v("--on-accent") });
       var acc = 0;
       ML.forEach(function (n, m) { var xx = xd(acc); ctx.strokeStyle = v("--panel"); ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(xx, 44); ctx.lineTo(xx, 84); ctx.stroke(); text(ctx, (m + 1) + "월", xd(acc + n / 2), 100, { s: 10.5, c: v("--mist"), a: "center" }); acc += n; });
-      /* 확대: 11월 1일(305일째) ~ 12월 31일 */
+      /* 확대: 11월 1일(305일째)~12월 31일 */
       var z0 = 304, zx0 = 120, zx1 = 860;
       function xz(d) { return zx0 + (d - z0) / (365 - z0) * (zx1 - zx0); }
       ctx.strokeStyle = v("--line"); ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(xd(z0), 84); ctx.lineTo(zx0, 160); ctx.moveTo(xd(365), 84); ctx.lineTo(zx1, 160); ctx.stroke(); ctx.setLineDash([]);
@@ -357,7 +357,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
     $("e1-wrap").hidden = false;
     var p = window.sthState("p1") || "";
     $("e1-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉢") === 0 ? "처음부터 정확히 짚었습니다. 이제 이리듐이라는 증거까지 갖췄네요." : "1980년 이전에는 많은 과학자도 그렇게 생각했습니다. 1 cm 점토층의 이리듐이 생각을 바꿔 놓았습니다.") +
+      (p.indexOf("㉢") === 0 ? "처음부터 정확히 짚었습니다. 이제 이리듐이라는 증거까지 갖췄습니다." : "1980년 이전에는 많은 과학자도 그렇게 생각했습니다. 1 cm 점토층의 이리듐이 생각을 바꿔 놓았습니다.") +
       "<br><b>내가 계산한 소행성</b> 지름 약 " + (window.sthState("astD") || "-") + " km";
   }
   function finish() { window.sthState("r1", "해결 · 첫 추리 " + first(window.sthState("p1")) + " · 이리듐으로 계산한 소행성 지름 약 " + (window.sthState("astD") || "-") + " km · 대멸종 5건 확인"); }
@@ -439,7 +439,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
       q: "이 분포에서 알 수 있는 것은 무엇일까요?",
       options: ["같은 종이면 부리 두께는 모두 같다", "같은 종 안에서도 개체마다 형질이 다르며, 이 차이는 가뭄이 오기 전부터 있었다", "부리가 두꺼운 새와 얇은 새는 서로 다른 종이다", "가뭄이 와야 비로소 부리 두께에 차이가 생긴다"],
       answer: 1,
-      why: ["막대가 하나가 아니라 넓게 퍼져 있습니다.", "이렇게 같은 종의 개체 사이에 나타나는 형질의 차이가 변이입니다. 변이는 환경이 바뀌기 전에 이미 있습니다.", "모두 중간땅핀치 한 종입니다. 분포가 끊기지 않고 이어져 있지요.", "이 기록은 가뭄 전에 잰 것입니다."],
+      why: ["막대가 하나가 아니라 넓게 퍼져 있습니다.", "이렇게 같은 종의 개체 사이에 나타나는 형질의 차이가 변이입니다. 변이는 환경이 바뀌기 전에 이미 있습니다.", "모두 중간땅핀치 한 종입니다. 분포가 끊기지 않고 이어져 있습니다.", "이 기록은 가뭄 전에 잰 것입니다."],
       onDone: function () { answered = true; window.sthState("varQ", 1); check(); }
     });
     draw(); say(); check();
@@ -721,7 +721,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
     mount: "wk2", unitLabel: "[통합과학2 Ⅰ-1] 이야기 ② 가뭄이 지나간 섬",
     items: [
       { id: "w2", label: "자연선택이 일어나는 순서", hint: "변이 → 선택 → 유전의 순서를 예 하나로 풀어 쓰세요." },
-      { id: "e2b", label: "친구의 말 고쳐 주기", hint: "“항생제를 자주 먹으면 세균이 항생제에 적응해서 내성이 생긴대.” 이 말에서 과학적으로 어색한 부분을 찾아, 배양 실험 결과를 근거로 고쳐 쓰세요." }
+      { id: "e2b", label: "친구의 말 고쳐 주기", hint: "“항생제를 자주 먹으면 세균이 항생제에 적응해서 내성이 생긴대.”이 말에서 과학적으로 어색한 부분을 찾아, 배양 실험 결과를 근거로 고쳐 쓰세요." }
     ]
   });
 })();
@@ -1013,7 +1013,7 @@ function first(p) { return p ? p.charAt(0) : "-"; }
     $("e3-wrap").hidden = false;
     var p = window.sthState("p3") || "";
     $("e3-vs").innerHTML = "<b>나의 첫 추리</b> " + (p || "기록 없음") + "<br>" +
-      (p.indexOf("㉢") === 0 ? "정확했습니다. 밭 설계 실험으로 직접 확인했지요." : "병원균과 기술도 영향을 주었지만, 같은 병이 돌아도 품종이 섞인 밭은 무너지지 않았습니다. 결정적인 차이는 유전적 다양성이었습니다.") +
+      (p.indexOf("㉢") === 0 ? "정확했습니다. 밭 설계 실험으로 직접 확인했습니다." : "병원균과 기술도 영향을 주었지만, 같은 병이 돌아도 품종이 섞인 밭은 무너지지 않았습니다. 결정적인 차이는 유전적 다양성이었습니다.") +
       "<br><b>나의 밭 설계</b> " + (window.sthState("farmBest") || "-");
   }
   function finish() { window.sthState("r3", "해결 · 첫 추리 " + first(window.sthState("p3")) + " · " + (window.sthState("farmBest") || "-")); }
