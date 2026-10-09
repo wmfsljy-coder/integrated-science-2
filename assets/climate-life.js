@@ -44,6 +44,7 @@
   };
   var ORDER = ["h50", "h10", "r10", "d10", "s100"];
   var PLACE = [
+    { k: "jinhae", ico: "🌸", name: "진해 바닷가", ex: "우리 학교가 있는 창원 진해구 해안", as: "coast" },
     { k: "city", ico: "🏙", name: "내륙 도시", ex: "서울·대구 같은 곳" },
     { k: "coast", ico: "🏖", name: "해안 저지대", ex: "부산 해안·다카·자카르타 같은 곳" },
     { k: "dry", ico: "🏜", name: "건조해지는 지역", ex: "지중해 연안·호주 남부·아프리카 남부 같은 곳" }
@@ -74,7 +75,9 @@
     return Math.min(0.95, e.p0 * lerp(WL, e.f, Math.max(0, T)));
   }
   /* 한 사람의 한평생: 해마다 가장 센 사건 하나를 칸에 칠하고, 모든 사건을 센다 */
+  function kindOf(place) { var p = PLACE.filter(function (x) { return x.k === place; })[0]; return (p && p.as) || place; }   /* 진해 = 해안으로 셈 */
   function live(sc, place, seed) {
+    var P0 = place; place = kindOf(place);
     var rnd = rng(seed), yrs = [], cnt = {};
     ORDER.forEach(function (k) { cnt[k] = 0; });
     for (var a = 0; a < AGES; a++) {
@@ -86,10 +89,10 @@
       ev.forEach(function (k) { cnt[k]++; });
       yrs.push({ y: y, a: a, T: T, SL: SL, ev: ev });
     }
-    return { yrs: yrs, cnt: cnt, place: place };
+    return { yrs: yrs, cnt: cnt, place: P0 };
   }
   function baseline(place, n) {   /* 예전 기후(배수 1)라면 n년 동안의 기대 횟수 */
-    var o = {};
+    var o = {}; place = kindOf(place);
     ORDER.forEach(function (k) { var e = EV[k]; o[k] = (e.only && e.only !== place) ? null : e.p0 * n * (k === "h10" ? (1 - EV.h50.p0) : 1); });
     return o;
   }
@@ -134,7 +137,7 @@
     css();
     var SK = "life_" + (o.id || "x"), st = (window.sthState && window.sthState(SK)) || {};
     function save() { if (window.sthState) window.sthState(SK, st); }
-    var pick = { sc: st.sc || "2-4.5", pl: st.pl || "city" };
+    var pick = { sc: st.sc || "2-4.5", pl: st.pl || "jinhae" };
     var box = el("div", "cl-box");
     /* 지금 연도·생년은 고를 수 있다(처음 값은 오늘 날짜 · 고른 학년). 해가 바뀌어도 고르기만 하면 나이가 맞는다 */
     function grades(now) { var sy = now === TODAY.getFullYear() && TODAY.getMonth() < 2 ? now - 1 : now; return [{ k: 1, born: sy - 16, name: "고1" }, { k: 2, born: sy - 17, name: "고2" }]; }
@@ -199,20 +202,20 @@
       st.sc = pick.sc; st.pl = pick.pl; st.n = (st.n || 0) + 1; save();
       var seed0 = (Date.now() ^ (Math.random() * 1e9)) >>> 0;
       var placesOther = [];
-      for (var i = 0; i < 4; i++) placesOther.push(PLACE[Math.floor(rng(seed0 + 7 * i + 3)() * 3)].k);
+      for (var i = 0; i < 4; i++) placesOther.push(PLACE[1 + Math.floor(rng(seed0 + 7 * i + 3)() * 3)].k);
       var lives = [live(sc, pick.pl, seed0)].concat(placesOther.map(function (p, i) { return live(sc, p, seed0 + 101 * (i + 1)); }));
       lives.push(live(PRE, pick.pl, seed0 + 999)); lives[5].pre = 1;
       var names = ["나", "지우", "아마라", "루카스", "메이", "예전 기후라면"];
       stage.innerHTML = "";
       var top = el("div", "cl-top"), now = el("div", "cl-now");
       var nAge = el("div"), nYear = el("div"), nT = el("div"), nS = el("div");
-      [nAge, nYear, nT].forEach(function (d) { now.appendChild(d); }); if (pick.pl === "coast") now.appendChild(nS);
+      [nAge, nYear, nT].forEach(function (d) { now.appendChild(d); }); if (kindOf(pick.pl) === "coast") now.appendChild(nS);
       var spd = el("div", "cl-spd");
       [["느리게", 650], ["보통", 300], ["빠르게", 70]].forEach(function (x) { var b = el("button", "btn", x[0]); b.type = "button"; b.addEventListener("click", function () { speed = x[1]; }); spd.appendChild(b); });
       var skip = el("button", "btn", "⏭ 끝까지"); skip.type = "button"; spd.appendChild(skip);
       top.appendChild(now); top.appendChild(spd); stage.appendChild(top);
       var leg = el("div", "cl-leg");
-      ORDER.forEach(function (k) { var e = EV[k]; if (e.only && lives.every(function (L) { return L.place !== e.only; })) return; var s = el("span", null, e.ico + " " + e.name); s.style.setProperty("--c", e.col); leg.appendChild(s); });
+      ORDER.forEach(function (k) { var e = EV[k]; if (e.only && lives.every(function (L) { return kindOf(L.place) !== e.only; })) return; var s = el("span", null, e.ico + " " + e.name); s.style.setProperty("--c", e.col); leg.appendChild(s); });
       stage.appendChild(leg);
       var rows = [];
       lives.forEach(function (L, i) {
@@ -302,6 +305,9 @@
         if (Math.floor(mine / bw) === b) { var m = el("i"); m.style.background = "var(--ink)"; m.title = "나"; col.appendChild(m); }
         hist.appendChild(col); hx.appendChild(el("span", null, b % 2 ? "" : String(b * bw)));
       });
+      var mx = 1; Array.prototype.forEach.call(hist.children, function (c) { mx = Math.max(mx, c.children.length); });
+      var ih = Math.max(1, Math.min(9, Math.floor((110 - mx) / mx)));   /* 가장 높은 칸이 상자 안에 들어오게 */
+      Array.prototype.forEach.call(hist.querySelectorAll("i"), function (i) { i.style.height = ih + "px"; });
       wrap.appendChild(hist); wrap.appendChild(hx);
       var lg = el("div", "cl-leg");
       sets.forEach(function (S, j) { var mean = data[j].reduce(function (x, y) { return x + y; }, 0) / 30; var s = el("span", null, S.s.name + " — 30명 평균 " + f1(mean) + "번"); s.style.setProperty("--c", S.c); lg.appendChild(s); });
