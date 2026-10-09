@@ -861,6 +861,7 @@ window.sthWork({
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
+    { key: "rInq", label: "교과서 실험" },
     { key: "rReal", label: "실제 자료" }
   ],
   items: [
@@ -878,6 +879,7 @@ window.sthShare({
     { key: "r3", label: "③ 불 없이 따뜻하게, 얼음 없이 차갑게" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
+    { key: "rInq", label: "교과서 실험" },
     { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "세 사건을 꿰는 한 문장" }

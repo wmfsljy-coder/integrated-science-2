@@ -747,6 +747,7 @@ window.sthWork({
     { key: "r2", label: "② 공청회에 서다" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
+    { key: "rInq", label: "교과서 실험" },
     { key: "rReal", label: "실제 자료" }
   ],
   items: [
@@ -763,6 +764,7 @@ window.sthShare({
     { key: "r2", label: "② 공청회에 서다" },
     { key: "rQuiz", label: "수준별 문제" },
     { key: "rLab", label: "응용 실험실" },
+    { key: "rInq", label: "교과서 실험" },
     { key: "rReal", label: "실제 자료" }
   ],
   line: { id: "all", label: "두 이야기를 꿰는 한 문장" }
