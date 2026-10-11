@@ -48,7 +48,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "겨울(유행 철)", min: SEASONS[0], max: SEASONS[SEASONS.length - 1], step: 1, value: SEASONS[0], fmt: function (x) { return x + " ~ " + (x + 1); }, onInput: function (x) { s = x; api.changed(); draw(); } });
       api.info("유행 철은 그해 40주(10월 초)부터 이듬해 20주(5월)까지로 잡았습니다. " + SRC1
-        + "<div data-link='{\"id\":\"kdca-flu\",\"title\":\"질병관리청 감염병 포털\",\"src\":\"질병관리청\",\"url\":\"https://dportal.kdca.go.kr/\",\"ask\":\"포털에서 ‘인플루엔자’를 찾아, 우리나라가 독감 유행을 어떤 방법(표본 감시 의료 기관 등)으로 감시하는지 한 문장으로 적어 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"kdca-flu\",\"title\":\"질병관리청 감염병포털 — 인플루엔자 통계\",\"src\":\"질병관리청\",\"url\":\"https://dportal.kdca.go.kr/pot/is/st/influ.do\",\"ask\":\"기간(절기)을 2019년 ~ 2021년으로 고르고 ‘통계작성’을 누르세요. 우리나라 외래 환자 1,000명당 독감 의사 환자 수가 2019~2020 겨울과 2020~2021 겨울에 각각 가장 높았던 값을 찾아, 미국 자료처럼 한 겨울이 사라졌는지 적어 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {

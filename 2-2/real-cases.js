@@ -55,8 +55,8 @@ window.sthLab({
       api.slider({ label: "달", min: 1, max: 12, step: 1, value: 7, fmt: function (x) { return x + "월"; }, onInput: function (x) { k = x; api.changed(); draw(); } });
       api.seg({ label: "보기", value: "real", options: [{ v: "real", t: "실제(구름 포함)" }, { v: "clear", t: "구름 없을 때도 함께" }], onPick: function (x) { clear = x === "clear"; draw(); } });
       api.info("막대는 구름 낀 날까지 모두 넣은 실제 값입니다. " + SRC
-        + "<div data-link='{\"id\":\"nasa-power\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"NASA 랭글리 연구소\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"① User Community는 Renewable Energy, Temporal Level은 Climatology를 고르고 ② 지도에서 우리 학교 근처를 찍은 뒤 ③ Solar Fluxes and Related → All Sky Surface Shortwave Downward Irradiance를 골라 Submit 하세요. 결과의 ANN(연평균) 값이 몇 kWh/m²/일인지 찾아 오세요. 기간이 달라 이 화면의 값(약 4.1)과 조금 다를 수 있어요.\"}'></div>"
-        + "<div data-map='{\"id\":\"school-roof\",\"name\":\"창원 웅천 일대\",\"lat\":35.13,\"lng\":128.70,\"zoom\":15,\"ask\":\"위성 사진에서 지붕에 태양광 패널이 있는 건물을 찾아보세요. 패널은 대부분 어느 쪽을 향해 있나요?\"}'></div>");
+        + "<div data-link='{\"id\":\"nasa-power\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"NASA 랭글리 연구소\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"① 왼쪽 메뉴의 Single Point 를 누르고 ② Data Resolution 은 Standard, User Community 는 Renewable Energy(RE), Temporal Level 은 Climatology 를 고르세요. ③ Latitude 35.11, Longitude 128.75(우리 학교)를 넣고 ④ Parameters 에서 All Sky Surface Shortwave Downward Irradiance 를 골라 Submit 하세요. 결과의 ANN(연평균) 값이 몇 kWh/m²/일인지 찾아 오세요. 기간이 달라 이 화면의 값(약 4.1)과 조금 다를 수 있어요.\"}'></div>"
+        + "<div data-map='{\"id\":\"school-roof\",\"name\":\"창원 웅천고 일대\",\"lat\":35.1125,\"lng\":128.7495,\"zoom\":15,\"ask\":\"위성 사진에서 지붕에 태양광 패널이 있는 건물을 찾아보세요. 패널은 대부분 어느 쪽을 향해 있나요?\"}'></div>");
       draw();
       return {
         judge: function () {

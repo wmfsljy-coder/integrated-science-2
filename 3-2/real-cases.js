@@ -55,7 +55,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "12월은 6월의 몇 %", min: 0, max: 100, step: 1, value: 50, fmt: function (x) { return x + "%"; }, onInput: function (x) { g = x; api.changed(); draw(); } });
       api.info("1 kWh는 1 kW 전열기를 한 시간 켠 에너지입니다. " + SRC
-        + "<div data-link='{\"id\":\"power-dav\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"미국 항공우주국\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"지도에서 우리 학교(또는 가까운 딸기 농가) 위치를 찍고 달마다의 일사량(ALLSKY_SFC_SW_DWN)을 찾아, 12월과 6월 값을 서울과 비교해 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"power-dav\",\"title\":\"NASA POWER 자료 보기\",\"src\":\"미국 항공우주국\",\"url\":\"https://power.larc.nasa.gov/data-access-viewer/\",\"ask\":\"왼쪽 메뉴의 Single Point 를 누르고 User Community 는 Renewable Energy(RE), Temporal Level 은 Climatology 를 고른 뒤, Latitude·Longitude 에 우리 학교(35.11, 128.75)를 넣고 All Sky Surface Shortwave Downward Irradiance(ALLSKY_SFC_SW_DWN)를 골라 Submit 하세요. 12월(DEC)과 6월(JUN) 값을 찾아 서울과 비교해 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {

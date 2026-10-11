@@ -100,7 +100,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "직선의 기울기", min: 0, max: 2, step: 0.05, value: 0.5, fmt: function (x) { return x.toFixed(2) + " °C / 100 ppm"; }, onInput: function (x) { m = x; api.changed(); draw(); } });
       api.info("‘점과 선의 평균 거리’가 가장 작아지는 기울기를 찾으세요. " + SRC2
-        + "<div data-link='{\"id\":\"gistemp\",\"title\":\"NASA GISTEMP 지구 기온 자료\",\"src\":\"NASA 고다드 우주연구소\",\"url\":\"https://data.giss.nasa.gov/gistemp/graphs_v4/\",\"ask\":\"가장 최근 해의 전 지구 기온 편차(°C)를 찾아, 이 그래프의 마지막 점과 비교해 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"gistemp\",\"title\":\"NASA GISTEMP 지구 기온 자료\",\"src\":\"NASA 고다드 우주연구소\",\"url\":\"https://data.giss.nasa.gov/gistemp/graphs_v4/\",\"ask\":\"첫 그래프(Global Mean Estimates based on Land and Ocean Data)의 마지막 점에 마우스를 올리거나 그래프 아래 plain text 를 눌러, 가장 최근 해의 전 지구 기온 편차(°C)를 찾아 이 그래프의 마지막 점과 비교해 오세요.\"}'></div>");
       draw();
       return {
         judge: function () {

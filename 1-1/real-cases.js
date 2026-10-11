@@ -56,7 +56,7 @@ window.sthLab({
       cv.canvas._redraw = draw;
       api.slider({ label: "10년마다 변한 넓이", min: -1.5, max: 0.5, step: 0.05, value: 0, fmt: function (x) { return x.toFixed(2) + " 백만 km²"; }, onInput: function (x) { sl = x; api.changed(); draw(); } });
       api.info("‘점과 선의 평균 거리’가 가장 작아지는 기울기를 찾으세요. " + SRC
-        + "<div data-link='{\"id\":\"nsidc-news\",\"title\":\"NSIDC 북극 해빙 소식\",\"src\":\"미국 국립 설빙자료센터\",\"url\":\"https://nsidc.org/arcticseaicenews/\",\"ask\":\"올해 북극 해빙이 가장 작았던 날의 면적과, 그것이 관측 이래 몇 번째로 작은지 찾아 오세요.\"}'></div>");
+        + "<div data-link='{\"id\":\"nsidc-news\",\"title\":\"NSIDC 북극 해빙 소식\",\"src\":\"미국 국립 설빙자료센터\",\"url\":\"https://nsidc.org/sea-ice-today\",\"ask\":\"첫 화면의 Featured Sea Ice Analysis(가장 최근 분석 글)를 열어, 올해 9월 평균 북극 해빙 면적(million square kilometers)과 그것이 위성 관측 이래 몇 번째로 작은지 찾아 오세요. 이 사례 그래프의 마지막 점과 견주어 보세요.\"}'></div>");
       draw();
       return {
         judge: function () {
