@@ -393,7 +393,7 @@ function text(ctx, s, x, y, o) {
   /* 장면 1 — 킬링 곡선 */
   (function () {
     var canvas = $("c-keel"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
-    function ppm(y) { var t = y - 1958; return 315 + 0.78 * t + 0.0128 * t * t; }      // 1958년 315 → 2024년 약 422
+    function ppm(y) { var t = y - 1958; return 315 + 0.76 * t + 0.0137 * t * t; }      // 1958년 315 → 2024년 약 425 (NOAA 연평균 424.61에 맞춤)
     function draw() {
       paper(ctx, W, H);
       var x0 = 70, x1 = W - 30, y0 = 30, y1 = H - 40;
