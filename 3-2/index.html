@@ -47,8 +47,9 @@
         <section class="scene" data-title="사물 인터넷 — 센서가 읽고 규칙이 움직인다">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“센서는 달았어요. 이제 <b>‘센서 값이 얼마면 장치를 움직인다’</b>는 규칙을 정해야 해요. 환기창은 온도가 몇 ℃를 넘으면 열고, 물은 흙의 수분이 몇 % 아래로 떨어지면 줄까요? 맑은 봄날 하루(24시간)를 돌려 보면서 찾아봐요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-farm" width="900" height="400"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="a-farm" width="900" height="400"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-farm-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">규칙 ① 온도가 이 값 이상이면 환기창을 연다<span class="val" id="a-ton-val">35℃</span></div>
                 <input type="range" id="a-ton" min="10" max="40" step="1" value="35">
@@ -57,6 +58,7 @@
                 <div class="ctrl-label">규칙 ② 토양 수분이 이 값 이하이면 물을 준다<span class="val" id="a-mon-val">30%</span></div>
                 <input type="range" id="a-mon" min="20" max="90" step="5" value="30">
               </div>
+              <button type="button" class="btn sm" id="a-farm-play">⏸ 하루 멈추기</button>
             </div>
             <div class="info-card" id="a-farm-info"></div>
           </div>
@@ -66,7 +68,7 @@
         <section class="scene" data-title="인공지능 — 익은 딸기를 가려내는 선">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“환기와 물은 ‘몇 ℃면 연다’처럼 <b>사람이 규칙을 정해 줄 수</b> 있었어요. 그런데 ‘익었다’는 건 규칙으로 쓰기가 어렵네요. 그래서 할머니가 직접 <b>익음/안 익음을 표시해 준 딸기 40개</b>를 카메라로 찍어 왔어요. 가로는 붉은 정도, 세로는 크기예요. 선 하나로 둘을 갈라 볼래요?”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-cls" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-cls" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">선의 기울기<span class="val" id="a-sl-val">0.00</span></div>
@@ -87,7 +89,7 @@
           <div class="story"><div class="who">👵</div><div class="say"><span class="name">할머니</span>“로봇이 참 기특하구나. 그런데 올해는 저쪽 두 이랑에 <b>흰 딸기</b>를 심었단다. 다 익어도 빨개지지 않고 하얗거나 연분홍빛인 품종이지. 로봇이 그것도 잘 따 주겠지?”</div></div>
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“어… 로봇이 학습한 40개는 전부 빨간 품종이었는데요. 일단 시험해 봐요. 로봇이 한 번도 본 적 없는 열매들로요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-test" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-test" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">시험할 열매</div>
@@ -156,8 +158,9 @@
           <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">업체 영업 사원</span>“저희 제품은 <b>오인식률이 1%</b>밖에 안 됩니다. 100명 중 99명은 정확히 구분한다는 뜻이죠. 경보가 울리면 99%는 진짜라고 보시면 됩니다.”</div></div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">통계학자</span>“정말 그럴까요? 직접 계산해 봅시다. 하루에 카메라 앞을 지나는 사람 가운데 <b>찾는 사람은 단 1명</b>이라고 합시다. 나머지는 모두 아무 관계 없는 시민입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-base" width="900" height="360"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="b-base" width="900" height="360"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="b-base-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">하루에 카메라 앞을 지나는 사람 수<span class="val" id="b-n-val">10,000명</span></div>
                 <input type="range" id="b-n" min="1000" max="50000" step="1000" value="10000">
@@ -191,7 +194,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap"><canvas id="b-scale" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-scale" width="900" height="330"></canvas></div>
             <div class="controls" id="b-weights"></div>
             <div class="info-card" id="b-scale-info"></div>
           </div>
@@ -278,6 +281,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

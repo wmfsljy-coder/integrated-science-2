@@ -49,7 +49,7 @@
         <section class="scene" data-title="용광로 — 코크스를 얼마나 넣을까">
           <div class="story"><div class="who">👨‍🏭</div><div class="say"><span class="name">제철소 기술자 한결</span>“가마의 원리는 오늘날 용광로와 같아요. 코크스(C)는 뜨거운 공기 속 산소와 만나 <b>일산화 탄소(CO)</b>가 되고, 이 일산화 탄소가 철광석에 붙어 있던 <b>산소를 떼어 갑니다.</b> 코크스 양을 바꿔 가며 무엇이 나오는지 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-furn" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-furn" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">넣는 철광석(Fe₂O₃)<span class="val" id="a-ore-val">160 kg</span></div>
@@ -77,7 +77,7 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">서진</span>“체험장 기념품 가게에서 <b>구리를 입힌 철 못</b>을 팔아요. 전기도 안 쓰고 <b>파란 용액에 담갔다 꺼내기만</b> 했대요. 여기엔 산소가 없는데… 이것도 산화·환원일까요?”</div></div>
           <div class="story"><div class="who">👨‍🏭</div><div class="say"><span class="name">한결</span>“산소가 끼어들지 않아도 <b>전자를 잃으면 산화, 전자를 얻으면 환원</b>입니다. 금속마다 전자를 잃고 이온이 되려는 정도(반응성)가 달라요. 금속과 수용액을 바꿔 가며 어느 조합에서 도금이 일어나는지 찾아보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-metal" width="900" height="380"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-metal" width="900" height="380"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">넣는 금속(고체)</div>
@@ -146,7 +146,7 @@
         <section class="scene" data-title="검사대 — 창고의 여섯 병을 가려내라">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">엘사</span>“말보다 검사죠. 창고에서 나온 여섯 병을 <b>지시약, 마그네슘 조각, 전류</b>로 검사해 보세요. 비커 속 입자 모형도 함께 보입니다. 산은 물에 녹아 <b>수소 이온(H⁺)</b>을, 염기는 <b>수산화 이온(OH⁻)</b>을 내놓는 물질이에요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-test" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-test" width="900" height="340"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">검사할 물질</div>
@@ -169,6 +169,7 @@
                   <button type="button" data-k="cur">전류</button>
                 </div>
               </div>
+              <button type="button" class="btn sm" id="b-test-play">⏸ 거품 멈추기</button>
             </div>
             <div class="info-card" id="b-test-info">물질과 검사 도구를 하나씩 고르세요.</div>
           </div>
@@ -180,8 +181,9 @@
         <section class="scene" data-title="이온 수 맞추기 — 중화점을 찾아라">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">엘사</span>“호수에 붓기 전에 실험실에서 연습합시다. 묽은 염산 20 mL에 수산화 나트륨 수용액을 조금씩 넣어요. <b>H⁺ 하나와 OH⁻ 하나가 만나 물 분자 하나</b>가 됩니다. BTB 용액을 넣어 두었으니 색도 함께 보세요. 온도계도 꽂아 두었습니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-ion" width="900" height="400"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="b-ion" width="900" height="400"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="b-ion-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">넣은 수산화 나트륨 수용액<span class="val" id="b-v-val">0 mL</span></div>
                 <input type="range" id="b-v" min="0" max="32" step="2" value="0">
@@ -196,14 +198,14 @@
         <section class="scene" data-title="중화 작전 — 소석회를 얼마나 뿌릴까">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">엘사</span>“이제 진짜 호수 물입니다. 호수 물 <b>1,000 L</b>를 담은 시험 수조에 염기인 <b>소석회(수산화 칼슘, Ca(OH)₂)</b> 가루를 뿌려요. 물고기가 살려면 <b>pH 6.5~8.5</b>여야 합니다. 모자라면 여전히 산성이고, 넘치면 이번엔 염기성 때문에 물고기가 못 삽니다. 곡선이 어디서 가팔라지는지 잘 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-lake" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-lake" width="900" height="400"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">수조에 넣은 소석회<span class="val" id="b-m-val">0.0 g</span></div>
                 <input type="range" id="b-m" min="0" max="8" step="0.1" value="0">
               </div>
             </div>
-            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-go" type="button">🚁 이 양으로 확정하고 물고기 풀어 보기</button></div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-go" type="button">🚁 이 양으로 확정하고 물고기 풀어 보기</button> <button class="btn sm" id="b-lake-play" type="button">⏸ 물고기 멈추기</button></div>
             <div class="info-card" id="b-lake-info">소석회 양을 정하고 확정하세요. 여러 번 시도할 수 있습니다.</div>
           </div>
           <div class="mission" id="b-m4"><span class="m-tag">미션</span><ul><li id="b-m4a">수조의 물을 <b>pH 6.5~8.5</b>로 만드는 소석회 양을 찾아 확정하세요.</li><li id="b-m4b">아래 물음에 답해 호수 전체에 뿌릴 양을 정하세요.</li></ul></div>
@@ -252,7 +254,7 @@
         <section class="scene" data-title="에너지 장부 — 열은 어디서 와서 어디로 가나">
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">동아리 선생님</span>“화학 반응이 일어나면 물질만 바뀌는 게 아니라 <b>에너지도 드나든단다.</b> 반응물이 가진 에너지와 생성물이 가진 에너지가 다르기 때문이지. 반응을 고르고 진행 슬라이더를 끝까지 밀어, 에너지 높이와 주변 온도가 어떻게 바뀌는지 보렴.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-energy" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-energy" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">반응 종류</div>
@@ -276,8 +278,10 @@
         <section class="scene" data-title="손난로 설계 — 뜨겁지 않게, 오래가게">
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">선생님</span>“손난로는 <b>철 가루가 공기 중의 산소와 만나 산화</b>되면서 내놓는 열을 쓰는 거야. 철이 녹스는 반응을 빠르게 일으키는 셈이지. 소금물과 활성탄은 반응을 빠르게 하고, 포장지의 <b>미세한 구멍</b>이 산소가 들어오는 속도를 정한단다. 60℃를 넘으면 화상 위험이 있고, 40℃대라도 맨살에 오래 대면 저온 화상을 입을 수 있어 옷 위에 붙여야 해. 50℃가 안 되면 추운 벤치에서 소용이 없지.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-warm" width="900" height="380"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-warm" width="900" height="380"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="c-warm-read"></div>
+              <div>
               <div class="ctrl-group">
                 <div class="ctrl-label">철 가루의 양<span class="val" id="c-fe-val">10 g</span></div>
                 <input type="range" id="c-fe" min="10" max="60" step="2" value="10">
@@ -285,6 +289,7 @@
               <div class="ctrl-group">
                 <div class="ctrl-label">포장지의 공기 구멍(산소가 들어오는 속도)<span class="val" id="c-air-val">2단계</span></div>
                 <input type="range" id="c-air" min="1" max="10" step="1" value="2">
+              </div>
               </div>
             </div>
             <div class="info-card" id="c-warm-info"></div>
@@ -295,8 +300,10 @@
         <section class="scene" data-title="냉찜질 팩 설계 — 차갑게, 그러나 얼지 않게">
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">선생님</span>“냉찜질 팩은 반대야. <b>질산 암모늄이 물에 녹을 때 주변의 열을 흡수</b>하거든. 열을 빼앗긴 물이 차가워지는 거지. 삔 발목에는 <b>2~6℃</b>가 알맞아. 그보다 차가우면 피부가 상할 수 있고, 미지근하면 부기가 안 빠져. 팩은 한 손에 잡혀야 하니까 전체 무게는 <b>150 g 이하</b>로.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-cold" width="900" height="340"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-cold" width="900" height="340"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="c-cold-read"></div>
+              <div>
               <div class="ctrl-group">
                 <div class="ctrl-label">물 주머니의 물 (20℃)<span class="val" id="c-w-val">100 g</span></div>
                 <input type="range" id="c-w" min="50" max="200" step="10" value="100">
@@ -304,6 +311,8 @@
               <div class="ctrl-group">
                 <div class="ctrl-label">질산 암모늄<span class="val" id="c-an-val">5 g</span></div>
                 <input type="range" id="c-an" min="0" max="60" step="1" value="5">
+              </div>
+              <button type="button" class="btn sm" id="c-cold-play">⏸ 입자 멈추기</button>
               </div>
             </div>
             <div class="info-card" id="c-cold-info"></div>
@@ -385,6 +394,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

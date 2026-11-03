@@ -48,8 +48,9 @@
         <section class="scene" data-title="계산 — 연료가 바닥나는 날">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">에밀</span>“수명은 간단해요. <b>(태양의 질량 × 연료 1 kg이 내는 에너지) ÷ 1초에 내보내는 에너지</b>. 연료가 얼마나 ‘진한지’를 바꿔 가며 태양의 수명을 구해 봅시다. 눈금이 1 올라가면 에너지는 10배예요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-a-fuel" width="900" height="300"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-a-fuel" width="900" height="300"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-fuel-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">연료 1 kg이 내는 에너지 (10의 거듭제곱 눈금)<span class="val" id="a-fuel-x-val">눈금 9.0</span></div>
                 <input type="range" id="a-fuel-x" min="7" max="15" step="0.1" value="9">
@@ -64,11 +65,13 @@
           <div class="story narr"><div class="who">⚛️</div><div class="say"><span class="name">이야기</span>답은 20세기에 나왔습니다. 1905년 <span data-view="who:알베르트 아인슈타인">아인슈타인</span>은 질량과 에너지가 서로 바뀔 수 있다는 <b><span data-view="law:질량-에너지 등가">E = mc²</span></b>을 내놓았고, 1920년 <span data-view="who:아서 스탠리 에딩턴">에딩턴</span>은 “수소 원자핵 4개의 질량이 헬륨 원자핵 1개보다 조금 무겁다”는 측정값에 주목했습니다. 1930년대 말, <span data-view="who:한스 베테">한스 베테</span>가 태양 중심부(약 1,500만 ℃)에서 수소 원자핵이 헬륨 원자핵으로 합쳐지는 <b>수소 핵융합</b> 과정을 밝혀냅니다.</div></div>
           <div class="case-file"><b class="k">수소 원자핵 4개</b> 4 × 1.0073 = <b>4.0292</b> &nbsp;|&nbsp; <b class="k">헬륨 원자핵 1개</b> <b>4.0015</b> &nbsp;|&nbsp; <b class="k">줄어든 질량</b> 0.0277 → 처음 질량의 <b>약 0.7%</b> (질량 단위 u)</div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-a-fus" width="900" height="340"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-a-fus" width="900" height="340"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-fus-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">태양 중심부에서 1초에 핵융합하는 수소의 질량<span class="val" id="a-fus-m-val">1.0억 톤</span></div>
                 <input type="range" id="a-fus-m" min="0" max="12" step="0.1" value="1">
+                <button type="button" class="btn sm" id="a-fus-play" style="margin-top:12px">⏸ 핵융합 멈추기</button>
               </div>
             </div>
             <div class="info-card" id="a-fus-info"></div>
@@ -80,14 +83,16 @@
         <section class="scene" data-title="추적 — 지구에 온 햇빛은 어디로 갔나">
           <div class="story"><div class="who">🛰️</div><div class="say"><span class="name">이야기</span>태양이 사방으로 내보내는 에너지 가운데 지구가 받는 것은 <b>약 22억분의 1</b>뿐입니다. 그래도 1초에 약 1.7×10¹⁷ J, 인류가 쓰는 에너지의 수천 배입니다. 이 가운데 약 30%는 구름과 지표에서 반사되어 우주로 돌아가고, 약 70%가 대기와 지표에 흡수되어 지구의 <b>에너지 흐름</b>을 일으킵니다. 그 70% 가운데 약 20%는 대기가 흡수하므로, <b>지표에 닿아 흡수되는 것은 약 50%</b>입니다.</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-a-flow" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-a-flow" width="900" height="300"></canvas></div>
+            <div class="controls"><button type="button" class="btn sm" id="a-flow-play">⏸ 흐름 멈추기</button></div>
           </div>
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">에너지 탐정단 선생님</span>“우리가 쓰는 에너지의 <b>근원</b>을 거슬러 올라가 봅시다. 대부분은 태양에 닿지만, 태양과 상관없는 것도 섞여 있어요. 속지 마세요.”</div></div>
           <div class="stage-card"><div id="a-sort"></div></div>
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">선생님</span>“이번에는 석탄 한 덩어리가 되기까지의 길을 숫자로 따라가요. 조사해 보니 햇빛의 <b>약 50%</b>가 지표에 닿고, 식물은 받은 빛의 <b>1% 안팎</b>만 화학 에너지로 저장해요. 죽은 생물이 썩지 않고 묻혀 화석 연료가 되는 일은 아주 드물어서, 여기서는 <b>0.1%</b>라고 가정합시다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-a-chain" width="900" height="220"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-a-chain" width="900" height="220"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-ch-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">지표에 도달하는 비율(%)<span class="val" id="a-ch-a-val">30</span></div>
                 <input type="range" id="a-ch-a" min="30" max="90" step="1" value="30">
@@ -144,7 +149,7 @@
         <section class="scene" data-title="실험 — 자석을 넣었다 뺐다">
           <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“말보다 실험이지. 코일에 검류계를 연결했어. 아래 손잡이를 끌어서 <b>자석을 직접 움직여 봐.</b> 빠르게도, 천천히도, 그리고 코일 속에 넣은 채 가만히도 있어 보고.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-b-ind" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-b-ind" width="900" height="300"></canvas></div>
             <div class="seg" id="b-ind-n" style="margin:0 20px 14px;">
               <button class="on" data-n="1" type="button">코일 100회</button>
               <button data-n="2" type="button">코일 200회</button>
@@ -164,8 +169,9 @@
         <section class="scene" data-title="설계 — 220 V, 60 Hz를 맞춰라">
           <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“넣었다 뺐다 하는 대신, 자석 사이에서 코일을 <b>계속 회전</b>시키면 코일을 지나는 자기장이 쉬지 않고 변해. 그게 <b>발전기</b>야. 운동 에너지가 전기 에너지로 바뀌는 거지. 전압은 <b>코일 감은 수 × 자석 세기 × 회전 속도</b>에 비례해. 단, 마을 가전제품은 220 V, 60 Hz에 맞춰져 있어. 모자라도, 넘쳐도 안 돼.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-b-gen" width="900" height="340"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-b-gen" width="900" height="340"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="b-gen-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">코일 감은 수<span class="val" id="b-gen-n-val">100회</span></div>
                 <input type="range" id="b-gen-n" min="20" max="400" step="10" value="100">
@@ -178,6 +184,7 @@
                 <div class="ctrl-label">1초 동안 회전수<span class="val" id="b-gen-f-val">20회</span></div>
                 <input type="range" id="b-gen-f" min="0" max="90" step="1" value="20">
               </div>
+              <button type="button" class="btn sm" id="b-gen-play">⏸ 회전 멈추기</button>
             </div>
             <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="b-gen-run" type="button">⚡ 이 설계로 마을에 송전하기</button></div>
             <div class="info-card" id="b-gen-info">세 값을 정하고 송전해 보세요. 여러 번 시도할 수 있습니다.</div>
@@ -196,11 +203,12 @@
               <button data-k="4" type="button">☀️ 태양광</button>
               <button data-k="5" type="button">🌋 지열</button>
             </div>
-            <div class="canvas-wrap"><canvas id="c-b-src" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-b-src" width="900" height="420"></canvas></div>
             <div class="seg" id="b-src-mode" style="margin:0 20px 14px;">
               <button class="on" data-m="eff" type="button">발전 효율(%) 비교</button>
               <button data-m="co2" type="button">CO₂ 배출량(g/kWh) 비교</button>
             </div>
+            <div class="controls" style="padding-top:0"><button type="button" class="btn sm" id="b-src-play">⏸ 흐름 멈추기</button></div>
             <div class="info-card" id="b-src-info"></div>
           </div>
           <div class="stage-card" style="margin-top:14px"><div id="b-q1"></div></div>
@@ -255,8 +263,9 @@
         <section class="scene" data-title="추적 — 단계마다 새는 에너지">
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“조사해 보니 석탄 화력 발전소의 효율은 <b>약 40%</b>, 송전·배전 과정의 효율은 <b>약 96%</b>, 백열전구가 전기 에너지를 빛으로 바꾸는 효율은 <b>약 5%</b>랍니다. 단계를 거칠 때마다 효율이 <b>곱해진다</b>는 점을 눈으로 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-c-loss" width="900" height="340"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-c-loss" width="900" height="340"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="c-loss-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">1단계: 발전 효율(%)<span class="val" id="c-l1-val">50</span></div>
                 <input type="range" id="c-l1" min="5" max="95" step="1" value="50">
@@ -269,10 +278,7 @@
                 <div class="ctrl-label">3단계: 전기 기구 효율(%)<span class="val" id="c-l3-val">50</span></div>
                 <input type="range" id="c-l3" min="5" max="95" step="1" value="50">
               </div>
-            </div>
-            <div class="readout" style="margin:0 20px 14px;">
-              <span class="dot" style="background:var(--coral)"></span>
-              <span class="txt" id="c-loss-total"></span>
+              <button type="button" class="btn sm" id="c-loss-play">⏸ 흐름 멈추기</button>
             </div>
             <div class="info-card" id="c-loss-info"></div>
           </div>
@@ -288,8 +294,9 @@
               <button data-k="cfl" type="button">🌀 전구형 형광등</button>
               <button data-k="led" type="button">✨ LED 전구</button>
             </div>
-            <div class="canvas-wrap"><canvas id="c-c-lamp" width="900" height="320"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="c-c-lamp" width="900" height="320"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="c-lamp-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">전구의 소비 전력<span class="val" id="c-lamp-w-val">30 W</span></div>
                 <input type="range" id="c-lamp-w" min="1" max="100" step="1" value="30">
@@ -303,7 +310,7 @@
         <section class="scene" data-title="설계 — 에너지 자립 마을">
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“새는 에너지를 막았으니, 이제 <b>어떻게 만들지</b>를 정할 차례입니다. 지금 우리 마을은 경유 발전기만으로 전기를 만듭니다. 태양광·풍력·배터리·경유 발전기를 얼마나 둘지 정해 주세요. <b>맑고 바람 부는 날</b>과 <b>흐리고 바람 없는 날</b>, 이틀을 연달아 버텨야 합니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="c-c-vill" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="c-c-vill" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">☀️ 태양광 (100 kW에 1.5억 원)<span class="val" id="c-v-s-val">500 kW</span></div>
@@ -402,6 +409,7 @@
 <script src="../assets/account.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>

@@ -47,7 +47,7 @@
         <section class="scene" data-title="지도 위의 검은 막대 — 어느 펌프인가">
           <div class="story"><div class="who">🎩</div><div class="say"><span class="name">존 스노</span>“사망자 한 명을 막대 하나로, 죽은 사람이 살던 집 앞에 그려 넣었네. 이 동네에는 공동 펌프가 다섯 개 있지. 사람들은 보통 <b>가장 가까운 펌프</b>에서 물을 긷는다네. 펌프를 하나씩 골라, 그 펌프가 가장 가까운 집들에서 몇 명이 죽었는지 세어 보게.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-map" width="900" height="430"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="a-map" width="900" height="430"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">조사할 펌프 (지도의 펌프를 눌러도 됩니다)</div>
@@ -71,8 +71,9 @@
           <div class="story narr"><div class="who">🧬</div><div class="say"><span class="name">이야기</span><span data-view="commons:Snow-cholera-map-1.jpg|퍼블릭 도메인|존 스노가 직접 그린 소호의 콜레라 사망자 지도(1854)">스노</span>는 병원체를 끝내 보지 못했습니다. 지금은 다릅니다. 여러분은 20XX년, 신종 호흡기 감염병 ‘X’가 번지기 시작한 도시의 <b>질병 대응 센터</b>에 배치되었습니다. 첫 일은 <b>진단</b>입니다. 면봉에 묻은 <span data-view="mol:6VXX|코로나19 바이러스의 스파이크 단백질">바이러스</span> 유전자는 너무 적어서 그대로는 검출되지 않습니다.</div></div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">진단 팀장 서윤</span>“그래서 <b>PCR(중합 효소 연쇄 반응)</b>을 써요. 온도를 올렸다 내리는 주기를 한 번 돌 때마다 표적 유전자가 <b>2배</b>로 복제돼요. 형광 신호가 검출 기준선을 넘는 순간의 주기 수가 <b>Ct 값</b>이에요. 처음 양과 주기 수를 바꿔 가며 직접 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-pcr" width="900" height="320"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="a-pcr" width="900" height="320"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-pcr-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">검체 속 처음 유전자 수<span class="val" id="a-pcr-n-val">1,000개</span></div>
                 <input type="range" id="a-pcr-n" min="1" max="7" step="0.1" value="3">
@@ -103,8 +104,9 @@
             <div class="info-card" id="a-rt-msg" style="margin:14px 0 0">민감도 80% = 감염자 100명 중 양성이 나오는 사람의 비율, 특이도 98% = 비감염자 9,900명 중 음성이 나오는 사람의 비율입니다.</div>
           </div>
           <div class="stage-card" style="margin-top:14px">
-            <div class="canvas-wrap"><canvas id="a-rt" width="900" height="320"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="a-rt" width="900" height="320"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-rt-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">유병률 (지금 감염되어 있는 시민의 비율)<span class="val" id="a-rt-p-val">1%</span></div>
                 <input type="range" id="a-rt-p" min="1" max="50" step="1" value="1">
@@ -126,8 +128,9 @@
         <section class="scene" data-title="유행 곡선을 눌러라 — 감염 재생산 지수 R">
           <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">센터장</span>“역학 조사 결과가 나왔습니다. 감염병 X는 아무 대책이 없을 때 환자 한 명이 평균 <b>3명</b>을 감염시킵니다. 이 값을 <b><span data-view="law:기초감염재생산수">기초 감염 재생산 지수</span>(R₀)</b>라고 하지요. 인구 10만 명인 우리 시의 병상과 의료진으로는 <b>동시에 앓는 환자 5,000명</b>까지만 감당할 수 있습니다. 그대로 두면 어떻게 되는지 보고, 대책을 세워 주십시오.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="a-sir" width="900" height="360"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="a-sir" width="900" height="360"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="a-sir-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">접촉 감소 (거리 두기·마스크·격리)<span class="val" id="a-sir-c-val">0%</span></div>
                 <input type="range" id="a-sir-c" min="0" max="80" step="5" value="0">
@@ -186,7 +189,7 @@
           <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“결과부터 말하면 루스벨트가 <b>약 61%</b>를 얻어 48개 주 가운데 46개 주에서 이겼어요. 240만 명이 틀린 거죠. 실마리는 ‘전화’와 ‘자동차’에 있어요. 먼저 과학 기술이 사회를 바꿔 온 큰 흐름부터 순서대로 놓아 보고, 새 기술 하나가 사람들 사이에 <b>어떤 모양으로 퍼지는지</b> 봅시다.”</div></div>
           <div class="stage-card"><div id="b-order"></div></div>
           <div class="stage-card" style="margin-top:14px">
-            <div class="canvas-wrap"><canvas id="b-scurve" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-scurve" width="900" height="300"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">기술 선택 (확산 속도가 다른 세 가지 모형)</div>
@@ -210,7 +213,7 @@
         <section class="scene" data-title="재현 실험 — 240만 명 대 5만 명">
           <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“1936년은 대공황 한가운데였고, 전화나 자동차가 있는 집은 <b>형편이 넉넉한 쪽</b>이었어요. 가상의 유권자 집단으로 재현해 봅시다. 전체 유권자 가운데 <b>전화·자동차 보유층은 35%</b>, 이들의 루스벨트 지지율은 40%이고, 나머지 65%인 비보유층의 지지율은 72%라고 하죠. 표본의 <b>크기</b>와 <b>구성</b>을 바꿔 가며 뽑아 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-poll" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap stage"><canvas id="b-poll" width="900" height="360"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">표본의 크기<span class="val" id="b-poll-n-val">1,000명</span></div>
@@ -237,8 +240,9 @@
         <section class="scene" data-title="이름을 지웠는데 — 익명 데이터의 함정">
           <div class="story"><div class="who">🧑‍💻</div><div class="say"><span class="name">지안</span>“마지막 과제예요. 가상의 도시 주민 <b>2,000명의 진료 기록</b>을 감염병 연구자들에게 공개하려 합니다. 이름과 주민 번호는 지웠어요. 그런데 1990년대 미국에서 연구자 라타냐 스위니가, ‘익명’으로 공개된 진료 기록을 선거인 명부와 맞춰 보아 주지사의 기록을 찾아낸 일이 있어요. 그는 <b>우편 번호·성별·생년월일 세 가지만으로 미국인의 약 87%가 단 한 명으로 특정된다</b>는 것도 보였죠. 어떤 항목을 얼마나 자세히 공개할지 정해 주세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap"><canvas id="b-priv" width="900" height="320"></canvas></div>
-            <div class="controls">
+            <div class="canvas-wrap stage"><canvas id="b-priv" width="900" height="320"></canvas></div>
+            <div class="sim-side">
+              <div class="readout" id="b-priv-read"></div>
               <div class="ctrl-group">
                 <div class="ctrl-label">사는 곳</div>
                 <div class="seg" id="b-pv-loc"><button type="button" class="on" data-l="0">공개 안 함</button><button type="button" data-l="1">구(5개)</button><button type="button" data-l="2">동(40개)</button></div>
@@ -333,6 +337,7 @@
 <script src="life-items.js"></script>
 <script src="episodes.js"></script>
 <script src="worked.js"></script>
+<script src="handoff.js"></script>
 <script src="quiz-items.js"></script>
 <script src="../assets/review.js"></script>
 <script src="../assets/peer.js"></script>
