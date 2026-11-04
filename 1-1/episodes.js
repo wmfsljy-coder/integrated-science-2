@@ -119,61 +119,129 @@ function finch(ctx, x, y, s, beak, alpha) {
   (function () {
     var canvas = $("a-c-ir"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var z = -30, log = window.sthState("irLog") || [];
-    var fr = rng(66), fos = [];
-    for (var i = 0; i < 46; i++) fos.push({ x: 88 + fr() * 150, z: -1.8 - fr() * 37.5, r: 3 + fr() * 4.5, a: fr() * 6.28 });
-    for (var j = 0; j < 9; j++) fos.push({ x: 88 + fr() * 150, z: 1.8 + fr() * 37, r: 1.6, a: 0 });
-    var T = 68, B = H - 44, LW = 330, CX0 = 80, CX1 = 246;
-    function yOf(zz) { return B - (zz + 40) / 80 * (B - T); }
     function zs(zz) { return (zz > 0 ? "+" : (zz < 0 ? "−" : "")) + Math.abs(zz) + " cm"; }
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      /* ── 왼쪽: 구비오 협곡의 지층 ── */
-      K.stage(ctx, 0, 0, LW, H, "earth", { seed: 5, title: "구비오 협곡의 지층" });
-      var y0 = yOf(0), cw = CX1 - CX0;
-      function rock(top, bot, c1, c2) {
-        var g = ctx.createLinearGradient(CX0, 0, CX1, 0);
-        g.addColorStop(0, c2); g.addColorStop(.35, c1); g.addColorStop(1, c2);
-        ctx.fillStyle = g; ctx.fillRect(CX0, top, cw, bot - top);
+    /* ── 아이소메트릭 블록: 구비오 협곡 절벽에서 경계 위아래 80 cm 를 잘라 낸 모형 ──
+       x = 앞면 가로(u), y = 깊이, z = 위(그림 단위). 높이 −40~+40 cm 를 z 20~280 에 놓는다. */
+    var LW = 540, RX = LW + 8;
+    var I = K.iso({ ox: 109, oy: 345, s: 0.76, L: 330, D: 120 });
+    var L = I.L, D = I.D, ZT = 300, CL = 4, UH = 230;          /* CL: 점토층 반두께(실제보다 두껍게) · UH: 시료 뜨는 자리 */
+    function zOf(zz) { return 20 + (zz + 40) / 80 * 260; }
+    var Z0 = zOf(0);
+    function zone(zz) { return zz < 0 ? "k" : (zz > 0 ? "p" : "c"); }
+    /* 화석: 아래(백악기)는 크고 빽빽, 위(신생대)는 아주 작고 드묾 */
+    var fr = rng(66), FOS = { front: [], right: [] };
+    ["front", "right"].forEach(function (sd) {
+      var Lw = sd === "front" ? L : D, nb = sd === "front" ? 58 : 20, ns = sd === "front" ? 10 : 4, i;
+      for (i = 0; i < nb; i++) FOS[sd].push({ u: 6 + fr() * (Lw - 12), z: 4 + fr() * (Z0 - CL - 9), r: 2.6 + fr() * 3.6, a: fr() * 6.28 });
+      for (i = 0; i < ns; i++) FOS[sd].push({ u: 6 + fr() * (Lw - 12), z: Z0 + CL + 6 + fr() * (ZT - Z0 - CL - 12), r: 1.1, a: 0 });
+    });
+    function shell(x, y, r, a, light) {                       /* 평면 나선으로 방이 늘어나는 유공충 껍데기 */
+      var k, n = 7;
+      for (k = 0; k < n; k++) {
+        var t = k / (n - 1), ang = a + t * 5.2, rr = r * (.17 + .27 * t), dd = r * (.12 + .52 * t);
+        var cx = x + Math.cos(ang) * dd, cy = y + Math.sin(ang) * dd;
+        var g = ctx.createRadialGradient(cx - rr * .3, cy - rr * .3, .3, cx, cy, rr);
+        g.addColorStop(0, light ? "rgba(255,252,240,.98)" : "rgba(255,250,235,.85)"); g.addColorStop(1, light ? "rgba(176,140,98,.95)" : "rgba(150,115,80,.75)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, rr, 0, 6.2832); ctx.fill();
+        ctx.strokeStyle = "rgba(90,60,35,.55)"; ctx.lineWidth = light ? 1 : .7; ctx.stroke();
       }
-      rock(T, y0 - 4, "#d9a796", "#a8786a");                     /* 신생대 초기 석회암(붉은빛) */
-      rock(y0 + 4, B, "#e6d6b8", "#b59f7c");                     /* 백악기 말 석회암(희끌한 빛) */
-      ctx.strokeStyle = "rgba(70,40,25,.28)"; ctx.lineWidth = 1;
-      for (var zb = -36; zb <= 36; zb += 8) { if (Math.abs(zb) < 3) continue; var yb = yOf(zb); ctx.beginPath(); ctx.moveTo(CX0, yb); ctx.bezierCurveTo(CX0 + cw * .3, yb - 2, CX0 + cw * .7, yb + 2, CX1, yb); ctx.stroke(); }
-      fos.forEach(function (f) {
-        var fy = yOf(f.z);
-        if (f.r > 2) {
-          var fg = ctx.createRadialGradient(f.x - f.r * .3, fy - f.r * .3, .5, f.x, fy, f.r);
-          fg.addColorStop(0, "rgba(255,250,235,.9)"); fg.addColorStop(1, "rgba(150,115,80,.75)");
-          ctx.fillStyle = fg; ctx.beginPath(); ctx.arc(f.x, fy, f.r, 0, 6.2832); ctx.fill();
-          ctx.strokeStyle = "rgba(90,60,35,.6)"; ctx.lineWidth = .9; ctx.beginPath();
-          for (var q = 0; q < 14; q++) { var aa = f.a + q * .55, rr = f.r * (1 - q / 16); if (q) ctx.lineTo(f.x + Math.cos(aa) * rr, fy + Math.sin(aa) * rr); else ctx.moveTo(f.x + Math.cos(aa) * rr, fy + Math.sin(aa) * rr); }
-          ctx.stroke();
-        } else { ctx.fillStyle = "rgba(110,70,50,.55)"; ctx.beginPath(); ctx.arc(f.x, fy, f.r, 0, 6.2832); ctx.fill(); }
+    }
+    function face(side) {
+      var Lw = side === "front" ? L : D;
+      I.face(ctx, side, function () {
+        var g = ctx.createLinearGradient(0, 0, 0, Z0);            /* 백악기 석회암: 희끄무레한 빛 */
+        g.addColorStop(0, "#c9b48f"); g.addColorStop(1, "#ece0c6");
+        ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, Z0 - CL);
+        var g2 = ctx.createLinearGradient(0, Z0, 0, ZT);          /* 신생대 석회암: 붉은빛 */
+        g2.addColorStop(0, "#c98a78"); g2.addColorStop(1, "#e2ab98");
+        ctx.fillStyle = g2; ctx.fillRect(0, Z0 + CL, Lw, ZT - Z0 - CL);
+        var R = K.rng(side === "front" ? 41 : 43), i;
+        for (i = 0; i < Lw * 2.2; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.22)" : "rgba(70,40,25,.18)"; ctx.fillRect(R() * Lw, R() * ZT, 1.5, 1.5); }
+        ctx.strokeStyle = "rgba(70,40,25,.30)"; ctx.lineWidth = 1.1;
+        for (var zb = 12; zb < ZT; zb += 26) { if (Math.abs(zb - Z0) < 14) continue; ctx.beginPath(); ctx.moveTo(0, zb); ctx.bezierCurveTo(Lw * .3, zb + 2, Lw * .7, zb - 2, Lw, zb + 1); ctx.stroke(); }
+        FOS[side].forEach(function (f) {
+          if (f.r > 2) shell(f.u, f.z, f.r, f.a, false);
+          else { ctx.fillStyle = "rgba(110,60,45,.6)"; ctx.beginPath(); ctx.arc(f.u, f.z, f.r, 0, 6.2832); ctx.fill(); }
+        });
+        var cg = ctx.createLinearGradient(0, Z0 - CL, 0, Z0 + CL);  /* 점토층 */
+        cg.addColorStop(0, "#5a2a1a"); cg.addColorStop(.5, "#3a1a10"); cg.addColorStop(1, "#6b3322");
+        ctx.fillStyle = cg; ctx.fillRect(0, Z0 - CL, Lw, CL * 2);
+        ctx.save(); ctx.shadowColor = KC.orange; ctx.shadowBlur = 8; ctx.strokeStyle = "rgba(255,179,92,.7)"; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.moveTo(0, Z0 + CL); ctx.lineTo(Lw, Z0 + CL); ctx.moveTo(0, Z0 - CL); ctx.lineTo(Lw, Z0 - CL); ctx.stroke(); ctx.restore();
+        if (side === "front") log.forEach(function (q) { ctx.fillStyle = "rgba(25,14,8,.82)"; ctx.beginPath(); ctx.arc(UH + 14, zOf(q.z), 3.6, 0, 6.2832); ctx.fill(); });
+        ctx.save(); ctx.setLineDash([7, 5]); ctx.strokeStyle = "#2f8fe0"; ctx.lineWidth = 2.2;
+        ctx.beginPath(); ctx.moveTo(0, zOf(z)); ctx.lineTo(Lw, zOf(z)); ctx.stroke(); ctx.restore();
       });
-      /* 점토층 */
-      var cg = ctx.createLinearGradient(0, y0 - 4, 0, y0 + 4);
-      cg.addColorStop(0, "#6b3322"); cg.addColorStop(.5, "#3a1a10"); cg.addColorStop(1, "#5a2a1a");
-      ctx.fillStyle = cg; ctx.fillRect(CX0, y0 - 4, cw, 8);
-      ctx.save(); ctx.shadowColor = KC.orange; ctx.shadowBlur = 10; ctx.strokeStyle = "rgba(255,179,92,.55)"; ctx.lineWidth = 1;
-      ctx.strokeRect(CX0, y0 - 4, cw, 8); ctx.restore();
-      ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; ctx.strokeRect(CX0, T, cw, B - T);
-      pill(ctx, "신생대 석회암", CX0 + 8, T + 20, { s: 11.5, c: "#ffd9c9" });
-      pill(ctx, "중생대 백악기 석회암", CX0 + 8, B - 10, { s: 11.5, c: "#fff0d0", box: [0, LW] });
-      pill(ctx, "점토층", CX0 - 6, y0 + 5, { s: 11, a: "right", c: KC.orange, box: [0, LW] });
-      /* 분석한 자리(채취 구멍) */
-      log.forEach(function (q) { var hy = yOf(q.z); ctx.fillStyle = "rgba(20,12,8,.75)"; ctx.beginPath(); ctx.arc(CX1 - 10, hy, 3.4, 0, 6.2832); ctx.fill(); });
-      /* 채취 위치 */
-      var py = yOf(z);
-      K.line(ctx, { x: CX0 - 4, y: py }, { x: LW, y: py }, KC.blue, 2, [6, 5], .95);
-      K.glow(ctx, CX1, py, 4, rgba(KC.blue, .95), 3.2);
-      pill(ctx, "⛏ " + zs(z), CX1 + 10, py + 5, { s: 11.5, c: KC.blue, box: [0, LW] });
-      /* ── 오른쪽: 이리듐 농도 그래프 ── */
-      var RX = LW + 8;
+      I.shade(ctx, side, function () { return ZT; });
+    }
+    function top() {
+      var a = I.P(0, 0, ZT), c = I.P(L, D, ZT);
+      var tg = ctx.createLinearGradient(a.x, a.y, c.x, c.y); tg.addColorStop(0, "#efc2b2"); tg.addColorStop(1, "#d39985");
+      I.plane(ctx, ZT, tg, "rgba(255,255,255,.55)");
+      var R = K.rng(77), i;
+      ctx.strokeStyle = "rgba(110,60,45,.35)"; ctx.lineWidth = 1;
+      for (i = 0; i < 6; i++) { var x0 = R() * L, y0 = R() * D, p1 = I.P(x0, y0, ZT), p2 = I.P(Math.min(L, x0 + 30 + R() * 60), Math.min(D, y0 + R() * 30), ZT); ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+      for (i = 0; i < 160; i++) { var q = I.P(R() * L, R() * D, ZT); ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.3)" : "rgba(120,60,45,.25)"; ctx.fillRect(q.x, q.y, 1.6, 1.2); }
+      /* 지질 망치 */
+      var h1 = I.P(150, 34, ZT), h2 = I.P(212, 72, ZT);
+      ctx.strokeStyle = "rgba(0,0,0,.25)"; ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(h1.x + 2, h1.y + 3); ctx.lineTo(h2.x + 2, h2.y + 3); ctx.stroke();
+      ctx.strokeStyle = "#9a6a3c"; ctx.lineWidth = 4.5; ctx.beginPath(); ctx.moveTo(h1.x, h1.y); ctx.lineTo(h2.x, h2.y); ctx.stroke(); ctx.lineCap = "butt";
+      I.quad(ctx, I.P(204, 56, ZT + 4), I.P(222, 88, ZT + 4), I.P(226, 86, ZT + 4), I.P(208, 54, ZT + 4), "#59606b");
+      I.quad(ctx, I.P(204, 56, ZT + 4), I.P(208, 54, ZT + 4), I.P(208, 54, ZT), I.P(204, 56, ZT), "#3c424b");
+    }
+    function loupe(cx, cy, r) {
+      var zn = zone(z), R = K.rng(zn === "k" ? 91 : 93), i;
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.2832); ctx.clip();
+      var bg = ctx.createRadialGradient(cx - r * .3, cy - r * .3, 4, cx, cy, r);
+      if (zn === "k") { bg.addColorStop(0, "#f6ecd6"); bg.addColorStop(1, "#cdb994"); }
+      else if (zn === "p") { bg.addColorStop(0, "#f0c3b3"); bg.addColorStop(1, "#c98a78"); }
+      else { bg.addColorStop(0, "#7a3a24"); bg.addColorStop(1, "#3a1a10"); }
+      ctx.fillStyle = bg; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      for (i = 0; i < 90; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.25)" : "rgba(60,30,20,.2)"; ctx.fillRect(cx - r + R() * r * 2, cy - r + R() * r * 2, 1.8, 1.8); }
+      if (zn === "k") [[-.45, -.42], [.18, -.55], [.55, -.08], [-.62, .12], [-.08, .05], [.35, .45], [-.32, .55]].forEach(function (q, k) { shell(cx + q[0] * r, cy + q[1] * r, 11 + R() * 8, R() * 6.28, true); });
+      if (zn === "p") for (i = 0; i < 3; i++) shell(cx - r * .55 + R() * r * 1.1, cy - r * .55 + R() * r * 1.1, 3.2, R() * 6.28, true);
+      var gl = ctx.createLinearGradient(cx - r, cy - r, cx + r, cy + r); gl.addColorStop(0, "rgba(255,255,255,.35)"); gl.addColorStop(.4, "rgba(255,255,255,0)");
+      ctx.fillStyle = gl; ctx.fillRect(cx - r, cy - r, r * 2, r * 2);
+      ctx.restore();
+      ctx.strokeStyle = "#1c2233"; ctx.lineWidth = 7; ctx.beginPath(); ctx.arc(cx, cy, r + 3, 0, 6.2832); ctx.stroke();
+      ctx.strokeStyle = "rgba(255,255,255,.6)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, r + 7, 0, 6.2832); ctx.stroke();
+    }
+    var dust = [];
+    function drawModel() {
+      var hiQ = null;
+      log.forEach(function (q) { if (q.v >= 6 && (!hiQ || q.v > hiQ.v)) hiQ = q; });
+      K.studio(ctx, 0, 0, LW, H, { x: I.P(L, D, 0).x - 60, y: I.P(L, D, 0).y - 40, rx: 250, ry: 52 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, LW, H, 14); ctx.clip();
+      face("front"); face("right"); top(); I.edges(ctx, ZT, ZT);
+      var p = I.P(UH, D, zOf(z));
+      K.glow(ctx, p.x, p.y, 4.5, "rgba(80,170,255,.95)", 3.2);
+      var lc = { x: 452, y: 196 }, lr = 62;
+      K.line(ctx, p, { x: lc.x - lr * .9, y: lc.y + lr * .45 }, "rgba(30,40,70,.55)", 1.4, [4, 4]);
+      loupe(lc.x, lc.y, lr);
+      dust.forEach(function (d) { ctx.fillStyle = "rgba(120,80,60," + (d.life * .9).toFixed(2) + ")"; ctx.beginPath(); ctx.arc(d.x, d.y, 1.8, 0, 6.2832); ctx.fill(); });
+      ctx.restore();
+      var box = [0, LW];
+      pill(ctx, "⛏ " + zs(z), p.x + 12, p.y - 10, { s: 12, c: KC.blue, box: box });
+      var pa = I.P(14, D, 250), pb = I.P(14, D, 50);
+      pill(ctx, "신생대 석회암", pa.x + 6, pa.y, { s: 11, c: "#ffd9c9", box: box });
+      pill(ctx, "중생대 백악기 석회암", pb.x + 6, pb.y, { s: 11, c: "#fff0d0", box: box });
+      I.label(ctx, L, 60, Z0, "점토층 (경계)", 44, 8, "#ffb35c", box);
+      var zn = zone(z);
+      pill(ctx, "🔍 " + zs(z) + " 확대", lc.x, lc.y + lr + 26, { s: 11.5, a: "center", c: KC.ink, box: box });
+      pill(ctx, zn === "k" ? "크고 다양한 유공충이 빽빽" : (zn === "p" ? "아주 작은 유공충만 드물게" : "화석이 거의 없는 점토"), lc.x, lc.y + lr + 50, { s: 11.5, a: "center", c: zn === "k" ? "#fff0d0" : (zn === "p" ? "#ffd9c9" : KC.orange), box: box });
+      K.warn(ctx, LW - 12, 24, "⚠ 점토층 두께는 보기 쉽게 과장 (실제 약 1 cm)", "right");
+      pill(ctx, "구비오 협곡 절벽 · 경계 위아래 80 cm", LW - 12, 52, { s: 11, a: "right", c: KC.mute, box: box });
+      if (hiQ) { K.bigText(ctx, "점토층만 이리듐 " + Math.round(hiQ.v / 0.3) + "배", 20, 48, 26, "#ffd35a"); K.bigText(ctx, "우주 먼지로는 설명이 안 된다", 20, 80, 16, "#ffffff"); }
+      else if (log.length) { K.bigText(ctx, "아직은 평범한 석회암", 20, 48, 26, "#ffffff"); var lv = log[log.length - 1].v; K.bigText(ctx, "이리듐 " + lv.toFixed(1) + " ppb · " + (lv > 1 ? "바탕값보다 높다, 경계 쪽으로" : "바탕값 근처"), 20, 80, 16, "#bfe6ff"); }
+      else { K.bigText(ctx, "1 cm 점토층의 비밀", 20, 48, 26, "#ffffff"); K.bigText(ctx, "높이를 골라 시료를 떠 보세요", 20, 80, 16, "#bfe6ff"); }
+    }
+    function drawChart() {
       K.stage(ctx, RX, 0, W - RX, H, "lab", { seed: 8, title: "높이별 이리듐 농도" });
-      var g = K.chart(ctx, { x: RX, y: 54, w: W - RX, h: H - 54, pl: 60, pb: 44, pt: 14, pr: 22, x0: 0, x1: 10, y0: -40, y1: 40, xt: 5, yt: 8,
+      var g = K.chart(ctx, { x: RX, y: 54, w: W - RX, h: H - 54, pl: 54, pb: 44, pt: 14, pr: 18, x0: 0, x1: 10, y0: -40, y1: 40, xt: 5, yt: 8,
         xl: "이리듐 농도 (ppb, 10억분의 1)", yl: "높이", yf: function (t) { return (t > 0 ? "+" : "") + Math.round(t); } });
+      var py = g.Y(z);
       K.line(ctx, { x: g.L, y: g.Y(0) }, { x: g.R, y: g.Y(0) }, KC.orange, 1.4, [5, 4], .7);
-      pill(ctx, "점토층 (0 cm)", g.R - 4, g.Y(0) - 8, { s: 10.5, a: "right", c: KC.orange });
+      pill(ctx, "점토층 (0 cm)", g.R - 4, g.Y(0) - 8, { s: 10.5, a: "right", c: KC.orange, box: [RX, W] });
       K.line(ctx, { x: g.X(0.3), y: g.T }, { x: g.X(0.3), y: g.B }, "rgba(200,210,255,.5)", 1.2, [3, 4]);
       K.line(ctx, { x: g.L, y: py }, { x: g.R, y: py }, KC.blue, 1.2, [6, 5], .5);
       var pts = log.slice().sort(function (a, b) { return a.z - b.z; }), hi = null;
@@ -183,9 +251,10 @@ function finch(ctx, x, y, s, beak, alpha) {
         K.glow(ctx, g.X(q.v), g.Y(q.z), big ? 5 : 4, rgba(big ? KC.red : KC.violet, .95), 3);
       });
       if (hi) pill(ctx, "⚠ " + hi.v.toFixed(1) + " ppb · 바탕값(0.3)의 약 " + Math.round(hi.v / 0.3) + "배", g.X(hi.v) - 12, g.Y(hi.z) + 26, { s: 11, a: "right", c: KC.red, box: [RX, W] });
-      if (!pts.length) pill(ctx, "아직 분석한 시료가 없습니다", (g.L + g.R) / 2, g.Y(20), { s: 12, a: "center", c: KC.mute });
+      if (!pts.length) pill(ctx, "아직 분석한 시료가 없습니다", (g.L + g.R) / 2, g.Y(20), { s: 12, a: "center", c: KC.mute, box: [RX, W] });
       K.t(ctx, "바탕값", g.X(0.3) + 5, g.B - 8, { s: 10, c: KC.dim });
     }
+    function draw() { ctx.clearRect(0, 0, W, H); drawModel(); drawChart(); }
     function check() {
       var seen = {}, n = 0, hi = false;
       log.forEach(function (q) { if (!seen[q.z]) { seen[q.z] = 1; n++; } if (q.v >= 6) hi = true; });
@@ -201,7 +270,16 @@ function finch(ctx, x, y, s, beak, alpha) {
       log.push({ z: z, v: Math.round(irAt(z) * 10) / 10 });
       if (log.length > 24) log = log.slice(-24);
       window.sthState("irLog", log);
+      if (!REDUCE) { var p = I.P(UH, D, zOf(z)), R = K.rng(log.length * 7 + 3); for (var i = 0; i < 16; i++) dust.push({ x: p.x, y: p.y, vx: -10 + R() * 70, vy: -60 + R() * 50, life: 1 }); }
       draw(); say(); check();
+    });
+    /* 시료를 뜰 때 돌가루가 잠깐 튄다(저절로 멈춘다 · 미션과 무관) */
+    K.animate(canvas, function (dt) {
+      if (!dust.length) return;
+      var s = dt / 1000;
+      dust.forEach(function (d) { d.x += d.vx * s; d.y += d.vy * s; d.vy += 140 * s; d.life -= s * 1.4; });
+      dust = dust.filter(function (d) { return d.life > 0; });
+      draw();
     });
     draw(); say(); check();
   })();
