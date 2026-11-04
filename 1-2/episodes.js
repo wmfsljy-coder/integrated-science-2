@@ -120,73 +120,193 @@ function seg(id, cb) {
       return { need: need, ext: ext, fe: ore * 0.7 * ext, oreLeft: ore * (1 - ext), cokeLeft: Math.max(0, coke - need),
                co2: Math.min(coke, need) * 44 / 12, oLost: ore * 0.3 * ext };
     }
-    function draw() {
+    /* ── 잘라 보는 용광로(아이소메트릭 블록) : 앞면 = 노 한가운데를 자른 단면 ── */
+    var TOP = 440, Z = 420, CU = 140, ph = 0, flowing = !REDUCE;
+    var I = K.iso({ ox: 600, oy: 300, s: 0.62, L: 280, D: 150 }), L = I.L, D = I.D;
+    var DARK = "#22304a";
+    function hw(z) {                                   /* 노 안쪽 반폭: 노상 → 보시 → 노복 → 샤프트 → 노구 */
+      if (z < 18) return 0;
+      if (z < 90) return 74;
+      if (z < 150) return lerp(74, 110, (z - 90) / 60);
+      if (z < 190) return 110;
+      if (z < 385) return lerp(110, 66, (z - 190) / 195);
+      return 66;
+    }
+    function cavity(c) {
+      var z; c.beginPath(); c.moveTo(CU - 74, 18);
+      for (z = 18; z < Z; z += 6) c.lineTo(CU - hw(z), z);
+      c.lineTo(CU - hw(Z), Z); c.lineTo(CU + hw(Z), Z);
+      for (z = Z; z >= 18; z -= 6) c.lineTo(CU + hw(z), z);
+      c.lineTo(CU + 74, 18); c.closePath();
+    }
+    function mixc(c1, c2, t) {
+      var a = rgbOf(c1), b = rgbOf(c2);
+      return "rgb(" + Math.round(lerp(a[0], b[0], t)) + "," + Math.round(lerp(a[1], b[1], t)) + "," + Math.round(lerp(a[2], b[2], t)) + ")";
+    }
+    function bricks(c, w, h, base) {
+      var g = c.createLinearGradient(0, 0, w, 0), y, x, row;
+      g.addColorStop(0, K.tint(base, .82)); g.addColorStop(.5, K.tint(base, 1.06)); g.addColorStop(1, K.tint(base, .78));
+      c.fillStyle = g; c.fillRect(0, 0, w, h);
+      c.strokeStyle = "rgba(40,20,12,.32)"; c.lineWidth = 1;
+      for (y = 14, row = 0; y < h; y += 14, row++) {
+        c.beginPath(); c.moveTo(0, y); c.lineTo(w, y); c.stroke();
+        for (x = (row % 2) * 14; x < w; x += 28) { c.beginPath(); c.moveTo(x, y); c.lineTo(x, y + 14); c.stroke(); }
+      }
+    }
+    /* 남은 철광석·코크스를 샤프트에 번갈아 쌓인 층으로 놓는다(반응하고 남은 것만) */
+    function lumps(nOre, nCoke) {
+      /* 층마다 가운데부터 바깥으로, 두 줄까지. 알갱이는 세 층에 번갈아 나눠 담는다 */
+      function slots(b) {
+        var out = [], row, j;
+        for (row = 0; row < 2; row++) {
+          var z = 206 + b * 30 + row * 13, w = hw(z) - 12, n = Math.floor(w / 19);
+          for (j = 0; j <= 2 * n; j++) { var k = j % 2 ? -Math.ceil(j / 2) : j / 2; out.push([CU + k * 19 + (row ? 9 : 0), z]); }
+        }
+        return out.filter(function (s) { return Math.abs(s[0] - CU) <= hw(s[1]) - 10; });
+      }
+      function fill(n, odd, r, c) {
+        var i, S = [slots(odd), slots(odd + 2), slots(odd + 4)];
+        for (i = 0; i < n; i++) {
+          var s = S[i % 3][Math.floor(i / 3)]; if (!s) continue;
+          var j = ((i * 7) % 5) - 2, p = I.P(s[0] + j, D, s[1] + (i % 2));
+          dot(ctx, p.x, p.y, r, c);
+        }
+      }
+      fill(nOre, 0, 6, "#b0553a"); fill(nCoke, 1, 4.6, "#4a4a52");
+    }
+    function paint() {
+      var r = calc(), i, k, fire = Math.min(1, coke / 12), box = [0, W];
+      var poolH = clamp(r.fe / 340 * 44, 0, 46);
       ctx.clearRect(0, 0, W, H);
-      var r = calc(), i, LW = 340;
-      /* ── 왼쪽: 용광로 단면 ── */
-      K.stage(ctx, 0, 0, LW, H, "night", { seed: 13, title: "용광로 단면" });
-      var sh = ctx.createLinearGradient(40, 0, 300, 0);
-      sh.addColorStop(0, "#3a241b"); sh.addColorStop(.5, "#6a4332"); sh.addColorStop(1, "#2c1a13");
-      ctx.fillStyle = sh; ctx.beginPath(); ctx.moveTo(88, 52); ctx.lineTo(252, 52); ctx.lineTo(304, 310); ctx.lineTo(36, 310); ctx.closePath(); ctx.fill();
-      ctx.strokeStyle = "rgba(0,0,0,.35)"; ctx.lineWidth = 1;
-      for (var by0 = 64; by0 < 310; by0 += 16) { ctx.beginPath(); ctx.moveTo(40, by0); ctx.lineTo(300, by0); ctx.stroke(); }
-      var hot = ctx.createLinearGradient(0, 62, 0, 300);
-      hot.addColorStop(0, "#2a1814"); hot.addColorStop(.55, "#7a2e12"); hot.addColorStop(1, "#ff8a2a");
-      ctx.fillStyle = hot; ctx.beginPath(); ctx.moveTo(100, 62); ctx.lineTo(240, 62); ctx.lineTo(290, 300); ctx.lineTo(50, 300); ctx.closePath(); ctx.fill();
-      ctx.save(); ctx.beginPath(); ctx.moveTo(100, 62); ctx.lineTo(240, 62); ctx.lineTo(290, 300); ctx.lineTo(50, 300); ctx.closePath(); ctx.clip();
-      K.glow(ctx, 170, 290, 60, "rgba(255,150,40,.35)", 2.2);
-      var nOre = Math.round(r.oreLeft / 20), nCoke = Math.round(r.cokeLeft / 4), nFe = r.fe;
-      for (i = 0; i < Math.min(nOre, 24); i++) dot(ctx, 92 + (i % 6) * 31 + (Math.floor(i / 6) % 2) * 10, 250 - Math.floor(i / 6) * 34, 11, "#b0553a");
-      for (i = 0; i < Math.min(nCoke, 24); i++) dot(ctx, 108 + (i % 6) * 27, 96 + Math.floor(i / 6) * 20, 7, "#4a4a52");
-      var poolH = clamp(nFe / 340 * 34, 0, 34);
-      if (poolH > 0) {
-        var pg = ctx.createLinearGradient(0, 300 - poolH, 0, 300);
-        pg.addColorStop(0, "#fff3b0"); pg.addColorStop(.4, "#ffb347"); pg.addColorStop(1, "#ff6a10");
-        ctx.save(); ctx.shadowColor = "#ffb347"; ctx.shadowBlur = 16; ctx.fillStyle = pg; ctx.fillRect(40, 300 - poolH, 260, poolH); ctx.restore();
+      /* ── 위: 스튜디오 위의 용광로 블록 ── */
+      K.studio(ctx, 0, 0, W, TOP, { x: 640, y: 398, rx: 230, ry: 44 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, TOP, 14); ctx.clip();
+      /* 오른쪽 면: 내화 벽돌 + 강철 띠 */
+      I.face(ctx, "right", function (Lw) {
+        bricks(ctx, Lw, Z, "#8c5640");
+        [66, 186, 306, 400].forEach(function (z) { ctx.fillStyle = "#4d5560"; ctx.fillRect(0, z, Lw, 9); ctx.fillStyle = "rgba(255,255,255,.2)"; ctx.fillRect(0, z + 7, Lw, 2); });
+      });
+      I.shade(ctx, "right", function () { return Z; });
+      /* 앞면: 노 한가운데를 자른 단면 */
+      I.face(ctx, "front", function (Lw) {
+        bricks(ctx, Lw, Z, "#9a5f45");
+        ctx.fillStyle = "#3d434c"; ctx.fillRect(0, 0, 7, Z); ctx.fillRect(Lw - 7, 0, 7, Z);
+        cavity(ctx);
+        var g = ctx.createLinearGradient(0, 18, 0, Z);
+        g.addColorStop(0, mixc("#3a302c", "#ff8a2a", fire));
+        g.addColorStop(.42, mixc("#2d2522", "#8a3414", fire));
+        g.addColorStop(1, mixc("#211a17", "#2a1814", fire));
+        ctx.fillStyle = g; ctx.fill();
+        ctx.save(); cavity(ctx); ctx.clip();
+        if (poolH > 0) {
+          var pg = ctx.createLinearGradient(0, 18, 0, 18 + poolH);
+          pg.addColorStop(0, "#ff6a10"); pg.addColorStop(.6, "#ffb347"); pg.addColorStop(1, "#fff3b0");
+          ctx.fillStyle = pg; ctx.fillRect(0, 18, Lw, poolH);
+        }
+        ctx.restore();
+        /* 풍구(송풍관): 벽을 뚫고 노 안으로 */
+        var wl = CU - hw(102), wr = CU + hw(102);
+        ctx.fillStyle = "#6d7682"; ctx.fillRect(0, 96, wl + 10, 12); ctx.fillRect(wr - 10, 96, Lw - wr + 10, 12);
+        ctx.fillStyle = "#c3ccd8"; ctx.fillRect(wl + 4, 98, 8, 8); ctx.fillRect(wr - 12, 98, 8, 8);
+        /* 출선구 */
+        ctx.fillStyle = poolH > 0 ? "#ff9a3c" : "#1a1210"; ctx.fillRect(Lw - 40, 24, 40, 7);
+      });
+      /* 윗면과 노구(장입구) */
+      I.plane(ctx, Z, "#a06a52", "rgba(255,255,255,.35)");
+      var hx0 = CU - hw(Z), hx1 = CU + hw(Z);
+      I.quad(ctx, I.P(hx0, 16, Z), I.P(hx1, 16, Z), I.P(hx1, D, Z), I.P(hx0, D, Z), "#1b120e");
+      I.quad(ctx, I.P(hx0, 16, Z), I.P(hx1, 16, Z), I.P(hx1, 16, Z - 18), I.P(hx0, 16, Z - 18), "#5a3426");
+      I.edges(ctx, Z, Z);
+      /* 쇳물·불꽃 빛 */
+      var pp = I.P(CU, D, 18 + poolH);
+      if (poolH > 0) K.glow(ctx, pp.x, pp.y, 16, "rgba(255,170,60,.55)", 2.6);
+      if (fire > 0) {
+        var fl = 1 + 0.18 * Math.sin(ph * 9), a1 = I.P(CU - hw(102) + 18, D, 102), a2 = I.P(CU + hw(102) - 18, D, 102);
+        K.glow(ctx, a1.x, a1.y, 8 * fl * (0.5 + 0.5 * fire), "rgba(255,190,70,.85)", 2.4);
+        K.glow(ctx, a2.x, a2.y, 8 * fl * (0.5 + 0.5 * fire), "rgba(255,190,70,.85)", 2.4);
+      }
+      /* 남은 철광석·코크스 */
+      lumps(Math.min(Math.round(r.oreLeft / 20), 24), Math.min(Math.round(r.cokeLeft / 4), 30));
+      /* 올라가는 기체: 아래에서는 CO(파랑), 위로 갈수록 산소를 얻어 CO₂(회색) */
+      if (r.ext > 0) {
+        var nG = Math.round(5 + 13 * r.ext);
+        for (k = 0; k < nG; k++) {
+          var t = ((k / nG) + ph * 0.16) % 1, z = 112 + t * (Z - 124);
+          var u = CU + Math.sin(k * 2.3 + t * 5) * hw(z) * 0.55, p = I.P(u, D, z);
+          ctx.globalAlpha = 0.85 * Math.min(1, (1 - t) * 4);
+          ctx.fillStyle = mixc("#7fd3ff", "#d9dce6", clamp((t - 0.2) / 0.6, 0, 1));
+          ctx.beginPath(); ctx.arc(p.x, p.y, 3.3, 0, 6.2832); ctx.fill();
+          ctx.globalAlpha = 1;
+        }
+      }
+      /* 열풍관 */
+      I.box(ctx, L, 52, 90, L + 150, 86, 114, "#c3cad3", "#929ba7", "#707985");
+      var b0 = I.P(L + 138, 69, 114), b1 = I.P(L + 22, 69, 114);
+      K.arrow(ctx, b0, b1, "#1f6fd1", 3.5, 11);
+      /* 배기가스 */
+      var top = I.P(CU, 60, Z);
+      if (r.ext > 0) {
+        K.arrow(ctx, { x: top.x, y: top.y }, { x: top.x, y: top.y - 36 }, "rgba(95,104,122,.9)", 2 + 4 * r.ext, 11);
+        K.pill(ctx, "배기가스 CO₂ " + Math.round(r.co2) + " kg", top.x + 14, top.y - 18, { s: 11, c: "#e8ecf4", box: box });
       }
       ctx.restore();
-      if (nFe > 0) tag(ctx, "쇳물 " + Math.round(nFe) + " kg", 170, 296 - poolH - 6, { s: 11, a: "center", c: KC.yellow, box: [0, LW] });
-      dot(ctx, 30, 334, 6, "#b0553a"); K.t(ctx, "철광석", 40, 338, { s: 10.5, c: KC.mute });
-      dot(ctx, 104, 334, 5, "#4a4a52"); K.t(ctx, "코크스", 114, 338, { s: 10.5, c: KC.mute });
-      K.t(ctx, "(반응하고 남은 것만 표시)", 170, 338, { s: 10, c: KC.dim });
-      K.arrow(ctx, { x: 4, y: 284 }, { x: 52, y: 284 }, KC.blue, 4, 11);
-      tag(ctx, "열풍 (공기 O₂)", 8, 262, { s: 10.5, c: KC.blue, box: [0, LW] });
-      if (r.ext > 0) {
-        K.arrow(ctx, { x: 170, y: 56 }, { x: 170, y: 18 }, "rgba(200,210,235,.85)", 2 + 4 * r.ext, 11);
-        tag(ctx, "CO₂", 184, 38, { s: 11, c: KC.mute, box: [0, LW] });
-      }
-      /* ── 오른쪽: 입자 모형 ── */
-      var RX = LW + 8, y = 106, xs;
-      K.stage(ctx, RX, 0, W - RX, H, "lab", { seed: 14, title: "입자 모형 — 산소(O)는 누구에게서 누구에게로 갔나" });
+      /* 이름표 */
+      if (r.oreLeft > 0.01 || r.cokeLeft > 0.01) I.label(ctx, CU - 66, D, 232, "남은 철광석·코크스 층", -100, -60, "#ffe1c9", box);
+      if (r.ext > 0) I.label(ctx, CU + 30, D, 250, "CO 기체가 올라가며 산소를 떼어 감", -170, 34, "#bfe6ff", box);
+      if (poolH > 0) I.label(ctx, CU - 50, D, 18 + poolH * 0.5, "쇳물(철) " + Math.round(r.fe) + " kg", -130, 12, "#ffd35a", box);
+      I.label(ctx, L + 110, 69, 114, "열풍 — 뜨거운 공기(O₂)를 불어 넣음", 26, -64, "#bfe0ff", box);
+      /* 범례 */
+      dot(ctx, 30, 398, 6, "#b0553a"); K.t(ctx, "철광석", 40, 402, { s: 11, w: "800", c: DARK });
+      dot(ctx, 98, 398, 4.6, "#4a4a52"); K.t(ctx, "코크스", 107, 402, { s: 11, w: "800", c: DARK });
+      ctx.fillStyle = "#7fd3ff"; ctx.beginPath(); ctx.arc(170, 398, 3.6, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = "#b9bdc9"; ctx.beginPath(); ctx.arc(180, 398, 3.6, 0, 6.2832); ctx.fill();
+      K.t(ctx, "CO → CO₂ 기체", 190, 402, { s: 11, w: "800", c: DARK });
+      K.t(ctx, "(반응하고 남은 것만 표시)", 22, 424, { s: 10.5, c: "#5a6478" });
+      /* 큰 제목 */
+      var h1, h2;
+      if (coke === 0) { h1 = "코크스가 없으면 쇳물도 없다"; h2 = "철광석 " + ore + " kg이 그대로 남는다"; }
+      else if (r.ext < 1) { h1 = "코크스가 모자라다"; h2 = "철광석 " + Math.round(r.oreLeft) + " kg이 아직 산소를 쥐고 있다"; }
+      else if (r.cokeLeft > 0.01) { h1 = "철은 다 나왔지만 코크스가 남는다"; h2 = "코크스 " + Math.round(r.cokeLeft) + " kg이 쓰이지 못함"; }
+      else { h1 = "남김없이 쇳물이 되었다"; h2 = "철 " + Math.round(r.fe) + " kg · 남은 철광석도 코크스도 0 kg"; }
+      K.bigText(ctx, h1, 22, 52, 28, "#ffffff");
+      K.bigText(ctx, h2, 22, 86, 18, "#ffd35a");
+      K.warn(ctx, W - 14, 30, "⚠ 모양은 단순화 · 알갱이 수는 남은 양에 비례", "right");
+
+      /* ── 아래: 입자 모형과 막대 장부 ── */
+      var y0 = TOP + 8, X0 = -340, y = y0 + 116, xs;
+      K.stage(ctx, 0, y0, W, H - y0, "lab", { seed: 14, title: "입자 모형 — 산소(O)는 누구에게서 누구에게로 갔나" });
       xs = [366, 388, 410, 432, 454];
-      for (i = 0; i < 5; i++) dot(ctx, xs[i], y, 11, i % 2 ? AT.Fe : AT.O, i % 2 ? "Fe" : "O", "#06202c", 9);
-      K.t(ctx, "+", 478, y + 5, { s: 16, w: "800", a: "center", c: KC.ink });
-      for (i = 0; i < 3; i++) { dot(ctx, 506 + i * 32, y - 11, 10, AT.C, "C", "#ffffff", 9); dot(ctx, 506 + i * 32, y + 10, 10, AT.O, "O", "#06202c", 9); }
-      K.arrow(ctx, { x: 594, y: y }, { x: 628, y: y }, KC.ink, 2, 9);
-      dot(ctx, 652, y, 11, AT.Fe, "Fe", "#06202c", 9); dot(ctx, 678, y, 11, AT.Fe, "Fe", "#06202c", 9);
-      K.t(ctx, "+", 702, y + 5, { s: 16, w: "800", a: "center", c: KC.ink });
-      for (i = 0; i < 3; i++) { var cx = 738 + i * 54; dot(ctx, cx - 17, y, 9, AT.O, "O", "#06202c", 8); dot(ctx, cx, y, 9, AT.C, "C", "#ffffff", 8); dot(ctx, cx + 17, y, 9, AT.O, "O", "#06202c", 8); }
-      K.t(ctx, "산화 철(Ⅲ)", 410, y + 38, { s: 10.5, a: "center", c: KC.mute });
-      K.t(ctx, "일산화 탄소", 538, y + 38, { s: 10.5, a: "center", c: KC.mute });
-      K.t(ctx, "철", 665, y + 38, { s: 10.5, a: "center", c: KC.mute });
-      K.t(ctx, "이산화 탄소", 792, y + 38, { s: 10.5, a: "center", c: KC.mute });
+      for (i = 0; i < 5; i++) dot(ctx, X0 + xs[i], y, 11, i % 2 ? AT.Fe : AT.O, i % 2 ? "Fe" : "O", "#06202c", 9);
+      K.t(ctx, "+", X0 + 478, y + 5, { s: 16, w: "800", a: "center", c: KC.ink });
+      for (i = 0; i < 3; i++) { dot(ctx, X0 + 506 + i * 32, y - 11, 10, AT.C, "C", "#ffffff", 9); dot(ctx, X0 + 506 + i * 32, y + 10, 10, AT.O, "O", "#06202c", 9); }
+      K.arrow(ctx, { x: X0 + 594, y: y }, { x: X0 + 628, y: y }, KC.ink, 2, 9);
+      dot(ctx, X0 + 652, y, 11, AT.Fe, "Fe", "#06202c", 9); dot(ctx, X0 + 678, y, 11, AT.Fe, "Fe", "#06202c", 9);
+      K.t(ctx, "+", X0 + 702, y + 5, { s: 16, w: "800", a: "center", c: KC.ink });
+      for (i = 0; i < 3; i++) { var cx = X0 + 738 + i * 54; dot(ctx, cx - 17, y, 9, AT.O, "O", "#06202c", 8); dot(ctx, cx, y, 9, AT.C, "C", "#ffffff", 8); dot(ctx, cx + 17, y, 9, AT.O, "O", "#06202c", 8); }
+      K.t(ctx, "산화 철(Ⅲ)", X0 + 410, y + 38, { s: 10.5, a: "center", c: KC.mute });
+      K.t(ctx, "일산화 탄소", X0 + 538, y + 38, { s: 10.5, a: "center", c: KC.mute });
+      K.t(ctx, "철", X0 + 665, y + 38, { s: 10.5, a: "center", c: KC.mute });
+      K.t(ctx, "이산화 탄소", X0 + 792, y + 38, { s: 10.5, a: "center", c: KC.mute });
       ctx.save(); ctx.shadowColor = KC.blue; ctx.shadowBlur = 8; ctx.strokeStyle = KC.blue; ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.moveTo(410, y - 18); ctx.quadraticCurveTo(538, y - 72, 656, y - 20); ctx.stroke(); ctx.restore();
-      K.arrow(ctx, { x: 646, y: y - 26 }, { x: 658, y: y - 18 }, KC.blue, 2.2, 9);
-      tag(ctx, "산소를 잃음 → 환원", 538, y - 48, { s: 11.5, a: "center", c: KC.blue });
+      ctx.beginPath(); ctx.moveTo(X0 + 410, y - 18); ctx.quadraticCurveTo(X0 + 538, y - 72, X0 + 656, y - 20); ctx.stroke(); ctx.restore();
+      K.arrow(ctx, { x: X0 + 646, y: y - 26 }, { x: X0 + 658, y: y - 18 }, KC.blue, 2.2, 9);
+      tag(ctx, "산소를 잃음 → 환원", X0 + 538, y - 48, { s: 11.5, a: "center", c: KC.blue });
       ctx.save(); ctx.shadowColor = KC.red; ctx.shadowBlur = 8; ctx.strokeStyle = KC.red; ctx.lineWidth = 2.2;
-      ctx.beginPath(); ctx.moveTo(538, y + 46); ctx.quadraticCurveTo(665, y + 88, 788, y + 48); ctx.stroke(); ctx.restore();
-      K.arrow(ctx, { x: 778, y: y + 54 }, { x: 790, y: y + 46 }, KC.red, 2.2, 9);
-      tag(ctx, "산소를 얻음 → 산화", 665, y + 84, { s: 11.5, a: "center", c: KC.red });
+      ctx.beginPath(); ctx.moveTo(X0 + 538, y + 46); ctx.quadraticCurveTo(X0 + 665, y + 88, X0 + 788, y + 48); ctx.stroke(); ctx.restore();
+      K.arrow(ctx, { x: X0 + 778, y: y + 54 }, { x: X0 + 790, y: y + 46 }, KC.red, 2.2, 9);
+      tag(ctx, "산소를 얻음 → 산화", X0 + 665, y + 84, { s: 11.5, a: "center", c: KC.red });
       /* 막대 장부 */
       var rows = [["남은 철광석", r.oreLeft, "#d0704f"], ["얻은 철", r.fe, KC.yellow], ["남은 코크스", r.cokeLeft, "#9aa0b5"], ["나온 이산화 탄소", r.co2, KC.mute]];
-      rows.forEach(function (row, k) {
-        var bby = 216 + k * 34;
-        K.t(ctx, row[0], RX + 16, bby + 14, { s: 11.5, w: "800", c: KC.ink });
-        meter(ctx, 486, bby, 300, 18, row[1] / 500, row[2]);
-        K.t(ctx, Math.round(row[1]) + " kg", 884, bby + 14, { s: 12.5, w: "900", a: "right", c: KC.ink });
+      rows.forEach(function (row, n) {
+        var bby = y0 + 52 + n * 38;
+        K.t(ctx, row[0], 560, bby + 14, { s: 11.5, w: "800", c: KC.ink });
+        meter(ctx, 668, bby, 162, 18, row[1] / 500, row[2]);
+        K.t(ctx, Math.round(row[1]) + " kg", 888, bby + 14, { s: 12.5, w: "900", a: "right", c: KC.ink });
       });
-
+    }
+    function draw() {
+      var r = calc();
+      paint();
       $("a-furn-info").innerHTML = "철광석 " + ore + " kg, 코크스 " + coke + " kg → 철 <b>" + Math.round(r.fe) + " kg</b>. " +
         "철광석이 <b>잃은 산소 " + Math.round(r.oLost) + " kg</b>은 고스란히 일산화 탄소가 <b>얻어</b> 이산화 탄소가 되었습니다. " +
         (r.ext < 1 ? "코크스가 모자라 철광석 " + Math.round(r.oreLeft) + " kg이 산소를 잃지 못한 채 남았습니다." :
@@ -204,6 +324,8 @@ function seg(id, cb) {
       if (got.a && got.b && got.q) { window.sthMission("a-m2", true); ep.clear(1); }
     }
     canvas._redraw = draw;
+    playBtn("a-furn-play", "⏸ 불길 멈추기", "▶ 불길 보기", function () { return flowing; }, function (x) { flowing = x; });
+    K.animate(canvas, function (dt) { if (flowing) { ph += dt / 1000; paint(); } }, 24);
     $("a-ore").addEventListener("input", function (e) { ore = +e.target.value; $("a-ore-val").textContent = ore + " kg"; draw(); });
     $("a-coke").addEventListener("input", function (e) { coke = +e.target.value; $("a-coke-val").textContent = coke + " kg"; draw(); });
     window.sthPick({

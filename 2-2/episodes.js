@@ -801,11 +801,202 @@ function playBtn(id, get, set, on, off) {                  // ⏸ 멈추기 단�
     var canvas = $("c-c-loss"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var e1 = 50, e2 = 90, e3 = 50, okA = !!window.sthState("lossA"), okB = !!window.sthState("lossB");
     var ph = 0, playing = !REDUCE;
+    /* ── 위: 석탄 화력 발전소 → 송전선 → 우리 집을 잘라 본 블록 모형 / 아래: 에너지 100의 길(띠그림) ── */
+    var DH = 420, Y0 = DH + 8, GZ = 16;
+    var I = K.iso({ ox: 190, oy: 95, s: 0.7, L: 700, D: 170 }), LL = I.L, DD = I.D;
+    function P(x, y, z) { return I.P(x, y, z); }
+    function poly(pts, fill, stroke, lw) {
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      for (var i = 1; i < pts.length; i++) ctx.lineTo(pts[i].x, pts[i].y);
+      ctx.closePath();
+      if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+      if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = lw || 1; ctx.stroke(); }
+    }
+    function seg(a, b, col, lw) { ctx.strokeStyle = col; ctx.lineWidth = lw || 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+    /* 앞·오른쪽 벽을 잘라 낸 방: 뒤 벽(y0)·왼 벽(x0)·바닥만 그리고, 잘린 자리는 흰 테두리 */
+    function room(x0, y0, x1, y1, z0, z1, wall, floor) {
+      poly([P(x0, y0, z0), P(x1, y0, z0), P(x1, y0, z1), P(x0, y0, z1)], K.tint(wall, 0.9));
+      poly([P(x0, y0, z0), P(x0, y1, z0), P(x0, y1, z1), P(x0, y0, z1)], K.tint(wall, 0.74));
+      poly([P(x0, y0, z0), P(x1, y0, z0), P(x1, y1, z0), P(x0, y1, z0)], floor);
+    }
+    function cutEdges(x0, y0, x1, y1, z0, z1) {
+      ctx.save(); ctx.lineJoin = "round";
+      var a = P(x1, y0, z0), b = P(x1, y0, z1), c = P(x0, y0, z1), d = P(x0, y1, z1), e = P(x0, y1, z0);
+      ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2.4;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.lineTo(c.x, c.y); ctx.lineTo(d.x, d.y); ctx.lineTo(e.x, e.y); ctx.stroke();
+      ctx.restore();
+    }
+    function wirePts(yw) {                                /* 기둥·송전탑 꼭대기 사이에 조금 처진 전선 */
+      var tops = [[275, GZ + 70], [340, GZ + 105], [440, GZ + 105], [540, GZ + 105], [578, GZ + 60]], out = [], i, t;
+      for (i = 0; i < tops.length - 1; i++) {
+        var a = P(tops[i][0], yw, tops[i][1]), b = P(tops[i + 1][0], yw, tops[i + 1][1]);
+        for (t = 0; t <= 1.0001; t += 0.125) {
+          if (i && t === 0) continue;
+          out.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + 7 * 4 * t * (1 - t) });
+        }
+      }
+      return out;
+    }
+    function puffs(cx, cy, n, r0, rise, drift, col, phase) {    /* 위로 피어오르는 김·연기 */
+      for (var k = 0; k < n; k++) {
+        var t = ((k / n + phase) % 1 + 1) % 1, r = r0 * (0.55 + t * 0.9);
+        var g = ctx.createRadialGradient(cx + drift * t - r * .3, cy - rise * t - r * .3, r * .1, cx + drift * t, cy - rise * t, r);
+        var al = (1 - t * .75);
+        g.addColorStop(0, "rgba(255,255,255," + (0.98 * al).toFixed(2) + ")"); g.addColorStop(.7, "rgba(214,222,232," + (0.9 * al).toFixed(2) + ")"); g.addColorStop(1, col.replace("A", (0.75 * al).toFixed(2)));
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx + drift * t, cy - rise * t, r, 0, 6.2832); ctx.fill();
+        ctx.strokeStyle = "rgba(120,132,150," + (0.35 * al).toFixed(2) + ")"; ctx.lineWidth = 1; ctx.stroke();
+      }
+    }
+    function tower(x, y) {                                /* 격자 송전탑 */
+      var h = 105, c = "#5b6472", lv = [0, 30, 58, 82, h], i, j;
+      function q(z) { var w = 9 - 6.5 * z / h; return [P(x - w, y - w, GZ + z), P(x + w, y - w, GZ + z), P(x + w, y + w, GZ + z), P(x - w, y + w, GZ + z)]; }
+      for (i = 0; i < 4; i++) seg(q(0)[i], q(h)[i], c, 1.6);
+      for (j = 1; j < lv.length; j++) {
+        var A = q(lv[j - 1]), B = q(lv[j]);
+        for (i = 0; i < 4; i++) { seg(A[i], B[(i + 1) % 4], "rgba(91,100,114,.75)", 0.9); seg(B[i], B[(i + 1) % 4], c, 1); }
+      }
+      seg(P(x, y - 20, GZ + h), P(x, y + 20, GZ + h), c, 2.2);
+      [-18, 18].forEach(function (d) { seg(P(x, y + d, GZ + h), P(x, y + d, GZ + h - 6), "#cfd6df", 2.6); });
+    }
+    function diorama(val) {
+      var loss1 = val[0] - val[1], loss2 = val[1] - val[2], loss3 = val[2] - val[3], light = val[3];
+      var mis = e1 === 40 && e2 === 96 && e3 === 5;
+      K.studio(ctx, 0, 0, W, DH, { x: 360, y: 300, rx: 400, ry: 92 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+      /* 땅 블록 */
+      I.box(ctx, 0, 0, 0, LL, DD, GZ, "#86b562", "#8a6a48", "#6d523a");
+      I.face(ctx, "front", function (Lw) {
+        ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1;
+        for (var z = 5; z < GZ; z += 5) { ctx.beginPath(); ctx.moveTo(0, z); ctx.lineTo(Lw, z); ctx.stroke(); }
+        ctx.fillStyle = "#6f9a4c"; ctx.fillRect(0, GZ - 3, Lw, 3);
+      });
+      I.plane(ctx, GZ + 0.2, "#c3c6c9", "rgba(255,255,255,.5)", 12, 285, 12, 160);          /* 발전소 마당 */
+      I.plane(ctx, GZ + 0.2, "#a7aaa6", null, 285, LL, 150, 164);                           /* 길 */
+      I.edges(ctx, GZ, GZ);
+      /* 굴뚝 · 냉각탑(뒤쪽부터) */
+      I.box(ctx, 98, 28, GZ, 114, 44, GZ + 150, "#e3e3e3", "#d2d2d2", "#a9a9a9");
+      I.box(ctx, 98, 28, GZ + 126, 114, 44, GZ + 136, "#e15a4f", "#d04a40", "#a63a32");
+      var tb = P(215, 28, GZ), tt = P(215, 28, GZ + 120), tm = P(215, 28, GZ + 80);
+      var cg = ctx.createLinearGradient(tb.x - 28, 0, tb.x + 28, 0); cg.addColorStop(0, "#e9eaeb"); cg.addColorStop(.55, "#c5c8cc"); cg.addColorStop(1, "#8d9298");
+      ctx.fillStyle = cg; ctx.beginPath();
+      ctx.moveTo(tb.x - 30, tb.y); ctx.quadraticCurveTo(tm.x - 14, tm.y, tt.x - 19, tt.y);
+      ctx.lineTo(tt.x + 19, tt.y); ctx.quadraticCurveTo(tm.x + 14, tm.y, tb.x + 30, tb.y);
+      ctx.ellipse(tb.x, tb.y, 30, 9, 0, 0, Math.PI); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#4b5058"; ctx.beginPath(); ctx.ellipse(tt.x, tt.y, 19, 5.5, 0, 0, 6.2832); ctx.fill();
+      /* 보일러실(잘라 봄) */
+      room(70, 50, 150, 140, GZ, GZ + 95, "#cfd4db", "#8c929b");
+      for (var tx = 78; tx < 146; tx += 8) seg(P(tx, 50, GZ + 6), P(tx, 50, GZ + 80), "rgba(120,128,140,.9)", 2);  /* 물이 끓는 관 */
+      var drum = P(110, 60, GZ + 84);
+      metal(ctx, drum.x - 30, drum.y - 8, 60, 16, "#d7dbe1", "#8d949e", 8);
+      var fire = P(110, 98, GZ + 22), fl = 0.85 + 0.15 * Math.sin(ph * 6.2832 * 3);
+      K.glow(ctx, fire.x, fire.y, 13 * fl, "rgba(255,150,50,.98)", 3.2);
+      for (var f = 0; f < 5; f++) {
+        var fx = fire.x - 16 + f * 8, fh = 10 + 8 * Math.abs(Math.sin(ph * 6.2832 * 2 + f));
+        ctx.fillStyle = f % 2 ? "rgba(255,200,70,.95)" : "rgba(255,110,40,.9)";
+        ctx.beginPath(); ctx.moveTo(fx - 4, fire.y + 6); ctx.quadraticCurveTo(fx, fire.y - fh, fx + 4, fire.y + 6); ctx.fill();
+      }
+      cutEdges(70, 50, 150, 140, GZ, GZ + 95);
+      /* 터빈·발전기실(잘라 봄) */
+      room(150, 70, 255, 140, GZ, GZ + 55, "#d9dde3", "#9aa1aa");
+      var sa = P(158, 105, GZ + 20), sb = P(206, 105, GZ + 20);
+      seg(sa, sb, "#59606b", 4);
+      for (var d = 0; d < 3; d++) {                       /* 터빈 날개 원판 — 김이 지나가며 돌린다 */
+        var xd = 164 + d * 15, rr = 9 + d * 2.5, pts = [];
+        for (var a = 0; a < 6.29; a += 0.4) pts.push(P(xd, 105 + rr * Math.cos(a), GZ + 20 + rr * Math.sin(a)));
+        poly(pts, "rgba(176,184,196,.9)", "rgba(255,255,255,.5)", 1);
+        for (var b = 0; b < 4; b++) {
+          var an = ph * 6.2832 * 2 + b * Math.PI / 4 + d;
+          seg(P(xd, 105, GZ + 20), P(xd, 105 + rr * Math.cos(an), GZ + 20 + rr * Math.sin(an)), "#6b7380", 1.4);
+        }
+      }
+      I.box(ctx, 212, 92, GZ, 246, 118, GZ + 34, "#e2a35c", "#c9853f", "#9b6330");          /* 발전기 */
+      cutEdges(150, 70, 255, 140, GZ, GZ + 55);
+      /* 석탄 더미 */
+      var cc = P(42, 128, GZ), apex = P(42, 128, GZ + 22);
+      var coal = ctx.createLinearGradient(apex.x - 30, apex.y, apex.x + 30, cc.y); coal.addColorStop(0, "#5b5b60"); coal.addColorStop(1, "#141418");
+      ctx.fillStyle = coal; ctx.beginPath(); ctx.moveTo(cc.x - 34, cc.y); ctx.lineTo(apex.x, apex.y); ctx.lineTo(cc.x + 34, cc.y); ctx.ellipse(cc.x, cc.y, 34, 11, 0, 0, Math.PI); ctx.closePath(); ctx.fill();
+      /* 김(폐열) · 연기 — 발전 효율이 낮을수록 냉각탑 김이 커진다 */
+      var steam = Math.max(0, loss1);
+      puffs(tt.x, tt.y - 4, 7, 6 + steam * 0.18, 26 + steam * 0.6, 48, "rgba(150,162,180,A)", ph);
+      var ct = P(106, 36, GZ + 150);
+      puffs(ct.x, ct.y - 2, 4, 5, 34, 18, "rgba(110,115,125,A)", (ph * 1.3) % 1);
+      /* 송전탑과 전선 — 전선에서 새는 열이 클수록 붉게 달아오른다 */
+      seg(P(275, 82, GZ + 70), P(275, 118, GZ + 70), "#5b6472", 2); seg(P(275, 100, GZ), P(275, 100, GZ + 70), "#5b6472", 3);
+      tower(340, 100); tower(440, 100);
+      var heat = clamp(loss2 / 12, 0, 1);
+      [82, 118].forEach(function (yw, wi) {
+        var wp = wirePts(yw);
+        if (heat > 0.02) {
+          ctx.save(); ctx.strokeStyle = "rgba(255,90,90," + (0.15 + 0.55 * heat).toFixed(2) + ")"; ctx.lineWidth = 3 + 6 * heat; ctx.shadowColor = "#ff5a5a"; ctx.shadowBlur = 10 * heat;
+          ctx.beginPath(); wp.forEach(function (p, i) { if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }); ctx.stroke(); ctx.restore();
+        }
+        ctx.strokeStyle = "#2f3540"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); wp.forEach(function (p, i) { if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }); ctx.stroke();
+        flowDots(ctx, wp, (ph + wi * .5) % 1, 3 + Math.round(val[2] / 12), "rgba(127,211,255,.95)", 1.9);
+      });
+      tower(540, 100);
+      seg(P(578, 82, GZ + 60), P(578, 118, GZ + 60), "#5b6472", 2); seg(P(578, 100, GZ), P(578, 100, GZ + 60), "#6b4a2e", 3);
+      seg(P(578, 100, GZ + 60), P(600, 100, GZ + 48), "#2f3540", 1.4);
+      /* 우리 집(잘라 봄) */
+      room(595, 55, 680, 140, GZ, GZ + 62, "#efe6d8", "#c9a578");
+      poly([P(595, 55, GZ + 62), P(680, 55, GZ + 62), P(680, 97.5, GZ + 88), P(595, 97.5, GZ + 88)], "rgba(176,72,58,.82)");
+      seg(P(595, 97.5, GZ + 88), P(680, 97.5, GZ + 88), "rgba(255,255,255,.7)", 1.2);
+      ctx.save(); ctx.setLineDash([4, 4]); seg(P(595, 97.5, GZ + 88), P(595, 140, GZ + 62), "rgba(176,72,58,.7)", 1.2); seg(P(680, 97.5, GZ + 88), P(680, 140, GZ + 62), "rgba(176,72,58,.7)", 1.2); ctx.restore();
+      I.box(ctx, 645, 105, GZ, 668, 128, GZ + 14, "#a7774a", "#8a5f38", "#6e4b2c");          /* 탁자 */
+      I.person(ctx, 625, 120, GZ, "#4fb6ff", 1.3);
+      var bp = P(632, 95, GZ + 40), bc = P(632, 95, GZ + 62), fp = P(632, 95, GZ);
+      seg(bc, bp, "#3a3a3a", 1);
+      var lt = clamp(light / 40, 0, 1);
+      var pool = ctx.createRadialGradient(fp.x, fp.y, 2, fp.x, fp.y, 46);
+      pool.addColorStop(0, "rgba(255,226,140," + (0.15 + 0.6 * lt).toFixed(2) + ")"); pool.addColorStop(1, "rgba(255,226,140,0)");
+      ctx.fillStyle = pool; ctx.beginPath(); ctx.ellipse(fp.x, fp.y, 46, 18, 0, 0, 6.2832); ctx.fill();
+      K.glow(ctx, bp.x, bp.y, 3 + 9 * lt, "rgba(255,236,170,.98)", 3.6);
+      var hq = clamp(loss3 / Math.max(val[2], 1), 0, 1);           /* 전구에서 나는 열 */
+      ctx.strokeStyle = "rgba(255,95,80," + (0.25 + 0.65 * hq).toFixed(2) + ")"; ctx.lineWidth = 1.6;
+      for (var w2 = -1; w2 <= 1; w2++) {
+        if (hq < 0.15 && w2) continue;
+        ctx.beginPath();
+        for (var yy = 0; yy <= 18; yy += 2) ctx.lineTo(bp.x + w2 * 7 + 2.5 * Math.sin(yy / 3 + ph * 12.566), bp.y - 9 - yy - 4 * ((ph * 2) % 1));
+        ctx.stroke();
+      }
+      cutEdges(595, 55, 680, 140, GZ, GZ + 62);
+      [[305, 158], [470, 152], [625, 22], [690, 158], [20, 20], [262, 40]].forEach(function (t, i) { I.tree(ctx, t[0], t[1], GZ, 0.85 + (i % 3) * .12); });
+      /* 에너지가 흐르는 길: 석탄 → 불 → 김 → 터빈 */
+      flowDots(ctx, [P(42, 128, GZ + 12), P(80, 110, GZ + 18), fire], ph, 5, "rgba(255,170,60,.98)", 2.2);
+      flowDots(ctx, [P(118, 62, GZ + 84), P(150, 90, GZ + 50), sa], (ph * 1.4) % 1, 5, "rgba(255,255,255,.95)", 2);
+      flowDots(ctx, [P(246, 105, GZ + 20), P(275, 100, GZ + 66)], ph, 2, "rgba(127,211,255,.95)", 1.9);
+      ctx.restore();
+      /* 이름표 */
+      var bx = [4, W - 4];
+      function neg(x) { return x < 0.05 ? "0" : "−" + x.toFixed(1); }
+      I.label(ctx, 70, 50, GZ + 95, "보일러 · 석탄을 태워 물을 끓임", -40, -14, "#ffd9a8", bx);
+      I.label(ctx, 180, 105, GZ + 20, "터빈·발전기", -18, 64, "#e8ecff", bx);
+      I.label(ctx, 215, 28, GZ + 100, "냉각탑 · 남은 열을 김으로 내보냄", 60, -58, "#ffb3a6", bx);
+      I.label(ctx, 440, 100, GZ + 105, "송전선 · 저항에서 열이 남", 44, -50, "#bfe6ff", bx);
+      I.label(ctx, 680, 76, GZ + 62, "우리 집 · 백열전구", 44, -52, "#fff1cf", bx);
+      /* 왼쪽 아래 장부 */
+      var ly = 298;
+      K.pill(ctx, "🪨 석탄의 화학 에너지 100", 14, ly, { s: 12, c: KC.orange, box: bx });
+      K.pill(ctx, "① 발전소 폐열 " + neg(loss1), 14, ly + 25, { s: 12, c: KC.red, box: bx });
+      K.pill(ctx, "② 전선의 열 " + neg(loss2), 14, ly + 50, { s: 12, c: KC.red, box: bx });
+      K.pill(ctx, "③ 전구의 열 " + neg(loss3), 14, ly + 75, { s: 12, c: KC.red, box: bx });
+      K.pill(ctx, "💡 빛이 된 에너지 " + light.toFixed(1), 14, ly + 100, { s: 12.5, c: KC.yellow, box: bx });
+      /* 큰 제목 */
+      var h1, h2;
+      if (mis) { h1 = "석탄 100 중 빛은 " + light.toFixed(1); h2 = "나머지 " + (100 - light).toFixed(1) + "은 열로 흩어졌다"; }
+      else if (light >= 50) { h1 = "새는 곳을 대부분 막았다"; h2 = "전체 효율 " + light.toFixed(1) + " %"; }
+      else if (light < 5) { h1 = "빛이 되는 건 겨우 " + light.toFixed(1); h2 = "효율은 단계마다 곱해진다"; }
+      else { h1 = "단계마다 에너지가 샌다"; h2 = "전체 효율 " + e1 + "% × " + e2 + "% × " + e3 + "%"; }
+      K.bigText(ctx, h1, W - 20, 50, 28, "#ffffff", "right");
+      K.bigText(ctx, h2, W - 20, 84, 18, "#ffd35a", "right");
+      K.warn(ctx, W - 14, DH - 14, "⚠ 크기·거리는 보기 쉽게 줄임 · 냉각탑 김의 크기 = 발전소 폐열", "right");
+    }
     function draw() {
       ctx.clearRect(0, 0, W, H);
-      K.stage(ctx, 0, 0, W, H, "lab", { seed: 15, title: "에너지 100의 길 · 단계마다 새어 나가는 에너지" });
       var s0 = 100, s1 = s0 * e1 / 100, s2 = s1 * e2 / 100, s3 = s2 * e3 / 100;
-      var val = [s0, s1, s2, s3], X = [40, 290, 540, 790], top = 66, k = 1.7, end = 868;
+      var val = [s0, s1, s2, s3], X = [40, 290, 540, 790], top = Y0 + 62, k = 1.4, end = 868;
+      diorama(val);
+      K.stage(ctx, 0, Y0, W, H - Y0, "lab", { seed: 15, title: "에너지 100의 길 · 단계마다 새어 나가는 에너지" });
       var names = ["연료의 에너지", "① 발전소를 나온 전기 에너지", "② 집에 도착한 전기 에너지", "③ 쓸모 있게 쓰인 에너지"];
       var why = ["", "굴뚝·냉각수의 폐열", "전선의 저항에서 나는 열", "기구에서 나는 열 등"];
       /* 새어 나가는 갈래 (열) */
