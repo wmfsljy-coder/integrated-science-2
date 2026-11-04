@@ -179,63 +179,229 @@ function vline(ctx, x, y0, y1, col, dash, w) {
     var data = M.map(), sel = null;
     var seen = window.sthState("mapSeen") || {}, hit = !!window.sthState("mapHit"), quiz = !!window.sthState("mapQuiz");
 
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      K.stage(ctx, 0, 0, W, H, "night", { seed: 18 });
-      /* 자갈길 */
-      var ROADS = [[40, 215, 860, 215], [450, 40, 450, 395], [120, 60, 800, 120], [100, 340, 820, 300], [230, 40, 180, 395], [700, 40, 660, 395]];
-      ctx.lineCap = "round";
-      ROADS.forEach(function (l) { ctx.strokeStyle = "#262b48"; ctx.lineWidth = 17; ctx.beginPath(); ctx.moveTo(l[0], l[1]); ctx.lineTo(l[2], l[3]); ctx.stroke(); });
-      ROADS.forEach(function (l) { ctx.strokeStyle = "#3a4166"; ctx.lineWidth = 11; ctx.beginPath(); ctx.moveTo(l[0], l[1]); ctx.lineTo(l[2], l[3]); ctx.stroke(); });
-      ctx.lineCap = "butt";
-      /* 고른 펌프에서 물을 길어 가는 집 */
-      if (sel !== null) {
-        var sp = M.PUMPS[sel]; ctx.strokeStyle = "rgba(127,211,255,.18)"; ctx.lineWidth = 1;
-        data.houses.forEach(function (h) { if (h.p === sel) { ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(h.x, h.y); ctx.stroke(); } });
+    /* ── 블록 모형: 소호 한 구역을 땅째 잘라 낸 디오라마 (지도 좌표 mx, my → 월드 x = mx − 20, y = my − 30) ── */
+    var DH = 488, G = 60;                                   /* 모형 칸 높이, 땅 두께(그림 단위) */
+    var I = K.iso({ ox: 330, oy: 106, s: 0.6, L: 860, D: 380 });
+    var L = I.L, D = I.D;
+    function wx(mx) { return mx - 20; }
+    function wy(my) { return my - 30; }
+    function PP(mx, my, z) { return I.P(wx(mx), wy(my), G + (z || 0)); }
+    var ROADS = [[40, 215, 860, 215], [450, 40, 450, 395], [120, 60, 800, 120], [100, 340, 820, 300], [230, 40, 180, 395], [700, 40, 660, 395]];
+    var ph = 0, playing = !REDUCE, pumpScr = [];
+    var objs = [];                                          /* 먼 것부터 그리도록 (x + y) 순서 */
+    data.houses.forEach(function (h, i) { objs.push({ k: "h", i: i, o: wx(h.x) + wy(h.y) }); });
+    M.BLD.forEach(function (b, i) { objs.push({ k: "b", i: i, o: wx(b.x + b.w / 2) + wy(b.y + b.h / 2) }); });
+    M.PUMPS.forEach(function (p, i) { objs.push({ k: "p", i: i, o: wx(p.x) + wy(p.y) }); });
+    objs.sort(function (a, b) { return a.o - b.o; });
+    var leakSeed = K.rng(40);
+    var PEB = []; for (var q = 0; q < 46; q++) PEB.push([leakSeed(), leakSeed(), 1 + leakSeed() * 2.2]);
+
+    function strata(side) {
+      I.face(ctx, side, function (Lw) {
+        var g1 = ctx.createLinearGradient(0, 0, 0, 22); g1.addColorStop(0, "#6f6c66"); g1.addColorStop(1, "#8e8a80");
+        ctx.fillStyle = g1; ctx.fillRect(0, 0, Lw, 22);                                   /* 자갈층 */
+        ctx.fillStyle = "rgba(70,140,215,.42)"; ctx.fillRect(0, 0, Lw, 17);               /* 지하수 */
+        var R = K.rng(side === "front" ? 7 : 9);
+        for (var i = 0; i < Lw / 5; i++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.28)" : "rgba(30,25,20,.35)"; ctx.beginPath(); ctx.arc(R() * Lw, 2 + R() * 18, 1 + R() * 1.6, 0, 6.2832); ctx.fill(); }
+        var g2 = ctx.createLinearGradient(0, 22, 0, 48); g2.addColorStop(0, "#b99a68"); g2.addColorStop(1, "#cdb283");
+        ctx.fillStyle = g2; ctx.fillRect(0, 22, Lw, 26);                                  /* 점토·모래 */
+        ctx.fillStyle = "#5a4433"; ctx.fillRect(0, 48, Lw, 12);                           /* 흙·포장 */
+        ctx.strokeStyle = "rgba(255,255,255,.75)"; ctx.lineWidth = 1.2; ctx.setLineDash([5, 4]);
+        ctx.beginPath(); ctx.moveTo(0, 17); ctx.lineTo(Lw, 17); ctx.stroke(); ctx.setLineDash([]);
+      });
+      I.shade(ctx, side, function () { return G; });
+    }
+
+    function house(h, mine) {
+      var cx = wx(h.x), cy = wy(h.y);
+      if (mine) I.box(ctx, cx - 4, cy - 4, G, cx + 4, cy + 4, G + 8, "#3d8fd0", "#cfe9ff", "#8fbfe6");
+      else I.box(ctx, cx - 4, cy - 4, G, cx + 4, cy + 4, G + 8, "#9b5b45", "#e6dccb", "#b9ad98");
+      if (h.d) I.box(ctx, cx - 2.4, cy - 2.4, G + 8, cx + 2.4, cy + 2.4, G + 8 + h.d * 10, "#ffb3bf", "#ff4d6d", "#c42d4a");
+    }
+    function building(b) {
+      I.box(ctx, wx(b.x), wy(b.y), G, wx(b.x + b.w), wy(b.y + b.h), G + 16, "#7b4a35", "#a55a3a", "#6f3622");
+      /* 벽돌 줄눈 */
+      var a = I.P(wx(b.x), wy(b.y + b.h), G), c = I.P(wx(b.x + b.w), wy(b.y + b.h), G);
+      ctx.strokeStyle = "rgba(255,220,190,.22)"; ctx.lineWidth = .8;
+      for (var z = 4; z < 16; z += 4) { ctx.beginPath(); ctx.moveTo(a.x, a.y - z * .6); ctx.lineTo(c.x, c.y - z * .6); ctx.stroke(); }
+    }
+    function pump(p, i) {
+      var off = hit && i === 0, cx = wx(p.x), cy = wy(p.y);
+      var c0 = off ? "#9aa0b0" : "#3fbfae", c1 = off ? "#5d6272" : "#1f7a70", c2 = off ? "#444958" : "#145a52";
+      I.box(ctx, cx - 6, cy - 6, G, cx + 6, cy + 6, G + 3, "#8b8478", "#a39c90", "#706a60");     /* 돌 받침 */
+      I.box(ctx, cx - 3, cy - 3, G + 3, cx + 3, cy + 3, G + 26, c0, c1, c2);                    /* 펌프 기둥 */
+      I.box(ctx, cx - 4.5, cy - 4.5, G + 26, cx + 4.5, cy + 4.5, G + 30, c0, c1, c2);           /* 머리 */
+      var s1 = I.P(cx - 3, cy + 1, G + 18), s2 = I.P(cx - 9, cy + 1, G + 16);                   /* 주둥이 */
+      ctx.strokeStyle = c1; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(s1.x, s1.y); ctx.lineTo(s2.x, s2.y); ctx.stroke();
+      if (!off) {
+        var h1 = I.P(cx + 3, cy, G + 27), h2 = I.P(cx + 14, cy, G + 40);
+        ctx.strokeStyle = "#2b3346"; ctx.lineWidth = 2.6; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(h1.x, h1.y); ctx.lineTo(h2.x, h2.y); ctx.stroke(); ctx.lineCap = "butt";
       }
+    }
+    function person(x0, y0, x1, y1, t, col) {
+      I.person(ctx, x0 + (x1 - x0) * t, y0 + (y1 - y0) * t, G, col, .9);
+    }
+
+    function inset(idx, leak) {
+      var cx = 792, cy = 172, r = 80, p = idx === null ? null : M.PUMPS[idx], a = idx === null ? null : pumpScr[idx], off = hit && idx === 0;
+      if (a) {
+        var ang = Math.atan2(a.y - 14 - cy, a.x - cx);
+        ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = "rgba(20,30,60,.55)"; ctx.lineWidth = 1.4;
+        ctx.beginPath(); ctx.moveTo(a.x, a.y - 14); ctx.lineTo(cx + Math.cos(ang) * r, cy + Math.sin(ang) * r); ctx.stroke(); ctx.restore();
+      }
+      ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.2832); ctx.clip();
+      var gs = cy - 30, sk = ctx.createLinearGradient(0, cy - r, 0, gs); sk.addColorStop(0, "#dfe8f2"); sk.addColorStop(1, "#c9d6e4");
+      ctx.fillStyle = sk; ctx.fillRect(cx - r, cy - r, 2 * r, gs - (cy - r));
+      ctx.fillStyle = "#5a4433"; ctx.fillRect(cx - r, gs, 2 * r, 12);
+      var cl = ctx.createLinearGradient(0, gs + 12, 0, cy + 20); cl.addColorStop(0, "#b99a68"); cl.addColorStop(1, "#cdb283");
+      ctx.fillStyle = cl; ctx.fillRect(cx - r, gs + 12, 2 * r, cy + 20 - gs - 12);
+      ctx.fillStyle = "#86837a"; ctx.fillRect(cx - r, cy + 20, 2 * r, r);
+      ctx.fillStyle = "rgba(70,140,215,.45)"; ctx.fillRect(cx - r, cy + 30, 2 * r, r);
+      PEB.forEach(function (e) { ctx.fillStyle = e[0] > .5 ? "rgba(255,255,255,.35)" : "rgba(30,25,20,.35)"; ctx.beginPath(); ctx.arc(cx - r + e[0] * 2 * r, cy + 22 + e[1] * 56, e[2], 0, 6.2832); ctx.fill(); });
+      ctx.strokeStyle = "rgba(255,255,255,.8)"; ctx.lineWidth = 1.2; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(cx - r, cy + 30); ctx.lineTo(cx + r, cy + 30); ctx.stroke(); ctx.setLineDash([]);
+      /* 벽돌로 쌓은 우물 */
+      ctx.fillStyle = "#8a4b32"; ctx.fillRect(cx - 14, gs, 6, cy + 52 - gs); ctx.fillRect(cx + 8, gs, 6, cy + 52 - gs);
+      ctx.strokeStyle = "rgba(255,220,190,.35)"; ctx.lineWidth = .8;
+      for (var by = gs + 5; by < cy + 52; by += 5) { ctx.beginPath(); ctx.moveTo(cx - 14, by); ctx.lineTo(cx - 8, by); ctx.moveTo(cx + 8, by); ctx.lineTo(cx + 14, by); ctx.stroke(); }
+      ctx.fillStyle = "#2a2420"; ctx.fillRect(cx - 8, gs, 16, cy + 30 - gs);
+      var wg = ctx.createLinearGradient(0, cy + 30, 0, cy + 52); wg.addColorStop(0, "#5aa8e6"); wg.addColorStop(1, "#1d4f8a");
+      ctx.fillStyle = wg; ctx.fillRect(cx - 8, cy + 30, 16, 22);
+      ctx.strokeStyle = "#9aa3b0"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(cx, gs - 6); ctx.lineTo(cx, cy + 46); ctx.stroke();
+      /* 펌프 */
+      metal(ctx, cx - 6, gs - 34, 12, 34, off ? "#9aa0b0" : "#3fbfae", off ? "#4a4f60" : "#145a52", 3, true);
+      metal(ctx, cx - 9, gs - 38, 18, 6, off ? "#b0b5c3" : "#7fe6d9", off ? "#5a5f70" : "#2a7a70", 2);
+      ctx.fillStyle = off ? "#6a6f80" : "#1f7a70"; ctx.fillRect(cx - 18, gs - 24, 12, 4);
+      if (!off) { ctx.strokeStyle = "#2b3346"; ctx.lineWidth = 3; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(cx + 5, gs - 30); ctx.lineTo(cx + 22, gs - 46); ctx.stroke(); ctx.lineCap = "butt"; }
+      /* 떠 올라가는 물 (움직임) */
+      if (!off) {
+        ctx.fillStyle = "rgba(127,211,255,.9)";
+        for (var k = 0; k < 4; k++) { var t = (ph * .35 + k / 4) % 1; ctx.beginPath(); ctx.arc(cx, cy + 46 - t * (cy + 46 - gs + 4), 1.8, 0, 6.2832); ctx.fill(); }
+      }
+      if (leak) {                                           /* 바로 옆 정화조 */
+        ctx.fillStyle = "#4b3a28"; ctx.fillRect(cx + 34, gs, 30, cy + 8 - gs);
+        ctx.fillStyle = "#6b5236"; ctx.fillRect(cx + 37, gs + 10, 24, cy + 5 - gs - 10);
+        ctx.fillStyle = "rgba(150,120,60,.85)";
+        for (var j = 0; j < 9; j++) {
+          var u = (ph * .22 + j / 9) % 1, px = cx + 40 - u * 26, py = cy + 8 + u * 26 + Math.sin((ph + j) * 2) * 2;
+          ctx.beginPath(); ctx.arc(px, py, 2, 0, 6.2832); ctx.fill();
+        }
+      }
+      ctx.restore();
+      ctx.strokeStyle = "#ffffff"; ctx.lineWidth = 5; ctx.beginPath(); ctx.arc(cx, cy, r, 0, 6.2832); ctx.stroke();
+      ctx.strokeStyle = "#1b2150"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.arc(cx, cy, r + 2.5, 0, 6.2832); ctx.stroke();
+      K.t(ctx, "흙", cx - 58, gs + 9, { s: 10, c: "#f4e9da" });
+      K.t(ctx, "점토·모래", cx - 66, cy + 12, { s: 10, c: "#3b2a18" });
+      K.t(ctx, "자갈층", cx - 60, cy + 40, { s: 10, c: "#ffffff" });
+      K.t(ctx, "지하수", cx + 22, cy + 58, { s: 10, c: "#ffffff" });
+      K.pill(ctx, "🔍 " + (p ? p.n + " 펌프" : "공동 펌프") + " 아래 단면", cx, cy - r - 10, { s: 11.5, a: "center", c: "#e8ecff", box: [600, W - 6] });
+      K.pill(ctx, leak ? "🚽 바로 옆 정화조가 새고 있었다" : "우물 → 자갈층의 지하수", cx, cy + r + 18, { s: 11, a: "center", c: leak ? "#ffb35c" : "#bfe6ff", box: [600, W - 6] });
+    }
+
+    function drawModel() {
+      ctx.clearRect(0, 0, W, DH + 4);
+      K.studio(ctx, 0, 0, W, DH, { x: 440, y: 470, rx: 360, ry: 40 });
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
+      strata("front"); strata("right");
+      /* 윗면: 포장된 땅 */
+      var tg = ctx.createLinearGradient(I.P(0, 0, G).x, I.P(0, 0, G).y, I.P(L, D, G).x, I.P(L, D, G).y);
+      tg.addColorStop(0, "#c9bfae"); tg.addColorStop(1, "#ada190");
+      I.plane(ctx, G, tg, "rgba(255,255,255,.6)");
+      /* 자갈길 */
+      ctx.lineCap = "round";
+      ROADS.forEach(function (l) { var a = PP(l[0], l[1]), b = PP(l[2], l[3]); ctx.strokeStyle = "#7d7466"; ctx.lineWidth = 9; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); });
+      ROADS.forEach(function (l) { var a = PP(l[0], l[1]), b = PP(l[2], l[3]); ctx.strokeStyle = "#a59a86"; ctx.lineWidth = 5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); });
+      ctx.lineCap = "butt";
       /* 사망자가 나온 집 둘레의 붉은 기운 */
       data.houses.forEach(function (h) {
         if (!h.d) return;
-        var g = ctx.createRadialGradient(h.x, h.y, 0, h.x, h.y, 28); g.addColorStop(0, "rgba(255,90,110," + (0.06 + 0.03 * h.d) + ")"); g.addColorStop(1, "rgba(255,90,110,0)");
-        ctx.fillStyle = g; ctx.fillRect(h.x - 28, h.y - 28, 56, 56);
+        var c = PP(h.x, h.y); ctx.save(); ctx.translate(c.x, c.y); ctx.scale(1, .5);
+        var g = ctx.createRadialGradient(0, 0, 0, 0, 0, 22); g.addColorStop(0, "rgba(255,70,95," + (0.10 + 0.05 * h.d) + ")"); g.addColorStop(1, "rgba(255,70,95,0)");
+        ctx.fillStyle = g; ctx.fillRect(-22, -22, 44, 44); ctx.restore();
       });
-      /* 집과 사망자 막대 */
-      data.houses.forEach(function (h) {
-        var mine = sel !== null && h.p === sel;
-        ctx.fillStyle = mine ? "#7fd3ff" : "#9a8b7a"; ctx.fillRect(h.x - 3.5, h.y - 3, 7, 6);
-        ctx.fillStyle = mine ? "#3d8fd0" : "#64554a"; ctx.beginPath(); ctx.moveTo(h.x - 5, h.y - 3); ctx.lineTo(h.x, h.y - 7); ctx.lineTo(h.x + 5, h.y - 3); ctx.closePath(); ctx.fill();
-        if (h.d) {
-          ctx.save(); ctx.shadowColor = KC.red; ctx.shadowBlur = 6; ctx.fillStyle = KC.red;
-          for (var k = 0; k < h.d; k++) ctx.fillRect(h.x - 5, h.y - 11 - k * 3.5, 10, 2.5);
-          ctx.restore();
+      /* 고른 펌프에서 물을 길어 가는 집 */
+      if (sel !== null) {
+        var sp = PP(M.PUMPS[sel].x, M.PUMPS[sel].y); ctx.strokeStyle = "rgba(40,120,210,.35)"; ctx.lineWidth = 1;
+        data.houses.forEach(function (h) { if (h.p === sel) { var c = PP(h.x, h.y); ctx.beginPath(); ctx.moveTo(sp.x, sp.y); ctx.lineTo(c.x, c.y); ctx.stroke(); } });
+        var g0 = PP(M.PUMPS[sel].x, M.PUMPS[sel].y);
+        ctx.save(); ctx.setLineDash([6, 4]); ctx.strokeStyle = "#1f6fd0"; ctx.lineWidth = 2.2; ctx.beginPath(); ctx.ellipse(g0.x, g0.y, 26, 13, 0, 0, 6.2832); ctx.stroke(); ctx.restore();
+      }
+      /* 집·건물·펌프 (먼 것부터) */
+      objs.forEach(function (o) {
+        if (o.k === "h") { var h = data.houses[o.i]; house(h, sel !== null && h.p === sel); }
+        else if (o.k === "b") building(M.BLD[o.i]);
+        else pump(M.PUMPS[o.i], o.i);
+      });
+      /* 물 긷는 사람들 (움직임) */
+      if (sel !== null && !(hit && sel === 0)) {
+        var p0 = M.PUMPS[sel], mine = data.houses.filter(function (h) { return h.p === sel; }), n = Math.min(8, mine.length);
+        for (var k = 0; k < n; k++) {
+          var h = mine[Math.floor(k * mine.length / n)], t = (ph * .12 + k * .37) % 1, tt = t < .5 ? t * 2 : 2 - t * 2;
+          person(wx(p0.x) + 8, wy(p0.y) + 8, wx(h.x), wy(h.y), tt, ["#ff6b81", "#ffd35a", "#4fb6ff", "#3fd3a3", "#b69cff", "#ff9a3c"][k % 6]);
         }
-      });
-      /* 건물 (벽돌) */
-      M.BLD.forEach(function (b) {
-        var bg = ctx.createLinearGradient(b.x, b.y, b.x, b.y + b.h); bg.addColorStop(0, "#8a4b32"); bg.addColorStop(1, "#4e2618");
-        ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(b.x, b.y, b.w, b.h, 6); ctx.fill();
-        ctx.strokeStyle = "rgba(255,179,92,.55)"; ctx.lineWidth = 1.5; ctx.stroke();
-        ctx.strokeStyle = "rgba(255,220,190,.10)"; ctx.lineWidth = 1;
-        for (var by = b.y + 9; by < b.y + b.h; by += 9) { ctx.beginPath(); ctx.moveTo(b.x + 3, by); ctx.lineTo(b.x + b.w - 3, by); ctx.stroke(); }
-        K.t(ctx, b.n, b.x + b.w / 2, b.y + b.h / 2 + 4, { s: 11.5, w: "800", a: "center", c: "#ffe2c4" });
-      });
-      /* 공동 펌프 */
+      }
+      I.edges(ctx, G, G);
+      ctx.restore();
+      /* 펌프 이름표 */
       M.PUMPS.forEach(function (p, i) {
-        var off = hit && i === 0;
-        if (sel === i) { ctx.save(); ctx.shadowColor = KC.blue; ctx.shadowBlur = 10; ctx.strokeStyle = KC.blue; ctx.lineWidth = 2.5; ctx.setLineDash([6, 5]); ctx.beginPath(); ctx.arc(p.x, p.y, 25, 0, 6.2832); ctx.stroke(); ctx.restore(); }
-        K.glow(ctx, p.x, p.y, 9, off ? "rgba(140,140,160,.4)" : "rgba(111,227,214,.45)", 2.4);
-        metal(ctx, p.x - 7, p.y - 13, 14, 26, off ? "#8a8fa0" : "#6fe3d6", off ? "#3a3f50" : "#145a52", 4, true);
-        metal(ctx, p.x - 10, p.y - 16, 20, 5, off ? "#9aa0b0" : "#a6f5ea", off ? "#4a4f60" : "#2a7a70", 2);
-        ctx.fillStyle = off ? "#555a6a" : "#bff7ef"; ctx.fillRect(p.x - 15, p.y - 5, 8, 4);
-        if (!off) { ctx.strokeStyle = "#dfe6f5"; ctx.lineWidth = 2.5; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(p.x + 6, p.y - 9); ctx.lineTo(p.x + 17, p.y - 19); ctx.stroke(); ctx.lineCap = "butt"; }
-        K.pill(ctx, p.n + (seen[i] ? " ✓" : ""), p.x, p.y + 33, { s: 11.5, a: "center", c: sel === i ? KC.blue : "#9ff0e4" });
-        if (seen[i]) K.pill(ctx, "100채당 " + data.stats[i].rate.toFixed(0) + "명", p.x, p.y + 54, { s: 10.5, a: "center", c: data.stats[i].rate >= 50 ? KC.red : KC.mute, bg: "rgba(9,12,34,.6)" });
-        if (off) K.pill(ctx, "✖ 손잡이 제거", p.x, p.y - 26, { s: 11, a: "center", c: KC.red });
+        var c = PP(p.x, p.y); pumpScr[i] = c;
+        K.pill(ctx, p.n + (seen[i] ? " ✓" : ""), c.x, c.y + 18, { s: 11.5, a: "center", c: sel === i ? "#7fd3ff" : "#9ff0e4" });
+        if (seen[i]) K.pill(ctx, "100채당 " + data.stats[i].rate.toFixed(0) + "명", c.x, c.y + 38, { s: 10.5, a: "center", c: data.stats[i].rate >= 50 ? "#ff9aac" : "#c9d2ee" });
+        if (hit && i === 0) K.pill(ctx, "✖ 손잡이 제거", c.x + 14, c.y - 30, { s: 11, a: "left", c: "#ff9aac" });
       });
-      K.pill(ctx, "1854년 소호 · 막대 하나 = 사망자 한 명", 16, 28, { s: 13, c: KC.blue });
-      K.t(ctx, "■ 집   ▬ 사망자   ● 공동 펌프   (고른 펌프가 가장 가까운 집은 파랗게 표시됩니다)", 40, H - 10, { s: 11, c: KC.mute });
+      var box = [0, W];
+      M.BLD.forEach(function (b, i) {
+        var cx = wx(b.x + b.w / 2), cy = wy(b.y + b.h / 2);
+        I.label(ctx, cx, cy, G + 16, b.n, i === 0 ? 64 : -70, i === 0 ? -46 : -22, "#ffe2c4", box);
+      });
+      I.label(ctx, 120, D, 9, "자갈층 · 지하수", -36, 34, "#bfe6ff", box);
+      I.label(ctx, 300, D, 36, "점토·모래", -30, 46, "#f3e2c4", box);
+      inset(sel, ep.cleared(1) && sel === 0);
+      /* 큰 제목 */
+      var t1, t2, c2 = "#ffd35a";
+      if (hit) { t1 = "브로드가 펌프, 손잡이를 떼다"; t2 = "1854년 9월 8일, 위원회가 건의를 받아들였다"; }
+      else if (sel === null) { t1 = "펌프 다섯 개, 범인은 어디에"; t2 = "펌프를 골라 둘레의 사망자를 세어 보세요"; c2 = "#ffffff"; }
+      else {
+        var nSeen = 0; for (var s = 0; s < 5; s++) if (seen[s]) nSeen++;
+        if (nSeen === 5) { t1 = "다섯 펌프를 모두 세었다"; t2 = "어느 펌프의 손잡이를 뗄까?"; }
+        else { t1 = M.PUMPS[sel].n + " 펌프 둘레"; t2 = "집 100채당 사망자 " + data.stats[sel].rate.toFixed(0) + "명 · 조사 " + nSeen + " / 5"; }
+      }
+      K.bigText(ctx, t1, 22, 50, 27, "#ffffff");
+      K.bigText(ctx, t2, 22, 82, 17, c2);
+      K.warn(ctx, W - 14, 30, "⚠ 높이는 과장 · 집 배치는 실제 지도를 본뜬 모형", "right");
+      K.pill(ctx, "■ 집   ▮ 빨간 기둥 = 사망자 수   (고른 펌프가 가장 가까운 집은 파랗게)", 16, DH - 14, { s: 11, c: "#e8ecff" });
     }
+
+    function drawChart() {
+      var y0 = DH + 8, h = H - y0, i;
+      ctx.clearRect(0, y0 - 4, W, h + 4);
+      K.stage(ctx, 0, y0, W, h, "lab", { seed: 18 });
+      K.pill(ctx, "1854년 소호 · 펌프별 집 100채당 사망자 (조사한 펌프만 나타납니다)", 14, y0 + 24, { s: 12, c: KC.blue });
+      var mx = 0; data.stats.forEach(function (s) { mx = Math.max(mx, s.rate); }); mx = mx * 1.08 || 1;
+      for (i = 0; i < 5; i++) {
+        var yy = y0 + 46 + i * 22, s = data.stats[i];
+        K.t(ctx, M.PUMPS[i].n, 20, yy + 11, { s: 12, w: "800", c: sel === i ? KC.blue : KC.ink });
+        track(ctx, 100, yy, 470, 14, 5);
+        if (seen[i]) {
+          gbar(ctx, 100, yy, 470 * s.rate / mx, 14, s.rate >= 50 ? "#ff8a9a" : "#7fd3ff", s.rate >= 50 ? KC.red : KC.blue, 5, 8);
+          K.t(ctx, s.rate.toFixed(0) + "명 (" + s.h + "채 · " + s.d + "명)", 100 + 470 * s.rate / mx + 8, yy + 11, { s: 11.5, w: "800", c: s.rate >= 50 ? KC.red : KC.ink });
+        } else K.t(ctx, "?  아직 조사하지 않음", 108, yy + 11, { s: 11, c: KC.mute });
+      }
+      var n = 0; for (i = 0; i < 5; i++) if (seen[i]) n++;
+      K.t(ctx, "조사한 펌프", 720, y0 + 58, { s: 12, c: KC.mute });
+      K.t(ctx, n + " / 5", 720, y0 + 92, { s: 28, w: "900", c: n === 5 ? KC.green : KC.yellow });
+      K.t(ctx, hit ? "브로드가 손잡이 제거" : "손잡이: 모두 그대로", 720, y0 + 124, { s: 12.5, w: "800", c: hit ? KC.red : KC.ink });
+    }
+    function draw() { drawModel(); drawChart(); }
     canvas._redraw = draw;
+    function moving() { return sel !== null || ep.cleared(1); }
+    var pb = $("a-map-play");
+    function btn() { if (pb) pb.textContent = playing ? "⏸ 움직임 멈추기" : "▶ 물 긷는 사람 보기"; }
+    if (pb) pb.addEventListener("click", function () { playing = !playing; btn(); });
+    btn();
+    K.animate(canvas, function (dt) {
+      if (!playing || !moving()) return;
+      ph += dt / 1000; drawModel();
+    }, 20);
 
     function say(extra) {
       var rows = M.PUMPS.map(function (p, i) {
@@ -264,7 +430,7 @@ function vline(ctx, x, y0, y1, col, dash, w) {
     });
     canvas.addEventListener("click", function (e) {
       var rc = canvas.getBoundingClientRect(), mx = (e.clientX - rc.left) * W / rc.width, my = (e.clientY - rc.top) * H / rc.height;
-      M.PUMPS.forEach(function (p, i) { if (Math.abs(mx - p.x) < 30 && Math.abs(my - p.y) < 30) pick(i); });
+      M.PUMPS.forEach(function (p, i) { var c = pumpScr[i]; if (c && Math.abs(mx - c.x) < 26 && my > c.y - 40 && my < c.y + 14) pick(i); });
     });
     $("a-handle").addEventListener("click", function () {
       if (sel === null) { say("먼저 펌프를 하나 고르세요."); return; }
