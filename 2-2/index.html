@@ -41,6 +41,7 @@
         <section class="scene" data-title="1850년대, 어느 천문대의 논쟁">
           <div class="story narr"><div class="who">☀️</div><div class="say"><span class="name">이야기</span>증기 기관이 세상을 바꾸던 19세기, 사람들이 아는 가장 강력한 연료는 <b>석탄</b>이었습니다. 그래서 과학자들은 진지하게 물었습니다. “태양도 거대한 석탄 덩어리가 타고 있는 것 아닐까?”</div></div>
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">천문대 조수 에밀</span>“계산원님, 마침 잘 오셨어요. 태양의 질량과 태양이 1초마다 내보내는 에너지는 이미 재 두었습니다. 이 숫자만 있으면 ‘석탄 태양’이 얼마나 오래 탈 수 있는지 알 수 있지 않을까요?”</div></div>
+          <figure class="hero-art"><img src="img/sun-coal.webp" alt="19세기 천문대를 땅째 블록처럼 잘라 낸 모형. 돔을 잘라 낸 천문대 안에 놋쇠 망원경과 계산 종이가 놓인 책상이 있고, 옆에는 검은 석탄 더미와 증기 기관, 석탄 수레가 있다. 위에는 4분의 1을 잘라 낸 태양이 떠 있어 가운데의 작고 밝은 중심핵, 매끈한 복사층, 바깥의 부글거리는 대류층이 보인다." width="900" height="900" loading="lazy"><figcaption><b>증기 기관의 시대에도 태양은 46억 년째 꺼지지 않고 있었습니다</b> 19세기 사람들이 아는 가장 센 연료는 석탄이었습니다. 위에 뜬 태양은 4분의 1을 잘라 속을 보여 주는 모형입니다. 가장 밝은 한가운데 중심핵에서 무슨 일이 일어나기에 46억 년 동안 꺼지지 않았을까요? <span class="art-note">⚠ 태양과 천문대의 크기는 실제 비율이 아닙니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">태양의 질량</b> 약 <b>2.0×10³⁰ kg</b> &nbsp;|&nbsp; <b class="k">태양이 1초에 내보내는 에너지</b> 약 <b>3.8×10²⁶ J</b> &nbsp;|&nbsp; <b class="k">석탄 1 kg이 탈 때 나오는 에너지</b> 약 <b>3×10⁷ J</b></div>
           <div class="gate loose" id="g1"></div>
         </section>
@@ -48,7 +49,7 @@
         <section class="scene" data-title="계산 — 연료가 바닥나는 날">
           <div class="story"><div class="who">🧑‍🔬</div><div class="say"><span class="name">에밀</span>“수명은 간단해요. <b>(태양의 질량 × 연료 1 kg이 내는 에너지) ÷ 1초에 내보내는 에너지</b>. 연료가 얼마나 ‘진한지’를 바꿔 가며 태양의 수명을 구해 봅시다. 눈금이 1 올라가면 에너지는 10배예요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-a-fuel" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-a-fuel" width="900" height="340"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="a-fuel-read"></div>
               <div class="ctrl-group">
@@ -65,7 +66,7 @@
           <div class="story narr"><div class="who">⚛️</div><div class="say"><span class="name">이야기</span>답은 20세기에 나왔습니다. 1905년 <span data-view="who:알베르트 아인슈타인">아인슈타인</span>은 질량과 에너지가 서로 바뀔 수 있다는 <b><span data-view="law:질량-에너지 등가">E = mc²</span></b>을 내놓았고, 1920년 <span data-view="who:아서 스탠리 에딩턴">에딩턴</span>은 “수소 원자핵 4개의 질량이 헬륨 원자핵 1개보다 조금 무겁다”는 측정값에 주목했습니다. 1930년대 말, <span data-view="who:한스 베테">한스 베테</span>가 태양 중심부(약 1,500만 ℃)에서 수소 원자핵이 헬륨 원자핵으로 합쳐지는 <b>수소 핵융합</b> 과정을 밝혀냅니다.</div></div>
           <div class="case-file"><b class="k">수소 원자핵 4개</b> 4 × 1.0073 = <b>4.0292</b> &nbsp;|&nbsp; <b class="k">헬륨 원자핵 1개</b> <b>4.0015</b> &nbsp;|&nbsp; <b class="k">줄어든 질량</b> 0.0277 → 처음 질량의 <b>약 0.7%</b> (질량 단위 u)</div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-a-fus" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-a-fus" width="900" height="400"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="a-fus-read"></div>
               <div class="ctrl-group">
@@ -83,14 +84,14 @@
         <section class="scene" data-title="추적 — 지구에 온 햇빛은 어디로 갔나">
           <div class="story"><div class="who">🛰️</div><div class="say"><span class="name">이야기</span>태양이 사방으로 내보내는 에너지 가운데 지구가 받는 것은 <b>약 22억분의 1</b>뿐입니다. 그래도 1초에 약 1.7×10¹⁷ J, 인류가 쓰는 에너지의 수천 배입니다. 이 가운데 약 30%는 구름과 지표에서 반사되어 우주로 돌아가고, 약 70%가 대기와 지표에 흡수되어 지구의 <b>에너지 흐름</b>을 일으킵니다. 그 70% 가운데 약 20%는 대기가 흡수하므로, <b>지표에 닿아 흡수되는 것은 약 50%</b>입니다.</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-a-flow" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-a-flow" width="900" height="420"></canvas></div>
             <div class="controls"><button type="button" class="btn sm" id="a-flow-play">⏸ 흐름 멈추기</button></div>
           </div>
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">에너지 탐정단 선생님</span>“우리가 쓰는 에너지의 <b>근원</b>을 거슬러 올라가 봅시다. 대부분은 태양에 닿지만, 태양과 상관없는 것도 섞여 있어요. 속지 마세요.”</div></div>
           <div class="stage-card"><div id="a-sort"></div></div>
           <div class="story"><div class="who">👩‍🏫</div><div class="say"><span class="name">선생님</span>“이번에는 석탄 한 덩어리가 되기까지의 길을 숫자로 따라가요. 조사해 보니 햇빛의 <b>약 50%</b>가 지표에 닿고, 식물은 받은 빛의 <b>1% 안팎</b>만 화학 에너지로 저장해요. 죽은 생물이 썩지 않고 묻혀 화석 연료가 되는 일은 아주 드물어서, 여기서는 <b>0.1%</b>라고 가정합시다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-a-chain" width="900" height="220"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-a-chain" width="900" height="260"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="a-ch-read"></div>
               <div class="ctrl-group">
@@ -141,6 +142,7 @@
         <section class="scene" data-title="태풍이 지나간 밤">
           <div class="story narr"><div class="who">📜</div><div class="say"><span class="name">실제로 있었던 일</span>1831년 10월, 영국의 과학자 <b>패러데이</b>는 구리선을 감은 코일에 검류계를 잇고 막대자석을 코일 속으로 밀어 넣었다 빼 보았습니다. 자석이 <b>움직이는 순간에만</b> 바늘이 흔들렸고, 가만히 두면 바늘은 0으로 돌아왔습니다. <b><span data-view="law:전자기 유도">전자기 유도</span></b>를 찾아낸 이 실험이 오늘날 모든 발전기의 출발점입니다. 누리섬의 학교 창고에도 바로 그 실험 도구가 있었습니다.</div></div>
           <div class="story narr"><div class="who">🌀</div><div class="say"><span class="name">이야기</span>태풍이 지나간 뒤, 육지와 이어진 해저 전선이 끊겨 <b>누리섬</b>(가상의 섬) 전체가 정전되었습니다. 냉장고의 생선도, 보건소의 약품 냉장고도 위험합니다. 수리선이 오려면 일주일이 걸립니다.</div></div>
+          <figure class="hero-art"><img src="img/dark-island.webp" alt="태풍이 지나간 밤의 작은 섬마을을 블록처럼 잘라 낸 모형. 집집마다 창이 캄캄하고 쓰러진 나뭇가지가 흩어져 있으며 세 사람이 손전등을 들고 있다. 앞면 바닷속 단면에는 해저 전선이 두 동강 나 있고, 가운데 학교 창고에는 막대자석, 구리선 코일, 검류계, 자전거, 작은 물레방아가 보인다." width="900" height="900" loading="lazy"><figcaption><b>바닷속 전선이 끊기자 섬 전체가 캄캄해졌습니다</b> 육지에서 오던 전기가 끊긴 지금, 쓸 수 있는 것은 학교 창고의 자석과 코일, 자전거, 낡은 물레방아뿐입니다. 이것들로 정말 전기를 만들 수 있을까요? <span class="art-note">⚠ 섬과 건물의 크기는 보기 쉽게 줄였습니다.</span></figcaption></figure>
           <div class="story"><div class="who">👵</div><div class="say"><span class="name">이장님</span>“학교 과학실 창고에 <b>강한 자석</b>하고 <b>구리선 코일</b>이 잔뜩 있다오. 자석이 그렇게 세다니, 코일 옆에 딱 붙여 두기만 하면 전기가 나오지 않겠소?”</div></div>
           <div class="case-file"><b class="k">창고 물품</b> 네오디뮴 자석, 에나멜선 코일(100·200·300회), 검류계, 자전거, 낡은 물레방아 &nbsp;|&nbsp; <b class="k">마을이 쓰는 전기</b> 교류 <b>220 V · 60 Hz</b></div>
           <div class="gate loose" id="g2"></div>
@@ -149,7 +151,7 @@
         <section class="scene" data-title="실험 — 자석을 넣었다 뺐다">
           <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“말보다 실험이지. 코일에 검류계를 연결했어. 아래 손잡이를 끌어서 <b>자석을 직접 움직여 봐.</b> 빠르게도, 천천히도, 그리고 코일 속에 넣은 채 가만히도 있어 보고.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-b-ind" width="900" height="300"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-b-ind" width="900" height="380"></canvas></div>
             <div class="seg" id="b-ind-n" style="margin:0 20px 14px;">
               <button class="on" data-n="1" type="button">코일 100회</button>
               <button data-n="2" type="button">코일 200회</button>
@@ -169,7 +171,7 @@
         <section class="scene" data-title="설계 — 220 V, 60 Hz를 맞춰라">
           <div class="story"><div class="who">🧑‍🔧</div><div class="say"><span class="name">지원단 선배</span>“넣었다 뺐다 하는 대신, 자석 사이에서 코일을 <b>계속 회전</b>시키면 코일을 지나는 자기장이 쉬지 않고 변해. 그게 <b>발전기</b>야. 운동 에너지가 전기 에너지로 바뀌는 거지. 전압은 <b>코일 감은 수 × 자석 세기 × 회전 속도</b>에 비례해. 단, 마을 가전제품은 220 V, 60 Hz에 맞춰져 있어. 모자라도, 넘쳐도 안 돼.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-b-gen" width="900" height="340"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-b-gen" width="900" height="400"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="b-gen-read"></div>
               <div class="ctrl-group">
@@ -203,7 +205,7 @@
               <button data-k="4" type="button">☀️ 태양광</button>
               <button data-k="5" type="button">🌋 지열</button>
             </div>
-            <div class="canvas-wrap stage"><canvas id="c-b-src" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-b-src" width="900" height="460"></canvas></div>
             <div class="seg" id="b-src-mode" style="margin:0 20px 14px;">
               <button class="on" data-m="eff" type="button">발전 효율(%) 비교</button>
               <button data-m="co2" type="button">CO₂ 배출량(g/kWh) 비교</button>
@@ -295,7 +297,7 @@
               <button data-k="cfl" type="button">🌀 전구형 형광등</button>
               <button data-k="led" type="button">✨ LED 전구</button>
             </div>
-            <div class="canvas-wrap stage"><canvas id="c-c-lamp" width="900" height="320"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-c-lamp" width="900" height="360"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="c-lamp-read"></div>
               <div class="ctrl-group">
@@ -311,7 +313,7 @@
         <section class="scene" data-title="설계 — 에너지 자립 마을">
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">위원장</span>“새는 에너지를 막았으니, 이제 <b>어떻게 만들지</b>를 정할 차례입니다. 지금 우리 마을은 경유 발전기만으로 전기를 만듭니다. 태양광·풍력·배터리·경유 발전기를 얼마나 둘지 정해 주세요. <b>맑고 바람 부는 날</b>과 <b>흐리고 바람 없는 날</b>, 이틀을 연달아 버텨야 합니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="c-c-vill" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-c-vill" width="900" height="600"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">☀️ 태양광 (100 kW에 1.5억 원)<span class="val" id="c-v-s-val">500 kW</span></div>
@@ -330,7 +332,7 @@
                 <input type="range" id="c-v-d" min="0" max="1000" step="50" value="0">
               </div>
             </div>
-            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="c-v-run" type="button">🏘️ 이 설계를 위원회에 제출하기</button></div>
+            <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn sm" id="c-v-play" type="button">⏸ 시간 멈추기</button> <button class="btn primary" id="c-v-run" type="button">🏘️ 이 설계를 위원회에 제출하기</button></div>
             <div class="info-card" id="c-v-info"></div>
           </div>
           <div class="mission" id="m3-4"><span class="m-tag">미션</span>세 조건을 모두 만족하는 설계를 찾아 제출하세요.<ul><li>이틀 동안 정전 <b>0시간</b> (안정성)</li><li>설치비 <b>55억 원 이하</b> (예산)</li><li>이산화 탄소 배출량이 지금(경유 발전기만 쓸 때)의 <b>40% 이하</b> (환경)</li></ul><p style="margin:8px 0 0;font-size:13px">💡 힌트: 흐리고 바람 없는 둘째 날 밤은 햇빛도 바람도 거의 없습니다. 배터리만으로 버티기 어렵다면 <b>경유 발전기를 보조 전원</b>으로 남겨 두고, 낮에는 태양광·배터리가 맡게 하세요.</p></div>

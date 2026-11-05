@@ -2,6 +2,35 @@
    이야기에서 찾은 개념을 처음 보는 상황에 써 본다. 공용 엔진: ../assets/lab.js (sthLab) */
 (function () {
 "use strict";
+/* ---- 밝은 스튜디오 + 입체 미니어처 말투 (kit.js 머리말 K.iso·K.LT·K.card 참고) ---- */
+var K = window.sthKit, LT = K.LT;
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function lt(ctx, s, x, y, o) { o = o || {}; if (!o.c) o.c = LT.ink; K.t(ctx, s, x, y, o); }
+function lead(ctx, px, py, qx, qy, s, col, box) {
+  ctx.strokeStyle = "rgba(20,25,40,.75)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke();
+  ctx.fillStyle = "#111622"; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, 6.283); ctx.fill();
+  return K.pill(ctx, s, qx + (qx < px ? -4 : 4), qy + 4, { s: 12, a: qx < px ? "right" : "left", c: col || "#e8ecff", box: box });
+}
+function judge(ctx, W, CH, title, big, bigCol, rows, tip, good) {      /* 오른쪽 흰 판정 카드 */
+  var CX = 640, x0 = CX + 16, x1 = W - 16;
+  K.card(ctx, CX, 0, W - CX, CH, title);
+  lt(ctx, big, x0, 58, { s: 19, w: "900", c: bigCol });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x0, x1, 92 + i * 26, r[2]); });
+  if (tip) K.tip(ctx, tip, x0 - 4, 100 + rows.length * 26, x1 - x0 + 4, good);
+}
+function hospital(ctx, ox, oy, need) {                                  /* 병상 10개 병원 미니어처 (need = 필요한 침대 수) */
+  var I = K.iso({ ox: ox, oy: oy, s: .78, L: 120, D: 70 }), fill = Math.min(10, Math.round(need)), extra = Math.max(0, Math.round(need) - 10);
+  I.box(ctx, 0, 0, 0, 120, 70, 6, "#f1f3f5", "#dfe4ea", "#b8c0ca");
+  I.box(ctx, 0, 0, 6, 120, 4, 40, "#ffffff", "#f1f3f5", "#ced4da");
+  var c = I.P(60, 4, 26); ctx.fillStyle = "#e03131"; ctx.fillRect(c.x - 3, c.y - 9, 6, 18); ctx.fillRect(c.x - 9, c.y - 3, 18, 6);
+  for (var b = 0; b < 10; b++) {
+    var bx = 8 + (b % 5) * 22, by = b < 5 ? 14 : 42, on = b < fill;
+    I.box(ctx, bx, by, 6, bx + 16, by + 22, 12, on ? "#ffc9c9" : "#ffffff", on ? "#e03131" : "#dee2e6", on ? "#a51111" : "#adb5bd");
+    if (on) { var hp = I.P(bx + 8, by + 6, 13); ctx.fillStyle = "#f1c7a5"; ctx.beginPath(); ctx.arc(hp.x, hp.y, 2.4, 0, 6.2832); ctx.fill(); }
+  }
+  for (var e = 0; e < Math.min(8, extra); e++) I.person(ctx, 128 + (e % 4) * 7, 20 + e * 7, 0, "#e03131", 1.2);
+  return extra;
+}
 
 window.sthLab({
   mount: "lab", key: "lab", result: "rLab",
@@ -23,31 +52,34 @@ window.sthLab({
       var R0 = 15, eff = 0.97, cov = 80;
       function Re() { return R0 * (1 - cov / 100 * eff); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var r = Re();
-        H.text(ctx, "전교생 200명", 40, 30, { s: 14, w: "900" });
-        var prot = Math.round(200 * cov / 100 * eff), vacc = Math.round(200 * cov / 100);
-        for (var i = 0; i < 200; i++) {
-          var x = 50 + (i % 20) * 19, y = 52 + Math.floor(i / 20) * 19;
-          var col = i < prot ? H.v("--teal") : (i < vacc ? H.v("--amber") : H.v("--line"));
-          H.dot(ctx, x, y, 7, col);
+        ctx.clearRect(0, 0, W, cv.H);
+        var r = Re(), CH = cv.H, prot = Math.round(200 * cov / 100 * eff), vacc = Math.round(200 * cov / 100), i;
+        K.studio(ctx, 0, 0, 630, CH, { x: 210, y: 292, rx: 180, ry: 16 });
+        var I = K.iso({ ox: 168, oy: 108, s: .72, L: 300, D: 150 });
+        I.box(ctx, 0, 0, 0, 300, 150, 8, "#d8c7a8", "#a68b67", "#86704f");
+        I.box(ctx, 0, 0, 8, 300, 14, 52, "#e9ecef", "#f8f9fa", "#ced4da");
+        for (i = 0; i < 9; i++) { var w0 = I.P(14 + i * 32, 14, 24), w1 = I.P(34 + i * 32, 14, 24), w2 = I.P(34 + i * 32, 14, 40), w3 = I.P(14 + i * 32, 14, 40); I.quad(ctx, w0, w1, w2, w3, "#a5d8ff", "rgba(255,255,255,.8)"); }
+        for (i = 0; i < 200; i++) {
+          var col = i % 20, row = Math.floor(i / 20);
+          I.person(ctx, 12 + col * 14.4, 26 + row * 12.4, 8, i < prot ? "#0ca678" : (i < vacc ? "#f59f00" : "#adb5bd"), .95);
         }
-        H.dot(ctx, 56, 260, 6, H.v("--teal")); H.text(ctx, "접종·면역 생김", 68, 264, { s: 11, c: H.v("--mist") });
-        H.dot(ctx, 176, 260, 6, H.v("--amber")); H.text(ctx, "접종했지만 면역 안 생김", 188, 264, { s: 11, c: H.v("--mist") });
-        H.dot(ctx, 56, 284, 6, H.v("--line")); H.text(ctx, "미접종", 68, 288, { s: 11, c: H.v("--mist") });
-        /* 세대별 환자 */
-        var gx0 = 480, gy1 = 250;
-        H.text(ctx, "환자 1명에서 시작한 세대별 새 환자", gx0, 60, { s: 12, w: "800", c: H.v("--mist") });
-        H.axes(ctx, gx0, 70, gx0 + 260, gy1);
-        var mx = Math.max(1, Math.pow(Math.max(r, 1), 4));
-        for (var g = 0; g <= 4; g++) {
-          var n = Math.pow(r, g), bh = Math.min(170, n / mx * 170);
-          H.box(ctx, gx0 + 12 + g * 50, gy1 - bh, 34, bh, r < 1 ? H.v("--green") : H.v("--rose"), 0.75);
-          H.text(ctx, n >= 100 ? n.toFixed(0) : n.toFixed(2), gx0 + 29 + g * 50, gy1 - bh - 6, { s: 10.5, w: "800", a: "center" });
-          H.text(ctx, g + "세대", gx0 + 29 + g * 50, gy1 + 16, { s: 10, a: "center", c: H.v("--mist") });
+        if (vacc < 200) { var sp = I.P(12 + 19 * 14.4, 26 + 9 * 12.4, 20); K.glow(ctx, sp.x, sp.y, 4, "rgba(240,62,62,.95)", 3); lead(ctx, sp.x, sp.y, sp.x + 40, sp.y + 30, "첫 환자", "#ffc9c9", [0, 390]); }
+        lt(ctx, "● 접종·면역 생김 " + prot + "명", 18, CH - 34, { s: 11.5, w: "800", c: "#0ca678" });
+        lt(ctx, "● 접종했지만 면역 없음 " + (vacc - prot) + "명", 18, CH - 14, { s: 11.5, w: "800", c: "#d9480f" });
+        lt(ctx, "● 미접종 " + (200 - vacc) + "명", 210, CH - 34, { s: 11.5, w: "800", c: LT.mute });
+        K.bigText(ctx, "R = " + r.toFixed(2), 18, 44, 26, r < 1 ? "#8ff5cf" : "#ffc9c9");
+        K.bigText(ctx, r < 1 ? "유행이 번지지 못한다" : "유행이 번진다", 18, 70, 15, "#ffd35a");
+        var ymax = Math.max(1.2, Math.pow(Math.max(r, 1), 4) * 1.15), g = K.chart(ctx, { x: 396, y: 60, w: 230, h: 236, x0: 0, x1: 5, y0: 0, y1: ymax, xt: 5, yt: 4, xf: function () { return ""; }, yf: function (q) { return q >= 10 ? Math.round(q) + "" : q.toFixed(1); }, yl: "세대별 새 환자", light: true });
+        for (var gg = 0; gg <= 4; gg++) {
+          var n = Math.pow(r, gg), x0 = g.X(gg + .2), x1 = g.X(gg + .8), y = g.Y(Math.min(n, ymax));
+          var bg = ctx.createLinearGradient(0, y, 0, g.B); bg.addColorStop(0, r < 1 ? "#63e6be" : "#ff8787"); bg.addColorStop(1, r < 1 ? "#0f9f76" : "#c92a2a");
+          ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(x0, y, x1 - x0, g.B - y, [4, 4, 0, 0]); ctx.fill();
+          lt(ctx, n >= 100 ? n.toFixed(0) : n.toFixed(2), (x0 + x1) / 2, y - 5, { s: 10, w: "800", a: "center" });
+          lt(ctx, gg + "세대", (x0 + x1) / 2, g.B + 15, { s: 10, a: "center", c: LT.mute });
         }
-        H.text(ctx, "실제 재생산 수 = 15 × (1 − " + cov + "% × " + Math.round(eff * 100) + "%) = " + r.toFixed(2), 480, 300,
-          { s: 13, w: "900", c: r < 1 ? H.v("--green-700") : H.v("--rose-700") });
+        judge(ctx, W, CH, "판정 · 홍역이 퍼질까", r < 1 ? "집단 면역 성공" : "유행이 번진다", r < 1 ? LT.green : LT.red,
+          [["접종률", cov + "%"], ["백신 효과", Math.round(eff * 100) + "%"], ["면역 생긴 학생", prot + "명"], ["15 × (1 − 접종 × 효과)", r.toFixed(2), r < 1 ? LT.green : LT.red]],
+          r < 1 ? "환자 한 명이 한 명도 못 옮긴다" : "R을 1 아래로 낮춰야 한다", r < 1);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "백신", value: 0.97, options: [{ v: 0.97, t: "MMR 백신 (효과 97%)" }, { v: 0.6, t: "가상의 약한 백신 (효과 60%)" }],
@@ -86,29 +118,45 @@ window.sthLab({
     },
     task: "뽑는 방법과 조사 인원을 정해 <b>치우침 없이 오차 ± 5%p 이내, 300명 이하</b>를 만족하세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
       var TRUE = 52;
       var M = { rand: { t: "학번 무작위 뽑기", bias: 0 }, line: { t: "급식실 앞 먼저 온 사람", bias: 14 }, web: { t: "누리집 자원 응답", bias: -17 } };
       var m = "line", n = 100;
       function moe(k) { return 196 * Math.sqrt(0.25 / k) * Math.sqrt((1000 - k) / 999); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var e = moe(n), est = TRUE + M[m].bias;
-        H.text(ctx, "조사 결과 — ‘급식에 만족한다’ 비율", 40, 30, { s: 14, w: "900" });
-        var x0 = 80, x1 = 820;
-        function X(p) { return x0 + p / 100 * (x1 - x0); }
-        H.axes(ctx, x0, 60, x1, 200);
-        [0, 20, 40, 60, 80, 100].forEach(function (p) { H.text(ctx, p + "%", X(p), 218, { s: 10.5, a: "center", c: H.v("--mist") }); });
-        H.box(ctx, X(est - e), 110, X(est + e) - X(est - e), 40, H.v("--brand"), 0.3);
-        H.dot(ctx, X(est), 130, 7, H.v("--brand-700"));
-        H.text(ctx, "내 조사: " + est + "% ± " + e.toFixed(1) + "%p", X(est), 98, { s: 12.5, w: "900", a: "center", c: H.v("--brand-700") });
-        H.line(ctx, [[X(TRUE), 64], [X(TRUE), 196]], H.v("--green-700"), 2);
-        H.text(ctx, "전교생에게 다 물었을 때 " + TRUE + "%", X(TRUE), 180, { s: 11.5, w: "800", a: "center", c: H.v("--green-700") });
-        H.text(ctx, "방법: " + M[m].t + (M[m].bias ? "  — 이 방법으로 모인 사람은 전교생과 성향이 다릅니다" : "  — 누구나 뽑힐 기회가 같습니다"), 40, 256,
-          { s: 12.5, w: "800", c: M[m].bias ? H.v("--rose-700") : H.v("--green-700") });
-        H.text(ctx, "조사 인원 " + n + "명" + (n > 300 ? " (일손 초과)" : "") + " · 오차 ± " + e.toFixed(1) + "%p" + (e <= 5 ? "" : " (너무 큼)"), 40, 284,
-          { s: 12.5, w: "800", c: n > 300 || e > 5 ? H.v("--rose-700") : H.v("--ink") });
-        H.text(ctx, "※ 오차는 95% 신뢰 수준, 전교생 1000명에서 뽑는 경우로 계산", 40, 308, { s: 11, c: H.v("--mist") });
+        ctx.clearRect(0, 0, W, cv.H);
+        var e = moe(n), est = TRUE + M[m].bias, CH = cv.H, ok = !M[m].bias && n <= 300 && e <= 5, i;
+        K.studio(ctx, 0, 0, 630, CH, { x: 500, y: CH - 40, rx: 120, ry: 16 });
+        K.bigText(ctx, "내 조사 " + est + "% ± " + e.toFixed(1) + "%p", 18, 44, 24, ok ? "#8ff5cf" : "#ffffff");
+        K.bigText(ctx, "전교생에게 다 물으면 " + TRUE + "%", 18, 70, 15, "#ffd35a");
+        var g = K.chart(ctx, { x: 6, y: 96, w: 370, h: 150, x0: 0, x1: 100, y0: 0, y1: 1, xt: 5, yt: 1, yf: function () { return ""; }, xf: function (q) { return q + "%"; }, pl: 18, light: true });
+        ctx.fillStyle = "rgba(28,126,214,.18)"; ctx.fillRect(g.X(est - e), g.Y(.72), g.X(est + e) - g.X(est - e), g.Y(.28) - g.Y(.72));
+        ctx.strokeStyle = "rgba(28,126,214,.6)"; ctx.strokeRect(g.X(est - e), g.Y(.72), g.X(est + e) - g.X(est - e), g.Y(.28) - g.Y(.72));
+        K.planet(ctx, g.X(est), g.Y(.5), 6, "#74c0fc", "#1864ab");
+        ctx.strokeStyle = LT.green; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(g.X(TRUE), g.T); ctx.lineTo(g.X(TRUE), g.B); ctx.stroke();
+        lt(ctx, "전교생 " + TRUE + "%", g.X(TRUE) + 5, g.T + 14, { s: 11, w: "900", c: LT.green });
+        lt(ctx, "내 조사 범위", g.X(est), g.Y(.28) + 14, { s: 10.5, w: "800", a: "center", c: LT.blue });
+        /* 뽑는 방법 미니어처 */
+        var I = K.iso({ ox: 500, oy: 128, s: .95, L: 90, D: 70 });
+        I.box(ctx, 0, 0, 0, 90, 70, 6, "#e9ecef", "#ced4da", "#adb5bd");
+        if (m === "rand") {
+          var R = K.rng(4); I.box(ctx, 20, 15, 6, 70, 55, 54, "rgba(220,235,255,.35)", "rgba(200,220,245,.45)", "rgba(170,195,230,.45)");
+          for (i = 0; i < 18; i++) { var bp = I.P(26 + R() * 38, 20 + R() * 30, 9 + R() * 22); K.planet(ctx, bp.x, bp.y, 4.5, ["#ff8787", "#74c0fc", "#ffe066", "#8ce99a"][i % 4], "#495057"); }
+          lead(ctx, I.P(45, 15, 54).x, I.P(45, 15, 54).y, 420, 82, "학번 공 뽑기 · 누구나 같은 기회", "#b2f2bb", [380, 630]);
+        } else if (m === "line") {
+          I.box(ctx, 0, 0, 6, 90, 30, 56, "#ffe8cc", "#ffd8a8", "#e8a65c"); var dr = I.P(30, 30, 6), dr2 = I.P(30, 30, 30); ctx.fillStyle = "#5c3b1e"; ctx.fillRect(dr.x - 6, dr2.y, 12, dr.y - dr2.y);
+          for (i = 0; i < 9; i++) I.person(ctx, 30 + i * 6, 38 + i * 3.5, 6, ["#ff6b81", "#4fb6ff", "#ffd35a"][i % 3], 1.3);
+          lead(ctx, I.P(45, 0, 56).x, I.P(45, 0, 56).y, 420, 82, "급식실 앞에 먼저 온 사람", "#ffc9c9", [380, 630]);
+        } else {
+          I.box(ctx, 20, 20, 6, 70, 50, 26, "#c69c6d", "#a47148", "#7f5539"); I.box(ctx, 30, 26, 26, 60, 44, 28, "#495057", "#343a40", "#212529");
+          var s1 = I.P(30, 26, 28), s2 = I.P(60, 26, 28), s3 = I.P(60, 26, 50), s4 = I.P(30, 26, 50); I.quad(ctx, s1, s2, s3, s4, "#4dabf7", "#343a40");
+          I.person(ctx, 45, 62, 6, "#b197fc", 1.4); I.person(ctx, 75, 30, 6, "#b197fc", 1.4);
+          lead(ctx, s3.x, s3.y, 420, 82, "누리집에 스스로 응답한 사람", "#ffc9c9", [380, 630]);
+        }
+        lt(ctx, "※ 오차는 95% 신뢰 수준, 전교생 1000명에서 뽑는 경우", 18, CH - 10, { s: 10.5, c: LT.mute });
+        judge(ctx, W, CH, "판정 · 급식 만족도 조사", ok ? "믿을 만한 조사" : (M[m].bias ? "치우친 조사" : (n > 300 ? "일손이 모자란다" : "오차가 너무 크다")), ok ? LT.green : LT.red,
+          [["방법", M[m].t, M[m].bias ? LT.red : LT.green], ["조사 인원 (300 이하)", n + "명", n > 300 ? LT.red : LT.ink], ["오차 (5%p 이하)", "± " + e.toFixed(1) + "%p", e > 5 ? LT.red : LT.ink], ["치우침", (M[m].bias > 0 ? "+" : "") + M[m].bias + "%p", M[m].bias ? LT.red : LT.ink]],
+          M[m].bias ? "모인 사람이 전교생과 성향이 다르다" : "누구나 뽑힐 기회가 같다", !M[m].bias);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "뽑는 방법", value: "line", options: [{ v: "rand", t: "학번 무작위 뽑기" }, { v: "line", t: "급식실 앞 먼저 온 사람" }, { v: "web", t: "누리집 자원 응답" }],
@@ -158,28 +206,29 @@ window.sthLab({
         return gy1 - (H.log10(Math.max(n, 10)) - 1) / 5 * (gy1 - gy0);
       }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "입원 환자 수 (" + (scale === "lin" ? "보통 눈금" : "로그 눈금 — 한 칸마다 10배") + ")", 40, 30, { s: 14, w: "900" });
-        H.axes(ctx, gx0, gy0, gx1, gy1);
-        (scale === "lin" ? [0, 2500, 5000, 7500, 10000] : [10, 100, 1000, 10000, 100000, 1000000]).forEach(function (n) {
-          H.text(ctx, n >= 1000 ? (n / 1000) + "천" : n + "", gx0 - 8, GY(n) + 4, { s: 10, a: "right", c: H.v("--mist") });
+        ctx.clearRect(0, 0, W, cv.H);
+        gx0 = 66; gx1 = 420; gy0 = 104; gy1 = 290;
+        var CH = cv.H, n60 = cases(60), over = null, pts = [], d, nn;
+        K.studio(ctx, 0, 0, 630, CH, { x: 530, y: 262, rx: 90, ry: 14 });
+        ctx.fillStyle = "rgba(255,255,255,.72)"; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
+        ctx.strokeStyle = LT.line; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(gx0, gy0); ctx.lineTo(gx0, gy1); ctx.lineTo(gx1, gy1); ctx.stroke();
+        (scale === "lin" ? [0, 2500, 5000, 7500, 10000] : [10, 100, 1000, 10000, 100000, 1000000]).forEach(function (q) {
+          ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gx0, GY(q)); ctx.lineTo(gx1, GY(q)); ctx.stroke();
+          lt(ctx, q >= 1000 ? (q / 1000) + "천" : q + "", gx0 - 8, GY(q) + 4, { s: 10, a: "right", c: LT.mute });
         });
-        [0, 10, 20, 30, 40, 50, 60].forEach(function (d) { H.text(ctx, d + "일", GX(d), gy1 + 16, { s: 10, a: "center", c: H.v("--mist") }); });
-        H.line(ctx, [[gx0, GY(5000)], [gx1, GY(5000)]], H.v("--rose"), 2);
-        H.text(ctx, "병상 5000", gx1 - 4, GY(5000) - 6, { s: 11, w: "800", a: "right", c: H.v("--rose-700") });
-        var pts = [], over = null;
-        for (var d = 0; d <= 60; d += 0.5) {
-          var n = cases(d); if (over === null && n > 5000) over = d;
-          if (scale === "lin" && n > 10000) break;
-          pts.push([GX(d), GY(n)]);
-        }
-        H.line(ctx, pts, H.v("--violet"), 3);
-        var n60 = cases(60);
-        H.rows(ctx, 660, 70, [
-          ["두 배가 되는 기간", Td.toFixed(1) + " 일"],
-          ["병상이 모자라는 날", over === null ? "60일 안에는 없음" : Math.ceil(over) + "일째", over === null ? "--green-700" : "--rose-700"],
-          ["60일째 입원 환자", n60 >= 1e6 ? (n60 / 1e6).toFixed(1) + " 백만" : Math.round(n60).toLocaleString() + " 명", n60 <= 5000 ? "--green-700" : "--rose-700", true]
-        ], 62);
+        [0, 10, 20, 30, 40, 50, 60].forEach(function (q) { lt(ctx, q + "일", GX(q), gy1 + 16, { s: 10, a: "center", c: LT.mute }); });
+        ctx.save(); ctx.strokeStyle = LT.red; ctx.lineWidth = 2; ctx.setLineDash([7, 4]); ctx.beginPath(); ctx.moveTo(gx0, GY(5000)); ctx.lineTo(gx1, GY(5000)); ctx.stroke(); ctx.restore();
+        lt(ctx, "병상 5000", gx1 - 4, GY(5000) - 6, { s: 11, w: "900", a: "right", c: LT.red });
+        for (d = 0; d <= 60; d += 0.5) { nn = cases(d); if (over === null && nn > 5000) over = d; if (scale === "lin" && nn > 10000) break; pts.push([GX(d), GY(nn)]); }
+        ctx.save(); ctx.strokeStyle = LT.violet; ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.shadowColor = "rgba(112,72,232,.3)"; ctx.shadowBlur = 3; ctx.beginPath(); pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.restore();
+        lt(ctx, "입원 환자 수 (" + (scale === "lin" ? "보통 눈금" : "로그 눈금 · 한 칸 10배") + ")", gx0, gy0 - 8, { s: 11, w: "800", c: LT.mute });
+        K.bigText(ctx, over === null ? "60일 안에는 버틴다" : Math.ceil(over) + "일째 병상 부족", 18, 44, 24, over === null ? "#8ff5cf" : "#ffc9c9");
+        K.bigText(ctx, Td.toFixed(1) + "일마다 두 배로", 18, 70, 15, "#ffd35a");
+        var ex = hospital(ctx, 490, 150, n60 / 500);
+        K.pill(ctx, "60일째 병원 · 침대 1개 = 병상 500", 530, 300, { s: 11, a: "center", c: ex ? "#ffc9c9" : "#e8ecff", box: [430, 628] });
+        judge(ctx, W, CH, "판정 · 병상이 버틸까", over === null ? "버틴다" : Math.ceil(over) + "일째 모자람", over === null ? LT.green : LT.red,
+          [["두 배가 되는 기간", Td.toFixed(1) + " 일"], ["병상이 모자라는 날", over === null ? "60일 안에는 없음" : Math.ceil(over) + "일째", over === null ? LT.green : LT.red], ["60일째 입원 환자", n60 >= 1e6 ? (n60 / 1e6).toFixed(1) + " 백만" : Math.round(n60).toLocaleString() + " 명", n60 <= 5000 ? LT.green : LT.red]],
+          over === null ? "두 배 기간을 늘렸다" : "두 배씩은 금세 폭발한다", over === null);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "세로 눈금", value: "lin", options: [{ v: "lin", t: "보통 눈금" }, { v: "log", t: "로그 눈금" }],

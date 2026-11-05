@@ -11,19 +11,36 @@ var DEC = FIT.b * 10, Y0 = 1989, Y1 = 2024;
 var P0 = FIT.my + FIT.b * (Y0 - FIT.mx), P1 = FIT.my + FIT.b * (Y1 - FIT.mx), DH = (Math.pow(10, P0 - P1) - 1) * 100;
 var SRC = "<small>출처: 하와이 해양 시계열 관측(HOT), 스테이션 ALOHA(북위 22.75°, 서경 158°) 표층 바닷물의 이산화 탄소 계열 자료(현장 수온에서 계산한 pH, 이산화 탄소 분압), 1988~2024. Dore, Lukas, Sadler, Church & Karl (2009), PNAS 106:12235. 사본은 data/hot-ph.js.</small>";
 
+var K = window.sthKit, LT = K.LT;
+/* 밝은 스튜디오 위 카드 그래프(왼쪽) */
 function chart(H, ctx, W, CH, slope, what) {
-  H.paper(ctx, W, CH);
-  var x0 = 70, x1 = 640, y0 = 24, y1 = CH - 36;
-  function X(y) { return x0 + (y - 1988) / (2026 - 1988) * (x1 - x0); }
+  ctx.clearRect(0, 0, W, CH);
+  K.studio(ctx, 0, 0, 600, CH, null);
+  K.bigText(ctx, what === "c" ? "바닷물 속 이산화 탄소가 늘었다" : "표층 바닷물의 pH", 16, 34, 19, "#ffffff");
   var lo = what === "c" ? 290 : 8.00, hi = what === "c" ? 440 : 8.16;
-  function Y(v) { return y1 - (v - lo) / (hi - lo) * (y1 - y0); }
-  H.axes(ctx, x0, y0, x1, y1);
-  (what === "c" ? [300, 340, 380, 420] : [8.00, 8.04, 8.08, 8.12, 8.16]).forEach(function (v) { H.text(ctx, what === "c" ? v : v.toFixed(2), x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  [1990, 2000, 2010, 2020].forEach(function (y) { H.text(ctx, y, X(y), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-  H.text(ctx, what === "c" ? "바닷물의 이산화 탄소 분압 (μatm, 녹은 이산화 탄소의 양)" : "표층 바닷물의 pH", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-  R.forEach(function (r) { H.dot(ctx, X(r[0]), Y(what === "c" ? r[2] : r[1]), 2.8, H.v(what === "c" ? "--coral-700" : "--brand")); });
-  if (slope != null && what !== "c") H.line(ctx, [[X(1988.8), Y(FIT.my + slope / 10 * (1988.8 - FIT.mx))], [X(2025), Y(FIT.my + slope / 10 * (2025 - FIT.mx))]], H.v("--amber-700"), 2.5);
-  return { X: X, Y: Y };
+  var g = K.chart(ctx, { x: 8, y: 46, w: 584, h: CH - 52, pl: 52, pb: 30, pt: 10, pr: 14, x0: 1988, x1: 2026, y0: lo, y1: hi, xt: 1, yt: 4, light: true,
+    xf: function () { return ""; }, yf: function (v) { return what === "c" ? String(Math.round(v)) : v.toFixed(2); } });
+  [1990, 2000, 2010, 2020].forEach(function (y) { K.t(ctx, String(y), g.X(y), g.B + 16, { s: 10.5, w: "600", a: "center", c: LT.mute }); });
+  K.t(ctx, what === "c" ? "이산화 탄소 분압 (μatm)" : "pH", g.L + 6, g.T + 14, { s: 11, w: "800", c: LT.mute });
+  R.forEach(function (r) { K.planet(ctx, g.X(r[0]), g.Y(what === "c" ? r[2] : r[1]), 2.8, what === "c" ? "#ff8a6b" : "#5aa9ff", what === "c" ? "#a3290f" : "#123a8a"); });
+  if (slope != null && what !== "c") K.plot(ctx, g, [[1988.8, FIT.my + slope / 10 * (1988.8 - FIT.mx)], [2025, FIT.my + slope / 10 * (2025 - FIT.mx)]], LT.yellow, { w: 3, light: true });
+  return g;
+}
+/* 오른쪽 흰 카드: 위에 작은 바다 블록(이산화 탄소가 녹아드는 모형), 아래 값 */
+function side(ctx, W, CH, rows, tip, good) {
+  var RX = 612, x0 = RX + 18, x1 = W - 18;
+  K.card(ctx, RX, 0, W - RX, CH, "바닷물이 이산화 탄소를 녹인다");
+  var I = K.iso({ ox: 742, oy: 78, s: 0.5, L: 210, D: 120 }), ZT = 50;
+  I.box(ctx, 0, 0, 0, I.L, I.D, ZT, "#5fb4e6", "#1f6fae", "#175a8f");
+  I.face(ctx, "front", function (Lw) { var gg = ctx.createLinearGradient(0, ZT, 0, 0); gg.addColorStop(0, "rgba(120,200,255,.5)"); gg.addColorStop(1, "rgba(5,30,80,.5)"); ctx.fillStyle = gg; ctx.fillRect(0, 0, Lw, ZT); });
+  [[60, 40], [120, 70], [170, 30]].forEach(function (q, i) {
+    var p = I.P(q[0], q[1], ZT + 34), d = I.P(q[0], q[1], ZT + 4);
+    K.arrow(ctx, { x: p.x, y: p.y + 12 }, d, "#e8590c", 2, 8);
+    K.planet(ctx, p.x - 7, p.y, 3.6, "#ff6b6b", "#7a1f1f"); K.planet(ctx, p.x, p.y, 4.2, "#8a92a8", "#2c3140"); K.planet(ctx, p.x + 7, p.y, 3.6, "#ff6b6b", "#7a1f1f");
+  });
+  var hp = I.P(150, I.D, 24); K.pill(ctx, "H⁺ ↑ → pH ↓", hp.x + 30, hp.y + 6, { s: 11, c: "#ffe1c9", box: [RX, W] });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x0, x1, 178 + i * 24, r[2] || LT.ink); });
+  if (tip) K.tip(ctx, tip, x0 - 4, CH - 44, x1 - x0 + 8, good);
 }
 
 window.sthLab({
@@ -41,11 +58,11 @@ window.sthLab({
     },
     task: "직선의 기울기(10년마다 pH 변화)를 맞추세요(± 0.004).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, sl = 0, what = "p";
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, sl = 0, what = "p";
       function err(m) { return Math.sqrt(mean(R.map(function (r) { var e = r[1] - (FIT.my + m / 10 * (r[0] - FIT.mx)); return e * e; }))); }
       function draw() {
         chart(H, ctx, W, cv.H, what === "p" ? sl : null, what);
-        H.rows(ctx, 680, 50, [["내 기울기", (sl >= 0 ? "+" : "") + sl.toFixed(3) + " / 10년", null, true], ["점과 선의 평균 거리", err(sl).toFixed(4)], ["측정한 날", R.length + " 번"]], 60);
+        side(ctx, W, cv.H, [["내 기울기", (sl >= 0 ? "+" : "") + sl.toFixed(3) + " / 10년", LT.violet], ["점과 선의 평균 거리", err(sl).toFixed(4)], ["측정한 날", R.length + " 번"]], what === "c" ? "같은 기간 이산화 탄소가 늘었다" : (Math.abs(sl - DEC) <= 0.004 ? "추세에 잘 맞는 직선" : "직선을 점들에 맞춰 보세요"), what === "c" ? null : Math.abs(sl - DEC) <= 0.004);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "보기", value: "p", options: [{ v: "p", t: "pH" }, { v: "c", t: "바닷물 속 이산화 탄소" }], onPick: function (x) { what = x; draw(); } });
@@ -77,11 +94,11 @@ window.sthLab({
     },
     task: "10^(pH 차이)를 계산해 수소 이온이 몇 % 늘었는지 슬라이더로 맞추세요(± 2 %).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, g = 0;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, g = 0;
       function draw() {
         var p = chart(H, ctx, W, cv.H, DEC, "p");
-        H.dot(ctx, p.X(Y0), p.Y(P0), 6, H.v("--amber-700")); H.dot(ctx, p.X(Y1), p.Y(P1), 6, H.v("--amber-700"));
-        H.rows(ctx, 680, 40, [[Y0 + "년 (추세)", "pH " + P0.toFixed(3)], [Y1 + "년 (추세)", "pH " + P1.toFixed(3)], ["pH 차이", (P0 - P1).toFixed(3)], ["내 답 (수소 이온)", "+" + g + " %", null, true]], 52);
+        K.planet(ctx, p.X(Y0), p.Y(P0), 6.5, "#ffc94d", "#8a5a00"); K.planet(ctx, p.X(Y1), p.Y(P1), 6.5, "#ffc94d", "#8a5a00");
+        side(ctx, W, cv.H, [[Y0 + "년 (추세)", "pH " + P0.toFixed(3)], [Y1 + "년 (추세)", "pH " + P1.toFixed(3)], ["pH 차이", (P0 - P1).toFixed(3)], ["내 답 (수소 이온)", "+" + g + " %", LT.violet]], Math.abs(g - DH) <= 2 ? "로그 눈금을 바르게 계산" : "10^(pH 차이)를 계산", Math.abs(g - DH) <= 2);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "수소 이온 농도가 늘어난 비율", min: 0, max: 60, step: 1, value: 0, fmt: function (x) { return "+" + x + " %"; }, onInput: function (x) { g = x; api.changed(); draw(); } });

@@ -17,19 +17,46 @@ var TH30 = (function () { var a = (N.days || []).map(function (r) { return r[1];
 var SRC2 = "<small>출처: 유럽 중기예보센터 ERA5 재분석(Open-Meteo 과거 날씨 API) — 충남 논산 부근(북위 36.20°, 동경 127.10°)의 하루 최저 기온, 2024년 12월 1일 ~ 2025년 2월 28일. 약 25 km 격자 값이라 들판의 실제 기온과 1~2 °C 다를 수 있습니다. 사본은 data/nonsan-winter.js.</small>";
 var MN = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
 
+/* ---- 스튜디오 말투(밝은 바탕 + 입체 미니어처 + 흰 판정 카드) — window.sthKit (_tools/STUDIO_GUIDE.md) ---- */
+var K = window.sthKit, LT = K.LT;
+function lpill(ctx, s, x, y, o) { o = o || {}; o.bg = o.bg || "rgba(255,255,255,.94)"; o.line = o.line || "rgba(20,40,90,.16)"; o.c = o.c || LT.ink; return K.pill(ctx, s, x, y, o); }
+function note(ctx, s, x, y, o) { o = o || {}; K.t(ctx, s, x, y, { s: o.s || 11, w: o.w || "700", a: o.a, c: o.c || LT.mute }); }
+function cube(ctx, x, y, w, h, d, cF, cT, cR, al) {
+  var dx = d * .7, dy = d * .5;
+  ctx.save(); if (al != null) ctx.globalAlpha = al;
+  ctx.fillStyle = cT; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + dx, y - dy); ctx.lineTo(x + w + dx, y - dy); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = cR; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + dx, y - dy); ctx.lineTo(x + w + dx, y + h - dy); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = cF; ctx.fillRect(x, y, w, h); ctx.restore();
+}
+function card(ctx, RX, W, CH, title, head, headCol, rows, tip, good) {
+  K.card(ctx, RX, 0, W - RX, CH, title);
+  if (head) K.t(ctx, head, RX + 18, 60, { s: 19, w: "900", c: headCol || LT.ink });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], RX + 18, W - 18, 94 + i * 27, r[2]); });
+  if (tip) K.tip(ctx, tip, RX + 12, CH - 46, W - RX - 24, good);
+}
+/* 작은 비닐 온실 미니어처 (흙 블록 위). heat: 보조 난방기 불빛 0~1 */
+function greenhouse(ctx, x, y, heat) {
+  cube(ctx, x, y, 120, 12, 44, "#8a6a48", "#8fbf63", "#6d523a");
+  var gx = x + 14, gy = y - 6, w = 84, h = 30, dx = 20, dy = 14;
+  ctx.fillStyle = "rgba(215,232,250,.55)"; ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 1.4;
+  ctx.beginPath(); ctx.moveTo(gx, gy); ctx.lineTo(gx, gy - h); ctx.quadraticCurveTo(gx + w / 2, gy - h - 24, gx + w, gy - h); ctx.lineTo(gx + w, gy); ctx.closePath(); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(gx + w, gy); ctx.lineTo(gx + w + dx, gy - dy); ctx.lineTo(gx + w + dx, gy - dy - h); ctx.lineTo(gx + w, gy - h); ctx.closePath(); ctx.fillStyle = "rgba(180,205,235,.5)"; ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(gx + w, gy - h); ctx.lineTo(gx + w + dx, gy - dy - h); ctx.moveTo(gx + w / 2, gy - h - 12); ctx.lineTo(gx + w / 2 + dx, gy - h - 12 - dy); ctx.stroke();
+  for (var i = 0; i < 4; i++) { var px = gx + 12 + i * 20; ctx.fillStyle = "#2fae6a"; ctx.beginPath(); ctx.ellipse(px, gy - 5, 6, 3.5, 0, 0, 6.2832); ctx.fill(); ctx.fillStyle = "#ff4d63"; ctx.beginPath(); ctx.arc(px + 3, gy - 3, 1.8, 0, 6.2832); ctx.fill(); }
+  if (heat) { cube(ctx, gx + w - 22, gy - 12, 14, 10, 8, "#868e96", "#adb5bd", "#495057"); K.glow(ctx, gx + w - 15, gy - 8, 3, "rgba(255,120,40," + (0.4 + 0.55 * heat).toFixed(2) + ")", 3.2); }
+}
 function chart(H, ctx, W, CH, pick) {
-  H.paper(ctx, W, CH);
-  var x0 = 60, x1 = 600, y0 = 26, y1 = CH - 36, bw = (x1 - x0) / 12;
-  function Y(v) { return y1 - v / 8 * (y1 - y0); }
-  H.axes(ctx, x0, y0, x1, y1);
-  [0, 2, 4, 6].forEach(function (v) { H.text(ctx, v, x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  for (var i = 0; i < 12; i++) {
-    var x = x0 + i * bw;
-    H.box(ctx, x + 6, Y(CLR[i]), bw - 12, y1 - Y(CLR[i]), H.v("--amber-700"), 0.25);
-    H.box(ctx, x + 6, Y(ALL[i]), bw - 12, y1 - Y(ALL[i]), H.v("--amber-700"), pick === i ? 1 : 0.75);
-    H.text(ctx, MN[i], x + bw / 2, y1 + 15, { s: 10, a: "center", c: pick === i ? H.v("--ink") : H.v("--mist") });
+  ctx.clearRect(0, 0, W, CH);
+  K.studio(ctx, 0, 0, 612, CH, { x: 520, y: CH - 40, rx: 100, ry: 16 });
+  var g = K.chart(ctx, { x: 4, y: 26, w: 436, h: CH - 30, pl: 40, pb: 30, pt: 18, pr: 12, x0: 0, x1: 12, y0: 0, y1: 8, xt: 12, yt: 4, light: true, xf: function () { return ""; } });
+  var bw = (g.X(1) - g.X(0)), i;
+  for (i = 0; i < 12; i++) {
+    var x = g.X(i) + bw * .18, w = bw * .5;
+    cube(ctx, x, g.Y(CLR[i]), w, g.B - g.Y(CLR[i]), 10, "rgba(245,159,0,.25)", "rgba(245,159,0,.32)", "rgba(200,120,0,.25)");
+    cube(ctx, x, g.Y(ALL[i]), w, g.B - g.Y(ALL[i]), 10, pick === i ? "#e8590c" : "#f59f00", pick === i ? "#ff8a4c" : "#ffc04d", pick === i ? "#b8430a" : "#c47f00");
+    K.t(ctx, MN[i], g.X(i + .5), g.B + 15, { s: 10, a: "center", c: (i === 5 || i === 11) ? LT.ink : LT.mute, w: (i === 5 || i === 11) ? "900" : "600" });
   }
-  H.text(ctx, "하루에 땅 1 m²에 닿는 햇빛 (kWh) — 짙은: 실제, 옅은: 구름 없을 때", x0 + 6, y0 - 10, { s: 11, w: "700", c: H.v("--mist") });
+  note(ctx, "하루에 땅 1 m²에 닿는 햇빛 (kWh) — 짙은: 실제 · 옅은: 구름이 없을 때", 8, 18, { s: 11, c: LT.mute });
 }
 
 window.sthLab({
@@ -50,7 +77,22 @@ window.sthLab({
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, g = 50;
       function draw() {
         chart(H, ctx, W, cv.H, null);
-        H.rows(ctx, 640, 30, [["6월 (실제)", ALL[5].toFixed(2) + " kWh/m²/일"], ["12월 (실제)", ALL[11].toFixed(2) + " kWh/m²/일"], ["내 답 (6월의 몇 %)", g + "%", null, true]], 62);
+        var CH = cv.H;
+        /* 입체 미니어처: 한낮의 태양 고도 — 6월 약 76°, 12월 약 29° (서울) */
+        var bx = 452, by = CH - 58, tx = bx + 46, ty = by - 34;
+        greenhouse(ctx, bx, by, 0);
+        [[76, 140, "#f59f00", "6월 76°", "#a85d00"], [29, 100, "#ff7a1a", "12월 29°", LT.orange]].forEach(function (s) {
+          var a = s[0] * Math.PI / 180, sx = tx + Math.cos(a) * s[1], sy = ty - Math.sin(a) * s[1];
+          K.line(ctx, { x: sx, y: sy }, { x: tx, y: ty }, s[2], 2.2, [5, 4]);
+          K.sun(ctx, sx, sy, 7);
+          lpill(ctx, s[3], sx + 12, sy + (s[0] > 50 ? 4 : -14), { s: 10.5, c: s[4], box: [446, 612] });
+        });
+        lpill(ctx, "겨울 해는 낮고 낮이 짧다", 520, CH - 14, { s: 10.5, a: "center", c: LT.mute, box: [446, 612] });
+        card(ctx, 620, W, CH, "서울의 햇빛 (2001~2024 평균)", "내 답 " + g + "%", LT.blue, [
+          ["6월 (실제)", ALL[5].toFixed(2) + " kWh/m²/일", "#a85d00"],
+          ["12월 (실제)", ALL[11].toFixed(2) + " kWh/m²/일", LT.orange],
+          ["구하는 값", "12월 ÷ 6월 × 100"]
+        ], null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "12월은 6월의 몇 %", min: 0, max: 100, step: 1, value: 50, fmt: function (x) { return x + "%"; }, onInput: function (x) { g = x; api.changed(); draw(); } });
@@ -84,21 +126,30 @@ window.sthLab({
       var D = N.days || [];
       function cnt(t) { return D.filter(function (r) { return r[1] < t; }).length; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var x0 = 60, x1 = 600, y0 = 26, y1 = cv.H - 36, bw = (x1 - x0) / Math.max(1, D.length);
-        function Y(v) { return y0 + (6 - v) / 20 * (y1 - y0); }
-        H.axes(ctx, x0, y0, x1, y1);
-        [5, 0, -5, -10].forEach(function (v) { H.text(ctx, v + "°", x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        H.dash(ctx, x0, Y(0), x1, Y(0), H.v("--line"), 1);
+        var CH = cv.H, n = cnt(th), ok = n >= 25 && n <= 35;
+        ctx.clearRect(0, 0, W, CH);
+        K.studio(ctx, 0, 0, 612, CH, { x: 520, y: CH - 40, rx: 100, ry: 16 });
+        var g = K.chart(ctx, { x: 4, y: 26, w: 436, h: CH - 30, pl: 40, pb: 30, pt: 18, pr: 12, x0: 0, x1: Math.max(1, D.length), y0: -16, y1: 8, xt: 1, yt: 6, light: true,
+          xf: function () { return ""; }, yf: function (q) { return Math.round(q) + "°"; } });
+        var bw = (g.R - g.L) / Math.max(1, D.length);
+        K.line(ctx, { x: g.L, y: g.Y(0) }, { x: g.R, y: g.Y(0) }, "rgba(20,40,90,.35)", 1);
         D.forEach(function (r, i) {
-          var on = r[1] < th;
-          H.box(ctx, x0 + i * bw + 0.5, Y(Math.max(r[1], 0)), Math.max(1, bw - 1), Math.abs(Y(r[1]) - Y(0)), on ? H.v("--rose-700") : H.v("--brand"), 0.85);
-          if (r[0].slice(8) === "01") H.text(ctx, (+r[0].slice(5, 7)) + "월", x0 + i * bw + 8, y1 + 15, { s: 10, c: H.v("--mist") });
+          var on = r[1] < th, y0 = g.Y(Math.max(r[1], 0)), h = Math.abs(g.Y(r[1]) - g.Y(0));
+          ctx.fillStyle = on ? LT.red : "rgba(28,126,214,.75)"; ctx.fillRect(g.L + i * bw + 0.5, y0, Math.max(1, bw - 1), Math.max(1, h));
+          if (r[0].slice(8) === "01") K.t(ctx, (+r[0].slice(5, 7)) + "월", g.L + i * bw + 8, g.B + 15, { s: 10, c: LT.mute, w: "700" });
         });
-        H.dash(ctx, x0, Y(th), x1, Y(th), H.v("--amber-700"), 2);
-        H.text(ctx, "문턱 " + th.toFixed(1) + "°", x1 - 4, Y(th) - 6, { s: 10.5, w: "800", a: "right", c: H.v("--amber-700") });
-        H.text(ctx, "논산 부근 하루 최저 기온 (°C) — 빨강: 난방기가 켜지는 날", x0 + 6, y0 - 10, { s: 11, w: "700", c: H.v("--mist") });
-        H.rows(ctx, 640, 40, [["문턱", th.toFixed(1) + " °C", "--amber-700"], ["난방기 켜지는 날", cnt(th) + " 일", null, true], ["겨울 전체", D.length + " 일"]], 62);
+        K.line(ctx, { x: g.L, y: g.Y(th) }, { x: g.R, y: g.Y(th) }, LT.orange, 2.2, [6, 4]);
+        lpill(ctx, "문턱 " + th.toFixed(1) + "°", g.R - 4, g.Y(th) + (th > -10 ? 18 : -6), { s: 10.5, a: "right", c: "#a85d00" });
+        note(ctx, "논산 부근 하루 최저 기온 (°C) — 빨강: 난방기가 켜지는 날", 8, 18, { s: 11 });
+        /* 입체 미니어처: 추운 밤 비닐 온실과 보조 난방기 */
+        greenhouse(ctx, 452, CH - 58, Math.min(1, n / 30));
+        lpill(ctx, "보조 난방기 " + n + "일 켜짐", 520, CH - 16, { s: 10.5, a: "center", c: ok ? LT.green : LT.orange, box: [446, 612] });
+        lpill(ctx, "바깥 " + th.toFixed(1) + "° 아래면 켬", 520, 64, { s: 10.5, a: "center", c: LT.ink, box: [446, 612] });
+        card(ctx, 620, W, CH, "판정", n + "일 켜짐", ok ? LT.green : LT.orange, [
+          ["문턱", th.toFixed(1) + " °C", "#a85d00"],
+          ["난방기 켜지는 날", n + " 일", ok ? LT.green : LT.red],
+          ["겨울 전체", D.length + " 일"]
+        ], ok ? "목표 25~35일 안" : (n > 35 ? "너무 자주 켜집니다" : "너무 드물게 켜집니다"), ok);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "바깥 기온 문턱", min: -12, max: 5, step: 0.1, value: 0, fmt: function (x) { return x.toFixed(1) + " °C"; }, onInput: function (x) { th = x; api.changed(); draw(); } });

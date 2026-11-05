@@ -4,6 +4,35 @@
    자료: data/flu-us.js (CDC ILINet), 1936년 선거 수치는 이 파일 안에 적음 */
 (function () {
 "use strict";
+/* ---- 밝은 스튜디오 + 입체 미니어처 말투 (kit.js 머리말 K.iso·K.LT·K.card 참고) ---- */
+var K = window.sthKit, LT = K.LT;
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function lt(ctx, s, x, y, o) { o = o || {}; if (!o.c) o.c = LT.ink; K.t(ctx, s, x, y, o); }
+function lead(ctx, px, py, qx, qy, s, col, box) {
+  ctx.strokeStyle = "rgba(20,25,40,.75)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke();
+  ctx.fillStyle = "#111622"; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, 6.283); ctx.fill();
+  return K.pill(ctx, s, qx + (qx < px ? -4 : 4), qy + 4, { s: 12, a: qx < px ? "right" : "left", c: col || "#e8ecff", box: box });
+}
+function judge(ctx, W, CH, title, big, bigCol, rows, tip, good) {      /* 오른쪽 흰 판정 카드 */
+  var CX = 690, x0 = CX + 16, x1 = W - 16;
+  K.card(ctx, CX, 0, W - CX, CH, title);
+  lt(ctx, big, x0, 58, { s: 19, w: "900", c: bigCol });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x0, x1, 92 + i * 26, r[2]); });
+  if (tip) K.tip(ctx, tip, x0 - 4, 100 + rows.length * 26, x1 - x0 + 4, good);
+}
+function hospital(ctx, ox, oy, need) {                                  /* 병상 10개 병원 미니어처 (need = 필요한 침대 수) */
+  var I = K.iso({ ox: ox, oy: oy, s: .78, L: 120, D: 70 }), fill = Math.min(10, Math.round(need)), extra = Math.max(0, Math.round(need) - 10);
+  I.box(ctx, 0, 0, 0, 120, 70, 6, "#f1f3f5", "#dfe4ea", "#b8c0ca");
+  I.box(ctx, 0, 0, 6, 120, 4, 40, "#ffffff", "#f1f3f5", "#ced4da");
+  var c = I.P(60, 4, 26); ctx.fillStyle = "#e03131"; ctx.fillRect(c.x - 3, c.y - 9, 6, 18); ctx.fillRect(c.x - 9, c.y - 3, 18, 6);
+  for (var b = 0; b < 10; b++) {
+    var bx = 8 + (b % 5) * 22, by = b < 5 ? 14 : 42, on = b < fill;
+    I.box(ctx, bx, by, 6, bx + 16, by + 22, 12, on ? "#ffc9c9" : "#ffffff", on ? "#e03131" : "#dee2e6", on ? "#a51111" : "#adb5bd");
+    if (on) { var hp = I.P(bx + 8, by + 6, 13); ctx.fillStyle = "#f1c7a5"; ctx.beginPath(); ctx.arc(hp.x, hp.y, 2.4, 0, 6.2832); ctx.fill(); }
+  }
+  for (var e = 0; e < Math.min(8, extra); e++) I.person(ctx, 128 + (e % 4) * 7, 20 + e * 7, 0, "#e03131", 1.2);
+  return extra;
+}
 var F = (window.REAL_FLU || { rows: [] }).rows;                     /* [YYYYWW, %] */
 function season(w) { var y = Math.floor(w / 100), k = w % 100; return k >= 40 ? y : y - 1; }
 var PK = {}; F.forEach(function (r) { var k = r[0] % 100; if (k > 20 && k < 40) return; var s = season(r[0]); if (!PK[s] || r[1] > PK[s][1]) PK[s] = [r[0], r[1]]; });
@@ -29,21 +58,25 @@ window.sthLab({
     },
     task: "겨울(유행 철)을 골라 봉우리 높이를 비교하고, 독감 유행이 가장 약했던 겨울을 고르세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, s = SEASONS[0];
+      var H = api.h, cv = api.canvas(300), ctx = cv.ctx, W = cv.W, s = SEASONS[0];
       function idx(w) { for (var i = 0; i < F.length; i++) if (F[i][0] === w) return i; return 0; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var x0 = 60, x1 = 640, y0 = 24, y1 = cv.H - 36;
-        function X(i) { return x0 + i / (F.length - 1) * (x1 - x0); }
-        function Y(v) { return y1 - v / 9 * (y1 - y0); }
-        H.axes(ctx, x0, y0, x1, y1);
-        [0, 2, 4, 6, 8].forEach(function (v) { H.text(ctx, v + "%", x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
+        ctx.clearRect(0, 0, W, cv.H);
+        var CH = cv.H, i;
+        K.studio(ctx, 0, 0, 684, CH, { x: 600, y: CH - 40, rx: 80, ry: 12 });
+        var g = K.chart(ctx, { x: 4, y: 22, w: 510, h: CH - 30, x0: 0, x1: F.length - 1, y0: 0, y1: 9, xt: 1, yt: 3, xf: function () { return ""; }, yf: function (q) { return q + "%"; }, yl: "독감 의심 환자 비율 (%)", light: true });
         var a = idx(s * 100 + 40), b = idx((s + 1) * 100 + 20);
-        ctx.fillStyle = "rgba(255,190,60,.18)"; ctx.fillRect(X(a), y0, X(b) - X(a), y1 - y0);
-        H.line(ctx, F.map(function (r, i) { return [X(i), Y(r[1])]; }), H.v("--coral-700"), 2);
-        SEASONS.forEach(function (q) { var i = idx(q * 100 + 52) || idx(q * 100 + 51); H.text(ctx, String(q).slice(2) + "-" + String(q + 1).slice(2), X(i), y1 + 15, { s: 9.5, a: "center", c: q === s ? H.v("--amber-700") : H.v("--mist") }); });
-        H.text(ctx, "독감 의심 환자 비율 (%)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-        H.rows(ctx, 680, 50, [["고른 겨울", s + " ~ " + (s + 1), "--amber-700"], ["가장 높은 주", String(PK[s][0]).slice(0, 4) + "년 " + (PK[s][0] % 100) + "주"], ["봉우리", PK[s][1].toFixed(1) + " %", null, true]], 58);
+        ctx.fillStyle = "rgba(245,159,0,.18)"; ctx.fillRect(g.X(a), g.T, g.X(b) - g.X(a), g.B - g.T);
+        K.plot(ctx, g, F.map(function (r, k) { return [k, r[1]]; }), LT.red, { w: 2, light: true });
+        SEASONS.forEach(function (q) { var k = idx(q * 100 + 52) || idx(q * 100 + 51); lt(ctx, String(q).slice(2) + "-" + String(q + 1).slice(2), g.X(k), g.B + 14, { s: 9.5, a: "center", w: q === s ? "900" : "600", c: q === s ? LT.orange : LT.mute }); });
+        /* 동네 의원 미니어처: 대기 환자 수 = 봉우리 높이, 2020~21년은 모두 마스크 */
+        var I = K.iso({ ox: 600, oy: 120, s: .7, L: 110, D: 80 }), pk = PK[s][1], np = Math.min(14, Math.round(pk * 2)), mask = s === 2020;
+        I.box(ctx, 0, 0, 0, 110, 80, 6, "#e9ecef", "#ced4da", "#adb5bd");
+        I.box(ctx, 0, 0, 6, 70, 34, 50, "#ffffff", "#f1f3f5", "#ced4da");
+        var cr = I.P(35, 34, 36); ctx.fillStyle = "#1c7ed6"; ctx.fillRect(cr.x - 2.5, cr.y - 8, 5, 16); ctx.fillRect(cr.x - 8, cr.y - 2.5, 16, 5);
+        for (i = 0; i < np; i++) { var px = 10 + (i % 7) * 13, py = 46 + Math.floor(i / 7) * 16; I.person(ctx, px, py, 6, "#ff922b", 1.3); if (mask) { var fp = I.P(px, py, 6); ctx.fillStyle = "#ffffff"; ctx.fillRect(fp.x - 2.2, fp.y - 16.5, 4.4, 2.6); } }
+        K.pill(ctx, mask ? "모두 마스크 · 대기 환자 적음" : "대기 환자 " + np + "명", 600, CH - 12, { s: 11, a: "center", c: mask ? "#b2f2bb" : "#ffd8a8", box: [516, 684] });
+        judge(ctx, W, CH, "판정 · 고른 겨울", s + " ~ " + (s + 1), s === LOW ? LT.green : LT.orange, [["가장 높은 주", String(PK[s][0]).slice(0, 4) + "년 " + (PK[s][0] % 100) + "주"], ["봉우리", PK[s][1].toFixed(1) + " %", s === LOW ? LT.green : LT.red]], s === LOW ? "유행이 가장 약했던 겨울" : "더 낮은 봉우리가 있다", s === LOW);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "겨울(유행 철)", min: SEASONS[0], max: SEASONS[SEASONS.length - 1], step: 1, value: SEASONS[0], fmt: function (x) { return x + " ~ " + (x + 1); }, onInput: function (x) { s = x; api.changed(); draw(); } });
@@ -73,14 +106,31 @@ window.sthLab({
     },
     task: "리터러리 다이제스트가 예측한 루스벨트 득표율과 실제 득표율의 차이(%p)를 맞추세요(± 0.5 %p). (예측 43%는 두 후보만 놓고 본 비율, 실제 60.8%는 전체 투표 대비라 기준이 조금 다르지만 여기서는 그대로 뺍니다.)",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(260), ctx = cv.ctx, W = cv.W, g = 0;
+      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, g = 0;
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var x0 = 230, x1 = 620, rows = [["리터러리 다이제스트 (238만 장)", LD.roosevelt, "--coral-700"], ["갤럽 (약 5만 명)", GALLUP.roosevelt, "--amber-700"], ["실제 결과", REAL.roosevelt, "--green-700"]];
-        H.text(ctx, "루스벨트 득표율", x0, 24, { s: 11, w: "700", c: H.v("--mist") });
-        rows.forEach(function (r, i) { var y = 40 + i * 52; H.text(ctx, r[0], x0 - 10, y + 20, { s: 12, w: "800", a: "right" }); H.box(ctx, x0, y, r[1] / 100 * (x1 - x0), 30, H.v(r[2]), 0.85); H.text(ctx, r[1] + " %", x0 + r[1] / 100 * (x1 - x0) + 8, y + 20, { s: 12, w: "900", c: H.v(r[2]) }); });
-        H.dash(ctx, x0 + 0.5 * (x1 - x0), 34, x0 + 0.5 * (x1 - x0), 200, H.v("--line"), 1);
-        H.rows(ctx, 690, 60, [["내 답 (어긋남)", g.toFixed(1) + " %p", null, true]], 60);
+        ctx.clearRect(0, 0, W, cv.H);
+        var CH = cv.H, x0 = 210, x1 = 500, rows = [["리터러리 다이제스트 (238만 장)", LD.roosevelt, "#c92a2a", "#ff8787"], ["갤럽 (약 5만 명)", GALLUP.roosevelt, "#d9480f", "#ffa94d"], ["실제 결과", REAL.roosevelt, "#0f9f76", "#63e6be"]];
+        K.studio(ctx, 0, 0, 684, CH, { x: 600, y: CH - 36, rx: 80, ry: 12 });
+        lt(ctx, "루스벨트 득표율", x0, 26, { s: 11, w: "800", c: LT.mute });
+        rows.forEach(function (r, i) {
+          var y = 42 + i * 56, w = r[1] / 100 * (x1 - x0);
+          lt(ctx, r[0], x0 - 10, y + 20, { s: 12, w: "800", a: "right" });
+          ctx.fillStyle = "#e3e9f1"; ctx.beginPath(); ctx.roundRect(x0, y, x1 - x0, 30, 6); ctx.fill();
+          var bg = ctx.createLinearGradient(0, y, 0, y + 30); bg.addColorStop(0, r[3]); bg.addColorStop(1, r[2]); ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(x0, y, w, 30, 6); ctx.fill();
+          lt(ctx, r[1] + " %", x0 + w + 8, y + 20, { s: 12, w: "900", c: r[2] });
+        });
+        ctx.save(); ctx.strokeStyle = "rgba(20,40,90,.45)"; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(x0 + .5 * (x1 - x0), 34); ctx.lineTo(x0 + .5 * (x1 - x0), 208); ctx.stroke(); ctx.restore();
+        lt(ctx, "50%", x0 + .5 * (x1 - x0), 222, { s: 10.5, a: "center", c: LT.mute });
+        /* 엽서 더미 미니어처: 238만 장 대 5만 명 (부피는 수의 세제곱근 비율) */
+        var I = K.iso({ ox: 600, oy: 96, s: .62, L: 130, D: 130 });
+        I.box(ctx, 0, 0, 0, 130, 130, 4, "#e9ecef", "#ced4da", "#adb5bd");
+        I.box(ctx, 8, 8, 4, 88, 88, 84, "#ffffff", "#f1f3f5", "#dee2e6");
+        var Ia = K.iso({ ox: 600, oy: 96, s: .62, L: 130, D: 130 }); for (var k = 10; k < 84; k += 6) { var l1 = Ia.P(8, 88, k), l2 = Ia.P(88, 88, k); ctx.strokeStyle = "rgba(120,130,150,.25)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(l1.x, l1.y); ctx.lineTo(l2.x, l2.y); ctx.stroke(); }
+        I.box(ctx, 100, 100, 4, 122, 122, 26, "#fff9db", "#ffec99", "#fcc419");
+        K.pill(ctx, "238만 장", I.P(48, 48, 84).x, I.P(48, 48, 84).y - 8, { s: 11, a: "center", c: "#ffc9c9", box: [516, 684] });
+        K.pill(ctx, "5만 명", I.P(111, 111, 26).x + 26, I.P(111, 111, 26).y + 30, { s: 11, a: "center", c: "#ffe066", box: [516, 684] });
+        K.pill(ctx, "많다고 정확하지 않다", 600, CH - 10, { s: 11, a: "center", c: "#e8ecff", box: [516, 684] });
+        judge(ctx, W, CH, "판정 · 예측이 얼마나 어긋났나", "내 답 " + g.toFixed(1) + " %p", Math.abs(g - (REAL.roosevelt - LD.roosevelt)) <= 0.5 ? LT.green : LT.orange, [["다이제스트 예측", LD.roosevelt + " %"], ["실제 득표율", REAL.roosevelt + " %", LT.green]], "실제 − 예측을 계산해 보세요", null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "예측과 실제의 차이", min: 0, max: 30, step: 0.1, value: 0, fmt: function (x) { return x.toFixed(1) + " %p"; }, onInput: function (x) { g = x; api.changed(); draw(); } });

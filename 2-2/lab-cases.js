@@ -2,6 +2,23 @@
    이야기에서 찾은 개념을 처음 보는 상황에 써 본다. 공용 엔진: ../assets/lab.js (sthLab) */
 (function () {
 "use strict";
+/* ---- 밝은 스튜디오 + 입체 미니어처 말투 (kit.js 머리말 K.iso·K.LT·K.card 참고) ---- */
+var K = window.sthKit, LT = K.LT;
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function lt(ctx, s, x, y, o) { o = o || {}; if (!o.c) o.c = LT.ink; K.t(ctx, s, x, y, o); }
+function lead(ctx, px, py, qx, qy, s, col, box) {
+  ctx.strokeStyle = "rgba(20,25,40,.75)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(qx, qy); ctx.stroke();
+  ctx.fillStyle = "#111622"; ctx.beginPath(); ctx.arc(px, py, 2.5, 0, 6.283); ctx.fill();
+  return K.pill(ctx, s, qx + (qx < px ? -4 : 4), qy + 4, { s: 12, a: qx < px ? "right" : "left", c: col || "#e8ecff", box: box });
+}
+function judge(ctx, W, CH, title, big, bigCol, rows, tip, good) {      /* 오른쪽 흰 판정 카드 */
+  var CX = 640, x0 = CX + 18, x1 = W - 18;
+  K.card(ctx, CX, 0, W - CX, CH, title);
+  lt(ctx, big, x0, 62, { s: 20, w: "900", c: bigCol });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x0, x1, 98 + i * 27, r[2]); });
+  if (tip) K.tip(ctx, tip, x0 - 4, 106 + rows.length * 27, x1 - x0 + 4, good);
+}
+function wireLine(ctx, pts, col, w) { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); pts.forEach(function (p, i) { if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }); ctx.stroke(); }
 
 window.sthLab({
   mount: "lab", key: "lab", result: "rLab",
@@ -22,37 +39,40 @@ window.sthLab({
       var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W;
       var N = 100, mag = 1, rpm = 60, ang = 0;
       var run = api.ticker();
-      var K = 0.16755 / 400;
-      function volt() { return K * N * mag * rpm; }
+      var KV = 0.16755 / 400;
+      function volt() { return KV * N * mag * rpm; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var V = volt();
-        H.text(ctx, "코일 속에서 도는 자석", 40, 30, { s: 14, w: "900" });
-        var cx = 180, cy = 170;
-        var turns = N / 25;
-        for (var i = 0; i < turns; i++) {
-          ctx.strokeStyle = H.v("--amber-700"); ctx.lineWidth = 1.5;
-          ctx.beginPath(); ctx.ellipse(cx - 70 + i * (140 / turns), cy, 6, 80, 0, 0, Math.PI * 2); ctx.stroke();
-        }
-        ctx.save(); ctx.translate(cx, cy); ctx.rotate(ang);
-        ctx.fillStyle = H.v("--rose"); ctx.fillRect(-10, -56, 20, 56);
-        ctx.fillStyle = H.v("--brand"); ctx.fillRect(-10, 0, 20, 56);
-        ctx.restore();
-        H.text(ctx, "코일 " + N + "회 · " + (mag === 2 ? "강한 네오디뮴 자석" : "보통 페라이트 자석"), cx, 290, { s: 12, w: "800", a: "center", c: H.v("--mist") });
-        /* 전압 파형 */
-        var gx0 = 360, gx1 = 640, gy = 170;
-        H.axes(ctx, gx0, 70, gx1, 270);
-        H.dash(ctx, gx0, gy, gx1, gy, H.v("--line"));
-        var pts = [], cyc = rpm / 60 * 2;
-        for (var x = 0; x <= 280; x += 2) pts.push([gx0 + x, gy - Math.sin(x / 280 * cyc * Math.PI * 2 + ang) * Math.min(95, V * 10)]);
-        if (rpm > 0) H.line(ctx, pts, H.v("--violet"), 2.5);
-        H.text(ctx, "2초 동안의 전압", gx0, 60, { s: 11.5, w: "800", c: H.v("--mist") });
-        var ok = V >= 5.7 && V <= 6.3;
-        H.rows(ctx, 680, 80, [
-          ["돌리는 빠르기", rpm + " 바퀴/분", rpm > 40 ? "--rose-700" : null],
-          ["최대 전압", V.toFixed(2) + " V", ok ? "--green-700" : "--rose-700", true],
-          ["휴대폰 충전", ok ? "가능 🔋" : (V > 6.3 ? "전압이 너무 높음" : "전압이 모자람"), ok ? "--green-700" : "--mist"]
-        ], 60);
+        ctx.clearRect(0, 0, W, cv.H);
+        var V = volt(), ok = V >= 5.7 && V <= 6.3, CH = cv.H, i;
+        K.studio(ctx, 0, 0, 630, CH, { x: 170, y: 286, rx: 150, ry: 18 });
+        var I = K.iso({ ox: 150, oy: 140, s: .85, L: 200, D: 110 }), turns = Math.round(N / 50) + 2;
+        I.box(ctx, 0, 0, 0, 200, 110, 10, "#e9ecef", "#adb5bd", "#868e96");
+        [40, 150].forEach(function (sx) { I.box(ctx, sx - 5, 40, 10, sx + 5, 70, 22, "#ced4da", "#adb5bd", "#868e96"); });
+        function ring(xc, back) { ctx.strokeStyle = back ? "#8a4a1c" : "#d9853f"; ctx.lineWidth = 3; ctx.beginPath(); for (var k = 0; k <= 20; k++) { var a = Math.PI / 2 + (back ? 1 : -1) * k / 20 * Math.PI, p = I.P(xc, 55 + 22 * Math.cos(a), 44 + 22 * Math.sin(a)); if (k) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); } ctx.stroke(); }
+        for (i = 0; i < turns; i++) ring(48 + i * 96 / Math.max(1, turns - 1), true);
+        var cM = I.P(95, 55, 44), nE = I.P(95 + 18 * Math.cos(ang), 55, 44 + 18 * Math.sin(ang)), sE = I.P(95 - 18 * Math.cos(ang), 55, 44 - 18 * Math.sin(ang));
+        ctx.lineCap = "butt"; ctx.lineWidth = 11; ctx.strokeStyle = "#e03131"; ctx.beginPath(); ctx.moveTo(cM.x, cM.y); ctx.lineTo(nE.x, nE.y); ctx.stroke();
+        ctx.strokeStyle = "#1c7ed6"; ctx.beginPath(); ctx.moveTo(cM.x, cM.y); ctx.lineTo(sE.x, sE.y); ctx.stroke();
+        ctx.lineWidth = 3; ctx.strokeStyle = "rgba(255,255,255,.45)"; ctx.beginPath(); ctx.moveTo(sE.x, sE.y - 4); ctx.lineTo(nE.x, nE.y - 4); ctx.stroke();
+        for (i = 0; i < turns; i++) ring(48 + i * 96 / Math.max(1, turns - 1), false);
+        var s0 = I.P(95, 55, 44), s1 = I.P(95, 130, 44), kE = I.P(95 + 26 * Math.cos(ang), 130, 44 + 26 * Math.sin(ang));
+        wireLine(ctx, [s0, s1], "#868e96", 4); wireLine(ctx, [s1, kE], "#495057", 5); K.planet(ctx, kE.x, kE.y, 6, "#ffc078", "#d9480f");
+        wireLine(ctx, [I.P(145, 77, 44), I.P(165, 100, 12), I.P(180, 52, 12)], "#343a40", 2);
+        I.box(ctx, 176, 20, 10, 190, 50, 72, "#495057", "#343a40", "#212529");
+        var ph = I.P(190, 35, 46); if (ok) K.glow(ctx, ph.x, ph.y, 5, "rgba(64,192,87,.95)", 3);
+        lead(ctx, I.P(120, 77, 44).x, I.P(120, 77, 44).y, 50, 100, "코일 " + N + "회", "#ffd9a8", [0, 360]);
+        lead(ctx, kE.x, kE.y, kE.x + 30, kE.y + 50, "손잡이 " + rpm + " 바퀴/분", rpm > 40 ? "#ffc9c9" : "#e8ecff", [0, 360]);
+        lead(ctx, ph.x, ph.y - 16, 300, 96, "휴대폰", ok ? "#b2f2bb" : "#e8ecff", [0, 360]);
+        K.bigText(ctx, V.toFixed(2) + " V", 18, 44, 26, ok ? "#8ff5cf" : "#ffffff");
+        K.bigText(ctx, ok ? (rpm > 40 ? "전압은 맞지만 너무 빠르다" : "휴대폰 충전 가능!") : "목표 5.7~6.3 V", 18, 70, 15, "#ffd35a");
+        var g = K.chart(ctx, { x: 364, y: 40, w: 262, h: 270, x0: 0, x1: 2, y0: -12, y1: 12, xt: 4, yt: 4, xl: "시간(s)", yl: "전압(V)", light: true });
+        ctx.save(); ctx.strokeStyle = "rgba(15,159,118,.8)"; ctx.setLineDash([5, 4]); [6, -6].forEach(function (q) { ctx.beginPath(); ctx.moveTo(g.L, g.Y(q)); ctx.lineTo(g.R, g.Y(q)); ctx.stroke(); }); ctx.restore();
+        lt(ctx, "필요 6 V", g.R - 4, g.Y(6) - 5, { s: 10.5, w: "800", a: "right", c: LT.green });
+        var pts = [], cyc = rpm / 60 * 2; for (var x = 0; x <= 2.0001; x += 0.01) pts.push([x, Math.sin(x / 2 * cyc * Math.PI * 2 + ang) * Math.min(12, V)]);
+        if (rpm > 0) K.plot(ctx, g, pts, LT.violet, { w: 2.4, light: true });
+        judge(ctx, W, CH, "판정 · 휴대폰 충전", ok ? "충전할 수 있다" : (V > 6.3 ? "전압이 너무 높다" : "전압이 모자란다"), ok ? LT.green : LT.red,
+          [["돌리는 빠르기", rpm + " 바퀴/분", rpm > 40 ? LT.red : LT.ink], ["코일 감은 수", N + "회"], ["자석", mag === 2 ? "네오디뮴 (2배)" : "페라이트"], ["최대 전압", V.toFixed(2) + " V", ok ? LT.green : LT.red]],
+          rpm > 40 ? "40 바퀴/분 이하로 돌려야 한다" : (ok ? "감은 수·자석·빠르기의 곱이 맞았다" : "감은 수 × 자석 × 빠르기를 키우거나 줄이자"), ok && rpm <= 40);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "코일 감은 수", value: 100, options: [{ v: 100, t: "100회" }, { v: 200, t: "200회" }, { v: 400, t: "400회" }],
@@ -94,7 +114,7 @@ window.sthLab({
     },
     task: "송전 전압과 전선 굵기를 골라 <b>손실 1% 미만 · 건설비 최소</b>를 찾으세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(340), ctx = cv.ctx, W = cv.W;
       var VOL = { 22.9: 1.0, 66: 1.5, 154: 2.2, 345: 3.5, 765: 7.0 };
       var WIRE = { thin: { t: "가는 선", r: 0.05, c: 0.5 }, std: { t: "보통 선", r: 0.03, c: 1.0 }, thick: { t: "굵은 선", r: 0.015, c: 2.2 } };
       var kv = 154, wire = "thick", P = 100e6;
@@ -110,25 +130,38 @@ window.sthLab({
         return b;
       }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var c = calc(kv, wire);
-        H.text(ctx, "발전소 → 200 km → 도시", 40, 30, { s: 14, w: "900" });
-        H.text(ctx, "🏭", 70, 150, { s: 34, a: "center" });
-        H.text(ctx, "🏙️", 540, 150, { s: 34, a: "center" });
-        var glow = Math.min(1, c.loss * 8);
-        ctx.strokeStyle = "rgba(239,68,68," + (0.25 + glow * 0.75) + ")"; ctx.lineWidth = 2 + (wire === "thick" ? 4 : wire === "std" ? 2.5 : 1);
-        ctx.beginPath(); ctx.moveTo(100, 120); ctx.quadraticCurveTo(300, 170, 510, 120); ctx.stroke();
-        for (var i = 1; i <= 3; i++) H.text(ctx, "🗼", 100 + i * 102, 140, { s: 22, a: "center" });
-        if (glow > 0.2) H.text(ctx, "♨ 전선이 뜨거워짐", 305, 196, { s: 12, w: "800", a: "center", c: H.v("--rose-700") });
-        H.text(ctx, "흐르는 전류 I = P ÷ V = " + c.I.toFixed(0) + " A", 60, 240, { s: 13, w: "800", c: H.v("--brand-700") });
-        H.text(ctx, "전선 저항 R = " + c.R.toFixed(0) + " Ω   →   잃는 전력 = I² × R", 60, 266, { s: 13, w: "800", c: H.v("--mist") });
-        H.text(ctx, "※ 건설비·저항은 수업용 어림값", 60, 300, { s: 11, c: H.v("--mist") });
+        ctx.clearRect(0, 0, W, cv.H);
+        var c = calc(kv, wire), CH = cv.H, ok = c.loss < 0.01, lev = [22.9, 66, 154, 345, 765].indexOf(kv), i;
+        K.studio(ctx, 0, 0, 630, CH, { x: 300, y: CH - 26, rx: 260, ry: 20 });
+        var I = K.iso({ ox: 150, oy: 104, s: .74, L: 520, D: 70 });
+        I.box(ctx, 0, 0, 0, 520, 70, 8, "#a9d18e", "#8a6a48", "#6d523a");
+        I.box(ctx, 10, 12, 8, 70, 58, 48, "#e9ecef", "#ced4da", "#adb5bd"); I.box(ctx, 22, 20, 48, 30, 28, 92, "#f8f9fa", "#dee2e6", "#adb5bd");
+        var th = 46 + lev * 14, TW = [150, 260, 370];
+        function towerAt(x) {
+          function q(z, w) { return [I.P(x - w, 35 - w, z), I.P(x + w, 35 - w, z), I.P(x + w, 35 + w, z), I.P(x - w, 35 + w, z)]; }
+          var A = q(8, 7), B = q(8 + th, 2.5); for (var k = 0; k < 4; k++) { wireLine(ctx, [A[k], B[k]], "#5c6576", 1.5); wireLine(ctx, [A[k], B[(k + 1) % 4]], "rgba(92,101,118,.6)", .8); }
+          wireLine(ctx, [I.P(x, 19, 8 + th), I.P(x, 51, 8 + th)], "#5c6576", 2.4);
+        }
+        TW.forEach(towerAt);
+        var heat = clamp(c.loss * 8, 0, 1), wwid = wire === "thick" ? 3.4 : (wire === "std" ? 2.4 : 1.4);
+        [21, 49].forEach(function (yw, wi) {
+          var tops = [[70, 44]].concat(TW.map(function (x) { return [x, 8 + th]; })).concat([[460, 40]]), pts = [];
+          for (var k = 0; k < tops.length - 1; k++) for (var t = 0; t <= 1.0001; t += .125) { if (k && t === 0) continue; var a = I.P(tops[k][0], yw, tops[k][1]), b = I.P(tops[k + 1][0], yw, tops[k + 1][1]); pts.push({ x: a.x + (b.x - a.x) * t, y: a.y + (b.y - a.y) * t + 10 * 4 * t * (1 - t) }); }
+          if (heat > .02) { ctx.save(); ctx.shadowColor = "#ff5a5a"; ctx.shadowBlur = 10 * heat; wireLine(ctx, pts, "rgba(240,62,62," + (.2 + .6 * heat).toFixed(2) + ")", wwid + 6 * heat); ctx.restore(); }
+          wireLine(ctx, pts, "#343a40", wwid);
+        });
+        [[455, 8, 495, 30, 60], [470, 36, 510, 62, 40], [500, 10, 518, 34, 80]].forEach(function (b) { I.box(ctx, b[0], b[1], 8, b[2], b[3], b[4], "#dbe4ff", "#bac8ff", "#91a7ff"); });
+        var tp = I.P(260, 35, 8 + th); lead(ctx, tp.x, tp.y, tp.x - 40, 100, "철탑 · " + kv + " kV", "#e8ecff", [0, 630]);
+        var pp = I.P(40, 35, 48); lead(ctx, pp.x, pp.y, 40, 150, "발전소 100 MW", "#ffd9a8", [0, 630]);
+        var cp = I.P(490, 30, 70); lead(ctx, cp.x, cp.y, cp.x + 30, cp.y - 46, "200 km 떨어진 도시", "#dbe4ff", [0, 630]);
+        var wp = I.P(320, 49, th - 6); lead(ctx, wp.x, wp.y + 8, wp.x + 40, wp.y + 70, WIRE[wire].t + (heat > .2 ? " · 뜨거워짐" : ""), heat > .2 ? "#ffc9c9" : "#e8ecff", [0, 630]);
         var lossTxt = c.loss >= 1 ? "보낼 수 없음" : (c.loss * 100).toFixed(2) + "%";
-        H.rows(ctx, 660, 70, [
-          ["전선에서 잃는 전력", lossTxt, c.loss < 0.01 ? "--green-700" : "--rose-700", true],
-          ["건설비 (억 원 / km)", c.cost.toFixed(1)],
-          ["철탑 · 전선", VOL[kv].toFixed(1) + " + " + WIRE[wire].c.toFixed(1)]
-        ], 62);
+        K.bigText(ctx, "손실 " + lossTxt, 18, 44, 26, ok ? "#8ff5cf" : "#ffffff");
+        K.bigText(ctx, ok ? "1% 미만 · 건설비 " + c.cost.toFixed(1) + "억/km" : "목표: 손실 1% 미만", 18, 70, 15, "#ffd35a");
+        judge(ctx, W, CH, "판정 · 송전 손실과 건설비", "손실 " + lossTxt, ok ? LT.green : LT.red,
+          [["흐르는 전류 I = P ÷ V", c.I.toFixed(0) + " A"], ["전선 저항 R", c.R.toFixed(0) + " Ω"], ["건설비 (억 원/km)", c.cost.toFixed(1)], ["철탑 + 전선", VOL[kv].toFixed(1) + " + " + WIRE[wire].c.toFixed(1)]],
+          ok ? "손실 조건 통과 · 더 싼 조합은?" : "잃는 전력 = I² × R", ok);
+        lt(ctx, "※ 건설비·저항은 수업용 어림값", W - 18, CH - 12, { s: 10.5, a: "right", c: LT.mute });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "송전 전압", value: 154, options: [{ v: 22.9, t: "22.9 kV" }, { v: 66, t: "66 kV" }, { v: 154, t: "154 kV" }, { v: 345, t: "345 kV" }, { v: 765, t: "765 kV" }],
@@ -171,26 +204,34 @@ window.sthLab({
       var h = 10, Q = 6;
       function power() { return 0.85 * 1000 * 9.8 * Q * h; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var P = power(), left = 15 - Q;
-        H.text(ctx, "댐 단면", 40, 30, { s: 14, w: "900" });
-        var base = 290, sc = 5.5, top = base - h * sc;
-        H.box(ctx, 60, top, 230, base - top, H.v("--brand"), 0.35);
-        ctx.fillStyle = H.v("--mist"); ctx.fillRect(290, top - 6, 24, base - top + 6);
-        H.line(ctx, [[60, base - 25 * sc], [290, base - 25 * sc]], H.v("--rose"), 1.5);
-        H.text(ctx, "25 m (윗마을 논)", 64, base - 25 * sc - 6, { s: 10.5, w: "800", c: H.v("--rose-700") });
-        H.text(ctx, h + " m", 250, top - 8, { s: 12, w: "900", a: "right", c: H.v("--brand-700") });
-        if (h > 25) H.text(ctx, "🌾 잠김!", 150, 60, { s: 13, w: "900", a: "center", c: H.v("--rose-700") });
-        H.arrow(ctx, 314, base - 20, 380, base - 20, H.v("--brand"), 2 + Q / 2, 10);
-        H.text(ctx, "⚙️", 400, base - 12, { s: 24, a: "center" });
-        H.text(ctx, "발전에 " + Q.toFixed(1) + " m³/s", 360, base + 22, { s: 11.5, w: "800", a: "center", c: H.v("--brand-700") });
-        H.text(ctx, left >= 3 ? "🐟 물고기 길 " + left.toFixed(1) + " m³/s" : "🐟 물고기 길이 말랐다 (" + left.toFixed(1) + ")", 460, 250,
-          { s: 12, w: "800", c: left >= 3 ? H.v("--green-700") : H.v("--rose-700") });
-        H.rows(ctx, 620, 70, [
-          ["물 1 kg의 위치 에너지", (9.8 * h).toFixed(0) + " J"],
-          ["1초에 떨어지는 물", (Q * 1000).toFixed(0) + " kg"],
-          ["전기 출력 (효율 85%)", (P / 1e6).toFixed(3) + " MW", P >= 2e6 && P <= 2.2e6 ? "--green-700" : "--rose-700", true]
-        ], 60);
+        ctx.clearRect(0, 0, W, cv.H);
+        var P = power(), left = 15 - Q, CH = cv.H, zs = 2.4, wl = 10 + h * zs, z25 = 10 + 25 * zs, okP = P >= 2e6 && P <= 2.2e6, i;
+        K.studio(ctx, 0, 0, 630, CH, { x: 330, y: CH - 26, rx: 240, ry: 20 });
+        var I = K.iso({ ox: 300, oy: 98, s: .72, L: 360, D: 150 });
+        I.box(ctx, 0, 0, 0, 360, 150, 10, "#9c8a72", "#7d6b55", "#5f513f");
+        I.box(ctx, 0, 0, 10, 360, 30, 100, "#a9d18e", "#8c7a62", "#6d5d48");
+        I.box(ctx, 0, 30, 10, 60, 62, z25, "#8ce99a", "#7d6b55", "#5f513f");
+        for (i = 0; i < 4; i++) { var r1 = I.P(4, 36 + i * 7, z25 + .2), r2 = I.P(56, 36 + i * 7, z25 + .2); wireLine(ctx, [r1, r2], "rgba(47,158,68,.8)", 1.2); }
+        I.box(ctx, 0, 30, 10, 140, 120, wl, "rgba(116,192,252,.72)", "rgba(28,126,214,.62)", "rgba(24,100,171,.62)");
+        ctx.save(); ctx.setLineDash([6, 4]); I.quad(ctx, I.P(0, 30, z25), I.P(140, 30, z25), I.P(140, 120, z25), I.P(0, 120, z25), null, "#e03131"); ctx.restore();
+        I.box(ctx, 140, 30, 10, 154, 120, wl + 4, "#f8f9fa", "#dee2e6", "#adb5bd");
+        I.box(ctx, 154, 62, 10.5, 360, 98, 11.5, "rgba(77,171,247,.85)", "rgba(28,126,214,.8)", "rgba(24,100,171,.8)");
+        if (left > 0) I.box(ctx, 154, 104, 10.5, 360, 116, 11.5, "rgba(116,192,252," + clamp(.2 + left / 12, 0, .9).toFixed(2) + ")", "rgba(28,126,214,.6)", "rgba(24,100,171,.6)");
+        if (left >= 3) for (i = 0; i < 3; i++) { var fp = I.P(200 + i * 50, 110, 12); ctx.fillStyle = "#ff922b"; ctx.beginPath(); ctx.ellipse(fp.x, fp.y, 5, 2.2, .5, 0, 6.2832); ctx.fill(); }
+        I.box(ctx, 166, 64, 11, 206, 96, 34, "#f1f3f5", "#dee2e6", "#adb5bd");
+        wireLine(ctx, [I.P(140, 80, 14), I.P(166, 80, 16)], "#495057", 4 + Q / 3);
+        var fl = []; fl.push(I.P(120, 80, wl - 6), I.P(150, 80, 14), I.P(186, 80, 14), I.P(360, 80, 12));
+        K.arrow(ctx, I.P(210, 80, 12), I.P(300, 80, 12), "rgba(28,126,214,.85)", 2 + Q / 2, 10);
+        lead(ctx, I.P(147, 30, wl + 4).x, I.P(147, 30, wl + 4).y, 380, 40, "댐 높이 " + h + " m", "#e8ecff", [0, 630]);
+        lead(ctx, I.P(30, 46, z25).x, I.P(30, 46, z25).y, 150, 140, "윗마을 논 (25 m)", h > 25 ? "#ffc9c9" : "#b2f2bb", [0, 630]);
+        lead(ctx, I.P(186, 96, 34).x, I.P(186, 96, 34).y, 430, 150, "발전소 (효율 85%) · 물 " + Q.toFixed(1) + " m³/s", "#e8ecff", [0, 630]);
+        lead(ctx, I.P(300, 116, 11).x, I.P(300, 116, 11).y, 440, 300, "물고기 길 " + left.toFixed(1) + " m³/s", left >= 3 ? "#b2f2bb" : "#ffc9c9", [0, 630]);
+        K.bigText(ctx, (P / 1e6).toFixed(3) + " MW", 18, 44, 26, okP && h <= 25 && left >= 3 ? "#8ff5cf" : "#ffffff");
+        K.bigText(ctx, h > 25 ? "윗마을 논이 잠긴다!" : (left < 3 ? "물고기 길이 마른다!" : (okP ? "마을에 딱 맞다" : "목표 2.0~2.2 MW")), 18, 70, 15, "#ffd35a");
+        K.warn(ctx, 620, CH - 10, "⚠ 높이는 보기 쉽게 과장", "right");
+        judge(ctx, W, CH, "판정 · 소수력 발전", (P / 1e6).toFixed(3) + " MW", okP ? LT.green : LT.red,
+          [["물 1 kg의 위치 에너지", (9.8 * h).toFixed(0) + " J"], ["1초에 떨어지는 물", (Q * 1000).toFixed(0) + " kg"], ["댐 높이 (25 m 이하)", h + " m", h > 25 ? LT.red : LT.ink], ["물고기 길 (3 이상)", left.toFixed(1) + " m³/s", left < 3 ? LT.red : LT.ink]],
+          h > 25 ? "윗마을 논이 잠깁니다" : (left < 3 ? "물고기가 살 수 없습니다" : (okP ? "세 조건을 모두 지켰다" : "물의 양 × 높이를 맞추자")), okP && h <= 25 && left >= 3);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "댐 높이 (떨어지는 높이)", min: 5, max: 40, step: 1, value: 10, fmt: function (x) { return x + " m"; },

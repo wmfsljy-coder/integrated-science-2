@@ -3,6 +3,42 @@
 (function () {
 "use strict";
 
+/* ---- 스튜디오 미니어처 도구(밝은 바닥 위 입체 모형 + 흰 판정 카드) ---- */
+var K = window.sthKit, LT = K.LT;
+function cl(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function ell(ctx, x, y, rx, ry) { ctx.beginPath(); ctx.ellipse(x, y, Math.max(.1, rx), Math.max(.1, ry), 0, 0, 6.2832); }
+function rgb(h) { var n = parseInt(h.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function rgba(h, a) { var c = rgb(h); return "rgba(" + c[0] + "," + c[1] + "," + c[2] + "," + a + ")"; }
+function mix(a, b, t) { var p = rgb(a), q = rgb(b), o = [], i; t = cl(t, 0, 1); for (i = 0; i < 3; i++) o.push(Math.round(p[i] + (q[i] - p[i]) * t)); return "rgb(" + o.join(",") + ")"; }
+function shadowF(ctx, x, y, rx, ry, a) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx);
+  var g = ctx.createRadialGradient(0, 0, 2, 0, 0, rx); g.addColorStop(0, "rgba(20,30,50," + (a || .28) + ")"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.fillStyle = g; ell(ctx, 0, 0, rx, rx); ctx.fill(); ctx.restore();
+}
+/* 유리 원기둥(비커·수조): inside(yl) 는 액체 속에 그릴 것 */
+function glass(ctx, cx, yb, rx, h, lv, c, a, inside, ry) {
+  ry = ry || rx * .22; var yt = yb - h, yl = yb - lv;
+  shadowF(ctx, cx + rx * .1, yb + ry * .4, rx * 1.3, ry * 1.5, .3);
+  ctx.fillStyle = "rgba(235,242,250,.45)"; ctx.beginPath(); ctx.moveTo(cx - rx, yt); ctx.lineTo(cx - rx, yb); ctx.ellipse(cx, yb, rx, ry, 0, Math.PI, 0, true); ctx.lineTo(cx + rx, yt); ctx.ellipse(cx, yt, rx, ry, 0, 0, Math.PI, true); ctx.fill();
+  if (lv > 0) {
+    var g = ctx.createLinearGradient(cx - rx, 0, cx + rx, 0); g.addColorStop(0, rgba(c, Math.min(.95, a * 1.7))); g.addColorStop(.4, rgba(c, a)); g.addColorStop(1, rgba(c, Math.min(.95, a * 1.8)));
+    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(cx - rx + 2, yl); ctx.lineTo(cx - rx + 2, yb); ctx.ellipse(cx, yb, rx - 2, ry - 1, 0, Math.PI, 0, true); ctx.lineTo(cx + rx - 2, yl); ctx.ellipse(cx, yl, rx - 2, ry, 0, 0, Math.PI, false); ctx.fill();
+    ctx.fillStyle = rgba(c, Math.min(.9, a)); ell(ctx, cx, yl, rx - 2, ry); ctx.fill();
+  }
+  if (inside) inside(yl);
+  ctx.strokeStyle = "rgba(120,140,170,.75)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cx - rx, yt); ctx.lineTo(cx - rx, yb); ctx.ellipse(cx, yb, rx, ry, 0, Math.PI, 0, true); ctx.lineTo(cx + rx, yt); ctx.stroke();
+  ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2.2; ell(ctx, cx, yt, rx, ry); ctx.stroke();
+  ctx.fillStyle = "rgba(255,255,255,.4)"; ctx.fillRect(cx - rx * .8, yt + ry + 6, rx * .12, h - ry - 12);
+  return { yl: yl, yt: yt };
+}
+/* 입체 온도계 */
+function thermo(ctx, x, y0, y1, f, c) {
+  var tg = ctx.createLinearGradient(x - 8, 0, x + 8, 0); tg.addColorStop(0, "#ffffff"); tg.addColorStop(1, "#b9c6d6");
+  ctx.fillStyle = tg; ctx.beginPath(); ctx.roundRect(x - 8, y0, 16, y1 - y0, 8); ctx.fill(); ctx.strokeStyle = "rgba(110,130,160,.7)"; ctx.lineWidth = 1.2; ctx.stroke();
+  var top = y1 - cl(f, 0, 1) * (y1 - y0 - 8); ctx.fillStyle = c; ctx.fillRect(x - 3, top, 6, y1 - top);
+  K.planet(ctx, x, y1 + 5, 12, c, "#7a1f12");
+}
+
 window.sthLab({
   mount: "lab", key: "lab", result: "rLab",
   cases: [
@@ -19,39 +55,50 @@ window.sthLab({
     },
     task: "모래 종류와 그늘막 가림 정도를 조절해 <b>암컷 비율 40~60%</b>를 맞추세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(340), ctx = cv.ctx, W = cv.W;
       var SAND = { light: { t: "밝은 산호 모래", d: -1, c: "#e9dcc0" }, dark: { t: "검은 화산 모래", d: 1.5, c: "#6b625a" } };
       var sand = "dark", shade = 0;
       function temp() { return 31.5 - 0.05 * shade + SAND[sand].d; }
       function fem(T) { return 1 / (1 + Math.exp(-(T - 29) / 0.6)); }
-      var gx0 = 520, gx1 = 850, gy0 = 70, gy1 = 250;
-      function GX(T) { return gx0 + (T - 26) / 8 * (gx1 - gx0); }
-      function GY(p) { return gy1 - p * (gy1 - gy0); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var T = temp(), f = fem(T);
-        H.text(ctx, "부화장 단면", 40, 30, { s: 14, w: "900" });
-        H.text(ctx, "☀️", 60, 76, { s: 28 });
-        H.box(ctx, 110, 90, 320, 8, H.v("--teal"), 0.25 + shade / 100 * 0.7);
-        H.text(ctx, "그늘막 " + shade + "%", 440, 98, { s: 11.5, w: "800", c: H.v("--teal-700") });
-        ctx.fillStyle = SAND[sand].c; ctx.fillRect(80, 150, 380, 130);
-        for (var i = 0; i < 20; i++) {
-          var x = 110 + (i % 10) * 34, y = 200 + Math.floor(i / 10) * 40, isF = i < Math.round(f * 20);
-          ctx.fillStyle = "#fbf6e8"; ctx.beginPath(); ctx.ellipse(x, y, 13, 16, 0, 0, Math.PI * 2); ctx.fill();
-          H.text(ctx, isF ? "♀" : "♂", x, y + 6, { s: 15, w: "900", a: "center", c: isF ? H.v("--rose-700") : H.v("--brand-700") });
+        var T = temp(), f = fem(T), LW = 500, i, ok = f >= 0.4 && f <= 0.6;
+        ctx.clearRect(0, 0, W, cv.H);
+        K.studio(ctx, 0, 0, LW, cv.H, null);
+        /* 모래사장 블록: 앞면은 둥지를 자른 단면(알 20개), 윗면은 모래와 그늘막 */
+        var I = K.iso({ ox: 250, oy: 128, s: 0.8, L: 260, D: 140 }), ZS = 110, sc = SAND[sand].c;
+        shadowF(ctx, 250, 320, 210, 28, .25);
+        I.face(ctx, "front", function (Lw) {
+          var g = ctx.createLinearGradient(0, ZS, 0, 0); g.addColorStop(0, mix(sc, "#ffffff", .1)); g.addColorStop(1, mix(sc, "#3a2e22", .35));
+          ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, ZS);
+          var R = K.rng(3); ctx.fillStyle = "rgba(255,255,255,.25)"; for (var k = 0; k < 160; k++) ctx.fillRect(R() * Lw, R() * ZS, 1.4, 1.4);
+          ctx.fillStyle = "rgba(60,40,20,.25)"; ctx.beginPath(); ctx.ellipse(Lw / 2, 46, 100, 30, 0, 0, 6.283); ctx.fill();
+        });
+        I.face(ctx, "right", function (Lw) { ctx.fillStyle = mix(sc, "#2a2018", .45); ctx.fillRect(0, 0, Lw, ZS); });
+        I.top(ctx, function () { return ZS; }, function (k) { return mix(sc, "#ffffff", k % 2 ? .12 : .05); }, 20);
+        I.edges(ctx, ZS, ZS);
+        /* 단면 속 알: ♀ 암컷 / ♂ 수컷 */
+        for (i = 0; i < 20; i++) {
+          var u = 22 + (i % 10) * 24, z = 60 - Math.floor(i / 10) * 24, p = I.P(u, I.D, z), isF = i < Math.round(f * 20);
+          K.planet(ctx, p.x, p.y, 8.5, "#fbf6e8", "#b8a98a");
+          K.t(ctx, isF ? "♀" : "♂", p.x, p.y + 4, { s: 11, w: "900", a: "center", c: isF ? "#c2255c" : "#1c64c4" });
         }
-        H.text(ctx, SAND[sand].t + " · 알 둥지 깊이 온도 " + T.toFixed(2) + " ℃", 80, 306, { s: 12.5, w: "800" });
-        H.axes(ctx, gx0, gy0, gx1, gy1);
-        H.text(ctx, "모래 온도 → 암컷 비율", gx0, gy0 - 14, { s: 12, w: "800", c: H.v("--mist") });
-        H.box(ctx, gx0, GY(0.6), gx1 - gx0, GY(0.4) - GY(0.6), H.v("--green"), 0.18);
-        var pts = []; for (var t = 26; t <= 34; t += 0.1) pts.push([GX(t), GY(fem(t))]);
-        H.line(ctx, pts, H.v("--rose"), 2.5);
-        [26, 28, 30, 32, 34].forEach(function (t) { H.text(ctx, t + " ℃", GX(t), gy1 + 16, { s: 10, a: "center", c: H.v("--mist") }); });
-        H.text(ctx, "100%", gx0 - 6, gy0 + 4, { s: 10, a: "right", c: H.v("--mist") });
-        H.text(ctx, "0%", gx0 - 6, gy1 + 4, { s: 10, a: "right", c: H.v("--mist") });
-        var cx = H.clamp(GX(T), gx0, gx1);
-        H.dot(ctx, cx, GY(f), 6, H.v("--rose-700"));
-        H.text(ctx, "암컷 " + (f * 100).toFixed(0) + "%", gx0 + 10, gy1 + 44, { s: 16, w: "900", c: f >= 0.4 && f <= 0.6 ? H.v("--green-700") : H.v("--rose-700") });
+        /* 그늘막: 네 기둥 위 반투명 천 */
+        [[20, 20], [240, 20], [20, 120], [240, 120]].forEach(function (q) { var a = I.P(q[0], q[1], ZS), b = I.P(q[0], q[1], ZS + 46); ctx.strokeStyle = "#6d5a46"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); });
+        if (shade > 0) I.plane(ctx, ZS + 46, "rgba(12,133,153," + (0.12 + shade / 100 * 0.6).toFixed(3) + ")", "rgba(255,255,255,.6)", 20, 240, 20, 120);
+        K.sun(ctx, 440, 46, 15);
+        var nRay = Math.max(1, Math.round(5 * (1 - shade / 100)));
+        for (i = 0; i < nRay; i++) { var r0 = I.P(60 + i * 40, 70, ZS + 2); K.arrow(ctx, { x: 430 - i * 6, y: 64 + i * 3 }, r0, "rgba(245,159,0,.85)", 2, 8); }
+        K.bigText(ctx, "암컷 " + (f * 100).toFixed(0) + "%", 18, 40, 26, ok ? "#7ee0a0" : "#ffffff");
+        K.bigText(ctx, SAND[sand].t + " · 그늘막 " + shade + "%", 18, 66, 15, "#ffd35a");
+        /* 오른쪽 흰 카드: 온도 → 암컷 비율 곡선 */
+        var RX = LW + 12;
+        K.card(ctx, RX, 0, W - RX, cv.H, "둥지 온도 " + T.toFixed(2) + " ℃ → 암컷 비율");
+        var g = K.chart(ctx, { x: RX + 6, y: 40, w: W - RX - 12, h: cv.H - 92, pl: 46, pb: 28, pt: 10, pr: 16, x0: 26, x1: 34, y0: 0, y1: 1, xt: 4, yt: 2, light: true, xf: function (q) { return Math.round(q) + " ℃"; }, yf: function (q) { return Math.round(q * 100) + "%"; } });
+        ctx.fillStyle = "rgba(15,159,118,.14)"; ctx.fillRect(g.L, g.Y(0.6), g.R - g.L, g.Y(0.4) - g.Y(0.6));
+        var pts = []; for (var t = 26; t <= 34; t += 0.1) pts.push([t, fem(t)]);
+        K.plot(ctx, g, pts, "#e64980", { w: 2.8, light: true });
+        K.planet(ctx, g.X(cl(T, 26, 34)), g.Y(f), 6, "#ff6b9a", "#8a1645");
+        K.tip(ctx, ok ? "암수가 고르게 태어납니다" : (f > 0.6 ? "아직 너무 따뜻해 암컷이 많음" : "너무 서늘해 수컷이 많음"), RX + 14, cv.H - 46, W - RX - 28, ok);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "모래", value: "dark", options: [{ v: "light", t: "밝은 산호 모래" }, { v: "dark", t: "검은 화산 모래" }],
@@ -96,24 +143,40 @@ window.sthLab({
       function levels() { var c = Math.pow(10, lg), out = []; CH.forEach(function (k) { c *= k[1]; out.push(c); }); return out; }
       function fmt(c) { return c >= 1 ? c.toFixed(2) : (c >= 0.001 ? c.toFixed(4) : c.toExponential(1)); }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var L = levels();
-        H.text(ctx, "먹이 사슬 단계별 몸속 농도 (ppm, 눈금 한 칸 = 10배)", 40, 30, { s: 14, w: "900" });
-        var x0 = 200, x1 = 820;
-        function X(c) { return x0 + (H.log10(c) + 9) / 12 * (x1 - x0); }
-        [-8, -6, -4, -2, 0, 2].forEach(function (e) {
-          H.dash(ctx, X(Math.pow(10, e)), 52, X(Math.pow(10, e)), 290, H.v("--line"), 1);
-          H.text(ctx, e === 0 ? "1" : "10^" + e, X(Math.pow(10, e)), 308, { s: 10, a: "center", c: H.v("--mist") });
-        });
-        H.line(ctx, [[X(5), 52], [X(5), 290]], H.v("--rose"), 2.5);
-        H.text(ctx, "5 ppm", X(5) + 6, 62, { s: 11, w: "800", c: H.v("--rose-700") });
+        var L = levels(), LW = 380, i, top = L[4], bad = top > 5;
+        ctx.clearRect(0, 0, W, cv.H);
+        K.studio(ctx, 0, 0, LW, cv.H, null);
+        /* 먹이 사슬 계단(입체 받침): 위 단계로 갈수록 몸속 농약 알갱이(빨간 점)가 빽빽해진다 */
+        var I = K.iso({ ox: 150, oy: 150, s: 0.72, L: 300, D: 90 });
+        shadowF(ctx, 210, 300, 180, 26, .25);
+        for (i = 0; i < 5; i++) {
+          var x0 = i * 60, z1 = 16 + i * 22;
+          I.box(ctx, x0, 0, 0, x0 + 58, 90, z1, ["#bfe3f7", "#c6e8c0", "#d6eef5", "#cfe1f0", "#f3e3c8"][i], "#9aa8b8", "#7d8a9a");
+          var p = I.P(x0 + 29, 45, z1), rr = 10 + i * 2.4;
+          K.planet(ctx, p.x, p.y - rr, rr, ["#5aa9ff", "#7ee07e", "#7fb6e6", "#4f8dd8", "#a7825a"][i], "#2a3a50");
+          var nd = Math.min(18, Math.max(0, Math.round((Math.log(L[i]) / Math.LN10 + 9) * 1.4)));
+          var R = K.rng(11 + i); for (var k = 0; k < nd; k++) { var a = R() * 6.283, d = R() * rr * .75; ctx.fillStyle = "#e03131"; ctx.beginPath(); ctx.arc(p.x + Math.cos(a) * d, p.y - rr + Math.sin(a) * d, 1.6, 0, 6.283); ctx.fill(); }
+          K.t(ctx, CH[i][2], p.x, p.y - rr * 2 - 6, { s: 13, a: "center" });
+        }
+        K.bigText(ctx, "물수리 " + fmt(top) + " ppm", 18, 40, 22, bad ? "#ffb0a0" : (top >= 2.5 ? "#7ee0a0" : "#ffffff"));
+        K.bigText(ctx, "단계마다 쌓여 백만 배", 18, 64, 14, "#ffd35a");
+        K.t(ctx, "빨간 점 = 몸속 농약 성분(눈금은 10배씩)", 18, cv.H - 12, { s: 10.5, w: "800", c: LT.mute });
+        /* 오른쪽 흰 카드: 단계별 농도 막대(로그 눈금) */
+        var RX = LW + 12, bx0 = RX + 150, bx1 = W - 24;
+        K.card(ctx, RX, 0, W - RX, cv.H, "단계별 몸속 농도 (ppm, 눈금 한 칸 = 10배)");
+        function X(c) { return bx0 + (H.log10(c) + 9) / 12 * (bx1 - bx0); }
+        [-8, -6, -4, -2, 0, 2].forEach(function (e) { K.line(ctx, { x: X(Math.pow(10, e)), y: 44 }, { x: X(Math.pow(10, e)), y: 262 }, LT.line, .6); K.t(ctx, e === 0 ? "1" : "10^" + e, X(Math.pow(10, e)), 278, { s: 10, w: "600", a: "center", c: LT.mute }); });
+        K.line(ctx, { x: X(5), y: 44 }, { x: X(5), y: 262 }, LT.red, 2.2);
+        K.t(ctx, "5 ppm", X(5) - 4, 58, { s: 11, w: "900", a: "right", c: LT.red });
         L.forEach(function (c, i) {
-          var y = 80 + i * 44, bad = i === 4 && c > 5;
-          H.text(ctx, CH[i][2] + " " + CH[i][0], 40, y + 14, { s: 13, w: "800" });
-          H.box(ctx, x0, y, Math.max(2, X(c) - x0), 22, bad ? H.v("--rose") : H.v(i === 4 ? "--green" : "--teal"), 0.7);
-          H.text(ctx, fmt(c), Math.min(X(c) + 8, 800), y + 16, { s: 11.5, w: "800", a: X(c) + 8 > 800 ? "right" : "left" });
-          if (i > 0) H.text(ctx, "×" + CH[i][1], x0 - 8, y + 16, { s: 10.5, a: "right", c: H.v("--mist") });
+          var y = 70 + i * 40, b2 = i === 4 && c > 5;
+          K.t(ctx, CH[i][0], RX + 18, y + 15, { s: 12.5, w: "800", c: LT.ink });
+          if (i > 0) K.t(ctx, "×" + CH[i][1], bx0 - 8, y + 15, { s: 10.5, w: "700", a: "right", c: LT.mute });
+          var gg = ctx.createLinearGradient(0, y, 0, y + 20); gg.addColorStop(0, b2 ? "#ff8a8a" : (i === 4 ? "#5fd3a3" : "#5ab8d0")); gg.addColorStop(1, b2 ? "#c92a2a" : (i === 4 ? "#0f9f76" : "#0c8599"));
+          ctx.fillStyle = gg; ctx.beginPath(); ctx.roundRect(bx0, y, Math.max(3, X(c) - bx0), 20, 6); ctx.fill();
+          var inB = X(c) + 6 > bx1 - 60; K.t(ctx, fmt(c), inB ? X(c) - 8 : X(c) + 6, y + 15, { s: 11.5, w: "900", a: inB ? "right" : "left", c: inB ? "#ffffff" : LT.ink });
         });
+        K.tip(ctx, bad ? "알 껍질이 얇아진다" : (top >= 2.5 ? "안전하면서 가장 느슨한 기준" : "안전하지만 필요 이상으로 엄격"), RX + 14, cv.H - 40, W - RX - 28, bad ? false : (top >= 2.5 ? true : null));
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "물 속 배출 기준 (10의 지수)", min: -8, max: -3, step: 0.1, value: -4,
@@ -152,33 +215,45 @@ window.sthLab({
     },
     task: "얼음 종류와 녹는 부피를 정해 <b>해수면이 5.0~5.5 cm</b> 오르게 하세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(350), ctx = cv.ctx, W = cv.W;
       var kind = "sea", V = 20000;
       function rise() { return kind === "land" ? V * 0.917 / 3.61e8 * 1e5 : 0; }
+      function cube(x, y, s, a) {
+        var d = s * .35;
+        ctx.globalAlpha = a; ctx.fillStyle = "#cfe9f7"; ctx.beginPath(); ctx.moveTo(x - s / 2, y - s); ctx.lineTo(x - s / 2 + d, y - s - d * .6); ctx.lineTo(x + s / 2 + d, y - s - d * .6); ctx.lineTo(x + s / 2, y - s); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = "#9cc9e6"; ctx.beginPath(); ctx.moveTo(x + s / 2, y - s); ctx.lineTo(x + s / 2 + d, y - s - d * .6); ctx.lineTo(x + s / 2 + d, y - d * .6); ctx.lineTo(x + s / 2, y); ctx.closePath(); ctx.fill();
+        var g = ctx.createLinearGradient(x - s / 2, y - s, x + s / 2, y); g.addColorStop(0, "#f4fbff"); g.addColorStop(1, "#b9dcf0"); ctx.fillStyle = g; ctx.fillRect(x - s / 2, y - s, s, s); ctx.globalAlpha = 1;
+        ctx.strokeStyle = "rgba(110,150,190,.6)"; ctx.lineWidth = 1; ctx.strokeRect(x - s / 2, y - s, s, s);
+      }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "두 컵으로 본 모형 — 녹은 만큼 얼음이 작아집니다", 40, 30, { s: 14, w: "900" });
-        var k = V / 40000;
-        [[160, "sea", "바다에 떠 있는 얼음 (해빙)"], [420, "land", "땅 위의 얼음 (빙상)"]].forEach(function (c) {
-          var x = c[0], on = kind === c[1], w0 = 150, lvl = 220 - (c[1] === "land" && on ? Math.min(40, rise() * 5) : 0);
-          ctx.strokeStyle = on ? H.v("--brand-700") : H.v("--line"); ctx.lineWidth = on ? 3 : 2;
-          ctx.beginPath(); ctx.moveTo(x - w0 / 2, 80); ctx.lineTo(x - w0 / 2, 280); ctx.lineTo(x + w0 / 2, 280); ctx.lineTo(x + w0 / 2, 80); ctx.stroke();
-          H.box(ctx, x - w0 / 2 + 2, lvl, w0 - 4, 278 - lvl, H.v("--brand"), 0.3);
-          H.dash(ctx, x - w0 / 2 - 14, 220, x + w0 / 2 + 14, 220, H.v("--mist"));
-          var s = 60 * (1 - (on ? k : 0)) + 8;
-          if (c[1] === "sea") H.box(ctx, x - s / 2, 220 - s * 0.083, s, s * 0.917 * 0.6, H.v("--foam"), 0.95);
-          else {
-            ctx.fillStyle = H.v("--mist"); ctx.beginPath(); ctx.moveTo(x - 50, 280); ctx.lineTo(x + 50, 280); ctx.lineTo(x + 30, 170); ctx.lineTo(x - 30, 170); ctx.closePath(); ctx.fill();
-            H.box(ctx, x - s / 2, 170 - s * 0.6, s, s * 0.6, H.v("--foam"), 0.95);
-          }
-          H.text(ctx, c[2], x, 304, { s: 12, w: "800", a: "center", c: on ? H.v("--brand-700") : H.v("--mist") });
+        var k = V / 40000, r = rise(), ok = kind === "land" && r >= 5 && r <= 5.5, LW = 560;
+        ctx.clearRect(0, 0, W, cv.H);
+        K.studio(ctx, 0, 0, LW, cv.H, null);
+        [[150, "sea", "바다에 떠 있는 얼음 (해빙)"], [410, "land", "땅 위의 얼음 (빙상)"]].forEach(function (c) {
+          var x = c[0], on = kind === c[1], lvH = 116 + (c[1] === "land" && on ? Math.min(40, r * 5) : 0), s = 60 * (1 - (on ? k : 0)) + 8;
+          glass(ctx, x, 298, 92, 210, lvH, "#5aa9e6", .3, function (yl) {
+            if (c[1] === "sea") cube(x - 6, yl + s * .917, s, .95);
+            else {
+              var rg = ctx.createLinearGradient(x - 50, 0, x + 50, 0); rg.addColorStop(0, "#6f6a64"); rg.addColorStop(.5, "#a39a90"); rg.addColorStop(1, "#5e5852");
+              ctx.fillStyle = rg; ctx.beginPath(); ctx.moveTo(x - 56, 292); ctx.lineTo(x + 56, 292); ctx.lineTo(x + 36, 168); ctx.lineTo(x - 36, 168); ctx.closePath(); ctx.fill();
+              cube(x - 4, 168, s, .95);
+            }
+          }, 18);
+          var ly = 298 - 116; ctx.save(); ctx.setLineDash([5, 4]); ctx.strokeStyle = "rgba(90,110,140,.8)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(x - 108, ly); ctx.lineTo(x + 108, ly); ctx.stroke(); ctx.restore();
+          K.pill(ctx, c[2], x, 330, { s: 11.5, a: "center", c: on ? "#ffffff" : "#c9d2e6", box: [0, LW] });
         });
-        var r = rise();
-        H.rows(ctx, 620, 80, [
-          ["녹은 얼음", (V / 1000).toFixed(0) + " 천 km³"],
-          ["바다에 더해진 물의 부피", kind === "land" ? (V * 0.917 / 1000).toFixed(1) + " 천 km³" : "0 (이미 바다를 밀어내고 있었음)"],
-          ["해수면 상승", r.toFixed(2) + " cm", r >= 5 && r <= 5.5 ? "--green-700" : "--rose-700", true]
-        ], 62);
+        K.bigText(ctx, "해수면 +" + r.toFixed(2) + " cm", 18, 40, 24, ok ? "#7ee0a0" : "#ffffff");
+        K.bigText(ctx, (kind === "land" ? "그린란드 빙상" : "북극 바다 얼음") + " " + (V / 1000) + " 천 km³ 녹음", 18, 64, 15, "#ffd35a");
+        K.t(ctx, "점선 = 처음 수면", LW - 14, 64, { s: 11, w: "800", a: "right", c: LT.mute });
+        var RX = LW + 12, x0 = RX + 18, x1 = W - 18;
+        K.card(ctx, RX, 0, W - RX, cv.H, "판정 — 해수면 상승");
+        K.t(ctx, r.toFixed(2) + " cm", x0, 70, { s: 28, w: "900", c: ok ? LT.green : LT.red });
+        K.t(ctx, "목표 5.0~5.5 cm", x1, 68, { s: 12, w: "800", a: "right", c: LT.mute });
+        K.row(ctx, "녹은 얼음", (V / 1000).toFixed(0) + " 천 km³", x0, x1, 116);
+        K.row(ctx, "바다에 더해진 물", kind === "land" ? (V * 0.917 / 1000).toFixed(1) + " 천 km³" : "0 (이미 밀어내던 자리)", x0, x1, 146, LT.blue);
+        K.bar(ctx, x0, 158, x1 - x0, r / 10, ok ? LT.green : LT.blue);
+        K.tip(ctx, kind === "sea" ? "떠 있는 얼음은 녹아도 그대로" : (ok ? "땅 위 얼음이 바다를 채움" : "부피를 조절해 보세요"), x0 - 4, 188, x1 - x0 + 8, ok ? true : (kind === "sea" ? false : null));
+        K.t(ctx, "바다 넓이 3.61억 km² · 얼음 밀도 0.917", x0, 252, { s: 11, w: "700", c: LT.mute });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "녹는 얼음", value: "sea", options: [{ v: "sea", t: "북극 바다 얼음" }, { v: "land", t: "그린란드 빙상" }],

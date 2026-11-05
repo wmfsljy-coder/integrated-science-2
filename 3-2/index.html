@@ -48,7 +48,7 @@
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“센서는 달았어요. 이제 <b>‘센서 값이 얼마면 장치를 움직인다’</b>는 규칙을 정해야 해요. 환기창은 온도가 몇 ℃를 넘으면 열고, 물은 흙의 수분이 몇 % 아래로 떨어지면 줄까요? 맑은 봄날 하루(24시간)를 돌려 보면서 찾아봐요.”</div></div>
           <figure class="hero-art"><img src="img/smart-greenhouse.webp" alt="딸기 온실을 땅째 블록처럼 잘라 낸 모형. 앞벽과 옆벽이 없어 검은 비닐을 덮은 두둑 위 딸기가 보이고, 유리 지붕의 환기창이 모터 팔로 열려 있다. 천장에는 물 주는 관과 하얀 온도 센서가 매달려 있고, 앞면 흙 단면에 토양 수분 센서의 두 갈래 막대가 꽂혀 있다. 온실 밖에는 파란 물탱크와 밸브, 안테나가 달린 제어기, 빨간 지붕 집이 있다." width="900" height="900" loading="lazy"><figcaption><b>잠든 사이에도 온실 창문은 스스로 열리고 닫힙니다</b> 스마트 온실에서는 센서가 공기 온도와 흙 속 물기를 쉬지 않고 재고, 제어기가 그 값을 정해 둔 규칙과 견주어 환기창 모터와 물 밸브를 움직입니다. 사람이 정하는 것은 ‘몇 ℃가 되면, 몇 %가 되면’이라는 기준뿐입니다. 그 기준을 얼마로 잡아야 딸기가 하루를 무사히 넘기는지는 아래 모형에서 직접 찾아보세요.</figcaption></figure>
           <div class="stage-card">
-            <div class="canvas-wrap" style="background:#e4eaf1"><canvas id="a-farm" width="900" height="730"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-farm" width="900" height="730"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="a-farm-read"></div>
               <div class="ctrl-group">
@@ -69,7 +69,7 @@
         <section class="scene" data-title="인공지능 — 익은 딸기를 가려내는 선">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“환기와 물은 ‘몇 ℃면 연다’처럼 <b>사람이 규칙을 정해 줄 수</b> 있었어요. 그런데 ‘익었다’는 건 규칙으로 쓰기가 어렵네요. 그래서 할머니가 직접 <b>익음/안 익음을 표시해 준 딸기 40개</b>를 카메라로 찍어 왔어요. 가로는 붉은 정도, 세로는 크기예요. 선 하나로 둘을 갈라 볼래요?”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-cls" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-cls" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">선의 기울기<span class="val" id="a-sl-val">0.00</span></div>
@@ -90,7 +90,7 @@
           <div class="story"><div class="who">👵</div><div class="say"><span class="name">할머니</span>“로봇이 참 기특하구나. 그런데 올해는 저쪽 두 이랑에 <b>흰 딸기</b>를 심었단다. 다 익어도 빨개지지 않고 하얗거나 연분홍빛인 품종이지. 로봇이 그것도 잘 따 주겠지?”</div></div>
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">다인</span>“어… 로봇이 학습한 40개는 전부 빨간 품종이었는데요. 일단 시험해 봐요. 로봇이 한 번도 본 적 없는 열매들로요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="a-test" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="a-test" width="900" height="420"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">시험할 열매</div>
@@ -144,6 +144,7 @@
         <section class="scene" data-title="시의회에서 온 초대장">
           <div class="story narr"><div class="who">🏛️</div><div class="say"><span class="name">이야기</span>가상의 도시 한빛시. 시의회에 안건 하나가 올라왔습니다. <b>“통학로와 학교 주변 CCTV 600대에 안면 인식 기능을 도입한다.”</b> 실종 아동을 빨리 찾을 수 있다는 기대와, 모든 시민의 얼굴이 기록된다는 걱정이 맞서자 시의회는 공청회를 열기로 했습니다.</div></div>
           <div class="story"><div class="who">👩‍💼</div><div class="say"><span class="name">시의회 의장</span>“통학로를 매일 걷는 당사자는 학생들이죠. 그래서 학생 대표에게 발언을 부탁합니다. 찬성이든 반대든 좋습니다. 다만 <b>근거를 갖춰서</b> 말해 주세요.”</div></div>
+          <figure class="hero-art"><img src="img/hearing-cctv.webp" alt="통학로와 시청 공청회장을 한 블록으로 잘라 낸 모형. 왼쪽에는 학교 정문 앞 보도와 횡단보도, 꼭대기에 둥근 CCTV 카메라가 달린 기둥 세 개가 있고 카메라에서 파란 감시 범위가 보도로 퍼진다. 오른쪽은 공청회장 안으로, 반원형 의원석과 발언대, 방청석이 있고 가운데 탁자에 초록 추와 빨간 추를 올린 저울이 놓여 있다." width="900" height="900" loading="lazy"><figcaption><b>통학로의 카메라 한 대를 두고 시민 모두가 저울 앞에 섭니다</b> 왼쪽은 아이들이 매일 걷는 통학로, 오른쪽은 그 카메라에 안면 인식 기능을 넣을지 따지는 공청회장입니다. 실종 아동을 빨리 찾는 편익과 모든 시민의 얼굴이 기록되는 위험 가운데 어느 쪽이 더 무거운지는 기술만으로 정해지지 않습니다. 이 이야기에서는 사실을 확인하고, 무게를 달고, 입장문을 씁니다. <span class="art-note">⚠ 가상의 도시 한빛시를 꾸며 그린 그림입니다.</span></figcaption></figure>
           <div class="case-file"><b class="k">실제 연구 ①</b> 2018년 한 연구에서 상용 얼굴 분석 프로그램 세 가지의 성별 판별 오류율을 쟀더니, 밝은 피부의 남성은 1% 미만이었지만 어두운 피부의 여성은 최대 약 35%였습니다. 학습에 쓴 얼굴 사진이 한쪽으로 치우쳐 있었기 때문입니다.<br><b class="k">실제 연구 ②</b> 2019년 미국 국립표준기술연구소(NIST)가 안면 인식 알고리즘 189개를 시험한 결과, 다수의 알고리즘에서 아시아계·아프리카계 얼굴을 다른 사람으로 잘못 알아보는 비율이 백인 얼굴보다 10~100배 높았습니다.</div>
           <div class="gate loose" id="g2"></div>
         </section>
@@ -159,7 +160,7 @@
           <div class="story"><div class="who">🧑‍💼</div><div class="say"><span class="name">업체 영업 사원</span>“저희 제품은 <b>오인식률이 1%</b>밖에 안 됩니다. 100명 중 99명은 정확히 구분한다는 뜻이죠. 경보가 울리면 99%는 진짜라고 보시면 됩니다.”</div></div>
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">통계학자</span>“정말 그럴까요? 직접 계산해 봅시다. 하루에 카메라 앞을 지나는 사람 가운데 <b>찾는 사람은 단 1명</b>이라고 합시다. 나머지는 모두 아무 관계 없는 시민입니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap stage"><canvas id="b-base" width="900" height="360"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-base" width="900" height="360"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="b-base-read"></div>
               <div class="ctrl-group">
@@ -195,7 +196,7 @@
                 </div>
               </div>
             </div>
-            <div class="canvas-wrap stage"><canvas id="b-scale" width="900" height="330"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="b-scale" width="900" height="330"></canvas></div>
             <div class="controls" id="b-weights"></div>
             <div class="info-card" id="b-scale-info"></div>
           </div>

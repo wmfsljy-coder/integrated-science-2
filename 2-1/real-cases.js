@@ -22,6 +22,43 @@ var CW_T0 = cwAvg(CW.slice(0, 10), 1), CW_T1 = cwAvg(CW.slice(-10), 1);
 var CW_MAX = CW.reduce(function (m, r) { return r[2] > m[2] ? r : m; }, [0, 0, -1]);
 var SRC3 = "<small>출처: 기상청 날씨누리 과거 관측 일별 자료, 창원(155) 날마다의 최고 기온으로 해마다 센 값(" + CW_Y0 + " ~ " + CW_YL + "). 사본은 data/cw155.js.</small>";
 
+var K = window.sthKit, LT = K.LT;
+function rcl(x, a, b) { return Math.max(a, Math.min(b, x)); }
+/* 밝은 스튜디오 + 흰 카드 그래프 틀(왼쪽 0~600) */
+function rbase(ctx, W, CH, head, sub) {
+  ctx.clearRect(0, 0, W, CH);
+  K.studio(ctx, 0, 0, 600, CH, null);
+  K.bigText(ctx, head, 16, 34, 20, "#ffffff");
+  if (sub) K.bigText(ctx, sub, 16 + Math.min(300, head.length * 17), 32, 13, "#ffd35a");
+}
+/* 오른쪽 흰 카드와 작은 입체 모형: kind = "mlo"(화산 위 관측소) · "globe"(지구와 온도계) · "city"(뜨거운 도시) */
+function rside(ctx, W, CH, kind, title, rows, tip, good) {
+  var RX = 612, x0 = RX + 18, x1 = W - 18, i;
+  K.card(ctx, RX, 0, W - RX, CH, title);
+  if (kind === "mlo") {
+    var I = K.iso({ ox: RX + 140, oy: 74, s: 0.5, L: 200, D: 150 });
+    I.field(ctx, function (x, y) { var dx = (x - 100) / 70, dy = (y - 75) / 56, r = Math.sqrt(dx * dx + dy * dy); return 8 + 80 * Math.max(0, 1 - r) * Math.max(0, 1 - r * .6); },
+      function (x, y, z, lt) { return z > 64 ? K.tint("#8b7d70", lt) : (z > 26 ? K.tint("#6e5a4a", lt) : K.tint("#7a9a55", lt)); }, 26, 20);
+    I.box(ctx, 96, 70, 84, 112, 82, 96, "#ffffff", "#e6e9ee", "#b9c0cc");
+    for (i = 0; i < 3; i++) { var a = I.P(20 + i * 20, 10, 112), b = I.P(66 + i * 10, 40, 98); K.arrow(ctx, a, b, "#1c7ed6", 1.8, 8); }
+  } else if (kind === "globe") {
+    var gx = RX + 110, gy = 98; K.earth(ctx, gx, gy, 44);
+    ctx.fillStyle = "rgba(255,140,90,.18)"; ctx.beginPath(); ctx.arc(gx, gy, 58, 0, 6.283); ctx.fill();
+    for (i = 0; i < 6; i++) { var an = i * 1.05, px = gx + Math.cos(an) * 54, py = gy + Math.sin(an) * 54; K.planet(ctx, px - 5, py, 3, "#ff6b6b", "#7a1f1f"); K.planet(ctx, px, py, 3.4, "#8a92a8", "#2c3140"); K.planet(ctx, px + 5, py, 3, "#ff6b6b", "#7a1f1f"); }
+    var tx = W - 60; ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.roundRect(tx - 8, 46, 16, 92, 8); ctx.fill(); ctx.strokeStyle = "rgba(110,130,160,.7)"; ctx.lineWidth = 1.2; ctx.stroke();
+    ctx.fillStyle = "#e8590c"; ctx.fillRect(tx - 3, 76, 6, 60); K.planet(ctx, tx, 142, 12, "#ff6b4a", "#7a1f12");
+  } else {
+    var J = K.iso({ ox: RX + 140, oy: 78, s: 0.45, L: 200, D: 120 });
+    J.box(ctx, 0, 0, 0, 200, 120, 10, "#9aa3b0", "#7d8696", "#6b7482");
+    [[16, 14, 46], [70, 20, 70], [130, 12, 40], [30, 70, 34], [100, 72, 56], [160, 70, 30]].forEach(function (q) { J.box(ctx, q[0], q[1], 10, q[0] + 34, q[1] + 34, 10 + q[2], "#e9ecf1", "#c9ced6", "#a7aeb9"); });
+    K.sun(ctx, RX + 44, 66, 12);
+    ctx.strokeStyle = "rgba(255,120,60,.55)"; ctx.lineWidth = 2;
+    for (i = 0; i < 4; i++) { var hx2 = RX + 116 + i * 24; ctx.beginPath(); ctx.moveTo(hx2, 104); ctx.bezierCurveTo(hx2 - 6, 94, hx2 + 6, 84, hx2, 72); ctx.stroke(); }
+  }
+  rows.forEach(function (r, k) { K.row(ctx, r[0], r[1], x0, x1, 186 + k * 26, r[2] || LT.ink); });
+  if (tip) K.tip(ctx, tip, x0 - 4, CH - 44, x1 - x0 + 8, good);
+}
+
 window.sthLab({
   mount: "real", key: "real", result: "rReal", label: "실제 자료",
   doneNote: "정리하기 탭에서 실제 자료가 보여 준 변화와 우리가 할 일을 적어 보세요.",
@@ -37,19 +74,18 @@ window.sthLab({
     },
     task: "그래프를 읽고 최근 10년의 한 해 증가량을 구해, <b>2050년 예상 농도</b>를 슬라이더로 맞추세요(± 4 ppm).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, p = 440;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, p = 440;
       var x0 = 60, x1 = 640, y0 = 20, y1 = 240;
       function X(y) { return x0 + (y - 1955) / (2055 - 1955) * (x1 - x0); }
       function Y(c) { return y1 - (c - 300) / 220 * (y1 - y0); }
       function draw() {
-        H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [300, 350, 400, 450, 500].forEach(function (c) { H.text(ctx, c, x0 - 8, Y(c) + 4, { s: 10, a: "right", c: H.v("--mist") }); H.dash(ctx, x0, Y(c), x1, Y(c), H.v("--line"), 0.6); });
-        [1960, 1980, 2000, 2020, 2050].forEach(function (y) { H.text(ctx, y, X(y), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-        H.text(ctx, "ppm", x0 + 6, y0 - 6, { s: 11, w: "700", c: H.v("--mist") });
-        H.line(ctx, AN.map(function (a) { return [X(a[0]), Y(a[1])]; }), H.v("--brand"), 2.5);
-        H.dash(ctx, X(YL), Y(co2(YL)), X(2050), Y(p), H.v("--coral-700"), 2);
-        H.dot(ctx, X(2050), Y(p), 7, H.v("--coral-700"));
-        H.rows(ctx, 680, 40, [[YL + "년", co2(YL).toFixed(1) + " ppm"], [(YL - 10) + "년", co2(YL - 10).toFixed(1) + " ppm"], ["1959~1969 한 해 증가", ((co2(1969) - co2(1959)) / 10).toFixed(2) + " ppm"], ["내 2050년 예상", p + " ppm", "--coral-700", true]], 52);
+        rbase(ctx, W, cv.H, "공기 속 이산화 탄소 (ppm)", "마우나로아 연평균");
+        var g = K.chart(ctx, { x: 6, y: 46, w: 588, h: cv.H - 52, pl: 48, pb: 28, pt: 10, pr: 14, x0: 1955, x1: 2055, y0: 300, y1: 520, xt: 1, yt: 4, light: true, xf: function () { return ""; } });
+        [1960, 1980, 2000, 2020, 2050].forEach(function (y) { K.t(ctx, String(y), g.X(y), g.B + 16, { s: 10.5, w: "600", a: "center", c: LT.mute }); });
+        K.plot(ctx, g, AN.map(function (a) { return [a[0], a[1]]; }), LT.blue, { w: 2.6, light: true });
+        K.line(ctx, { x: g.X(YL), y: g.Y(co2(YL)) }, { x: g.X(2050), y: g.Y(p) }, LT.orange, 2, [6, 4]);
+        K.planet(ctx, g.X(2050), g.Y(p), 7, "#ff9a4d", "#a33c06");
+        rside(ctx, W, cv.H, "mlo", "해발 3,400 m 화산 비탈의 관측소", [[YL + "년", co2(YL).toFixed(1) + " ppm"], [(YL - 10) + "년", co2(YL - 10).toFixed(1) + " ppm"], ["1959~1969 한 해 증가", ((co2(1969) - co2(1959)) / 10).toFixed(2) + " ppm"], ["내 2050년 예상", p + " ppm", LT.orange]], null, null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "2050년 예상 농도", min: 420, max: 520, step: 1, value: 440, fmt: function (x) { return x + " ppm"; }, onInput: function (x) { p = x; api.changed(); draw(); } });
@@ -82,20 +118,20 @@ window.sthLab({
     },
     task: "직선의 기울기를 바꿔 점들을 가장 잘 지나게 하세요(100 ppm 당 °C, ± 0.1).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, m = 0.5;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, m = 0.5;
       var x0 = 60, x1 = 600, y0 = 20, y1 = 250;
       function X(c) { return x0 + (c - 310) / 125 * (x1 - x0); }
       function Y(t) { return y1 - (t + 0.4) / 1.8 * (y1 - y0); }
       function resid(mm) { var cx = 0, cy = 0; PAIRS.forEach(function (p) { cx += p[0]; cy += p[1]; }); cx /= PAIRS.length; cy /= PAIRS.length; var s = 0; PAIRS.forEach(function (p) { var e = p[1] - (cy + mm / 100 * (p[0] - cx)); s += e * e; }); return { r: Math.sqrt(s / PAIRS.length), cx: cx, cy: cy }; }
       function draw() {
-        H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [-0.2, 0, 0.4, 0.8, 1.2].forEach(function (t) { H.text(ctx, (t > 0 ? "+" : "") + t.toFixed(1), x0 - 8, Y(t) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        [320, 360, 400, 430].forEach(function (c) { H.text(ctx, c + " ppm", X(c), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-        H.text(ctx, "기온 편차 (°C)", x0 + 6, y0 - 6, { s: 11, w: "700", c: H.v("--mist") });
-        PAIRS.forEach(function (p) { H.dot(ctx, X(p[0]), Y(p[1]), 3.2, p[2] >= 2015 ? H.v("--coral-700") : H.v("--brand")); });
+        rbase(ctx, W, cv.H, "이산화 탄소 ↔ 지구 기온", "점 하나 = 한 해");
+        var g = K.chart(ctx, { x: 6, y: 46, w: 588, h: cv.H - 52, pl: 48, pb: 28, pt: 10, pr: 14, x0: 310, x1: 435, y0: -0.4, y1: 1.4, xt: 1, yt: 6, light: true, xf: function () { return ""; }, yf: function (t) { return (t > 0 ? "+" : "") + t.toFixed(1); } });
+        [320, 360, 400, 430].forEach(function (c) { K.t(ctx, c + " ppm", g.X(c), g.B + 16, { s: 10.5, w: "600", a: "center", c: LT.mute }); });
+        PAIRS.forEach(function (q) { K.planet(ctx, g.X(q[0]), g.Y(q[1]), 3.2, q[2] >= 2015 ? "#ff6b6b" : "#5aa9ff", q[2] >= 2015 ? "#7a1f1f" : "#123a8a"); });
         var r = resid(m);
-        H.line(ctx, [[X(312), Y(r.cy + m / 100 * (312 - r.cx))], [X(432), Y(r.cy + m / 100 * (432 - r.cx))]], H.v("--amber-700"), 2.5);
-        H.rows(ctx, 640, 40, [["내 기울기", m.toFixed(2) + " °C / 100 ppm", null, true], ["점과 선의 평균 거리", r.r.toFixed(3) + " °C", r.r < resid(FIT.m * 100).r + 0.003 ? "--green-700" : "--mist"], ["빨간 점", "2015년 이후"]], 58);
+        K.plot(ctx, g, [[312, r.cy + m / 100 * (312 - r.cx)], [432, r.cy + m / 100 * (432 - r.cx)]], LT.yellow, { w: 3, light: true });
+        var best = r.r < resid(FIT.m * 100).r + 0.003;
+        rside(ctx, W, cv.H, "globe", "온실 기체가 늘면 지구가 데워진다", [["내 기울기", m.toFixed(2) + " °C / 100 ppm", LT.violet], ["점과 선의 평균 거리", r.r.toFixed(3) + " °C", best ? LT.green : LT.ink], ["빨간 점", "2015년 이후"]], best ? "평균 거리가 가장 작다" : "평균 거리를 줄여 보세요", best);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "직선의 기울기", min: 0, max: 2, step: 0.05, value: 0.5, fmt: function (x) { return x.toFixed(2) + " °C / 100 ppm"; }, onInput: function (x) { m = x; api.changed(); draw(); } });
@@ -126,19 +162,20 @@ window.sthLab({
     },
     task: "막대를 읽어 두 기간의 평균을 구하고, <b>마지막 10년 ÷ 처음 10년</b>을 슬라이더로 맞추세요(± 0.2 배).",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W, k = 1.0;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W, k = 1.0;
       var x0 = 50, x1 = 640, y0 = 24, y1 = 250, n = CW.length, bw = (x1 - x0) / n;
       function Y(d) { return y1 - d / 50 * (y1 - y0); }
       function draw() {
-        H.paper(ctx, W, cv.H); H.axes(ctx, x0, y0, x1, y1);
-        [0, 10, 20, 30, 40, 50].forEach(function (d) { H.text(ctx, d, x0 - 8, Y(d) + 4, { s: 10, a: "right", c: H.v("--mist") }); if (d) H.dash(ctx, x0, Y(d), x1, Y(d), H.v("--line"), 0.6); });
-        H.text(ctx, "폭염일(일)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
+        rbase(ctx, W, cv.H, "창원의 폭염일 (최고 33 °C 이상)", "");
+        var n = CW.length, g = K.chart(ctx, { x: 6, y: 46, w: 588, h: cv.H - 52, pl: 40, pb: 28, pt: 10, pr: 12, x0: 0, x1: n, y0: 0, y1: 50, xt: 1, yt: 5, light: true, xf: function () { return ""; } });
+        var bw = (g.R - g.L) / n;
         CW.forEach(function (r, i) {
-          var col = i < 10 ? H.v("--brand") : i >= n - 10 ? H.v("--coral-700") : H.v("--mist");
-          H.box(ctx, x0 + i * bw + 1.5, Y(r[2]), bw - 3, y1 - Y(r[2]), col, i < 10 || i >= n - 10 ? 0.9 : 0.45);
-          if (r[0] % 5 === 0) H.text(ctx, r[0], x0 + i * bw + bw / 2, y1 + 15, { s: 10, a: "center", c: H.v("--mist") });
+          var c0 = i < 10 ? ["#74b9ff", "#1c64c4"] : (i >= n - 10 ? ["#ff9a7a", "#c92a2a"] : ["#c9d2e0", "#8a96a8"]), y = g.Y(r[2]);
+          var gg = ctx.createLinearGradient(0, y, 0, g.B); gg.addColorStop(0, c0[0]); gg.addColorStop(1, c0[1]);
+          ctx.fillStyle = gg; ctx.beginPath(); ctx.roundRect(g.L + i * bw + 1.5, y, bw - 3, g.B - y, [3, 3, 0, 0]); ctx.fill();
+          if (r[0] % 5 === 0) K.t(ctx, String(r[0]), g.L + i * bw + bw / 2, g.B + 16, { s: 10.5, w: "600", a: "center", c: LT.mute });
         });
-        H.rows(ctx, 680, 40, [["처음 10년 한 해 평균", "? 일", "--brand"], ["마지막 10년 한 해 평균", "? 일", "--coral-700"], ["가장 많았던 해", CW_MAX[0] + "년 " + CW_MAX[2] + "일"], ["내 답 (몇 배)", k.toFixed(1) + " 배", null, true]], 54);
+        rside(ctx, W, cv.H, "city", "평균보다 극단이 먼저 늘어난다", [["처음 10년 한 해 평균", "? 일", LT.blue], ["마지막 10년 한 해 평균", "? 일", LT.red], ["가장 많았던 해", CW_MAX[0] + "년 " + CW_MAX[2] + "일"], ["내 답 (몇 배)", k.toFixed(1) + " 배", LT.violet]], null, null);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "마지막 10년 ÷ 처음 10년", min: 1, max: 4, step: 0.1, value: 1, fmt: function (x) { return x.toFixed(1) + " 배"; }, onInput: function (x) { k = x; api.changed(); draw(); } });

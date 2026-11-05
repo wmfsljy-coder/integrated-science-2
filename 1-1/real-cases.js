@@ -4,6 +4,7 @@
    자료: data/seaice-sep.js (NSIDC Sea Ice Index v4, NOAA/NSIDC) */
 (function () {
 "use strict";
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 var S = (window.REAL_SEAICE || { rows: [] }).rows;                 /* [연도, 백만 km²] */
 function mean(a) { return a.reduce(function (s, x) { return s + x; }, 0) / (a.length || 1); }
 var FIT = (function () { var x = S.map(function (r) { return r[0]; }), y = S.map(function (r) { return r[1]; }), mx = mean(x), my = mean(y), b = 0, q = 0; x.forEach(function (v, i) { b += (v - mx) * (y[i] - my); q += (v - mx) * (v - mx); }); b /= q; return { b: b, a: my - b * mx }; })();
@@ -15,21 +16,33 @@ var KOREA = 0.2207;                                                 /* 한반도
 var NK = (EARLY - LATE) / KOREA;
 var SRC = "<small>출처: 미국 국립 설빙자료센터(NSIDC) Sea Ice Index 버전 4(G02135), 북극 9월 월평균 해빙 면적(바다 얼음이 15% 넘게 덮인 넓이), 1979 ~ " + (S.length ? S[S.length - 1][0] : "") + "년. 가장 최근 해는 잠정값일 수 있습니다. 사본은 data/seaice-sep.js.</small>";
 
-function chart(H, ctx, W, CH, slope, showFit) {
+function chart(H, ctx, W, CH, slope, showFit) {             /* 밝은 카드 그래프 */
   H.paper(ctx, W, CH);
-  var x0 = 60, x1 = 640, y0 = 24, y1 = CH - 36;
-  function X(y) { return x0 + (y - 1978) / (2027 - 1978) * (x1 - x0); }
-  function Y(v) { return y1 - (v - 2) / 7 * (y1 - y0); }
-  H.axes(ctx, x0, y0, x1, y1);
-  [3, 5, 7, 9].forEach(function (v) { H.text(ctx, v, x0 - 6, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  [1980, 1990, 2000, 2010, 2020].forEach(function (y) { H.text(ctx, y, X(y), y1 + 15, { s: 10, a: "center", c: H.v("--mist") }); });
-  H.text(ctx, "9월 북극 해빙 면적 (백만 km²)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-  S.forEach(function (r) { H.dot(ctx, X(r[0]), Y(r[1]), 3.6, r[0] === 2012 ? H.v("--rose-700") : H.v("--brand")); });
+  var K = window.sthKit, LTc = K.LT;
+  var g = K.chart(ctx, { x: 6, y: 34, w: 630, h: CH - 34, pl: 46, pb: 32, pt: 10, pr: 14, x0: 1978, x1: 2027, y0: 2, y1: 9, xt: 7, yt: 7, light: true,
+    xf: function (q) { return String(Math.round(q)); } });
+  K.t(ctx, "9월 북극 해빙 면적 (백만 km²)", 18, 24, { s: 12, w: "900", c: LTc.ink });
+  S.forEach(function (r) { var c = r[0] === 2012 ? LTc.red : LTc.blue; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(g.X(r[0]), g.Y(r[1]), 5, 0, 6.2832); ctx.fill(); ctx.fillStyle = c; ctx.beginPath(); ctx.arc(g.X(r[0]), g.Y(r[1]), 3.6, 0, 6.2832); ctx.fill(); });
   if (showFit) {
     var my = mean(S.map(function (r) { return r[1]; })), mx = mean(S.map(function (r) { return r[0]; }));
-    H.line(ctx, [[X(1979), Y(my + slope / 10 * (1979 - mx))], [X(2026), Y(my + slope / 10 * (2026 - mx))]], H.v("--amber-700"), 2.5);
+    K.plot(ctx, g, [[1979, my + slope / 10 * (1979 - mx)], [2026, my + slope / 10 * (2026 - mx)]], LTc.orange, { light: true, w: 3 });
   }
-  return { X: X, Y: Y };
+  return { X: g.X, Y: g.Y };
+}
+/* 북극 바다 블록 미니어처: 위 얼음판의 넓이가 비율 f 만큼 */
+function iceBlock(ctx, ox, oy, f, f0) {
+  var K = window.sthKit, I = K.iso({ ox: ox, oy: oy, s: 0.55, L: 200, D: 150 }), Z = 34;
+  ctx.fillStyle = "rgba(20,30,50,.18)"; ctx.beginPath(); ctx.ellipse(I.P(200, 150, 0).x - 30, I.P(200, 150, 0).y - 10, 110, 16, 0, 0, 6.2832); ctx.fill();
+  I.box(ctx, 0, 0, 0, 200, 150, Z, "#4dabf7", "#1864ab", "#0b4f8a");
+  function floe(r, fill, stroke, dash) {
+    ctx.beginPath();
+    for (var i = 0; i <= 24; i++) { var a = i / 24 * 6.2832, rr = r * (1 + .12 * Math.sin(a * 3) + .06 * Math.cos(a * 5)), p = I.P(100 + Math.cos(a) * rr, 75 + Math.sin(a) * rr * .8, Z + 3); if (i) ctx.lineTo(p.x, p.y); else ctx.moveTo(p.x, p.y); }
+    ctx.closePath(); if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+    if (stroke) { ctx.strokeStyle = stroke; ctx.lineWidth = 1.6; if (dash) ctx.setLineDash([5, 4]); ctx.stroke(); ctx.setLineDash([]); }
+  }
+  if (f0) floe(70 * Math.sqrt(f0), null, "rgba(255,255,255,.95)", true);
+  floe(70 * Math.sqrt(f), "#f8f9fa", "#ced4da", false);
+  return I;
 }
 
 window.sthLab({
@@ -51,7 +64,14 @@ window.sthLab({
       function err(m) { var mx = mean(S.map(function (r) { return r[0]; })), my = mean(S.map(function (r) { return r[1]; })); return Math.sqrt(mean(S.map(function (r) { var e = r[1] - (my + m / 10 * (r[0] - mx)); return e * e; }))); }
       function draw() {
         chart(H, ctx, W, cv.H, sl, true);
-        H.rows(ctx, 680, 40, [["내 기울기 (백만 km²)", sl.toFixed(2) + " / 10년", null, true], ["= 1981~2010 평균의", (sl / BASE * 100).toFixed(1) + " % / 10년"], ["점과 선의 평균 거리", err(sl).toFixed(3)], ["빨간 점", "2012년 (가장 작았던 해)"]], 52);
+        var K = window.sthKit, LTc = K.LT;
+        K.card(ctx, 646, 8, 246, cv.H - 16, "내 추세선");
+        K.row(ctx, "기울기 / 10년", sl.toFixed(2), 664, 876, 56, LTc.orange);
+        K.row(ctx, "평균에 견주면", (sl / BASE * 100).toFixed(1) + " %", 664, 876, 80);
+        K.row(ctx, "점과 선의 거리", err(sl).toFixed(3), 664, 876, 104);
+        var my = mean(S.map(function (r) { return r[1]; })), mx = mean(S.map(function (r) { return r[0]; })), v0 = my + sl / 10 * (1979 - mx), v1 = my + sl / 10 * (2024 - mx);
+        iceBlock(ctx, 730, 150, clamp(v1 / Math.max(v0, .1), .05, 1.6) * .8, .8);
+        K.t(ctx, "점선 1979 · 흰 얼음 2024 (내 선)", 664, cv.H - 22, { s: 10, w: "700", c: LTc.mute });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "10년마다 변한 넓이", min: -1.5, max: 0.5, step: 0.05, value: 0, fmt: function (x) { return x.toFixed(2) + " 백만 km²"; }, onInput: function (x) { sl = x; api.changed(); draw(); } });
@@ -83,10 +103,21 @@ window.sthLab({
     build: function (stage, api) {
       var H = api.h, cv = api.canvas(280), ctx = cv.ctx, W = cv.W, g = 1;
       function draw() {
-        var p = chart(H, ctx, W, cv.H, 0, false);
-        H.dash(ctx, p.X(1979), p.Y(EARLY), p.X(1988), p.Y(EARLY), H.v("--amber-700"), 3);
-        H.dash(ctx, p.X(2015), p.Y(LATE), p.X(2024), p.Y(LATE), H.v("--amber-700"), 3);
-        H.rows(ctx, 680, 40, [["1979~1988 평균", EARLY.toFixed(2) + " 백만 km²"], ["2015~2024 평균", LATE.toFixed(2) + " 백만 km²"], ["한반도", "0.22 백만 km²"], ["내 답", g + " 개", null, true]], 52);
+        var p = chart(H, ctx, W, cv.H, 0, false), K = window.sthKit, LTc = K.LT;
+        H.dash(ctx, p.X(1979), p.Y(EARLY), p.X(1988), p.Y(EARLY), LTc.orange, 3);
+        H.dash(ctx, p.X(2015), p.Y(LATE), p.X(2024), p.Y(LATE), LTc.orange, 3);
+        K.card(ctx, 646, 8, 246, cv.H - 16, "사라진 얼음 = 한반도 몇 개?");
+        K.row(ctx, "1979~1988 평균", EARLY.toFixed(2) + " 백만 km²", 664, 876, 58);
+        K.row(ctx, "2015~2024 평균", LATE.toFixed(2) + " 백만 km²", 664, 876, 82);
+        K.row(ctx, "한반도", "0.22 백만 km²", 664, 876, 106);
+        /* 한반도 넓이 타일(입체 판) g 개 */
+        for (var i = 0; i < 20; i++) {
+          var cx = 676 + (i % 10) * 20, cy = 140 + Math.floor(i / 10) * 26, on = i < g, c = on ? "#20c997" : "#dee2e6";
+          ctx.fillStyle = K.tint(c, 1.2); ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + 5, cy - 4); ctx.lineTo(cx + 19, cy - 4); ctx.lineTo(cx + 14, cy); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = c; ctx.fillRect(cx, cy, 14, 14);
+        }
+        K.t(ctx, "판 하나 = 한반도 넓이", 664, 200, { s: 10.5, w: "700", c: LTc.mute });
+        K.t(ctx, "내 답  " + g + " 개", 664, 236, { s: 20, w: "900", c: LTc.ink });
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "한반도 몇 개 넓이", min: 1, max: 20, step: 1, value: 1, fmt: function (x) { return x + " 개"; }, onInput: function (x) { g = x; api.changed(); draw(); } });

@@ -13,22 +13,46 @@ var BEST = 1; for (m = 2; m <= 12; m++) if (SW[m] > SW[BEST]) BEST = m;
 var AREA = 100, EFF = 0.20, PR_ = 0.8, OUT = YEAR * AREA * EFF * PR_;             /* kWh/년 */
 var SRC = "<small>출처: NASA 랭글리 연구소 POWER 프로젝트, 창원 웅천 부근(북위 35.13°, 동경 128.70°) 2015~2024 월평균 지표 일사량(ALLSKY_SFC_SW_DWN, 구름 낀 날 포함)·맑은 하늘 일사량·강수량. 위성 관측과 재분석 자료로 만든 격자값입니다. 사본은 data/power-ungcheon-monthly.js.</small>";
 
-function bars(H, ctx, W, CH, pick, showClear) {
-  H.paper(ctx, W, CH);
-  var x0 = 60, x1 = 640, y0 = 24, y1 = CH - 36;
-  function X(m) { return x0 + (m - 0.5) / 12 * (x1 - x0); }
-  function Y(v) { return y1 - v / 10 * (y1 - y0); }
-  H.axes(ctx, x0, y0, x1, y1);
-  [0, 2, 4, 6, 8, 10].forEach(function (v) { H.text(ctx, v, x0 - 8, Y(v) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-  H.text(ctx, "하루 동안 1 m²에 닿는 햇빛 에너지 (kWh)", x0 + 6, y0 - 8, { s: 11, w: "700", c: H.v("--mist") });
-  for (var m = 1; m <= 12; m++) {
-    var on = m === pick;
-    if (showClear) H.box(ctx, X(m) - 18, Y(CL[m]), 36, y1 - Y(CL[m]), H.v("--line"), 0.6);
-    H.box(ctx, X(m) - 14, Y(SW[m]), 28, y1 - Y(SW[m]), on ? H.v("--amber-700") : H.v("--brand"), on ? 0.95 : 0.7);
-    H.text(ctx, m + "월", X(m), y1 + 15, { s: 10.5, w: on ? "900" : "500", a: "center", c: on ? H.v("--amber-700") : H.v("--mist") });
-    if (showClear) H.text(ctx, PR[m].toFixed(1), X(m), y0 + 12, { s: 9.5, a: "center", c: H.v("--teal-700") });
+var K = window.sthKit, LT = K.LT;
+function lt(ctx, s, x, y, o) { o = o || {}; if (!o.c) o.c = LT.ink; K.t(ctx, s, x, y, o); }
+function judge(ctx, W, CH, title, big, bigCol, rows, tip, good) {
+  var CX = 690, x0 = CX + 16, x1 = W - 16;
+  K.card(ctx, CX, 0, W - CX, CH, title);
+  lt(ctx, big, x0, 58, { s: 19, w: "900", c: bigCol });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], x0, x1, 92 + i * 26, r[2]); });
+  if (tip) K.tip(ctx, tip, x0 - 4, 100 + rows.length * 26, x1 - x0 + 4, good);
+}
+function roof(ctx, CH, m, panels) {                  /* 학교 지붕 태양광 미니어처: 그달 한낮의 해 높이와 비구름 */
+  var I = K.iso({ ox: 590, oy: CH - 128, s: .62, L: 120, D: 90 }), i;
+  var dec = 23.44 * Math.sin(2 * Math.PI * (30.4 * (m - 0.5) - 81) / 365), alt = 90 - 35.1 + dec, a = alt * Math.PI / 180;
+  var sx = 590 - 74 * Math.cos(a), sy = CH - 150 - 96 * Math.sin(a) + 30;
+  ctx.strokeStyle = "rgba(245,159,0,.35)"; ctx.setLineDash([3, 4]); ctx.beginPath(); ctx.arc(590, CH - 120, 96, Math.PI, Math.PI * 1.5); ctx.stroke(); ctx.setLineDash([]);
+  K.sun(ctx, sx, sy, 9); K.planet(ctx, sx, sy, 10, "#fff3bf", "#f59f00");
+  I.box(ctx, 0, 0, 0, 120, 90, 46, "#dee2e6", "#f1f3f5", "#ced4da");
+  for (i = 0; i < 3; i++) for (var j = 0; j < (panels ? 4 : 3); j++) {
+    var x0 = 10 + j * 26, y0 = 10 + i * 26, p1 = I.P(x0, y0, 47), p2 = I.P(x0 + 22, y0, 47), p3 = I.P(x0 + 22, y0 + 18, 56), p4 = I.P(x0, y0 + 18, 56);
+    var pg = ctx.createLinearGradient(p1.x, p1.y, p3.x, p3.y); pg.addColorStop(0, "#1c3d78"); pg.addColorStop(.5, "#3b6fc4"); pg.addColorStop(1, "#14305e");
+    I.quad(ctx, p1, p2, p3, p4, pg, "rgba(255,255,255,.6)");
   }
-  if (showClear) H.text(ctx, "위 숫자 = 하루 평균 강수량(mm) · 회색 = 구름이 없을 때의 햇빛", x0 + 6, y0 + 28, { s: 10.5, w: "700", c: H.v("--teal-700") });
+  for (i = 0; i < 4; i++) { var wp = I.P(20 + i * 26, 90, 20); ctx.fillStyle = "#a5d8ff"; ctx.fillRect(wp.x - 6, wp.y - 6, 10, 8); }
+  if (m) { var nc = Math.round(clamp(PR[m] / 3, 0, 4)); for (i = 0; i < nc; i++) { var cx = 540 + i * 34, cy = 40 + (i % 2) * 14; [[-10, 2, 10], [0, -4, 13], [12, 2, 10]].forEach(function (q) { var g = ctx.createRadialGradient(cx + q[0] - 3, cy + q[1] - 4, 2, cx + q[0], cy + q[1], q[2]); g.addColorStop(0, "#ffffff"); g.addColorStop(1, "#adb5bd"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx + q[0], cy + q[1], q[2], 0, 6.2832); ctx.fill(); }); if (PR[m] > 5) { ctx.strokeStyle = "rgba(28,100,190,.6)"; ctx.lineWidth = 1.2; for (var r = 0; r < 4; r++) { ctx.beginPath(); ctx.moveTo(cx - 8 + r * 6, cy + 14); ctx.lineTo(cx - 11 + r * 6, cy + 24); ctx.stroke(); } } } }
+  if (m) K.pill(ctx, m + "월 한낮 해 높이 약 " + Math.round(alt) + "°", 590, CH - 10, { s: 11, a: "center", c: "#ffe3a3", box: [500, 684] });
+  else K.pill(ctx, "지붕 패널 100 m²", 590, CH - 10, { s: 11, a: "center", c: "#bfe6ff", box: [500, 684] });
+}
+function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
+function bars(H, ctx, W, CH, pick, showClear) {
+  ctx.clearRect(0, 0, W, CH);
+  K.studio(ctx, 0, 0, 684, CH, { x: 590, y: CH - 40, rx: 90, ry: 14 });
+  var g = K.chart(ctx, { x: 6, y: 22, w: 496, h: CH - 26, x0: 0, x1: 12, y0: 0, y1: 10, xt: 12, yt: 5, xf: function () { return ""; }, yl: "하루 1 m²에 닿는 햇빛 (kWh)", light: true });
+  for (var m = 1; m <= 12; m++) {
+    var on = m === pick, cx = g.X(m - 0.5);
+    if (showClear) { ctx.fillStyle = "rgba(20,40,90,.12)"; ctx.fillRect(cx - 16, g.Y(CL[m]), 32, g.B - g.Y(CL[m])); }
+    var bg = ctx.createLinearGradient(0, g.Y(SW[m]), 0, g.B); bg.addColorStop(0, on ? "#ffa94d" : "#74c0fc"); bg.addColorStop(1, on ? "#d9480f" : "#1c7ed6");
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.roundRect(cx - 12, g.Y(SW[m]), 24, g.B - g.Y(SW[m]), [5, 5, 0, 0]); ctx.fill();
+    lt(ctx, m + "월", cx, g.B + 15, { s: 10.5, w: on ? "900" : "600", a: "center", c: on ? LT.orange : LT.mute });
+    if (showClear) lt(ctx, PR[m].toFixed(1), cx, g.T + 12, { s: 9.5, a: "center", c: LT.teal });
+  }
+  if (showClear) lt(ctx, "위 숫자 = 하루 평균 강수량(mm) · 회색 = 구름이 없을 때", g.L + 6, g.T + 28, { s: 10.5, w: "800", c: LT.teal });
 }
 
 window.sthLab({
@@ -49,7 +73,8 @@ window.sthLab({
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, k = 7, clear = false;
       function draw() {
         bars(H, ctx, W, cv.H, k, clear);
-        H.rows(ctx, 680, 50, [["고른 달", k + "월", "--amber-700", true], ["하루 일사량", SW[k].toFixed(2) + " kWh/m²"], ["구름 없을 때", CL[k].toFixed(2) + " kWh/m²"], ["하루 평균 강수량", PR[k].toFixed(1) + " mm"]], 50);
+        roof(ctx, cv.H, k, false);
+        judge(ctx, W, cv.H, "판정 · 고른 달", k + "월 · " + SW[k].toFixed(2) + " kWh/m²", k === BEST ? LT.green : LT.orange, [["하루 일사량", SW[k].toFixed(2) + " kWh/m²"], ["구름 없을 때", CL[k].toFixed(2) + " kWh/m²"], ["하루 강수량", PR[k].toFixed(1) + " mm", LT.teal]], k === BEST ? "가장 많은 달" : "더 높은 막대가 있다", k === BEST);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "달", min: 1, max: 12, step: 1, value: 7, fmt: function (x) { return x + "월"; }, onInput: function (x) { k = x; api.changed(); draw(); } });
@@ -84,7 +109,8 @@ window.sthLab({
       var H = api.h, cv = api.canvas(270), ctx = cv.ctx, W = cv.W, g = 10000;
       function draw() {
         bars(H, ctx, W, cv.H, 0, false);
-        H.rows(ctx, 680, 40, [["한 해 일사량", Math.round(YEAR) + " kWh/m²"], ["내 답 (한 해 발전량)", g.toLocaleString() + " kWh", "--amber-700", true], ["집 몇 채 몫 (한 집 3,600 kWh/년)", (g / 3600).toFixed(1) + " 채"]], 62);
+        roof(ctx, cv.H, 0, true);
+        judge(ctx, W, cv.H, "판정 · 한 해 발전량", g.toLocaleString() + " kWh", Math.abs(g - OUT) <= 1000 ? LT.green : LT.orange, [["한 해 일사량", Math.round(YEAR) + " kWh/m²"], ["집 몇 채 몫", (g / 3600).toFixed(1) + " 채"], ["효율 × 손실", "0.2 × 0.8"]], Math.abs(g - OUT) <= 1000 ? "계산이 맞았다" : "넓이·효율·0.8을 곱해 보자", Math.abs(g - OUT) <= 1000);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "한 해 발전량", min: 2000, max: 60000, step: 500, value: 10000, fmt: function (x) { return x.toLocaleString() + " kWh"; }, onInput: function (x) { g = x; api.changed(); draw(); } });

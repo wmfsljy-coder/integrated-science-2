@@ -3,6 +3,23 @@
 (function () {
 "use strict";
 
+/* ---- 스튜디오 말투(밝은 바탕 + 입체 미니어처 + 흰 판정 카드) — window.sthKit (_tools/STUDIO_GUIDE.md) ---- */
+var K = window.sthKit, LT = K.LT;
+function lpill(ctx, s, x, y, o) { o = o || {}; o.bg = o.bg || "rgba(255,255,255,.94)"; o.line = o.line || "rgba(20,40,90,.16)"; o.c = o.c || LT.ink; return K.pill(ctx, s, x, y, o); }
+function note(ctx, s, x, y, o) { o = o || {}; K.t(ctx, s, x, y, { s: o.s || 11, w: o.w || "700", a: o.a, c: o.c || LT.mute }); }
+function cube(ctx, x, y, w, h, d, cF, cT, cR) {
+  var dx = d * .7, dy = d * .5;
+  ctx.fillStyle = cT; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + dx, y - dy); ctx.lineTo(x + w + dx, y - dy); ctx.lineTo(x + w, y); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = cR; ctx.beginPath(); ctx.moveTo(x + w, y); ctx.lineTo(x + w + dx, y - dy); ctx.lineTo(x + w + dx, y + h - dy); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = cF; ctx.fillRect(x, y, w, h);
+}
+/* 오른쪽 흰 판정 카드: rows = [[이름, 값, 색], …] */
+function card(ctx, RX, W, CH, title, head, headCol, rows, tip, good) {
+  K.card(ctx, RX, 0, W - RX, CH, title);
+  if (head) K.t(ctx, head, RX + 18, 60, { s: 19, w: "900", c: headCol || LT.ink });
+  rows.forEach(function (r, i) { K.row(ctx, r[0], r[1], RX + 18, W - 18, 94 + i * 27, r[2]); });
+  if (tip) K.tip(ctx, tip, RX + 12, CH - 46, W - RX - 24, good);
+}
 function erf(x) {
   var s = x < 0 ? -1 : 1; x = Math.abs(x);
   var t = 1 / (1 + 0.3275911 * x);
@@ -51,32 +68,53 @@ window.sthLab({
         }
         return { st: st, flips: flips, dark: Math.ceil(dark / 6), waste: Math.ceil(waste / 6) };
       }
-      var gx0 = 70, gx1 = 610, gy0 = 50, gy1 = 270;
-      function GX(i) { return gx0 + i / NS * (gx1 - gx0); }
-      function GY(l) { return gy1 - (H.log10(Math.max(l, 1))) / 5 * (gy1 - gy0); }
+      var LW = 612;
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var r = sim();
-        H.text(ctx, "하루 동안의 센서 밝기 (lux, 로그 눈금)", 40, 30, { s: 14, w: "900" });
-        for (var i = 0, a = -1; i <= NS; i++) {
+        var r = sim(), CH = cv.H, ok = r.flips <= 2 && !r.dark && !r.waste, i, a;
+        ctx.clearRect(0, 0, W, CH);
+        K.studio(ctx, 0, 0, LW, CH, { x: 532, y: CH - 52, rx: 96, ry: 16 });
+        K.bigText(ctx, "하루 " + r.flips + "번 바뀜", 16, 36, 22, r.flips <= 2 ? "#8ce99a" : "#ffffff");
+        var g = K.chart(ctx, { x: 4, y: 46, w: 436, h: CH - 50, pl: 46, pb: 50, pt: 10, pr: 10, x0: 0, x1: 24, y0: 0, y1: 5, xt: 4, yt: 5, light: true,
+          xf: function (h) { return h + "시"; }, yf: function (q) { return ["1", "10", "100", "1천", "1만", "10만"][Math.round(q)]; } });
+        function GX(k) { return g.X(k / 360); }
+        function GY(l) { return g.Y(H.log10(Math.max(l, 1))); }
+        for (i = 0, a = -1; i <= NS; i++) {
           if (i < NS && r.st[i]) { if (a < 0) a = i; }
-          else if (a >= 0) { H.box(ctx, GX(a), gy1 + 4, Math.max(1.5, GX(i) - GX(a)), 10, H.v("--amber"), 0.9); a = -1; }
+          else if (a >= 0) { ctx.fillStyle = "rgba(245,159,0,.9)"; ctx.fillRect(GX(a), g.B + 24, Math.max(1.5, GX(i) - GX(a)), 9); a = -1; }
         }
-        H.text(ctx, "가로등 켜짐", gx0, gy1 + 30, { s: 10.5, w: "800", c: H.v("--amber-700") });
-        H.axes(ctx, gx0, gy0, gx1, gy1);
-        [1, 10, 100, 1000, 10000, 100000].forEach(function (l) { H.text(ctx, l >= 1000 ? (l / 1000) + "천" : l + "", gx0 - 6, GY(l) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        [0, 6, 12, 18, 24].forEach(function (h) { H.text(ctx, h + "시", GX(h * 360), gy1 + 48, { s: 10, a: "center", c: H.v("--mist") }); });
-        var pts = []; for (var j = 0; j < NS; j += 12) pts.push([GX(j), GY(SENS[j])]);
-        H.line(ctx, pts, H.v("--brand"), 1.5);
-        H.line(ctx, [[gx0, GY(ON)], [gx1, GY(ON)]], H.v("--amber-700"), 1.5);
-        H.line(ctx, [[gx0, GY(OFF)], [gx1, GY(OFF)]], H.v("--teal-700"), 1.5);
-        H.text(ctx, "켜는 문턱 " + ON, gx1 + 6, GY(ON) + (ON >= OFF ? -4 : 12), { s: 10.5, w: "800", c: H.v("--amber-700") });
-        H.text(ctx, "끄는 문턱 " + OFF, gx1 + 6, GY(OFF) + (ON >= OFF ? 12 : -4), { s: 10.5, w: "800", c: H.v("--teal-700") });
-        H.rows(ctx, 730, 60, [
-          ["하루에 바뀐 횟수", r.flips + " 번", r.flips <= 2 ? "--green-700" : "--rose-700", true],
-          ["50 lux보다 어두운데 꺼짐", r.dark + " 분", r.dark ? "--rose-700" : "--green-700"],
-          ["1000 lux보다 밝은데 켜짐", r.waste + " 분", r.waste ? "--rose-700" : "--green-700"]
-        ], 62);
+        note(ctx, "켜짐", g.L - 6, g.B + 33, { s: 10.5, a: "right", c: "#a85d00" });
+        var pts = []; for (var j = 0; j < NS; j += 12) pts.push([j / 360, H.log10(Math.max(SENS[j], 1))]);
+        K.plot(ctx, g, pts, LT.blue, { w: 1.4, light: true, glow: false });
+        K.line(ctx, { x: g.L, y: GY(ON) }, { x: g.R, y: GY(ON) }, LT.orange, 2, [6, 4]);
+        K.line(ctx, { x: g.L, y: GY(OFF) }, { x: g.R, y: GY(OFF) }, LT.teal, 2, [6, 4]);
+        function yl(y) { return Math.max(g.T + 16, Math.min(g.B - 4, y)); }
+        lpill(ctx, "켜는 문턱 " + ON, g.R - 4, yl(GY(ON) + (ON >= OFF ? -6 : 18)), { s: 10.5, a: "right", c: LT.orange });
+        lpill(ctx, "끄는 문턱 " + OFF, g.R - 4, yl(GY(OFF) + (ON >= OFF ? 18 : -6)), { s: 10.5, a: "right", c: LT.teal });
+        note(ctx, "센서가 잰 밝기 (lux · 눈금 한 칸 = 10배)", g.L + 6, g.T + 14, { s: 10.5, c: LT.blue });
+        /* 입체 미니어처: 보도 위 스마트 가로등 (해 질 녘의 모습) */
+        var sx = 532, base = CH - 64;
+        cube(ctx, 462, base, 126, 14, 40, "#bcc4cf", "#e1e6ec", "#98a1ae");
+        var lit = !r.dark;
+        if (lit) {
+          ctx.fillStyle = r.flips > 2 ? "rgba(255,214,90,.16)" : "rgba(255,214,90,.32)";
+          ctx.beginPath(); ctx.moveTo(498, 128); ctx.lineTo(470, base - 6); ctx.lineTo(566, base - 6); ctx.closePath(); ctx.fill();
+        }
+        var pg = ctx.createLinearGradient(sx - 3, 0, sx + 3, 0); pg.addColorStop(0, "#5f6878"); pg.addColorStop(.5, "#dfe4ec"); pg.addColorStop(1, "#5f6878");
+        ctx.fillStyle = pg; ctx.fillRect(sx - 3, 112, 6, base - 112 - 10);
+        ctx.strokeStyle = "#6b7484"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(sx, 116); ctx.quadraticCurveTo(sx - 6, 104, sx - 28, 112); ctx.stroke();
+        cube(ctx, sx - 46, 112, 30, 9, 12, "#59606e", "#8a93a3", "#3f4552");
+        if (lit) K.glow(ctx, sx - 31, 124, 4, r.flips > 2 ? "rgba(255,226,140,.7)" : "rgba(255,226,140,.98)", 3.4);
+        if (lit && r.flips > 2) { ctx.strokeStyle = LT.orange; ctx.lineWidth = 2; [[-62, 118], [-8, 130]].forEach(function (z) { ctx.beginPath(); ctx.moveTo(sx + z[0], z[1]); ctx.lineTo(sx + z[0] + 5, z[1] - 6); ctx.lineTo(sx + z[0] + 1, z[1] - 9); ctx.lineTo(sx + z[0] + 7, z[1] - 16); ctx.stroke(); }); }
+        cube(ctx, sx - 4, 106, 8, 5, 6, "#ffffff", "#ffffff", "#c9ced6");
+        lpill(ctx, "밝기 센서", sx + 12, 104, { s: 10.5, c: LT.blue, box: [440, LW] });
+        lpill(ctx, ok ? "해 질 녘 한 번만 켜짐" : (r.flips > 2 ? "해 질 녘 깜빡깜빡" : "켜고 끄는 때가 어긋남"), 526, CH - 20, { s: 11, a: "center", c: ok ? LT.green : LT.orange, box: [440, LW] });
+        card(ctx, LW + 8, W, CH, "판정", ok ? "깜빡임 없음" : "아직 고칠 곳 있음", ok ? LT.green : LT.orange, [
+          ["하루에 바뀐 횟수", r.flips + " 번", r.flips <= 2 ? LT.green : LT.red],
+          ["50 lux보다 어두운데 꺼짐", r.dark + " 분", r.dark ? LT.red : LT.green],
+          ["1000 lux보다 밝은데 켜짐", r.waste + " 분", r.waste ? LT.red : LT.green]
+        ], r.dark ? "어두운데 꺼집니다" : (r.waste ? "밝은데 켜집니다" : (r.flips > 2 ? "문턱 근처에서 깜빡입니다" : "두 문턱 사이 간격이 잡음을 막음")), ok);
+        note(ctx, "해 질 녘 센서 잡음 약 ±40 lux", LW + 26, 190);
+        note(ctx, "오후 2시 먹구름 약 700 lux", LW + 26, 210);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "켜는 문턱 (이보다 어두우면 켬)", min: 0, max: 1000, step: 25, value: 300, fmt: function (x) { return x + " lux"; },
@@ -120,33 +158,46 @@ window.sthLab({
       var t = 0.5, sd = 0.12;
       function fp() { return 1 - Phi((t - 0.3) / sd); }
       function catchR() { return 1 - Phi((t - 0.75) / sd); }
-      var gx0 = 60, gx1 = 580, gy0 = 60, gy1 = 270;
-      function GX(x) { return gx0 + x * (gx1 - gx0); }
       function pdf(x, m) { return Math.exp(-0.5 * Math.pow((x - m) / sd, 2)); }
+      var LW = 612;
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "메일별 스팸 점수의 분포", 40, 30, { s: 14, w: "900" });
-        H.axes(ctx, gx0, gy0, gx1, gy1);
-        [0, 0.25, 0.5, 0.75, 1].forEach(function (x) { H.text(ctx, x + "", GX(x), gy1 + 16, { s: 10, a: "center", c: H.v("--mist") }); });
-        [[0.3, "--teal", "정상 메일"], [0.75, "--rose", "스팸"]].forEach(function (d) {
-          var pts = [];
-          for (var x = 0; x <= 1.0001; x += 0.005) pts.push([GX(x), gy1 - pdf(x, d[0]) * 170]);
-          for (var x2 = 0; x2 <= 1.0001; x2 += 0.005) {
-            var bad = d[0] < 0.5 ? x2 >= t : x2 < t;
-            if (bad) H.box(ctx, GX(x2), gy1 - pdf(x2, d[0]) * 170, (gx1 - gx0) * 0.005 + 0.5, pdf(x2, d[0]) * 170, H.v(d[1]), 0.45);
-          }
-          H.line(ctx, pts, H.v(d[1]), 2.5);
-          H.text(ctx, d[2], GX(d[0]), gy1 - 180, { s: 12, w: "900", a: "center", c: H.v(d[1] + "-700") });
+        var CH = cv.H, f = fp(), c = catchR(), ok = f <= 0.01 && c >= 0.9, x;
+        ctx.clearRect(0, 0, W, CH);
+        K.studio(ctx, 0, 0, LW, CH, { x: 530, y: CH - 44, rx: 96, ry: 16 });
+        K.bigText(ctx, "문턱 " + t.toFixed(3), 16, 36, 22, ok ? "#8ce99a" : "#ffffff");
+        var g = K.chart(ctx, { x: 4, y: 46, w: 440, h: CH - 50, pl: 22, pb: 34, pt: 26, pr: 12, x0: 0, x1: 1, y0: 0, y1: 1.15, xt: 4, yt: 1, light: true,
+          yf: function () { return ""; }, xl: "메일의 스팸 점수 →" });
+        [[0.3, LT.teal, "정상 메일", "rgba(12,133,153,.38)"], [0.75, LT.red, "스팸", "rgba(224,49,49,.32)"]].forEach(function (d) {
+          var lo = d[0] < 0.5 ? t : 0, hi = d[0] < 0.5 ? 1 : t;
+          ctx.fillStyle = d[3]; ctx.beginPath(); ctx.moveTo(g.X(lo), g.B);
+          for (x = lo; x <= hi + 1e-9; x += 0.005) ctx.lineTo(g.X(x), g.Y(pdf(x, d[0])));
+          ctx.lineTo(g.X(hi), g.B); ctx.closePath(); ctx.fill();
+          var pts = []; for (x = 0; x <= 1.0001; x += 0.005) pts.push([x, pdf(x, d[0])]);
+          K.plot(ctx, g, pts, d[1], { w: 2.6, light: true });
+          lpill(ctx, d[2], g.X(d[0]), g.Y(1.02) - 4, { s: 11.5, a: "center", c: d[1] });
         });
-        H.line(ctx, [[GX(t), gy0 - 6], [GX(t), gy1]], H.v("--ink"), 2);
-        H.text(ctx, "문턱 " + t.toFixed(3), GX(t), gy0 - 12, { s: 12, w: "900", a: "center" });
-        H.text(ctx, "진한 부분 = 잘못 판단한 메일", gx0, 312, { s: 11, c: H.v("--mist") });
-        var f = fp(), c = catchR();
-        H.rows(ctx, 630, 70, [
-          ["스팸함에 빠진 정상 메일", (f * 100).toFixed(2) + "%", f <= 0.01 ? "--green-700" : "--rose-700", true],
-          ["막아 낸 스팸", (c * 100).toFixed(1) + "%", c >= 0.9 ? "--green-700" : "--rose-700", true],
-          ["하루 정상 900통 중 잘못 막힘", Math.round(900 * f) + " 통"]
-        ], 66);
+        K.line(ctx, { x: g.X(t), y: g.T - 6 }, { x: g.X(t), y: g.B }, LT.ink, 2.4);
+        lpill(ctx, "문턱", g.X(t), g.T - 8 > 60 ? g.T - 8 : 66, { s: 10.5, a: "center", c: LT.ink, box: [0, 446] });
+        /* 입체 미니어처: 받은 편지함과 스팸함 — 쌓인 편지 높이 = 메일 수 */
+        function tray(x, lab, nW, nR, warn) {
+          var by = CH - 66, hw = Math.max(nW ? 2 : 0, nW / 900 * 60), hr = Math.max(nR ? 2 : 0, nR / 900 * 60);
+          cube(ctx, x, by, 66, 16, 30, "#c9a26b", "#e7c48f", "#9c7a49");
+          if (hr) cube(ctx, x + 6, by - hr, 52, hr, 20, "#f37a85", "#ffb3ba", "#c9404d");
+          if (hw) cube(ctx, x + 6, by - hr - hw, 52, hw, 20, "#ffffff", "#f6f8fb", "#cfd6df");
+          lpill(ctx, lab, x + 40, by + 34, { s: 10.5, a: "center", c: LT.ink, box: [446, LW] });
+          if (warn) lpill(ctx, warn, x + 40, by - hr - hw - 24, { s: 10.5, a: "center", c: LT.red, box: [446, LW] });
+        }
+        var nf = Math.round(900 * f), nc = Math.round(900 * c);
+        tray(456, "받은 편지함", 900 - nf, 900 - nc, null);
+        tray(534, "스팸함", nf, nc, nf ? "정상 " + nf + "통!" : null);
+        note(ctx, "흰 = 정상 · 빨강 = 스팸 (하루 각 900통)", 452, 62, { s: 10 });
+        card(ctx, LW + 8, W, CH, "판정", ok ? "두 조건 모두 만족" : "아직 맞지 않음", ok ? LT.green : LT.orange, [
+          ["스팸함에 빠진 정상 메일", (f * 100).toFixed(2) + "%", f <= 0.01 ? LT.green : LT.red],
+          ["막아 낸 스팸", (c * 100).toFixed(1) + "%", c >= 0.9 ? LT.green : LT.red],
+          ["정상 900통 중 잘못 막힘", nf + " 통"],
+          ["판단 단서", sd < 0.1 ? "내용 + 주소록" : "내용만"]
+        ], f > 0.01 ? "정상 메일이 너무 많이 걸립니다" : (c < 0.9 ? "스팸을 덜 막습니다" : "두 실수를 함께 줄였습니다"), ok);
+        note(ctx, "진한 부분 = 잘못 판단한 메일", LW + 26, 222);
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "판단에 쓰는 단서", value: 0.12, options: [{ v: 0.12, t: "글 내용 점수만" }, { v: 0.08, t: "내용 + 보낸 사람 주소록 확인" }],
@@ -189,29 +240,46 @@ window.sthLab({
       var lg = 4, cars = 10;
       function D() { return Math.pow(10, lg); }
       function p0(d) { return Math.exp(-d / 1e6); }
-      var gx0 = 70, gx1 = 580, gy0 = 50, gy1 = 260;
-      function GX(l) { return gx0 + (l - 4) / 4 * (gx1 - gx0); }
-      function GY(p) { return gy1 - p * (gy1 - gy0); }
+      var LW = 612;
+      function km(d) { return d >= 1e6 ? (d / 1e6).toFixed(2) + " 백만 km" : Math.round(d / 1000) + " 천 km"; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        H.text(ctx, "사람만큼 위험한 차가 사고 없이 달릴 확률", 40, 30, { s: 14, w: "900" });
-        H.axes(ctx, gx0, gy0, gx1, gy1);
-        [4, 5, 6, 7, 8].forEach(function (l) { H.text(ctx, ["1만", "10만", "100만", "1000만", "1억"][l - 4] + " km", GX(l), gy1 + 16, { s: 10, a: "center", c: H.v("--mist") }); });
-        ["0%", "50%", "100%"].forEach(function (s, i) { H.text(ctx, s, gx0 - 6, GY(i / 2) + 4, { s: 10, a: "right", c: H.v("--mist") }); });
-        H.line(ctx, [[gx0, GY(0.05)], [gx1, GY(0.05)]], H.v("--rose"), 1.5);
-        H.text(ctx, "5%", gx1 + 6, GY(0.05) + 4, { s: 11, w: "800", c: H.v("--rose-700") });
-        H.box(ctx, GX(H.log10(4e6)), gy0, gx1 - GX(H.log10(4e6)), gy1 - gy0, H.v("--mist"), 0.15);
-        H.text(ctx, "예산 초과", (GX(H.log10(4e6)) + gx1) / 2, gy0 + 16, { s: 11, w: "800", a: "center", c: H.v("--mist") });
-        var pts = []; for (var l = 4; l <= 8.0001; l += 0.02) pts.push([GX(l), GY(p0(Math.pow(10, l)))]);
-        H.line(ctx, pts, H.v("--violet"), 2.5);
-        var d = D(), p = p0(d);
-        H.dot(ctx, GX(lg), GY(p), 6, H.v("--violet-700"));
+        var CH = cv.H, d = D(), p = p0(d), over = d > 4e6 + 1, ok = p <= 0.05 && !over, l;
+        ctx.clearRect(0, 0, W, CH);
+        K.studio(ctx, 0, 0, LW, CH, { x: 530, y: CH - 46, rx: 96, ry: 16 });
+        K.bigText(ctx, "사고 없이 달릴 확률 " + (p * 100).toFixed(1) + "%", 16, 36, 21, ok ? "#8ce99a" : "#ffffff");
+        var g = K.chart(ctx, { x: 4, y: 46, w: 440, h: CH - 50, pl: 46, pb: 36, pt: 14, pr: 14, x0: 4, x1: 8, y0: 0, y1: 1, xt: 4, yt: 2, light: true,
+          xf: function (q) { return ["1만", "10만", "100만", "1000만", "1억"][Math.round(q) - 4] + " km"; }, yf: function (q) { return Math.round(q * 100) + "%"; } });
+        var xb = g.X(H.log10(4e6));
+        ctx.fillStyle = "rgba(20,40,90,.08)"; ctx.fillRect(xb, g.T, g.R - xb, g.B - g.T);
+        note(ctx, "예산 초과", (xb + g.R) / 2, g.T + 16, { s: 10.5, a: "center" });
+        K.line(ctx, { x: g.L, y: g.Y(0.05) }, { x: g.R, y: g.Y(0.05) }, LT.red, 1.8, [6, 4]);
+        lpill(ctx, "5%", g.L + 8, g.Y(0.05) - 6, { s: 10.5, c: LT.red });
+        var pts = []; for (l = 4; l <= 8.0001; l += 0.02) pts.push([l, p0(Math.pow(10, l))]);
+        K.plot(ctx, g, pts, LT.violet, { w: 2.8, light: true });
+        ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.arc(g.X(lg), g.Y(p), 7.5, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = ok ? LT.green : LT.violet; ctx.beginPath(); ctx.arc(g.X(lg), g.Y(p), 5, 0, 6.2832); ctx.fill();
+        note(ctx, "사람만큼 위험한 차의 0건 확률", g.L + 8, g.B - 40, { s: 10.5, c: LT.violet });
+        /* 입체 미니어처: 시험 도로 위 자율 주행차 */
+        var by = CH - 70;
+        cube(ctx, 452, by, 132, 14, 64, "#4a5160", "#6b7383", "#363c48");
+        ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 2; ctx.setLineDash([8, 6]);
+        ctx.beginPath(); ctx.moveTo(474, by - 11); ctx.lineTo(474 + 132, by - 11); ctx.stroke(); ctx.setLineDash([]);
+        var cx = 470 + Math.min(1, (lg - 4) / 4) * 84;
+        ctx.fillStyle = "rgba(10,15,30,.35)"; ctx.beginPath(); ctx.ellipse(cx + 22, by - 13, 22, 4, 0, 0, 6.2832); ctx.fill();
+        cube(ctx, cx, by - 26, 36, 9, 18, "#1c7ed6", "#4dabf7", "#1864ab");
+        cube(ctx, cx + 7, by - 33, 20, 7, 14, "#cfe8ff", "#e7f5ff", "#9cc8ef");
+        ctx.fillStyle = "#212529"; [cx + 6, cx + 28].forEach(function (wx) { ctx.beginPath(); ctx.ellipse(wx, by - 17, 4, 4, 0, 0, 6.2832); ctx.fill(); });
+        K.planet(ctx, cx + 21, by - 42, 3.2, "#ffffff", "#7a8494");
+        lpill(ctx, "주행 " + km(d), 518, by - 66, { s: 11, a: "center", c: over ? LT.red : LT.ink, box: [446, LW] });
+        lpill(ctx, "시험 도로", 518, CH - 18, { s: 10.5, a: "center", c: LT.mute, box: [446, LW] });
         var days = d / (cars * 500);
-        H.rows(ctx, 630, 70, [
-          ["시험 거리", d >= 1e6 ? (d / 1e6).toFixed(2) + " 백만 km" : Math.round(d / 1000) + " 천 km", d > 4e6 ? "--rose-700" : null],
-          ["사고 없이 달릴 확률", (p * 100).toFixed(1) + "%", p <= 0.05 ? "--green-700" : "--rose-700", true],
-          ["시험 차 " + cars + "대 · 하루 500 km", days >= 365 ? (days / 365).toFixed(1) + " 년" : Math.ceil(days) + " 일"]
-        ], 62);
+        card(ctx, LW + 8, W, CH, "판정", ok ? "근거가 됩니다" : (over ? "예산 초과" : "아직 우연일 수 있음"), ok ? LT.green : LT.orange, [
+          ["시험 거리", km(d), over ? LT.red : LT.ink],
+          ["사고 없이 달릴 확률", (p * 100).toFixed(1) + "%", p <= 0.05 ? LT.green : LT.red],
+          ["차 " + cars + "대 · 하루 500 km", days >= 365 ? (days / 365).toFixed(1) + " 년" : Math.ceil(days) + " 일"]
+        ], over ? "예산 400만 km를 넘었습니다" : (p > 0.05 ? "0건이 운일 확률이 큽니다" : "0건이 우연이라 보기 어렵습니다"), ok);
+        note(ctx, "예산 사용", LW + 26, 192);
+        K.bar(ctx, LW + 26, 200, W - LW - 52, d / 4e6, over ? LT.red : LT.blue);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "시험 거리 (눈금 한 칸 = 10배)", min: 4, max: 8, step: 0.05, value: 4,
