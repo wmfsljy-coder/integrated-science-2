@@ -114,7 +114,7 @@ window.sthLab({
     },
     task: "송전 전압과 전선 굵기를 골라 <b>손실 1% 미만 · 건설비 최소</b>를 찾으세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(340), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(320), ctx = cv.ctx, W = cv.W;
       var VOL = { 22.9: 1.0, 66: 1.5, 154: 2.2, 345: 3.5, 765: 7.0 };
       var WIRE = { thin: { t: "가는 선", r: 0.05, c: 0.5 }, std: { t: "보통 선", r: 0.03, c: 1.0 }, thick: { t: "굵은 선", r: 0.015, c: 2.2 } };
       var kv = 154, wire = "thick", P = 100e6;
@@ -133,8 +133,8 @@ window.sthLab({
         ctx.clearRect(0, 0, W, cv.H);
         var c = calc(kv, wire), CH = cv.H, ok = c.loss < 0.01, lev = [22.9, 66, 154, 345, 765].indexOf(kv), i;
         K.studio(ctx, 0, 0, 630, CH, { x: 300, y: CH - 26, rx: 260, ry: 20 });
-        var I = K.iso({ ox: 150, oy: 104, s: .74, L: 520, D: 70 });
-        I.box(ctx, 0, 0, 0, 520, 70, 8, "#a9d18e", "#8a6a48", "#6d523a");
+        var I = K.iso({ ox: 170, oy: 90, s: .74, L: 520, D: 70 });
+        I.box(ctx, 0, 0, 0, 520, 70, 8, "#a9d18e", "#8a6a48", "#73573b");   /* 얇은 단색 받침 */
         I.box(ctx, 10, 12, 8, 70, 58, 48, "#e9ecef", "#ced4da", "#adb5bd"); I.box(ctx, 22, 20, 48, 30, 28, 92, "#f8f9fa", "#dee2e6", "#adb5bd");
         var th = 46 + lev * 14, TW = [150, 260, 370];
         function towerAt(x) {
@@ -151,7 +151,7 @@ window.sthLab({
           wireLine(ctx, pts, "#343a40", wwid);
         });
         [[455, 8, 495, 30, 60], [470, 36, 510, 62, 40], [500, 10, 518, 34, 80]].forEach(function (b) { I.box(ctx, b[0], b[1], 8, b[2], b[3], b[4], "#dbe4ff", "#bac8ff", "#91a7ff"); });
-        var tp = I.P(260, 35, 8 + th); lead(ctx, tp.x, tp.y, tp.x - 40, 100, "철탑 · " + kv + " kV", "#e8ecff", [0, 630]);
+        var tp = I.P(260, 35, 8 + th); lead(ctx, tp.x, tp.y, tp.x - 40, Math.min(100, tp.y - 26), "철탑 · " + kv + " kV", "#e8ecff", [0, 630]);
         var pp = I.P(40, 35, 48); lead(ctx, pp.x, pp.y, 40, 150, "발전소 100 MW", "#ffd9a8", [0, 630]);
         var cp = I.P(490, 30, 70); lead(ctx, cp.x, cp.y, cp.x + 30, cp.y - 46, "200 km 떨어진 도시", "#dbe4ff", [0, 630]);
         var wp = I.P(320, 49, th - 6); lead(ctx, wp.x, wp.y + 8, wp.x + 40, wp.y + 70, WIRE[wire].t + (heat > .2 ? " · 뜨거워짐" : ""), heat > .2 ? "#ffc9c9" : "#e8ecff", [0, 630]);
@@ -200,17 +200,17 @@ window.sthLab({
     },
     task: "댐 높이와 발전에 쓸 물의 양을 정해 <b>2.0~2.2 MW</b>를 만드세요. 물고기와 윗마을을 지켜야 합니다.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(296), ctx = cv.ctx, W = cv.W;
       var h = 10, Q = 6;
       function power() { return 0.85 * 1000 * 9.8 * Q * h; }
       function draw() {
         ctx.clearRect(0, 0, W, cv.H);
         var P = power(), left = 15 - Q, CH = cv.H, zs = 2.4, wl = 10 + h * zs, z25 = 10 + 25 * zs, okP = P >= 2e6 && P <= 2.2e6, i;
         K.studio(ctx, 0, 0, 630, CH, { x: 330, y: CH - 26, rx: 240, ry: 20 });
-        var I = K.iso({ ox: 300, oy: 98, s: .72, L: 360, D: 150 });
-        I.box(ctx, 0, 0, 0, 360, 150, 10, "#9c8a72", "#7d6b55", "#5f513f");
-        I.box(ctx, 0, 0, 10, 360, 30, 100, "#a9d18e", "#8c7a62", "#6d5d48");
-        I.box(ctx, 0, 30, 10, 60, 62, z25, "#8ce99a", "#7d6b55", "#5f513f");
+        var I = K.iso({ ox: 300, oy: 70, s: .72, L: 360, D: 150 });
+        I.box(ctx, 0, 0, 0, 360, 150, 10, "#9c8a72", "#8a7860", "#73634d");   /* 얇은 단색 땅(물길 단면은 그대로) */
+        I.box(ctx, 0, 0, 10, 360, 30, z25, "#a9d18e", "#8a7860", "#73634d");   /* 골짜기 비탈 = 윗마을 높이 */
+        I.box(ctx, 0, 30, 10, 60, 62, z25, "#8ce99a", "#8a7860", "#73634d");
         for (i = 0; i < 4; i++) { var r1 = I.P(4, 36 + i * 7, z25 + .2), r2 = I.P(56, 36 + i * 7, z25 + .2); wireLine(ctx, [r1, r2], "rgba(47,158,68,.8)", 1.2); }
         I.box(ctx, 0, 30, 10, 140, 120, wl, "rgba(116,192,252,.72)", "rgba(28,126,214,.62)", "rgba(24,100,171,.62)");
         ctx.save(); ctx.setLineDash([6, 4]); I.quad(ctx, I.P(0, 30, z25), I.P(140, 30, z25), I.P(140, 120, z25), I.P(0, 120, z25), null, "#e03131"); ctx.restore();
@@ -223,9 +223,9 @@ window.sthLab({
         var fl = []; fl.push(I.P(120, 80, wl - 6), I.P(150, 80, 14), I.P(186, 80, 14), I.P(360, 80, 12));
         K.arrow(ctx, I.P(210, 80, 12), I.P(300, 80, 12), "rgba(28,126,214,.85)", 2 + Q / 2, 10);
         lead(ctx, I.P(147, 30, wl + 4).x, I.P(147, 30, wl + 4).y, 380, 40, "댐 높이 " + h + " m", "#e8ecff", [0, 630]);
-        lead(ctx, I.P(30, 46, z25).x, I.P(30, 46, z25).y, 150, 140, "윗마을 논 (25 m)", h > 25 ? "#ffc9c9" : "#b2f2bb", [0, 630]);
+        lead(ctx, I.P(30, 46, z25).x, I.P(30, 46, z25).y, 150, 116, "윗마을 논 (25 m)", h > 25 ? "#ffc9c9" : "#b2f2bb", [0, 630]);
         lead(ctx, I.P(186, 96, 34).x, I.P(186, 96, 34).y, 430, 150, "발전소 (효율 85%) · 물 " + Q.toFixed(1) + " m³/s", "#e8ecff", [0, 630]);
-        lead(ctx, I.P(300, 116, 11).x, I.P(300, 116, 11).y, 440, 300, "물고기 길 " + left.toFixed(1) + " m³/s", left >= 3 ? "#b2f2bb" : "#ffc9c9", [0, 630]);
+        lead(ctx, I.P(300, 116, 11).x, I.P(300, 116, 11).y, 440, 250, "물고기 길 " + left.toFixed(1) + " m³/s", left >= 3 ? "#b2f2bb" : "#ffc9c9", [0, 630]);
         K.bigText(ctx, (P / 1e6).toFixed(3) + " MW", 18, 44, 26, okP && h <= 25 && left >= 3 ? "#8ff5cf" : "#ffffff");
         K.bigText(ctx, h > 25 ? "윗마을 논이 잠긴다!" : (left < 3 ? "물고기 길이 마른다!" : (okP ? "마을에 딱 맞다" : "목표 2.0~2.2 MW")), 18, 70, 15, "#ffd35a");
         K.warn(ctx, 620, CH - 10, "⚠ 높이는 보기 쉽게 과장", "right");

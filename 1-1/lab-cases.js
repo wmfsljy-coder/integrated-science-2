@@ -258,20 +258,20 @@ window.sthLab({
     },
     task: "모양과 넓이를 정해 <b>800 km² 이하에서 50종 이상</b>이 살 수 있게 만드세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(290), ctx = cv.ctx, W = cv.W;
       var A = 300, shape = "one";
       function inner(a, sh) {
         if (sh === "one") { var s = Math.max(0, Math.sqrt(a) - 2); return s * s; }
         var q = Math.max(0, Math.sqrt(a / 4) - 2); return 4 * q * q;
       }
       function species(a, sh) { return 10 * Math.pow(inner(a, sh), 0.25); }
-      var RI = window.sthKit.iso({ ox: 180, oy: 74, s: 0.62, L: 240, D: 240 }), RZ = 18;
+      var RI = window.sthKit.iso({ ox: 186, oy: 66, s: 0.68, L: 240, D: 240 }), RZ = 6;
       function draw() {
         H.paper(ctx, W, cv.H);
         var K = window.sthKit, LTc = K.LT, I = RI, ia = inner(A, shape), S = species(A, shape);
-        /* 땅 블록(둘레는 농경지) */
-        ctx.fillStyle = "rgba(20,30,50,.18)"; ctx.beginPath(); ctx.ellipse(I.P(240, 240, 0).x, I.P(240, 240, 0).y - 30, 160, 26, 0, 0, 6.2832); ctx.fill();
-        I.box(ctx, 0, 0, 0, I.L, I.D, RZ, "#d8e3a6", "#8d6e4f", "#6f5640");
+        /* 땅 받침(둘레는 농경지) — 얇은 한 가지 색 옆면 */
+        ctx.fillStyle = "rgba(20,30,50,.18)"; ctx.beginPath(); ctx.ellipse(I.P(240, 240, 0).x, I.P(240, 240, 0).y - 30, 170, 26, 0, 0, 6.2832); ctx.fill();
+        I.box(ctx, 0, 0, 0, I.L, I.D, RZ, "#d8e3a6", "#a9b872", "#8d9c5a");
         var u = 240 / Math.sqrt(1500), side = Math.sqrt(A) * u, e = u, c0 = 120;
         function piece(x, y, s) {
           I.box(ctx, x, y, RZ, x + s, y + s, RZ + 4, "#8ce99a", "#2f9e44", "#2b8a3e");
@@ -291,9 +291,9 @@ window.sthLab({
         }
         I.edges(ctx, RZ, RZ);
         K.bigText(ctx, "숲 속 " + ia.toFixed(0) + " km² · " + S.toFixed(1) + "종", 18, 34, 21, S >= 50 ? "#8ff0c8" : "#ffffff");
-        K.t(ctx, "연한 초록 = 가장자리 1 km (소음·빛 때문에 숲 속 종이 못 삶)", 18, 318, { s: 10.5, w: "700", c: LTc.mute });
+        K.t(ctx, "연한 초록 = 가장자리 1 km (소음·빛 때문에 숲 속 종이 못 삶)", 18, cv.H - 12, { s: 10.5, w: "700", c: LTc.mute });
         /* 종-면적 곡선 */
-        var g = K.chart(ctx, { x: 380, y: 46, w: 270, h: 250, pl: 42, pb: 32, pt: 12, pr: 12, x0: 0, x1: 1500, y0: 0, y1: 70, xt: 3, yt: 2, light: true, xl: "숲 속 넓이 (km²)", yl: "종 수" });
+        var g = K.chart(ctx, { x: 380, y: 40, w: 270, h: 218, pl: 42, pb: 32, pt: 12, pr: 12, x0: 0, x1: 1500, y0: 0, y1: 70, xt: 3, yt: 2, light: true, xl: "숲 속 넓이 (km²)", yl: "종 수" });
         var pts = []; for (var a = 0; a <= 1500; a += 20) pts.push([a, 10 * Math.pow(a, 0.25)]);
         K.plot(ctx, g, pts, LTc.teal, { light: true, w: 2.6 });
         K.line(ctx, { x: g.L, y: g.Y(50) }, { x: g.R, y: g.Y(50) }, LTc.red, 1.4, [5, 4]);

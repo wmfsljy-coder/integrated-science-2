@@ -72,7 +72,7 @@ window.sthLab({
       /* 거리 블록 두 개: 해 질 녘(깜빡임·꺼짐을 본다) / 오후 2시 먹구름(대낮에 켜지는지 본다) */
       function street(ox, oy, sky0, sky1, state, flick, title, tc) {
         var I = K.iso({ ox: ox, oy: oy, s: 1, L: 170, D: 120 }), i;
-        I.box(ctx, 0, 0, -12, 170, 120, 0, "#c9cfd6", "#9aa3ae", "#7d8693");
+        I.box(ctx, 0, 0, -7, 170, 120, 0, "#c9cfd6", "#9aa3ae", "#7d8693");   /* 얇은 단색 받침 */
         I.box(ctx, 0, 0, 0, 170, 46, 3, "#e3e6ea", "#c3c9d0", "#a9b0ba");
         I.plane(ctx, .1, "#5c6370", null, 0, 170, 50, 120);
         for (i = 0; i < 5; i++) { var a = I.P(8 + i * 36, 85, .2), b = I.P(26 + i * 36, 85, .2); ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
@@ -304,7 +304,7 @@ window.sthLab({
         K.studio(ctx, 0, 0, LW, CH, { x: 306, y: CH - 40, rx: 290, ry: 24 });
         K.bigText(ctx, "사고 없이 달릴 확률 " + (p * 100).toFixed(1) + "%", 16, 36, 21, ok ? "#8ce99a" : "#ffffff");
         var I = IRD, xb = (H.log10(4e6) - 4) * 100, xc = (lg - 4) * 100;
-        I.box(ctx, 0, 0, -12, 420, 96, 0, "#a9d18e", "#8a6a48", "#6d523a");
+        I.box(ctx, 0, 0, -7, 420, 96, 0, "#a9d18e", "#8a6a48", "#73573b");   /* 얇은 단색 받침 */
         I.box(ctx, 0, 26, 0, 420, 74, 1.5, "#5c6370", "#4a5160", "#3d434f");
         I.plane(ctx, 1.6, ok ? "rgba(15,159,118,.55)" : "rgba(28,126,214,.5)", null, 0, Math.min(xc, 420), 28, 72);
         for (i = 0; i < 26; i++) { var a = I.P(6 + i * 16, 50, 1.7), b = I.P(14 + i * 16, 50, 1.7); ctx.strokeStyle = "rgba(255,255,255,.85)"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }

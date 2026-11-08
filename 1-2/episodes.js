@@ -867,8 +867,8 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
       ctx.fillStyle = "#0b1a2a"; ctx.beginPath(); ctx.arc(10, -2, 1.8, 0, 6.2832); ctx.fill();
       ctx.restore();
     }
-    /* ── 호수 블록 모형: 앞면은 호수 한가운데를 자른 단면(물·호수 바닥·흙), 윗면은 호숫가 숲과 물 ── */
-    var I = K.iso({ ox: 262, oy: 172, s: 0.8, L: 360, D: 250 }), LL = I.L, DD = I.D, ZG = 110, ZW = 100;
+    /* ── 호수 블록 모형: 앞면은 호수 한가운데를 자른 물 단면(그 아래 땅은 한 가지 색으로 얇게), 윗면은 호숫가 숲과 물 ── */
+    var I = K.iso({ ox: 262, oy: 132, s: 0.8, L: 360, D: 250 }), LL = I.L, DD = I.D, ZG = 60, ZW = 50;
     var LCX = LL * 0.5, LCY = DD * 0.76, LRX = LL * 0.36, LRY = DD * 0.42;
     var off = null, offKey = null, ph = 0;
     function sm(t) { t = clamp(t, 0, 1); return t * t * (3 - 2 * t); }
@@ -876,7 +876,7 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
     function zTop(x, y) {
       var r = rr(x, y), g = ZG + 3 * Math.sin(x / 23) * Math.cos(y / 17);
       if (r >= 1) return g;
-      return g - 20 * sm((1 - r) / 0.14) - 44 * sm((1 - r) / 0.7);
+      return g - 16 * sm((1 - r) / 0.14) - 34 * sm((1 - r) / 0.7);
     }
     function mixH(a, b, t, f) { var p = rgbOf(a), q = rgbOf(b), o = [], i; for (i = 0; i < 3; i++) o.push(clamp(Math.round((p[i] + (q[i] - p[i]) * clamp(t, 0, 1)) * (f || 1)), 0, 255)); return "rgb(" + o.join(",") + ")"; }
     /* 물 색: 산성 호수는 플랑크톤이 없어 유난히 맑은 청록, 중성은 생물이 사는 푸른 초록, 소석회가 넘치면 뿌연 하늘색 */
@@ -888,7 +888,7 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
     function colTop(x, y, z, lt, p) {
       var zt = zTop(x, y);
       if (zt < ZW - 0.2) {
-        var d = clamp((ZW - zt) / 60, 0, 1), w = waterHex(p);
+        var d = clamp((ZW - zt) / 40, 0, 1), w = waterHex(p);
         return p < 6.5 ? mixH("#d8cfae", w[0], 0.35 + 0.6 * d, 1.02) : mixH(w[0], w[1], d * 0.8, 1);
       }
       if (zt < ZW + 4) return K.tint("#cdbb98", lt);
@@ -905,14 +905,10 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
       var fc = I.P(LL / 2, DD / 2, 0);
       K.studio(ctx, 0, 0, 560, H, { x: fc.x + 10, y: fc.y + 56, rx: 250, ry: 70 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, 560, H, 14); ctx.clip();
-      /* 앞면: 흙·호수 바닥 단면 + 물 단면 */
+      /* 앞면: 한 가지 색 땅 + 물 단면 */
       I.face(ctx, "front", function (Lw) {
         ctx.save(); I.profile(ctx, "front", front, 0); ctx.clip();
-        var bands = [[0, 34, "#7d7f86"], [34, 72, "#a5865f"], [72, 96, "#8a6a45"], [96, 130, "#5a4330"]];
-        bands.forEach(function (b) { ctx.fillStyle = b[2]; ctx.fillRect(0, b[0], Lw, b[1] - b[0]); });
-        var R = K.rng(9); ctx.fillStyle = "rgba(255,240,220,.22)";
-        for (var i = 0; i < 220; i++) ctx.fillRect(R() * Lw, R() * 100, 1.6, 1.6);
-        ctx.fillStyle = "rgba(40,30,20,.25)"; for (i = 0; i < 40; i++) { ctx.beginPath(); ctx.arc(R() * Lw, R() * 30, 2 + R() * 3, 0, 6.283); ctx.fill(); }
+        ctx.fillStyle = "#9a7b55"; ctx.fillRect(0, 0, Lw, ZG + 10);
         ctx.restore();
         var u, w = waterHex(p);
         ctx.beginPath(); ctx.moveTo(0, ZW);
@@ -925,7 +921,7 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
       });
       I.face(ctx, "right", function (Lw) {
         ctx.save(); I.profile(ctx, "right", function (u) { return zTop(LL, u); }, 0); ctx.clip();
-        [[0, 34, "#6f7178"], [34, 72, "#957853"], [72, 96, "#7b5e3d"], [96, 130, "#4f3b2a"]].forEach(function (b) { ctx.fillStyle = b[2]; ctx.fillRect(0, b[0], Lw, b[1] - b[0]); });
+        ctx.fillStyle = "#9a7b55"; ctx.fillRect(0, 0, Lw, ZG + 10);
         ctx.restore();
       });
       I.shade(ctx, "right", function (u) { return zTop(LL, u); });
@@ -993,7 +989,7 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
       K.card(ctx, RX, 0, W - RX, H, "판정 — 호숫물 pH");
       cardBig(ctx, "pH " + pH.toFixed(2), x0, 68, ok ? LT.green : (pH < 6.5 ? LT.orange : LT.violet), 28);
       K.t(ctx, pH < 6.5 ? "산성" : (pH > 8.5 ? "염기성이 너무 강함" : (pH > 7.5 ? "약한 염기성" : "거의 중성")), x1, 66, { s: 13, w: "800", a: "right", c: LT.mute });
-      var g = K.chart(ctx, { x: RX + 6, y: 92, w: W - RX - 12, h: 270, pl: 40, pb: 40, pt: 12, pr: 14, x0: 0, x1: 8, y0: 0, y1: 14, xt: 4, yt: 7, xl: "넣은 소석회 (g)", yl: "pH", light: true });
+      var g = K.chart(ctx, { x: RX + 6, y: 88, w: W - RX - 12, h: 216, pl: 40, pb: 40, pt: 12, pr: 14, x0: 0, x1: 8, y0: 0, y1: 14, xt: 4, yt: 7, xl: "넣은 소석회 (g)", yl: "pH", light: true });
       ctx.fillStyle = "rgba(15,159,118,.14)"; ctx.fillRect(g.L, g.Y(8.5), g.R - g.L, g.Y(6.5) - g.Y(8.5));
       K.t(ctx, "물고기가 사는 pH 6.5~8.5", g.R - 4, g.Y(8.5) - 6, { s: 10.5, w: "800", a: "right", c: LT.green });
       var pts = [];
@@ -1001,8 +997,8 @@ function cardBig(ctx, s, x, y, c, size) { K.t(ctx, s, x, y, { s: size || 22, w: 
       pts.push([m, pH]);
       if (pts.length > 1) K.plot(ctx, g, pts, LT.teal, { w: 3, light: true });
       K.planet(ctx, g.X(m), g.Y(pH), 6, "#ff9a4d", "#a33c06");
-      K.t(ctx, "지나온 구간만 그려집니다", x0, 382, { s: 11, w: "700", c: LT.mute });
-      K.tip(ctx, ok ? "H⁺과 OH⁻의 수가 맞았다" : (pH < 6.5 ? "H⁺이 아직 많다 — 더 넣기" : "OH⁻이 남았다 — 너무 많음"), x0 - 4, 398, x1 - x0 + 8, ok);
+      K.t(ctx, "지나온 구간만 그려집니다", x0, 326, { s: 12, w: "700", c: LT.mute });
+      K.tip(ctx, ok ? "H⁺과 OH⁻의 수가 맞았다" : (pH < 6.5 ? "H⁺이 아직 많다 — 더 넣기" : "OH⁻이 남았다 — 너무 많음"), x0 - 4, 340, x1 - x0 + 8, ok);
     }
     function report() {
       var rows = tries.slice(-5).map(function (t) { return "소석회 " + t.m.toFixed(1) + " g → pH " + t.p.toFixed(2) + " " + (t.ok ? "✅ 물고기가 자리를 잡았습니다" : (t.p < 6.5 ? "❌ 아직 산성입니다" : "❌ 염기성이 너무 강합니다")); });

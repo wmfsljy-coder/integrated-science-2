@@ -805,7 +805,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
     var n = Math.min(200, window.sthState("varN") || 0), answered = !!window.sthState("varQ"), shownH = null;
     function binsOf(nn) { var b = [], i; for (i = 0; i < 10; i++) b.push(0); BIRDS.slice(0, nn).forEach(function (q) { b[clamp(Math.floor((q.p - 7) / 0.5), 0, 9)]++; }); return b; }
     /* ── 섬 블록: 왼쪽은 아직 안 잰 핀치 무리, 오른쪽은 부리 두께 측정판(0.5 mm 칸마다 잰 핀치를 쌓는다) ── */
-    var VI = K.iso({ ox: 120, oy: 130, s: 0.74, L: 600, D: 96 }), VZ = 26, VB0 = 190, VBW = 40;
+    var VI = K.iso({ ox: 140, oy: 104, s: 0.68, L: 600, D: 96 }), VZ = 12, VB0 = 190, VBW = 40;
     var VF = (function () { var r = rng(321), a = []; for (var i = 0; i < 40; i++) a.push([12 + r() * 140, 10 + r() * 78, BIRDS[i * 5].p]); return a; })();
     function draw() {
       ctx.clearRect(0, 0, W, H);
@@ -814,17 +814,9 @@ function shadowE(ctx, x, y, rx, ry, a) {
       var fl = I.P(L, D, 0);
       K.studio(ctx, 0, 0, LW, H, { x: fl.x - 150, y: fl.y - 40, rx: 280, ry: 34 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, LW, H, 14); ctx.clip();
-      /* 섬 블록: 응회암 층 + 아래 바닷물 */
+      /* 섬 받침: 모래땅 윗면 + 한 가지 색 얇은 옆면 */
       ["front", "right"].forEach(function (sd) {
-        I.face(ctx, sd, function (Lw) {
-          var g = ctx.createLinearGradient(0, 0, 0, VZ); g.addColorStop(0, "#6e4f36"); g.addColorStop(1, "#a7784f");
-          ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, VZ);
-          ctx.strokeStyle = "rgba(50,30,15,.35)"; ctx.lineWidth = 1; for (var k = 1; k < 4; k++) { ctx.beginPath(); ctx.moveTo(0, k * 6.5); ctx.bezierCurveTo(Lw * .3, k * 6.5 + 2, Lw * .7, k * 6.5 - 2, Lw, k * 6.5); ctx.stroke(); }
-          var R = K.rng(sd === "front" ? 31 : 32); for (k = 0; k < Lw * .5; k++) { ctx.fillStyle = "rgba(40,25,10,.35)"; ctx.beginPath(); ctx.arc(R() * Lw, R() * VZ, .8 + R(), 0, 6.2832); ctx.fill(); }
-          var wg = ctx.createLinearGradient(0, 0, 0, 10); wg.addColorStop(0, "rgba(20,90,170,.85)"); wg.addColorStop(1, "rgba(70,160,230,.7)");
-          ctx.fillStyle = wg; ctx.fillRect(0, 0, Lw, 10);
-          ctx.strokeStyle = "rgba(255,255,255,.8)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(0, 10); ctx.lineTo(Lw, 10); ctx.stroke();
-        });
+        I.face(ctx, sd, function (Lw) { ctx.fillStyle = "#a7784f"; ctx.fillRect(0, 0, Lw, VZ); });
         I.shade(ctx, sd, function () { return VZ; });
       });
       var a0 = I.P(0, 0, VZ), c0 = I.P(L, D, VZ), tg = ctx.createLinearGradient(a0.x, a0.y, c0.x, c0.y);
@@ -844,7 +836,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
       for (i = 0; i <= 10; i++) {
         var u0 = VB0 + i * VBW, s1 = I.P(u0, 8, VZ + .5), s2 = I.P(u0, 88, VZ + .5);
         ctx.strokeStyle = i % 2 ? "rgba(120,90,50,.25)" : "rgba(120,90,50,.6)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(s1.x, s1.y); ctx.lineTo(s2.x, s2.y); ctx.stroke();
-        if (i % 2 === 0) { var tq = I.P(u0, D, VZ); K.t(ctx, (7 + i * .5) + (i === 10 ? " mm" : ""), tq.x - 10, tq.y + 34, { s: 12, w: "800", a: "center", c: LTc.ink }); }
+        if (i % 2 === 0) { var tq = I.P(u0, D, VZ); K.t(ctx, (7 + i * .5) + (i === 10 ? " mm" : ""), tq.x - 10, tq.y + 24, { s: 12, w: "800", a: "center", c: LTc.ink }); }
       }
       var balls = [];
       for (var k = 0; k < 10; k++) {
@@ -864,7 +856,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
       var pa = I.P(150, 40, VZ + 34), pb = I.P(VB0 + 8, 40, VZ + 34);
       if (nF > 0) K.arrow(ctx, pa, pb, "rgba(20,40,90,.55)", 2.4, 10);
       ctx.restore();
-      var pf = I.P(60, 0, VZ + 50);
+      var pf = I.P(60, 0, VZ + 46);
       lp(ctx, nF > 0 ? "아직 안 잰 핀치 " + (200 - n) + "마리" : "섬의 핀치를 모두 쟀습니다", pf.x, pf.y, { s: 12, a: "center", c: LTc.ink, box: [0, LW] });
       K.bigText(ctx, n ? "잰 핀치 " + n + " / 200마리" : "가뭄 전 중간땅핀치", 18, 40, 22, "#ffffff");
       K.t(ctx, "다프네메이저섬 · 점 하나 = 핀치 1마리 · 무리 그림 하나 = 5마리", 18, 64, { s: 12, w: "700", c: LTc.mute });
@@ -873,13 +865,13 @@ function shadowE(ctx, x, y, rx, ry, a) {
       part.forEach(function (b) { lo = Math.min(lo, b.p); hi = Math.max(hi, b.p); });
       if (!n) { lo = 8.4; hi = 10.4; }
       K.card(ctx, RX, 0, W - RX, H, "같은 종, 다른 부리");
-      shadowE(ctx, RX + 110, 150, 50, 7, .22);
-      finch(ctx, RX + 110, 120, 1.25, lo, n ? 1 : .4);
-      K.t(ctx, (n ? "가장 얇은 부리 " + lo.toFixed(1) : "얇은 부리") + " mm", RX + 125, 178, { s: 12, w: "800", a: "center", c: LTc.blue });
-      shadowE(ctx, RX + 110, 272, 50, 7, .22);
-      finch(ctx, RX + 110, 242, 1.25, hi, n ? 1 : .4);
-      K.t(ctx, (n ? "가장 두꺼운 부리 " + hi.toFixed(1) : "두꺼운 부리") + " mm", RX + 125, 300, { s: 12, w: "800", a: "center", c: LTc.orange });
-      K.tip(ctx, n ? "차이 " + (hi - lo).toFixed(1) + " mm · 같은 섬, 같은 종" : "잡아서 재면 실제 값이 나옵니다", RX + 14, 318, W - RX - 28, null);
+      shadowE(ctx, RX + 110, 136, 50, 7, .22);
+      finch(ctx, RX + 110, 106, 1.25, lo, n ? 1 : .4);
+      K.t(ctx, (n ? "가장 얇은 부리 " + lo.toFixed(1) : "얇은 부리") + " mm", RX + 125, 162, { s: 12, w: "800", a: "center", c: LTc.blue });
+      shadowE(ctx, RX + 110, 240, 50, 7, .22);
+      finch(ctx, RX + 110, 210, 1.25, hi, n ? 1 : .4);
+      K.t(ctx, (n ? "가장 두꺼운 부리 " + hi.toFixed(1) : "두꺼운 부리") + " mm", RX + 125, 266, { s: 12, w: "800", a: "center", c: LTc.orange });
+      K.tip(ctx, n ? "차이 " + (hi - lo).toFixed(1) + " mm · 같은 섬, 같은 종" : "잡아서 재면 실제 값이 나옵니다", RX + 14, 280, W - RX - 28, null);
       K.t(ctx, "부리 두께는 조금 과장", W - 16, H - 14, { s: 11, a: "right", c: LTc.dim });
     }
     K.animate(canvas, function () {
@@ -923,7 +915,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
     var slots = {}, POS = BIRDS.map(function (b) { var k = Math.round(b.p * 10); slots[k] = (slots[k] || 0) + 1; return { k: k, n: slots[k] }; });
     var ORDER = (function () { var r = rng(7), a = BIRDS.map(function (b, i) { return i; }); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; } return a; })();
     /* ── 다프네메이저섬 블록: 윗면 가로축 = 부리 두께. 같은 두께의 핀치는 탑처럼 쌓는다 ── */
-    var SI = K.iso({ ox: 92, oy: 186, s: 0.7, L: 500, D: 90 }), SZ = 30;
+    var SI = K.iso({ ox: 92, oy: 138, s: 0.7, L: 500, D: 90 }), SZ = 14;
     var SEEDS = (function () { var r = rng(55), a = []; for (var i = 0; i < 90; i++) a.push([r() * 500, r() * 90]); return a; })();
     function draw() {
       ctx.clearRect(0, 0, W, H);
@@ -932,17 +924,9 @@ function shadowE(ctx, x, y, rx, ry, a) {
       var fl = I.P(L, D, 0);
       K.studio(ctx, 0, 0, LW, H, { x: fl.x - 140, y: fl.y - 30, rx: 260, ry: 34 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, LW, H, 14); ctx.clip();
-      /* 섬 블록: 앞·오른쪽 면은 응회암 층, 아래쪽은 바닷물 */
+      /* 섬 받침: 메마른 땅 윗면 + 한 가지 색 얇은 옆면 */
       ["front", "right"].forEach(function (sd) {
-        I.face(ctx, sd, function (Lw) {
-          var g = ctx.createLinearGradient(0, 0, 0, SZ); g.addColorStop(0, "#6e4f36"); g.addColorStop(1, "#a7784f");
-          ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, SZ);
-          ctx.strokeStyle = "rgba(50,30,15,.35)"; ctx.lineWidth = 1; for (var k = 1; k < 4; k++) { ctx.beginPath(); ctx.moveTo(0, k * 7.5); ctx.bezierCurveTo(Lw * .3, k * 7.5 + 2, Lw * .7, k * 7.5 - 2, Lw, k * 7.5); ctx.stroke(); }
-          var R = K.rng(sd === "front" ? 3 : 4); for (k = 0; k < Lw * .5; k++) { ctx.fillStyle = "rgba(40,25,10,.35)"; ctx.beginPath(); ctx.arc(R() * Lw, R() * SZ, .8 + R(), 0, 6.2832); ctx.fill(); }
-          var wg = ctx.createLinearGradient(0, 0, 0, 12); wg.addColorStop(0, "rgba(20,90,170,.85)"); wg.addColorStop(1, "rgba(70,160,230,.7)");
-          ctx.fillStyle = wg; ctx.fillRect(0, 0, Lw, 12);
-          ctx.strokeStyle = "rgba(255,255,255,.8)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(0, 12); ctx.lineTo(Lw, 12); ctx.stroke();
-        });
+        I.face(ctx, sd, function (Lw) { ctx.fillStyle = "#a7784f"; ctx.fillRect(0, 0, Lw, SZ); });
         I.shade(ctx, sd, function () { return SZ; });
       });
       /* 윗면: 메마른 땅 + 가시 열매 */
@@ -980,17 +964,17 @@ function shadowE(ctx, x, y, rx, ry, a) {
       /* 판정 카드 */
       var RX = LW + 10, p0 = RX + 18, p1 = W - 18, sr = alive.length / 2, ms = alive.length ? mean(alive) : 0, okR = sr >= 12 && sr <= 18;
       K.card(ctx, RX, 0, W - RX, H, "가뭄 실험");
-      K.t(ctx, !shown ? "가뭄 전" : (okR ? "1977년과 비슷" : (sr > 18 ? "가뭄이 약함" : "개체군 위기")), p0, 62, { s: 20, w: "900", c: !shown ? LTc.ink : (okR ? LTc.green : LTc.red) });
-      K.row(ctx, "가뭄 세기", String(x), p0, p1, 98);
-      K.row(ctx, "살아남은 핀치", alive.length + " / 200", p0, p1, 124);
-      K.row(ctx, "생존율", sr.toFixed(1) + " %", p0, p1, 150, okR ? LTc.green : LTc.ink);
-      K.bar(ctx, p0, 160, p1 - p0, sr / 100, okR ? LTc.green : LTc.orange);
-      K.row(ctx, "생존자 평균 부리", shown && alive.length ? ms.toFixed(2) + " mm" : "—", p0, p1, 198);
-      K.row(ctx, "평균의 변화", shown && alive.length ? (ms - MEAN0 >= 0 ? "+" : "") + (ms - MEAN0).toFixed(2) + " mm" : "—", p0, p1, 224, LTc.orange);
-      K.tip(ctx, "목표: 생존율 12~18 % (1977년 약 15 %)", p0 - 4, 240, p1 - p0 + 8, okR && !!shown);
-      K.t(ctx, "점은 옆으로 움직이지 않습니다.", p0, 304, { s: 11, c: LTc.mute });
-      K.t(ctx, "개체가 변한 것이 아니라", p0, 322, { s: 11, c: LTc.mute });
-      K.t(ctx, "집단의 구성이 변합니다.", p0, 340, { s: 11, c: LTc.mute });
+      K.t(ctx, !shown ? "가뭄 전" : (okR ? "1977년과 비슷" : (sr > 18 ? "가뭄이 약함" : "개체군 위기")), p0, 60, { s: 20, w: "900", c: !shown ? LTc.ink : (okR ? LTc.green : LTc.red) });
+      K.row(ctx, "가뭄 세기", String(x), p0, p1, 92);
+      K.row(ctx, "살아남은 핀치", alive.length + " / 200", p0, p1, 116);
+      K.row(ctx, "생존율", sr.toFixed(1) + " %", p0, p1, 140, okR ? LTc.green : LTc.ink);
+      K.bar(ctx, p0, 150, p1 - p0, sr / 100, okR ? LTc.green : LTc.orange);
+      K.row(ctx, "생존자 평균 부리", shown && alive.length ? ms.toFixed(2) + " mm" : "—", p0, p1, 184);
+      K.row(ctx, "평균의 변화", shown && alive.length ? (ms - MEAN0 >= 0 ? "+" : "") + (ms - MEAN0).toFixed(2) + " mm" : "—", p0, p1, 208, LTc.orange);
+      K.tip(ctx, "목표: 생존율 12~18 % (1977년 약 15 %)", p0 - 4, 222, p1 - p0 + 8, okR && !!shown);
+      K.t(ctx, "점은 옆으로 움직이지 않습니다.", p0, 280, { s: 12, c: LTc.mute });
+      K.t(ctx, "개체가 변한 것이 아니라", p0, 299, { s: 12, c: LTc.mute });
+      K.t(ctx, "집단의 구성이 변합니다.", p0, 318, { s: 12, c: LTc.mute });
     }
     function report() {
       var rows = tries.slice(-5).map(function (t) { return "가뭄 세기 " + t.x + " → 생존 <b>" + t.s + "%</b>, 생존자 평균 " + (t.s ? t.m + " mm (" + (t.d >= 0 ? "+" : "") + t.d + ")" : "-") + " " + (t.ok ? "✅ 1977년과 비슷!" : (t.s > 18 ? "❌ 가뭄이 약해 대부분 살아남음" : "❌ 개체군이 사라질 위기")); });
@@ -1499,7 +1483,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
       N.forEach(function (c) { if (c > 0) { rich++; s += (c / tot) * (c / tot); } });
       return { tot: tot, rich: rich, D: tot ? 1 - s : 0 };
     }
-    var DI = K.iso({ ox: 134, oy: 100, s: 0.78, L: 380, D: 160 }), DZ = 22;
+    var DI = K.iso({ ox: 200, oy: 80, s: 0.74, L: 380, D: 160 }), DZ = 8;
     var SPC = ["#2f9e44", "#0c8599", "#e8590c", "#f783ac"];
     function tree(x, y, sp) {                                   /* x, y = 월드 좌표(숲 바닥) */
       var I = DI, p = I.P(x, y, DZ);
@@ -1518,13 +1502,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
       K.studio(ctx, 0, 0, LW, H, { x: fl.x - 120, y: fl.y - 40, rx: 220, ry: 34 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, LW, H, 14); ctx.clip();
       ["front", "right"].forEach(function (sd) {
-        Q.face(ctx, sd, function (Lw) {
-          var g = ctx.createLinearGradient(0, 0, 0, DZ); g.addColorStop(0, "#4a3424"); g.addColorStop(1, "#7a573c");
-          ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, DZ);
-          ctx.fillStyle = "#3f7d3a"; ctx.fillRect(0, DZ - 4, Lw, 4);
-          var R = K.rng(sd === "front" ? 21 : 22); ctx.strokeStyle = "rgba(230,210,170,.35)"; ctx.lineWidth = 1;
-          for (var k = 0; k < Lw / 12; k++) { var u = R() * Lw; ctx.beginPath(); ctx.moveTo(u, DZ - 4); ctx.lineTo(u + (R() - .5) * 8, 4 + R() * 8); ctx.stroke(); }
-        });
+        Q.face(ctx, sd, function (Lw) { ctx.fillStyle = "#5f8f3e"; ctx.fillRect(0, 0, Lw, DZ); });   /* 얇은 한 가지 색 받침 */
         Q.shade(ctx, sd, function () { return DZ; });
       });
       var a0 = Q.P(0, 0, DZ), c0 = Q.P(Q.L, Q.D, DZ), tg = ctx.createLinearGradient(a0.x, a0.y, c0.x, c0.y);
@@ -1540,22 +1518,22 @@ function shadowE(ctx, x, y, rx, ry, a) {
       ctx.restore();
       if (!I.tot) lp(ctx, "나무가 한 그루도 없습니다", 270, 190, { s: 12, a: "center", c: LTc.mute, box: [0, LW] });
       K.bigText(ctx, "다양성 지수 D = " + I.D.toFixed(3), 18, 38, 22, I.D >= .6 ? "#8ff0c8" : (I.D <= .3 ? "#ffb0b0" : "#ffffff"));
-      K.t(ctx, "숲 조사 구역 · 나무 한 그루 = 한 그루", 18, H - 12, { s: 10.5, w: "700", c: LTc.mute });
+      K.t(ctx, "숲 조사 구역 · 나무 한 그루 = 한 그루", 18, H - 10, { s: 10.5, w: "700", c: LTc.mute });
       /* 오른쪽 카드: 비율과 지수 */
       var RX = LW + 10, p0 = RX + 18, p1 = W - 18;
       K.card(ctx, RX, 0, W - RX, H, "종별 비율");
       N.forEach(function (c, sp) {
-        var y = 56 + sp * 40, pp = I.tot ? c / I.tot : 0;
+        var y = 52 + sp * 34, pp = I.tot ? c / I.tot : 0;
         K.t(ctx, NAME[sp], p0, y, { s: 11.5, w: "800", c: c ? LTc.ink : LTc.dim });
         K.t(ctx, c ? Math.round(pp * 100) + "%" : "없음", p1, y, { s: 11.5, w: "900", a: "right", c: LTc.mute });
         K.bar(ctx, p0, y + 8, p1 - p0, pp, SPC[sp]);
       });
-      K.row(ctx, "종 풍부도 · 전체", I.rich + "종 · " + I.tot + "그루", p0, p1, 228);
+      K.row(ctx, "종 풍부도 · 전체", I.rich + "종 · " + I.tot + "그루", p0, p1, 196);
       var dc = I.D >= .6 ? LTc.green : (I.D <= .3 ? LTc.red : LTc.ink);
-      K.t(ctx, "D", p0, 268, { s: 12, w: "800", c: LTc.mute });
-      K.t(ctx, I.D.toFixed(3), p0 + 24, 270, { s: 24, w: "900", c: dc });
-      K.bar(ctx, p0, 282, p1 - p0, clamp(I.D, 0, 1), dc);
-      K.t(ctx, "0", p0, 308, { s: 10, c: LTc.dim }); K.t(ctx, "1", p1, 308, { s: 10, a: "right", c: LTc.dim });
+      K.t(ctx, "D", p0, 232, { s: 12, w: "800", c: LTc.mute });
+      K.t(ctx, I.D.toFixed(3), p0 + 24, 234, { s: 24, w: "900", c: dc });
+      K.bar(ctx, p0, 246, p1 - p0, clamp(I.D, 0, 1), dc);
+      K.t(ctx, "0", p0, 272, { s: 10, c: LTc.dim }); K.t(ctx, "1", p1, 272, { s: 10, a: "right", c: LTc.dim });
 
       $("c-div-index").innerHTML = "다양성 지수 D = 1 − Σp<sub>i</sub>² = <b>" + I.D.toFixed(3) + "</b> (p는 각 종의 비율. 0에 가까울수록 한 종이 우세, 클수록 여러 종이 고르게 있음)";
       $("c-div-info").innerHTML = I.tot === 0 ? "나무가 한 그루도 없습니다." :
@@ -1630,7 +1608,7 @@ function shadowE(ctx, x, y, rx, ry, a) {
     var kind = "simple", removed = { simple: {}, complex: {} }, ok = window.sthState("webOK") || { a: false, b: false };
     function byId(web, id) { for (var i = 0; i < web.length; i++) if (web[i].id === id) return web[i]; return null; }
     /* 들판 블록과 종이 사는 자리 [x, y, 높이] */
-    var WI = K.iso({ ox: 290, oy: 124, s: 0.8, L: 440, D: 300 }), WZ = 30;
+    var WI = K.iso({ ox: 290, oy: 98, s: 0.74, L: 440, D: 300 }), WZ = 10;
     var WPOS = { grass: [100, 210], hopper: [190, 270], rabbit: [80, 100], mouse: [230, 150], frog: [300, 200], oak: [340, 50], bird: [340, 50, 75], snake: [200, 40, 16], hawk: [150, 120, 190] };
     var phase = 0, flowing = !REDUCE, painting = false;
     function draw() {
@@ -1638,16 +1616,9 @@ function shadowE(ctx, x, y, rx, ry, a) {
       var web = WEBS[kind], dead = cascade(web, removed[kind]), LTc = K.LT, I = WI, LW = 640, i;
       var fl = I.P(I.L, I.D, 0);
       K.studio(ctx, 0, 0, LW, H, { x: fl.x - 120, y: fl.y - 40, rx: 300, ry: 34 });
-      /* ── 들판 블록: 앞·오른쪽 면은 흙 단면, 윗면은 풀밭 + 연못 + 바위 ── */
+      /* ── 들판 블록: 얇은 한 가지 색 받침, 윗면은 풀밭 + 연못 + 바위 ── */
       ["front", "right"].forEach(function (sd) {
-        I.face(ctx, sd, function (Lw) {
-          var g = ctx.createLinearGradient(0, 0, 0, WZ); g.addColorStop(0, "#5a3d28"); g.addColorStop(.75, "#7a5236"); g.addColorStop(1, "#4f7a26");
-          ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, WZ);
-          ctx.fillStyle = "#5f9e2f"; ctx.fillRect(0, WZ - 4, Lw, 4);
-          var R = K.rng(sd === "front" ? 61 : 62), k;
-          for (k = 0; k < Lw * .4; k++) { ctx.fillStyle = R() > .5 ? "rgba(255,230,190,.25)" : "rgba(30,15,5,.3)"; ctx.fillRect(R() * Lw, R() * (WZ - 6), 1.6, 1.6); }
-          ctx.strokeStyle = "rgba(240,220,190,.35)"; ctx.lineWidth = 1; for (k = 0; k < Lw / 14; k++) { var rx0 = R() * Lw; ctx.beginPath(); ctx.moveTo(rx0, WZ - 4); ctx.quadraticCurveTo(rx0 + 3, WZ - 10, rx0 - 2, WZ - 16 - R() * 6); ctx.stroke(); }
-        });
+        I.face(ctx, sd, function (Lw) { ctx.fillStyle = "#6aa33a"; ctx.fillRect(0, 0, Lw, WZ); });
         I.shade(ctx, sd, function () { return WZ; });
       });
       var a0 = I.P(0, 0, WZ), c0 = I.P(I.L, I.D, WZ), tg = ctx.createLinearGradient(a0.x, a0.y, c0.x, c0.y);

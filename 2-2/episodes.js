@@ -964,7 +964,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       if (s.indexOf("빛") >= 0) return [KC.yellow, "#6b5210"];
       return [KC.red, "#6e1a2c"];
     }
-    var IB = K.iso({ ox: 250, oy: 164, s: .7, L: 380, D: 210 }), GZ = 14, PSW = 560;
+    var IB = K.iso({ ox: 250, oy: 134, s: .7, L: 380, D: 210 }), GZ = 14, PSW = 560;
     function ecolL(s) {
       if (s.indexOf("전기") >= 0) return LT.violet; if (s.indexOf("핵") >= 0) return "#5c940d"; if (s.indexOf("화학") >= 0) return LT.orange;
       if (s.indexOf("위치") >= 0) return LT.teal; if (s.indexOf("운동") >= 0) return LT.blue; if (s.indexOf("빛") >= 0) return "#e8a400"; return LT.red;
@@ -1022,7 +1022,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
         IB.box(ctx, 174, 80, GZ, 228, 140, GZ + 26, "#e9ecef", "#d5d9df", "#b0b7c1");
         IB.box(ctx, 168, 90, GZ - 1, 380, 130, GZ + 1, "#4dabf7", "#1c7ed6", "#1864ab");
         flowDots(ctx, [IB.P(150, 110, GZ + 50), IB.P(176, 110, GZ + 12), IB.P(380, 110, GZ + 2)], ph, 8, "rgba(28,126,214,.95)", 2.2);
-        p = IB.P(80, 100, GZ + 70); lead(ctx, p.x, p.y, p.x - 40, p.y - 50, "높은 곳의 물 · 위치 에너지", "#bfe6ff", BX);
+        p = IB.P(80, 100, GZ + 70); lead(ctx, p.x, p.y, p.x - 34, p.y - 38, "높은 곳의 물 · 위치 에너지", "#bfe6ff", BX);
         p = IB.P(159, 105, GZ + 84); lead(ctx, p.x, p.y, p.x + 60, p.y - 40, "댐", "#e8ecff", BX);
         p = IB.P(200, 110, GZ + 26); lead(ctx, p.x, p.y, p.x + 60, p.y + 50, "수차(터빈) · 발전기", "#e8ecff", BX);
       } else if (sel === 3) {
@@ -1052,17 +1052,16 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     function draw() {
       ctx.clearRect(0, 0, W, H);
       var p = PLANTS[sel], n = p.chain.length, k;
-      K.studio(ctx, 0, 0, PSW, H, { x: 280, y: 360, rx: 230, ry: 28 });
+      K.studio(ctx, 0, 0, PSW, H, { x: 280, y: 326, rx: 230, ry: 26 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, PSW, H, 14); ctx.clip();
-      IB.box(ctx, 0, 0, 0, 380, 210, GZ, sel === 4 ? "#b9c98e" : "#86b562", "#8a6a48", "#6d523a");
-      IB.face(ctx, "front", function (Lw) { ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; for (var z = 4; z < GZ; z += 4) { ctx.beginPath(); ctx.moveTo(0, z); ctx.lineTo(Lw, z); ctx.stroke(); } });
+      IB.box(ctx, 0, 0, 0, 380, 210, GZ, sel === 4 ? "#b9c98e" : "#86b562", "#8a6a48", "#73573b");   /* 얇은 단색 받침(땅속은 지열 발전만 따로 그림) */
       IB.edges(ctx, GZ, GZ);
       plant(sel);
       ctx.restore();
       K.bigText(ctx, p.name + " · 효율 " + p.eff + "%", 18, 44, 25, "#ffffff");
       K.bigText(ctx, sel === 4 ? "빛을 곧바로 전기로" : "무엇으로 터빈을 돌리나", 18, 72, 16, "#ffd35a");
       /* 에너지 전환 띠 */
-      var bw = n === 2 ? 200 : (n === 3 ? 158 : 122), gap = (532 - n * bw) / Math.max(1, n - 1), y0 = 392;
+      var bw = n === 2 ? 200 : (n === 3 ? 158 : 122), gap = (532 - n * bw) / Math.max(1, n - 1), y0 = 346;
       p.chain.forEach(function (c, i) {
         var bx = 14 + i * (bw + gap), col = ecolL(c), ln = c.split("\n");
         ctx.save(); ctx.shadowColor = "rgba(20,30,60,.18)"; ctx.shadowBlur = 6; ctx.fillStyle = "#ffffff"; ctx.beginPath(); ctx.roundRect(bx, y0, bw, 52, 10); ctx.fill(); ctx.restore();
@@ -1081,12 +1080,12 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
         lbar(ctx, bx0, y, Math.max(4, bwid), 18, on ? "#d9480f" : (mode === "eff" ? "#0c8599" : "#c92a2a"), on ? "#ffa94d" : (mode === "eff" ? "#66d9e8" : "#ff8787"), 6);
         lt(ctx, val + (mode === "eff" ? "%" : "g"), x1, y + 13, { s: 12, w: "900", a: "right", c: on ? LT.orange : LT.ink });
       });
-      K.row(ctx, "섬의 1년 (1,000만 kWh) CO₂", "약 " + (p.co2 * 10).toLocaleString() + "톤", x0, x1, 270, LT.red);
-      K.row(ctx, "넣은 에너지 100 중 전기", String(p.eff), x0, x1, 296, LT.green);
-      K.tip(ctx, sel === 4 ? "터빈·발전기 없이 전기를 만든다" : "결국 터빈이 발전기를 돌린다", x0 - 4, 312, x1 - x0 + 4, true);
+      K.row(ctx, "섬의 1년 (1,000만 kWh) CO₂", "약 " + (p.co2 * 10).toLocaleString() + "톤", x0, x1, 256, LT.red);
+      K.row(ctx, "넣은 에너지 100 중 전기", String(p.eff), x0, x1, 282, LT.green);
+      K.tip(ctx, sel === 4 ? "터빈·발전기 없이 전기를 만든다" : "결국 터빈이 발전기를 돌린다", x0 - 4, 296, x1 - x0 + 4, true);
       var ns = 0; seen.forEach(function (s) { if (s) ns++; });
-      lt(ctx, "살펴본 발전소 " + ns + " / 6", x0, 374, { s: 12, w: "800", c: ns === 6 ? LT.green : LT.mute });
-      lt(ctx, "CO₂는 건설·연료 채굴까지 포함한 값", x0, 398, { s: 10.5, c: LT.mute });
+      lt(ctx, "살펴본 발전소 " + ns + " / 6", x0, 352, { s: 12, w: "800", c: ns === 6 ? LT.green : LT.mute });
+      lt(ctx, "CO₂는 건설·연료 채굴까지 포함한 값", x0, 376, { s: 10.5, c: LT.mute });
       $("b-src-info").innerHTML = "<b>" + p.icon + " " + p.name + "</b> — " + p.note;
     }
     function check() {
@@ -1209,8 +1208,8 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     var e1 = 50, e2 = 90, e3 = 50, okA = !!window.sthState("lossA"), okB = !!window.sthState("lossB");
     var ph = 0, playing = !REDUCE;
     /* ── 위: 석탄 화력 발전소 → 송전선 → 우리 집을 잘라 본 블록 모형 / 아래: 에너지 100의 길(띠그림) ── */
-    var DH = 420, Y0 = DH + 8, GZ = 16;
-    var I = K.iso({ ox: 190, oy: 95, s: 0.7, L: 700, D: 170 }), LL = I.L, DD = I.D;
+    var DH = 386, Y0 = DH + 8, GZ = 10;
+    var I = K.iso({ ox: 190, oy: 88, s: 0.65, L: 700, D: 170 }), LL = I.L, DD = I.D;
     function P(x, y, z) { return I.P(x, y, z); }
     function poly(pts, fill, stroke, lw) {
       ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
@@ -1268,13 +1267,11 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     function diorama(val) {
       var loss1 = val[0] - val[1], loss2 = val[1] - val[2], loss3 = val[2] - val[3], light = val[3];
       var mis = e1 === 40 && e2 === 96 && e3 === 5;
-      K.studio(ctx, 0, 0, W, DH, { x: 360, y: 300, rx: 400, ry: 92 });
+      K.studio(ctx, 0, 0, W, DH, { x: 350, y: 278, rx: 380, ry: 84 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
       /* 땅 블록 */
-      I.box(ctx, 0, 0, 0, LL, DD, GZ, "#86b562", "#8a6a48", "#6d523a");
+      I.box(ctx, 0, 0, 0, LL, DD, GZ, "#86b562", "#8a6a48", "#73573b");   /* 얇은 단색 받침 */
       I.face(ctx, "front", function (Lw) {
-        ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1;
-        for (var z = 5; z < GZ; z += 5) { ctx.beginPath(); ctx.moveTo(0, z); ctx.lineTo(Lw, z); ctx.stroke(); }
         ctx.fillStyle = "#6f9a4c"; ctx.fillRect(0, GZ - 3, Lw, 3);
       });
       I.plane(ctx, GZ + 0.2, "#c3c6c9", "rgba(255,255,255,.5)", 12, 285, 12, 160);          /* 발전소 마당 */
@@ -1382,7 +1379,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       I.label(ctx, 440, 100, GZ + 105, "송전선 · 저항에서 열이 남", 44, -50, "#bfe6ff", bx);
       I.label(ctx, 680, 76, GZ + 62, "우리 집 · 백열전구", 44, -52, "#fff1cf", bx);
       /* 왼쪽 아래 장부 */
-      var ly = 298;
+      var ly = 270;
       K.pill(ctx, "🪨 석탄의 화학 에너지 100", 14, ly, { s: 12, c: KC.orange, box: bx });
       K.pill(ctx, "① 발전소 폐열 " + neg(loss1), 14, ly + 25, { s: 12, c: KC.red, box: bx });
       K.pill(ctx, "② 전선의 열 " + neg(loss2), 14, ly + 50, { s: 12, c: KC.red, box: bx });
@@ -1611,7 +1608,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     var canvas = $("c-c-vill"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var S = 500, Wd = 0, Bt = 0, Dg = 0, tries = window.sthState("villTries") || [];
     function verdict(r) { return { a: r.black === 0, b: r.cost <= 55 + 1e-9, c: r.ratio <= 0.4 + 1e-9 }; }
-    var IV = K.iso({ ox: 196, oy: 84, s: .8, L: 560, D: 200 }), GZ = 12, hr = 11, playing = !REDUCE, off = null, offKey = "", last = null;
+    var IV = K.iso({ ox: 208, oy: 78, s: .72, L: 560, D: 200 }), GZ = 12, VH = 360, hr = 11, playing = !REDUCE, off = null, offKey = "", last = null;
     var HOUSES = []; (function () { for (var r = 0; r < 3; r++) for (var c = 0; c < 4; c++) HOUSES.push([28 + c * 55, 22 + r * 60]); })();
     function mix(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
     function config() {
@@ -1623,9 +1620,8 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     function dieselAt(i) { return [408 + i * 36, 158]; }
     function paintStatic(c) {
       var octx = ctx; ctx = c;
-      K.studio(ctx, 0, 0, 640, 400, { x: 340, y: 372, rx: 300, ry: 30 });
-      IV.box(ctx, 0, 0, 0, 560, 200, GZ, "#8fbf6a", "#8a6a48", "#6d523a");
-      IV.face(ctx, "front", function (Lw) { ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; for (var z = 4; z < GZ; z += 4) { ctx.beginPath(); ctx.moveTo(0, z); ctx.lineTo(Lw, z); ctx.stroke(); } });
+      K.studio(ctx, 0, 0, 640, VH, { x: 330, y: 338, rx: 280, ry: 28 });
+      IV.box(ctx, 0, 0, 0, 560, 200, GZ, "#8fbf6a", "#8a6a48", "#73573b");   /* 얇은 단색 받침 */
       IV.plane(ctx, GZ + .2, "#b8b2a4", null, 0, 250, 92, 100);
       IV.edges(ctx, GZ, GZ);
       var cf = config(), i;
@@ -1646,10 +1642,10 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       var h = Math.floor(hr) % 48, o = r.rows[h], hh = h % 24, d2 = h >= 24, day = hh >= 6 && hh < 18;
       var sunUp = Math.max(0, Math.sin(Math.PI * (hr % 24 - 6) / 12)), wind = d2 ? 0.06 : (0.35 + 0.15 * Math.sin(hh / 24 * 2 * Math.PI + 1));
       ctx.drawImage(off, 0, 0, W, H);
-      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, 640, 400, 14); ctx.clip();
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, 640, VH, 14); ctx.clip();
       /* 하늘: 해·구름·밤 */
       var night = clamp(1 - sunUp * 3, 0, 1);
-      if (night > 0) { ctx.fillStyle = "rgba(12,22,58," + (0.42 * night).toFixed(2) + ")"; ctx.fillRect(0, 0, 640, 400); }
+      if (night > 0) { ctx.fillStyle = "rgba(12,22,58," + (0.42 * night).toFixed(2) + ")"; ctx.fillRect(0, 0, 640, VH); }
       if (sunUp > 0) { var sx = lerp(230, 610, (hr % 24 - 6) / 12), sy = 120 - 92 * sunUp; K.sun(ctx, sx, sy, 12); K.planet(ctx, sx, sy, 12, "#fff3bf", "#f59f00"); if (d2) puffCloud(ctx, sx - 6, sy + 6, .9, true); }
       else { K.planet(ctx, 600, 40, 9, "#f8f9fa", "#adb5bd"); }
       if (d2) { puffCloud(ctx, 330, 50, .8, true); puffCloud(ctx, 470, 36, .7, true); }
@@ -1673,15 +1669,15 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       if (o.un > 1) K.pill(ctx, "⚡ 정전!", IV.P(140, 60, GZ + 40).x, IV.P(140, 60, GZ + 40).y, { s: 14, a: "center", c: "#ff8787" });
       K.bigText(ctx, (d2 ? "2일째 " : "1일째 ") + hh + "시", 18, 44, 26, "#ffffff");
       K.bigText(ctx, d2 ? "흐리고 바람 없음" : "맑고 바람 부는 날", 18, 72, 16, "#ffd35a");
-      lt(ctx, "태양광 " + S + " kW", 18, 304, { s: 12, w: "800", c: LT.blue }); lt(ctx, "풍력 " + Wd + " kW", 18, 326, { s: 12, w: "800", c: LT.teal });
-      lt(ctx, "배터리 " + Bt.toLocaleString() + " kWh", 18, 348, { s: 12, w: "800", c: LT.green }); lt(ctx, "경유 발전기 " + Dg + " kW", 18, 370, { s: 12, w: "800", c: LT.orange });
+      lt(ctx, "태양광 " + S + " kW", 18, 268, { s: 12, w: "800", c: LT.blue }); lt(ctx, "풍력 " + Wd + " kW", 18, 290, { s: 12, w: "800", c: LT.teal });
+      lt(ctx, "배터리 " + Bt.toLocaleString() + " kWh", 18, 312, { s: 12, w: "800", c: LT.green }); lt(ctx, "경유 발전기 " + Dg + " kW", 18, 334, { s: 12, w: "800", c: LT.orange });
       if (cf.nP) { var lp = panelAt(Math.min(cf.nP - 1, 2)); IV.label(ctx, lp[0] + 17, lp[1] + 6, GZ + 8, "태양광 판 " + cf.nP + "장", 30, -50, "#a5d8ff", [0, 640]); }
-      if (cf.nB) { var lb = battAt(Math.min(cf.nB - 1, 3)); IV.label(ctx, lb[0] + 30, lb[1] + 11, GZ + 10, "배터리 컨테이너 " + cf.nB + "개", 40, 26, "#b2f2bb", [0, 640]); }
-      if (cf.nD) { var ld = dieselAt(cf.nD - 1); IV.label(ctx, ld[0] + 28, ld[1] + 10, GZ + 10, "경유 발전기 " + cf.nD + "대", 30, 40, "#ffd8a8", [0, 640]); }
+      if (cf.nB) { var lb = battAt(Math.min(cf.nB - 1, 3)); IV.label(ctx, lb[0] + 30, lb[1] + 11, GZ + 10, "배터리 컨테이너 " + cf.nB + "개", 50, -4, "#b2f2bb", [0, 640]); }
+      if (cf.nD) { var ld = dieselAt(cf.nD - 1); IV.label(ctx, ld[0] + 28, ld[1] + 10, GZ + 10, "경유 발전기 " + cf.nD + "대", 56, 6, "#ffd8a8", [0, 640]); }
       IV.label(ctx, 28, 160, GZ + 20, "집 12채", -30, 40, "#e8ecff", [0, 640]);
       /* 지금 시각 카드 */
       var CX = 650, x0 = CX + 18, x1 = W - 18;
-      K.card(ctx, CX, 0, W - CX, 400, "지금 · " + (d2 ? "2일째 " : "1일째 ") + hh + "시");
+      K.card(ctx, CX, 0, W - CX, VH, "지금 · " + (d2 ? "2일째 " : "1일째 ") + hh + "시");
       lt(ctx, o.un > 1 ? "정전!" : (o.dg > 1 ? "경유 발전 중" : (o.dis > 1 ? "배터리로 버팀" : "햇빛·바람으로 충분")), x0, 62, { s: 19, w: "900", c: o.un > 1 ? LT.red : (o.dg > 1 ? LT.orange : (o.dis > 1 ? LT.blue : LT.green)) });
       K.row(ctx, "마을이 쓰는 전력", Math.round(o.D) + " kW", x0, x1, 96);
       K.row(ctx, "태양광·풍력", Math.round(o.R) + " kW", x0, x1, 122, LT.green);
@@ -1690,9 +1686,9 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       K.row(ctx, "모자람(정전)", Math.round(o.un) + " kW", x0, x1, 200, o.un > 1 ? LT.red : LT.ink);
       K.row(ctx, "배터리 잔량", Bt > 0 ? Math.round(o.soc / Bt * 100) + "%" : "없음", x0, x1, 226);
       K.bar(ctx, x0, 236, x1 - x0, Bt > 0 ? o.soc / Bt : 0, LT.teal);
-      lt(ctx, "▶ 시간을 흘려 보며 마을을 지켜보세요", x0, 380, { s: 12, c: LT.mute });
+      lt(ctx, "▶ 시간을 흘려 보며 마을을 지켜보세요", x0, VH - 20, { s: 12, c: LT.mute });
       /* 아래: 이틀(48시간) 전력 수급 그래프 */
-      var Y0 = 408, gx0 = 56, gx1 = 880, gy0 = 446, gy1 = 596, bw = (gx1 - gx0) / 48, maxP = 900;
+      var Y0 = VH + 8, gx0 = 56, gx1 = 880, gy0 = 406, gy1 = 556, bw = (gx1 - gx0) / 48, maxP = 900;
       K.studio(ctx, 0, Y0, W, H - Y0);
       ctx.fillStyle = "rgba(255,255,255,.7)"; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
       for (var hb = 0; hb < 48; hb++) { var q = hb % 24; if (!(q >= 6 && q < 18)) { ctx.fillStyle = "rgba(20,40,90,.07)"; ctx.fillRect(gx0 + hb * bw, gy0, bw + .5, gy1 - gy0); } }
@@ -1712,17 +1708,17 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       lt(ctx, "kW", gx0 - 6, gy0 - 6, { s: 10, a: "right", c: LT.mute });
       var cxh = gx0 + (hr % 48) * bw; ctx.strokeStyle = LT.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cxh, gy0 - 4); ctx.lineTo(cxh, gy1 + 2); ctx.stroke();
       ctx.fillStyle = LT.ink; ctx.beginPath(); ctx.moveTo(cxh, gy0 - 2); ctx.lineTo(cxh - 5, gy0 - 10); ctx.lineTo(cxh + 5, gy0 - 10); ctx.closePath(); ctx.fill();
-      lt(ctx, "🔋", 22, 636, { s: 13 });
-      ltrack(ctx, gx0, 622, gx1 - gx0, 16, 5);
-      if (Bt > 0) r.rows.forEach(function (oo, hh2) { ctx.fillStyle = "rgba(12,133,153," + (0.08 + 0.85 * oo.soc / Bt).toFixed(2) + ")"; ctx.fillRect(gx0 + hh2 * bw, 622, bw, 16); });
-      else lt(ctx, "배터리 없음", gx0 + 8, 634, { s: 10.5, c: LT.dim });
+      lt(ctx, "🔋", 22, 596, { s: 13 });
+      ltrack(ctx, gx0, 582, gx1 - gx0, 16, 5);
+      if (Bt > 0) r.rows.forEach(function (oo, hh2) { ctx.fillStyle = "rgba(12,133,153," + (0.08 + 0.85 * oo.soc / Bt).toFixed(2) + ")"; ctx.fillRect(gx0 + hh2 * bw, 582, bw, 16); });
+      else lt(ctx, "배터리 없음", gx0 + 8, 594, { s: 10.5, c: LT.dim });
       [["#0f9f76", "태양광·풍력"], ["#1c7ed6", "배터리 방전"], ["#e8590c", "경유 발전"], ["#c92a2a", "정전(모자람)"], [LT.violet, "— 마을이 쓰는 전력"]].forEach(function (pq, k) {
-        ctx.fillStyle = pq[0]; ctx.beginPath(); ctx.roundRect(gx0 + k * 160, 648, 12, 12, 3); ctx.fill(); lt(ctx, pq[1], gx0 + k * 160 + 18, 659, { s: 11 });
+        ctx.fillStyle = pq[0]; ctx.beginPath(); ctx.roundRect(gx0 + k * 160, 608, 12, 12, 3); ctx.fill(); lt(ctx, pq[1], gx0 + k * 160 + 18, 619, { s: 11 });
       });
       var vd = verdict(r);
-      K.tip(ctx, (vd.a ? "✅" : "❌") + " 정전 " + r.black + "시간", gx0 - 4, 666, 250, vd.a);
-      K.tip(ctx, (vd.b ? "✅" : "❌") + " 설치비 " + r.cost.toFixed(1) + "억 원", gx0 + 262, 666, 250, vd.b);
-      K.tip(ctx, (vd.c ? "✅" : "❌") + " CO₂ 지금의 " + Math.round(r.ratio * 100) + "% (" + (r.co2 / 1000).toFixed(1) + "톤)", gx0 + 524, 666, 300, vd.c);
+      K.tip(ctx, (vd.a ? "✅" : "❌") + " 정전 " + r.black + "시간", gx0 - 4, 626, 250, vd.a);
+      K.tip(ctx, (vd.b ? "✅" : "❌") + " 설치비 " + r.cost.toFixed(1) + "억 원", gx0 + 262, 626, 250, vd.b);
+      K.tip(ctx, (vd.c ? "✅" : "❌") + " CO₂ 지금의 " + Math.round(r.ratio * 100) + "% (" + (r.co2 / 1000).toFixed(1) + "톤)", gx0 + 524, 626, 300, vd.c);
       return r;
     }
     playBtn("c-v-play", function () { return playing; }, function (x) { playing = x; }, "⏸ 시간 멈추기", "▶ 이틀 흘려 보기");

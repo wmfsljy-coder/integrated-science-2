@@ -345,9 +345,9 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
     var Ton = 35, Mon = 30, ci = 56, playing = !REDUCE, last = null;
     function mix(a, b, u) { return "rgb(" + [0, 1, 2].map(function (k) { return Math.round(a[k] + (b[k] - a[k]) * u); }).join(",") + ")"; }
     /* ── 위: 스마트 온실을 블록처럼 잘라 본 모형 (앞벽·오른쪽 벽은 잘라 냄) ── */
-    var DH = 420, GZ = 28, WT = GZ + 110, RZ = GZ + 160;
+    var DH = 400, GZ = 12, WT = GZ + 110, RZ = GZ + 160;
     var X0 = 30, X1 = 520, Y0 = 25, Y1 = 250, YM = (Y0 + Y1) / 2;
-    var I = K.iso({ ox: 400, oy: 92, s: 0.72, L: 580, D: 250 });
+    var I = K.iso({ ox: 400, oy: 74, s: 0.72, L: 580, D: 250 });
     function P(x, y, z) { return I.P(x, y, z); }
     function poly(pts, fill, stroke, lw) {
       ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
@@ -366,7 +366,7 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
     function diorama(o) {
       var t = ci * 0.25, S = (t > 6 && t < 18) ? Math.sin((t - 6) / 12 * Math.PI) : 0, night = 1 - Math.min(1, S * 3);
       var T = o.T[ci], Mo = o.M[ci], vent = !!o.vent[ci], wat = !!(o.wat[ci] || (ci > 0 && o.wat[ci - 1])), i, k;
-      K.studio(ctx, 0, 0, W, DH, { x: 470, y: 335, rx: 330, ry: 66 });
+      K.studio(ctx, 0, 0, W, DH, { x: 470, y: 322, rx: 330, ry: 62 });
       ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, W, DH, 14); ctx.clip();
       /* 밤에는 스튜디오도 어두워진다 */
       if (night > 0) {
@@ -378,19 +378,17 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
       /* 해·달 — 오른쪽 하늘을 지나간다 */
       if (S > 0) K.sun(ctx, 590 + (t - 6) / 12 * 270, 160 - S * 112, 13);
       else { var mt = t < 6 ? t + 24 : t, mu = (mt - 18) / 12; K.glow(ctx, 590 + mu * 270, 160 - Math.sin(mu * Math.PI) * 100, 9, "rgba(250,244,210,.98)", 2.4); }
-      /* 땅 블록 — 앞면이 온실 흙의 단면 */
+      /* 얇은 받침 — 온실 안 흙은 수분에 따라 색만 바뀐다(줄무늬·자갈 점 없음) */
       var soil = soilHex(Mo);
-      I.box(ctx, 0, 0, 0, I.L, I.D, GZ, "#8fbf63", "#8a6a48", "#6d523a");
+      I.box(ctx, 0, 0, 0, I.L, I.D, GZ, "#8fbf63", "#8a6a48", "#73573b");
       I.face(ctx, "front", function (Lw) {
         ctx.fillStyle = soil; ctx.fillRect(X0, 0, X1 - X0, GZ);
-        if (wat) { var wg = ctx.createLinearGradient(0, GZ, 0, GZ - 14); wg.addColorStop(0, "rgba(40,70,120,.55)"); wg.addColorStop(1, "rgba(40,70,120,0)"); ctx.fillStyle = wg; ctx.fillRect(X0, GZ - 14, X1 - X0, 14); }
-        var R = K.rng(9);
-        for (var q = 0; q < 220; q++) { ctx.fillStyle = R() > .5 ? "rgba(255,255,255,.14)" : "rgba(40,25,10,.25)"; ctx.fillRect(R() * Lw, R() * GZ, 1.6, 1.6); }
+        if (wat) { ctx.fillStyle = "rgba(40,70,120,.35)"; ctx.fillRect(X0, 0, X1 - X0, GZ); }
         ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(X0, 0); ctx.lineTo(X0, GZ); ctx.moveTo(X1, 0); ctx.lineTo(X1, GZ); ctx.stroke();
         /* 토양 수분 센서 막대 */
-        ctx.fillStyle = "#cfd6df"; ctx.fillRect(438, GZ - 22, 3, 22); ctx.fillRect(446, GZ - 22, 3, 22);
+        ctx.fillStyle = "#cfd6df"; ctx.fillRect(438, 2, 3, GZ - 2); ctx.fillRect(446, 2, 3, GZ - 2);
       });
-      I.plane(ctx, GZ + 0.2, "#b49d7a", null, X0, X1, Y0, Y1);
+      I.plane(ctx, GZ + 0.2, K.tint(soil, 1.12), null, X0, X1, Y0, Y1);
       I.edges(ctx, GZ, GZ);
       /* 물탱크 · 할머니 집 (온실 밖) */
       var tb = P(15, 160, GZ), tt = P(15, 160, GZ + 46);
@@ -479,7 +477,7 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
       I.label(ctx, 140, YM, GZ + 70, "🌡️ 온도 센서", -60, 70, "#ffd9a8", bx);
       I.label(ctx, 270, YM + 30, roofZ(YM + 30), "환기창 · 규칙 ①이 여닫음", 70, -96, vent ? "#ffe9a8" : "#e8ecff", bx);
       I.label(ctx, X1 - 40, 75, pz, "물 주는 관 · 규칙 ②가 밸브를 엶", 70, -40, "#bfe6ff", bx);
-      I.label(ctx, 444, Y1, GZ - 8, "💧 토양 수분 센서 (흙 단면)", 50, 34, "#bfe6ff", bx);
+      I.label(ctx, 444, Y1, GZ - 6, "💧 토양 수분 센서 (흙 단면)", 50, 30, "#bfe6ff", bx);
       I.label(ctx, 556, 210, GZ + 36, "제어기 · 무선으로 연결", 34, 12, "#e8ecff", bx);
       /* 왼쪽 읽음 */
       var hh = Math.floor(t), mm = Math.round((t - hh) * 60);

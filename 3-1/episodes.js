@@ -636,8 +636,7 @@ function onPlane(ctx, I, y, fn) {
     function plaza(cnt) {                                    /* cnt = { tp, fp, fn } 모형 개수, 없으면 검사 전 */
       var i;
       IQ.box(ctx, 0, 0, -12, 330, 230, 0, "#e9dfcf", "#b9a88f", "#97876f");
-      IQ.face(ctx, "front", function (Lw) { ctx.fillStyle = "rgba(255,255,255,.18)"; for (var u = 0; u < Lw; u += 22) ctx.fillRect(u, -12, 1.2, 12); });
-      for (i = 0; i <= 330; i += 30) { var a = IQ.P(i, 0, 0), b = IQ.P(i, 230, 0); ctx.strokeStyle = "rgba(140,120,90,.22)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+            for (i = 0; i <= 330; i += 30) { var a = IQ.P(i, 0, 0), b = IQ.P(i, 230, 0); ctx.strokeStyle = "rgba(140,120,90,.22)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
       for (i = 0; i < 6; i++) IQ.house(ctx, 10 + i * 54, 2, 0, 36, 22, 18, ["#c0553f", "#3b7dd8", "#d08c2c"][i % 3]);
       IQ.tree(ctx, 4, 226, 0, 1.1); IQ.tree(ctx, 326, 30, 0, 1.1);
       var kinds = [], P = cnt || { tp: 0, fp: 0, fn: 0 };
@@ -973,8 +972,7 @@ function onPlane(ctx, I, y, fn) {
       K.bigText(ctx, M.TECH[ti].n + "형 확산 모형 · " + phaseS, 18, 70, 15, "#ffd35a");
       /* 마을 블록 */
       var own = Math.round(pct / 2.5);
-      ITW.box(ctx, 0, 0, -16, 300, 220, 0, "#a9d18e", "#8a6a48", "#6d523a");
-      ITW.face(ctx, "front", function (Lw) { ctx.fillStyle = "#5a4433"; ctx.fillRect(0, -16, Lw, 6); });
+      ITW.box(ctx, 0, 0, -12, 300, 220, 0, "#a9d18e", "#8a6a48", "#6d523a");   /* 얇은 단색 받침 */
       for (i = 0; i < 5; i++) ITW.box(ctx, 0, 34 + i * 41, 0, 300, 39 + i * 41, .5, "#e3d5bd", "#c9b99c", "#b0a084");
       var siteDone = false;
       VH.slice().sort(function (a, b) { return (a.x + a.y) - (b.x + b.y); }).forEach(function (h) {

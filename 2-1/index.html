@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-compact>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -61,7 +61,7 @@
         <section class="scene" data-title="실험 — 가지 높이를 바꿔 잎을 따 보자">
           <div class="story"><div class="who">🧑‍🎓</div><div class="say"><span class="name">하람</span>“비생물적 요인 중에 <b>빛</b>이 수상해요. 나무 꼭대기는 해가 쨍쨍한데, 아래쪽 가지는 위쪽 잎에 가려 어둡잖아요. 사다리차를 빌렸으니 높이를 바꿔 가며 잎을 따 봐요!”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-leaf" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-leaf" width="900" height="350"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="leaf-read"></div>
               <div>
@@ -119,7 +119,7 @@
         <section class="scene" data-title="단서 ① — 늑대는 왜 원래 적을까">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">리나</span>“늑대는 많을 때도 백여 마리였어요. 엘크는 수천 마리였는데 말이죠. 먹이 사슬을 따라 에너지가 얼마나 전달되는지 보면 까닭을 알 수 있어요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-pyr" width="900" height="400"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-pyr" width="900" height="340"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="pyr-read"></div>
               <div>
@@ -142,7 +142,7 @@
         <section class="scene" data-title="단서 ② — 늑대 없는 70년">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">리나</span>“이제 시간을 돌려 봅시다. 1926년, 늑대가 0마리가 된 순간부터예요. 식생(버드나무 숲), 엘크, 늑대 세 가지를 함께 지켜보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-gone" width="900" height="520"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-gone" width="900" height="480"></canvas></div>
             <div class="toggle-row" style="margin:0 20px 14px;"><button class="btn primary" id="gone-run" type="button">▶ 시간 흐르게 하기</button></div>
             <div class="info-card" id="gone-info">버튼을 눌러 70년을 흘려보내세요.</div>
           </div>
@@ -153,7 +153,7 @@
         <section class="scene" data-title="복원 작전 — 늑대를 몇 마리 데려올까">
           <div class="story"><div class="who">👩‍🔬</div><div class="say"><span class="name">리나</span>“1995년, 드디어 캐나다에서 늑대를 데려오기로 했어요. 몇 마리를 풀지 조사관님이 정하세요. 너무 적으면 숲이 돌아오는 데 오래 걸리고, 너무 많으면 엘크가 위험해집니다.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-back" width="900" height="520"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-back" width="900" height="480"></canvas></div>
             <div class="controls">
               <div class="ctrl-group">
                 <div class="ctrl-label">풀어 놓을 늑대 수<span class="val" id="back-n-val">10마리</span></div>
@@ -200,7 +200,7 @@
       <div class="episode" id="ep3">
         <section class="scene" data-title="하와이 산꼭대기의 기록">
           <div class="story narr"><div class="who">🌋</div><div class="say"><span class="name">이야기</span>1958년, 과학자 <span data-view="who:찰스 데이비드 킬링">찰스 킬링</span>은 하와이 마우나로아 산꼭대기에서 공기 속 이산화 탄소를 재기 시작했습니다. 첫해의 값은 약 <b>315 ppm</b>. 그 뒤로 기록은 지금까지 이어졌고, 2024년에는 약 <b>425 ppm</b>이 되었습니다.</div></div>
-          <div class="stage-card"><div class="canvas-wrap studio"><canvas id="c-keel" width="900" height="400"></canvas></div><div class="controls"><button type="button" class="btn sm" id="keel-play">⏸ 멈추기</button></div></div>
+          <div class="stage-card"><div class="canvas-wrap studio"><canvas id="c-keel" width="900" height="360"></canvas></div><div class="controls"><button type="button" class="btn sm" id="keel-play">⏸ 멈추기</button></div></div>
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">회의 의장</span>“자문관, 회의장에는 ‘온실 효과는 나쁜 것이니 아예 없애자’는 사람도 있습니다. 먼저 하나 묻죠.”</div></div>
           <div class="gate loose" id="g3"></div>
         </section>
@@ -208,7 +208,7 @@
         <section class="scene" data-title="온실 상자 — 대기를 직접 조절해 보자">
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">회의 의장</span>“말보다 실험이죠. 대기가 지표에서 나오는 복사 에너지를 <b>얼마나 흡수하는지</b>를 바꿔 가며 지표 온도를 확인해 보세요.”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-gh" width="900" height="420"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-gh" width="900" height="370"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="gh-read"></div>
               <div>
@@ -245,7 +245,7 @@
         <section class="scene" data-title="2℃ 작전 — 감축 경로를 찾아라">
           <div class="story"><div class="who">👨‍💼</div><div class="say"><span class="name">회의 의장</span>“지구 평균 기온은 산업화 이전보다 이미 약 1.3℃ 올랐습니다. 기온 상승은 <b>지금까지 내보낸 <span data-view="owid:annual-co2-emissions-per-country|나라별 이산화 탄소 배출량" data-ask="이산화 탄소를 가장 많이 내보내는 나라는 어디일까? 우리나라는 몇 번째쯤일까?">이산화 탄소</span>의 누적량</b>에 거의 비례합니다. 언제부터, 해마다 몇 %씩 줄여야 2100년에 2℃를 넘지 않을까요?”</div></div>
           <div class="stage-card">
-            <div class="canvas-wrap studio"><canvas id="c-path" width="900" height="440"></canvas></div>
+            <div class="canvas-wrap studio"><canvas id="c-path" width="900" height="380"></canvas></div>
             <div class="sim-side">
               <div class="readout" id="path-read"></div>
               <div>
@@ -326,7 +326,7 @@
 </div>
 
 <button class="theme-toggle" id="themeToggle">라이트 모드</button>
-<script src="../assets/theme.js?v=790c9518"></script>
+<script src="../assets/theme.js?v=38235066"></script>
 <script src="../assets/scope.js?v=cecf172a"></script>
 <script src="../assets/kit.js?v=94e3bd47"></script>
 <script src="../assets/story.js?v=cd80882e"></script>
