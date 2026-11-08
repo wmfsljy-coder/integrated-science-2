@@ -118,45 +118,58 @@ window.sthLab({
     },
     task: "뽑는 방법과 조사 인원을 정해 <b>치우침 없이 오차 ± 5%p 이내, 300명 이하</b>를 만족하세요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(380), ctx = cv.ctx, W = cv.W;
       var TRUE = 52;
       var M = { rand: { t: "학번 무작위 뽑기", bias: 0 }, line: { t: "급식실 앞 먼저 온 사람", bias: 14 }, web: { t: "누리집 자원 응답", bias: -17 } };
       var m = "line", n = 100;
       function moe(k) { return 196 * Math.sqrt(0.25 / k) * Math.sqrt((1000 - k) / 999); }
+      /* 운동장 블록: 학생 모형 200개(1개 = 5명). 뽑는 방법에 따라 뽑히는 학생이 모이는 곳이 다르다 */
+      var IY = K.iso({ ox: 250, oy: 118, s: .82, L: 330, D: 210 }), KIDS = [];
+      (function () {
+        var R = K.rng(52), i, j;
+        for (j = 0; j < 10; j++) for (i = 0; i < 20; i++) {
+          var kx = 14 + i * 15.6 + (R() - .5) * 4, ky = 76 + j * 13 + (R() - .5) * 4;
+          KIDS.push({ x: kx, y: ky, r: R(), dl: Math.sqrt(Math.pow(kx - 60, 2) + Math.pow(ky - 62, 2)), dw: Math.sqrt(Math.pow(kx - 270, 2) + Math.pow(ky - 58, 2)) * (0.8 + R() * .4), c: ["#a5b4c8", "#b8c4d6", "#9fb0c6"][i % 3] });
+        }
+      })();
       function draw() {
         ctx.clearRect(0, 0, W, cv.H);
         var e = moe(n), est = TRUE + M[m].bias, CH = cv.H, ok = !M[m].bias && n <= 300 && e <= 5, i;
-        K.studio(ctx, 0, 0, 630, CH, { x: 500, y: CH - 40, rx: 120, ry: 16 });
+        K.studio(ctx, 0, 0, 630, CH, { x: 290, y: CH - 30, rx: 250, ry: 22 });
         K.bigText(ctx, "내 조사 " + est + "% ± " + e.toFixed(1) + "%p", 18, 44, 24, ok ? "#8ff5cf" : "#ffffff");
         K.bigText(ctx, "전교생에게 다 물으면 " + TRUE + "%", 18, 70, 15, "#ffd35a");
-        var g = K.chart(ctx, { x: 6, y: 96, w: 370, h: 150, x0: 0, x1: 100, y0: 0, y1: 1, xt: 5, yt: 1, yf: function () { return ""; }, xf: function (q) { return q + "%"; }, pl: 18, light: true });
-        ctx.fillStyle = "rgba(28,126,214,.18)"; ctx.fillRect(g.X(est - e), g.Y(.72), g.X(est + e) - g.X(est - e), g.Y(.28) - g.Y(.72));
-        ctx.strokeStyle = "rgba(28,126,214,.6)"; ctx.strokeRect(g.X(est - e), g.Y(.72), g.X(est + e) - g.X(est - e), g.Y(.28) - g.Y(.72));
-        K.planet(ctx, g.X(est), g.Y(.5), 6, "#74c0fc", "#1864ab");
-        ctx.strokeStyle = LT.green; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(g.X(TRUE), g.T); ctx.lineTo(g.X(TRUE), g.B); ctx.stroke();
-        lt(ctx, "전교생 " + TRUE + "%", g.X(TRUE) + 5, g.T + 14, { s: 11, w: "900", c: LT.green });
-        lt(ctx, "내 조사 범위", g.X(est), g.Y(.28) + 14, { s: 10.5, w: "800", a: "center", c: LT.blue });
-        /* 뽑는 방법 미니어처 */
-        var I = K.iso({ ox: 500, oy: 128, s: .95, L: 90, D: 70 });
-        I.box(ctx, 0, 0, 0, 90, 70, 6, "#e9ecef", "#ced4da", "#adb5bd");
-        if (m === "rand") {
-          var R = K.rng(4); I.box(ctx, 20, 15, 6, 70, 55, 54, "rgba(220,235,255,.35)", "rgba(200,220,245,.45)", "rgba(170,195,230,.45)");
-          for (i = 0; i < 18; i++) { var bp = I.P(26 + R() * 38, 20 + R() * 30, 9 + R() * 22); K.planet(ctx, bp.x, bp.y, 4.5, ["#ff8787", "#74c0fc", "#ffe066", "#8ce99a"][i % 4], "#495057"); }
-          lead(ctx, I.P(45, 15, 54).x, I.P(45, 15, 54).y, 420, 82, "학번 공 뽑기 · 누구나 같은 기회", "#b2f2bb", [380, 630]);
-        } else if (m === "line") {
-          I.box(ctx, 0, 0, 6, 90, 30, 56, "#ffe8cc", "#ffd8a8", "#e8a65c"); var dr = I.P(30, 30, 6), dr2 = I.P(30, 30, 30); ctx.fillStyle = "#5c3b1e"; ctx.fillRect(dr.x - 6, dr2.y, 12, dr.y - dr2.y);
-          for (i = 0; i < 9; i++) I.person(ctx, 30 + i * 6, 38 + i * 3.5, 6, ["#ff6b81", "#4fb6ff", "#ffd35a"][i % 3], 1.3);
-          lead(ctx, I.P(45, 0, 56).x, I.P(45, 0, 56).y, 420, 82, "급식실 앞에 먼저 온 사람", "#ffc9c9", [380, 630]);
-        } else {
-          I.box(ctx, 20, 20, 6, 70, 50, 26, "#c69c6d", "#a47148", "#7f5539"); I.box(ctx, 30, 26, 26, 60, 44, 28, "#495057", "#343a40", "#212529");
-          var s1 = I.P(30, 26, 28), s2 = I.P(60, 26, 28), s3 = I.P(60, 26, 50), s4 = I.P(30, 26, 50); I.quad(ctx, s1, s2, s3, s4, "#4dabf7", "#343a40");
-          I.person(ctx, 45, 62, 6, "#b197fc", 1.4); I.person(ctx, 75, 30, 6, "#b197fc", 1.4);
-          lead(ctx, s3.x, s3.y, 420, 82, "누리집에 스스로 응답한 사람", "#ffc9c9", [380, 630]);
-        }
-        lt(ctx, "※ 오차는 95% 신뢰 수준, 전교생 1000명에서 뽑는 경우", 18, CH - 10, { s: 10.5, c: LT.mute });
+        /* 운동장 바닥과 건물 두 채 */
+        IY.box(ctx, 0, 0, -12, 330, 210, 0, "#d8c7a8", "#a68b67", "#86704f");
+        IY.box(ctx, 0, 66, 0, 330, 210, .3, "#e2cfa9", "#c9b48c", "#b09c76");
+        IY.box(ctx, 8, 6, 0, 112, 58, 40, "#ffe8cc", "#ffd8a8", "#e8a65c");
+        var d1 = IY.P(52, 58, 0), d2 = IY.P(68, 58, 0), d3 = IY.P(68, 58, 24), d4 = IY.P(52, 58, 24); IY.quad(ctx, d1, d2, d3, d4, "#7a4b24");
+        for (i = 0; i < 3; i++) IY.quad(ctx, IY.P(14 + i * 30, 58, 28), IY.P(36 + i * 30, 58, 28), IY.P(36 + i * 30, 58, 36), IY.P(14 + i * 30, 58, 36), "#a5d8ff");
+        IY.box(ctx, 214, 4, 0, 324, 54, 52, "#edf2f7", "#dbe4ee", "#b7c4d3");
+        for (i = 0; i < 4; i++) IY.quad(ctx, IY.P(222 + i * 25, 54, 30), IY.P(240 + i * 25, 54, 30), IY.P(240 + i * 25, 54, 44), IY.P(222 + i * 25, 54, 44), "#4dabf7");
+        /* 뽑힌 학생 정하기 */
+        var k = Math.round(n / 5), ord = KIDS.map(function (q, idx) { return idx; });
+        ord.sort(function (a, b) { return m === "rand" ? KIDS[a].r - KIDS[b].r : (m === "line" ? KIDS[a].dl - KIDS[b].dl : KIDS[a].dw - KIDS[b].dw); });
+        var pick = {}; ord.slice(0, k).forEach(function (idx) { pick[idx] = 1; });
+        KIDS.map(function (q, idx) { return idx; }).sort(function (a, b) { return (KIDS[a].x + KIDS[a].y) - (KIDS[b].x + KIDS[b].y); }).forEach(function (idx) {
+          var q = KIDS[idx];
+          if (pick[idx]) { var g0 = IY.P(q.x, q.y, 0); ctx.fillStyle = "rgba(255,212,59,.75)"; ctx.beginPath(); ctx.ellipse(g0.x, g0.y, 6, 3, 0, 0, 6.2832); ctx.fill(); }
+          IY.person(ctx, q.x, q.y, 0, pick[idx] ? "#f76707" : q.c, 1.05);
+        });
+        var la = m === "line" ? IY.P(60, 58, 26) : (m === "web" ? IY.P(270, 54, 52) : IY.P(170, 140, 14));
+        var lab = m === "line" ? "급식실 앞에 먼저 온 학생만" : (m === "web" ? "컴퓨터실 근처 · 스스로 응답한 학생만" : "학번 무작위 · 운동장 곳곳에서 고르게");
+        lead(ctx, la.x, la.y, m === "web" ? 560 : 200, m === "web" ? 112 : 104, lab, M[m].bias ? "#ffc9c9" : "#b2f2bb", [0, 630]);
+        K.pill(ctx, "주황 학생 = 뽑힌 표본 " + n + "명 (학생 모형 1개 = 5명)", 300, CH - 14, { s: 12, a: "center", c: "#ffe3a3", box: [0, 630] });
         judge(ctx, W, CH, "판정 · 급식 만족도 조사", ok ? "믿을 만한 조사" : (M[m].bias ? "치우친 조사" : (n > 300 ? "일손이 모자란다" : "오차가 너무 크다")), ok ? LT.green : LT.red,
           [["방법", M[m].t, M[m].bias ? LT.red : LT.green], ["조사 인원 (300 이하)", n + "명", n > 300 ? LT.red : LT.ink], ["오차 (5%p 이하)", "± " + e.toFixed(1) + "%p", e > 5 ? LT.red : LT.ink], ["치우침", (M[m].bias > 0 ? "+" : "") + M[m].bias + "%p", M[m].bias ? LT.red : LT.ink]],
           M[m].bias ? "모인 사람이 전교생과 성향이 다르다" : "누구나 뽑힐 기회가 같다", !M[m].bias);
+        /* 카드 안 작은 띠: 내 조사 범위와 전교생 값 */
+        var g = K.chart(ctx, { x: 646, y: 252, w: 248, h: 104, x0: 0, x1: 100, y0: 0, y1: 1, xt: 4, yt: 1, yf: function () { return ""; }, xf: function (q) { return q + "%"; }, pl: 10, pr: 12, pb: 26, light: true });
+        ctx.fillStyle = "rgba(28,126,214,.18)"; ctx.fillRect(g.X(est - e), g.Y(.78), g.X(est + e) - g.X(est - e), g.Y(.22) - g.Y(.78));
+        ctx.strokeStyle = "rgba(28,126,214,.6)"; ctx.lineWidth = 1; ctx.strokeRect(g.X(est - e), g.Y(.78), g.X(est + e) - g.X(est - e), g.Y(.22) - g.Y(.78));
+        K.planet(ctx, g.X(est), g.Y(.5), 5, "#74c0fc", "#1864ab");
+        ctx.strokeStyle = LT.green; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(g.X(TRUE), g.T); ctx.lineTo(g.X(TRUE), g.B); ctx.stroke();
+        lt(ctx, "전교생 " + TRUE + "%", g.X(TRUE) + (est >= TRUE ? -5 : 5), g.T + 12, { s: 10.5, w: "900", a: est >= TRUE ? "right" : "left", c: LT.green });
+        lt(ctx, "파란 띠 = 내 조사 범위 (95% 신뢰 수준)", 656, 248, { s: 10.5, w: "700", c: LT.blue });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "뽑는 방법", value: "line", options: [{ v: "rand", t: "학번 무작위 뽑기" }, { v: "line", t: "급식실 앞 먼저 온 사람" }, { v: "web", t: "누리집 자원 응답" }],
@@ -196,39 +209,58 @@ window.sthLab({
     },
     task: "두 배가 되는 기간을 조절해 <b>60일 동안 입원 환자가 5000명 이하</b>가 되게 하되, 가장 약한 방역(두 배 기간 12일 이하)으로 하세요. 눈금을 바꿔 보면 그래프가 달리 보여요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(380), ctx = cv.ctx, W = cv.W;
       var Td = 3, scale = "lin";
       function cases(d) { return 100 * Math.pow(2, d / Td); }
-      var gx0 = 80, gx1 = 620, gy0 = 50, gy1 = 280;
-      function GX(d) { return gx0 + d / 60 * (gx1 - gx0); }
-      function GY(n) {
-        if (scale === "lin") return gy1 - Math.min(n, 10000) / 10000 * (gy1 - gy0);
-        return gy1 - (H.log10(Math.max(n, 10)) - 1) / 5 * (gy1 - gy0);
+      /* 병원 블록 모형: 침대 20개(1개 = 병상 250개), 자리가 없으면 마당에 줄을 선다 */
+      var IHB = K.iso({ ox: 236, oy: 128, s: 1, L: 250, D: 150 });
+      function ward(n60) {
+        var fill = Math.min(20, Math.round(n60 / 250)), extra = Math.max(0, Math.round((n60 - 5000) / 250)), i;
+        IHB.box(ctx, 0, 0, -10, 300, 150, 0, "#c9d3c0", "#9aa78c", "#7f8b72");
+        IHB.box(ctx, 0, 0, 0, 250, 150, 6, "#f1f3f5", "#dfe4ea", "#b8c0ca");
+        IHB.box(ctx, 0, 0, 6, 250, 6, 62, "#ffffff", "#f1f3f5", "#ced4da");
+        IHB.box(ctx, 0, 6, 6, 6, 150, 62, "#ffffff", "#e9ecef", "#ced4da");
+        for (i = 0; i < 6; i++) IHB.quad(ctx, IHB.P(20 + i * 38, 6.1, 34), IHB.P(42 + i * 38, 6.1, 34), IHB.P(42 + i * 38, 6.1, 52), IHB.P(20 + i * 38, 6.1, 52), "#d0ebff", "rgba(120,150,190,.6)");
+        var cp = IHB.P(125, 6, 22); ctx.fillStyle = "#e03131"; ctx.fillRect(cp.x - 4, cp.y - 12, 8, 24); ctx.fillRect(cp.x - 12, cp.y - 4, 24, 8);
+        for (i = 0; i < 20; i++) {
+          var bx = 18 + (i % 5) * 45, by = 18 + Math.floor(i / 5) * 32, on = i < fill;
+          IHB.box(ctx, bx, by, 6, bx + 30, by + 20, 14, on ? "#ffc9c9" : "#ffffff", on ? "#e03131" : "#dee2e6", on ? "#a51111" : "#adb5bd");
+          IHB.box(ctx, bx, by, 14, bx + 7, by + 20, 18, "#f8f9fa", "#e9ecef", "#ced4da");
+          if (on) { var hp = IHB.P(bx + 4, by + 10, 18); ctx.fillStyle = "#f1c7a5"; ctx.beginPath(); ctx.arc(hp.x, hp.y, 3.2, 0, 6.2832); ctx.fill(); }
+        }
+        for (i = 0; i < Math.min(42, extra); i++) IHB.person(ctx, 262 + (i % 3) * 11, 8 + Math.floor(i / 3) * 10.5, 0, "#e03131", 1.3);
+        return { fill: fill, extra: extra };
       }
       function draw() {
         ctx.clearRect(0, 0, W, cv.H);
-        gx0 = 66; gx1 = 420; gy0 = 104; gy1 = 290;
-        var CH = cv.H, n60 = cases(60), over = null, pts = [], d, nn;
-        K.studio(ctx, 0, 0, 630, CH, { x: 530, y: 262, rx: 90, ry: 14 });
-        ctx.fillStyle = "rgba(255,255,255,.72)"; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
-        ctx.strokeStyle = LT.line; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(gx0, gy0); ctx.lineTo(gx0, gy1); ctx.lineTo(gx1, gy1); ctx.stroke();
-        (scale === "lin" ? [0, 2500, 5000, 7500, 10000] : [10, 100, 1000, 10000, 100000, 1000000]).forEach(function (q) {
-          ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gx0, GY(q)); ctx.lineTo(gx1, GY(q)); ctx.stroke();
-          lt(ctx, q >= 1000 ? (q / 1000) + "천" : q + "", gx0 - 8, GY(q) + 4, { s: 10, a: "right", c: LT.mute });
-        });
-        [0, 10, 20, 30, 40, 50, 60].forEach(function (q) { lt(ctx, q + "일", GX(q), gy1 + 16, { s: 10, a: "center", c: LT.mute }); });
-        ctx.save(); ctx.strokeStyle = LT.red; ctx.lineWidth = 2; ctx.setLineDash([7, 4]); ctx.beginPath(); ctx.moveTo(gx0, GY(5000)); ctx.lineTo(gx1, GY(5000)); ctx.stroke(); ctx.restore();
-        lt(ctx, "병상 5000", gx1 - 4, GY(5000) - 6, { s: 11, w: "900", a: "right", c: LT.red });
-        for (d = 0; d <= 60; d += 0.5) { nn = cases(d); if (over === null && nn > 5000) over = d; if (scale === "lin" && nn > 10000) break; pts.push([GX(d), GY(nn)]); }
-        ctx.save(); ctx.strokeStyle = LT.violet; ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.shadowColor = "rgba(112,72,232,.3)"; ctx.shadowBlur = 3; ctx.beginPath(); pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.restore();
-        lt(ctx, "입원 환자 수 (" + (scale === "lin" ? "보통 눈금" : "로그 눈금 · 한 칸 10배") + ")", gx0, gy0 - 8, { s: 11, w: "800", c: LT.mute });
+        var CH = cv.H, n60 = cases(60), over = null, d, nn, pts = [];
+        for (d = 0; d <= 60; d += 0.5) { nn = cases(d); if (over === null && nn > 5000) over = d; }
+        K.studio(ctx, 0, 0, 630, CH, { x: 300, y: CH - 34, rx: 260, ry: 22 });
         K.bigText(ctx, over === null ? "60일 안에는 버틴다" : Math.ceil(over) + "일째 병상 부족", 18, 44, 24, over === null ? "#8ff5cf" : "#ffc9c9");
         K.bigText(ctx, Td.toFixed(1) + "일마다 두 배로", 18, 70, 15, "#ffd35a");
-        var ex = hospital(ctx, 490, 150, n60 / 500);
-        K.pill(ctx, "60일째 병원 · 침대 1개 = 병상 500", 530, 300, { s: 11, a: "center", c: ex ? "#ffc9c9" : "#e8ecff", box: [430, 628] });
+        var wd = ward(n60);
+        K.pill(ctx, "60일째 병원 · 침대 1개 = 병상 250개", 190, CH - 14, { s: 12, a: "center", c: wd.extra ? "#ffc9c9" : "#e8ecff", box: [0, 630] });
+        if (wd.extra) { K.pill(ctx, "자리가 없는 환자 " + (n60 >= 1e6 ? (n60 / 1e6).toFixed(1) + " 백만" : Math.round(n60 - 5000).toLocaleString()) + "명" + (wd.extra > 42 ? " (일부만 그림)" : ""), 470, 112, { s: 12, a: "center", c: "#ffc9c9", box: [300, 630] }); }
+        else K.pill(ctx, "빈 침대 " + (20 - wd.fill) + "개", 470, 112, { s: 12, a: "center", c: "#b2f2bb", box: [300, 630] });
         judge(ctx, W, CH, "판정 · 병상이 버틸까", over === null ? "버틴다" : Math.ceil(over) + "일째 모자람", over === null ? LT.green : LT.red,
           [["두 배가 되는 기간", Td.toFixed(1) + " 일"], ["병상이 모자라는 날", over === null ? "60일 안에는 없음" : Math.ceil(over) + "일째", over === null ? LT.green : LT.red], ["60일째 입원 환자", n60 >= 1e6 ? (n60 / 1e6).toFixed(1) + " 백만" : Math.round(n60).toLocaleString() + " 명", n60 <= 5000 ? LT.green : LT.red]],
           over === null ? "두 배 기간을 늘렸다" : "두 배씩은 금세 폭발한다", over === null);
+        /* 카드 안 작은 그래프: 입원 환자 수 (보통/로그 눈금) */
+        var gx0 = 690, gx1 = 884, gy0 = 240, gy1 = 350;
+        function GX(dd) { return gx0 + dd / 60 * (gx1 - gx0); }
+        function GY(v2) { if (scale === "lin") return gy1 - Math.min(v2, 10000) / 10000 * (gy1 - gy0); return gy1 - (H.log10(Math.max(v2, 10)) - 1) / 5 * (gy1 - gy0); }
+        ctx.fillStyle = "rgba(255,255,255,.8)"; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
+        (scale === "lin" ? [0, 5000, 10000] : [10, 1000, 100000]).forEach(function (q) {
+          ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(gx0, GY(q)); ctx.lineTo(gx1, GY(q)); ctx.stroke();
+          lt(ctx, q >= 1000 ? (q / 1000) + "천" : q + "", gx0 - 6, GY(q) + 4, { s: 10.5, a: "right", c: LT.mute });
+        });
+        [0, 30, 60].forEach(function (q) { lt(ctx, q + "일", GX(q), gy1 + 15, { s: 10.5, a: "center", c: LT.mute }); });
+        ctx.strokeStyle = LT.line; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(gx0, gy0); ctx.lineTo(gx0, gy1); ctx.lineTo(gx1, gy1); ctx.stroke();
+        ctx.save(); ctx.strokeStyle = LT.red; ctx.lineWidth = 1.6; ctx.setLineDash([6, 4]); ctx.beginPath(); ctx.moveTo(gx0, GY(5000)); ctx.lineTo(gx1, GY(5000)); ctx.stroke(); ctx.restore();
+        for (d = 0; d <= 60; d += 0.5) { nn = cases(d); if (scale === "lin" && nn > 10000) break; pts.push([GX(d), GY(nn)]); }
+        ctx.save(); ctx.strokeStyle = LT.violet; ctx.lineWidth = 2.6; ctx.lineJoin = "round"; ctx.beginPath(); pts.forEach(function (p, i) { if (i) ctx.lineTo(p[0], p[1]); else ctx.moveTo(p[0], p[1]); }); ctx.stroke(); ctx.restore();
+        lt(ctx, "입원 환자 (" + (scale === "lin" ? "보통 눈금" : "로그 눈금 · 한 칸 100배") + ")", 656, 230, { s: 11, w: "800", c: LT.mute });
+        lt(ctx, "병상", gx1, GY(5000) - 4, { s: 10.5, w: "900", a: "right", c: LT.red });
       }
       cv.canvas._redraw = draw;
       api.seg({ label: "세로 눈금", value: "lin", options: [{ v: "lin", t: "보통 눈금" }, { v: "log", t: "로그 눈금" }],

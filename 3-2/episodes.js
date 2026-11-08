@@ -97,6 +97,13 @@ function cube(ctx, x, y, w, h, d, cF, cT, cR, alpha) {
   ctx.restore();
 }
 
+/* 바닥 그림자(타원) */
+function floorShadow(ctx, x, y, rx, ry, a) {
+  ctx.save(); ctx.translate(x, y); ctx.scale(1, ry / rx);
+  var g = ctx.createRadialGradient(0, 0, 1, 0, 0, rx); g.addColorStop(0, "rgba(20,30,50," + (a || .28) + ")"); g.addColorStop(1, "rgba(20,30,50,0)");
+  ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, rx, 0, 6.2832); ctx.fill(); ctx.restore();
+}
+
 /*MODEL-BEGIN — 계산 모형 (node로 따로 검증한다) */
 function clamp(x, a, b) { return Math.max(a, Math.min(b, x)); }
 function rng(seed) { var s = seed; return function () { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296; }; }
@@ -189,62 +196,131 @@ function scaleNet(wb, wr, safe) {
 function stance(net) { return net >= 3 ? "도입 찬성 쪽" : (net <= -3 ? "도입 반대 쪽" : "팽팽함(판단 유보)"); }
 /*MODEL-END*/
 
-/* 산점도 한 장 — 장면 3·4가 함께 쓴다. 밝은 스튜디오 위 카드 그래프 + 딸기 입체 미니어처 + 오른쪽 흰 판정 카드 */
+/* 딸기 선별 라인 — 장면 3·4가 함께 쓴다. 왼쪽 큰 칸: 컨베이어·카메라·로봇 팔·두 바구니 입체 미니어처(로봇의 선으로 가른 결과가 바구니에 담긴다)
+   오른쪽 흰 카드: 작은 산점도(선 긋기) + 범례 + 판정 */
+var ICV = K.iso({ ox: 170, oy: 118, s: 1.12, L: 360, D: 150 });
+function drawLine(ctx, pts, L0) {
+  var I = ICV, i;
+  /* 공장 바닥 블록 */
+  I.box(ctx, -10, -20, -10, 360, 150, 0, "#e9ecef", "#c3cad3", "#a5aeba");
+  for (i = 0; i <= 370; i += 37) { var f0 = I.P(i - 10, -20, 0), f1 = I.P(i - 10, 150, 0); ctx.strokeStyle = "rgba(120,130,145,.18)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(f0.x, f0.y); ctx.lineTo(f1.x, f1.y); ctx.stroke(); }
+  /* 바구니 (안쪽 먼저, 앞벽은 나중에) */
+  function basketBack(x0, y0, x1, y1) {
+    I.box(ctx, x0, y0, 0, x1, y1, 2, "#c69c6d", "#a47148", "#7f5539");
+    I.box(ctx, x0, y0, 2, x1, y0 + 3, 22, "#d4a373", "#b5835a", "#8d6040");
+    I.box(ctx, x0, y0, 2, x0 + 3, y1, 22, "#d4a373", "#b5835a", "#8d6040");
+  }
+  function basketFront(x0, y0, x1, y1) {
+    I.box(ctx, x0, y1 - 3, 2, x1, y1, 22, "#e0b689", "#c08a5a", "#94653f");
+    I.box(ctx, x1 - 3, y0, 2, x1, y1, 22, "#e0b689", "#c08a5a", "#94653f");
+    ctx.strokeStyle = "rgba(90,55,25,.35)"; ctx.lineWidth = 1;
+    for (var z = 7; z < 22; z += 5) { var w0 = I.P(x0, y1, z), w1 = I.P(x1, y1, z), w2 = I.P(x1, y0, z); ctx.beginPath(); ctx.moveTo(w0.x, w0.y); ctx.lineTo(w1.x, w1.y); ctx.lineTo(w2.x, w2.y); ctx.stroke(); }
+  }
+  var ripe = [], unripe = [];
+  pts.forEach(function (p) { var pred = p.s > L0.a * p.r + L0.b ? 1 : 0; (pred ? ripe : unripe).push({ p: p, bad: pred !== p.y }); });
+  function fill(list, x0, y0, x1, y1) {
+    var slots = [], nC = 7, nR = 6;
+    list.forEach(function (q, k) { var c = k % nC, r = Math.floor(k / nC) % nR, lay = Math.floor(k / (nC * nR)); slots.push({ q: q, x: x0 + 7 + c * (x1 - x0 - 14) / (nC - 1), y: y0 + 7 + r * (y1 - y0 - 14) / (nR - 1), z: 8 + lay * 6 }); });
+    slots.sort(function (a, b) { return (a.x + a.y) - (b.x + b.y); }).forEach(function (s) {
+      var sp = I.P(s.x, s.y, s.z);
+      berry(ctx, sp.x, sp.y, 5.4, (s.q.p.w ? "w" : "r") + (s.q.p.y ? "r" : "u"));
+      if (s.q.bad) { ctx.save(); ctx.lineCap = "round"; ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 3.4; ctx.beginPath(); ctx.moveTo(sp.x - 6, sp.y - 6); ctx.lineTo(sp.x + 6, sp.y + 6); ctx.moveTo(sp.x + 6, sp.y - 6); ctx.lineTo(sp.x - 6, sp.y + 6); ctx.stroke(); ctx.strokeStyle = "#12203a"; ctx.lineWidth = 1.6; ctx.stroke(); ctx.restore(); }
+    });
+  }
+  /* 안 익음 바구니 (컨베이어 옆) */
+  basketBack(150, 80, 230, 140); fill(unripe, 150, 80, 230, 140); basketFront(150, 80, 230, 140);
+  /* 로봇 팔 받침 */
+  I.box(ctx, 108, 70, 0, 132, 94, 14, "#ffd43b", "#f59f00", "#d9480f");
+  /* 컨베이어: 다리 · 벨트 · 굴림대 */
+  [[10, 4], [10, 46], [240, 4], [240, 46]].forEach(function (q) { I.box(ctx, q[0], q[1], 0, q[0] + 5, q[1] + 4, 30, "#adb5bd", "#868e96", "#6c757d"); });
+  I.box(ctx, 0, 0, 30, 262, 50, 36, "#8d96a3", "#ced4da", "#9aa3ae");
+  I.plane(ctx, 36.05, "#5f6b7a", null, 2, 260, 4, 46);
+  for (i = 0; i < 14; i++) { var r0 = I.P(10 + i * 18.5, 4, 36.1), r1 = I.P(10 + i * 18.5, 46, 36.1); ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(r0.x, r0.y); ctx.lineTo(r1.x, r1.y); ctx.stroke(); }
+  /* 카메라 문(뒤 기둥) */
+  I.box(ctx, 76, -14, 0, 82, -8, 76, "#dee2e6", "#ced4da", "#adb5bd");
+  /* 벨트 위 다음 열매들 */
+  var belt = pts.slice(0, 5), bx = [24, 62, 79, 150, 214];
+  belt.forEach(function (p, k) { var bp = I.P(bx[k], 25, 42); berry(ctx, bp.x, bp.y, 6.2, (p.w ? "w" : "r") + (p.y ? "r" : "u")); });
+  /* 카메라 빛 */
+  var cam = I.P(79, 25, 74), tgt = I.P(79, 25, 38);
+  var cg = ctx.createLinearGradient(0, cam.y, 0, tgt.y); cg.addColorStop(0, "rgba(116,192,252,.55)"); cg.addColorStop(1, "rgba(116,192,252,.08)");
+  ctx.fillStyle = cg; ctx.beginPath(); ctx.moveTo(cam.x - 4, cam.y); ctx.lineTo(cam.x + 4, cam.y); ctx.lineTo(tgt.x + 18, tgt.y); ctx.lineTo(tgt.x - 18, tgt.y); ctx.closePath(); ctx.fill();
+  /* 카메라 문(앞 기둥 · 윗보) */
+  I.box(ctx, 76, 58, 0, 82, 64, 76, "#e9ecef", "#ced4da", "#adb5bd");
+  I.box(ctx, 76, -14, 76, 82, 64, 82, "#f1f3f5", "#dee2e6", "#bac2cc");
+  I.box(ctx, 72, 18, 70, 86, 32, 80, "#343a40", "#495057", "#212529");
+  var lens = I.P(79, 32, 74); K.planet(ctx, lens.x, lens.y, 3.2, "#a5d8ff", "#1864ab");
+  /* 로봇 팔: 받침 → 어깨 → 팔꿈치 → 집게(벨트 위) */
+  var j0 = I.P(120, 82, 14), j1 = I.P(126, 70, 66), j2 = I.P(160, 30, 70), j3 = I.P(166, 25, 46);
+  ctx.lineCap = "round";
+  [[j0, j1, 11], [j1, j2, 9], [j2, j3, 6]].forEach(function (s) { ctx.strokeStyle = "#d9480f"; ctx.lineWidth = s[2] + 2; ctx.beginPath(); ctx.moveTo(s[0].x, s[0].y); ctx.lineTo(s[1].x, s[1].y); ctx.stroke(); ctx.strokeStyle = "#ffa94d"; ctx.lineWidth = s[2] - 2; ctx.stroke(); });
+  [j1, j2].forEach(function (j) { K.planet(ctx, j.x, j.y, 6, "#e9ecef", "#495057"); });
+  ctx.strokeStyle = "#495057"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(j3.x - 6, j3.y + 6); ctx.lineTo(j3.x - 2, j3.y - 2); ctx.lineTo(j3.x + 2, j3.y - 2); ctx.lineTo(j3.x + 6, j3.y + 6); ctx.stroke();
+  ctx.lineCap = "butt";
+  /* 익음 바구니 (벨트 끝) */
+  basketBack(272, -4, 352, 60); fill(ripe, 272, -4, 352, 60); basketFront(272, -4, 352, 60);
+  return { ripe: ripe, unripe: unripe, cam: I.P(79, 18, 80), arm: j2, bR: I.P(352, 28, 22), bU: I.P(190, 140, 4) };
+}
 function drawScatter(ctx, W, H, pts, lines, title, side) {
   ctx.clearRect(0, 0, W, H);
-  var LW = 622;
-  K.studio(ctx, 0, 0, LW, H, { x: 330, y: H - 20, rx: 300, ry: 26 });
-  var g = K.chart(ctx, { x: 6, y: 62, w: LW - 14, h: H - 66, x0: 0, x1: 100, y0: 10, y1: 50, xt: 5, yt: 4, xl: "붉은 정도 (카메라가 잰 값, %) →", yl: "↑ 크기(mm)", pl: 46, light: true });
+  var LW = 548;
+  K.studio(ctx, 0, 0, LW, H, { x: 250, y: 404, rx: 250, ry: 30 });
+  var L0 = lines[0], res = drawLine(ctx, pts, L0);
+  function cntBad(a) { var n = 0; a.forEach(function (q) { if (q.bad) n++; }); return n; }
+  var leadL = function (p, qx, qy, s, col) { ctx.strokeStyle = "rgba(20,25,40,.75)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(qx, qy); ctx.stroke(); ctx.fillStyle = "#111622"; ctx.beginPath(); ctx.arc(p.x, p.y, 2.5, 0, 6.283); ctx.fill(); K.pill(ctx, s, qx + (qx < p.x ? -4 : 4), qy + 4, { s: 12, a: qx < p.x ? "right" : "left", c: col || "#e8ecff", box: [0, LW] }); };
+  leadL(res.cam, 330, 96, "카메라: 붉은 정도·크기를 잰다");
+  leadL(res.arm, 40, 150, "로봇 팔: 선 아래 열매를 옆으로");
+  K.pill(ctx, "로봇: 익음 " + res.ripe.length + "개 (✕ " + cntBad(res.ripe) + ")", 470, 372, { s: 12.5, a: "center", c: "#ffc9c9", box: [300, LW] });
+  K.pill(ctx, "로봇: 안 익음 " + res.unripe.length + "개 (✕ " + cntBad(res.unripe) + ")", 190, 372, { s: 12.5, a: "center", c: "#d3f9d8", box: [0, 360] });
+  K.pill(ctx, "✕ = 할머니의 판정과 다르게 들어간 열매", LW / 2, H - 14, { s: 12, a: "center", c: "#e8ecff", box: [0, LW] });
+  /* 큰 글자: 결과 한 줄 + 무엇을 보는 그림인지 */
+  var r1 = side[1] || { t: "" };
+  K.bigText(ctx, r1.t, 18, 38, 22, r1.c === "--green-700" ? "#8ce99a" : "#ffffff");
+  note(ctx, title, 20, 60, { s: 12, w: "800", c: LT.mute });
+  K.warn(ctx, LW - 12, 30, "⚠ 딸기 크기는 보기 쉽게 그림", "right");
+  /* 오른쪽 흰 카드: 작은 산점도 */
+  var RX = LW + 8, sx = RX + 18;
+  judgeCard(ctx, RX, W, H, "산점도 · 선보다 위 = 로봇이 ‘익음’");
+  var g = K.chart(ctx, { x: RX + 4, y: 40, w: W - RX - 12, h: 216, x0: 0, x1: 100, y0: 10, y1: 50, xt: 4, yt: 4, xl: "붉은 정도(%) →", yl: "↑ 크기(mm)", pl: 34, pb: 32, light: true });
   function px(r) { return g.X(r); }
   function py(s) { return g.Y(s); }
   function lc(tok) { return tok === "--violet" || tok === "--violet-700" ? LT.violet : LT.blue; }
   ctx.save(); ctx.beginPath(); ctx.rect(g.L, g.T, g.R - g.L, g.B - g.T); ctx.clip();
   lines.forEach(function (L, k) {
     var col = lc(L.c);
-    if (k === 0) {                                   // 첫 번째 선의 위쪽을 '익음' 영역으로 칠한다
+    if (k === 0) {
       var rg = ctx.createLinearGradient(0, g.T, 0, g.B); rg.addColorStop(0, "rgba(240,62,80,.16)"); rg.addColorStop(1, "rgba(240,62,80,.05)");
       ctx.fillStyle = rg; ctx.beginPath();
       ctx.moveTo(px(0), py(L.b)); ctx.lineTo(px(100), py(100 * L.a + L.b)); ctx.lineTo(px(100), -4000); ctx.lineTo(px(0), -4000); ctx.closePath(); ctx.fill();
     }
-    ctx.save(); ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 6; ctx.setLineDash(L.dash ? [10, 6] : []);
+    ctx.save(); ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 5; ctx.setLineDash(L.dash ? [8, 5] : []);
     ctx.beginPath(); ctx.moveTo(px(0), py(L.b)); ctx.lineTo(px(100), py(100 * L.a + L.b)); ctx.stroke();
-    ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke(); ctx.restore();
+    ctx.strokeStyle = col; ctx.lineWidth = 2.6; ctx.stroke(); ctx.restore();
   });
   ctx.restore();
-  var L0 = lines[0];
   pts.slice().sort(function (p, q) { return q.s - p.s; }).forEach(function (p) {
     var X = px(p.r), Y = py(p.s), bad = (p.s > L0.a * p.r + L0.b ? 1 : 0) !== p.y;
-    berry(ctx, X, Y, 6.6, (p.w ? "w" : "r") + (p.y ? "r" : "u"));
-    if (bad) {
-      ctx.save(); ctx.lineCap = "round";
-      ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(X - 10, Y - 10); ctx.lineTo(X + 10, Y + 10); ctx.moveTo(X + 10, Y - 10); ctx.lineTo(X - 10, Y + 10); ctx.stroke();
-      ctx.strokeStyle = "#12203a"; ctx.lineWidth = 1.8; ctx.stroke(); ctx.restore();
-    }
+    berry(ctx, X, Y, 4.6, (p.w ? "w" : "r") + (p.y ? "r" : "u"));
+    if (bad) { ctx.save(); ctx.lineCap = "round"; ctx.strokeStyle = "rgba(255,255,255,.9)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(X - 6, Y - 6); ctx.lineTo(X + 6, Y + 6); ctx.moveTo(X + 6, Y - 6); ctx.lineTo(X - 6, Y + 6); ctx.stroke(); ctx.strokeStyle = "#12203a"; ctx.lineWidth = 1.5; ctx.stroke(); ctx.restore(); }
   });
-  /* 큰 글자: 결과 한 줄 + 무엇을 보는 그림인지 */
-  var r1 = side[1] || { t: "" };
-  K.bigText(ctx, r1.t, 18, 38, 22, r1.c === "--green-700" ? "#8ce99a" : "#ffffff");
-  note(ctx, title, 20, 58, { s: 11.5, w: "800", c: LT.mute });
-  K.warn(ctx, LW - 12, 30, "⚠ 딸기 크기는 보기 쉽게 그림", "right");
-  /* 오른쪽 흰 판정 카드 */
-  var RX = LW + 8, sx = RX + 18, sy = 58;
-  judgeCard(ctx, RX, W, H, "범례와 판정");
-  berry(ctx, sx + 7, sy - 4, 6.5, "rr"); note(ctx, "익음 (할머니의 판정)", sx + 22, sy, { c: LT.ink });
-  berry(ctx, sx + 7, sy + 20, 6.5, "ru"); note(ctx, "안 익음 (할머니의 판정)", sx + 22, sy + 24, { c: LT.ink });
-  berry(ctx, sx + 7, sy + 44, 6.5, "wr"); note(ctx, "흰 딸기 품종 (익음)", sx + 22, sy + 48, { s: 11, c: LT.mute });
-  ctx.save(); ctx.strokeStyle = "#12203a"; ctx.lineWidth = 2.4; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(sx + 1, sy + 60); ctx.lineTo(sx + 13, sy + 72); ctx.moveTo(sx + 13, sy + 60); ctx.lineTo(sx + 1, sy + 72); ctx.stroke(); ctx.restore();
-  note(ctx, "로봇이 잘못 가른 열매", sx + 22, sy + 71, { s: 11, c: LT.mute });
-  ctx.fillStyle = "rgba(240,62,80,.16)"; ctx.fillRect(sx, sy + 82, 14, 12);
-  note(ctx, "붉은 칸 = 로봇이 ‘익음’으로 보는 쪽", sx + 22, sy + 93, { s: 11, c: LT.mute });
+  /* 범례 두 줄 */
+  var ly = 280;
+  berry(ctx, sx + 6, ly - 4, 5.5, "rr"); note(ctx, "익음", sx + 16, ly, { c: LT.ink });
+  berry(ctx, sx + 66, ly - 4, 5.5, "ru"); note(ctx, "안 익음", sx + 76, ly, { c: LT.ink });
+  berry(ctx, sx + 142, ly - 4, 5.5, "wr"); note(ctx, "흰 품종(익음)", sx + 152, ly, { c: LT.ink });
+  ctx.save(); ctx.strokeStyle = "#12203a"; ctx.lineWidth = 2.2; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(sx + 1, ly + 13); ctx.lineTo(sx + 11, ly + 23); ctx.moveTo(sx + 11, ly + 13); ctx.lineTo(sx + 1, ly + 23); ctx.stroke(); ctx.restore();
+  note(ctx, "잘못 가른 열매", sx + 16, ly + 23, { s: 11.5, c: LT.mute });
+  ctx.fillStyle = "rgba(240,62,80,.18)"; ctx.fillRect(sx + 128, ly + 12, 14, 12);
+  note(ctx, "로봇의 ‘익음’ 쪽", sx + 148, ly + 23, { s: 11.5, c: LT.mute });
   function col(tok) { return tok === "--green-700" ? LT.green : (tok === "--rose-700" ? LT.red : (tok === "--violet-700" ? LT.violet : (tok === "--brand-700" ? LT.blue : (tok === "--mist" ? LT.mute : LT.ink)))); }
-  var y = sy + 128;
+  var y = ly + 56;
   side.forEach(function (row, i) {
     if (i === 1) {
       ctx.fillStyle = row.c === "--green-700" ? "#e7f7f0" : "#fdeee4"; ctx.beginPath(); ctx.roundRect(sx - 6, y - 21, W - sx - 12, 32, 10); ctx.fill();
       K.t(ctx, row.t, sx + 4, y + 1, { s: 15, w: "900", c: row.c === "--green-700" ? "#0f766e" : "#b4400c" });
       y += 34;
     } else {
-      K.t(ctx, row.t, sx, y, { s: row.s && row.s < 13 ? 11.5 : 12.5, w: row.w || "700", c: col(row.c) });
+      K.t(ctx, row.t, sx, y, { s: row.s && row.s < 13 ? 12 : 12.5, w: row.w || "700", c: col(row.c) });
       y += i === 0 ? 30 : 22;
     }
   });
@@ -827,48 +903,78 @@ function drawScatter(ctx, W, H, pts, lines, title, side) {
     var all = window.sthState("scale") || {}, topic = "cctv", touched = !!window.sthState("scaleSafe");
     function cur() { if (!all[topic]) all[topic] = { b: [0, 0, 0], r: [0, 0, 0], s: [0, 0, 0] }; return all[topic]; }
     var angNow = null, angTo = 0;
+    /* 접시 위 무게 덩이: 입체 블록(폭 80 · 깊이 30), 높이 = 무게 × 7. 안전장치를 켠 위험은 반투명 + 점선 */
     function stack(cx, plateY, items, ws, safe, col) {
-      var y = plateY, i;
+      var y = plateY + 6, i, w = 104, dd = 24, dx = dd * .7;
       for (i = 0; i < 3; i++) {
-        var sf = !!(safe && safe[i]), eff = ws[i] * (sf ? 0.5 : 1), h = eff * 7;
-        if (h <= 0) continue;
+        var sf = !!(safe && safe[i]), eff = ws[i] * (sf ? 0.5 : 1), h = eff * 7, x = cx - (w + dx) / 2;
+        if (h <= 0) {                                                   /* 빈 자리: 옅은 점선 판 */
+          ctx.save(); ctx.globalAlpha = .5; ctx.setLineDash([3, 3]); ctx.strokeStyle = "rgba(20,40,90,.55)"; ctx.lineWidth = 1; ctx.strokeRect(x, y - 4, w, 4); ctx.restore();
+          y -= 4; continue;
+        }
         y -= h;
-        cube(ctx, cx - 64, y, 116, h - 1, 18, col[0], K.tint(col[0], 1.22), col[1], sf ? 0.5 : 1);
-        if (sf) { ctx.save(); ctx.strokeStyle = "rgba(20,40,90,.55)"; ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]); ctx.strokeRect(cx - 64, y, 116, h - 1); ctx.restore(); }
-        if (h >= 13) K.t(ctx, (sf ? "🛡️ " : "") + items[i][0] + " " + (+eff.toFixed(1)), cx - 6, y + h / 2 + 4, { s: 10.5, w: "800", a: "center", c: sf ? LT.ink : "#ffffff" });
+        var fg = ctx.createLinearGradient(x, 0, x + w, 0); fg.addColorStop(0, K.tint(col[0], 1.08)); fg.addColorStop(1, K.tint(col[0], .88));
+        cube(ctx, x, y, w, h - 1, dd, fg, K.tint(col[0], 1.28), col[1], sf ? 0.5 : 1);
+        ctx.fillStyle = "rgba(255,255,255,.35)"; ctx.fillRect(x, y, w, 1.5);
+        if (sf) { ctx.save(); ctx.strokeStyle = "rgba(20,40,90,.6)"; ctx.lineWidth = 1.2; ctx.setLineDash([4, 3]); ctx.strokeRect(x, y, w, h - 1); ctx.restore(); }
+        if (h >= 13) K.t(ctx, (sf ? "🛡️ " : "") + items[i][0] + " " + (+eff.toFixed(1)), x + w / 2, y + h / 2 + 4, { s: 11, w: "800", a: "center", c: sf ? LT.ink : "#ffffff" });
       }
+    }
+    function pan(x, plate, col) {                                       /* 금속 접시(입체 그릇) */
+      var ug = ctx.createLinearGradient(0, plate, 0, plate + 30); ug.addColorStop(0, "#c3cad5"); ug.addColorStop(1, "#6f7a8c");
+      ctx.fillStyle = ug; ctx.beginPath(); ctx.ellipse(x, plate + 6, 88, 30, 0, 0, Math.PI); ctx.lineTo(x - 88, plate); ctx.closePath(); ctx.fill();
+      var rg = ctx.createLinearGradient(x - 92, 0, x + 92, 0); rg.addColorStop(0, "#9aa5b5"); rg.addColorStop(.4, "#f4f6fa"); rg.addColorStop(1, "#8e99aa");
+      ctx.fillStyle = rg; ctx.beginPath(); ctx.ellipse(x, plate, 92, 28, 0, 0, 6.2832); ctx.fill();
+      ctx.strokeStyle = col; ctx.lineWidth = 2.6; ctx.stroke();
+      var ig = ctx.createLinearGradient(0, plate - 24, 0, plate + 24); ig.addColorStop(0, "#c9d0da"); ig.addColorStop(1, "#eef1f5");
+      ctx.fillStyle = ig; ctx.beginPath(); ctx.ellipse(x, plate + 2, 82, 23, 0, 0, 6.2832); ctx.fill();
     }
     function render() {
       ctx.clearRect(0, 0, W, H);
       var d = TOPICS[topic], c = cur(), r = scaleNet(c.b, c.r, c.s);
-      var LW = 632, ang = angNow, cx = 316, py = 64, arm = 200;
+      var LW = 632, ang = angNow, cx = 316, py = 74, arm = 200, i;
       var lx = cx - arm * Math.cos(ang), ly = py + arm * Math.sin(ang), rx = cx + arm * Math.cos(ang), ry = py - arm * Math.sin(ang);
-      K.studio(ctx, 0, 0, LW, H, { x: cx, y: 304, rx: 270, ry: 24 });
+      K.studio(ctx, 0, 0, LW, H, { x: cx, y: H - 30, rx: 290, ry: 26 });
       lpill(ctx, d.name, cx, 30, { s: 14, a: "center", box: [0, LW] });
-      /* 나무 받침 · 금속 기둥 */
-      cube(ctx, cx - 86, 286, 160, 22, 30, "#b47c4a", "#d7a06a", "#8a5a33");
-      var pg = ctx.createLinearGradient(cx - 8, 0, cx + 8, 0); pg.addColorStop(0, "#7d879a"); pg.addColorStop(.45, "#f4f6fa"); pg.addColorStop(1, "#6e788b");
-      ctx.fillStyle = pg; ctx.fillRect(cx - 7, py, 14, 220);
-      ctx.fillStyle = "rgba(20,30,50,.18)"; ctx.beginPath(); ctx.ellipse(cx, 278, 22, 5, 0, 0, 6.2832); ctx.fill();
-      /* 저울대 */
+      /* 나무 받침 (입체 블록, 나뭇결) */
+      floorShadow(ctx, cx + 10, 340, 170, 18, .3);
+      var bxL = cx - 126, byT = 300;
+      var wf = ctx.createLinearGradient(0, byT, 0, byT + 34); wf.addColorStop(0, "#c48a55"); wf.addColorStop(1, "#9c6738");
+      cube(ctx, bxL, byT, 230, 34, 48, wf, "#e2b47e", "#8a5a33");
+      ctx.strokeStyle = "rgba(90,50,20,.3)"; ctx.lineWidth = 1;
+      for (i = 0; i < 5; i++) { ctx.beginPath(); ctx.moveTo(bxL, byT + 6 + i * 6); ctx.bezierCurveTo(bxL + 70, byT + 9 + i * 6, bxL + 150, byT + 3 + i * 6, bxL + 230, byT + 6 + i * 6); ctx.stroke(); }
+      ctx.strokeStyle = "rgba(120,70,30,.25)"; for (i = 0; i < 3; i++) { ctx.beginPath(); ctx.moveTo(bxL + 20 + i * 70, byT - 4); ctx.lineTo(bxL + 50 + i * 70, byT - 20); ctx.stroke(); }
+      ctx.fillStyle = "#e9c46a"; ctx.beginPath(); ctx.roundRect(cx - 34, byT + 11, 56, 13, 3); ctx.fill(); ctx.strokeStyle = "#b08900"; ctx.stroke();
+      var top = { x: cx, y: byT - 12 };
+      /* 금속 기둥: 받침 고리 · 원기둥 · 위 고리 */
+      ctx.fillStyle = "#59606e"; ctx.beginPath(); ctx.ellipse(top.x, top.y, 22, 8, 0, 0, 6.2832); ctx.fill();
+      var cg = ctx.createLinearGradient(top.x - 16, 0, top.x + 16, 0); cg.addColorStop(0, "#6e788b"); cg.addColorStop(.45, "#f4f6fa"); cg.addColorStop(1, "#5f6878");
+      ctx.fillStyle = cg; ctx.beginPath(); ctx.ellipse(top.x, top.y - 6, 18, 6.5, 0, 0, 6.2832); ctx.fill(); ctx.fillRect(top.x - 18, top.y - 12, 36, 6);
+      var pg = ctx.createLinearGradient(top.x - 8, 0, top.x + 8, 0); pg.addColorStop(0, "#6e788b"); pg.addColorStop(.42, "#f7f9fc"); pg.addColorStop(1, "#5c6576");
+      ctx.fillStyle = pg; ctx.fillRect(top.x - 7, py, 14, top.y - 12 - py);
+      ctx.fillStyle = "#c9d0da"; ctx.beginPath(); ctx.ellipse(top.x, top.y - 12, 7, 2.6, 0, 0, 6.2832); ctx.fill();
+      /* 눈금판과 바늘 (저울대와 함께 기운다) */
+      ctx.fillStyle = "rgba(255,255,255,.92)"; ctx.strokeStyle = "rgba(20,40,90,.25)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(cx, py); ctx.arc(cx, py, 56, Math.PI / 2 - .62, Math.PI / 2 + .62); ctx.closePath(); ctx.fill(); ctx.stroke();
+      for (i = -3; i <= 3; i++) { var a2 = Math.PI / 2 + i * .17; ctx.strokeStyle = i === 0 ? "#12203a" : "rgba(20,40,90,.45)"; ctx.lineWidth = i === 0 ? 2 : 1; ctx.beginPath(); ctx.moveTo(cx + Math.cos(a2) * 44, py + Math.sin(a2) * 44); ctx.lineTo(cx + Math.cos(a2) * 53, py + Math.sin(a2) * 53); ctx.stroke(); }
+      ctx.save(); ctx.translate(cx, py); ctx.rotate(-ang); ctx.strokeStyle = "#e03131"; ctx.lineWidth = 2.4; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(0, 52); ctx.stroke(); ctx.restore();
+      /* 저울대 (두께가 있는 금속 막대) */
       ctx.save(); ctx.translate(cx, py); ctx.rotate(-ang);
-      var bg2 = ctx.createLinearGradient(0, -6, 0, 6); bg2.addColorStop(0, "#f7f9fc"); bg2.addColorStop(.5, "#b9c2d0"); bg2.addColorStop(1, "#6b7588");
-      ctx.fillStyle = bg2; ctx.beginPath(); ctx.roundRect(-arm - 8, -6, arm * 2 + 16, 12, 6); ctx.fill(); ctx.restore();
+      ctx.fillStyle = "#d9dee6"; ctx.beginPath(); ctx.moveTo(-arm - 8, -7); ctx.lineTo(-arm, -13); ctx.lineTo(arm + 16, -13); ctx.lineTo(arm + 8, -7); ctx.closePath(); ctx.fill();
+      var bg2 = ctx.createLinearGradient(0, -7, 0, 7); bg2.addColorStop(0, "#f7f9fc"); bg2.addColorStop(.5, "#b9c2d0"); bg2.addColorStop(1, "#6b7588");
+      ctx.fillStyle = bg2; ctx.beginPath(); ctx.roundRect(-arm - 8, -7, arm * 2 + 16, 14, 4); ctx.fill();
+      ctx.restore();
       [[lx, ly, d.ben, c.b, null, ["#12b886", "#087f5b"], "편익 " + r.B, LT.green], [rx, ry, d.risk, c.r, c.s, ["#f0565f", "#b02a33"], "위험 " + (+r.R.toFixed(1)), LT.red]].forEach(function (s) {
-        var plate = s[1] + 128;
-        ctx.strokeStyle = "rgba(60,70,90,.6)"; ctx.lineWidth = 1.4;
-        ctx.beginPath(); ctx.moveTo(s[0], s[1]); ctx.lineTo(s[0] - 76, plate); ctx.moveTo(s[0], s[1]); ctx.lineTo(s[0] + 76, plate); ctx.stroke();
-        /* 접시: 얕은 그릇 */
-        var dg = ctx.createLinearGradient(0, plate - 4, 0, plate + 12); dg.addColorStop(0, "#f2f5f9"); dg.addColorStop(1, "#7f8a9c");
-        ctx.fillStyle = dg; ctx.beginPath(); ctx.ellipse(s[0], plate, 88, 9, 0, 0, Math.PI); ctx.lineTo(s[0] - 88, plate); ctx.fill();
-        var tg2 = ctx.createLinearGradient(s[0] - 88, 0, s[0] + 88, 0); tg2.addColorStop(0, "#aab4c4"); tg2.addColorStop(.4, "#eef2f7"); tg2.addColorStop(1, "#8f9aac");
-        ctx.fillStyle = tg2; ctx.beginPath(); ctx.ellipse(s[0], plate, 88, 7, 0, 0, 6.2832); ctx.fill();
-        ctx.strokeStyle = s[7]; ctx.lineWidth = 2.4; ctx.stroke();
-        stack(s[0], plate - 2, s[2], s[3], s[4], s[5]);
-        lpill(ctx, s[6], s[0], plate + 34, { s: 14, a: "center", c: s[7], box: [0, LW] });
-        K.planet(ctx, s[0], s[1], 4.5, "#f4f6fa", "#5b6488");
+        var plate = s[1] + 132;
+        /* 사슬 세 가닥 (뒤 한 가닥은 접시 뒤로) */
+        ctx.strokeStyle = "rgba(60,70,90,.45)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(s[0], s[1]); ctx.lineTo(s[0] + 10, plate - 26); ctx.stroke();
+        ctx.strokeStyle = "rgba(60,70,90,.7)"; ctx.lineWidth = 1.5; ctx.setLineDash([3, 2]);
+        ctx.beginPath(); ctx.moveTo(s[0], s[1]); ctx.lineTo(s[0] - 90, plate); ctx.moveTo(s[0], s[1]); ctx.lineTo(s[0] + 90, plate); ctx.stroke(); ctx.setLineDash([]);
+        pan(s[0], plate, s[7]);
+        stack(s[0], plate + 2, s[2], s[3], s[4], s[5]);
+        lpill(ctx, s[6], s[0], plate + 56, { s: 14, a: "center", c: s[7], box: [0, LW] });
+        K.planet(ctx, s[0], s[1], 5, "#f4f6fa", "#5b6488");
       });
-      K.planet(ctx, cx, py, 8, "#ffe8a3", "#8a6a12");
+      K.planet(ctx, cx, py, 9, "#ffe8a3", "#8a6a12");
       /* 오른쪽 흰 판정 카드 */
       var RX = LW + 8, x0 = RX + 18, x1 = W - 18, nS = c.s[0] + c.s[1] + c.s[2];
       judgeCard(ctx, RX, W, H, "나의 저울", stance(r.net), r.net >= 3 ? LT.green : (r.net <= -3 ? LT.red : LT.mute));

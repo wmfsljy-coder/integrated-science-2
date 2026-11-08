@@ -132,7 +132,7 @@ window.sthLab({
     },
     task: "그을음 정도를 정해 <b>50세대 뒤 흰 나방이 50% 이상</b>이 되게 하세요. 그을음은 35% 이상이어야 합니다(예산 한계). ▶ 로 세대를 돌려 볼 수 있어요.",
     build: function (stage, api) {
-      var H = api.h, cv = api.canvas(330), ctx = cv.ctx, W = cv.W;
+      var H = api.h, cv = api.canvas(360), ctx = cv.ctx, W = cv.W;
       var soot = 90, shown = 50;
       var run = api.ticker();
       function surv(x) { var k = x / 100; return { L: 1 - 0.4 * k, D: 1 - 0.4 * (1 - k) }; }
@@ -154,41 +154,72 @@ window.sthLab({
         ctx.fillStyle = white ? "#adb5bd" : "#111"; ctx.fillRect(-1, -4, 2, 8);
         ctx.restore();
       }
+      function mix(a, b, t) { var p = parseInt(a.slice(1), 16), q = parseInt(b.slice(1), 16), o = [16, 8, 0].map(function (sh) { var u = (p >> sh) & 255, w = (q >> sh) & 255; return Math.round(u + (w - u) * t); }); return "rgb(" + o.join(",") + ")"; }
       function draw() {
-        H.paper(ctx, W, cv.H);
-        var K = window.sthKit, LTc = K.LT, ser = series(soot), s = surv(soot), pW = ser[shown];
+        var K = window.sthKit, LTc = K.LT, ser = series(soot), s = surv(soot), pW = ser[shown], LW = 560, i;
+        ctx.clearRect(0, 0, W, cv.H);
+        var I = K.iso({ ox: 250, oy: 172, s: 0.72, L: 300, D: 160 }), FZ = 16, fl = I.P(I.L, I.D, 0);
+        K.studio(ctx, 0, 0, LW, cv.H, { x: fl.x - 100, y: fl.y - 30, rx: 250, ry: 28 });
+        var bark = Math.round(225 - soot * 1.7);
+        function barkC(k) { return "rgb(" + Math.round(bark * k) + "," + Math.round((bark - 8) * k) + "," + Math.round(Math.max(0, bark - 20) * k) + ")"; }
+        /* 숲 땅 블록: 그을음이 많을수록 풀빛이 잿빛으로 */
+        var gk = soot / 100;
+        ["front", "right"].forEach(function (sd) {
+          I.face(ctx, sd, function (Lw) {
+            var g = ctx.createLinearGradient(0, 0, 0, FZ); g.addColorStop(0, "#5a3d28"); g.addColorStop(1, "#7a5236");
+            ctx.fillStyle = g; ctx.fillRect(0, 0, Lw, FZ); ctx.fillStyle = mix("#5f9e2f", "#55585c", gk); ctx.fillRect(0, FZ - 3, Lw, 3);
+          });
+          I.shade(ctx, sd, function () { return FZ; });
+        });
+        var a0 = I.P(0, 0, FZ), c0 = I.P(I.L, I.D, FZ), tg = ctx.createLinearGradient(a0.x, a0.y, c0.x, c0.y);
+        tg.addColorStop(0, mix("#a8d86a", "#8d9196", gk)); tg.addColorStop(1, mix("#6fae3a", "#5e6268", gk));
+        I.plane(ctx, FZ, tg, "rgba(255,255,255,.5)");
+        /* 공장 굴뚝과 연기 */
+        I.box(ctx, 230, 6, FZ, 296, 46, FZ + 40, "#c9ced6", "#a5adb8", "#7f8894");
+        I.box(ctx, 262, 14, FZ + 40, 278, 30, FZ + 150, "#b7795a", "#9a5f45", "#7a4632");
+        var ch = I.P(270, 22, FZ + 150);
+        for (i = 0; i < 7; i++) { var sk = i / 6, r0 = 9 + i * 5; ctx.fillStyle = "rgba(" + Math.round(150 - 110 * gk) + "," + Math.round(150 - 110 * gk) + "," + Math.round(155 - 110 * gk) + "," + (0.12 + 0.55 * gk) * (1 - sk * .6) + ")"; ctx.beginPath(); ctx.arc(ch.x + 4 + i * 13, ch.y - 8 - i * 12, r0, 0, 6.2832); ctx.fill(); }
+        /* 뒤쪽 나무들(껍질 색 = 그을음) */
+        function trunk(x, y, w, h, k0) {
+          var bg = ctx.createLinearGradient(x - w / 2, 0, x + w / 2, 0);
+          bg.addColorStop(0, barkC(.6 * k0)); bg.addColorStop(.4, barkC(1 * k0)); bg.addColorStop(1, barkC(.5 * k0));
+          ctx.fillStyle = "rgba(20,30,50,.2)"; ctx.beginPath(); ctx.ellipse(x + w * .5, y + 2, w * .9, w * .25, 0, 0, 6.2832); ctx.fill();
+          ctx.fillStyle = bg; ctx.fillRect(x - w / 2, y - h, w, h); ctx.beginPath(); ctx.ellipse(x, y, w / 2, w * .18, 0, 0, Math.PI); ctx.fill();
+          ctx.strokeStyle = "rgba(0,0,0,.16)"; ctx.lineWidth = 1; for (var b = 0; b < w / 7; b++) { var bx = x - w / 2 + 4 + b * 7; ctx.beginPath(); ctx.moveTo(bx, y - h + 4); ctx.bezierCurveTo(bx - 3, y - h * .6, bx + 3, y - h * .3, bx, y - 3); ctx.stroke(); }
+        }
+        [[40, 30, 16, 120], [120, 20, 18, 132], [30, 110, 18, 112], [110, 90, 20, 124]].forEach(function (t0) { var p = I.P(t0[0], t0[1], FZ); trunk(p.x, p.y, t0[2], t0[3], .95); });
+        /* 앞쪽 큰 줄기 — 나방 16마리 표본이 앉아 있다(흰 나방 비율 = 지금 세대의 비율) */
+        var tp = I.P(220, 124, FZ), tx = tp.x, tw = 78;
+        trunk(tx, tp.y, tw, tp.y - 22, 1);
+        var nW = Math.round(pW * 16);
+        for (var m = 0; m < 16; m++) moth(tx - 24 + MR[m][0] * 48, 44 + m * 14 + MR[m][1] * 5, m < nW, 1.2);
+        /* 나방을 노리는 새 */
+        var bd = { x: tx + 160, y: 200 };
+        ctx.fillStyle = "#3d3a36"; ctx.beginPath(); ctx.ellipse(bd.x, bd.y, 15, 8, -.2, 0, 6.2832); ctx.fill();
+        ctx.beginPath(); ctx.arc(bd.x - 13, bd.y - 5, 6, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = "#e8a33d"; ctx.beginPath(); ctx.moveTo(bd.x - 18, bd.y - 6); ctx.lineTo(bd.x - 26, bd.y - 3); ctx.lineTo(bd.x - 18, bd.y - 2); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = "#57534e"; ctx.beginPath(); ctx.moveTo(bd.x - 2, bd.y - 4); ctx.lineTo(bd.x + 12, bd.y - 22); ctx.lineTo(bd.x + 10, bd.y - 2); ctx.closePath(); ctx.fill();
+        K.pill(ctx, "눈에 띄는 나방부터 잡힘", bd.x - 2, bd.y + 30, { s: 12, a: "center", c: LTc.ink, bg: "rgba(255,255,255,.92)", line: "rgba(20,40,90,.18)", box: [0, LW] });
+        K.pill(ctx, "껍질 밝기 " + Math.round(bark / 225 * 100) + "%", tx, tp.y + 26, { s: 12, a: "center", c: LTc.ink, bg: "rgba(255,255,255,.92)", line: "rgba(20,40,90,.18)", box: [0, LW] });
         K.bigText(ctx, shown + "세대 뒤 흰 나방 " + (pW * 100).toFixed(1) + "%", 18, 34, 21, pW >= .5 ? "#8ff0c8" : "#ffffff");
-        /* 왼쪽 그래프 */
-        var g = K.chart(ctx, { x: 10, y: 48, w: 470, h: 274, pl: 46, pb: 36, pt: 12, pr: 14, x0: 0, x1: 50, y0: 0, y1: 1, xt: 5, yt: 2, light: true, xl: "세대", yf: function (q) { return Math.round(q * 100) + "%"; } });
+        K.t(ctx, "줄기 위 나방 16마리 = 집단 표본", 18, 58, { s: 12, w: "700", c: LTc.mute });
+        K.t(ctx, "한 마리의 색은 바뀌지 않습니다", 18, cv.H - 14, { s: 12, w: "700", c: LTc.mute });
+        /* 오른쪽 흰 카드: 작은 그래프 + 생존율 */
+        var p0 = 590, p1 = 868;
+        K.card(ctx, 572, 14, 314, cv.H - 28, "그을음 " + soot + "% · 흰 나방 비율");
+        var g = K.chart(ctx, { x: 576, y: 44, w: 306, h: 132, pl: 44, pb: 28, pt: 8, pr: 12, x0: 0, x1: 50, y0: 0, y1: 1, xt: 5, yt: 2, light: true, yf: function (q) { return Math.round(q * 100) + "%"; } });
         K.line(ctx, { x: g.L, y: g.Y(.5) }, { x: g.R, y: g.Y(.5) }, LTc.green, 1.4, [5, 4]);
         var pts = []; for (var gg = 0; gg <= shown; gg++) pts.push([gg, ser[gg]]);
-        K.plot(ctx, g, pts, LTc.blue, { light: true, w: 3 });
-        ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(g.X(shown), g.Y(pW), 6.5, 0, 6.2832); ctx.fill();
-        ctx.fillStyle = LTc.blue; ctx.beginPath(); ctx.arc(g.X(shown), g.Y(pW), 4.5, 0, 6.2832); ctx.fill();
-        /* 가운데: 나무줄기 미니어처 — 그을음만큼 어둡고, 나방 비율만큼 흰 나방 */
-        var bark = Math.round(225 - soot * 1.7), tx = 556, tw = 70;
-        ctx.fillStyle = "rgba(20,30,50,.2)"; ctx.beginPath(); ctx.ellipse(tx + 6, 314, 56, 9, 0, 0, 6.2832); ctx.fill();
-        var bg = ctx.createLinearGradient(tx - tw / 2, 0, tx + tw / 2, 0);
-        bg.addColorStop(0, "rgb(" + Math.round(bark * .6) + "," + Math.round((bark - 8) * .6) + "," + Math.round(Math.max(0, bark - 20) * .6) + ")");
-        bg.addColorStop(.4, "rgb(" + bark + "," + (bark - 8) + "," + Math.max(0, bark - 20) + ")");
-        bg.addColorStop(1, "rgb(" + Math.round(bark * .5) + "," + Math.round((bark - 8) * .5) + "," + Math.round(Math.max(0, bark - 20) * .5) + ")");
-        ctx.fillStyle = bg; ctx.fillRect(tx - tw / 2, 40, tw, 274);
-        ctx.beginPath(); ctx.ellipse(tx, 314, tw / 2, 6, 0, 0, Math.PI); ctx.fill();
-        ctx.strokeStyle = "rgba(0,0,0,.18)"; ctx.lineWidth = 1.2; for (var b = 0; b < 9; b++) { ctx.beginPath(); ctx.moveTo(tx - 28 + b * 7, 44); ctx.bezierCurveTo(tx - 32 + b * 7, 130, tx - 24 + b * 7, 220, tx - 28 + b * 7, 310); ctx.stroke(); }
-        var nW = Math.round(pW * 12);
-        for (var m = 0; m < 12; m++) moth(tx - 22 + MR[m][0] * 44, 60 + m * 20 + MR[m][1] * 6, m < nW, 1.15);
-        K.t(ctx, "나무껍질 · 나방 12마리 표본", tx, 334, { s: 10.5, w: "700", a: "center", c: LTc.mute });
-        /* 판정 카드 */
-        var p0 = 660, p1 = 868;
-        K.card(ctx, 642, 14, 244, cv.H - 28, "그을음 " + soot + "%");
-        K.row(ctx, "흰 나방 생존율", (s.L * 100).toFixed(0) + "%", p0, p1, 76, LTc.blue);
-        K.bar(ctx, p0, 86, p1 - p0, s.L, LTc.blue);
-        K.row(ctx, "검은 나방 생존율", (s.D * 100).toFixed(0) + "%", p0, p1, 128);
-        K.bar(ctx, p0, 138, p1 - p0, s.D, "#495057");
-        K.row(ctx, shown + "세대 뒤 흰 나방", (pW * 100).toFixed(1) + "%", p0, p1, 184, pW >= .5 ? LTc.green : LTc.red);
-        K.tip(ctx, pW >= .5 ? "흰 나방이 절반을 넘었습니다" : "아직 절반이 안 됩니다", p0 - 4, 204, p1 - p0 + 8, pW >= .5);
-        K.t(ctx, "한 마리의 색은 바뀌지 않고", p0, 268, { s: 11, c: LTc.mute });
-        K.t(ctx, "살아남은 쪽이 자손을 남깁니다.", p0, 285, { s: 11, c: LTc.mute });
+        K.plot(ctx, g, pts, LTc.blue, { light: true, w: 2.6 });
+        ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(g.X(shown), g.Y(pW), 6, 0, 6.2832); ctx.fill();
+        ctx.fillStyle = LTc.blue; ctx.beginPath(); ctx.arc(g.X(shown), g.Y(pW), 4, 0, 6.2832); ctx.fill();
+        K.t(ctx, "세대", g.R, g.B + 26, { s: 11, w: "700", a: "right", c: LTc.mute });
+        K.row(ctx, "흰 나방 생존율", (s.L * 100).toFixed(0) + "%", p0, p1, 214, LTc.blue);
+        K.bar(ctx, p0, 222, p1 - p0, s.L, LTc.blue);
+        K.row(ctx, "검은 나방 생존율", (s.D * 100).toFixed(0) + "%", p0, p1, 254);
+        K.bar(ctx, p0, 262, p1 - p0, s.D, "#495057");
+        K.row(ctx, shown + "세대 뒤 흰 나방", (pW * 100).toFixed(1) + "%", p0, p1, 294, pW >= .5 ? LTc.green : LTc.red);
+        K.tip(ctx, pW >= .5 ? "흰 나방이 절반을 넘었습니다" : "아직 절반이 안 됩니다", p0 - 4, 302, p1 - p0 + 8, pW >= .5);
       }
       cv.canvas._redraw = draw;
       api.slider({ label: "그을음 정도", min: 0, max: 100, step: 1, value: 90, fmt: function (x) { return x + "%"; },

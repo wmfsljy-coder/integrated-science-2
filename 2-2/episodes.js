@@ -84,6 +84,7 @@ function playBtn(id, get, set, on, off) {                  // ⏸ 멈추기 단�
 }
 /* ---- 밝은 스튜디오 말투 도구 (블록 모형·입체 미니어처 장면, kit.js 머리말 K.iso·K.LT·K.card 참고) ---- */
 var LT = K.LT;
+function mixHex(a, b, t) { var p = parseInt(a.slice(1), 16), q = parseInt(b.slice(1), 16), o = [16, 8, 0].map(function (s) { var u = (p >> s) & 255, w = (q >> s) & 255; return Math.round(u + (w - u) * t); }); return "rgb(" + o.join(",") + ")"; }
 function lt(ctx, s, x, y, o) { o = o || {}; if (!o.c) o.c = LT.ink; K.t(ctx, s, x, y, o); }
 function ltrack(ctx, x, y, w, h, r) { ctx.fillStyle = "#e3e9f1"; ctx.beginPath(); ctx.roundRect(x, y, w, h, r == null ? 6 : r); ctx.fill(); }
 function lbar(ctx, x, y, w, h, c0, c1, r) {                 // 밝은 바탕 막대(살짝 볼록)
@@ -158,68 +159,114 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     var NUKE = [{ x: 13.9, n: "우라늄 핵분열", up: 0 }, { x: 14.8, n: "수소 핵융합", up: 1 }];
     function draw() {
       ctx.clearRect(0, 0, W, H);
-      var e = Math.pow(10, x), y = lifeYears(e), ok = y >= 4.6e9, SW = 628;
-      K.studio(ctx, 0, 0, SW, H, { x: 540, y: 104, rx: 80, ry: 16 });
-      var x0 = 46, x1 = 598, ay = 202;
+      var e = Math.pow(10, x), y = lifeYears(e), ok = y >= 4.6e9, SW = 600;
+      K.studio(ctx, 0, 0, SW, H, { x: 310, y: 330, rx: 300, ry: 26 });
+      var x0 = 50, x1 = 560, sy = 300, sd = 26, sdx = 18;
       function AX(k) { return x0 + (k - 7) / 8 * (x1 - x0); }
-      K.bigText(ctx, "태양의 수명 " + years(y), 18, 46, 25, ok ? "#8ff5cf" : "#ffffff");
-      K.bigText(ctx, ok ? "지구의 나이 46억 년을 넘긴다" : "지구의 나이 46억 년에 못 미친다", 18, 76, 16, "#ffd35a");
-      /* 연료 1 kg 견본 — 받침 위의 입체 덩어리 */
-      var kind = x < 8.4 ? "coal" : (x < 12.5 ? "mid" : "nuke"), Ib = K.iso({ ox: 540, oy: 50, s: 1.05, L: 46, D: 46 });
-      Ib.box(ctx, 0, 0, 0, 46, 46, 8, "#f6f8fb", "#d5dbe3", "#aeb7c3");
+      var kind = x < 8.4 ? "coal" : (x < 12.5 ? "mid" : "nuke");
+      K.bigText(ctx, "태양의 수명 " + years(y), 18, 44, 25, ok ? "#8ff5cf" : "#ffffff");
+      K.bigText(ctx, ok ? "지구의 나이 46억 년을 넘긴다" : "지구의 나이 46억 년에 못 미친다", 18, 72, 16, "#ffd35a");
+      /* 태양(입체 공): 태양 전체가 지금 고른 연료라면 */
+      var SX = 470, SY = 116, SR = 56;
+      floorShadow(ctx, SX + 8, 262, SR * .9, 12, .22);
+      if (kind === "nuke") { K.glow(ctx, SX, SY, SR * 1.25, "rgba(255,200,80,.55)", 2.2); }
+      var sg = ctx.createRadialGradient(SX - SR * .35, SY - SR * .4, SR * .1, SX, SY, SR);
+      if (kind === "coal") { sg.addColorStop(0, "#6b6b74"); sg.addColorStop(.6, "#2c2c33"); sg.addColorStop(1, "#141418"); }
+      else if (kind === "mid") { sg.addColorStop(0, "#ffffff"); sg.addColorStop(.55, "#ffd8a8"); sg.addColorStop(1, "#e8590c"); }
+      else { sg.addColorStop(0, "#fffbe6"); sg.addColorStop(.5, "#ffd43b"); sg.addColorStop(1, "#f76707"); }
+      ctx.fillStyle = sg; ctx.beginPath(); ctx.arc(SX, SY, SR, 0, 6.2832); ctx.fill();
       if (kind === "coal") {
-        Ib.box(ctx, 9, 9, 8, 37, 37, 30, "#4a4a52", "#27272d", "#141418");
-        var Rr = K.rng(5); for (var q = 0; q < 16; q++) { var pq = Ib.P(10 + Rr() * 26, 37, 9 + Rr() * 20); ctx.fillStyle = "rgba(255,255,255," + (0.1 + Rr() * .15).toFixed(2) + ")"; ctx.fillRect(pq.x, pq.y, 2, 1.5); }
-      } else if (kind === "mid") Ib.box(ctx, 9, 9, 8, 37, 37, 30, "#d3dae4", "#9aa6b6", "#76839a");
-      else { var cq = Ib.P(23, 23, 20); K.glow(ctx, cq.x, cq.y, 13, "rgba(190,150,255,.9)", 2.6); Ib.box(ctx, 9, 9, 8, 37, 37, 30, "rgba(255,246,205,.97)", "rgba(255,196,90,.95)", "rgba(222,128,60,.95)"); }
-      K.pill(ctx, "연료 1 kg · " + (kind === "coal" ? "석탄" : (kind === "nuke" ? "원자핵 반응" : "가상의 연료")), 540, 114, { s: 11.5, a: "center", c: "#ffffff", box: [380, SW - 4] });
-      /* 반응 종류 띠와 눈금자(10배씩) */
-      ctx.fillStyle = "rgba(232,89,12,.12)"; ctx.beginPath(); ctx.roundRect(AX(7) - 8, ay - 14, AX(8.7) - AX(7) + 16, 28, 8); ctx.fill();
-      lt(ctx, "화학 반응(연소)", AX(7) - 4, ay + 40, { s: 10.5, w: "800", c: LT.orange });
-      if (okB) {
-        ctx.fillStyle = "rgba(112,72,232,.12)"; ctx.beginPath(); ctx.roundRect(AX(13.6) - 8, ay - 14, AX(15) - AX(13.6) + 16, 28, 8); ctx.fill();
-        lt(ctx, "원자핵 반응", AX(15) + 4, ay + 40, { s: 10.5, w: "800", a: "right", c: LT.violet });
+        /* 불씨가 박힌 석탄 덩어리 표면 */
+        var Rc = K.rng(3);
+        ctx.save(); ctx.beginPath(); ctx.arc(SX, SY, SR, 0, 6.2832); ctx.clip();
+        for (var cq = 0; cq < 14; cq++) { var ca = Rc() * 6.28, cr = Rc() * SR * .9, cx = SX + Math.cos(ca) * cr, cy = SY + Math.sin(ca) * cr; ctx.strokeStyle = "rgba(255," + Math.round(90 + Rc() * 80) + ",40," + (0.5 + Rc() * .4).toFixed(2) + ")"; ctx.lineWidth = 1.6; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(cx + (Rc() - .5) * 22, cy + (Rc() - .5) * 16); ctx.stroke(); }
+        ctx.restore();
+        for (var fl = 0; fl < 5; fl++) { var fa = -2.6 + fl * .55, fx = SX + Math.cos(fa) * SR, fy = SY + Math.sin(fa) * SR; ctx.fillStyle = "rgba(255,146,43,.75)"; ctx.beginPath(); ctx.moveTo(fx - 6, fy + 4); ctx.quadraticCurveTo(fx, fy - 18, fx + 6, fy + 4); ctx.fill(); }
+      } else if (kind === "nuke") {
+        ctx.save(); ctx.beginPath(); ctx.arc(SX, SY, SR, 0, 6.2832); ctx.clip();
+        var Rg = K.rng(6); for (var gq = 0; gq < 40; gq++) { ctx.fillStyle = "rgba(255,255,255," + (0.12 + Rg() * .2).toFixed(2) + ")"; ctx.beginPath(); ctx.arc(SX + (Rg() - .5) * SR * 1.8, SY + (Rg() - .5) * SR * 1.8, 2 + Rg() * 4, 0, 6.2832); ctx.fill(); }
+        ctx.restore();
       }
-      var ag = ctx.createLinearGradient(x0, 0, x1, 0); ag.addColorStop(0, "#e8590c"); ag.addColorStop(1, "#7048e8");
-      ctx.strokeStyle = ag; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(x0, ay); ctx.lineTo(x1, ay); ctx.stroke();
-      ctx.strokeStyle = LT.line; ctx.lineWidth = 1.5;
-      for (var k = 7; k <= 15; k++) {
-        var gx = AX(k);
-        ctx.beginPath(); ctx.moveTo(gx, ay - 6); ctx.lineTo(gx, ay + 6); ctx.stroke();
-        lt(ctx, "10" + sup(k), gx, ay + 23, { s: 11, c: LT.mute, a: "center", w: "700" });
+      K.pill(ctx, kind === "coal" ? "석탄으로 된 태양" : (kind === "nuke" ? "원자핵 반응으로 빛나는 태양" : "가상의 연료로 된 태양"), SX - SR - 14, SY + 4, { s: 12.5, a: "right", c: kind === "coal" ? "#ffd8a8" : "#fff3bf", box: [0, SW - 4] });
+      /* 견본 진열대(연료 1 kg 견본을 에너지 순서로 올려 둔 선반). 앞면 = 10배 눈금자 */
+      var shG = ctx.createLinearGradient(0, sy, 0, sy + 30); shG.addColorStop(0, "#ffffff"); shG.addColorStop(1, "#dfe5ee");
+      ctx.fillStyle = "#eef2f7"; ctx.beginPath(); ctx.moveTo(x0 - 20, sy); ctx.lineTo(x1 + 20, sy); ctx.lineTo(x1 + 20 + sdx, sy - sd); ctx.lineTo(x0 - 20 + sdx, sy - sd); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#c3ccd8"; ctx.beginPath(); ctx.moveTo(x1 + 20, sy); ctx.lineTo(x1 + 20 + sdx, sy - sd); ctx.lineTo(x1 + 20 + sdx, sy - sd + 30); ctx.lineTo(x1 + 20, sy + 30); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = shG; ctx.fillRect(x0 - 20, sy, x1 - x0 + 40, 30);
+      ctx.strokeStyle = "rgba(110,130,160,.5)"; ctx.lineWidth = 1; ctx.strokeRect(x0 - 20, sy, x1 - x0 + 40, 30);
+      ctx.fillStyle = "rgba(232,89,12,.16)"; ctx.fillRect(AX(7) - 8, sy + 2, AX(8.7) - AX(7) + 16, 26);
+      if (okB) { ctx.fillStyle = "rgba(112,72,232,.16)"; ctx.fillRect(AX(13.6) - 8, sy + 2, AX(15) - AX(13.6) + 16, 26); }
+      ctx.strokeStyle = LT.line; ctx.lineWidth = 1.4;
+      for (var k = 7; k <= 15; k++) { var gx = AX(k); ctx.beginPath(); ctx.moveTo(gx, sy); ctx.lineTo(gx, sy + 8); ctx.stroke(); lt(ctx, "10" + sup(k), gx, sy + 23, { s: 12, c: LT.ink, a: "center", w: "800" }); }
+      lt(ctx, "연료 1 kg이 내는 에너지 (J) · 한 칸 = 10배", x0 - 20, sy + 50, { s: 12, w: "800", c: LT.mute });
+      lt(ctx, "화학 반응(연소)", AX(7) - 8, sy + 70, { s: 12, w: "800", c: LT.orange });
+      if (okB) lt(ctx, "원자핵 반응", AX(15) + 8, sy + 70, { s: 12, w: "800", a: "right", c: LT.violet });
+      /* 견본: 석탄 덩어리, 수소 가스통, (찾은 뒤) 우라늄 알갱이, 수소 핵융합 플라스마 */
+      function cube(cx, by, s0, cTop, cFront, cSide) {
+        var d = s0 * .45;
+        ctx.fillStyle = cFront; ctx.fillRect(cx - s0 / 2, by - s0, s0, s0);
+        ctx.fillStyle = cTop; ctx.beginPath(); ctx.moveTo(cx - s0 / 2, by - s0); ctx.lineTo(cx + s0 / 2, by - s0); ctx.lineTo(cx + s0 / 2 + d * .7, by - s0 - d); ctx.lineTo(cx - s0 / 2 + d * .7, by - s0 - d); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = cSide; ctx.beginPath(); ctx.moveTo(cx + s0 / 2, by - s0); ctx.lineTo(cx + s0 / 2 + d * .7, by - s0 - d); ctx.lineTo(cx + s0 / 2 + d * .7, by - d); ctx.lineTo(cx + s0 / 2, by); ctx.closePath(); ctx.fill();
       }
-      FUELS.concat(okB ? NUKE : []).forEach(function (f) {
-        var fx = AX(f.x), nuke = f.x > 12;
-        K.planet(ctx, fx, ay, 5, nuke ? "#b197fc" : "#ffa94d", nuke ? "#4c2a9e" : "#8a3a08");
-        K.pill(ctx, f.n, fx, f.up ? ay - 40 : ay - 20, { s: 11, a: "center", c: nuke ? "#d9ccff" : "#ffd9a8", box: [0, SW] });
-      });
-      var px = AX(x);
-      ctx.save(); ctx.shadowColor = "rgba(20,40,90,.35)"; ctx.shadowBlur = 4; ctx.fillStyle = LT.blue;
-      ctx.beginPath(); ctx.moveTo(px, ay - 3); ctx.lineTo(px - 8, ay - 50); ctx.lineTo(px + 8, ay - 50); ctx.closePath(); ctx.fill(); ctx.restore();
-      K.pill(ctx, "1 kg에 " + sci(e) + " J", px, ay - 60, { s: 13, a: "center", c: "#bfe6ff", box: [0, SW] });
-      /* 수명 막대 (로그 눈금 10³~10¹¹ 년) */
-      var by = 256, bh = 22, t = clamp((Math.log(y) / Math.LN10 - 3) / 8, 0.01, 1);
-      ltrack(ctx, x0, by, x1 - x0, bh, 11);
-      lbar(ctx, x0, by, (x1 - x0) * t, bh, ok ? "#0f9f76" : "#c92a2a", ok ? "#63e6be" : "#ff8787", 11);
-      K.planet(ctx, x0 + (x1 - x0) * t, by + bh / 2, 8, "#ffe066", "#e8590c");
-      var ex = x0 + (Math.log(4.6e9) / Math.LN10 - 3) / 8 * (x1 - x0);
-      ctx.strokeStyle = LT.ink; ctx.lineWidth = 1.6; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.moveTo(ex, by - 8); ctx.lineTo(ex, by + bh + 6); ctx.stroke(); ctx.setLineDash([]);
-      K.pill(ctx, "지구의 나이 46억 년", ex, by + bh + 24, { s: 11, a: "center", c: "#ffd35a", box: [0, SW] });
-      [3, 5, 7, 9, 11].forEach(function (k2) { lt(ctx, ["천 년", "10만 년", "천만 년", "10억 년", "천억 년"][(k2 - 3) / 2], x0 + (k2 - 3) / 8 * (x1 - x0), by + bh + 46, { s: 10.5, c: LT.mute, a: k2 === 3 ? "left" : (k2 === 11 ? "right" : "center") }); });
-      K.pill(ctx, years(y), x0 + 12, by + 16, { s: 12, c: "#ffffff", box: [0, SW] });
-      /* 오른쪽 판정 카드 */
-      var CX = 640, cx0 = CX + 18, cx1 = W - 18, rt = e / 3.16e7;
+      var shelfY = sy - 8;
+      function sample(f, i) {
+        var fx = AX(f.x) + 6, nuke = f.x > 12;
+        floorShadow(ctx, fx + 6, shelfY + 2, 18, 4, .25);
+        if (f.n === "석탄") {
+          cube(fx, shelfY, 24, "#55555e", "#2b2b31", "#18181c");
+          var Rr = K.rng(5); for (var q = 0; q < 8; q++) { ctx.fillStyle = "rgba(255,255,255,.25)"; ctx.fillRect(fx - 10 + Rr() * 18, shelfY - 22 + Rr() * 18, 2, 1.5); }
+        } else if (f.n === "수소 기체 연소") {
+          cyl(ctx, fx, shelfY - 30, shelfY, 9, 3.5, "#d0ebff", "#ffffff", "#74c0fc", "#e7f5ff");
+          ctx.fillStyle = "#495057"; ctx.fillRect(fx - 3, shelfY - 38, 6, 8);
+          lt(ctx, "H₂", fx, shelfY - 12, { s: 11, w: "900", a: "center", c: "#1864ab" });
+        } else if (f.n === "우라늄 핵분열") {
+          K.glow(ctx, fx, shelfY - 12, 16, "rgba(140,233,154,.6)", 2.2);
+          cyl(ctx, fx, shelfY - 22, shelfY, 8, 3, "#a9e34b", "#d8f5a2", "#5c940d", "#c0eb75");
+        } else {
+          K.glow(ctx, fx, shelfY - 14, 20, "rgba(255,212,59,.8)", 2.4);
+          cube(fx, shelfY, 26, "rgba(255,255,255,.35)", "rgba(220,235,255,.35)", "rgba(180,200,230,.35)");
+          K.planet(ctx, fx + 2, shelfY - 15, 8, "#fff3bf", "#f59f00");
+        }
+        var ly = f.up ? sy - 82 : sy - 58;
+        ctx.strokeStyle = "rgba(20,25,40,.55)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(fx, shelfY - 32); ctx.lineTo(fx, ly + 6); ctx.stroke();
+        K.pill(ctx, f.n, fx, ly, { s: 12, a: "center", c: nuke ? "#d9ccff" : "#ffd9a8", box: [0, SW] });
+      }
+      FUELS.concat(okB ? NUKE : []).forEach(sample);
+      /* 내가 고른 연료 1 kg (투명 상자): 눈금을 따라 움직이고, 진할수록 밝게 빛난다 */
+      var px = AX(x), t = (x - 7) / 8;
+      if (t > .25) K.glow(ctx, px, shelfY - 4, 10 + 26 * t, "rgba(" + Math.round(255) + "," + Math.round(200 - 60 * t) + "," + Math.round(80 + 170 * t) + "," + (0.25 + .55 * t).toFixed(2) + ")", 2.2);
+      var core = t < .2 ? "#3a3a42" : mixHex("#ff922b", "#b197fc", clamp((t - .2) / .8, 0, 1));
+      floorShadow(ctx, px + 8, sy + 2, 24, 5, .3);
+      cube(px, sy + 2, 34, "rgba(220,240,255,.55)", "rgba(200,225,255,.45)", "rgba(150,180,220,.45)");
+      K.planet(ctx, px + 3, sy - 15, 7 + 4 * t, core, t < .2 ? "#111" : "#5f3dc4");
+      ctx.strokeStyle = "rgba(28,126,214,.9)"; ctx.lineWidth = 1.6; ctx.strokeRect(px - 17, sy - 32, 34, 34);
+      K.pill(ctx, "1 kg에 " + sci(e) + " J", px, sy - 112, { s: 13, a: "center", c: "#bfe6ff", box: [0, SW] });
+      ctx.strokeStyle = "rgba(28,126,214,.85)"; ctx.lineWidth = 1.4; ctx.beginPath(); ctx.moveTo(px, sy - 104); ctx.lineTo(px, sy - 40); ctx.stroke();
+      ctx.fillStyle = LT.blue; ctx.beginPath(); ctx.moveTo(px, sy + 10); ctx.lineTo(px - 6, sy + 2); ctx.lineTo(px + 6, sy + 2); ctx.closePath(); ctx.fill();
+      /* 견본 → 태양: 태양 전체가 이 연료라면 */
+      ctx.save(); ctx.setLineDash([5, 5]); ctx.strokeStyle = "rgba(28,126,214,.55)"; ctx.lineWidth = 1.6;
+      ctx.beginPath(); ctx.moveTo(px + 18, sy - 30); ctx.quadraticCurveTo((px + SX) / 2, sy - 30, SX - SR * .7, SY + SR * .7); ctx.stroke(); ctx.restore();
+      K.warn(ctx, SW - 12, H - 12, "⚠ 견본·태양의 크기는 실제 비율이 아닙니다", "right");
+      /* 오른쪽 판정 카드: 수명 시간띠는 여기로 */
+      var CX = 612, cx0 = CX + 18, cx1 = W - 18, rt = e / 3.16e7;
       K.card(ctx, CX, 0, W - CX, H, "판정 · 이 연료로 태양이 빛나는 시간");
       lt(ctx, years(y), cx0, 64, { s: 22, w: "900", c: ok ? LT.green : LT.orange });
-      K.row(ctx, "연료 1 kg의 에너지", sci(e) + " J", cx0, cx1, 100);
-      K.row(ctx, "석탄과 비교", "× " + (rt < 10 ? rt.toFixed(1) : (rt < 1e4 ? Math.round(rt).toLocaleString() : sci(rt, 1))), cx0, cx1, 128, rt >= 1e6 ? LT.violet : LT.ink);
-      K.row(ctx, "태양의 질량", "2.0×10³⁰ kg", cx0, cx1, 156);
-      K.row(ctx, "1초에 내보내는 에너지", "3.8×10²⁶ J", cx0, cx1, 184);
-      K.bar(ctx, cx0, 198, cx1 - cx0, (Math.log(Math.max(y, 1)) / Math.LN10 - 3) / (Math.log(4.6e9) / Math.LN10 - 3), ok ? LT.green : LT.orange);
-      lt(ctx, "천 년", cx0, 226, { s: 10.5, c: LT.mute }); lt(ctx, "46억 년", cx1, 226, { s: 10.5, a: "right", c: LT.mute });
-      K.tip(ctx, ok ? "화학 반응으로는 낼 수 없는 에너지" : "46억 년을 설명하지 못합니다", cx0 - 4, 240, cx1 - cx0 + 4, ok);
-      lt(ctx, (okA ? "✓" : "○") + " 석탄 태양의 수명 (눈금 7.5)", cx0, 302, { s: 11.5, w: "800", c: okA ? LT.green : LT.mute });
-      lt(ctx, (okB ? "✓" : "○") + " 46억 년을 넘기는 첫 눈금", cx0, 324, { s: 11.5, w: "800", c: okB ? LT.green : LT.mute });
+      K.row(ctx, "연료 1 kg의 에너지", sci(e) + " J", cx0, cx1, 98);
+      K.row(ctx, "석탄과 비교", "× " + (rt < 10 ? rt.toFixed(1) : (rt < 1e4 ? Math.round(rt).toLocaleString() : sci(rt, 1))), cx0, cx1, 122, rt >= 1e6 ? LT.violet : LT.ink);
+      K.row(ctx, "태양의 질량", "2.0×10³⁰ kg", cx0, cx1, 146);
+      K.row(ctx, "1초에 내보내는 에너지", "3.8×10²⁶ J", cx0, cx1, 170);
+      /* 수명 시간띠 (로그 눈금 10³~10¹¹ 년) */
+      lt(ctx, "태양의 수명 (한 칸 = 100배)", cx0, 198, { s: 12, w: "800", c: LT.ink });
+      var bx0 = cx0, bw = cx1 - cx0, by = 216, tl = clamp((Math.log(y) / Math.LN10 - 3) / 8, 0.01, 1);
+      ltrack(ctx, bx0, by, bw, 14, 7);
+      lbar(ctx, bx0, by, bw * tl, 14, ok ? "#0f9f76" : "#c92a2a", ok ? "#63e6be" : "#ff8787", 7);
+      K.planet(ctx, bx0 + bw * tl, by + 7, 6, "#ffe066", "#e8590c");
+      var ex = bx0 + (Math.log(4.6e9) / Math.LN10 - 3) / 8 * bw;
+      ctx.strokeStyle = LT.ink; ctx.lineWidth = 1.6; ctx.setLineDash([4, 3]); ctx.beginPath(); ctx.moveTo(ex, by - 6); ctx.lineTo(ex, by + 22); ctx.stroke(); ctx.setLineDash([]);
+      lt(ctx, "천 년", bx0, by + 34, { s: 11, c: LT.mute }); lt(ctx, "46억 년", ex, by - 10, { s: 11, w: "800", a: "center", c: LT.ink }); lt(ctx, "천억 년", cx1, by + 34, { s: 11, a: "right", c: LT.mute });
+      K.tip(ctx, ok ? "화학 반응으로는 낼 수 없는 에너지" : "46억 년을 설명하지 못합니다", cx0 - 4, 262, cx1 - cx0 + 4, ok);
+      lt(ctx, (okA ? "✓" : "○") + " 석탄 태양의 수명 (눈금 7.5)", cx0, 334, { s: 12, w: "800", c: okA ? LT.green : LT.mute });
+      lt(ctx, (okB ? "✓" : "○") + " 46억 년을 넘기는 첫 눈금", cx0, 358, { s: 12, w: "800", c: okB ? LT.green : LT.mute });
       $("a-fuel-read").innerHTML = "<span class='k'>연료 1 kg</span><span class='v y'>" + sci(e) + " J</span>" +
         "<span class='k'>태양의 수명</span><span class='v b'>" + years(y) + "</span>" +
         "<span class='sub'>= 태양 질량 × 연료 1 kg의 에너지 ÷ 1초에 내보내는 에너지</span>" +
@@ -529,35 +576,87 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       var a = 30, b = 2, c = 0.1;
       function draw() {
         ctx.clearRect(0, 0, W, H);
-        var SW = 610, s1 = a, s2 = s1 * b / 100, s3 = s2 * c / 100, need = 100 / s3, ok = need >= 190000 && need <= 210000;
-        K.studio(ctx, 0, 0, SW, H);
-        var st = [{ n: "대기 밖 햇빛", p: 100, c0: "#e8a400", c: "#ffe066" }, { n: "지표에 도달", p: s1, c0: "#d9480f", c: "#ffa94d", m: "× " + a + "%" },
-          { n: "광합성으로 저장 (화학 에너지)", p: s2, c0: "#0f9f76", c: "#63e6be", m: "× " + b.toFixed(1) + "%" }, { n: "화석 연료로 보존", p: s3, c0: "#5f3dc4", c: "#b197fc", m: "× " + c.toFixed(2) + "%" }];
-        var x0 = 40, full = 400;
-        ctx.strokeStyle = LT.grid; ctx.lineWidth = 1; ctx.setLineDash([3, 4]);
-        for (var k = -6; k <= 2; k++) { var lx = x0 + full * (k + 6) / 8; ctx.beginPath(); ctx.moveTo(lx, 12); ctx.lineTo(lx, 206); ctx.stroke(); if ((k + 6) % 2 === 0) lt(ctx, (k === 2 ? "100" : (k === 0 ? "1" : "10" + sup(k))) + "%", lx, 222, { s: 10.5, a: "center", c: LT.mute, w: "600" }); }
-        ctx.setLineDash([]);
-        st.forEach(function (s, i) {
-          var y = 18 + i * 48, w = Math.max(6, full * (Math.log(s.p) / Math.LN10 + 6) / 8);
-          ltrack(ctx, x0, y, full, 28, 8);
-          lbar(ctx, x0, y, w, 28, s.c0, s.c, 8);
-          if (s.m) lt(ctx, "↓ " + s.m, x0 + 4, y - 6, { s: 11, w: "800", c: s.c0 });
-          lt(ctx, s.n, x0 + w + 10, y + 12, { s: 11.5, w: "800" });
-          lt(ctx, (s.p >= 0.1 ? s.p.toFixed(1) : (s.p >= 0.001 ? s.p.toFixed(4) : s.p.toFixed(6))) + " %", x0 + w + 10, y + 27, { s: 11, w: "900", c: s.c0 });
+        var SW = 600, s1 = a, s2 = s1 * b / 100, s3 = s2 * c / 100, need = 100 / s3, ok = need >= 190000 && need <= 210000;
+        K.studio(ctx, 0, 0, SW, H, { x: 300, y: 304, rx: 300, ry: 22 });
+        /* 계단 블록: 대기 밖 햇빛 → 지표 → 식물 → 석탄층 → 발전소. 블록 높이 = 남은 에너지(로그 눈금) */
+        var st = [{ n: "대기 밖 햇빛", p: 100, c: "#ffd43b" }, { n: "지표에 도달", p: s1, c: "#c8a46a", m: "× " + a + "%" },
+          { n: "식물이 저장", p: s2, c: "#69b34c", m: "× " + b.toFixed(1) + "%" }, { n: "석탄층", p: s3, c: "#3a3a42", m: "× " + c.toFixed(2) + "%" }];
+        var FY = 300, BW = 92, GAP = 22, DX = 22, DY = 15, X0 = 26;
+        function hOf(p) { return clamp(20 + 170 * (Math.log(p) / Math.LN10 + 5) / 7, 16, 200); }
+        function obox(x, h, top, front, side) {
+          ctx.fillStyle = front; ctx.fillRect(x, FY - h, BW, h);
+          ctx.fillStyle = side; ctx.beginPath(); ctx.moveTo(x + BW, FY - h); ctx.lineTo(x + BW + DX, FY - h - DY); ctx.lineTo(x + BW + DX, FY - DY); ctx.lineTo(x + BW, FY); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = top; ctx.beginPath(); ctx.moveTo(x, FY - h); ctx.lineTo(x + BW, FY - h); ctx.lineTo(x + BW + DX, FY - h - DY); ctx.lineTo(x + DX, FY - h - DY); ctx.closePath(); ctx.fill();
+          ctx.strokeStyle = "rgba(255,255,255,.7)"; ctx.lineWidth = 1.2; ctx.beginPath(); ctx.moveTo(x, FY - h); ctx.lineTo(x + BW, FY - h); ctx.lineTo(x + BW + DX, FY - h - DY); ctx.moveTo(x + BW, FY - h); ctx.lineTo(x + BW, FY); ctx.stroke();
+        }
+        var hs = st.map(function (s) { return hOf(s.p); }), xs = st.map(function (s, i) { return X0 + i * (BW + GAP); });
+        floorShadow(ctx, 300, FY + 4, 290, 16, .2);
+        /* 해(왼쪽 위) */
+        var sunX = xs[0] + 30, sunY = FY - hs[0] - 58;
+        K.sun(ctx, sunX, sunY, 16); K.planet(ctx, sunX, sunY, 16, "#fff3bf", "#f59f00");
+        /* ① 대기 밖 햇빛: 빛 덩어리(반투명 노란 블록) */
+        obox(xs[0], hs[0], "rgba(255,236,153,.95)", "rgba(255,212,59,.85)", "rgba(240,170,20,.85)");
+        ctx.strokeStyle = "rgba(255,255,255,.55)"; ctx.lineWidth = 2; for (var q = 0; q < 5; q++) { var qx = xs[0] + 10 + q * 18; ctx.beginPath(); ctx.moveTo(qx, FY - hs[0] + 8); ctx.lineTo(qx - 8, FY - 6); ctx.stroke(); }
+        /* ② 지표: 흙 블록 + 반사되는 빛(위로 튀는 회색 화살표) */
+        obox(xs[1], hs[1], "#e9d8a6", "#a07d52", "#7d5f3c");
+        var nIn = Math.round(2 + a / 18), nOut = Math.round((100 - a) / 18);
+        for (q = 0; q < nIn; q++) { var ix = xs[1] + 12 + q * (BW - 20) / Math.max(1, nIn - 1); K.arrow(ctx, { x: ix - 14, y: FY - hs[1] - 52 }, { x: ix, y: FY - hs[1] - 18 }, "rgba(245,159,0,.9)", 2.2, 7); }
+        for (q = 0; q < nOut; q++) { var ox = xs[1] + 16 + q * 15; K.arrow(ctx, { x: ox, y: FY - hs[1] - 22 }, { x: ox + 10, y: FY - hs[1] - 54 - (q % 2) * 8 }, "rgba(134,142,150,.8)", 1.8, 6); }
+        /* ③ 식물: 흙 블록 위 풀과 나무(광합성 효율 ∝ 그루 수) */
+        obox(xs[2], hs[2], "#8cc46a", "#8a6a48", "#6d523a");
+        ctx.fillStyle = "#4f9a3f"; ctx.fillRect(xs[2], FY - hs[2], BW, 5);
+        var nTr = Math.round(1 + b * 2), Rt = K.rng(11);
+        for (q = 0; q < nTr; q++) {
+          var tx = xs[2] + 8 + Rt() * (BW - 8), ty = FY - hs[2] - 2 - Rt() * (DY - 3), tsc = 0.8 + Rt() * .3;
+          tx += (FY - hs[2] - ty) / DY * DX * .6;
+          ctx.fillStyle = "#6b4a2e"; ctx.fillRect(tx - 1.5, ty - 8 * tsc, 3, 8 * tsc);
+          ctx.fillStyle = q % 2 ? "#2f7a2a" : "#3f8f35"; ctx.beginPath(); ctx.moveTo(tx, ty - 28 * tsc); ctx.lineTo(tx + 9 * tsc, ty - 8 * tsc); ctx.lineTo(tx - 9 * tsc, ty - 8 * tsc); ctx.closePath(); ctx.fill();
+        }
+        /* ④ 석탄층: 암석 블록 속 검은 석탄층(보존 비율 ∝ 두께) */
+        obox(xs[3], hs[3], "#a8a29a", "#8c857c", "#6e675f");
+        var seam = clamp(4 + 16 * (Math.log(c) / Math.LN10 + 2) / 2, 3, Math.max(4, hs[3] - 8));
+        ctx.fillStyle = "#16161a"; ctx.fillRect(xs[3], FY - hs[3] * .5 - seam / 2, BW, seam);
+        ctx.beginPath(); ctx.moveTo(xs[3] + BW, FY - hs[3] * .5 - seam / 2); ctx.lineTo(xs[3] + BW + DX, FY - hs[3] * .5 - seam / 2 - DY); ctx.lineTo(xs[3] + BW + DX, FY - hs[3] * .5 + seam / 2 - DY); ctx.lineTo(xs[3] + BW, FY - hs[3] * .5 + seam / 2); ctx.closePath(); ctx.fillStyle = "#0c0c0f"; ctx.fill();
+        ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; for (q = 1; q < 4; q++) { ctx.beginPath(); ctx.moveTo(xs[3], FY - hs[3] * q / 4); ctx.lineTo(xs[3] + BW, FY - hs[3] * q / 4); ctx.stroke(); }
+        /* ⑤ 발전소: 석탄을 태워 전기로 */
+        var px = X0 + 4 * (BW + GAP) - 6;
+        obox(px, 10, "#ced4da", "#adb5bd", "#868e96");
+        ctx.fillStyle = "#e9ecef"; ctx.fillRect(px + 8, FY - 46, 40, 36); ctx.fillStyle = "#c3cad3"; ctx.beginPath(); ctx.moveTo(px + 48, FY - 46); ctx.lineTo(px + 58, FY - 53); ctx.lineTo(px + 58, FY - 17); ctx.lineTo(px + 48, FY - 10); ctx.fill();
+        ctx.fillStyle = "#c92a2a"; ctx.fillRect(px + 14, FY - 82, 7, 36);
+        cyl(ctx, px + 72, FY - 58, FY - 12, 13, 4, "#dee2e6", "#f8f9fa", "#adb5bd", "#ced4da");
+        puffCloud(ctx, px + 22, FY - 98, .4, true);
+        /* 단계 사이: 남은 에너지 띠(점점 가늘어짐) + 곱하는 효율 */
+        for (var i = 0; i < 4; i++) {
+          var x1 = xs[i] + BW + DX - 4, y1 = FY - hs[i] - DY / 2, nx = i < 3 ? xs[i + 1] + 6 : px + 10, ny = i < 3 ? FY - hs[i + 1] - DY / 2 : FY - 50;
+          if (i === 3) K.arrow(ctx, { x: xs[3] + BW + DX - 2, y: FY - hs[3] * .5 - DY }, { x: px + 6, y: FY - 30 }, "rgba(40,40,46,.85)", 2.4, 8);
+          if (i < 3) K.pill(ctx, st[i + 1].m, (x1 + nx) / 2, Math.min(y1, ny) - 26, { s: 12.5, a: "center", c: ["#ffd8a8", "#d3f9d8", "#e9ecef"][i], box: [0, SW] });
+        }
+        /* 블록 앞면 이름·값 */
+        st.forEach(function (s, k) {
+          var dark = k === 0 || k === 1;
+          var val = (s.p >= 0.1 ? s.p.toFixed(1) : (s.p >= 0.001 ? s.p.toFixed(4) : s.p.toFixed(6))) + "%";
+          var ty2 = FY - Math.min(hs[k], 60) + 22;
+          if (hs[k] < 44) { K.pill(ctx, s.n + " " + val, xs[k] + BW / 2, FY + 22, { s: 12, a: "center", c: "#ffffff", box: [0, SW] }); return; }
+          lt(ctx, s.n, xs[k] + BW / 2, ty2, { s: 12, w: "900", a: "center", c: dark ? LT.ink : "#ffffff" });
+          lt(ctx, val, xs[k] + BW / 2, ty2 + 17, { s: 12, w: "900", a: "center", c: dark ? "#7a4a00" : "#ffe066" });
         });
-        lt(ctx, "막대는 로그 눈금 (점선 한 칸이 10배)", SW - 14, H - 12, { s: 10.5, c: LT.mute, a: "right" });
-        var CX = SW + 10, cx0 = CX + 18, cx1 = W - 18;
+        lt(ctx, "발전소", px + 40, FY + 22, { s: 12, w: "900", a: "center", c: LT.ink });
+        K.bigText(ctx, "햇빛 " + (Math.round(need / 1000) * 1000).toLocaleString() + " J", SW - 14, 44, 24, ok ? "#8ff5cf" : "#ffffff", "right");
+        K.bigText(ctx, "→ 화석 연료 1 J", SW - 14, 70, 16, "#ffd35a", "right");
+        K.warn(ctx, SW - 14, 98, "⚠ 블록 높이는 로그 눈금", "right");
+        var CX = SW + 12, cx0 = CX + 18, cx1 = W - 18;
         K.card(ctx, CX, 0, W - CX, H, "판정 · 화석 연료 1 J에 든 햇빛");
         lt(ctx, "햇빛 약 " + (Math.round(need / 1000) * 1000).toLocaleString() + " J", cx0, 62, { s: 20, w: "900", c: ok ? LT.green : LT.orange });
-        K.row(ctx, "남는 비율", s3.toFixed(6) + "%", cx0, cx1, 96);
-        K.row(ctx, "조사한 값", "약 20만 J", cx0, cx1, 122);
-        K.tip(ctx, ok ? "조사한 값과 일치합니다" : "효율이 곱해지며 급격히 줄어든다", cx0 - 4, 138, cx1 - cx0 + 4, ok);
-        /* 작은 블록: 숲 아래 석탄층 */
-        var Ic = K.iso({ ox: 690, oy: 196, s: .52, L: 90, D: 60 });
-        Ic.box(ctx, 0, 0, 0, 90, 60, 40, "#79b85a", "#8a6a48", "#6d523a");
-        Ic.face(ctx, "front", function (Lw) { ctx.fillStyle = "#18181d"; ctx.fillRect(0, 12, Lw, 6 + 6 * clamp((Math.log(s3) / Math.LN10 + 4) / 3, 0, 1)); ctx.fillStyle = "#4b8f3e"; ctx.fillRect(0, 36, Lw, 4); });
-        [[20, 15], [55, 25], [35, 45]].forEach(function (t) { Ic.tree(ctx, t[0], t[1], 40, .7); });
-        lt(ctx, "석탄층 =", 748, 214, { s: 11, w: "800" }); lt(ctx, "수억 년 모인 햇빛", 748, 230, { s: 11, c: LT.mute });
+        K.row(ctx, "남는 비율", s3.toFixed(6) + "%", cx0, cx1, 94);
+        K.row(ctx, "조사한 값", "약 20만 J", cx0, cx1, 118);
+        K.tip(ctx, ok ? "조사한 값과 일치합니다" : "효율이 곱해지며 급격히 줄어든다", cx0 - 4, 132, cx1 - cx0 + 4, ok);
+        /* 작은 로그 막대(카드 안) */
+        st.forEach(function (s, k) {
+          var y = 196 + k * 30, f = clamp((Math.log(s.p) / Math.LN10 + 6) / 8, 0.02, 1);
+          lt(ctx, s.n, cx0, y, { s: 12, w: "700", c: LT.mute });
+          K.bar(ctx, cx0, y + 6, cx1 - cx0, f, ["#f59f00", "#c8a46a", "#0f9f76", "#495057"][k]);
+        });
+        lt(ctx, "막대: 로그 눈금 10⁻⁶ ~ 100%", cx0, H - 14, { s: 11, c: LT.mute });
         $("a-ch-read").innerHTML = "<span class='k'>남는 비율</span><span class='v g'>" + s3.toFixed(6) + "%</span>" +
           "<span class='k'>화석 연료 1 J에</span><span class='v y'>햇빛 약 " + (Math.round(need / 1000) * 1000).toLocaleString() + " J</span>" +
           "<span class='sub'>100 × " + a + "% × " + b.toFixed(1) + "% × " + c.toFixed(2) + "%</span>" +
@@ -1406,12 +1505,13 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       for (var t = 0; t < 4; t++) metal(ctx, cx - 12, by + t * 6, 24, 6, "#d8dbe4", "#6a7080", 2);
       ctx.fillStyle = "#2a2d38"; ctx.beginPath(); ctx.roundRect(cx - 6, by + 24, 12, 6, 2); ctx.fill();
     }
-    var IR = K.iso({ ox: 196, oy: 182, s: .9, L: 170, D: 170 }), RZ = 120;
+    var IR = K.iso({ ox: 236, oy: 184, s: 1.18, L: 170, D: 170 }), RZ = 120;
     function draw() {
       ctx.clearRect(0, 0, W, H);
       var L = LAMPS[type], lm = w * L.lmw, ok = lm >= 760 && lm <= 840, effPct = 5 * L.lmw / 13.3, glow = clamp(lm / 800, 0, 2), RW = 336;
       var dk = 0.3 + 0.7 * Math.min(1, glow);
-      K.studio(ctx, 0, 0, RW, H, { x: 196, y: 344, rx: 150, ry: 18 });
+      RW = 470;
+      K.studio(ctx, 0, 0, RW, H, { x: 240, y: 388, rx: 210, ry: 22 });
       /* 회관 방(앞·오른쪽 벽과 천장을 잘라 냄) */
       function Q(a, b, c2, d, col) { IR.quad(ctx, IR.P(a[0], a[1], a[2]), IR.P(b[0], b[1], b[2]), IR.P(c2[0], c2[1], c2[2]), IR.P(d[0], d[1], d[2]), col); }
       Q([0, 0, 0], [170, 0, 0], [170, 170, 0], [0, 170, 0], K.tint("#c8a273", .4 + .65 * dk));
@@ -1422,9 +1522,10 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       onPlane(ctx, IR, 0, function () { ctx.fillStyle = "#1b2a4a"; ctx.fillRect(110, 52, 40, 44); ctx.strokeStyle = "#f8f9fa"; ctx.lineWidth = 3; ctx.strokeRect(110, 52, 40, 44); ctx.beginPath(); ctx.moveTo(130, 52); ctx.lineTo(130, 96); ctx.stroke(); });
       var fp = IR.P(85, 85, 0), pool = ctx.createRadialGradient(fp.x, fp.y, 2, fp.x, fp.y, 120);
       pool.addColorStop(0, "rgba(255,226,140," + clamp(glow * .55, 0, .7).toFixed(2) + ")"); pool.addColorStop(1, "rgba(255,226,140,0)");
-      ctx.fillStyle = pool; ctx.beginPath(); ctx.ellipse(fp.x, fp.y, 120, 56, 0, 0, 6.2832); ctx.fill();
+      ctx.fillStyle = pool; ctx.beginPath(); ctx.ellipse(fp.x, fp.y, 160, 74, 0, 0, 6.2832); ctx.fill();
       IR.box(ctx, 60, 70, 0, 120, 112, 30, K.tint("#a7774a", .5 + .5 * dk), K.tint("#8a5f38", .5 + .5 * dk), K.tint("#6e4b2c", .5 + .5 * dk));
-      IR.person(ctx, 40, 130, 0, "#4fb6ff", 1.7); IR.person(ctx, 140, 60, 0, "#ff922b", 1.7);
+      IR.person(ctx, 40, 130, 0, "#4fb6ff", 2.3); IR.person(ctx, 140, 60, 0, "#ff922b", 2.3);
+      [[70, 58], [104, 58], [52, 92], [126, 120]].forEach(function (c) { IR.box(ctx, c[0], c[1], 0, c[0] + 12, c[1] + 12, 18, K.tint("#9aa7b8", .5 + .5 * dk), K.tint("#7d8a9c", .5 + .5 * dk), K.tint("#5f6b7c", .5 + .5 * dk)); });
       /* 잘린 벽 테두리 */
       ctx.strokeStyle = "rgba(255,255,255,.95)"; ctx.lineWidth = 2.4; ctx.lineJoin = "round";
       var e1 = IR.P(170, 0, 0), e2 = IR.P(170, 0, RZ), e3 = IR.P(0, 0, RZ), e4 = IR.P(0, 170, RZ), e5 = IR.P(0, 170, 0);
@@ -1434,11 +1535,13 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       ctx.strokeStyle = "rgba(40,40,50,.7)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(top.x, top.y); ctx.lineTo(bp.x, bp.y - 34); ctx.stroke();
       if (lm > 5) K.glow(ctx, bp.x, bp.y - 8, 8 + 12 * Math.min(glow, 1.5), "rgba(255,226,150," + clamp(glow * 0.6, 0.08, 0.95) + ")", 2.6);
       var heat = (100 - effPct) / 100, nw = Math.round(heat * 4 * Math.min(1, w / 20));
-      ctx.save(); ctx.strokeStyle = "rgba(224,49,49,.6)"; ctx.lineWidth = 2;
-      for (var hq = 0; hq < nw; hq++) [-1, 1].forEach(function (sd) { var x0 = bp.x + sd * (46 + hq * 12); ctx.beginPath(); for (var yy = 0; yy <= 44; yy += 4) { var xx = x0 + Math.sin(yy / 6 + hq) * 3; if (yy) ctx.lineTo(xx, bp.y + 10 - yy); else ctx.moveTo(xx, bp.y + 10 - yy); } ctx.stroke(); });
+      ctx.save(); ctx.strokeStyle = "rgba(224,49,49,.65)"; ctx.lineWidth = 2.4;
+      for (var hq = 0; hq < nw; hq++) [-1, 1].forEach(function (sd) { var x0 = bp.x + sd * (60 + hq * 15); ctx.beginPath(); for (var yy = 0; yy <= 56; yy += 4) { var xx = x0 + Math.sin(yy / 7 + hq) * 4; if (yy) ctx.lineTo(xx, bp.y + 14 - yy); else ctx.moveTo(xx, bp.y + 14 - yy); } ctx.stroke(); });
       ctx.restore();
-      bulb(bp.x, bp.y, type, glow);
-      if (nw) K.pill(ctx, "열", bp.x + 52 + nw * 12, bp.y - 34, { s: 11, c: "#ffc9c9", box: [0, RW] });
+      ctx.save(); ctx.translate(bp.x, bp.y); ctx.scale(1.3, 1.3); bulb(0, 0, type, glow); ctx.restore();
+      if (nw) K.pill(ctx, "열 " + (100 - effPct).toFixed(0) + "%", bp.x + 66 + nw * 15, bp.y - 44, { s: 12, c: "#ffc9c9", box: [0, RW] });
+      if (lm > 5) K.pill(ctx, "빛 " + effPct.toFixed(0) + "%", bp.x, bp.y + 78, { s: 12, a: "center", c: "#fff3bf", box: [0, RW] });
+      K.warn(ctx, RW - 12, H - 12, "⚠ 전구 크기는 보기 쉽게 과장", "right");
       K.bigText(ctx, Math.round(lm) + " lm", 18, 44, 28, ok ? "#8ff5cf" : "#ffffff");
       K.bigText(ctx, L.n + " " + w + " W", 18, 70, 15, "#ffd35a");
       /* 오른쪽 판정 카드 */
@@ -1457,12 +1560,13 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       lt(ctx, "하루 5시간씩 1년 동안 쓰는 전기 (내가 맞춘 전구)", gx, 208, { s: 12.5, w: "800" });
       ["inc", "cfl", "led"].forEach(function (k, i) {
         var y = 220 + i * 28, fw = found[k];
-        lt(ctx, LAMPS[k].n, gx + 96, y + 14, { s: 11, a: "right", w: k === type ? "900" : "700", c: k === type ? LT.ink : LT.mute });
-        ltrack(ctx, gx + 104, y, 300, 18, 5);
-        if (fw) { var kwh = fw * 5 * 365 / 1000; lbar(ctx, gx + 104, y, 300 * kwh / 130, 18, k === "inc" ? "#c92a2a" : "#0c8599", k === "inc" ? "#ff8787" : "#66d9e8", 5); lt(ctx, fw + " W → " + kwh.toFixed(0) + " kWh", gx + 104 + 300 * kwh / 130 + 8, y + 14, { s: 11, w: "800" }); }
-        else lt(ctx, "아직 맞추지 못함", gx + 112, y + 14, { s: 10.5, c: LT.dim });
+        var TW = gw - 214;
+        lt(ctx, LAMPS[k].n, gx + 96, y + 14, { s: 11.5, a: "right", w: k === type ? "900" : "700", c: k === type ? LT.ink : LT.mute });
+        ltrack(ctx, gx + 104, y, TW, 18, 5);
+        if (fw) { var kwh = fw * 5 * 365 / 1000; lbar(ctx, gx + 104, y, TW * Math.min(1, kwh / 130), 18, k === "inc" ? "#c92a2a" : "#0c8599", k === "inc" ? "#ff8787" : "#66d9e8", 5); lt(ctx, fw + " W → " + kwh.toFixed(0) + " kWh", gx + gw, y + 14, { s: 11.5, w: "800", a: "right" }); }
+        else lt(ctx, "아직 맞추지 못함", gx + gw, y + 14, { s: 11, a: "right", c: LT.dim });
       });
-      K.tip(ctx, ok ? "✅ 회관에 알맞은 밝기" : (lm < 760 ? "어둡습니다 · 760 lm 이상으로" : "필요 이상으로 밝습니다 (낭비)"), gx - 4, 314, gw + 4, ok ? true : null);
+      K.tip(ctx, ok ? "✅ 회관에 알맞은 밝기" : (lm < 760 ? "어둡습니다 · 760 lm 이상으로" : "필요 이상으로 밝습니다 (낭비)"), gx - 4, 330, gw + 4, ok ? true : null);
       $("c-lamp-read").innerHTML = "<span class='k'>밝기</span><span class='v y'>" + Math.round(lm) + " lm</span>" +
         "<span class='sub'>= " + w + " W × " + L.lmw + " lm/W</span>" +
         "<span class='k'>빛 효율</span><span class='v b'>약 " + effPct.toFixed(0) + "%</span>" +
@@ -1507,7 +1611,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     var canvas = $("c-c-vill"), ctx = window.setupCanvas(canvas), W = canvas._w, H = canvas._h;
     var S = 500, Wd = 0, Bt = 0, Dg = 0, tries = window.sthState("villTries") || [];
     function verdict(r) { return { a: r.black === 0, b: r.cost <= 55 + 1e-9, c: r.ratio <= 0.4 + 1e-9 }; }
-    var IV = K.iso({ ox: 286, oy: 62, s: .62, L: 560, D: 200 }), GZ = 12, hr = 11, playing = !REDUCE, off = null, offKey = "", last = null;
+    var IV = K.iso({ ox: 196, oy: 84, s: .8, L: 560, D: 200 }), GZ = 12, hr = 11, playing = !REDUCE, off = null, offKey = "", last = null;
     var HOUSES = []; (function () { for (var r = 0; r < 3; r++) for (var c = 0; c < 4; c++) HOUSES.push([28 + c * 55, 22 + r * 60]); })();
     function mix(a, b, t) { return a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }); }
     function config() {
@@ -1519,7 +1623,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
     function dieselAt(i) { return [408 + i * 36, 158]; }
     function paintStatic(c) {
       var octx = ctx; ctx = c;
-      K.studio(ctx, 0, 0, 640, 300, { x: 360, y: 270, rx: 240, ry: 26 });
+      K.studio(ctx, 0, 0, 640, 400, { x: 340, y: 372, rx: 300, ry: 30 });
       IV.box(ctx, 0, 0, 0, 560, 200, GZ, "#8fbf6a", "#8a6a48", "#6d523a");
       IV.face(ctx, "front", function (Lw) { ctx.strokeStyle = "rgba(255,255,255,.18)"; ctx.lineWidth = 1; for (var z = 4; z < GZ; z += 4) { ctx.beginPath(); ctx.moveTo(0, z); ctx.lineTo(Lw, z); ctx.stroke(); } });
       IV.plane(ctx, GZ + .2, "#b8b2a4", null, 0, 250, 92, 100);
@@ -1542,10 +1646,10 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       var h = Math.floor(hr) % 48, o = r.rows[h], hh = h % 24, d2 = h >= 24, day = hh >= 6 && hh < 18;
       var sunUp = Math.max(0, Math.sin(Math.PI * (hr % 24 - 6) / 12)), wind = d2 ? 0.06 : (0.35 + 0.15 * Math.sin(hh / 24 * 2 * Math.PI + 1));
       ctx.drawImage(off, 0, 0, W, H);
-      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, 640, 300, 14); ctx.clip();
+      ctx.save(); ctx.beginPath(); ctx.roundRect(0, 0, 640, 400, 14); ctx.clip();
       /* 하늘: 해·구름·밤 */
       var night = clamp(1 - sunUp * 3, 0, 1);
-      if (night > 0) { ctx.fillStyle = "rgba(12,22,58," + (0.42 * night).toFixed(2) + ")"; ctx.fillRect(0, 0, 640, 300); }
+      if (night > 0) { ctx.fillStyle = "rgba(12,22,58," + (0.42 * night).toFixed(2) + ")"; ctx.fillRect(0, 0, 640, 400); }
       if (sunUp > 0) { var sx = lerp(230, 610, (hr % 24 - 6) / 12), sy = 120 - 92 * sunUp; K.sun(ctx, sx, sy, 12); K.planet(ctx, sx, sy, 12, "#fff3bf", "#f59f00"); if (d2) puffCloud(ctx, sx - 6, sy + 6, .9, true); }
       else { K.planet(ctx, 600, 40, 9, "#f8f9fa", "#adb5bd"); }
       if (d2) { puffCloud(ctx, 330, 50, .8, true); puffCloud(ctx, 470, 36, .7, true); }
@@ -1555,7 +1659,7 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
         if (o.un <= 1 && !day) { var wp = IV.P(hq[0] + 13, hq[1] + 22, GZ + 8); K.glow(ctx, wp.x, wp.y, 3, "rgba(255,224,120,.9)", 3); }
       });
       /* 풍력 */
-      for (i = 0; i < cf.nW; i++) { var m = millAt(i); windmill(ctx, IV.P(m[0], m[1], GZ), 54, 30, hr * 6 * wind * 4 + i); }
+      for (i = 0; i < cf.nW; i++) { var m = millAt(i); windmill(ctx, IV.P(m[0], m[1], GZ), 70, 38, hr * 6 * wind * 4 + i); }
       /* 배터리 잔량 */
       for (i = 0; i < cf.nB; i++) { var b = battAt(i), f = Bt > 0 ? o.soc / Bt : 0; onPlane(ctx, IV, b[1] + 22, function () { ctx.fillStyle = "#e9ecef"; ctx.fillRect(b[0] + 4, GZ + 3, 22, 12); ctx.fillStyle = f > .2 ? "#20c997" : "#fa5252"; ctx.fillRect(b[0] + 4, GZ + 3, 22, 12 * f); }); }
       /* 경유 발전기 연기 */
@@ -1569,11 +1673,15 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       if (o.un > 1) K.pill(ctx, "⚡ 정전!", IV.P(140, 60, GZ + 40).x, IV.P(140, 60, GZ + 40).y, { s: 14, a: "center", c: "#ff8787" });
       K.bigText(ctx, (d2 ? "2일째 " : "1일째 ") + hh + "시", 18, 44, 26, "#ffffff");
       K.bigText(ctx, d2 ? "흐리고 바람 없음" : "맑고 바람 부는 날", 18, 72, 16, "#ffd35a");
-      lt(ctx, "태양광 " + S + " kW", 18, 214, { s: 11.5, w: "800", c: LT.blue }); lt(ctx, "풍력 " + Wd + " kW", 18, 234, { s: 11.5, w: "800", c: LT.teal });
-      lt(ctx, "배터리 " + Bt.toLocaleString() + " kWh", 18, 254, { s: 11.5, w: "800", c: LT.green }); lt(ctx, "경유 발전기 " + Dg + " kW", 18, 274, { s: 11.5, w: "800", c: LT.orange });
+      lt(ctx, "태양광 " + S + " kW", 18, 304, { s: 12, w: "800", c: LT.blue }); lt(ctx, "풍력 " + Wd + " kW", 18, 326, { s: 12, w: "800", c: LT.teal });
+      lt(ctx, "배터리 " + Bt.toLocaleString() + " kWh", 18, 348, { s: 12, w: "800", c: LT.green }); lt(ctx, "경유 발전기 " + Dg + " kW", 18, 370, { s: 12, w: "800", c: LT.orange });
+      if (cf.nP) { var lp = panelAt(Math.min(cf.nP - 1, 2)); IV.label(ctx, lp[0] + 17, lp[1] + 6, GZ + 8, "태양광 판 " + cf.nP + "장", 30, -50, "#a5d8ff", [0, 640]); }
+      if (cf.nB) { var lb = battAt(Math.min(cf.nB - 1, 3)); IV.label(ctx, lb[0] + 30, lb[1] + 11, GZ + 10, "배터리 컨테이너 " + cf.nB + "개", 40, 26, "#b2f2bb", [0, 640]); }
+      if (cf.nD) { var ld = dieselAt(cf.nD - 1); IV.label(ctx, ld[0] + 28, ld[1] + 10, GZ + 10, "경유 발전기 " + cf.nD + "대", 30, 40, "#ffd8a8", [0, 640]); }
+      IV.label(ctx, 28, 160, GZ + 20, "집 12채", -30, 40, "#e8ecff", [0, 640]);
       /* 지금 시각 카드 */
       var CX = 650, x0 = CX + 18, x1 = W - 18;
-      K.card(ctx, CX, 0, W - CX, 300, "지금 · " + (d2 ? "2일째 " : "1일째 ") + hh + "시");
+      K.card(ctx, CX, 0, W - CX, 400, "지금 · " + (d2 ? "2일째 " : "1일째 ") + hh + "시");
       lt(ctx, o.un > 1 ? "정전!" : (o.dg > 1 ? "경유 발전 중" : (o.dis > 1 ? "배터리로 버팀" : "햇빛·바람으로 충분")), x0, 62, { s: 19, w: "900", c: o.un > 1 ? LT.red : (o.dg > 1 ? LT.orange : (o.dis > 1 ? LT.blue : LT.green)) });
       K.row(ctx, "마을이 쓰는 전력", Math.round(o.D) + " kW", x0, x1, 96);
       K.row(ctx, "태양광·풍력", Math.round(o.R) + " kW", x0, x1, 122, LT.green);
@@ -1582,9 +1690,9 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       K.row(ctx, "모자람(정전)", Math.round(o.un) + " kW", x0, x1, 200, o.un > 1 ? LT.red : LT.ink);
       K.row(ctx, "배터리 잔량", Bt > 0 ? Math.round(o.soc / Bt * 100) + "%" : "없음", x0, x1, 226);
       K.bar(ctx, x0, 236, x1 - x0, Bt > 0 ? o.soc / Bt : 0, LT.teal);
-      lt(ctx, "▶ 시간을 흘려 보며 마을을 지켜보세요", x0, 280, { s: 10.5, c: LT.mute });
+      lt(ctx, "▶ 시간을 흘려 보며 마을을 지켜보세요", x0, 380, { s: 12, c: LT.mute });
       /* 아래: 이틀(48시간) 전력 수급 그래프 */
-      var Y0 = 308, gx0 = 56, gx1 = 880, gy0 = 346, gy1 = 496, bw = (gx1 - gx0) / 48, maxP = 900;
+      var Y0 = 408, gx0 = 56, gx1 = 880, gy0 = 446, gy1 = 596, bw = (gx1 - gx0) / 48, maxP = 900;
       K.studio(ctx, 0, Y0, W, H - Y0);
       ctx.fillStyle = "rgba(255,255,255,.7)"; ctx.fillRect(gx0, gy0, gx1 - gx0, gy1 - gy0);
       for (var hb = 0; hb < 48; hb++) { var q = hb % 24; if (!(q >= 6 && q < 18)) { ctx.fillStyle = "rgba(20,40,90,.07)"; ctx.fillRect(gx0 + hb * bw, gy0, bw + .5, gy1 - gy0); } }
@@ -1604,17 +1712,17 @@ function puffCloud(ctx, x, y, sc, dark) {                  // 입체 구름 덩�
       lt(ctx, "kW", gx0 - 6, gy0 - 6, { s: 10, a: "right", c: LT.mute });
       var cxh = gx0 + (hr % 48) * bw; ctx.strokeStyle = LT.ink; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(cxh, gy0 - 4); ctx.lineTo(cxh, gy1 + 2); ctx.stroke();
       ctx.fillStyle = LT.ink; ctx.beginPath(); ctx.moveTo(cxh, gy0 - 2); ctx.lineTo(cxh - 5, gy0 - 10); ctx.lineTo(cxh + 5, gy0 - 10); ctx.closePath(); ctx.fill();
-      lt(ctx, "🔋", 22, 536, { s: 13 });
-      ltrack(ctx, gx0, 522, gx1 - gx0, 16, 5);
-      if (Bt > 0) r.rows.forEach(function (oo, hh2) { ctx.fillStyle = "rgba(12,133,153," + (0.08 + 0.85 * oo.soc / Bt).toFixed(2) + ")"; ctx.fillRect(gx0 + hh2 * bw, 522, bw, 16); });
-      else lt(ctx, "배터리 없음", gx0 + 8, 534, { s: 10.5, c: LT.dim });
+      lt(ctx, "🔋", 22, 636, { s: 13 });
+      ltrack(ctx, gx0, 622, gx1 - gx0, 16, 5);
+      if (Bt > 0) r.rows.forEach(function (oo, hh2) { ctx.fillStyle = "rgba(12,133,153," + (0.08 + 0.85 * oo.soc / Bt).toFixed(2) + ")"; ctx.fillRect(gx0 + hh2 * bw, 622, bw, 16); });
+      else lt(ctx, "배터리 없음", gx0 + 8, 634, { s: 10.5, c: LT.dim });
       [["#0f9f76", "태양광·풍력"], ["#1c7ed6", "배터리 방전"], ["#e8590c", "경유 발전"], ["#c92a2a", "정전(모자람)"], [LT.violet, "— 마을이 쓰는 전력"]].forEach(function (pq, k) {
-        ctx.fillStyle = pq[0]; ctx.beginPath(); ctx.roundRect(gx0 + k * 160, 548, 12, 12, 3); ctx.fill(); lt(ctx, pq[1], gx0 + k * 160 + 18, 559, { s: 11 });
+        ctx.fillStyle = pq[0]; ctx.beginPath(); ctx.roundRect(gx0 + k * 160, 648, 12, 12, 3); ctx.fill(); lt(ctx, pq[1], gx0 + k * 160 + 18, 659, { s: 11 });
       });
       var vd = verdict(r);
-      K.tip(ctx, (vd.a ? "✅" : "❌") + " 정전 " + r.black + "시간", gx0 - 4, 566, 250, vd.a);
-      K.tip(ctx, (vd.b ? "✅" : "❌") + " 설치비 " + r.cost.toFixed(1) + "억 원", gx0 + 262, 566, 250, vd.b);
-      K.tip(ctx, (vd.c ? "✅" : "❌") + " CO₂ 지금의 " + Math.round(r.ratio * 100) + "% (" + (r.co2 / 1000).toFixed(1) + "톤)", gx0 + 524, 566, 300, vd.c);
+      K.tip(ctx, (vd.a ? "✅" : "❌") + " 정전 " + r.black + "시간", gx0 - 4, 666, 250, vd.a);
+      K.tip(ctx, (vd.b ? "✅" : "❌") + " 설치비 " + r.cost.toFixed(1) + "억 원", gx0 + 262, 666, 250, vd.b);
+      K.tip(ctx, (vd.c ? "✅" : "❌") + " CO₂ 지금의 " + Math.round(r.ratio * 100) + "% (" + (r.co2 / 1000).toFixed(1) + "톤)", gx0 + 524, 666, 300, vd.c);
       return r;
     }
     playBtn("c-v-play", function () { return playing; }, function (x) { playing = x; }, "⏸ 시간 멈추기", "▶ 이틀 흘려 보기");
