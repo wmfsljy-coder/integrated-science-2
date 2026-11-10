@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 태양 에너지의 생성과 전환 (통합과학2 Ⅱ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1">교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅱ-2 에너지 전환과 활용 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 태양 에너지의 생성과 전환</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 석탄 태양</h2>
+  <p>태양의 질량 약 2.0×10³⁰ kg · 태양이 1초에 내보내는 에너지 약 3.8×10²⁶ J · 석탄 1 kg이 탈 때 나오는 에너지 약 3×10⁷ J</p>
+  <p><span class="formula">수명 = 태양의 질량 × 연료 1 kg의 에너지 ÷ 1초에 내보내는 에너지</span></p>
+  <ul>
+    <li>석탄 태양의 수명 ≈ 1.6×10¹¹ 초 ≈ 약 <b class="blank" data-n="1">5천</b> 년 → 지구의 나이 46억 년에 크게 못 미친다.</li>
+    <li>46억 년을 버티려면 연료 1 kg이 약 3×10¹³ J(석탄의 약 100만 배)을 내야 한다.<br>→ 연소(화학 반응)로는 불가능, 태양의 에너지원은 <b class="blank" data-n="2">원자핵</b> 반응</li>
+  </ul>
+
+  <h2>② 수소 핵융합</h2>
+  <ul>
+    <li>태양 중심핵(약 1,500만 ℃): 수소 원자핵 4개 → <b class="blank" data-n="3">헬륨</b> 원자핵 1개 + 에너지</li>
+    <li>이 반응을 <b class="blank" data-n="4">수소 핵융합</b>이라고 한다.</li>
+  </ul>
+  <table>
+    <tr><th>수소 원자핵 4개</th><th>헬륨 원자핵 1개</th><th>줄어든 질량</th></tr>
+    <tr><td>4 × 1.0073 = 4.0292 u</td><td>4.0015 u</td><td>0.0277 u (약 0.7%)</td></tr>
+  </table>
+  <ul>
+    <li>반응 뒤에 줄어든 질량 → <b class="blank" data-n="5">질량 결손</b></li>
+    <li>줄어든 질량은 에너지로 바뀐다: E = <b class="blank" data-n="6">Δm × c²</b> &nbsp;(c = 3.0×10⁸ m/s)</li>
+    <li>1초에 수소 약 6억 톤 핵융합 → 약 <b class="blank" data-n="7">420만</b> 톤의 질량이 사라짐 → 3.8×10²⁶ J (실제 태양의 밝기와 일치)</li>
+  </ul>
+
+  <h2>③ 지구에서의 에너지 흐름</h2>
+  <ul>
+    <li>지구가 받는 양: 태양이 내보내는 에너지의 약 22억분의 1 (1초에 약 1.7×10¹⁷ J)</li>
+    <li>지구에 온 태양 에너지 100 → 반사 약 <b class="blank" data-n="8">30</b> % · 대기 흡수 약 20 % · 지표 흡수 약 <b class="blank" data-n="9">50</b> %</li>
+  </ul>
+  <table>
+    <tr><th style="width:26%">흡수된 태양 에너지가</th><th>바뀌는 모습</th><th style="width:30%">이용</th></tr>
+    <tr><td>열에너지</td><td>대기·지표·바다를 데운다</td><td>-</td></tr>
+    <tr><td><b class="blank" data-n="10">운동</b> 에너지</td><td>고르지 않게 데워져 바람·해류·파도</td><td>풍력·파력 발전</td></tr>
+    <tr><td><b class="blank" data-n="11">위치</b> 에너지</td><td>증발한 물이 높은 곳에 비로 내린다</td><td>수력 발전</td></tr>
+    <tr><td><b class="blank" data-n="12">화학</b> 에너지</td><td>광합성으로 양분에 저장</td><td>먹이·장작·화석 연료</td></tr>
+  </table>
+  <ul>
+    <li>근원이 태양이 아닌 것: 지열(지구 내부의 열), 조력(<b class="blank" data-n="13">달</b>의 인력), 핵에너지(원자핵)</li>
+    <li>화석 연료 1 J ← 식물이 저장한 1,000 J(보존 0.1%, 가정값) ← 지표의 빛 10만 J(광합성 1%) ← 햇빛 약 <b class="blank" data-n="14">20만</b> J(지표 도달 50%)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 태양 에너지에 대한 설명으로 옳은 것은? <span class="ans">→ ㉡</span><br>
+      ㉠ 중심부에서 수소가 산소와 결합해 탄다 &nbsp; ㉡ 핵융합 뒤 질량의 합이 줄어든다 &nbsp; ㉢ 태양의 질량은 시간이 지나도 그대로다</p>
+    <p>2. 근원이 태양 에너지가 <u>아닌</u> 것을 모두 고르면? &nbsp; 풍력 · 조력 · 지열 · 석유 <span class="ans">→ 조력, 지열</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>태양은 '타고' 있을까, '가벼워지고' 있을까? 오늘 배운 낱말 두 개 이상을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「태양은 석탄 덩어리일까」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?";
+  }
+</script>
+</body>
+</html>

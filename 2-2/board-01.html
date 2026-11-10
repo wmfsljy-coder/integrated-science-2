@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 태양 에너지의 생성과 전환 (통합과학2 Ⅱ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  /* 이 강의에서만 쓰는 모양 */
+  @keyframes sunIn { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: none; } }
+  .current .art .sunwrap { animation: sunIn 1.2s ease both; transform-box: fill-box; transform-origin: center; }
+  .fuse .h { transition: transform 1.1s cubic-bezier(.5,0,.3,1), opacity .4s ease 1s; transform-box: fill-box; transform-origin: center; }
+  .fuse .h1 { transform: translate(-115px, -90px); } .fuse .h2 { transform: translate(115px, -90px); }
+  .fuse .h3 { transform: translate(-115px, 90px); } .fuse .h4 { transform: translate(115px, 90px); }
+  .fuse.go .h { transform: translate(0, 0); opacity: 0; }
+  .fuse .he, .fuse .burst { opacity: 0; transition: opacity .5s ease 1.1s, transform .6s ease 1.1s; transform-box: fill-box; transform-origin: center; transform: scale(.4); }
+  .fuse.go .he, .fuse.go .burst { opacity: 1; transform: none; }
+  .fuse .before { transition: opacity .3s; } .fuse.go .before { opacity: 0; }
+  .chain { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 40px; }
+  .chain .box { background: #fff; border: 4px solid var(--line); border-radius: 24px; padding: 24px 22px; text-align: center; min-width: 200px; white-space: nowrap; }
+  .chain .box b { display: block; font-size: 46px; letter-spacing: -.03em; }
+  .chain .box span { display: block; font-size: 24px; color: var(--mute); margin-top: 6px; line-height: 1.4; }
+  .chain .op { text-align: center; font-size: 26px; font-weight: 900; color: var(--orange); line-height: 1.3; white-space: nowrap; }
+  .chain .op i { display: block; font-style: normal; font-size: 46px; color: var(--dim); }
+  .chain .box.sun { border-color: #f59f00; background: #fff8db; }
+  .chain .box.end { border-color: var(--ink); }
+  .tree { display: grid; grid-template-columns: 340px 1fr; gap: 34px; align-items: stretch; }
+  .tree .root { border-radius: 26px; background: radial-gradient(circle at 50% 40%, #fff3bf, #ffd43b 55%, #f59f00); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; }
+  .tree .root b { font-size: 44px; line-height: 1.25; letter-spacing: -.03em; }
+  .tree .root span { font-size: 25px; color: #6b4a00; margin-top: 10px; font-weight: 700; }
+  .tree .rows { display: grid; gap: 16px; }
+  .tree .r { display: grid; grid-template-columns: 76px 330px 1fr; gap: 16px; align-items: center; background: var(--soft); border-radius: 20px; padding: 14px 24px; border-left: 10px solid var(--line); }
+  .tree .r .ic { font-size: 50px; text-align: center; }
+  .tree .r .nm { font-size: 34px; font-weight: 900; letter-spacing: -.03em; }
+  .tree .r .ds { font-size: 26px; color: var(--mute); line-height: 1.45; }
+  .tree .r.heat { border-left-color: var(--red); } .tree .r.kin { border-left-color: var(--blue); } .tree .r.pot { border-left-color: var(--teal); } .tree .r.chem { border-left-color: var(--green); }
+  .buckets { display: grid; grid-template-columns: 1.05fr .85fr 1fr 1.2fr; gap: 20px; margin-top: 26px; }
+  .bucket { background: #fff; border-radius: 20px; padding: 18px 20px; border-top: 10px solid var(--line); min-height: 380px; }
+  .bucket h3 { font-size: 27px; margin-bottom: 4px; }
+  .bucket .sb { font-size: 21px; color: var(--mute); margin-bottom: 12px; display: block; }
+  .bucket .it { font-size: 25px; font-weight: 800; padding: 10px 14px; border-radius: 12px; background: var(--soft); margin-bottom: 8px; line-height: 1.35; }
+  .bucket .it small { display: block; font-size: 19px; font-weight: 500; color: var(--mute); margin-top: 2px; }
+  .bucket.k { border-top-color: var(--blue); } .bucket.p { border-top-color: var(--teal); } .bucket.c { border-top-color: var(--green); } .bucket.x { border-top-color: var(--red); }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 18px 24px 18px 84px; margin-bottom: 16px; background: #fff; border-radius: 20px; font-size: 30px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 18px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .seg100 { display: flex; width: 1400px; background: #e8edf4; border-radius: 18px; }
+  .seg100 > div { position: relative; }
+  .seg100 .sg { height: 96px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 40px; font-weight: 900; }
+  .seg100 > div:first-child .sg { border-radius: 18px 0 0 18px; } .seg100 > div:last-child .sg { border-radius: 0 18px 18px 0; }
+  .seg100 p { position: absolute; left: 6px; right: 6px; top: 112px; font-size: 29px; line-height: 1.4; }
+  .seg100 + p { margin-top: 170px !important; }  .q { font-size: 32px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="4분의 1을 잘라 속을 보여 주는 태양과 멀리 있는 지구">
+      <defs>
+        <radialGradient id="cGlow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffb347" stop-opacity=".55"/><stop offset="1" stop-color="#ffb347" stop-opacity="0"/></radialGradient>
+        <radialGradient id="cSurf" cx="38%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c4"/><stop offset=".5" stop-color="#ffb13b"/><stop offset="1" stop-color="#d9480f"/></radialGradient>
+        <radialGradient id="cConv" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="#f76707"/><stop offset="1" stop-color="#c92a2a"/></radialGradient>
+        <radialGradient id="cRad" cx="50%" cy="50%" r="50%"><stop offset=".35" stop-color="#ffd43b"/><stop offset="1" stop-color="#ff922b"/></radialGradient>
+        <radialGradient id="cCore" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#fff3bf"/><stop offset="1" stop-color="#ffd43b"/></radialGradient>
+        <radialGradient id="cEarth" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#a5d8ff"/><stop offset=".6" stop-color="#1c7ed6"/><stop offset="1" stop-color="#0b3d6e"/></radialGradient>
+        <clipPath id="cQuarter"><path d="M800 270 L560 270 A240 240 0 0 1 800 30 Z"/></clipPath>
+      </defs>
+      <g class="sunwrap">
+        <circle cx="800" cy="270" r="330" fill="url(#cGlow)"/>
+        <circle cx="800" cy="270" r="240" fill="url(#cSurf)"/>
+        <g clip-path="url(#cQuarter)">
+          <circle cx="800" cy="270" r="240" fill="url(#cConv)"/>
+          <circle cx="800" cy="270" r="168" fill="url(#cRad)"/>
+          <circle cx="800" cy="270" r="60" fill="url(#cCore)"/>
+        </g>
+        <path d="M560 270 L800 270 L800 30" fill="none" stroke="#7a2400" stroke-width="3" opacity=".7"/>
+      </g>
+      <path d="M1040 330 Q1180 380 1300 420" fill="none" stroke="#ffd43b" stroke-width="3" stroke-dasharray="8 8" opacity=".8"/>
+      <circle cx="1330" cy="430" r="20" fill="url(#cEarth)"/>
+      <text x="1330" y="485" fill="#a5d8ff" font-size="22" font-weight="800" text-anchor="middle">지구</text>
+      <text x="1560" y="510" fill="#7b8598" font-size="17" text-anchor="end">⚠ 태양과 지구의 크기·거리는 실제 비율이 아닙니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅱ-2 에너지 전환과 활용 · 01</p>
+    <h1>태양 에너지의 생성과 전환</h1>
+    <p class="sub" data-step="1">태양은 타고 있을까, 가벼워지고 있을까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 태양이 어떻게 빛나는지, 그 에너지가 지구에 와서 무엇으로 바뀌는지 봅니다. 학습지 빈칸 번호가 화면 번호와 같으니, 화면에 번호가 열리면 그대로 받아 적게 합니다.</p>
+    <p data-at="1">부제의 두 낱말 '타고'와 '가벼워지고'를 기억하게 하고, 수업 끝에 다시 묻겠다고만 말합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="태양이 석탄 덩어리라면?" data-part="도입">
+  <p class="kicker">도입 · 19세기 과학자들의 진지한 질문</p>
+  <h2>태양이 통째로 석탄이라면?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>증기 기관의 시대, 사람들이 아는 가장 센 연료는 <b>석탄</b>이었습니다. 그래서 과학자들은 물었습니다. “태양도 거대한 석탄 덩어리가 타는 것 아닐까?”</p>
+      <table class="ledger mt">
+        <tr><td>태양의 질량</td><td class="v">약 2.0×10³⁰ kg</td></tr>
+        <tr><td>태양이 1초에 내보내는 에너지</td><td class="v">약 3.8×10²⁶ J</td></tr>
+        <tr><td>석탄 1 kg이 탈 때 나오는 에너지</td><td class="v">약 3×10⁷ J</td></tr>
+      </table>
+    </div>
+    <div class="card yel">
+      <h3>지금 밝기로 탄다면 다 타 버릴 때까지?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 수천 년</div>
+        <div class="opt">㉡ 수백만 년</div>
+        <div class="opt">㉢ 수십억 년</div>
+      </div>
+      <p class="small mt" data-step="1">손을 들어 골라 보고, 고른 까닭을 한 문장으로 말해 보세요. 답은 다음 장면에서 계산으로 확인합니다.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지난 시간에 에너지의 형태를 배웠어요. 오늘은 그 에너지가 어디서 오는지 끝까지 거슬러 올라가 봅니다. 19세기에는 태양이 석탄처럼 탄다는 생각이 진지하게 받아들여졌어요. 표의 숫자 세 개만 있으면 석탄 태양의 수명을 구할 수 있습니다.</p>
+    <p data-at="1">㉠㉡㉢ 가운데 하나에 손을 들게 하고, 두세 명에게 까닭을 묻습니다. 답은 주지 않고 바로 계산으로 넘어갑니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 네 낱말로 오늘을 정리합니다</h2>
+  <div class="kw" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card"><b>수소 핵융합</b><span>태양 중심핵에서 수소 원자핵이 합쳐지는 반응</span></div>
+    <div class="card"><b>질량 결손</b><span>반응 뒤에 줄어든 질량, 그만큼이 에너지가 된다</span></div>
+    <div class="card"><b>에너지 전환</b><span>한 형태의 에너지가 다른 형태로 바뀌는 것</span></div>
+    <div class="card"><b>에너지 흐름</b><span>태양 에너지가 지구에서 이어지며 옮겨 가는 길</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script">
+    <p>키워드 네 개를 읽어 주기만 하고 설명은 하지 않습니다. 수업 끝 정리에서 이 네 낱말이 모두 다시 나옵니다.</p>
+  </aside>
+</section>
+
+<!-- 4 석탄 태양 계산 -->
+<section class="slide" id="s-coal" data-title="석탄 태양은 몇 년 탈까" data-part="① 석탄 태양">
+  <p class="kicker">① 석탄 태양 · 계산</p>
+  <h2>석탄 태양은 몇 년 동안 탈까</h2>
+  <p class="formula">수명 = <span class="c-blue">태양의 질량 × 연료 1 kg의 에너지</span> ÷ <span class="c-orange">1초에 내보내는 에너지</span></p>
+  <p class="formula" data-step="1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= <span class="c-blue">2.0×10³⁰ kg × 3×10⁷ J/kg</span> ÷ <span class="c-orange">3.8×10²⁶ J/s</span></p>
+  <p class="formula" data-step="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈ 1.6×10¹¹ 초 &nbsp;<span class="c-mute" style="font-size:30px">(1년 ≈ 3.2×10⁷ 초)</span></p>
+  <p class="formula" data-step="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;≈ 약 <b class="blank" data-n="1" data-step="3">5천</b> 년</p>
+  <div data-step="3" class="mt">
+    <svg viewBox="0 0 1400 150" width="1400" height="150" aria-label="5천 년과 46억 년을 로그 눈금으로 비교한 띠">
+      <rect x="60" y="50" width="1280" height="26" rx="13" fill="#e8edf4"/>
+      <rect x="60" y="50" width="262" height="26" rx="13" fill="#d9302c"/>
+      <line x1="1161" y1="30" x2="1161" y2="96" stroke="#161b28" stroke-width="4" stroke-dasharray="7 5"/>
+      <text x="322" y="118" font-size="24" font-weight="900" fill="#d9302c" text-anchor="middle">석탄 태양 약 5천 년</text>
+      <text x="1161" y="20" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">지구의 나이 약 46억 년</text>
+      <text x="60" y="118" font-size="20" fill="#5f6b80">1년</text><text x="1340" y="118" font-size="20" fill="#5f6b80" text-anchor="end">100억 년</text>
+      <text x="740" y="140" font-size="20" fill="#5f6b80" text-anchor="middle">한 칸 = 10배 (로그 눈금)</text>
+    </svg>
+  </div>
+  <aside class="script">
+    <p>연료가 다 탈 때까지의 시간은 '가진 에너지 전체 ÷ 1초에 쓰는 에너지'입니다. 가진 에너지는 태양의 질량에 연료 1 kg의 에너지를 곱하면 됩니다.</p>
+    <p data-at="1">숫자를 넣습니다. 10의 지수끼리 더하고 빼면 30 + 7 − 26 = 11이에요.</p>
+    <p data-at="2">초를 햇수로 바꾸려면 1년의 초, 약 3.2×10⁷으로 나눕니다.</p>
+    <p data-at="3">빈칸 1번, 약 5천 년. ㉠을 고른 학생이 맞았어요. 그런데 지질학자들은 지구가 46억 년 되었다고 말합니다. 태양은 적어도 그만큼 빛났어야 하는데, 석탄으로는 100만분의 1밖에 안 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 5 얼마나 진한 연료여야 하나 -->
+<section class="slide" id="s-need" data-title="46억 년을 버티려면" data-part="① 석탄 태양">
+  <p class="kicker">① 석탄 태양 · 46억 년을 설명하려면</p>
+  <h2>연료가 얼마나 '진해야' 할까</h2>
+  <svg viewBox="0 0 1400 440" width="1400" height="440" aria-label="연료 1킬로그램이 내는 에너지를 10배 눈금에 나타낸 자">
+    <rect x="80" y="150" width="236" height="150" rx="14" fill="#fff4e6" data-step="2"/>
+    <rect x="1094" y="150" width="246" height="150" rx="14" fill="#efe9ff" data-step="2"/>
+    <text x="198" y="140" font-size="25" font-weight="900" fill="#e8590c" text-anchor="middle" data-step="2">화학 반응(연소)</text>
+    <text x="1217" y="140" font-size="25" font-weight="900" fill="#6741d9" text-anchor="middle" data-step="2">원자핵 반응</text>
+    <line x1="80" y1="300" x2="1340" y2="300" stroke="#161b28" stroke-width="4"/>
+    <g font-size="23" font-weight="800" fill="#161b28" text-anchor="middle">
+      <line x1="80" y1="300" x2="80" y2="318" stroke="#161b28" stroke-width="3"/><text x="80" y="348">10⁷</text>
+      <line x1="237.5" y1="300" x2="237.5" y2="318" stroke="#161b28" stroke-width="3"/><text x="237.5" y="348">10⁸</text>
+      <line x1="395" y1="300" x2="395" y2="318" stroke="#161b28" stroke-width="3"/><text x="395" y="348">10⁹</text>
+      <line x1="552.5" y1="300" x2="552.5" y2="318" stroke="#161b28" stroke-width="3"/><text x="552.5" y="348">10¹⁰</text>
+      <line x1="710" y1="300" x2="710" y2="318" stroke="#161b28" stroke-width="3"/><text x="710" y="348">10¹¹</text>
+      <line x1="867.5" y1="300" x2="867.5" y2="318" stroke="#161b28" stroke-width="3"/><text x="867.5" y="348">10¹²</text>
+      <line x1="1025" y1="300" x2="1025" y2="318" stroke="#161b28" stroke-width="3"/><text x="1025" y="348">10¹³</text>
+      <line x1="1182.5" y1="300" x2="1182.5" y2="318" stroke="#161b28" stroke-width="3"/><text x="1182.5" y="348">10¹⁴</text>
+      <line x1="1340" y1="300" x2="1340" y2="318" stroke="#161b28" stroke-width="3"/><text x="1340" y="348">10¹⁵</text>
+    </g>
+    <text x="80" y="392" font-size="22" font-weight="800" fill="#5f6b80">연료 1 kg이 내는 에너지 (J) · 한 칸 = 10배</text>
+    <!-- 견본 -->
+    <circle cx="155" cy="282" r="14" fill="#2b2b31"/><text x="155" y="250" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">석탄</text>
+    <circle cx="261" cy="282" r="14" fill="#74c0fc"/><text x="285" y="215" font-size="21" font-weight="800" fill="#1864ab" text-anchor="middle">수소 기체 연소</text>
+    <g data-step="1">
+      <line x1="1094" y1="70" x2="1094" y2="300" stroke="#1462d8" stroke-width="5" stroke-dasharray="10 7"/>
+      <rect x="560" y="30" width="520" height="80" rx="14" fill="#1462d8"/>
+      <text x="820" y="64" font-size="25" font-weight="900" fill="#fff" text-anchor="middle">46억 년을 버티는 최소값 약 3×10¹³ J/kg</text>
+      <text x="820" y="96" font-size="22" font-weight="700" fill="#dce9ff" text-anchor="middle">석탄의 약 100만 배</text>
+    </g>
+    <g data-step="2">
+      <circle cx="1167" cy="282" r="14" fill="#82c91e"/><text x="1167" y="250" font-size="21" font-weight="800" fill="#2b8a3e" text-anchor="middle">우라늄 핵분열</text>
+      <circle cx="1308" cy="282" r="16" fill="#ffd43b" stroke="#f59f00" stroke-width="3"/><text x="1300" y="215" font-size="21" font-weight="900" fill="#6741d9" text-anchor="middle">수소 핵융합</text>
+    </g>
+  </svg>
+  <p class="big center" data-step="2">연소로는 불가능 → 태양의 에너지원은 <b class="blank" data-n="2" data-step="2">원자핵</b> 반응</p>
+  <aside class="script">
+    <p>거꾸로 물어봅시다. 46억 년을 버티려면 연료 1 kg이 얼마의 에너지를 내야 할까요? 눈금 한 칸이 10배입니다. 석탄은 10⁷ 근처, 수소를 태워도 10⁸ 근처예요.</p>
+    <p data-at="1">필요한 값은 약 3×10¹³, 석탄의 100만 배입니다. 불에 타는 연료, 곧 화학 반응으로는 아무리 좋은 연료도 여기까지 못 갑니다.</p>
+    <p data-at="2">이 정도를 내는 것은 원자핵이 바뀌는 반응뿐입니다. 빈칸 2번, 원자핵 반응. 원자력 발전의 우라늄 핵분열도 여기, 태양의 수소 핵융합은 그보다 더 오른쪽입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 수소 핵융합 -->
+<section class="slide" id="s-fusion" data-title="태양 중심핵의 수소 핵융합" data-part="② 핵융합">
+  <p class="kicker">② 수소 핵융합 · 태양 중심핵 약 1,500만 ℃</p>
+  <h2>수소 원자핵 4개가 하나로</h2>
+  <svg viewBox="0 0 1400 470" width="1400" height="470" class="fuse" aria-label="태양 단면과 중심핵 확대: 수소 원자핵 4개가 헬륨 원자핵 1개로 합쳐진다">
+    <defs>
+      <radialGradient id="fSurf" cx="38%" cy="35%" r="70%"><stop offset="0" stop-color="#fff3c4"/><stop offset=".5" stop-color="#ffb13b"/><stop offset="1" stop-color="#d9480f"/></radialGradient>
+      <radialGradient id="fConv" cx="50%" cy="50%" r="50%"><stop offset=".7" stop-color="#f76707"/><stop offset="1" stop-color="#c92a2a"/></radialGradient>
+      <radialGradient id="fRad" cx="50%" cy="50%" r="50%"><stop offset=".35" stop-color="#ffd43b"/><stop offset="1" stop-color="#ff922b"/></radialGradient>
+      <radialGradient id="fCore" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff"/><stop offset=".6" stop-color="#fff3bf"/><stop offset="1" stop-color="#ffd43b"/></radialGradient>
+      <radialGradient id="fZoom" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff8e1"/><stop offset="1" stop-color="#ffc76b"/></radialGradient>
+      <radialGradient id="fH" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#ffb3a7"/><stop offset="1" stop-color="#b3261e"/></radialGradient>
+      <radialGradient id="fHe" cx="35%" cy="35%" r="70%"><stop offset="0" stop-color="#d0bfff"/><stop offset="1" stop-color="#4527a0"/></radialGradient>
+      <clipPath id="fQ"><path d="M240 250 L40 250 A200 200 0 0 1 240 50 Z"/></clipPath>
+    </defs>
+    <circle cx="240" cy="250" r="200" fill="url(#fSurf)"/>
+    <g clip-path="url(#fQ)"><circle cx="240" cy="250" r="200" fill="url(#fConv)"/><circle cx="240" cy="250" r="140" fill="url(#fRad)"/><circle cx="240" cy="250" r="50" fill="url(#fCore)"/></g>
+    <path d="M40 250 L240 250 L240 50" fill="none" stroke="#7a2400" stroke-width="3" opacity=".7"/>
+    <g font-size="21" font-weight="800">
+      <text x="60" y="38" fill="#c92a2a">대류층</text>
+      <text x="96" y="150" fill="#fff" stroke="#9c4a00" stroke-width="5" paint-order="stroke">복사층</text>
+      <text x="160" y="236" fill="#7a2400" stroke="#fff8e1" stroke-width="5" paint-order="stroke">중심핵</text>
+    </g>
+    <line x1="270" y1="225" x2="800" y2="140" stroke="#5f6b80" stroke-width="2.5" stroke-dasharray="8 6"/>
+    <line x1="270" y1="275" x2="800" y2="330" stroke="#5f6b80" stroke-width="2.5" stroke-dasharray="8 6"/>
+    <circle cx="1000" cy="235" r="205" fill="url(#fZoom)" stroke="#fff" stroke-width="8"/>
+    <circle cx="1000" cy="235" r="211" fill="none" stroke="#5f6b80" stroke-width="2"/>
+    <g class="h h1"><circle cx="1000" cy="235" r="36" fill="url(#fH)"/><text x="1000" y="247" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">H</text></g>
+    <g class="h h2"><circle cx="1000" cy="235" r="36" fill="url(#fH)"/><text x="1000" y="247" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">H</text></g>
+    <g class="h h3"><circle cx="1000" cy="235" r="36" fill="url(#fH)"/><text x="1000" y="247" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">H</text></g>
+    <g class="h h4"><circle cx="1000" cy="235" r="36" fill="url(#fH)"/><text x="1000" y="247" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">H</text></g>
+    <g class="burst" stroke="#f59f00" stroke-width="7" stroke-linecap="round">
+      <line x1="1000" y1="150" x2="1000" y2="108"/><line x1="1000" y1="320" x2="1000" y2="362"/><line x1="915" y1="235" x2="873" y2="235"/><line x1="1085" y1="235" x2="1127" y2="235"/>
+      <line x1="940" y1="175" x2="912" y2="147"/><line x1="1060" y1="175" x2="1088" y2="147"/><line x1="940" y1="295" x2="912" y2="323"/><line x1="1060" y1="295" x2="1088" y2="323"/>
+      <text x="1000" y="400" font-size="30" font-weight="900" fill="#e8590c" stroke="none" text-anchor="middle">+ 에너지</text>
+    </g>
+    <g class="he"><circle cx="1000" cy="235" r="62" fill="url(#fHe)"/><text x="1000" y="251" font-size="44" font-weight="900" fill="#fff" text-anchor="middle">He</text></g>
+    <text x="1000" y="400" font-size="22" font-weight="800" fill="#9c4a00" text-anchor="middle" class="before">중심핵 확대 · 아주 뜨겁고 빽빽하다</text>
+    <text x="1395" y="466" font-size="17" fill="#7b8598" text-anchor="end">⚠ 원자핵 크기는 과장 · 실제 반응은 여러 단계</text>
+  </svg>
+  <p class="big" data-step="1" style="margin-top:6px">수소 원자핵 4개 → <b class="blank" data-n="3" data-step="1">헬륨</b> 원자핵 1개 + 에너지</p>
+  <p class="big" data-step="2">이 반응을 <b class="blank" data-n="4" data-step="2">수소 핵융합</b>이라고 한다</p>
+  <aside class="script">
+    <p>답은 20세기에 나왔습니다. 태양을 4분의 1 잘라 보면 가장 안쪽이 중심핵, 온도가 약 1,500만 ℃예요. 여기를 확대해 봅니다. 수소 원자핵, 곧 양성자들이 엄청난 속도로 부딪칩니다.</p>
+    <p data-at="1">수소 원자핵 4개가 합쳐져 헬륨 원자핵 1개가 되고 에너지가 나옵니다. 빈칸 3번, 헬륨. 실제로는 한꺼번에 4개가 부딪치는 게 아니라 여러 단계를 거쳐요.</p>
+    <p data-at="2">빈칸 4번, 수소 핵융합. 1905년 아인슈타인의 E = mc², 1920년 에딩턴의 측정, 1930년대 말 한스 베테가 이 과정을 밝혔다는 것까지 짧게 덧붙입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 질량 결손 -->
+<section class="slide" id="s-defect" data-title="줄어든 0.7%" data-part="② 핵융합">
+  <p class="kicker">② 수소 핵융합 · 질량을 재 보면</p>
+  <h2>합쳐졌더니 가벼워졌다</h2>
+  <svg viewBox="0 0 1400 250" width="1400" height="250" aria-label="수소 원자핵 4개와 헬륨 원자핵 1개의 질량 막대 비교">
+    <defs>
+      <linearGradient id="gH" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ff8f8f"/><stop offset="1" stop-color="#c2255c"/></linearGradient>
+      <linearGradient id="gHe" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#b197fc"/><stop offset="1" stop-color="#5f3dc4"/></linearGradient>
+    </defs>
+    <text x="0" y="36" font-size="27" font-weight="900" fill="#c2255c">수소 원자핵 4개 &nbsp;4 × 1.0073 = 4.0292 u</text>
+    <rect x="0" y="50" width="1100" height="50" rx="10" fill="url(#gH)"/>
+    <text x="0" y="146" font-size="27" font-weight="900" fill="#5f3dc4">헬륨 원자핵 1개 &nbsp;4.0015 u</text>
+    <rect x="0" y="160" width="1092.4" height="50" rx="10" fill="url(#gHe)"/>
+    <rect x="1092.4" y="156" width="10" height="58" fill="none" stroke="#e8590c" stroke-width="4" stroke-dasharray="4 3"/>
+    <g data-step="1">
+      <path d="M1106 185 L1160 185" stroke="#e8590c" stroke-width="4"/>
+      <rect x="1160" y="140" width="236" height="92" rx="14" fill="#fff4e6" stroke="#e8590c" stroke-width="3"/>
+      <text x="1278" y="178" font-size="25" font-weight="900" fill="#e8590c" text-anchor="middle">0.0277 u 줄어듦</text>
+      <text x="1278" y="214" font-size="25" font-weight="900" fill="#e8590c" text-anchor="middle">= 약 0.7%</text>
+    </g>
+  </svg>
+  <p class="big" data-step="1">반응 뒤에 줄어든 질량 → <b class="blank" data-n="5" data-step="1">질량 결손</b></p>
+  <p class="big" data-step="2">줄어든 질량은 에너지로 바뀐다: &nbsp;E = <b class="blank" data-n="6" data-step="2">Δm × c²</b></p>
+  <p class="small" data-step="2">c = 3.0×10⁸ m/s (빛의 속력) → c² = 9×10¹⁶. 질량 1 kg이 통째로 에너지가 되면 9×10¹⁶ J, 석탄 1 kg의 약 30억 배</p>
+  <aside class="script">
+    <p>원자핵의 질량을 재 봅니다. u는 원자 질량 단위예요. 수소 원자핵 4개는 4.0292, 헬륨 원자핵 1개는 4.0015. 막대 끝을 보세요. 조금 짧죠.</p>
+    <p data-at="1">0.0277만큼, 처음 질량의 약 0.7%가 사라졌습니다. 빈칸 5번, 질량 결손. 재가 남은 것도, 연기로 날아간 것도 아닙니다.</p>
+    <p data-at="2">빈칸 6번, E = Δm × c². c²이 9×10¹⁶이라 아주 작은 질량도 엄청난 에너지가 됩니다. 이것이 화학 반응과 원자핵 반응의 차이예요.</p>
+  </aside>
+</section>
+
+<!-- 8 1초 동안 -->
+<section class="slide soft" id="s-second" data-title="1초 동안 태양에서 일어나는 일" data-part="② 핵융합">
+  <p class="kicker">② 수소 핵융합 · 실제 태양의 밝기와 맞춰 보기</p>
+  <h2>1초 동안 태양에서 일어나는 일</h2>
+  <div class="chain">
+    <div class="box"><b>약 6억 톤</b><span>핵융합하는 수소</span></div>
+    <div class="op" data-step="1"><i>→</i>× 0.7%</div>
+    <div class="box" data-step="1"><b>약 <b class="blank" data-n="7" data-step="1" style="display:inline-block;font-size:46px">420만</b> 톤</b><span>사라지는 질량 (Δm)</span></div>
+    <div class="op" data-step="2"><i>→</i>× c²</div>
+    <div class="box sun" data-step="2"><b>3.8×10²⁶ J</b><span>태양이 1초에 내보내는<br>에너지와 일치</span></div>
+  </div>
+  <p class="big center mt2" data-step="3">태양은 타는 것이 아니라 <span class="c-orange">1초마다 가벼워지고</span> 있다</p>
+  <p class="note" data-step="3">핵융합이 일어날 만큼 뜨거운 곳은 중심부뿐이라 태양 수소의 약 10%만 쓰입니다. 이 속도라면 태양의 수명은 약 100억 년입니다.</p>
+  <aside class="script">
+    <p>정말 이걸로 태양의 밝기가 설명될까요? 태양 중심에서는 1초에 수소 약 6억 톤이 헬륨으로 바뀝니다.</p>
+    <p data-at="1">그 0.7%, 빈칸 7번, 약 420만 톤의 질량이 1초마다 사라집니다.</p>
+    <p data-at="2">420만 톤에 c²을 곱하면 3.8×10²⁶ J. 처음에 본 태양이 1초에 내보내는 에너지와 딱 맞습니다.</p>
+    <p data-at="3">표지의 질문으로 돌아가요. 태양은 타고 있나요, 가벼워지고 있나요? 중심부 수소만 써도 약 100억 년 빛난다는 것까지 말해 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 9 확인 -->
+<section class="slide" id="s-check1" data-title="줄어든 질량은 어디로?" data-part="② 핵융합">
+  <p class="kicker">② 수소 핵융합 · 확인</p>
+  <h2>줄어든 0.7%의 질량은 어떻게 되었을까</h2>
+  <div class="opts" style="max-width:1150px">
+    <div class="opt wrong" data-step="1">① 재가 되어 태양 중심에 쌓였다</div>
+    <div class="opt right" data-step="1">② 에너지로 바뀌어 빛과 열로 방출되었다</div>
+    <div class="opt wrong" data-step="1">③ 수소가 타서 연기(기체)로 날아갔다</div>
+    <div class="opt wrong" data-step="1">④ 측정 오차일 뿐 실제로는 줄지 않았다</div>
+  </div>
+  <p class="why mt" data-step="2">핵융합은 산소와 결합하는 연소가 아니라 원자핵끼리 합쳐지는 반응입니다. 재도 연기도 생기지 않고, 0.7%는 정밀하게 측정된 값으로 태양의 밝기를 정확히 설명합니다.</p>
+  <aside class="script">
+    <p>30초 동안 짝과 이야기하게 한 뒤 번호를 손가락으로 들게 합니다.</p>
+    <p data-at="1">정답은 ②. ①과 ③을 고른 학생은 아직 '태운다'는 생각이 남은 것이니 한 번 더 짚어 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 10 지구에 닿는 에너지 -->
+<section class="slide" id="s-earth" data-title="지구에 닿는 태양 에너지" data-part="③ 에너지 흐름">
+  <p class="kicker">③ 지구에서의 에너지 흐름</p>
+  <h2>지구는 태양 에너지를 얼마나 받을까</h2>
+  <div class="cols" style="grid-template-columns:1fr 1fr;gap:30px">
+    <div class="card"><p class="small" style="margin:0">태양이 사방으로 내보내는 에너지 가운데</p><p class="big" style="margin:0">약 22억분의 1</p></div>
+    <div class="card"><p class="small" style="margin:0">그래도 1초에</p><p class="big" style="margin:0">약 1.7×10¹⁷ J <span style="font-size:26px;color:var(--mute)">인류가 쓰는 에너지의 수천 배</span></p></div>
+  </div>
+  <p class="small" style="margin:34px 0 10px;color:var(--ink);font-weight:900">지구에 온 태양 에너지를 100으로 놓으면</p>
+  <div class="seg100">
+    <div style="width:30%"><div class="sg" data-step="1" style="background:#adb5bd">30</div><p data-step="1">반사 약 <b class="blank" data-n="8" data-step="1">30</b>%<br><span class="small">구름·지표가 우주로 되돌림</span></p></div>
+    <div style="width:20%"><div class="sg" data-step="2" style="background:#4dabf7">20</div><p data-step="2">대기 흡수<br>약 20%</p></div>
+    <div style="width:50%"><div class="sg" data-step="2" style="background:#2f9e44">50</div><p data-step="2">지표 흡수 약 <b class="blank" data-n="9" data-step="2">50</b>%<br><span class="small">땅과 바다가 데워진다</span></p></div>
+  </div>
+  <p class="big center" data-step="2" style="margin-top:6px"><span class="c-orange">흡수된 약 70</span>이 지구의 에너지 흐름을 일으킨다</p>
+  <aside class="script">
+    <p>태양 에너지는 사방으로 퍼지기 때문에 지구에 오는 것은 약 22억분의 1뿐이에요. 그래도 1초에 1.7×10¹⁷ J, 인류 전체가 쓰는 에너지의 수천 배입니다.</p>
+    <p data-at="1">지구에 온 에너지를 100이라 하면 약 30은 구름과 지표에서 반사되어 우주로 돌아갑니다. 빈칸 8번, 30.</p>
+    <p data-at="2">나머지 약 70이 흡수되는데, 20은 대기가, 약 50은 지표가 흡수합니다. 빈칸 9번, 50. 이 70이 지구의 모든 에너지 흐름의 출발점이에요.</p>
+  </aside>
+</section>
+
+<!-- 11 무엇으로 바뀌나 -->
+<section class="slide" id="s-convert" data-title="흡수된 햇빛은 무엇으로 바뀔까" data-part="③ 에너지 흐름">
+  <p class="kicker">③ 지구에서의 에너지 흐름 · 에너지 전환</p>
+  <h2>흡수된 태양 에너지는 무엇으로 바뀔까</h2>
+  <div class="tree">
+    <div class="root"><b>흡수된<br>태양 에너지</b><span>약 70</span></div>
+    <div class="rows">
+      <div class="r heat"><div class="ic">🔥</div><div class="nm">열에너지</div><div class="ds">대기·지표·바다를 데운다</div></div>
+      <div class="r kin" data-step="1"><div class="ic">💨</div><div class="nm"><b class="blank" data-n="10" data-step="1">운동</b> 에너지</div><div class="ds">고르지 않게 데워져 바람·해류·파도 → 풍력·파력 발전</div></div>
+      <div class="r pot" data-step="2"><div class="ic">🌧️</div><div class="nm"><b class="blank" data-n="11" data-step="2">위치</b> 에너지</div><div class="ds">증발한 물이 높은 곳에 비로 내린다 → 수력 발전</div></div>
+      <div class="r chem" data-step="3"><div class="ic">🌿</div><div class="nm"><b class="blank" data-n="12" data-step="3">화학</b> 에너지</div><div class="ds">광합성으로 양분에 저장 → 먹이·장작·화석 연료</div></div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>흡수된 에너지는 먼저 대기, 땅, 바다를 데우는 열에너지가 됩니다.</p>
+    <p data-at="1">그런데 적도와 극, 땅과 바다가 고르지 않게 데워지니 공기와 물이 움직이죠. 바람, 해류, 파도. 빈칸 10번, 운동 에너지. 풍력, 파력 발전이 이것을 씁니다.</p>
+    <p data-at="2">햇빛이 물을 증발시켜 높은 곳에 비로 내리게 합니다. 댐에 고인 물은 빈칸 11번, 위치 에너지. 수력 발전이에요.</p>
+    <p data-at="3">식물은 광합성으로 빛에너지를 양분에 저장합니다. 빈칸 12번, 화학 에너지. 밥도 장작도 석탄도 여기서 나옵니다.</p>
+  </aside>
+</section>
+
+<!-- 12 근원 분류 -->
+<section class="slide soft" id="s-sort" data-title="에너지의 근원 거슬러 올라가기" data-part="③ 에너지 흐름">
+  <p class="kicker">③ 지구에서의 에너지 흐름 · 분류</p>
+  <h2>거슬러 올라가면 모두 태양일까</h2>
+  <div class="chips">
+    <span class="chip" data-hide="1">💨 풍력 발전기를 돌리는 바람</span><span class="chip" data-hide="1">🌊 서핑하는 파도</span>
+    <span class="chip" data-hide="2">🏞️ 댐에 고인 물</span><span class="chip" data-hide="3">🍚 밥 한 공기</span><span class="chip" data-hide="3">🪨 석탄</span>
+    <span class="chip" data-hide="3">🛢️ 석유·천연가스</span><span class="chip" data-hide="4">🌋 지열 발전</span><span class="chip" data-hide="4">🌗 조력 발전</span><span class="chip" data-hide="4">☢️ 원자력 발전의 우라늄</span>
+  </div>
+  <div class="buckets">
+    <div class="bucket k"><h3>태양 → 대기·해수의 운동</h3><span class="sb">고르지 않게 데워져 바람·해류</span>
+      <div data-step="1"><div class="it">💨 바람</div><div class="it">🌊 파도<small>바람이 일으킨다</small></div></div></div>
+    <div class="bucket p"><h3>태양 → 물의 순환</h3><span class="sb">증발한 물이 높은 곳에 내린다</span>
+      <div data-step="2"><div class="it">🏞️ 댐에 고인 물</div></div></div>
+    <div class="bucket c"><h3>태양 → 광합성</h3><span class="sb">빛에너지가 화학 에너지로</span>
+      <div data-step="3"><div class="it">🍚 밥</div><div class="it">🪨 석탄<small>옛 식물</small></div><div class="it">🛢️ 석유·천연가스<small>옛 바다 생물</small></div></div></div>
+    <div class="bucket x"><h3>근원이 태양이 아니다</h3><span class="sb">지구 내부 · 달 · 원자핵</span>
+      <div data-step="4"><div class="it">🌋 지열<small>지구 내부의 열</small></div><div class="it" style="white-space:nowrap">🌗 조력 ← <b class="blank" data-n="13" data-step="4">달</b>의 인력<small>밀물과 썰물</small></div><div class="it">☢️ 우라늄<small>원자핵의 핵에너지</small></div></div></div>
+  </div>
+  <aside class="script">
+    <p>우리가 쓰는 에너지 아홉 가지입니다. 근원을 거슬러 올라가 네 칸으로 나눠 봅시다. 먼저 학생들에게 하나씩 어디로 갈지 물어봅니다.</p>
+    <p data-at="1">바람과 파도는 태양이 고르지 않게 데운 결과입니다. 파도는 바람이 일으키니까요.</p>
+    <p data-at="2">댐의 물은 증발해서 올라갔다 내린 물, 물의 순환입니다.</p>
+    <p data-at="3">밥, 석탄, 석유는 모두 광합성에서 시작합니다. 석유는 옛 바다 플랑크톤이에요.</p>
+    <p data-at="4">속지 말아야 할 세 가지. 지열은 지구 내부, 조력은 빈칸 13번, 달의 인력, 우라늄은 원자핵의 에너지입니다. 이 셋은 태양에서 오지 않았습니다.</p>
+  </aside>
+</section>
+
+<!-- 13 햇빛의 화석 -->
+<section class="slide" id="s-fossil" data-title="석탄 1 J에 담긴 햇빛" data-part="③ 에너지 흐름">
+  <p class="kicker">③ 지구에서의 에너지 흐름 · 햇빛의 화석</p>
+  <h2>화석 연료 1 J을 만들려면 햇빛이 얼마나?</h2>
+  <div class="chain" style="gap:12px">
+    <div class="box sun" data-step="3"><b>약 <b class="blank" data-n="14" data-step="3" style="display:inline-block;font-size:46px">20만</b> J</b><span>햇빛</span></div>
+    <div class="op" data-step="3"><i>→</i>× 50%<br><span style="font-size:20px;color:var(--mute);font-weight:700">지표 도달</span></div>
+    <div class="box" data-step="2"><b>10만 J</b><span>지표에 닿은 빛</span></div>
+    <div class="op" data-step="2"><i>→</i>× 1%<br><span style="font-size:20px;color:var(--mute);font-weight:700">광합성 효율</span></div>
+    <div class="box" data-step="1"><b>1,000 J</b><span>식물이 저장한<br>화학 에너지</span></div>
+    <div class="op" data-step="1"><i>→</i>× 0.1%<br><span style="font-size:20px;color:var(--mute);font-weight:700">화석 연료로 보존</span></div>
+    <div class="box end"><b>1 J</b><span>화석 연료</span></div>
+  </div>
+  <p class="big center mt2" data-step="3">석탄과 석유는 먼 옛날 생물이 저장한 <span class="c-orange">햇빛의 화석</span></p>
+  <p class="note">0.1%는 계산을 위한 가정값입니다. 실제 값은 시대와 환경에 따라 크게 다릅니다.</p>
+  <aside class="script">
+    <p>석탄 한 덩어리를 거꾸로 따라가 봅니다. 맨 오른쪽, 화석 연료 1 J에서 출발해요.</p>
+    <p data-at="1">죽은 생물이 썩지 않고 묻혀 화석 연료가 되는 일은 아주 드뭅니다. 여기서는 0.1%라고 가정하면, 식물이 저장한 에너지가 1,000 J 있어야 해요.</p>
+    <p data-at="2">식물은 받은 빛의 1% 안팎만 저장합니다. 그러면 지표에 닿은 빛은 10만 J.</p>
+    <p data-at="3">햇빛의 약 50%가 지표에 닿으니 처음 햇빛은 빈칸 14번, 약 20만 J. 석탄 1 J에는 햇빛 20만 J과 수억 년의 시간이 들어 있는 셈입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>태양은 '타는' 것이 아니라 '가벼워지고' 있었다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1">태양이 석탄이라면 약 <b>5천 년</b>이면 다 탄다 → 화학 반응으로는 46억 년을 설명할 수 없다</li>
+    <li data-k="2" data-step="2">중심핵에서 수소 원자핵 4개 → 헬륨 원자핵 1개 (<b>수소 핵융합</b>), 줄어든 질량 0.7%가 <b>E = Δmc²</b> 만큼의 에너지로</li>
+    <li data-k="3" data-step="3">태양은 1초에 약 <b>420만 톤</b>씩 가벼워진다</li>
+    <li data-k="4" data-step="4">지구에 흡수된 태양 에너지 → 열·<b>운동</b>·<b>위치</b>·<b>화학</b> 에너지로 전환 (지열·조력·핵에너지는 예외)</li>
+  </ul>
+  <aside class="script">
+    <p>학습지를 덮고 한 줄씩 말로 먼저 떠올리게 한 다음 열어 줍니다.</p>
+    <p data-at="4">마지막으로 표지의 질문, 태양은 타고 있나요 가벼워지고 있나요? 한 문장으로 답하게 하고 마칩니다.</p>
+  </aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 태양 에너지에 대한 설명으로 옳은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 중심부에서 수소가 산소와 결합해 탄다</div>
+        <div class="opt right" data-step="1">㉡ 핵융합 뒤 질량의 합이 줄어든다</div>
+        <div class="opt wrong" data-step="1">㉢ 태양의 질량은 시간이 지나도 그대로다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 근원이 태양 에너지가 <u>아닌</u> 것을 모두 고르면?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">풍력</div>
+        <div class="opt right" data-step="2">조력</div>
+        <div class="opt right" data-step="2">지열</div>
+        <div class="opt wrong" data-step="2">석유</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. ㉢이 틀린 까닭은 1초에 약 420만 톤씩 가벼워지기 때문입니다.</p>
+    <p data-at="2">2번은 조력과 지열. 석유는 광합성, 풍력은 대기의 운동에서 왔어요.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 시간 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「태양은 석탄 덩어리일까」</h2>
+  <div class="cols">
+    <div class="card"><h3>눈금을 직접 돌려 보세요</h3><p>석탄 태양의 수명, 46억 년을 넘기는 첫 눈금, 실제 태양 밝기와 맞는 핵융합량을 찾는 미션이 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 불 꺼진 섬</h3><p>자석과 코일로 전기를 만드는 발전기, 그리고 그 발전기를 무엇으로 돌릴지 따져 봅니다.</p></div>
+  </div>
+  <aside class="script">
+    <p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다. 오늘 칠판에서 본 숫자를 학생이 직접 슬라이더로 찾아내는 활동이에요.</p>
+  </aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+  /* 수소 핵융합 장면: 1단계에서 원자핵 4개가 한 번 합쳐지고 멈춘다(되돌아가면 처음 모습) */
+  Board.on("s-fusion", function (step, slide) { slide.querySelector(".fuse").classList.toggle("go", step >= 1); });
+</script>
+</body>
+</html>
