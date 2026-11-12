@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 지구 환경 변화 (통합과학2 Ⅱ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes earthIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .ewrap { animation: earthIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; }
+  .two .card li { font-size: 26px; margin-bottom: 6px; }
+  .two .card ul { margin: 6px 0 0; padding-left: 26px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 29px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .mitig .it { font-size: 25px; font-weight: 700; padding: 10px 14px; border-radius: 12px; background: #fff; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="달아오르는 지구와 기온 상승을 가리키는 온도계">
+      <defs>
+        <radialGradient id="c3-e" cx="50%" cy="20%" r="80%"><stop offset="0" stop-color="#4dabf7"/><stop offset=".55" stop-color="#1864ab"/><stop offset="1" stop-color="#0b2a4a"/></radialGradient>
+        <radialGradient id="c3-h" cx="50%" cy="100%" r="60%"><stop offset=".84" stop-color="#ff922b" stop-opacity="0"/><stop offset=".9" stop-color="#ff922b" stop-opacity=".55"/><stop offset="1" stop-color="#ff6b6b" stop-opacity="0"/></radialGradient>
+        <linearGradient id="c3-t" x1="0" x2="0" y1="1" y2="0"><stop offset="0" stop-color="#ffa94d"/><stop offset="1" stop-color="#e03131"/></linearGradient>
+      </defs>
+      <g class="ewrap">
+        <ellipse cx="700" cy="1180" rx="1000" ry="900" fill="url(#c3-h)"/>
+        <ellipse cx="700" cy="1180" rx="900" ry="810" fill="url(#c3-e)"/>
+        <g fill="#2f9e44" opacity=".75"><path d="M300 470 q80 -60 160 -20 q60 30 40 50Z"/><path d="M820 420 q90 -40 170 0 q40 30 0 50Z"/></g>
+      </g>
+      <g data-step="1">
+        <rect x="1330" y="60" width="56" height="360" rx="28" fill="#f1f3f5" stroke="#ced4da" stroke-width="4"/>
+        <rect x="1342" y="170" width="32" height="236" rx="16" fill="url(#c3-t)"/>
+        <circle cx="1358" cy="430" r="44" fill="#e03131"/>
+        <line x1="1300" y1="200" x2="1420" y2="200" stroke="#ffd43b" stroke-width="4" stroke-dasharray="10 6"/>
+        <text x="1290" y="208" fill="#ffd43b" font-size="26" font-weight="900" text-anchor="end">2 ℃</text>
+      </g>
+      <text x="1560" y="24" fill="#7b8598" font-size="17" text-anchor="end">⚠ 대기의 붉은 띠는 상징적으로 그렸습니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅱ-1 생태계와 환경 변화 · 03</p>
+    <h1>지구 환경 변화</h1>
+    <p class="sub" data-step="1">2100년의 기온, 2 ℃의 문턱을 넘지 않으려면</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 온실 효과와 지구 온난화, 엘니뇨와 사막화, 그리고 우리가 할 수 있는 대처를 봅니다. 여러분은 기후 회의에 파견된 청소년 과학 자문관입니다.</p>
+    <p data-at="1">2 ℃의 문턱이 무엇인지는 마지막 파트에서 계산으로 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="온실 효과를 없애자?" data-part="도입">
+  <p class="kicker">도입 · 기후 회의장</p>
+  <h2>“온실 효과는 나쁜 것이니 아예 없애자”</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>회의장에는 이렇게 주장하는 사람도 있습니다. 의장이 자문관에게 먼저 묻습니다.</p>
+      <p class="big mt">만약 온실 효과가 <span class="c-red">아예 없다면</span> 지구는 어떻게 될까?</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 답은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 지금보다 시원하고 살기 좋아진다</div>
+        <div class="opt">㉡ 지금과 별 차이가 없다</div>
+        <div class="opt">㉢ 평균 기온이 영하로 떨어져 꽁꽁 언다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>'온실 효과'라는 말을 들으면 나쁜 것부터 떠올리기 쉽습니다. 정말 없애면 좋을까요?</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않고, 실험 결과로 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>온실 효과</b><span>대기가 지표를 따뜻하게 하는 자연 현상</span></div>
+    <div class="card"><b>지구 온난화</b><span>지구 평균 기온이 올라가는 현상</span></div>
+    <div class="card"><b>엘니뇨</b><span>동태평양 바다가 평소보다 따뜻해지는 현상</span></div>
+    <div class="card"><b>사막화</b><span>땅이 점점 사막처럼 바뀌는 현상</span></div>
+    <div class="card"><b>완화와 적응</b><span>기후 변화에 대처하는 두 갈래</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~16번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 킬링 곡선 -->
+<section class="slide" id="s-keel" data-title="마우나로아의 기록" data-part="① 온실 효과">
+  <p class="kicker">① 온실 효과와 지구 온난화 · 1958년 하와이 마우나로아 산꼭대기</p>
+  <h2>공기 속 이산화 탄소가 계속 늘고 있다</h2>
+  <svg id="keelSvg" viewBox="0 0 1400 440" width="1400" height="440" aria-label="1958년 약 315 ppm에서 2024년 약 425 ppm까지 오르는 대기 중 이산화 탄소 농도 모식 곡선"></svg>
+  <p class="big" data-step="2">대기 중 <b class="blank" data-n="1" data-step="2">이산화 탄소</b> 농도: 1958년 약 315 ppm → 2024년 약 425 ppm</p>
+  <aside class="script">
+    <p>1958년, 과학자 찰스 킬링이 하와이 마우나로아 산꼭대기에서 공기 속 이산화 탄소를 재기 시작했습니다. 그 기록이 지금까지 이어지고 있어요.</p>
+    <p data-at="1">곡선이 톱니처럼 오르내리는 것은 계절 때문입니다. 북반구 식물이 자라는 여름에는 광합성으로 조금 줄고, 겨울에는 다시 늘어요.</p>
+    <p data-at="2">빈칸 1번, 이산화 탄소. 첫해 약 315 ppm이 2024년에는 약 425 ppm이 되었습니다.</p>
+  </aside>
+</section>
+
+<!-- 5 온실 효과 원리 -->
+<section class="slide" id="s-gh" data-title="온실 효과의 원리" data-part="① 온실 효과">
+  <p class="kicker">① 온실 효과와 지구 온난화 · 에너지의 길을 따라가면</p>
+  <h2>대기가 지표의 열을 붙잡아 되돌려 준다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg viewBox="0 0 760 470" width="760" height="470" aria-label="햇빛이 지표를 데우고, 지표가 내보낸 적외선을 대기가 흡수해 다시 지표로 내보낸다">
+      <defs>
+        <marker id="s5g-y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.5" markerHeight="3.5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f59f00"/></marker>
+        <marker id="s5g-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.5" markerHeight="3.5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+        <linearGradient id="s5g-a" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e7f5ff"/><stop offset="1" stop-color="#bfe0ff"/></linearGradient>
+        <linearGradient id="s5g-gr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#8bc34a"/><stop offset=".2" stop-color="#a47148"/><stop offset="1" stop-color="#7b5233"/></linearGradient>
+      </defs>
+      <rect x="0" y="120" width="760" height="150" rx="16" fill="url(#s5g-a)"/>
+      <text x="745" y="204" font-size="22" font-weight="900" fill="#1864ab" text-anchor="end">대기 (수증기·이산화 탄소)</text>
+      <rect x="0" y="400" width="760" height="70" rx="12" fill="url(#s5g-gr)"/>
+      <text x="740" y="448" font-size="23" font-weight="900" fill="#fff" text-anchor="end">지표</text>
+      <g data-step="1"><g stroke="#f59f00" stroke-width="8" marker-end="url(#s5g-y)"><line x1="70" y1="10" x2="150" y2="390"/><line x1="130" y1="10" x2="210" y2="390"/></g>
+        <text x="200" y="60" font-size="24" font-weight="900" fill="#e8590c">햇빛</text></g>
+      <g data-step="2" stroke="#e03131" stroke-width="7" fill="none" marker-end="url(#s5g-r)">
+        <path d="M330 395 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40"/>
+        <path d="M440 395 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40 q14 -20 0 -40"/>
+      </g>
+      <g data-step="3"><circle cx="330" cy="200" r="13" fill="#e03131"/>
+        <g stroke="#e03131" stroke-width="7" fill="none" marker-end="url(#s5g-r)"><path d="M600 230 V390"/><path d="M600 160 V20"/></g>
+        <text x="618" y="330" font-size="23" font-weight="900" fill="#c92a2a">지표로</text><text x="618" y="70" font-size="23" font-weight="900" fill="#c92a2a">우주로</text></g>
+    </svg>
+    <div class="lines">
+      <p data-step="1">햇빛이 지표를 데운다</p>
+      <p data-step="2">데워진 지표는 <b class="blank" data-n="2" data-step="2">적외선</b>(지구 복사)을 내보낸다</p>
+      <p data-step="3">대기가 흡수했다가 지표로 다시 내보낸다 → <b class="blank" data-n="3" data-step="3">재복사</b></p>
+      <p data-step="4">그래서 대기가 없을 때보다 지표가 따뜻하다 → <b class="blank" data-n="4" data-step="4">온실 효과</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>에너지가 어떻게 오가는지 따라가 봅시다.</p>
+    <p data-at="1">햇빛은 대기를 대부분 통과해 지표를 데웁니다.</p>
+    <p data-at="2">데워진 지표는 눈에 보이지 않는 빛, 빈칸 2번, 적외선을 내보냅니다.</p>
+    <p data-at="3">이 적외선을 수증기와 이산화 탄소가 흡수하고, 위아래로 다시 내보냅니다. 아래로 돌아오는 것이 빈칸 3번, 재복사.</p>
+    <p data-at="4">지표는 햇빛에 더해 재복사까지 받으니 더 따뜻합니다. 빈칸 4번, 온실 효과.</p>
+  </aside>
+</section>
+
+<!-- 6 흡수율 실험 -->
+<section class="slide" id="s-abs" data-title="흡수율을 바꿔 보면" data-part="① 온실 효과">
+  <p class="kicker">① 온실 효과와 지구 온난화 · 온실 상자 실험 (단원 화면 모형)</p>
+  <h2>대기가 지구 복사를 얼마나 흡수하느냐에 따라</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="absSvg" viewBox="0 0 780 500" width="780" height="500" aria-label="대기의 흡수율이 0%, 약 77%, 85%일 때 지표 평균 기온 막대"></svg>
+    <div class="lines">
+      <p data-step="1">온실 효과가 없으면(흡수율 0%) 약 <b class="blank" data-n="5" data-step="1">−18</b> ℃ → 바다까지 언다</p>
+      <p data-step="2">자연적인 온실 효과 덕분에 지금은 약 15 ℃</p>
+      <p data-step="3">온실 기체가 늘어 흡수율이 높아지면 더 뜨거워진다 → 온실 효과의 <b class="blank" data-n="6" data-step="3">강화</b></p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 지표 기온 T = 255 K × (2 ÷ (2 − 흡수율))<sup>¼</sup>. 대기를 한 겹으로 본 단순한 계산입니다.</p>
+  <aside class="script">
+    <p>단원 화면의 온실 상자 실험을 그대로 옮겼습니다. 대기가 지표에서 나오는 적외선을 얼마나 흡수하는지 바꿔 봅시다.</p>
+    <p data-at="1">흡수율 0%, 온실 효과가 전혀 없으면 빈칸 5번, 약 영하 18 ℃. ㉢을 고른 학생이 맞았어요.</p>
+    <p data-at="2">흡수율 약 77%에서 지금의 지구, 약 15 ℃. 자연적인 온실 효과 덕분에 33 ℃나 따뜻합니다.</p>
+    <p data-at="3">흡수율을 85%로 올리면 약 20 ℃. 빈칸 6번, 강화. 없애야 할 것은 온실 효과가 아니라 온실 효과의 '강화'입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 확인 -->
+<section class="slide" id="s-check1" data-title="회의장 주장에 답하기" data-part="① 온실 효과">
+  <p class="kicker">① 온실 효과와 지구 온난화 · 확인</p>
+  <h2>“온실 효과를 없애자”에 대한 답으로 옳은 것은?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">① 옳다. 온실 효과가 없으면 지구가 시원해져 살기 좋다</div>
+    <div class="opt right" data-step="1">② 온실 효과가 없으면 약 −18 ℃로 언다. 줄일 것은 온실 효과의 ‘강화’다</div>
+    <div class="opt wrong" data-step="1">③ 온실 효과는 지표 기온과 관계가 없다</div>
+    <div class="opt wrong" data-step="1">④ 온실 효과는 사람이 만든 현상이다</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ②. ④가 틀린 까닭: 온실 효과 자체는 지구가 생길 때부터 있던 자연 현상이고, 사람은 그것을 '강화'하고 있습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 지구 온난화 -->
+<section class="slide" id="s-warm" data-title="지구 온난화와 그 영향" data-part="① 온실 효과">
+  <p class="kicker">① 온실 효과와 지구 온난화 · 이미 오른 1.3 ℃</p>
+  <h2>강화된 온실 효과가 불러온 변화</h2>
+  <div class="cols" style="grid-template-columns:620px 1fr;align-items:center">
+    <svg viewBox="0 0 620 440" width="620" height="440" aria-label="해안 단면: 빙하가 녹고 바닷물이 팽창해 해수면이 높아진다">
+      <defs>
+        <linearGradient id="s8-sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#74c0fc"/><stop offset="1" stop-color="#1864ab"/></linearGradient>
+        <linearGradient id="s8-land" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#94d82d"/><stop offset=".12" stop-color="#a47148"/><stop offset="1" stop-color="#6f4a2e"/></linearGradient>
+        <marker id="s8-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c92a2a"/></marker>
+      </defs>
+      <rect x="0" y="0" width="620" height="440" rx="18" fill="#f2f5f9"/>
+      <rect x="0" y="250" width="620" height="190" fill="url(#s8-sea)"/>
+      <rect x="0" y="210" width="620" height="40" fill="#4dabf7" opacity=".55" data-step="2"/>
+      <path d="M380 440 L380 230 Q420 170 470 160 L620 140 V440Z" fill="url(#s8-land)"/>
+      <rect x="490" y="100" width="40" height="40" fill="#adb5bd"/><polygon points="485,100 510,78 535,100" fill="#868e96"/>
+      <polygon points="40,250 80,170 130,250" fill="#e7f5ff" stroke="#a5d8ff" stroke-width="3" data-hide="2"/>
+      <line x1="0" y1="250" x2="380" y2="250" stroke="#fff" stroke-width="3" stroke-dasharray="10 6" data-step="2"/>
+      <text x="20" y="278" font-size="21" font-weight="900" fill="#fff" data-step="2">예전 해수면</text>
+      <path d="M250 300 V222" stroke="#c92a2a" stroke-width="6" marker-end="url(#s8-a)" data-step="2"/>
+      <text x="60" y="160" font-size="21" font-weight="900" fill="#1864ab" data-hide="2">빙하</text>
+      <text x="610" y="430" font-size="17" fill="#e7f5ff" text-anchor="end">⚠ 높이 과장 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">강화된 온실 효과로 지구 평균 기온이 올라간다 → <b class="blank" data-n="7" data-step="1">지구 온난화</b></p>
+      <p class="small" data-step="1">산업화 이전보다 이미 약 1.3 ℃ 상승</p>
+      <p data-step="2">빙하가 녹고 바닷물이 팽창 → <b class="blank" data-n="8" data-step="2">해수면</b> 상승</p>
+      <p data-step="3">봄꽃이 피는 시기가 빨라지고 생물의 사는 곳이 바뀐다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지구 평균 기온은 산업화 이전보다 이미 약 1.3 ℃ 올랐습니다.</p>
+    <p data-at="1">빈칸 7번, 지구 온난화.</p>
+    <p data-at="2">육지의 빙하가 녹아 바다로 흘러들고, 바닷물 자체도 데워지면 부피가 커집니다. 빈칸 8번, 해수면 상승.</p>
+    <p data-at="3">생물에게도 영향이 갑니다. 봄꽃이 피는 시기가 해마다 빨라지고 있어요. 생태계 단원과 이어지는 부분입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 평년과 엘니뇨 -->
+<section class="slide" id="s-enso" data-title="평년과 엘니뇨" data-part="② 엘니뇨·사막화">
+  <p class="kicker">② 엘니뇨와 사막화 · 적도 태평양을 동서로 잘라 보면</p>
+  <h2>무역풍이 약해지면 바다가 바뀐다</h2>
+  <svg id="ensoSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="평년과 엘니뇨 때 적도 태평양 단면: 무역풍, 따뜻한 물, 용승, 비구름의 위치"></svg>
+  <p data-step="1">평년: 동쪽에서 부는 <b class="blank" data-n="9" data-step="1">무역풍</b>이 따뜻한 물을 서쪽으로 밀고, 페루 앞바다에서는 찬물이 솟는 <b class="blank" data-n="10" data-step="1">용승</b></p>
+  <p data-step="2">무역풍이 약해져 따뜻한 물이 동쪽으로 퍼지고 동태평양 수온이 높아짐 → <b class="blank" data-n="11" data-step="2">엘니뇨</b></p>
+  <p class="note" data-step="2">반대로 무역풍이 평소보다 강해져 동태평양이 더 차가워지는 상태는 라니냐라고 합니다. 그림의 색은 수온(따뜻한 표층수 주황, 차가운 물 파랑)을 나타냅니다.</p>
+  <aside class="script">
+    <p>적도 태평양을 동서로 잘라 본 그림입니다. 왼쪽이 서쪽 인도네시아·호주, 오른쪽이 동쪽 페루예요. 바다 깊이는 크게 과장했습니다.</p>
+    <p data-at="1">평년에는 동쪽에서 서쪽으로 부는 빈칸 9번, 무역풍이 따뜻한 표층수를 서쪽으로 밀어 쌓습니다. 빈 자리를 채우려고 페루 앞바다에서는 찬 심층수가 솟아오르죠. 빈칸 10번, 용승. 영양염이 많아 좋은 어장이 됩니다.</p>
+    <p data-at="2">무역풍이 약해지면 따뜻한 물이 동쪽으로 퍼지고 용승이 약해집니다. 빈칸 11번, 엘니뇨. 비구름도 따라서 동쪽으로 옮겨 갑니다.</p>
+  </aside>
+</section>
+
+<!-- 10 엘니뇨의 영향 -->
+<section class="slide soft" id="s-enso2" data-title="엘니뇨가 오면" data-part="② 엘니뇨·사막화">
+  <p class="kicker">② 엘니뇨와 사막화 · 태평양 양쪽에서 일어나는 일</p>
+  <h2>한쪽은 가뭄, 한쪽은 폭우</h2>
+  <svg viewBox="0 0 1400 200" width="1400" height="200" aria-label="엘니뇨 때 비구름이 서태평양에서 동태평양으로 옮겨 간다">
+    <defs><marker id="s10-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <rect x="0" y="120" width="1400" height="70" rx="14" fill="#74c0fc"/>
+    <rect x="0" y="100" width="220" height="90" rx="14" fill="#c49a6c"/><text x="110" y="162" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">인도네시아·호주</text>
+    <rect x="1220" y="100" width="180" height="90" rx="14" fill="#c49a6c"/><text x="1310" y="162" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">페루</text>
+    <text x="700" y="165" font-size="24" font-weight="900" fill="#0b3d6e" text-anchor="middle">태평양</text>
+    <g opacity=".35"><circle cx="260" cy="50" r="30" fill="#868e96"/><circle cx="300" cy="40" r="36" fill="#868e96"/><circle cx="340" cy="52" r="28" fill="#868e96"/></g>
+    <path d="M400 50 H1020" stroke="#495057" stroke-width="6" stroke-dasharray="14 8" marker-end="url(#s10-a)"/>
+    <g><circle cx="1080" cy="50" r="30" fill="#495057"/><circle cx="1120" cy="40" r="36" fill="#495057"/><circle cx="1160" cy="52" r="28" fill="#495057"/></g>
+    <text x="700" y="34" font-size="22" font-weight="900" fill="#495057" text-anchor="middle">비구름이 동쪽으로</text>
+  </svg>
+  <div class="two">
+    <div class="card" data-step="1"><h3>🌏 서태평양 (인도네시아·호주)</h3><ul><li>비구름이 떠나 큰 가뭄</li><li>숲에 산불이 번진다</li></ul></div>
+    <div class="card" data-step="2"><h3>🌎 동태평양 (페루)</h3><ul><li>용승이 약해져 영양염이 올라오지 못함 → 멸치가 잡히지 않는다</li><li>평소 건조한 곳에 폭우</li></ul></div>
+  </div>
+  <p class="center mt" data-step="3">엘니뇨는 자연 변동이지만, 바다가 더워질수록 그 피해가 커질 수 있다</p>
+  <aside class="script">
+    <p>현장 조사원의 보고입니다. 페루 앞바다에서 멸치가 사라졌다고 합니다.</p>
+    <p data-at="1">비구름이 떠난 서쪽은 가뭄과 산불.</p>
+    <p data-at="2">동쪽은 용승이 약해져 어장이 무너지고, 평소 건조한 곳에 폭우가 내립니다.</p>
+    <p data-at="3">엘니뇨 자체는 몇 년마다 되풀이되는 자연 변동이라는 점을 짚어 줍니다. 지구 온난화와 같은 말이 아니에요.</p>
+  </aside>
+</section>
+
+<!-- 11 사막화 -->
+<section class="slide" id="s-desert" data-title="사막화" data-part="② 엘니뇨·사막화">
+  <p class="kicker">② 엘니뇨와 사막화 · 몽골 초원이 모래밭으로</p>
+  <h2>초원이 사막이 되어 간다</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="풀이 무성한 초원에서 풀이 줄어든 땅을 거쳐 모래 먼지가 이는 맨땅으로 바뀌는 과정">
+    <defs>
+      <linearGradient id="s11-g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#94d82d"/><stop offset=".2" stop-color="#8a6a45"/><stop offset="1" stop-color="#5c4330"/></linearGradient>
+      <linearGradient id="s11-g3" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffe8a1"/><stop offset=".25" stop-color="#e6c27a"/><stop offset="1" stop-color="#b08a4f"/></linearGradient>
+      <marker id="s11-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker>
+    </defs>
+    <rect x="0" y="160" width="400" height="120" rx="14" fill="url(#s11-g1)"/>
+    <g fill="#2f9e44">
+      <path d="M30 162 l8 -36 l8 36Z"/><path d="M70 162 l7 -30 l7 30Z"/><path d="M110 162 l8 -40 l8 40Z"/><path d="M160 162 l7 -32 l7 32Z"/><path d="M200 162 l8 -38 l8 38Z"/><path d="M250 162 l7 -30 l7 30Z"/><path d="M300 162 l8 -36 l8 36Z"/><path d="M350 162 l7 -32 l7 32Z"/>
+    </g>
+    <text x="200" y="60" font-size="28" font-weight="900" fill="#2b8a3e" text-anchor="middle">초원</text>
+    <g data-step="1"><path d="M410 220 H480" stroke="#495057" stroke-width="5" marker-end="url(#s11-a)"/>
+      <rect x="500" y="160" width="400" height="120" rx="14" fill="url(#s11-g1)" opacity=".8"/>
+      <g fill="#82c91e"><path d="M560 162 l6 -18 l6 18Z"/><path d="M700 162 l6 -16 l6 16Z"/><path d="M820 162 l6 -14 l6 14Z"/></g>
+      <text x="700" y="60" font-size="28" font-weight="900" fill="#8a6a45" text-anchor="middle">풀이 줄어든 땅</text></g>
+    <g data-step="2"><path d="M910 220 H980" stroke="#495057" stroke-width="5" marker-end="url(#s11-a)"/>
+      <rect x="1000" y="160" width="400" height="120" rx="14" fill="url(#s11-g3)"/>
+      <g fill="#e6c27a" opacity=".55"><ellipse cx="1150" cy="120" rx="120" ry="30"/><ellipse cx="1260" cy="95" rx="100" ry="26"/></g>
+      <text x="1200" y="60" font-size="28" font-weight="900" fill="#b08a4f" text-anchor="middle">맨땅 · 모래 먼지(황사)</text></g>
+    <text x="1395" y="296" font-size="17" fill="#5f6b80" text-anchor="end">⚠ 모식도</text>
+  </svg>
+  <p data-step="2">사막 주변의 땅이 점점 사막처럼 바뀌는 현상 → <b class="blank" data-n="12" data-step="2">사막화</b></p>
+  <div class="two" data-step="3">
+    <div class="card"><h3>자연적 원인</h3><p style="margin:0">가뭄(강수량 감소), 기후 변화</p></div>
+    <div class="card"><h3>사람에 의한 원인</h3><p style="margin:0"><b class="blank" data-n="13" data-step="3">과도한 방목</b>, 지나친 경작, 숲 벌채</p></div>
+  </div>
+  <aside class="script">
+    <p>몽골 초원이 모래밭으로 변하고 있다는 보고입니다.</p>
+    <p data-at="1">가뭄이 이어지거나 풀을 너무 많이 쓰면 땅이 드러납니다.</p>
+    <p data-at="2">맨땅에서는 모래 먼지가 일어 우리나라 황사로도 이어져요. 빈칸 12번, 사막화.</p>
+    <p data-at="3">원인은 자연과 사람이 겹칩니다. 빈칸 13번, 가축을 너무 많이 풀어 풀이 사라지는 과도한 방목이 대표적입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 누적 배출량 -->
+<section class="slide" id="s-cum" data-title="2 ℃의 문턱" data-part="③ 대처">
+  <p class="kicker">③ 기후 변화에 대처하기 · 감축 경로 (단원 화면 모형)</p>
+  <h2>기온은 지금까지 내보낸 ‘총량’이 정한다</h2>
+  <div class="cols" style="grid-template-columns:820px 1fr;align-items:center">
+    <svg id="cumSvg" viewBox="0 0 820 470" width="820" height="470" aria-label="2024년 이후 누적 배출량에 비례해 오르는 기온 상승과 1.5도, 2도 선"></svg>
+    <div class="lines">
+      <p data-step="1">기온 상승은 이산화 탄소 <b class="blank" data-n="14" data-step="1">누적 배출량</b>에 거의 비례</p>
+      <p data-step="2">2 ℃ 아래로 묶으려면 앞으로 약 1,560 Gt까지만, 1.5 ℃는 약 440 Gt까지만</p>
+      <p data-step="3">시작이 늦을수록 남은 몫이 빨리 줄어 → 훨씬 가파르게 줄여야 한다</p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 기온 상승 ≈ 1.3 ℃ + 0.45 ℃ × (2024년 이후 누적 배출량 ÷ 1,000 Gt). 다른 온실 기체·에어로졸·되먹임은 넣지 않았습니다.</p>
+  <aside class="script">
+    <p>지금까지 이미 약 1.3 ℃가 올랐습니다. 의장의 말처럼 기온 상승은 해마다 내보내는 양이 아니라 지금까지 내보낸 이산화 탄소를 모두 더한 양에 거의 비례해요.</p>
+    <p data-at="1">빈칸 14번, 누적 배출량. 이 화면 모형에서는 1,000 Gt마다 약 0.45 ℃ 오릅니다.</p>
+    <p data-at="2">2 ℃까지 남은 몫은 0.7 ÷ 0.45 × 1,000, 약 1,560 Gt. 1.5 ℃는 약 440 Gt입니다.</p>
+    <p data-at="3">물통에 물을 채우는 것과 같아요. 늦게 잠글수록 거의 다 찬 뒤라 급하게 잠가야 합니다. 단원 화면 장면 4에서 시작 연도와 감축률을 직접 바꿔 보게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 13 완화와 적응 -->
+<section class="slide soft" id="s-mitig" data-title="완화와 적응" data-part="③ 대처">
+  <p class="kicker">③ 기후 변화에 대처하기 · 두 갈래</p>
+  <h2>원인을 줄이거나, 결과에 대비하거나</h2>
+  <svg viewBox="0 0 1400 170" width="1400" height="170" aria-label="온실 기체 배출에서 기후 변화를 거쳐 피해로 이어지는 흐름과 완화·적응이 작용하는 곳">
+    <defs><marker id="s13-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker>
+      <marker id="s13-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#198a4a"/></marker>
+      <marker id="s13-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker></defs>
+    <g font-size="26" font-weight="900" text-anchor="middle">
+      <rect x="0" y="80" width="360" height="80" rx="18" fill="#fff" stroke="#adb5bd" stroke-width="3"/><text x="180" y="130" fill="#343a40">🏭 온실 기체 배출</text>
+      <rect x="520" y="80" width="360" height="80" rx="18" fill="#fff" stroke="#adb5bd" stroke-width="3"/><text x="700" y="130" fill="#343a40">🌡️ 기온 상승</text>
+      <rect x="1040" y="80" width="360" height="80" rx="18" fill="#fff" stroke="#adb5bd" stroke-width="3"/><text x="1220" y="130" fill="#343a40">🌊 폭염·가뭄·해수면</text>
+    </g>
+    <g stroke="#495057" stroke-width="5"><path d="M370 120 H505" marker-end="url(#s13-a)"/><path d="M890 120 H1025" marker-end="url(#s13-a)"/></g>
+    <g data-step="1"><path d="M180 10 V68" stroke="#198a4a" stroke-width="7" marker-end="url(#s13-g)"/><text x="200" y="40" font-size="24" font-weight="900" fill="#198a4a">원인을 줄인다</text></g>
+    <g data-step="2"><path d="M1220 10 V68" stroke="#1462d8" stroke-width="7" marker-end="url(#s13-b)"/><text x="1200" y="40" font-size="24" font-weight="900" fill="#1462d8" text-anchor="end">피해에 대비한다</text></g>
+  </svg>
+  <div class="two mitig mt">
+    <div class="card green" data-step="1"><h3>온실 기체를 줄이거나 흡수 → <b class="blank" data-n="15" data-step="1">완화</b></h3>
+      <div class="it">태양광·풍력 발전 비중을 늘린다</div><div class="it">효율 높은 제품, 대중교통 이용</div><div class="it">숲을 가꾸어 이산화 탄소 흡수원을 넓힌다</div></div>
+    <div class="card blue" data-step="2"><h3>이미 닥친 변화에 대비 → <b class="blank" data-n="16" data-step="2">적응</b></h3>
+      <div class="it">해안 방조제를 높인다</div><div class="it">가뭄·더위에 강한 작물 품종 개발</div><div class="it">폭염 경보 체계와 무더위 쉼터</div></div>
+  </div>
+  <aside class="script">
+    <p>이미 오른 1.3 ℃의 피해는 지금도 일어나고 있어요. 그래서 대처는 두 갈래입니다.</p>
+    <p data-at="1">원인인 배출을 줄이는 쪽, 빈칸 15번, 완화. 숲을 가꾸는 것도 이산화 탄소를 흡수하니 완화예요. 여기서 많이 헷갈립니다.</p>
+    <p data-at="2">이미 닥친 결과에 대비하는 쪽, 빈칸 16번, 적응. 둘을 가르는 기준은 '원인을 줄이느냐, 결과에 대비하느냐'입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>줄여야 할 것은 온실 효과가 아니라 그 ‘강화’</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>온실 효과</b>: 대기가 흡수한 적외선을 지표로 재복사 → 없으면 약 −18 ℃, 지금은 약 15 ℃</li>
+    <li data-k="2" data-step="2">이산화 탄소가 늘어 온실 효과가 강화 → <b>지구 온난화</b>(이미 약 1.3 ℃), 해수면 상승</li>
+    <li data-k="3" data-step="3"><b>엘니뇨</b>: 무역풍 약화 → 따뜻한 물이 동쪽으로, 용승 약화 · <b>사막화</b>: 가뭄 + 과도한 방목 등</li>
+    <li data-k="4" data-step="4">기온은 누적 배출량이 정한다 · 대처는 원인을 줄이는 <b>완화</b>와 결과에 대비하는 <b>적응</b></li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 '온실 효과를 없애자'는 주장에 한 문장으로 답하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 엘니뇨 때 일어나는 일로 옳은 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 무역풍이 강해진다</div>
+        <div class="opt right" data-step="1">㉡ 페루 앞바다의 용승이 약해진다</div>
+        <div class="opt wrong" data-step="1">㉢ 인도네시아에 비가 많아진다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. ‘숲을 가꾸어 이산화 탄소 흡수원을 넓힌다’는?</p>
+      <div class="opts">
+        <div class="opt right" data-step="2">㉠ 완화</div>
+        <div class="opt wrong" data-step="2">㉡ 적응</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 무역풍은 약해지고, 비구름이 떠난 인도네시아는 가뭄입니다.</p>
+    <p data-at="2">2번은 완화. 대기 중 이산화 탄소를 줄이는 쪽이니까요.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「2℃의 문턱」</h2>
+  <div class="cols">
+    <div class="card"><h3>감축 경로를 직접 찾아 보세요</h3><p>온실 상자 세 상태 만들기, 엘니뇨 만들기, 현장 보고 9건 분류, 2100년을 2 ℃ 아래로 묶는 경로 찾기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 단원 · Ⅱ-2 에너지 전환과 활용</h3><p>태양은 어떻게 빛나고, 그 에너지가 지구에서 무엇으로 바뀌는지 따라갑니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 킬링 곡선 — 1958년 약 315 ppm·2024년 약 425 ppm(단원 화면 값)을 잇는 모식 곡선 + 계절 변동 ±3 ppm */
+  (function () {
+    var svg = document.getElementById("keelSvg"), X0 = 110, X1 = 1340, Y0 = 380, Y1 = 40;
+    function X(y) { return X0 + (y - 1958) / 66 * (X1 - X0); }
+    function Y(c) { return Y0 - (c - 300) / 140 * (Y0 - Y1); }
+    function base(t) { return 315 + 0.797 * t + 0.01317 * t * t; }
+    var pts = [], t;
+    for (t = 0; t <= 66; t += 1 / 12) pts.push(X(1958 + t).toFixed(1) + " " + Y(base(t) + 3 * Math.sin(t * 6.2832)).toFixed(1));
+    var h = "<g stroke='#e8edf4' stroke-width='2'>";
+    [300, 340, 380, 420].forEach(function (c) { h += "<line x1='" + X0 + "' y1='" + Y(c) + "' x2='" + X1 + "' y2='" + Y(c) + "'/>"; });
+    h += "</g>";
+    [300, 340, 380, 420].forEach(function (c) { h += "<text x='" + (X0 - 12) + "' y='" + (Y(c) + 8) + "' font-size='21' font-weight='800' fill='#5f6b80' text-anchor='end'>" + c + "</text>"; });
+    h += "<text x='" + X0 + "' y='22' font-size='21' font-weight='900' fill='#5f6b80'>CO₂ 농도 (ppm)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [1960, 1980, 2000, 2020].forEach(function (y) { h += "<line x1='" + X(y) + "' y1='" + Y0 + "' x2='" + X(y) + "' y2='" + (Y0 + 12) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(y) + "' y='" + (Y0 + 40) + "' font-size='22' font-weight='800' fill='#161b28' text-anchor='middle'>" + y + "</text>"; });
+    h += "<g data-step='1'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#e03131' stroke-width='3.5'/></g>";
+    h += "<g data-step='2'><circle cx='" + X(1958) + "' cy='" + Y(315) + "' r='10' fill='#1462d8'/><text x='" + (X(1958) + 10) + "' y='" + (Y(315) - 52) + "' font-size='26' font-weight='900' fill='#1462d8'>1958년 약 315</text>";
+    h += "<circle cx='" + X(2024) + "' cy='" + Y(425) + "' r='10' fill='#c92a2a'/><text x='" + (X(2024) - 18) + "' y='" + (Y(425) + 6) + "' font-size='26' font-weight='900' fill='#c92a2a' text-anchor='end'>2024년 약 425</text></g>";
+    h += "<text x='" + X1 + "' y='22' font-size='18' fill='#7b8598' text-anchor='end'>⚠ 처음과 끝 값만 실측, 그 사이는 매끄럽게 이은 모식 곡선</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 흡수율 막대 — T = 255 K × (2 ÷ (2 − e))^¼ − 273 (단원 화면 모형) */
+  (function () {
+    var svg = document.getElementById("absSvg"), Z = 300, K = 7;   // 0 ℃ 높이, 1 ℃ = 7 px
+    function T(e) { return 255 * Math.pow(2 / (2 - e), 0.25) - 273.15; }
+    var bars = [{ e: 0, n: "0%", c: "#4dabf7", st: 1, lab: "없음" }, { e: 0.77, n: "약 77%", c: "#40c057", st: 2, lab: "지금" }, { e: 0.85, n: "85%", c: "#e03131", st: 3, lab: "강화" }];
+    var h = "<line x1='60' y1='" + Z + "' x2='770' y2='" + Z + "' stroke='#161b28' stroke-width='3'/><text x='50' y='" + (Z + 8) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='end'>0 ℃</text>";
+    [20, -20].forEach(function (v) { h += "<line x1='60' y1='" + (Z - v * K) + "' x2='770' y2='" + (Z - v * K) + "' stroke='#e8edf4' stroke-width='2'/><text x='50' y='" + (Z - v * K + 8) + "' font-size='21' font-weight='800' fill='#5f6b80' text-anchor='end'>" + (v > 0 ? "+" : "−") + Math.abs(v) + "</text>"; });
+    bars.forEach(function (b, i) {
+      var t = T(b.e), x = 110 + i * 230, top = t >= 0 ? Z - t * K : Z, hh = Math.abs(t) * K;
+      var tv = Math.round(t);
+      h += "<g data-step='" + b.st + "'><rect x='" + x + "' y='" + top + "' width='140' height='" + hh + "' rx='10' fill='" + b.c + "'/>";
+      h += "<text x='" + (x + 70) + "' y='" + (t >= 0 ? top - 14 : Z + hh / 2 + 11) + "' font-size='30' font-weight='900' fill='" + (t >= 0 ? b.c : "#fff") + "' text-anchor='middle'>" + (tv > 0 ? "약 " + tv : "약 −" + Math.abs(tv)) + " ℃</text>";
+      h += "<text x='" + (x + 70) + "' y='" + (i === 0 ? 470 : 470) + "' font-size='23' font-weight='900' fill='#161b28' text-anchor='middle'>흡수율 " + b.n + "</text>";
+      h += "<text x='" + (x + 70) + "' y='" + 498 + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>" + b.lab + "</text></g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* 적도 태평양 단면 두 장 (평년 · 엘니뇨) */
+  (function () {
+    var svg = document.getElementById("ensoSvg");
+    function panel(x0, el, step) {
+      var W = 680, h = "<g" + (step ? " data-step='" + step + "'" : "") + ">";
+      var id = el ? "e" : "n";
+      h += "<defs><linearGradient id='en-sky-" + id + "' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#e7f5ff'/><stop offset='1' stop-color='#d0ebff'/></linearGradient>";
+      h += "<linearGradient id='en-deep-" + id + "' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#4dabf7'/><stop offset='1' stop-color='#1864ab'/></linearGradient>";
+      h += "<marker id='en-ar-" + id + "' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='3.5' markerHeight='3.5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#343a40'/></marker>";
+      h += "<marker id='en-up-" + id + "' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='3.5' markerHeight='3.5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#a5d8ff'/></marker></defs>";
+      h += "<rect x='" + x0 + "' y='40' width='" + W + "' height='130' fill='url(#en-sky-" + id + ")'/>";
+      h += "<rect x='" + x0 + "' y='170' width='" + W + "' height='190' fill='url(#en-deep-" + id + ")'/>";
+      /* 따뜻한 표층: 평년은 서쪽이 두껍고 동쪽이 얇다, 엘니뇨는 평평하게 퍼진다 */
+      var wW = el ? 70 : 120, wE = el ? 55 : 14;
+      h += "<path d='M" + x0 + " 170 H" + (x0 + W) + " V" + (170 + wE) + " Q" + (x0 + W * .5) + " " + (170 + (wW + wE) / 2 + (el ? 5 : 30)) + " " + x0 + " " + (170 + wW) + "Z' fill='#ff922b' opacity='.85'/>";
+      h += "<text x='" + (x0 + (el ? W * .5 : 130)) + "' y='" + (el ? 212 : 230) + "' font-size='22' font-weight='900' fill='#fff' text-anchor='middle'>따뜻한 물</text>";
+      /* 육지 */
+      h += "<rect x='" + x0 + "' y='120' width='80' height='240' fill='#c49a6c'/><text x='" + (x0 + 40) + "' y='380' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='middle'>서 · 인도네시아</text>";
+      h += "<rect x='" + (x0 + W - 70) + "' y='120' width='70' height='240' fill='#c49a6c'/><text x='" + (x0 + W - 35) + "' y='380' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='middle'>동 · 페루</text>";
+      /* 비구름 */
+      var cx = el ? x0 + W * .5 - 20 : x0 + 170;
+      h += "<g fill='#868e96'><circle cx='" + cx + "' cy='80' r='26'/><circle cx='" + (cx + 32) + "' cy='70' r='32'/><circle cx='" + (cx + 64) + "' cy='82' r='24'/></g>";
+      h += "<g stroke='#4dabf7' stroke-width='3'><line x1='" + (cx + 10) + "' y1='108' x2='" + (cx + 2) + "' y2='132'/><line x1='" + (cx + 34) + "' y1='108' x2='" + (cx + 26) + "' y2='132'/><line x1='" + (cx + 58) + "' y1='108' x2='" + (cx + 50) + "' y2='132'/></g>";
+      /* 무역풍 (동 → 서) */
+      var wl = el ? 130 : 330;
+      h += "<path d='M" + (x0 + W - 110) + " 150 H" + (x0 + W - 110 - wl) + "' stroke='#343a40' stroke-width='" + (el ? 4 : 8) + "' marker-end='url(#en-ar-" + id + ")'/>";
+      h += "<text x='" + (x0 + W - 110) + "' y='138' font-size='21' font-weight='900' fill='#343a40' text-anchor='end'>무역풍" + (el ? " (약함)" : "") + "</text>";
+      /* 용승 */
+      h += "<path d='M" + (x0 + W - 110) + " 340 Q" + (x0 + W - 95) + " 260 " + (x0 + W - 90) + " " + (el ? 250 : 190) + "' stroke='#a5d8ff' stroke-width='" + (el ? 3 : 7) + "' fill='none'" + (el ? " stroke-dasharray='8 6'" : "") + " marker-end='url(#en-up-" + id + ")'/>";
+      h += "<text x='" + (x0 + W - 120) + "' y='" + 330 + "' font-size='20' font-weight='900' fill='#e7f5ff' text-anchor='end'>" + (el ? "용승 약함" : "찬물 용승") + "</text>";
+      h += "<text x='" + (x0 + W / 2) + "' y='28' font-size='28' font-weight='900' fill='" + (el ? "#d9480f" : "#1462d8") + "' text-anchor='middle'>" + (el ? "엘니뇨" : "평년") + "</text>";
+      return h + "</g>";
+    }
+    svg.innerHTML = panel(0, false, 0) + panel(720, true, 2) + "<text x='1400' y='398' font-size='17' fill='#7b8598' text-anchor='end'>⚠ 바다 깊이를 크게 과장 · 실제 태평양은 폭이 1만 km가 넘어 훨씬 납작하다</text>";
+  })();
+
+  /* 누적 배출량과 기온 (단원 화면 모형) */
+  (function () {
+    var svg = document.getElementById("cumSvg"), X0 = 90, X1 = 790, Y0 = 400, Y1 = 40;
+    function X(c) { return X0 + c / 3000 * (X1 - X0); }
+    function Y(t) { return Y0 - (t - 1) / 2 * (Y0 - Y1); }
+    function T(c) { return 1.3 + 0.45 * c / 1000; }
+    var h = "";
+    [1, 1.5, 2, 2.5, 3].forEach(function (t) { h += "<line x1='" + X0 + "' y1='" + Y(t) + "' x2='" + X1 + "' y2='" + Y(t) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(t) + 8) + "' font-size='21' font-weight='800' fill='#5f6b80' text-anchor='end'>" + t + "</text>"; });
+    h += "<text x='" + X0 + "' y='22' font-size='21' font-weight='900' fill='#5f6b80'>기온 상승 (℃)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 1000, 2000, 3000].forEach(function (c) { h += "<line x1='" + X(c) + "' y1='" + Y0 + "' x2='" + X(c) + "' y2='" + (Y0 + 12) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(c) + "' y='" + (Y0 + 40) + "' font-size='22' font-weight='800' fill='#161b28' text-anchor='middle'>" + c.toLocaleString() + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y0 + 66) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>2024년 이후 누적 배출량 (Gt CO₂)</text>";
+    h += "<g data-step='1'><line x1='" + X(0) + "' y1='" + Y(T(0)) + "' x2='" + X(3000) + "' y2='" + Y(T(3000)) + "' stroke='#e03131' stroke-width='6'/>";
+    h += "<circle cx='" + X(0) + "' cy='" + Y(1.3) + "' r='9' fill='#e03131'/><text x='" + (X(0) + 2) + "' y='" + (Y(1.3) + 34) + "' font-size='21' font-weight='900' fill='#c92a2a'>지금 1.3 ℃</text></g>";
+    h += "<g data-step='2'>";
+    [[1.5, 444, "#0b7f99", "1.5 ℃ · 약 440 Gt"], [2, 1556, "#e8590c", "2 ℃ · 약 1,560 Gt"]].forEach(function (q) {
+      h += "<line x1='" + X0 + "' y1='" + Y(q[0]) + "' x2='" + X1 + "' y2='" + Y(q[0]) + "' stroke='" + q[2] + "' stroke-width='3' stroke-dasharray='10 6'/>";
+      h += "<line x1='" + X(q[1]) + "' y1='" + Y(q[0]) + "' x2='" + X(q[1]) + "' y2='" + Y0 + "' stroke='" + q[2] + "' stroke-width='3' stroke-dasharray='6 6'/>";
+      h += "<circle cx='" + X(q[1]) + "' cy='" + Y(q[0]) + "' r='8' fill='" + q[2] + "'/>";
+      var lw = q[0] > 1.7;   /* 2 ℃ 이름표는 왼쪽 위, 1.5 ℃ 이름표는 오른쪽 아래(선과 축에 안 닿게) */
+      h += "<text x='" + (X(q[1]) + (lw ? -14 : 14)) + "' y='" + (Y(q[0]) + (lw ? -14 : 34)) + "' font-size='23' font-weight='900' fill='" + q[2] + "' text-anchor='" + (lw ? "end" : "start") + "' stroke='#fff' stroke-width='6' paint-order='stroke'>" + q[3] + "</text>";
+    });
+    h += "</g>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>
