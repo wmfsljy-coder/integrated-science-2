@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 자연선택과 진화 (통합과학2 Ⅰ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅰ-1 지구 환경 변화와 생물다양성 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 자연선택과 진화</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 같은 종 안의 차이, 변이 — 1977년 다프네메이저섬</h2>
+  <ul>
+    <li>우기 강수량 약 24 mm(평년의 5분의 1 수준) → 작고 부드러운 씨앗 고갈, 크고 딱딱한 남가새 씨앗만 남음</li>
+    <li>중간땅핀치 약 1,200마리 → 약 180마리: 약 <b class="blank" data-n="1">15</b>%만 생존</li>
+    <li>같은 종인데 부리 두께가 7 mm대~11 mm대로 퍼져 있다(가뭄 전부터) → 같은 종의 개체 사이에 나타나는 형질의 차이: <b class="blank" data-n="2">변이</b></li>
+    <li>변이의 까닭: <b class="blank" data-n="3">돌연변이</b>로 새로운 유전자가 생기고, <b class="blank" data-n="4">유성 생식</b> 과정에서 부모의 유전자가 다양하게 조합된다</li>
+  </ul>
+
+  <h2>② 자연선택과 유전</h2>
+  <ul>
+    <li>가뭄에는 딱딱한 씨앗을 깰 수 있는 <b class="blank" data-n="5">두꺼운</b> 부리가 유리 → 살아남은 새의 평균 부리 두께가 가뭄 전 집단보다 약 0.5 mm 큼</li>
+    <li>환경에 유리한 형질을 가진 개체가 더 많이 살아남아 자손을 남기는 것 → <b class="blank" data-n="6">자연선택</b></li>
+    <li>한 마리 한 마리의 부리가 자란 것이 아니다. 부리가 얇은 개체가 더 많이 죽어 ‘집단의 평균’이 달라졌다</li>
+    <li>형질이 자손에게 <b class="blank" data-n="7">유전</b>되어야 다음 세대가 달라진다 (핀치 부리의 유전되는 비율 약 0.8, 나머지는 먹이 같은 환경의 몫)</li>
+    <li>세대를 거치며 <b class="blank" data-n="8">집단</b>의 형질 구성이 달라지는 것 → <b class="blank" data-n="9">진화</b></li>
+    <li>모형: <span class="formula">자손 평균의 변화 = 유전되는 비율 × (살아남은 부모 평균 − 전체 평균)</span></li>
+    <li>1983년 엘니뇨로 큰비 → 작은 씨앗이 넘침 → 부리가 작은 새가 유리. 어떤 형질이 유리한지는 <b class="blank" data-n="10">환경</b>이 정한다</li>
+  </ul>
+
+  <h2>③ 항생제 내성과 생물다양성</h2>
+  <table>
+    <tr><th style="width:36%">배양 접시 (세균 100만 마리)</th><th>결과</th></tr>
+    <tr><td>(가) 내성 세균 0마리 + 항생제</td><td>모두 죽고, 내성 세균은 새로 생기지 않는다</td></tr>
+    <tr><td>(나) 내성 세균 조금 + 항생제 없음</td><td>보통 세균이 가득, 내성 세균의 비율은 아주 낮다</td></tr>
+    <tr><td>(다) 내성 세균 조금 + 항생제</td><td>이미 있던 소수만 살아남아 불어남 → <b class="blank" data-n="11">항생제 내성</b> 세균이 접시를 차지</td></tr>
+  </table>
+  <ul>
+    <li>항생제가 내성을 만든 것이 아니라 이미 있던 변이를 골랐다 = 자연선택 (세균은 20~30분마다 분열해 훨씬 빠르다)</li>
+    <li>한 조상 집단이 서로 다른 환경에서 자연선택을 거치며 차이가 쌓이면 서로 다른 <b class="blank" data-n="12">종</b>이 된다</li>
+    <li>갈라파고스 핀치 10여 종 · 지구의 <b class="blank" data-n="13">생물다양성</b>은 변이와 자연선택이 쌓여 만들어진 결과</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 항생제를 쓴 뒤 내성 세균이 늘어난 까닭은? <span class="ans">→ ㉡</span><br>
+      ㉠ 항생제가 보통 세균을 내성 세균으로 바꾸었다 &nbsp; ㉡ 이미 섞여 있던 내성 세균만 살아남아 불어났다 &nbsp; ㉢ 세균이 스스로 내성을 길렀다</p>
+    <p>2. 진화가 일어나려면 살아남는 데 유리한 형질이 어떻게 되어야 하는가? <span class="ans">→ 자손에게 유전되어야 한다</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘가뭄은 부리를 키우지 않았다. 골랐을 뿐이다’를 변이·자연선택·유전 세 낱말을 넣어 한 문장으로 바꿔 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「가뭄이 지나간 섬」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

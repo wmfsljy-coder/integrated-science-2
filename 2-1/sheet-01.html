@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 생태계의 구성 (통합과학2 Ⅱ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅱ-1 생태계와 환경 변화 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 생태계의 구성</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 생태계의 구성 요소</h2>
+  <ul>
+    <li>나무·이끼·애벌레·박새·버섯·세균처럼 살아 있는 것 → <b class="blank" data-n="1">생물적 요인</b></li>
+    <li>빛·온도·물·토양·공기처럼 생물을 둘러싼 환경 → <b class="blank" data-n="2">비생물적 요인</b></li>
+    <li>생물과 환경이 서로 영향을 주고받는 하나의 체계 → <b class="blank" data-n="3">생태계</b></li>
+  </ul>
+  <table>
+    <tr><th style="width:17%">역할</th><th>하는 일</th><th style="width:30%">뒤뜰의 예</th></tr>
+    <tr><td><b class="blank" data-n="4">생산자</b></td><td>광합성으로 양분을 스스로 만든다</td><td>느티나무, 이끼, 토끼풀</td></tr>
+    <tr><td><b class="blank" data-n="5">소비자</b></td><td>다른 생물을 먹어 양분을 얻는다</td><td>애벌레(1차), 박새(2차), 거미</td></tr>
+    <tr><td><b class="blank" data-n="6">분해자</b></td><td>죽은 생물·배설물을 분해한다</td><td>버섯, 곰팡이, 흙 속 세균</td></tr>
+  </table>
+  <ul>
+    <li>분해해서 나온 <b class="blank" data-n="7">무기물</b>을 생산자가 뿌리로 다시 흡수한다</li>
+  </ul>
+
+  <h2>② 빛과 잎</h2>
+  <ul>
+    <li>같은 나무에서 가지가 높을수록(빛이 강할수록) 잎이 두껍다 → 증거물 A(약 230 µm)는 꼭대기, B(약 100 µm)는 아래 가지</li>
+    <li>잎의 두께를 바꾼 범인: 비생물적 요인인 <b class="blank" data-n="8">빛</b></li>
+    <li>빛이 강한 곳의 작고 두꺼운 잎 → <b class="blank" data-n="9">양엽</b> &nbsp;·&nbsp; 빛이 약한 곳의 넓고 얇은 잎 → <b class="blank" data-n="10">음엽</b></li>
+    <li>양엽은 <b class="blank" data-n="11">울타리 조직</b>이 여러 층으로 쌓여 두껍다 · 한 나무에서도 양엽과 음엽이 함께 달린다</li>
+  </ul>
+
+  <h2>③ 생물과 환경의 관계</h2>
+  <table>
+    <tr><th style="width:24%">방향</th><th style="width:22%">이름</th><th>뒤뜰 관찰 기록의 예</th></tr>
+    <tr><td>환경 → 생물</td><td><b class="blank" data-n="12">작용</b></td><td>빛이 강한 꼭대기 가지의 잎이 두껍다 · 기온이 내려가자 잎을 떨군다</td></tr>
+    <tr><td>생물 → 환경</td><td><b class="blank" data-n="13">반작용</b></td><td>낙엽이 썩어 흙이 기름지게 된다 · 지렁이가 흙에 공기를 통하게 한다</td></tr>
+    <tr><td>생물 ↔ 생물</td><td><b class="blank" data-n="14">상호 작용</b></td><td>박새가 늘자 애벌레가 줄었다 · 벌이 토끼풀의 꽃가루를 옮긴다</td></tr>
+  </table>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. ‘숲이 우거지자 숲 바닥에 닿는 빛이 줄었다’는 작용, 반작용, 상호 작용 가운데 무엇인가? <span class="ans">→ 반작용</span></p>
+    <p>2. 흙 속 세균은 어디에 속할까? <span class="ans">→ ㉢</span><br>
+      ㉠ 비생물적 요인 &nbsp; ㉡ 생산자 &nbsp; ㉢ 분해자</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>하람이에게: 두께가 다른 두 잎의 정체를 ‘빛’과 ‘울타리 조직’을 넣어 한 문장으로 답하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「한 나무, 두 가지 잎」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

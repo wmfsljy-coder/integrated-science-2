@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 생태계 평형 (통합과학2 Ⅱ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅱ-1 생태계와 환경 변화 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 생태계 평형</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 먹이 관계</h2>
+  <ul>
+    <li>버드나무 → 엘크 → 늑대처럼 먹고 먹히는 관계를 한 줄로 이은 것 → <b class="blank" data-n="1">먹이 사슬</b> (화살표 = 양분이 옮겨 가는 방향)</li>
+    <li>사슬의 각 단계 → <b class="blank" data-n="2">영양 단계</b> : 생산자(버드나무) → <b class="blank" data-n="3">1차 소비자</b>(엘크) → <b class="blank" data-n="4">2차 소비자</b>(늑대)</li>
+    <li>여러 먹이 사슬이 그물처럼 얽힌 것 → <b class="blank" data-n="5">먹이 그물</b> · 복잡할수록 한 먹이가 줄어도 다른 먹이로 대신해 안정하다</li>
+  </ul>
+
+  <h2>② 생태 피라미드</h2>
+  <table>
+    <tr><th style="width:26%">영양 단계</th><th style="width:22%">에너지 (단원 화면 모형)</th><th>읽을 점</th></tr>
+    <tr><td>2차 소비자 (늑대)</td><td>5,000</td><td rowspan="3">다음 단계로 전해지는 에너지는 약 <b class="blank" data-n="6">10</b> % → 늑대에게는 생산자의 1 %뿐<br>나머지는 생명 활동에 쓰이고 <b class="blank" data-n="7">열</b>로 빠져나가거나 먹히지 않고 남는다</td></tr>
+    <tr><td>1차 소비자 (엘크)</td><td>50,000</td></tr>
+    <tr><td>생산자 (풀·버드나무)</td><td>500,000</td></tr>
+  </table>
+  <ul>
+    <li>아래가 넓고 위가 좁게 쌓은 모양 → <b class="blank" data-n="8">생태 피라미드</b> · <b class="blank" data-n="9">개체 수</b>와 생물량도 대체로 위로 갈수록 줄어든다</li>
+  </ul>
+
+  <h2>③ 생태계 평형</h2>
+  <ul>
+    <li>늑대 없는 70년(모형): <b class="blank" data-n="10">포식자</b>가 사라지자 엘크 약 3,800 → 한때 1만 7천 마리 · 식생 75 % → 20 % · 먹이가 모자라 엘크는 1만 2천 마리쯤에서 멈춤</li>
+    <li>늑대가 돌아오자: 늑대 증가 → 엘크 감소 → 숲 회복 → 먹이가 줄어 늑대 증가가 멈춤 (실제: 1995~1996년 늑대 31마리 재도입)</li>
+    <li>개체 수가 일정한 범위에서 오르내리며 균형을 유지하는 상태 → <b class="blank" data-n="11">생태계 평형</b> (멈춘 상태가 아니다)</li>
+    <li>포식자 하나가 먹이 사슬을 타고 아래 단계까지 영향을 주는 현상 → <b class="blank" data-n="12">영양 단계 연쇄 효과</b> (늑대 ▲ → 엘크 ▼ → 버드나무 ▲ → 비버·새 ▲)</li>
+    <li>평형이 깨지는 큰 변화: 천적이 없는 <b class="blank" data-n="13">외래종</b> 유입, 서식지 파괴, 산소 부족 같은 비생물적 요인의 변화(2022년 마산만 정어리 떼죽음)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 생산자 에너지 100,000, 단계마다 10 %씩 전달될 때 2차 소비자가 얻는 에너지는? <span class="ans">→ ㉡</span><br>
+      ㉠ 10,000 &nbsp; ㉡ 1,000 &nbsp; ㉢ 100</p>
+    <p>2. 늑대가 돌아온 뒤 강가 버드나무가 다시 자란 까닭은? <span class="ans">→ ㉡</span><br>
+      ㉠ 늑대가 버드나무 씨를 퍼뜨려서 &nbsp; ㉡ 늑대가 엘크 수를 줄여서 &nbsp; ㉢ 비버가 엘크를 쫓아내서</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>“늑대가 나무를 심은 것도 아닌데 숲이 돌아왔다.” 그 까닭을 ‘먹이 사슬’이라는 말을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「늑대가 돌아왔다」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

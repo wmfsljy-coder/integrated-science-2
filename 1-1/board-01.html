@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 지질시대와 대멸종 (통합과학2 Ⅰ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes rockIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .rwrap { animation: rockIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .flow { display: grid; gap: 12px; }
+  .flow .st { display: flex; gap: 16px; align-items: center; background: var(--soft); border-radius: 16px; padding: 12px 20px; font-size: 27px; font-weight: 700; line-height: 1.4; }
+  .flow .st i { flex: none; font-style: normal; width: 42px; height: 42px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 22px; text-align: center; line-height: 42px; }
+  .eras .card { padding: 22px 22px; }
+  .eras .card h3 { font-size: 30px; margin-bottom: 6px; }
+  .eras .card ul { margin: 0; padding-left: 22px; }
+  .eras .card li { font-size: 26px; line-height: 1.42; margin-bottom: 6px; }
+  .eras .card svg { display: block; margin: 0 auto 6px; }
+  table.ledger td { font-size: 28px; padding: 12px 12px; }
+  table.ledger th { padding: 8px 12px; }
+  table.ledger td:last-child { white-space: nowrap; }
+  table.ledger td svg { width: 150px; margin-right: 8px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="흰 석회암과 분홍 석회암 사이에 얇은 붉은 점토층이 낀 절벽 단면과 하늘에서 떨어지는 천체">
+      <defs>
+        <pattern id="c1-dn" width="34" height="30" patternUnits="userSpaceOnUse"><circle cx="8" cy="8" r="5" fill="#b8ab93"/><circle cx="25" cy="22" r="3.5" fill="#c9bea8"/><circle cx="26" cy="6" r="2" fill="#a89a80"/></pattern>
+        <pattern id="c1-sp" width="110" height="80" patternUnits="userSpaceOnUse"><circle cx="30" cy="40" r="2" fill="#b7897a"/></pattern>
+        <linearGradient id="c1-tr" x1="1" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd43b" stop-opacity="0"/><stop offset="1" stop-color="#ff922b"/></linearGradient>
+      </defs>
+      <g class="rwrap">
+        <rect x="560" y="60" width="520" height="190" rx="10" fill="#e8b9a6"/><rect x="560" y="60" width="520" height="190" rx="10" fill="url(#c1-sp)"/>
+        <rect x="560" y="250" width="520" height="18" fill="#8f2f1f"/>
+        <rect x="560" y="268" width="520" height="232" rx="10" fill="#ece6da"/><rect x="560" y="268" width="520" height="232" rx="10" fill="url(#c1-dn)"/>
+        <g font-size="26" font-weight="800" fill="#c9d1df" text-anchor="end">
+          <text x="535" y="165">신생대 석회암</text>
+          <text x="535" y="268" fill="#ffd43b">점토층 약 1 cm</text>
+          <text x="535" y="395">중생대 백악기 석회암</text>
+        </g>
+      </g>
+      <g data-step="1">
+        <line x1="1560" y1="0" x2="1325" y2="150" stroke="url(#c1-tr)" stroke-width="22" stroke-linecap="round"/>
+        <circle cx="1318" cy="156" r="24" fill="#868e96" stroke="#ffa94d" stroke-width="4"/>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 점토층 두께와 화석 크기는 크게 과장했습니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅰ-1 지구 환경 변화와 생물다양성 · 01</p>
+    <h1>지질시대와 대멸종</h1>
+    <p class="sub" data-step="1">손가락 한 마디 두께의 진흙층에 남은 6600만 년 전의 흔적</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 46억 년 지구 역사를 어떻게 나누는지, 그리고 그 사이에 생물이 한꺼번에 사라진 대멸종을 봅니다. 여러분은 지층 탐정입니다.</p>
+    <p data-at="1">공룡을 사라지게 한 범인은 공룡 뼈가 아니라 1 cm 남짓한 진흙층에서 밝혀졌습니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="1 cm 점토층의 수수께끼" data-part="도입">
+  <p class="kicker">도입 · 1970년대 말, 이탈리아 구비오의 석회암 절벽</p>
+  <h2>1 cm 점토층을 경계로 바다 생물이 바뀌었다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>위 석회암(신생대)</b> 아주 작은 유공충 몇 종만 드물게</p>
+      <p><b class="c-red">점토층 약 1 cm</b> 화석이 거의 없음</p>
+      <p><b>아래 석회암(중생대 백악기)</b> 크고 다양한 유공충 화석이 빽빽</p>
+      <p class="small mt">유공충: 바다에 떠서 사는 아주 작은 플랑크톤. 점토층은 약 6600만 년 전, 공룡이 사라진 시기의 지층입니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>이 1 cm가 쌓이는 동안 무슨 일이?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 오랜 세월 기후가 서서히 변해 생물이 조금씩 사라졌다</div>
+        <div class="opt">㉡ 새로 나타난 생물과의 경쟁에서 밀려 차례로 사라졌다</div>
+        <div class="opt">㉢ 지구 밖에서 온 천체가 충돌해 환경이 갑자기 바뀌었다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지질학자 월터 알바레즈가 구비오 골짜기에서 본 줄무늬입니다. 점토층 아래와 위의 바다가 완전히 딴 세상이에요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 증거를 하나씩 모아 직접 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>지질시대</b><span>지구가 생긴 뒤 지금까지의 긴 역사</span></div>
+    <div class="card"><b>표준 화석</b><span>지층이 쌓인 시대를 알려 주는 화석</span></div>
+    <div class="card"><b>이리듐층</b><span>소행성 충돌의 흔적이 남은 얇은 층</span></div>
+    <div class="card"><b>대멸종</b><span>많은 종이 한꺼번에 사라진 사건</span></div>
+    <div class="card"><b>생물다양성</b><span>대멸종 뒤 줄었다가 다시 늘어난 것</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 구비오 절벽 -->
+<section class="slide" id="s-gubbio" data-title="구비오 절벽의 세 층" data-part="① 점토층의 증거">
+  <p class="kicker">① 점토층의 증거 · 절벽의 세 층을 현미경으로 보면</p>
+  <h2>점토층 위아래의 바다가 딴 세상이다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg viewBox="0 0 700 480" width="700" height="480" aria-label="절벽 단면 세 층과 아래층·위층을 현미경으로 본 원 두 개. 아래층에는 크고 다양한 유공충이 빽빽하고 위층에는 아주 작은 것 몇 개뿐이다">
+      <defs>
+        <pattern id="s4-dn" width="30" height="26" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="4.5" fill="#b8ab93"/><circle cx="22" cy="19" r="3" fill="#c9bea8"/></pattern>
+        <pattern id="s4-sp" width="90" height="70" patternUnits="userSpaceOnUse"><circle cx="30" cy="35" r="2" fill="#b7897a"/></pattern>
+      </defs>
+      <rect x="40" y="20" width="250" height="180" fill="#efc7b6"/><rect x="40" y="20" width="250" height="180" fill="url(#s4-sp)"/>
+      <rect x="40" y="200" width="250" height="26" fill="#8f2f1f"/>
+      <rect x="40" y="226" width="250" height="224" fill="#ece6da"/><rect x="40" y="226" width="250" height="224" fill="url(#s4-dn)"/>
+      <text x="165" y="118" font-size="22" font-weight="900" fill="#7a3b2a" text-anchor="middle">신생대</text>
+      <text x="165" y="345" font-size="22" font-weight="900" fill="#5c5040" text-anchor="middle">중생대 백악기</text>
+      <rect x="32" y="194" width="266" height="38" rx="6" fill="none" stroke="#f59f00" stroke-width="6" data-step="2"/>
+      <g data-step="1">
+        <line x1="290" y1="340" x2="412" y2="350" stroke="#495057" stroke-width="3" stroke-dasharray="8 6"/>
+        <circle cx="520" cy="350" r="105" fill="#f8f4ec" stroke="#495057" stroke-width="6"/>
+        <g fill="#d9c7a0" stroke="#8c7a55" stroke-width="2">
+          <circle cx="470" cy="300" r="18"/><circle cx="495" cy="292" r="13"/><circle cx="512" cy="300" r="9"/>
+          <circle cx="560" cy="320" r="22"/><circle cx="584" cy="338" r="15"/>
+          <circle cx="455" cy="370" r="14"/><circle cx="476" cy="384" r="10"/><circle cx="490" cy="394" r="7"/>
+          <circle cx="540" cy="395" r="20"/><circle cx="566" cy="410" r="13"/>
+          <circle cx="600" cy="378" r="10"/><circle cx="520" cy="350" r="12"/><circle cx="530" cy="268" r="11"/><circle cx="548" cy="262" r="8"/>
+        </g>
+      </g>
+      <g data-step="3">
+        <line x1="290" y1="110" x2="412" y2="110" stroke="#495057" stroke-width="3" stroke-dasharray="8 6"/>
+        <circle cx="520" cy="110" r="105" fill="#fbf1ec" stroke="#495057" stroke-width="6"/>
+        <g fill="#d9c7a0" stroke="#8c7a55" stroke-width="1.5"><circle cx="490" cy="95" r="4"/><circle cx="555" cy="130" r="3.5"/><circle cx="515" cy="150" r="3"/></g>
+      </g>
+      <text x="40" y="474" font-size="18" fill="#5f6b80">⚠ 점토층 두께·화석 크기 과장 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">아래(중생대 백악기): 크고 다양한 유공충 화석이 빽빽하다</p>
+      <p data-step="2">가운데 약 1 cm의 붉은 <b class="blank" data-n="1" data-step="2">점토층</b>: 화석이 거의 없다</p>
+      <p data-step="3">위(신생대): 아주 작은 유공충 몇 종만 드물게</p>
+      <p class="small" data-step="3">1 cm가 쌓이는 동안 바다 생물이 거의 다 바뀌었다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>절벽을 아래에서 위로 읽습니다. 아래가 오래된 층입니다.</p>
+    <p data-at="1">아래 백악기 석회암을 현미경으로 보면 크고 다양한 유공충 껍데기가 빽빽해요.</p>
+    <p data-at="2">빈칸 1번, 점토층. 손가락 한 마디 두께인데 화석이 거의 없습니다.</p>
+    <p data-at="3">그 위 신생대 석회암에는 아주 작은 유공충 몇 종만 남았습니다. 이 1 cm가 쌓이는 동안 무슨 일이 있었는지 증거를 모아 봅시다.</p>
+  </aside>
+</section>
+
+<!-- 5 이리듐 그래프 -->
+<section class="slide" id="s-ir" data-title="높이별 시료 분석" data-part="① 점토층의 증거">
+  <p class="kicker">① 점토층의 증거 · 절벽 높이를 바꿔 가며 시료 분석 (단원 화면 모형)</p>
+  <h2>점토층에서만 한 원소가 치솟는다</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="irSvg" viewBox="0 0 780 470" width="780" height="470" aria-label="높이에 따른 이리듐 농도: 위아래 석회암은 약 0.3 ppb, 점토층에서 약 9 ppb까지 치솟는다"></svg>
+    <div class="lines">
+      <p data-step="1">위아래 석회암: 약 0.3 ppb (바탕값)</p>
+      <p data-step="2">점토층에서 <b class="blank" data-n="2" data-step="2">이리듐</b>이 약 9 ppb → 주변의 20~30배</p>
+      <p data-step="3">이 원소는 지각에는 거의 없고 우주 먼지와 <b class="blank" data-n="3" data-step="3">운석</b>에 훨씬 많다</p>
+    </div>
+  </div>
+  <p class="note">ppb = 10억분의 1. 연구팀은 처음에 ‘늘 일정하게 떨어지는 우주 먼지’로 쌓인 시간을 재려 했지만, 우주 먼지만으로는 설명할 수 없는 양이 나왔습니다.</p>
+  <aside class="script">
+    <p>알바레즈 연구팀은 점토층이 쌓이는 데 걸린 시간을 알고 싶었습니다. 그래서 높이를 바꿔 가며 시료를 떠서 한 원소의 양을 쟀어요.</p>
+    <p data-at="1">점토층에서 먼 석회암은 약 0.3 ppb. 이것이 바탕값입니다.</p>
+    <p data-at="2">점토층에 가까워지면 갑자기 치솟아 약 9 ppb, 주변의 20~30배입니다. 빈칸 2번, 이리듐.</p>
+    <p data-at="3">이리듐은 지구가 만들어질 때 철과 함께 핵으로 가라앉아 지각에는 거의 없어요. 대신 빈칸 3번, 운석과 우주 먼지에 많습니다. 이 많은 이리듐은 어디서 왔을까요?</p>
+  </aside>
+</section>
+
+<!-- 6 소행성과 충돌구 -->
+<section class="slide" id="s-ast" data-title="소행성과 충돌구" data-part="① 점토층의 증거">
+  <p class="kicker">① 점토층의 증거 · 이리듐 양으로 거꾸로 계산하면</p>
+  <h2>지름 약 10 km의 천체가 떨어졌다</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="지름 약 10 km의 소행성과 지름 약 180 km의 충돌구를 같은 비율로 그린 단면">
+    <defs>
+      <linearGradient id="s6-gr" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#c49a6c"/><stop offset="1" stop-color="#7b5233"/></linearGradient>
+      <linearGradient id="s6-tr" x1="1" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffd43b" stop-opacity="0"/><stop offset="1" stop-color="#ff922b"/></linearGradient>
+      <marker id="s6-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#868e96"/></marker>
+    </defs>
+    <path d="M0 150 H200 Q700 330 1200 150 H1400 V300 H0Z" fill="url(#s6-gr)" data-step="3"/>
+    <rect x="0" y="150" width="1400" height="150" fill="url(#s6-gr)" data-hide="3"/>
+    <g data-step="1">
+      <line x1="1100" y1="0" x2="760" y2="70" stroke="url(#s6-tr)" stroke-width="40" stroke-linecap="round"/>
+      <circle cx="728" cy="78" r="28" fill="#868e96" stroke="#ff922b" stroke-width="4"/>
+      <line x1="700" y1="122" x2="756" y2="122" stroke="#161b28" stroke-width="4"/>
+      <text x="728" y="146" font-size="21" font-weight="900" fill="#161b28" text-anchor="middle">10 km</text>
+    </g>
+    <g data-step="2" stroke="#868e96" stroke-width="6" fill="none" marker-end="url(#s6-a)">
+      <path d="M640 140 Q420 40 200 70"/><path d="M820 140 Q1000 40 1220 70"/>
+      <text x="200" y="40" font-size="22" font-weight="900" fill="#495057" stroke="none">이리듐 먼지가 전 세계로</text>
+    </g>
+    <g data-step="3">
+      <line x1="200" y1="125" x2="1200" y2="125" stroke="#c92a2a" stroke-width="4"/>
+      <line x1="200" y1="112" x2="200" y2="138" stroke="#c92a2a" stroke-width="4"/><line x1="1200" y1="112" x2="1200" y2="138" stroke="#c92a2a" stroke-width="4"/>
+      <text x="1000" y="112" font-size="23" font-weight="900" fill="#c92a2a" text-anchor="middle">지름 약 180 km</text>
+    </g>
+    <g data-step="4" font-size="21" font-weight="900" fill="#fff" text-anchor="middle">
+      <circle cx="420" cy="215" r="9" fill="#e7f5ff"/><circle cx="980" cy="215" r="9" fill="#e7f5ff"/>
+      <text x="500" y="270">충격 석영 · 유리 알갱이</text>
+    </g>
+    <text x="1395" y="292" font-size="18" fill="#fff" text-anchor="end">⚠ 깊이는 과장 · 소행성과 충돌구 지름 비율은 맞춤</text>
+  </svg>
+  <div class="two tight mt">
+    <div>
+      <p data-step="1">1 cm²에 쌓인 이리듐 약 8 ng → 거꾸로 계산하면 지름 약 7 km</p>
+      <p data-step="1">다른 방법까지 종합: 지름 10 ± 4 km의 <b class="blank" data-n="4" data-step="1">소행성</b> 충돌 (1980년 발표)</p>
+    </div>
+    <div>
+      <p data-step="2">덴마크·뉴질랜드 등 같은 시기 지층에도 이리듐층</p>
+      <p data-step="3">1991년 유카탄반도 땅속, 칙술루브 <b class="blank" data-n="5" data-step="3">충돌구</b></p>
+      <p data-step="4">충돌 압력으로만 생기는 충격 석영도 발견</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>연구팀은 거꾸로 계산했습니다. 이만한 이리듐을 지구 전체에 뿌리려면 얼마나 큰 소행성이 필요할까?</p>
+    <p data-at="1">구비오 점토층에는 1 cm²에 약 8 ng의 이리듐이 쌓여 있었고, 계산하면 약 7 km. 다른 방법까지 합쳐 지름 10 ± 4 km라고 발표했습니다. 빈칸 4번, 소행성. 에베레스트산만 한 돌덩이예요.</p>
+    <p data-at="2">덴마크, 뉴질랜드 같은 세계 곳곳의 같은 시기 지층에서도 이리듐층이 나왔습니다. 충돌 먼지가 지구 전체로 퍼졌다는 뜻이죠.</p>
+    <p data-at="3">1991년, 멕시코 유카탄반도 땅속에서 지름 약 180 km의 구덩이가 확인됩니다. 빈칸 5번, 충돌구. 그림의 소행성과 충돌구는 지름 비율을 맞춰 그렸습니다.</p>
+    <p data-at="4">충돌의 압력으로만 생기는 충격 석영, 녹았다 굳은 유리 알갱이까지. 증거가 서로 맞아떨어집니다.</p>
+  </aside>
+</section>
+
+<!-- 7 충돌 뒤 일어난 일 -->
+<section class="slide soft" id="s-chain" data-title="충돌 뒤 일어난 일" data-part="① 점토층의 증거">
+  <p class="kicker">① 점토층의 증거 · 사건 재구성</p>
+  <h2>환경 변화가 멸종으로 이어진 순서</h2>
+  <div class="cols" style="grid-template-columns:520px 1fr;align-items:center">
+    <svg viewBox="0 0 520 470" width="520" height="470" aria-label="햇빛이 먼지층에 가려지고 식물이 시들며 공룡이 사라지는 모식도">
+      <defs>
+        <linearGradient id="s7-sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d0ebff"/><stop offset="1" stop-color="#f1f8ff"/></linearGradient>
+      </defs>
+      <rect x="0" y="0" width="520" height="400" rx="18" fill="url(#s7-sky)"/>
+      <rect x="0" y="380" width="520" height="90" rx="12" fill="#a47148"/>
+      <circle cx="80" cy="70" r="40" fill="#ffd43b"/>
+      <g stroke="#f59f00" stroke-width="6" data-hide="2"><line x1="120" y1="110" x2="260" y2="360"/><line x1="160" y1="80" x2="400" y2="360"/></g>
+      <g data-step="2"><rect x="0" y="120" width="520" height="70" fill="#495057" opacity=".88"/>
+        <text x="300" y="164" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">먼지·그을음</text>
+        <g stroke="#f59f00" stroke-width="6"><line x1="120" y1="110" x2="125" y2="118"/><line x1="160" y1="80" x2="180" y2="118"/></g></g>
+      <g fill="#2f9e44" data-hide="3"><path d="M240 382 l14 -70 l14 70Z"/><path d="M300 382 l12 -55 l12 55Z"/><path d="M360 382 l14 -80 l14 80Z"/><path d="M420 382 l12 -50 l12 50Z"/></g>
+      <g fill="#a68a64" data-step="3"><path d="M240 382 l30 -26 l-2 26Z"/><path d="M300 382 l26 -20 l-2 20Z"/><path d="M360 382 l32 -30 l-2 30Z"/><path d="M420 382 l24 -18 l-2 18Z"/></g>
+      <g data-step="4"><text x="110" y="370" font-size="64" text-anchor="middle">🦕</text><path d="M70 300 L150 380 M150 300 L70 380" stroke="#e03131" stroke-width="8"/></g>
+      <g data-step="5"><text x="470" y="376" font-size="40" text-anchor="middle">🐁</text></g>
+      <text x="510" y="462" font-size="18" fill="#fff" text-anchor="end">⚠ 모식도</text>
+    </svg>
+    <div class="flow">
+      <div class="st" data-step="1"><i>1</i><span>지름 약 10 km의 소행성이 유카탄반도에 충돌</span></div>
+      <div class="st" data-step="2"><i>2</i><span>먼지와 그을음이 대기로 퍼져 햇빛을 가림</span></div>
+      <div class="st" data-step="3"><i>3</i><span>기온 하강, 식물·식물 플랑크톤의 <b class="blank" data-n="6" data-step="3">광합성</b> 감소</span></div>
+      <div class="st" data-step="4"><i>4</i><span>먹이 사슬이 아래부터 무너짐 → 공룡·암모나이트 멸종</span></div>
+      <div class="st" data-step="5"><i>5</i><span>살아남은 작은 동물이 빈 환경으로 퍼짐 (③에서)</span></div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 결말 미션처럼 순서를 재구성합니다. 학생에게 다음 칸을 먼저 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">충돌 자체로 모든 생물이 죽은 것은 아닙니다.</p>
+    <p data-at="2">엄청난 양의 먼지와 그을음이 대기로 퍼져 햇빛을 가립니다.</p>
+    <p data-at="3">햇빛이 줄면 기온이 떨어지고, 빈칸 6번, 광합성이 크게 줄어요. 먹이 사슬의 맨 아래가 흔들립니다.</p>
+    <p data-at="4">먹이 사슬이 아래부터 무너져 공룡, 암모나이트 같은 생물이 사라졌습니다.</p>
+    <p data-at="5">살아남은 쪽에서 무슨 일이 일어났는지는 세 번째 파트에서 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 8 46억 년 달력 -->
+<section class="slide" id="s-cal" data-title="46억 년을 1년 달력으로" data-part="② 지질시대">
+  <p class="kicker">② 지질시대와 표준 화석 · 지구의 1년 달력 (단원 화면 모형)</p>
+  <h2>46억 년을 1년 달력으로 줄이면</h2>
+  <svg id="calSvg" viewBox="0 0 1400 390" width="1400" height="390" aria-label="46억 년을 365일로 줄인 띠. 선캄브리아 시대가 322일, 고생대는 11월 19일, 중생대는 12월 12일, 신생대는 12월 26일에 시작한다"></svg>
+  <div class="tight">
+    <p data-step="1">지구가 탄생한 약 46억 년 전부터 지금까지 → <b class="blank" data-n="7" data-step="1">지질시대</b> (화석 생물이 크게 바뀌는 때를 경계로 나눈다)</p>
+    <p data-step="2">1년 가운데 322일(약 88%)이 <b class="blank" data-n="8" data-step="2">선캄브리아 시대</b> · 생물이 단순해 화석이 드물다</p>
+  </div>
+  <p class="note">달력 하루 ≈ 1260만 년. 시대가 시작된 때: 고생대 약 5.39억 년 전, 중생대 약 2.52억 년 전, 신생대 약 6600만 년 전.</p>
+  <aside class="script">
+    <p>‘6600만 년 전’이 지구 역사에서 어디쯤인지 감이 오나요? 지구가 태어난 46억 년 전을 1월 1일 0시, 지금을 12월 31일 자정으로 놓아 봅시다.</p>
+    <p data-at="1">이 46억 년 전체가 빈칸 7번, 지질시대입니다. 화석으로 나오는 생물이 크게 바뀌는 때를 경계로 나눠요.</p>
+    <p data-at="2">11월 18일까지, 322일이 빈칸 8번, 선캄브리아 시대입니다. 1년의 약 88%예요.</p>
+    <p data-at="3">고생대는 11월 19일에야 시작합니다. 단단한 껍데기를 가진 생물이 갑자기 다양해져 화석이 풍부해지는 때예요.</p>
+    <p data-at="4">공룡이 사라진 날은 12월 26일. 중생대는 약 2주, 신생대는 약 5일입니다.</p>
+    <p data-at="5">현생 인류는 12월 31일 밤 11시 26분쯤에야 나타납니다.</p>
+  </aside>
+</section>
+
+<!-- 9 시대별 환경과 생물 -->
+<section class="slide soft" id="s-eras" data-title="시대별 환경과 생물" data-part="② 지질시대">
+  <p class="kicker">② 지질시대와 표준 화석 · 지구 환경은 끊임없이 변했다</p>
+  <h2>시대마다 환경도, 번성한 생물도 달랐다</h2>
+  <div class="cols c4 eras">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 200 100" width="200" height="100" aria-label="층층이 쌓인 둥근 스트로마톨라이트"><g fill="none" stroke="#6741d9" stroke-width="5"><path d="M20 95 Q50 20 80 95"/><path d="M30 95 Q50 40 70 95"/><path d="M110 95 Q145 10 180 95"/><path d="M122 95 Q145 30 168 95"/><path d="M134 95 Q145 50 156 95"/></g></svg>
+      <h3>선캄브리아</h3>
+      <ul><li>남세균의 광합성 → 산소 증가</li><li>화석이 드물다 (스트로마톨라이트)</li></ul>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 200 100" width="200" height="100" aria-label="세 갈래로 나뉜 삼엽충"><ellipse cx="100" cy="52" rx="44" ry="44" fill="#99e9f2" stroke="#0b7f99" stroke-width="5"/><g stroke="#0b7f99" stroke-width="4"><line x1="82" y1="12" x2="82" y2="92"/><line x1="118" y1="12" x2="118" y2="92"/><line x1="60" y1="40" x2="140" y2="40"/><line x1="58" y1="58" x2="142" y2="58"/><line x1="62" y1="76" x2="138" y2="76"/></g></svg>
+      <h3>고생대</h3>
+      <ul><li>대체로 온난, 말기 빙하기</li><li>오존층 → 육상 진출</li><li>말기에 대륙이 모여 <b class="blank" data-n="9" data-step="2">판게아</b></li><li>삼엽충·방추충·양치식물</li></ul>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 200 100" width="200" height="100" aria-label="나선형 껍데기의 암모나이트"><path d="M100 52 m0 -6 a6 6 0 1 1 -6 6 a12 12 0 1 1 12 12 a20 20 0 1 1 -20 -20 a30 30 0 1 1 30 30 a42 42 0 0 1 -42 -42" fill="none" stroke="#e8590c" stroke-width="6"/></svg>
+      <h3>중생대</h3>
+      <ul><li>빙하기 없이 온난</li><li>판게아가 갈라지기 시작</li><li>암모나이트·공룡·겉씨식물</li></ul>
+    </div>
+    <div class="card" data-step="4">
+      <svg viewBox="0 0 200 100" width="200" height="100" aria-label="동전 모양의 화폐석"><circle cx="100" cy="50" r="44" fill="#ffe8a1" stroke="#f08c00" stroke-width="5"/><g fill="none" stroke="#f08c00" stroke-width="3"><circle cx="100" cy="50" r="32"/><circle cx="100" cy="50" r="20"/><circle cx="100" cy="50" r="8"/></g></svg>
+      <h3>신생대</h3>
+      <ul><li>전기 온난, 후기 빙하기·간빙기 반복</li><li>화폐석·매머드·속씨식물</li></ul>
+    </div>
+  </div>
+  <aside class="script">
+    <p>네 시대의 환경과 대표 생물입니다. 환경이 바뀌면 번성하는 생물도 바뀌었어요.</p>
+    <p data-at="1">선캄브리아 시대에는 남세균의 광합성으로 바다와 대기에 산소가 늘었습니다. 화석은 드물어요.</p>
+    <p data-at="2">고생대에는 오존층이 두꺼워져 생물이 육지로 올라옵니다. 말기에 대륙이 하나로 모이죠. 빈칸 9번, 판게아.</p>
+    <p data-at="3">중생대는 빙하기 없이 따뜻했고, 판게아가 갈라지기 시작합니다. 암모나이트와 공룡의 시대예요.</p>
+    <p data-at="4">신생대 후기에는 빙하기와 간빙기가 되풀이되었고, 매머드가 이때 살았습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 표준 화석 -->
+<section class="slide" id="s-index" data-title="표준 화석" data-part="② 지질시대">
+  <p class="kicker">② 지질시대와 표준 화석 · 화석으로 지층의 나이 읽기</p>
+  <h2>어떤 화석은 지층의 시대를 알려 준다</h2>
+  <div class="cols" style="grid-template-columns:600px 1fr;align-items:center">
+    <svg viewBox="0 0 600 470" width="600" height="470" aria-label="세 지층에서 각각 화폐석, 암모나이트, 삼엽충 화석이 나오고 각 지층이 신생대, 중생대, 고생대에 쌓였음을 가리킨다">
+      <defs><marker id="s10-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+      <rect x="20" y="20" width="320" height="140" fill="#f3d9a4"/><rect x="20" y="160" width="320" height="140" fill="#d8c3a5"/><rect x="20" y="300" width="320" height="150" fill="#b8a48c"/>
+      <g data-step="1">
+        <circle cx="180" cy="90" r="36" fill="#ffe8a1" stroke="#f08c00" stroke-width="5"/><g fill="none" stroke="#f08c00" stroke-width="3"><circle cx="180" cy="90" r="24"/><circle cx="180" cy="90" r="11"/></g>
+        <path d="M180 232 m0 -5 a5 5 0 1 1 -5 5 a10 10 0 1 1 10 10 a17 17 0 1 1 -17 -17 a26 26 0 1 1 26 26 a36 36 0 0 1 -36 -36" fill="none" stroke="#e8590c" stroke-width="5"/>
+        <ellipse cx="180" cy="376" rx="34" ry="44" fill="#99e9f2" stroke="#0b7f99" stroke-width="5"/><g stroke="#0b7f99" stroke-width="3"><line x1="166" y1="336" x2="166" y2="416"/><line x1="194" y1="336" x2="194" y2="416"/><line x1="150" y1="362" x2="210" y2="362"/><line x1="148" y1="382" x2="212" y2="382"/><line x1="152" y1="400" x2="208" y2="400"/></g>
+      </g>
+      <g data-step="2" font-size="26" font-weight="900">
+        <g stroke="#495057" stroke-width="4" marker-end="url(#s10-a)"><line x1="350" y1="90" x2="420" y2="90"/><line x1="350" y1="230" x2="420" y2="230"/><line x1="350" y1="375" x2="420" y2="375"/></g>
+        <text x="430" y="99" fill="#e67700">신생대</text><text x="430" y="239" fill="#d9480f">중생대</text><text x="430" y="384" fill="#0b7f99">고생대</text>
+      </g>
+      <text x="20" y="468" font-size="18" fill="#5f6b80">⚠ 화석 크기 과장 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">지층마다 나오는 화석이 다르다 (화폐석 · 암모나이트 · 삼엽충)</p>
+      <p data-step="2">특정 시대에만 살았던 생물의 화석 → 지층이 쌓인 시대를 알려 준다: <b class="blank" data-n="10" data-step="2">표준 화석</b></p>
+      <div class="card red" data-step="3">
+        <p style="margin:0 0 6px"><b>화석 = 그 생물의 뼈 그대로?</b></p>
+        <p class="small" style="margin:0">아니다. 뼈 속 빈틈을 광물이 채우거나 다른 광물로 바뀌어 돌처럼 된 것이 대부분. 모양만 찍힌 화석도 많다.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면에서 화석 8개를 시대별로 나눠 본 것과 같은 원리입니다.</p>
+    <p data-at="1">층마다 나오는 화석이 다릅니다.</p>
+    <p data-at="2">삼엽충이 나오면 고생대, 암모나이트면 중생대, 화폐석이면 신생대에 쌓인 층입니다. 이런 화석이 빈칸 10번, 표준 화석.</p>
+    <p data-at="3">박물관의 공룡 뼈를 실제 뼈 그대로라고 생각하기 쉽습니다. 대부분은 광물이 스며들어 돌처럼 바뀐 것이에요.</p>
+  </aside>
+</section>
+
+<!-- 11 확인 -->
+<section class="slide" id="s-check1" data-title="익룡은 공룡일까" data-part="② 지질시대">
+  <p class="kicker">② 지질시대와 표준 화석 · 확인</p>
+  <h2>중생대 하늘을 날던 익룡은 공룡일까?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 공룡이다</div>
+    <div class="opt right" data-step="1">㉡ 공룡이 아니다</div>
+    <div class="opt wrong" data-step="1">㉢ 공룡의 조상이다</div>
+    <div class="opt wrong" data-step="1">㉣ 공룡이 진화한 것이다</div>
+  </div>
+  <p data-step="1" style="margin-top:40px">공룡 = <b>중생대 육지</b>에 살았던 특정 파충류 무리. 익룡·어룡·수장룡은 중생대에 살았지만 공룡이 아니다.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ㉡. 중생대에 살았던 파충류가 모두 공룡인 것은 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 12 생물 무리 수 곡선 -->
+<section class="slide" id="s-ext" data-title="곡선이 꺼지는 다섯 곳" data-part="③ 대멸종">
+  <p class="kicker">③ 다섯 번의 대멸종 · 화석으로 센 해양 생물 무리의 수</p>
+  <h2>곡선이 갑자기 꺼지는 곳이 다섯 군데</h2>
+  <svg id="extSvg" viewBox="0 0 1400 420" width="1400" height="420" aria-label="5.4억 년 전부터 지금까지 해양 생물 무리 수의 개략 곡선과 크게 꺼지는 다섯 시기"></svg>
+  <div class="tight">
+    <p data-step="2">짧은 기간에 많은 종이 한꺼번에 사라지는 사건 → <b class="blank" data-n="11" data-step="2">대멸종</b></p>
+    <p data-step="3">가장 큰 것: <b class="blank" data-n="12" data-step="3">페름기 말</b> 대멸종 (종의 약 96%) · 고생대와 중생대의 경계</p>
+  </div>
+  <p class="note">곡선은 개략도이고, 사라진 종의 비율은 화석 기록으로 추정한 값입니다.</p>
+  <aside class="script">
+    <p>6600만 년 전 같은 일이 처음이었을까요? 화석으로 남은 해양 생물 무리의 수를 시간에 따라 그렸습니다.</p>
+    <p data-at="1">전체적으로는 늘어나지만, 군데군데 갑자기 꺼집니다.</p>
+    <p data-at="2">이렇게 짧은 기간에 많은 종이 한꺼번에 사라지는 사건이 빈칸 11번, 대멸종. 다섯 번 있었습니다.</p>
+    <p data-at="3">가장 큰 것은 빈칸 12번, 페름기 말. 종의 약 96%가 사라졌고, 이것이 고생대와 중생대의 경계입니다. 공룡이 사라진 백악기 말은 중생대와 신생대의 경계고요.</p>
+  </aside>
+</section>
+
+<!-- 13 대멸종의 원인 -->
+<section class="slide soft" id="s-cause" data-title="대멸종의 원인 비교" data-part="③ 대멸종">
+  <p class="kicker">③ 다섯 번의 대멸종 · 원인은 저마다 달랐다</p>
+  <h2>환경이 급격히 변할 때 대멸종이 일어났다</h2>
+  <table class="ledger">
+    <tr><th style="width:250px">대멸종</th><th style="width:230px">언제</th><th>주된 원인</th><th style="width:300px">사라진 종 (추정)</th></tr>
+    <tr data-step="1"><td><b>오르도비스기 말</b></td><td>약 4.45억 년 전</td><td>급격한 빙하기, 해수면 하강</td><td><svg viewBox="0 0 300 30" width="200" height="22" style="vertical-align:middle"><rect width="300" height="30" rx="6" fill="#e8edf4"/><rect width="255" height="30" rx="6" fill="#e03131"/></svg> 약 85%</td></tr>
+    <tr data-step="2"><td><b>데본기 후기</b></td><td>약 3.72억 년 전</td><td>바다의 산소 부족, 기후 변화</td><td><svg viewBox="0 0 300 30" width="200" height="22" style="vertical-align:middle"><rect width="300" height="30" rx="6" fill="#e8edf4"/><rect width="225" height="30" rx="6" fill="#e03131"/></svg> 약 75%</td></tr>
+    <tr data-step="3"><td><b>페름기 말</b></td><td>약 2.52억 년 전</td><td>시베리아의 대규모 <b class="blank" data-n="13" data-step="3">화산 분출</b> → 온난화·해양 산성화</td><td><svg viewBox="0 0 300 30" width="200" height="22" style="vertical-align:middle"><rect width="300" height="30" rx="6" fill="#e8edf4"/><rect width="288" height="30" rx="6" fill="#e03131"/></svg> 약 96%</td></tr>
+    <tr data-step="4"><td><b>트라이아스기 말</b></td><td>약 2.01억 년 전</td><td>판게아가 갈라지며 화산 활동</td><td><svg viewBox="0 0 300 30" width="200" height="22" style="vertical-align:middle"><rect width="300" height="30" rx="6" fill="#e8edf4"/><rect width="240" height="30" rx="6" fill="#e03131"/></svg> 약 80%</td></tr>
+    <tr data-step="5"><td><b>백악기 말</b></td><td>약 6600만 년 전</td><td>소행성 충돌</td><td><svg viewBox="0 0 300 30" width="200" height="22" style="vertical-align:middle"><rect width="300" height="30" rx="6" fill="#e8edf4"/><rect width="225" height="30" rx="6" fill="#e03131"/></svg> 약 75%</td></tr>
+  </table>
+  <aside class="script">
+    <p>다섯 대멸종의 원인은 하나가 아닙니다. 모두 환경이 급격하게 바뀌었다는 점이 같아요.</p>
+    <p data-at="1">오르도비스기 말: 급격한 빙하기로 해수면이 낮아져 얕은 바다가 사라졌습니다.</p>
+    <p data-at="2">데본기 후기: 바다에 산소가 부족해져 산호, 갑주어가 큰 타격을 입었습니다.</p>
+    <p data-at="3">페름기 말: 빈칸 13번, 시베리아의 대규모 화산 분출. 온난화와 해양 산성화, 산소 부족이 겹쳤고 삼엽충도 이때 사라집니다.</p>
+    <p data-at="4">트라이아스기 말: 판게아가 갈라지며 화산 활동이 일어났고, 그 뒤 공룡이 번성합니다.</p>
+    <p data-at="5">백악기 말: 오늘 앞에서 본 소행성 충돌입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 대멸종 뒤 -->
+<section class="slide" id="s-after" data-title="대멸종 뒤에 일어난 일" data-part="③ 대멸종">
+  <p class="kicker">③ 다섯 번의 대멸종 · 백악기 말 이후</p>
+  <h2>대멸종은 주인공이 바뀌는 전환점</h2>
+  <svg id="afterSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="백악기 말에 생물다양성이 크게 줄었다가 신생대에 다시 늘어나는 개략 곡선, 중생대 공룡과 신생대 포유류"></svg>
+  <div class="tight">
+    <p data-step="1">대멸종 → 생물다양성이 크게 줄어든다</p>
+    <p data-step="2">살아남은 생물이 비어 있는 환경으로 퍼져 다시 다양해짐 → 신생대에 <b class="blank" data-n="14" data-step="2">포유류</b> 번성</p>
+    <p data-step="3">대멸종은 생물다양성의 끝이 아니라 <b class="c-blue">주인공이 바뀌는 전환점</b></p>
+  </div>
+  <p class="note">같은 시기 인도 데칸고원의 대규모 화산 분출이 멸종에 얼마나 영향을 주었는지는 지금도 연구 중입니다. 곡선은 개략도입니다.</p>
+  <aside class="script">
+    <p>대멸종 뒤에는 무슨 일이 일어났을까요?</p>
+    <p data-at="1">공룡과 암모나이트를 비롯해 종의 약 75%가 사라졌습니다. 생물다양성이 크게 줄었죠.</p>
+    <p data-at="2">하지만 살아남은 작은 동물들이 비어 있는 환경으로 퍼져 나갔습니다. 빈칸 14번, 포유류가 신생대에 크게 번성합니다.</p>
+    <p data-at="3">대멸종은 끝이 아니라 주인공이 바뀌는 전환점이었습니다. 이 다양해지는 과정이 다음 시간의 주제, 진화와 이어집니다.</p>
+  </aside>
+</section>
+
+<!-- 15 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>지구 환경이 바뀌면 생물다양성도 바뀐다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>지질시대</b>: 약 46억 년 전~지금 · 선캄브리아(1년 달력의 약 88%) → 고생대 → 중생대 → 신생대</li>
+    <li data-k="2" data-step="2"><b>표준 화석</b>: 특정 시대에만 산 생물의 화석 → 지층의 시대 (삼엽충·암모나이트·화폐석)</li>
+    <li data-k="3" data-step="3">구비오 1 cm 점토층의 <b>이리듐</b> → 약 6600만 년 전 소행성 충돌 → 햇빛 차단·광합성 감소 → 공룡 멸종</li>
+    <li data-k="4" data-step="4"><b>대멸종</b> 다섯 번(가장 큰 것: 페름기 말) → 다양성이 줄었다가 살아남은 생물이 다시 다양해짐</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 16 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 백악기 말 소행성 충돌의 증거가 <span class="c-red">아닌</span> 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 세계 곳곳 같은 시기 지층의 이리듐층</div>
+        <div class="opt wrong" data-step="1">㉡ 유카탄반도 땅속의 지름 약 180 km 충돌구</div>
+        <div class="opt right" data-step="1">㉢ 점토층 아래 석회암의 크고 다양한 유공충</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 고생대와 중생대의 경계가 된 대멸종은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 오르도비스기 말</div>
+        <div class="opt right" data-step="2">㉡ 페름기 말</div>
+        <div class="opt wrong" data-step="2">㉢ 백악기 말</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉢. 점토층 아래의 유공충은 충돌 ‘전’의 바다 모습일 뿐, 충돌의 증거가 아닙니다.</p>
+    <p data-at="2">2번은 ㉡ 페름기 말. 백악기 말은 중생대와 신생대의 경계입니다.</p>
+  </aside>
+</section>
+
+<!-- 17 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「1센티미터의 점토층」</h2>
+  <div class="cols">
+    <div class="card"><h3>지층 탐정이 되어 보세요</h3><p>시료를 떠서 이리듐 그래프 그리기, 소행성 지름 계산, 46억 년 달력, 화석 분류, 곡선이 꺼지는 다섯 사건 찾기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 자연선택과 진화</h3><p>살아남은 생물은 어떻게 다시 다양해졌을까요? 1977년 갈라파고스의 가뭄과 핀치의 부리를 따라갑니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 이리듐 농도 — 단원 화면 모형 irAt(z) = 0.3 + 8.7 × e^(−|z|/λ) ppb, λ = 5 cm(위)·2 cm(아래) */
+  (function () {
+    var svg = document.getElementById("irSvg"), X0 = 110, X1 = 740, Y0 = 50, Y1 = 410;
+    function X(v) { return X0 + v / 10 * (X1 - X0); }
+    function Y(z) { return Y0 + (40 - z) / 80 * (Y1 - Y0); }
+    function ir(z) { return 0.3 + 8.7 * Math.exp(-Math.abs(z) / (z >= 0 ? 5 : 2)); }
+    var h = "<rect x='" + X0 + "' y='" + Y(0.5) + "' width='" + (X1 - X0) + "' height='" + (Y(-0.5) - Y(0.5)) + "' fill='#c92a2a' opacity='.55'/>";
+    h += "<text x='" + (X1) + "' y='" + (Y(0) + 30) + "' font-size='20' font-weight='900' fill='#c92a2a' text-anchor='end'>점토층</text>";
+    [40, 20, -20, -40].forEach(function (z) { h += "<line x1='" + X0 + "' y1='" + Y(z) + "' x2='" + X1 + "' y2='" + Y(z) + "' stroke='#e8edf4' stroke-width='2'/>"; });
+    [40, 20, 0, -20, -40].forEach(function (z) { h += "<text x='" + (X0 - 12) + "' y='" + (Y(z) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + (z > 0 ? "+" + z : (z < 0 ? "−" + Math.abs(z) : "0")) + "</text>"; });
+    h += "<text x='" + (X0 - 60) + "' y='22' font-size='20' font-weight='900' fill='#5f6b80'>높이 (cm)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 2, 4, 6, 8, 10].forEach(function (v) { h += "<text x='" + X(v) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + v + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 56) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>이리듐 농도 (ppb)</text>";
+    h += "<g data-step='1'>";
+    [-40, -30, -20, -10, 20, 30, 40].forEach(function (z) { h += "<circle cx='" + X(ir(z)) + "' cy='" + Y(z) + "' r='8' fill='#1462d8'/>"; });
+    h += "<text x='" + (X(0.3) + 22) + "' y='" + (Y(-30) + 7) + "' font-size='22' font-weight='900' fill='#1462d8'>바탕값 약 0.3 ppb</text></g>";
+    var pts = [], z;
+    for (z = -40; z <= 40; z += 0.25) pts.push(X(ir(z)).toFixed(1) + " " + Y(z).toFixed(1));
+    h += "<g data-step='2'><line x1='" + X(6) + "' y1='" + Y0 + "' x2='" + X(6) + "' y2='" + Y1 + "' stroke='#f08c00' stroke-width='3' stroke-dasharray='10 7'/>";
+    h += "<text x='" + (X(6) + 8) + "' y='" + (Y0 + 22) + "' font-size='20' font-weight='900' fill='#e8590c'>6 ppb</text>";
+    h += "<polyline points='" + pts.join(" ") + "' fill='none' stroke='#e03131' stroke-width='4'/>";
+    [-4, -2, 0, 2, 5, 10].forEach(function (z) { h += "<circle cx='" + X(ir(z)) + "' cy='" + Y(z) + "' r='8' fill='#e03131'/>"; });
+    h += "<text x='" + (X(9) - 14) + "' y='" + (Y(0) - 44) + "' font-size='24' font-weight='900' fill='#c92a2a' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>약 9 ppb · 바탕값의 약 30배</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 지구의 1년 달력 — 단원 화면과 같은 경계(5.39·2.52·0.66억 년 전), 46억 년 = 365일 */
+  (function () {
+    var svg = document.getElementById("calSvg");
+    function day(ma) { return (1 - ma / 4600) * 365; }
+    var B = [[4600, 539, "#6741d9", "선캄브리아 시대"], [539, 252, "#0b7f99", "고생대"], [252, 66, "#e8590c", "중생대"], [66, 0, "#f08c00", "신생대"]];
+    var ML = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31], W = 1400, T0 = 40, TH = 60;
+    function XA(d) { return d / 365 * W; }
+    var h = "<rect x='0' y='" + T0 + "' width='" + W + "' height='" + TH + "' rx='8' fill='#e8edf4'/>";
+    h += "<text x='0' y='" + (T0 - 12) + "' font-size='20' font-weight='800' fill='#5f6b80'>1월 1일 0시 = 46억 년 전</text>";
+    h += "<text x='" + W + "' y='" + (T0 - 12) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>12월 31일 자정 = 지금</text>";
+    var acc = 0;
+    ML.forEach(function (m, i) { var x = XA(acc); h += "<line x1='" + x + "' y1='" + (T0 + TH) + "' x2='" + x + "' y2='" + (T0 + TH + 10) + "' stroke='#5f6b80' stroke-width='2'/>"; if (i % 2 === 0) h += "<text x='" + (x + 4) + "' y='" + (T0 + TH + 32) + "' font-size='19' font-weight='800' fill='#5f6b80'>" + (i + 1) + "월</text>"; acc += m; });
+    h += "<g data-step='1'><rect x='0' y='" + T0 + "' width='" + W + "' height='" + TH + "' rx='8' fill='none' stroke='#161b28' stroke-width='4'/></g>";
+    h += "<g data-step='2'><rect x='0' y='" + T0 + "' width='" + XA(day(539)) + "' height='" + TH + "' rx='8' fill='#6741d9'/>";
+    h += "<text x='" + (XA(day(539)) / 2) + "' y='" + (T0 + 40) + "' font-size='26' font-weight='900' fill='#fff' text-anchor='middle'>322일 · 약 88%</text></g>";
+    /* 확대: 11월 1일(304일) ~ 12월 31일 */
+    var Z0 = 304, ZY = 220, ZH = 64;
+    function XZ(d) { return (d - Z0) / (365 - Z0) * W; }
+    h += "<g data-step='3'>";
+    B.slice(1).forEach(function (b) { h += "<rect x='" + XA(day(b[0])) + "' y='" + T0 + "' width='" + (XA(day(b[1])) - XA(day(b[0]))) + "' height='" + TH + "' fill='" + b[2] + "'/>"; });
+    h += "<path d='M" + XA(Z0) + " " + (T0 + TH) + " L0 " + ZY + " M" + W + " " + (T0 + TH) + " L" + W + " " + ZY + "' stroke='#9aa4b5' stroke-width='2' stroke-dasharray='6 6' fill='none'/>";
+    h += "<rect x='" + XA(Z0) + "' y='" + T0 + "' width='" + (W - XA(Z0)) + "' height='" + TH + "' fill='none' stroke='#161b28' stroke-width='3'/>";
+    h += "<text x='" + (W / 2) + "' y='" + (ZY - 14) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='middle'>확대 · 11월 1일 ~ 12월 31일</text>";
+    B.forEach(function (b) {
+      var a = Math.max(day(b[0]), Z0), e = day(b[1]);
+      h += "<rect x='" + XZ(a) + "' y='" + ZY + "' width='" + (XZ(e) - XZ(a)) + "' height='" + ZH + "' fill='" + b[2] + "'/>";
+      if (b[3] !== "선캄브리아 시대") h += "<text x='" + ((XZ(a) + XZ(e)) / 2) + "' y='" + (ZY + 42) + "' font-size='24' font-weight='900' fill='#fff' text-anchor='middle'>" + b[3] + "</text>";
+    });
+    h += "<line x1='" + XZ(day(539)) + "' y1='" + (ZY - 4) + "' x2='" + XZ(day(539)) + "' y2='" + (ZY + ZH + 18) + "' stroke='#0b7f99' stroke-width='4'/>";
+    h += "<text x='" + (XZ(day(539)) + 8) + "' y='" + (ZY + ZH + 40) + "' font-size='24' font-weight='900' fill='#0b7f99'>11월 19일 고생대 시작</text></g>";
+    h += "<g data-step='4'><line x1='" + XZ(day(66)) + "' y1='" + (ZY - 4) + "' x2='" + XZ(day(66)) + "' y2='" + (ZY + ZH + 18) + "' stroke='#c92a2a' stroke-width='4'/>";
+    h += "<text x='" + (XZ(day(66)) - 8) + "' y='" + (ZY + ZH + 40) + "' font-size='24' font-weight='900' fill='#c92a2a' text-anchor='end'>☄️ 12월 26일 공룡이 사라진 날</text></g>";
+    h += "<g data-step='5'><text x='" + W + "' y='" + (ZY + ZH + 80) + "' font-size='24' font-weight='900' fill='#161b28' text-anchor='end'>12월 31일 밤 11시 26분쯤 현생 인류 ▲</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 해양 생물 무리 수 개략 곡선 — 단원 화면의 다섯 사건(연대·깊이) */
+  (function () {
+    var svg = document.getElementById("extSvg"), X0 = 70, X1 = 1380, Y0 = 330, Y1 = 30;
+    var EXT = [["오르도비스기 말", 445, 85, .26], ["데본기 후기", 372, 75, .2], ["페름기 말", 252, 96, .52], ["트라이아스기 말", 201, 80, .22], ["백악기 말", 66, 75, .18]];
+    function X(t) { return X0 + (540 - t) / 540 * (X1 - X0); }
+    function Y(f) { return Y0 - f * (Y0 - Y1); }
+    function base(t) { return 0.3 + 0.62 * Math.pow((540 - t) / 540, 1.3); }
+    function fam(t) { var f = base(t); EXT.forEach(function (e) { if (t < e[1]) f *= 1 - e[3] * Math.exp(-(e[1] - t) / 9); }); return f; }
+    var pts = [], t;
+    for (t = 540; t >= 0; t -= 1) pts.push(X(t).toFixed(1) + " " + Y(fam(t)).toFixed(1));
+    var h = "<text x='" + X0 + "' y='20' font-size='20' font-weight='900' fill='#5f6b80'>해양 생물 무리의 수 (개략)</text>";
+    [[539, 252, "#0b7f99", "고생대"], [252, 66, "#e8590c", "중생대"], [66, 0, "#f08c00", "신생대"]].forEach(function (E) {
+      h += "<rect x='" + X(E[0]) + "' y='" + (Y0 + 6) + "' width='" + (X(E[1]) - X(E[0])) + "' height='34' fill='" + E[2] + "'/>";
+      h += "<text x='" + ((X(E[0]) + X(E[1])) / 2) + "' y='" + (Y0 + 31) + "' font-size='21' font-weight='900' fill='#fff' text-anchor='middle'>" + E[3] + "</text>";
+    });
+    h += "<text x='" + X0 + "' y='" + (Y0 + 70) + "' font-size='20' font-weight='800' fill='#5f6b80'>5.4억 년 전</text><text x='" + X1 + "' y='" + (Y0 + 70) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>지금</text>";
+    h += "<g data-step='1'><polygon points='" + X(540) + " " + Y0 + " " + pts.join(" ") + " " + X(0) + " " + Y0 + "' fill='#d0ebff'/><polyline points='" + pts.join(" ") + "' fill='none' stroke='#1462d8' stroke-width='5'/></g>";
+    h += "<g data-step='2'>";
+    EXT.forEach(function (e, i) {
+      var x = X(e[1] - 1), y = Y(fam(e[1] - 1)), big = i === 2, tx = big ? x - 34 : x, ta = big ? "end" : "middle";
+      h += "<circle cx='" + x + "' cy='" + y + "' r='10' fill='#e03131'/>";
+      h += "<text x='" + tx + "' y='" + (y + (big ? 6 : 36)) + "' font-size='20' font-weight='900' fill='#c92a2a' text-anchor='" + ta + "'>" + e[0] + "</text>";
+      h += "<text x='" + tx + "' y='" + (y + (big ? 30 : 60)) + "' font-size='19' font-weight='800' fill='#c92a2a' text-anchor='" + ta + "'" + (big ? " data-step='3'" : "") + ">약 " + e[2] + "%</text>";
+    });
+    h += "</g>";
+    var px = X(251), py = Y(fam(251));
+    h += "<g data-step='3'><circle cx='" + px + "' cy='" + py + "' r='26' fill='none' stroke='#f08c00' stroke-width='6'/></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 백악기 말 이후 다양성 개략 곡선 */
+  (function () {
+    var svg = document.getElementById("afterSvg"), X0 = 40, X1 = 1380, Y0 = 290, Y1 = 40;
+    function X(t) { return X0 + (120 - t) / 120 * (X1 - X0); }
+    function f(t) { var b = 0.55 + 0.35 * (120 - t) / 120; if (t < 66) b *= 1 - 0.55 * Math.exp(-(66 - t) / 8); return b; }
+    function Y(v) { return Y0 - v * (Y0 - Y1); }
+    var pre = [], post = [], t;
+    for (t = 120; t >= 66; t -= 0.5) pre.push(X(t).toFixed(1) + " " + Y(f(t)).toFixed(1));
+    for (t = 66; t >= 0; t -= 0.5) post.push(X(t).toFixed(1) + " " + Y(f(t)).toFixed(1));
+    var h = "<rect x='" + X(120) + "' y='" + Y0 + "' width='" + (X(66) - X(120)) + "' height='34' fill='#e8590c'/><rect x='" + X(66) + "' y='" + Y0 + "' width='" + (X(0) - X(66)) + "' height='34' fill='#f08c00'/>";
+    h += "<text x='" + ((X(120) + X(66)) / 2) + "' y='" + (Y0 + 25) + "' font-size='21' font-weight='900' fill='#fff' text-anchor='middle'>중생대 백악기</text><text x='" + ((X(66) + X(0)) / 2) + "' y='" + (Y0 + 25) + "' font-size='21' font-weight='900' fill='#fff' text-anchor='middle'>신생대</text>";
+    h += "<text x='" + X0 + "' y='24' font-size='20' font-weight='900' fill='#5f6b80'>생물다양성 (개략)</text>";
+    h += "<polyline points='" + pre.join(" ") + "' fill='none' stroke='#1462d8' stroke-width='5'/>";
+    h += "<text x='" + X(105) + "' y='" + (Y(f(105)) - 40) + "' font-size='54' text-anchor='middle'>🦕</text>";
+    h += "<g data-step='1'><polyline points='" + post.slice(0, 30).join(" ") + "' fill='none' stroke='#e03131' stroke-width='5'/><line x1='" + X(66) + "' y1='" + Y1 + "' x2='" + X(66) + "' y2='" + Y0 + "' stroke='#c92a2a' stroke-width='3' stroke-dasharray='8 6'/><text x='" + (X(66) + 10) + "' y='" + (Y1 + 10) + "' font-size='21' font-weight='900' fill='#c92a2a'>☄️ 약 6600만 년 전</text></g>";
+    h += "<g data-step='2'><polyline points='" + post.slice(29).join(" ") + "' fill='none' stroke='#2f9e44' stroke-width='5'/><text x='" + X(20) + "' y='" + (Y(f(20)) - 30) + "' font-size='50' text-anchor='middle'>🐘 🐁 🦇</text></g>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 생물다양성의 의미 (통합과학2 Ⅰ-1 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes fieldIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .fwrap { animation: fieldIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; margin-bottom: 8px; }
+  .two .card p { font-size: 26px; margin-bottom: 6px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .calc { font-size: 30px; font-weight: 800; line-height: 1.5; margin: 0 0 14px; }
+  .sortrow { display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: center; background: #fff; border: 3px solid var(--line); border-radius: 18px; padding: 16px 24px; margin-bottom: 16px; font-size: 28px; font-weight: 700; }
+  .sortrow .tag { font-size: 26px; text-align: center; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="한 품종만 같은 색으로 줄지어 심은 밭과 여러 품종이 섞인 밭"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅰ-1 지구 환경 변화와 생물다양성 · 03</p>
+    <h1>생물다양성의 의미</h1>
+    <p class="sub" data-step="1">1845년 아일랜드의 감자밭은 왜 병 하나에 한꺼번에 무너졌을까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 생물다양성을 세 층위로 나눠 보고, 다양성이 왜 중요한지 밭과 숲과 들판에서 확인합니다. 여러분은 종자 은행의 조사관입니다.</p>
+    <p data-at="1">왼쪽 밭과 오른쪽 밭, 어느 쪽이 병에 더 잘 견딜지 먼저 떠올려 보게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="사라진 바나나, 굶주린 섬" data-part="도입">
+  <p class="kicker">도입 · 1845년 아일랜드 · 1950년대 중앙아메리카</p>
+  <h2>병 하나에 나라의 밭이 한꺼번에 무너졌다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>1845년 아일랜드</b> 감자 역병이 돌자 나라 전체의 감자밭이 한꺼번에 썩었다.</p>
+      <p><b>1950년대 바나나 농장</b> 흙 속 곰팡이가 일으키는 파나마병으로 그로 미셸 품종을 더는 기를 수 없게 되었다.</p>
+      <p class="small mt">감자의 고향 안데스에는 수천 가지 품종이 있고, 그곳 감자밭은 통째로 무너진 적이 없다.</p>
+    </div>
+    <div class="card yel">
+      <h3>왜 한꺼번에 무너졌을까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 유난히 독한 병원균이 나타났기 때문이다</div>
+        <div class="opt">㉡ 농약과 재배 기술이 부족했기 때문이다</div>
+        <div class="opt">㉢ 밭 전체가 유전적으로 똑같은 한 품종이었기 때문이다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>종자 은행 연구원이 사건 두 개를 가져왔습니다. 하나는 감자, 하나는 바나나예요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 안데스의 밭이 왜 무너지지 않았는지도 함께 생각하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>생물다양성</b><span>생물이 얼마나 다양한지, 세 층위로 본다</span></div>
+    <div class="card"><b>유전적 다양성</b><span>밭에서 본다</span></div>
+    <div class="card"><b>종 다양성</b><span>숲과 들판에서 본다</span></div>
+    <div class="card"><b>풍부도·균등도</b><span>종 다양성을 재는 두 기준</span></div>
+    <div class="card"><b>생태계 다양성</b><span>숲·갯벌·습지처럼 생태계의 종류</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~12번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 두 사건의 공통점 -->
+<section class="slide" id="s-case" data-title="두 사건의 공통점" data-part="① 유전적 다양성">
+  <p class="kicker">① 유전적 다양성 · 감자와 바나나의 공통점</p>
+  <h2>밭 전체가 똑같은 하나였다</h2>
+  <div class="two">
+    <div class="card" data-step="1"><h3>🥔 아일랜드 대기근 (1845~1852)</h3>
+      <p>농민 대부분이 수확량이 많은 ‘럼퍼’ 한 품종만 길렀다</p>
+      <p>약 100만 명 사망, 100만 명 이상이 나라를 떠남</p></div>
+    <div class="card" data-step="2"><h3>🍌 그로 미셸 바나나 (1950년대)</h3>
+      <p>파나마병이 농장에서 농장으로 번졌다</p>
+      <p>1960년대에 지금의 캐번디시 품종으로 교체</p></div>
+  </div>
+  <svg viewBox="0 0 1400 200" width="1400" height="200" aria-label="씨감자 하나를 잘라 심으면 유전자가 똑같은 감자 포기들이 자란다" data-step="3">
+    <defs><marker id="s4-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <ellipse cx="120" cy="110" rx="80" ry="56" fill="#d9a066" stroke="#a0703e" stroke-width="5"/>
+    <text x="120" y="190" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">씨감자 하나</text>
+    <path d="M220 110 H330" stroke="#495057" stroke-width="6" marker-end="url(#s4-a)"/>
+    <text x="275" y="90" font-size="20" font-weight="800" fill="#495057" text-anchor="middle">잘라 심기</text>
+    <g id="s4-clones"></g>
+    <text x="1390" y="194" font-size="20" font-weight="900" fill="#1462d8" text-anchor="end">모든 포기의 유전자가 같다 (같은 색 띠)</text>
+  </svg>
+  <p data-step="3" style="font-size:28px">감자는 씨감자로, 바나나는 곁순으로 번식 → 밭 전체가 유전적으로 같은 <b class="blank" data-n="1" data-step="3">복제</b> 개체</p>
+  <aside class="script">
+    <p>두 사건의 공통점을 찾아봅시다.</p>
+    <p data-at="1">아일랜드 농민 대부분은 수확량이 많은 럼퍼 한 품종만 길렀습니다. 대기근으로 약 100만 명이 죽고, 100만 명 이상이 나라를 떠났어요.</p>
+    <p data-at="2">그로 미셸 바나나도 파나마병이 번지자 상업 재배가 불가능해져 1960년대에 캐번디시로 바뀌었습니다.</p>
+    <p data-at="3">감자는 씨감자를 잘라 심고, 바나나는 땅속줄기에서 돋은 곁순을 옮겨 심습니다. 그래서 밭 전체가 빈칸 1번, 유전적으로 똑같은 복제 개체예요.</p>
+  </aside>
+</section>
+
+<!-- 5 밭 설계 -->
+<section class="slide" id="s-farm" data-title="한 품종 밭과 섞어 심은 밭" data-part="① 유전적 다양성">
+  <p class="kicker">① 유전적 다양성 · 밭 설계 (단원 화면 모형)</p>
+  <h2>같은 병이 와도 섞어 심은 밭은 버틴다</h2>
+  <svg id="farmSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="한 품종만 심은 밭은 역병균에 모두 쓰러지고, 네 품종을 섞어 심은 밭은 한 품종의 일부만 쓰러진다"></svg>
+  <div class="tight">
+    <p data-step="2">역병균 A는 품종 ①만 감염 → 한 품종 밭은 전멸, 섞어 심은 밭은 일부만 쓰러짐</p>
+    <p data-step="3">같은 종 안에서 유전자가 다양한 정도 → <b class="blank" data-n="2" data-step="3">유전적 다양성</b></p>
+    <p data-step="4">높으면 환경이 급변해도 살아남는 개체가 있어 <b class="blank" data-n="3" data-step="4">멸종</b> 위험이 낮다 · 그 변이가 <b class="blank" data-n="4" data-step="4">자연선택</b>의 재료</p>
+  </div>
+  <p class="note">단원 화면 모형: 역병균 하나는 품종 하나만 감염하고 이웃한 같은 품종으로 번지며, 품종 번호가 커질수록 수확량이 5%씩 적다. 너무 적게 섞으면 병에, 너무 많이 섞으면 수확량 부족에 무너진다.</p>
+  <aside class="script">
+    <p>1843년의 아일랜드로 돌아가 밭을 설계해 봅시다. 품종마다 병에 대한 저항성 유전자가 다릅니다.</p>
+    <p data-at="1">왼쪽은 럼퍼 한 품종만, 오른쪽은 네 품종을 섞어 심은 밭입니다.</p>
+    <p data-at="2">품종 ①만 감염시키는 역병균이 들어오면 왼쪽 밭은 이웃으로 번져 전멸합니다. 오른쪽은 ① 일부만 쓰러지고, 병이 다른 품종에 막혀 멀리 번지지 못해요.</p>
+    <p data-at="3">같은 종 안에서 유전자가 다양한 정도, 빈칸 2번, 유전적 다양성입니다.</p>
+    <p data-at="4">유전적 다양성이 높은 집단은 환경이 급변해도 일부가 살아남아 빈칸 3번, 멸종할 위험이 낮습니다. 지난 시간에 본 것처럼 그 변이가 빈칸 4번, 자연선택의 재료이기도 하고요.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="안데스의 밭은 왜" data-part="① 유전적 다양성">
+  <p class="kicker">① 유전적 다양성 · 확인</p>
+  <h2>안데스의 감자밭이 통째로 무너진 적이 없는 까닭은?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">① 수확량이 가장 많은 한 품종만 골라 심었기 때문이다</div>
+    <div class="opt right" data-step="1">② 여러 품종이 섞여 있어 어떤 병이 와도 일부는 살아남기 때문이다</div>
+    <div class="opt wrong" data-step="1">③ 감자가 병을 겪으며 스스로 저항성을 길렀기 때문이다</div>
+    <div class="opt wrong" data-step="1">④ 품종의 수는 병 피해와 관계가 없기 때문이다</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ②. ③은 지난 시간의 오개념과 같아요. 병을 겪는다고 저항성이 새로 생기지 않습니다. 이미 있던 저항성 유전자를 가진 품종이 살아남을 뿐입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 두 숲 -->
+<section class="slide" id="s-div" data-title="종 수만 세면 될까" data-part="② 종 다양성">
+  <p class="kicker">② 종 다양성 · 나무 100그루씩 조사한 두 숲</p>
+  <h2>종의 수가 같아도 다양성은 다를 수 있다</h2>
+  <div class="cols" style="grid-template-columns:740px 1fr;align-items:center">
+    <svg id="forestSvg" viewBox="0 0 740 440" width="740" height="440" aria-label="(가) 숲은 네 종이 25그루씩 고르게, (나) 숲은 한 종이 85그루이고 나머지 세 종이 5그루씩"></svg>
+    <div class="lines">
+      <p data-step="3">한 지역에 여러 종이 얼마나 다양하게 사는가 → <b class="blank" data-n="5" data-step="3">종 다양성</b></p>
+      <p data-step="3">종의 수 → <b class="blank" data-n="6" data-step="3">종 풍부도</b>: 두 숲 모두 4종</p>
+      <p data-step="4">각 종이 얼마나 고르게 있는가 → <b class="blank" data-n="7" data-step="4">종 균등도</b>: (가)가 높다 → (가)의 종 다양성이 높다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>밭에서 본 것은 한 종 안의 다양성이었습니다. 이번엔 한 지역에 얼마나 다양한 종이 사는지 봅니다.</p>
+    <p data-at="1">(가) 숲은 참나무, 소나무, 단풍나무, 벚나무가 25그루씩.</p>
+    <p data-at="2">(나) 숲은 참나무가 85그루, 나머지 세 종이 5그루씩입니다. 둘 다 네 종, 100그루예요.</p>
+    <p data-at="3">빈칸 5번, 종 다양성. 먼저 종의 수, 빈칸 6번, 종 풍부도는 두 숲이 같습니다.</p>
+    <p data-at="4">그런데 (나)는 걸어 다니면 거의 참나무만 보이죠. 각 종이 고르게 있는 정도, 빈칸 7번, 종 균등도가 (가)가 높아서 (가)의 종 다양성이 더 높습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 다양성 지수 -->
+<section class="slide soft" id="s-simpson" data-title="다양성 지수로 재기" data-part="② 종 다양성">
+  <p class="kicker">② 종 다양성 · 다양성 지수 (단원 화면의 심슨 지수)</p>
+  <h2>두 그루를 골랐을 때 서로 다른 종일 확률</h2>
+  <div class="card" style="text-align:center"><p class="formula" style="margin:0">D = 1 − (p₁² + p₂² + p₃² + p₄²) &nbsp;<span class="small">p = 각 종의 비율</span></p></div>
+  <div class="two mt">
+    <div class="card" data-step="1"><h3>(가) 25 · 25 · 25 · 25</h3>
+      <p class="calc">D = 1 − 4 × 0.25²<br>= 1 − 0.25 = <b class="blank" data-n="8" data-step="2">0.75</b></p></div>
+    <div class="card" data-step="3"><h3>(나) 85 · 5 · 5 · 5</h3>
+      <p class="calc">D = 1 − (0.85² + 3 × 0.05²)<br>= 1 − 0.73 = 0.27</p></div>
+  </div>
+  <svg viewBox="0 0 1400 120" width="1400" height="120" aria-label="0부터 1까지의 눈금 위에 (나) 0.27과 (가) 0.75" data-step="4" class="mt">
+    <rect x="40" y="40" width="1320" height="24" rx="12" fill="#dee2e6"/>
+    <rect x="40" y="40" width="356" height="24" rx="12" fill="#ff8787"/><rect x="40" y="40" width="990" height="24" rx="12" fill="#69db7c" opacity=".55"/>
+    <g font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle"><text x="40" y="96">0</text><text x="700" y="96">0.5</text><text x="1360" y="96">1</text></g>
+    <circle cx="396" cy="52" r="14" fill="#e03131"/><text x="396" y="26" font-size="22" font-weight="900" fill="#c92a2a" text-anchor="middle">(나) 0.27</text>
+    <circle cx="1030" cy="52" r="14" fill="#2f9e44"/><text x="1030" y="26" font-size="22" font-weight="900" fill="#2b8a3e" text-anchor="middle">(가) 0.75 · 네 종으로 낼 수 있는 최댓값</text>
+  </svg>
+  <aside class="script">
+    <p>종 다양성을 숫자로 재 봅시다. 숲에서 아무렇게나 두 그루를 골랐을 때 서로 다른 종일 확률이 다양성 지수 D입니다.</p>
+    <p data-at="1">(가)는 네 종이 0.25씩. 제곱해서 네 번 더하면 0.25.</p>
+    <p data-at="2">1에서 빼면 빈칸 8번, 0.75입니다.</p>
+    <p data-at="3">(나)는 0.85의 제곱 0.7225에 0.05의 제곱 세 개를 더해 0.73. 1에서 빼면 0.27입니다.</p>
+    <p data-at="4">종 수가 같아도 고르게 분포할수록 D가 커집니다. 네 종이 똑같은 비율일 때의 0.75가 네 종으로 낼 수 있는 최댓값이에요. 그루 수가 아니라 비율이 같으면 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 9 먹이 그물 -->
+<section class="slide" id="s-web" data-title="한 종이 사라지면" data-part="② 종 다양성">
+  <p class="kicker">② 종 다양성 · 두 들판에서 똑같이 개구리를 없애면 (단원 화면)</p>
+  <h2>종이 많으면 한 종이 사라져도 버틴다</h2>
+  <svg id="webSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="종이 적은 들판에서는 개구리가 사라지자 뱀과 매까지 사라지고, 종이 많은 들판에서는 뱀이 들쥐를 먹고 버텨 다른 종이 모두 남는다"></svg>
+  <div class="tight">
+    <p data-step="2">종이 적은 들판: 개구리가 사라지자 먹이를 잃은 뱀·매까지 사라짐 (5종 중 2종 남음)</p>
+    <p data-step="3">종이 많은 들판: 뱀은 들쥐를 먹고 버팀 (9종 중 8종 남음) → 복잡한 <b class="blank" data-n="9" data-step="3">먹이 그물</b></p>
+    <p data-step="4">종 다양성이 높으면 한 종이 사라져도 생태계 <b class="blank" data-n="10" data-step="4">평형</b>이 쉽게 깨지지 않는다</p>
+  </div>
+  <aside class="script">
+    <p>종 다양성이 높으면 무엇이 좋을까요? 화살표는 먹이에서 먹는 쪽으로 그렸습니다. 먹이를 모두 잃은 동물은 그 들판에서 사라진다는 규칙입니다.</p>
+    <p data-at="1">왼쪽은 먹이 관계가 한 줄, 오른쪽은 그물처럼 얽혀 있습니다.</p>
+    <p data-at="2">왼쪽에서 개구리를 없애면 뱀은 먹이가 없어 사라지고, 뱀만 먹던 매도 사라집니다.</p>
+    <p data-at="3">오른쪽에서는 뱀이 들쥐를 먹고 버팁니다. 빈칸 9번, 먹이 그물이 복잡하기 때문이에요.</p>
+    <p data-at="4">빈칸 10번, 평형. 실제로는 먹이가 줄기만 해도 개체 수가 흔들리지만, 종이 많을수록 충격을 잘 견딥니다.</p>
+  </aside>
+</section>
+
+<!-- 10 생태계 다양성 -->
+<section class="slide soft" id="s-eco" data-title="생태계 다양성" data-part="③ 생태계 다양성">
+  <p class="kicker">③ 생태계 다양성과 보전 · 우리나라의 여러 생태계</p>
+  <h2>생태계의 종류가 다양할수록</h2>
+  <svg id="ecoSvg" viewBox="0 0 1400 240" width="1400" height="240" aria-label="숲, 하천, 갯벌, 습지, 농경지가 이어진 풍경"></svg>
+  <div class="cols" style="grid-template-columns:1fr 470px;align-items:center;margin-top:16px">
+    <div class="tight">
+      <p data-step="1">숲·하천·갯벌·습지·농경지처럼 생태계의 종류가 다양한 정도 → <b class="blank" data-n="11" data-step="1">생태계 다양성</b></p>
+      <p data-step="2">서로 다른 환경에 적응한 더 많은 종과 유전자가 깃든다</p>
+      <p data-step="3">세 층위는 서로를 떠받친다</p>
+    </div>
+    <svg viewBox="0 0 470 270" width="470" height="270" aria-label="생태계 다양성 안에 종 다양성, 그 안에 유전적 다양성이 들어 있는 겹친 원" data-step="3">
+      <ellipse cx="235" cy="135" rx="230" ry="130" fill="#d3f9d8" stroke="#2f9e44" stroke-width="4"/>
+      <ellipse cx="235" cy="160" rx="160" ry="92" fill="#d0ebff" stroke="#1c7ed6" stroke-width="4"/>
+      <ellipse cx="235" cy="185" rx="92" ry="52" fill="#ffe8cc" stroke="#e8590c" stroke-width="4"/>
+      <g font-size="22" font-weight="900" text-anchor="middle"><text x="235" y="40" fill="#2b8a3e">생태계 다양성</text><text x="235" y="104" fill="#1864ab">종 다양성</text><text x="235" y="192" fill="#d9480f">유전적 다양성</text></g>
+    </svg>
+  </div>
+  <aside class="script">
+    <p>마지막 층위입니다.</p>
+    <p data-at="1">우리나라에는 숲, 하천, 갯벌, 습지, 농경지가 함께 있습니다. 생태계 자체의 종류가 다양한 것, 빈칸 11번, 생태계 다양성.</p>
+    <p data-at="2">갯벌에는 갯벌에 맞는 종이, 습지에는 습지에 맞는 종이 삽니다. 생태계가 다양할수록 더 많은 종과 유전자가 깃들어요.</p>
+    <p data-at="3">세 층위는 따로가 아닙니다. 생태계가 사라지면 그 안의 종과 유전자도 함께 사라집니다.</p>
+  </aside>
+</section>
+
+<!-- 11 확인: 층위 나누기 -->
+<section class="slide" id="s-check2" data-title="어느 층위일까" data-part="③ 생태계 다양성">
+  <p class="kicker">③ 생태계 다양성과 보전 · 확인</p>
+  <h2>각 사례는 어느 층위의 이야기일까?</h2>
+  <div class="sortrow"><span>치타는 개체 사이의 유전자 차이가 매우 작아 전염병에 약하다</span><span class="tag" data-step="1" style="background:#ffe8cc;color:#d9480f">유전적 다양성</span></div>
+  <div class="sortrow"><span>두 숲은 나무 종 수가 같지만 한쪽은 소나무가 90%를 차지한다</span><span class="tag" data-step="2" style="background:#d0ebff;color:#1864ab">종 다양성</span></div>
+  <div class="sortrow"><span>열대 우림을 밀어 넓은 땅을 모두 기름야자 농장으로 바꾸었다</span><span class="tag" data-step="3" style="background:#d3f9d8;color:#2b8a3e">생태계 다양성</span></div>
+  <aside class="script">
+    <p>하나씩 읽고 손가락 1, 2, 3으로 층위를 들게 합니다. 1은 유전적, 2는 종, 3은 생태계.</p>
+    <p data-at="1">치타는 한 종 안의 이야기입니다. 유전적 다양성이 낮은 예.</p>
+    <p data-at="2">종 수는 같고 고른 정도가 다릅니다. 종 균등도, 종 다양성의 이야기예요.</p>
+    <p data-at="3">사라진 것이 한 종이 아니라 숲이라는 생태계 전체입니다. 생태계 다양성이 줄었습니다.</p>
+  </aside>
+</section>
+
+<!-- 12 지금의 과제 -->
+<section class="slide soft" id="s-now" data-title="다양성은 보험이다" data-part="③ 생태계 다양성">
+  <p class="kicker">③ 생태계 다양성과 보전 · 이야기는 끝나지 않았다</p>
+  <h2>다양성을 지키는 일</h2>
+  <div class="cols c3">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 300 110" width="300" height="110" aria-label="모두 같은 모양과 색의 바나나 송이"><g fill="#ffd43b" stroke="#e8a900" stroke-width="3"><path d="M40 30 Q60 100 120 96 Q70 80 60 26Z"/><path d="M100 30 Q120 100 180 96 Q130 80 120 26Z"/><path d="M160 30 Q180 100 240 96 Q190 80 180 26Z"/><path d="M220 30 Q240 100 300 96 Q250 80 240 26Z"/></g></svg>
+      <h3>지금의 바나나</h3>
+      <p style="font-size:26px">수출용 바나나는 다시 캐번디시 한 품종에 기대고, 새로운 파나마병(TR4)이 퍼지고 있다</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 300 110" width="300" height="110" aria-label="색이 서로 다른 씨앗 봉투가 꽂힌 선반"><rect x="10" y="96" width="280" height="8" fill="#868e96"/><g stroke="#495057" stroke-width="2"><rect x="20" y="30" width="44" height="66" fill="#ffa8a8"/><rect x="74" y="20" width="44" height="76" fill="#a5d8ff"/><rect x="128" y="34" width="44" height="62" fill="#b2f2bb"/><rect x="182" y="24" width="44" height="72" fill="#ffe066"/><rect x="236" y="32" width="44" height="64" fill="#d0bfff"/></g></svg>
+      <h3>종자 저장고</h3>
+      <p style="font-size:26px">노르웨이 스발바르 국제 종자 저장고(2008년 개관) → 작물의 다양한 <b class="blank" data-n="12" data-step="2">품종</b>을 보존</p>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 300 110" width="300" height="110" aria-label="바다를 헤엄치는 대구"><rect x="0" y="0" width="300" height="110" rx="14" fill="#d0ebff"/><path d="M60 55 Q120 15 200 50 L250 25 L240 55 L250 85 L200 60 Q120 95 60 55Z" fill="#a47148"/><circle cx="85" cy="50" r="5" fill="#161b28"/></svg>
+      <h3>📍 우리 동네 진해</h3>
+      <p style="font-size:26px">2024년 진해만 대구 수정란 35억 알, 어린 대구 1,400만 마리 방류</p>
+    </div>
+  </div>
+  <p class="center" data-step="3" style="font-size:28px;margin-top:40px"><b>토의</b> 같은 부모에게서 나온 어린 대구를 아주 많이 풀면 유전적 다양성은 어떻게 될까?</p>
+  <aside class="script">
+    <p>그로 미셸 이야기는 끝나지 않았습니다.</p>
+    <p data-at="1">지금 세계의 수출용 바나나는 다시 캐번디시 한 품종에 기대고 있고, 새로운 파나마병 TR4가 퍼지고 있습니다. 같은 실수가 되풀이될 수 있어요.</p>
+    <p data-at="2">그래서 세계 곳곳에서 작물의 씨앗을 보존합니다. 노르웨이 스발바르의 국제 종자 저장고가 2008년에 문을 열었습니다. 빈칸 12번, 품종.</p>
+    <p data-at="3">경상남도는 진해만으로 돌아오는 대구를 되살리려고 2024년 수정란 35억 알, 어린 대구 1,400만 마리를 방류했습니다. 개체 수를 늘리는 것과 유전적 다양성을 지키는 것은 같은 일일까요? 답을 정해 주지 말고 모둠별로 이야기하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>범인은 병원균이 아니라 ‘똑같음’이었다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>유전적 다양성</b>: 같은 종 안 유전자의 다양함 → 한 품종(복제) 밭은 병 하나에 무너진다</li>
+    <li data-k="2" data-step="2"><b>종 다양성</b> = 종 풍부도 + 종 균등도 · 다양성 지수 D = 1 − Σp² ((가) 0.75 &gt; (나) 0.27)</li>
+    <li data-k="3" data-step="3">종 다양성이 높으면 먹이 그물이 복잡 → 한 종이 사라져도 생태계 평형이 유지된다</li>
+    <li data-k="4" data-step="4"><b>생태계 다양성</b> · 세 층위는 서로를 떠받친다 → 품종 보존과 서식지 보전</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 첫 추리를 다시 보고 ‘다양성은 보험이다’라는 말을 자기 말로 풀게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 종 풍부도가 같은 두 숲 가운데 종 다양성이 높은 쪽은?</p>
+      <div class="opts">
+        <div class="opt right" data-step="1">㉠ 각 종이 고르게 사는 숲</div>
+        <div class="opt wrong" data-step="1">㉡ 한 종이 대부분을 차지하는 숲</div>
+        <div class="opt wrong" data-step="1">㉢ 두 숲이 같다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. ‘같은 종의 달팽이인데 껍데기 무늬가 개체마다 다르다’는?</p>
+      <div class="opts">
+        <div class="opt right" data-step="2">㉠ 유전적 다양성</div>
+        <div class="opt wrong" data-step="2">㉡ 종 다양성</div>
+        <div class="opt wrong" data-step="2">㉢ 생태계 다양성</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉠. 종 균등도가 높을수록 종 다양성이 높습니다.</p>
+    <p data-at="2">2번은 ㉠. 한 종 안에서 나타나는 차이니까요.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「한 가지만 심은 밭」</h2>
+  <div class="cols">
+    <div class="card"><h3>직접 밭을 설계해 보세요</h3><p>6년 동안 기근 없는 밭 설계, 다양성 지수가 다른 숲 세 가지 만들기, 두 들판에서 개구리 없애기, 조사 카드 층위별 분류가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 단원 · Ⅰ-2 화학 변화</h3><p>우리 주변의 물질이 어떻게 바뀌는지, 화학 변화를 배웁니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다. 단원 전체를 정리하는 수준별 문제 탭도 안내합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function rng(seed) { var s = seed % 2147483647; if (s <= 0) s += 2147483646; return function () { s = s * 16807 % 2147483647; return (s - 1) / 2147483646; }; }
+  var VC = ["#2f9e44", "#1c7ed6", "#f59f00", "#ae3ec9"];
+  /* 표지: 한 품종 밭과 섞어 심은 밭 */
+  (function () {
+    var svg = document.getElementById("coverSvg"), h = "<g class='fwrap'>", r = rng(7);
+    function field(x0, mixed) {
+      var s = "<rect x='" + x0 + "' y='120' width='560' height='340' rx='16' fill='#5c4330'/>";
+      for (var j = 0; j < 6; j++) for (var i = 0; i < 9; i++) {
+        var c = mixed ? VC[Math.floor(r() * 4)] : VC[0];
+        s += "<circle cx='" + (x0 + 50 + i * 57.5) + "' cy='" + (165 + j * 51) + "' r='20' fill='" + c + "'/>";
+      }
+      return s;
+    }
+    h += field(160, false) + field(880, true) + "</g>";
+    h += "<g data-step='1' font-size='26' font-weight='800' fill='#c9d1df' text-anchor='middle'><text x='440' y='96'>한 품종만 심은 밭</text><text x='1160' y='96'>여러 품종을 섞어 심은 밭</text></g>";
+    h += "<text x='1560' y='510' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 점 하나 = 감자 한 포기, 색 = 품종</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 씨감자 복제: 같은 색 유전자 띠를 가진 포기들 */
+  (function () {
+    var g = document.getElementById("s4-clones"), h = "";
+    for (var i = 0; i < 8; i++) {
+      var x = 400 + i * 120;
+      h += "<path d='M" + x + " 150 Q" + (x - 30) + " 90 " + x + " 60 Q" + (x + 30) + " 90 " + x + " 150Z' fill='#2f9e44'/>";
+      h += "<rect x='" + (x - 30) + "' y='158' width='60' height='14' rx='4' fill='#1462d8'/>";
+    }
+    g.innerHTML = h;
+  })();
+
+  /* 밭 두 곳 — 역병균 A(품종 ①만)가 이웃한 같은 품종으로 번진다 */
+  (function () {
+    var svg = document.getElementById("farmSvg"), COLS = 14, ROWS = 6, CS = 40, r = rng(1845);
+    var mix = []; for (var k = 0; k < COLS * ROWS; k++) mix.push(Math.floor(r() * 4));
+    function spread(lay, seeds) {
+      var dead = {}, front = seeds.filter(function (s) { return lay[s] === 0; });
+      front.forEach(function (s) { dead[s] = 1; });
+      while (front.length) {
+        var nx = [];
+        front.forEach(function (c) {
+          var y = Math.floor(c / COLS), x = c % COLS;
+          for (var dy = -1; dy <= 1; dy++) for (var dx = -1; dx <= 1; dx++) {
+            var yy = y + dy, xx = x + dx, n = yy * COLS + xx;
+            if (yy < 0 || yy >= ROWS || xx < 0 || xx >= COLS || dead[n] || lay[n] !== 0) continue;
+            dead[n] = 1; nx.push(n);
+          }
+        });
+        front = nx;
+      }
+      return dead;
+    }
+    var one = []; for (k = 0; k < COLS * ROWS; k++) one.push(0);
+    var seedsA = [20, 47, 75];
+    var ones = []; mix.forEach(function (v, i) { if (v === 0) ones.push(i); });
+    var d1 = spread(one, seedsA), d2 = spread(mix, [ones[2], ones[Math.floor(ones.length / 2)], ones[ones.length - 3]]);
+    function draw(x0, lay, dead, title) {
+      var s = "<text x='" + (x0 + COLS * CS / 2) + "' y='26' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>" + title + "</text>";
+      s += "<rect x='" + (x0 - 10) + "' y='40' width='" + (COLS * CS + 20) + "' height='" + (ROWS * CS + 20) + "' rx='12' fill='#6b4a32'/>";
+      var base = "", sick = "";
+      for (var i = 0; i < lay.length; i++) {
+        var cx = x0 + (i % COLS) * CS + CS / 2, cy = 50 + Math.floor(i / COLS) * CS + CS / 2;
+        base += "<circle cx='" + cx + "' cy='" + cy + "' r='15' fill='" + VC[lay[i]] + "'/>";
+        if (dead[i]) sick += "<circle cx='" + cx + "' cy='" + cy + "' r='17' fill='#3b2a1f'/><path d='M" + (cx - 8) + " " + (cy - 8) + " L" + (cx + 8) + " " + (cy + 8) + " M" + (cx + 8) + " " + (cy - 8) + " L" + (cx - 8) + " " + (cy + 8) + "' stroke='#ff8787' stroke-width='3'/>";
+      }
+      return s + "<g data-step='1'>" + base + "</g><g data-step='2'>" + sick + "</g>";
+    }
+    var h = draw(40, one, d1, "1품종 (① 럼퍼만)") + draw(780, mix, d2, "4품종 섞어 심기 (①~④)");
+    var lg = "<g data-step='1' font-size='20' font-weight='800' fill='#161b28'>";
+    ["①", "②", "③", "④"].forEach(function (n, i) { lg += "<circle cx='" + (790 + i * 110) + "' cy='" + 318 + "' r='10' fill='" + VC[i] + "'/><text x='" + (806 + i * 110) + "' y='325'>품종 " + n + "</text>"; });
+    lg += "</g><g data-step='2' font-size='20' font-weight='800' fill='#c92a2a'><circle cx='1236' cy='318' r='11' fill='#3b2a1f'/><text x='1252' y='325'>역병으로 쓰러짐</text></g>";
+    var c1 = Object.keys(d1).length;
+    lg += "<g data-step='2' font-size='22' font-weight='900'><text x='" + (40 + COLS * CS / 2) + "' y='325' fill='#c92a2a' text-anchor='middle'>" + c1 + "포기 중 " + c1 + "포기 쓰러짐</text></g>";
+    svg.innerHTML = h + lg;
+  })();
+
+  /* 두 숲: 100그루씩 */
+  (function () {
+    var svg = document.getElementById("forestSvg"), SP = ["참나무", "소나무", "단풍나무", "벚나무"], SC = ["#2f9e44", "#0c8599", "#e8590c", "#f783ac"];
+    function forest(x0, counts, seed, step, title) {
+      var a = [], i, r = rng(seed);
+      counts.forEach(function (n, k) { for (i = 0; i < n; i++) a.push(k); });
+      for (i = a.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = a[i]; a[i] = a[j]; a[j] = t; }
+      var s = "<g data-step='" + step + "'><text x='" + (x0 + 165) + "' y='26' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>" + title + "</text>";
+      s += "<rect x='" + x0 + "' y='40' width='330' height='330' rx='14' fill='#f4fce3'/>";
+      for (i = 0; i < 100; i++) s += "<circle cx='" + (x0 + 30 + (i % 10) * 30) + "' cy='" + (70 + Math.floor(i / 10) * 30) + "' r='12' fill='" + SC[a[i]] + "'/>";
+      return s + "</g>";
+    }
+    var h = forest(10, [25, 25, 25, 25], 11, 1, "(가) 25 · 25 · 25 · 25") + forest(400, [85, 5, 5, 5], 12, 2, "(나) 85 · 5 · 5 · 5");
+    h += "<g font-size='20' font-weight='800' fill='#161b28'>";
+    SP.forEach(function (n, i) { h += "<circle cx='" + (30 + i * 180) + "' cy='410' r='11' fill='" + SC[i] + "'/><text x='" + (48 + i * 180) + "' y='417'>" + n + "</text>"; });
+    svg.innerHTML = h + "</g>";
+  })();
+
+  /* 먹이 그물 두 개 — 단원 화면의 들판(화살표: 먹이 → 먹는 쪽) */
+  (function () {
+    var svg = document.getElementById("webSvg"), NW = 150, NH = 46;
+    var S = { grass: [280, 368, "🌿 풀"], hopper: [280, 298, "🦗 메뚜기"], frog: [280, 228, "🐸 개구리"], snake: [280, 158, "🐍 뱀"], hawk: [280, 88, "🦅 매"] };
+    var SE = [["grass", "hopper"], ["hopper", "frog"], ["frog", "snake"], ["snake", "hawk"]];
+    var C = { grass: [772, 360, "🌿 풀"], oak: [1123, 360, "🌰 참나무"], hopper: [658, 285, "🦗 메뚜기"], mouse: [924, 285, "🐭 들쥐"], rabbit: [1190, 285, "🐇 토끼"], frog: [715, 205, "🐸 개구리"], bird: [1038, 205, "🐦 박새"], snake: [838, 125, "🐍 뱀"], hawk: [1010, 40, "🦅 매"] };
+    var CE = [["grass", "hopper"], ["grass", "mouse"], ["oak", "mouse"], ["grass", "rabbit"], ["hopper", "frog"], ["hopper", "bird"], ["oak", "bird"], ["frog", "snake"], ["mouse", "snake"], ["snake", "hawk"], ["mouse", "hawk"], ["bird", "hawk"], ["rabbit", "hawk"]];
+    function edge(a, b, id, col, w) {
+      var dx = b[0] - a[0], dy = b[1] - a[1], L = Math.sqrt(dx * dx + dy * dy), ux = dx / L, uy = dy / L;
+      var k1 = Math.min(NH / 2 / Math.abs(uy || 1e-6), NW / 2 / Math.abs(ux || 1e-6)) + 2, k2 = k1 + 4;
+      return "<line x1='" + (a[0] + ux * k1) + "' y1='" + (a[1] + uy * k1) + "' x2='" + (b[0] - ux * k2) + "' y2='" + (b[1] - uy * k2) + "' stroke='" + col + "' stroke-width='" + w + "' marker-end='url(#" + id + ")'/>";
+    }
+    function node(p, fill) { return "<rect x='" + (p[0] - NW / 2) + "' y='" + (p[1] - NH / 2) + "' width='" + NW + "' height='" + NH + "' rx='12' fill='" + (fill || "#fff") + "' stroke='#adb5bd' stroke-width='3'/><text x='" + p[0] + "' y='" + (p[1] + 8) + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>" + p[2] + "</text>"; }
+    function gone(p) { return "<rect x='" + (p[0] - NW / 2) + "' y='" + (p[1] - NH / 2) + "' width='" + NW + "' height='" + NH + "' rx='12' fill='#f1f3f5' opacity='.85'/><path d='M" + (p[0] - 22) + " " + (p[1] - 18) + " L" + (p[0] + 22) + " " + (p[1] + 18) + " M" + (p[0] + 22) + " " + (p[1] - 18) + " L" + (p[0] - 22) + " " + (p[1] + 18) + "' stroke='#e03131' stroke-width='6'/>"; }
+    var h = "<defs><marker id='w-ar' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#868e96'/></marker>";
+    h += "<marker id='w-gr' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='3.5' markerHeight='3.5' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#2f9e44'/></marker></defs>";
+    h += "<rect x='0' y='0' width='560' height='400' rx='18' fill='#f4fce3'/><rect x='580' y='0' width='820' height='400' rx='18' fill='#f4fce3'/>";
+    h += "<text x='20' y='34' font-size='22' font-weight='900' fill='#2b8a3e'>종이 적은 들판 (5종)</text><text x='1380' y='34' font-size='22' font-weight='900' fill='#2b8a3e' text-anchor='end'>종이 많은 들판 (9종)</text>";
+    SE.forEach(function (e) { h += edge(S[e[0]], S[e[1]], "w-ar", "#868e96", 4); });
+    CE.forEach(function (e) { h += edge(C[e[0]], C[e[1]], "w-ar", "#868e96", 3); });
+    Object.keys(S).forEach(function (k) { h += node(S[k]); });
+    Object.keys(C).forEach(function (k) { h += node(C[k]); });
+    h += "<g data-step='2'>" + gone(S.frog) + gone(S.snake) + gone(S.hawk) + "<text x='370' y='128' font-size='20' font-weight='900' fill='#c92a2a'>먹이를 잃음</text></g>";
+    h += "<g data-step='3'>" + gone(C.frog) + edge(C.mouse, C.snake, "w-gr", "#2f9e44", 7) + "<text x='930' y='160' font-size='20' font-weight='900' fill='#2b8a3e'>들쥐를 먹고 버팀</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 생태계 풍경 띠 */
+  (function () {
+    var svg = document.getElementById("ecoSvg"), W = 280, h = "";
+    var E = [["숲", "#b2f2bb"], ["하천", "#a5d8ff"], ["갯벌", "#d8c3a5"], ["습지", "#c3fae8"], ["농경지", "#fff3bf"]];
+    E.forEach(function (e, i) {
+      var x = i * W;
+      h += "<g data-step='" + (i < 5 ? 1 : 1) + "'><rect x='" + (x + 4) + "' y='0' width='" + (W - 8) + "' height='200' rx='16' fill='" + e[1] + "'/>";
+      h += "<text x='" + (x + W / 2) + "' y='232' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>" + e[0] + "</text></g>";
+    });
+    /* 숲 */
+    for (var t = 0; t < 5; t++) h += "<path d='M" + (40 + t * 48) + " 170 l24 -90 l24 90Z' fill='#2f9e44'/><rect x='" + (60 + t * 48) + "' y='170' width='8' height='16' fill='#7b5233'/>";
+    /* 하천 */
+    h += "<path d='M300 200 Q360 140 420 120 T560 40' stroke='#1c7ed6' stroke-width='34' fill='none'/>";
+    /* 갯벌: 물결과 게 */
+    h += "<rect x='564' y='130' width='272' height='70' fill='#a47148' opacity='.6'/><path d='M564 120 q30 -14 60 0 t60 0 t60 0 t60 0 t32 0' stroke='#4dabf7' stroke-width='6' fill='none'/>";
+    h += "<text x='650' y='176' font-size='34'>🦀</text><text x='740' y='186' font-size='30'>🐚</text>";
+    /* 습지: 갈대 */
+    for (t = 0; t < 8; t++) h += "<path d='M" + (870 + t * 28) + " 190 q6 -60 -4 -110' stroke='#2b8a3e' stroke-width='5' fill='none'/><ellipse cx='" + (866 + t * 28) + "' cy='80' rx='6' ry='16' fill='#8a6a45'/>";
+    h += "<ellipse cx='980' cy='186' rx='110' ry='14' fill='#74c0fc' opacity='.7'/>";
+    /* 농경지: 논 */
+    for (t = 0; t < 4; t++) h += "<rect x='" + (1136 + (t % 2) * 130) + "' y='" + (40 + Math.floor(t / 2) * 80) + "' width='118' height='70' rx='6' fill='#94d82d' stroke='#5c940d' stroke-width='3'/>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

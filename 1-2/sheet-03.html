@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 반응과 에너지 출입 (통합과학2 Ⅰ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격을 조금 줄인다 */ p, li { line-height: 1.74; } td, th { padding: 3px 8px; line-height: 1.5; } h2 { margin: 9px 0 4px; } .write { height: 46px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅰ-2 화학 변화 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 반응과 에너지 출입</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 에너지 장부 — 반응물과 생성물의 에너지</h2>
+  <table>
+    <tr><th style="width:16%"></th><th>에너지를 내놓는 반응</th><th>에너지를 빨아들이는 반응</th></tr>
+    <tr><td>에너지 비교</td><td>반응물의 에너지 &gt; 생성물의 에너지</td><td>생성물의 에너지 &gt; 반응물의 에너지</td></tr>
+    <tr><td>에너지 출입</td><td>차이만큼 주변으로 <b class="blank" data-n="1">방출</b> → 주변 온도 상승</td><td>차이만큼 주변의 에너지를 <b class="blank" data-n="3">흡수</b> → 주변 온도 하강</td></tr>
+    <tr><td>이름</td><td><b class="blank" data-n="2">발열 반응</b></td><td><b class="blank" data-n="4">흡열 반응</b></td></tr>
+    <tr><td>예</td><td>메테인의 연소 CH₄ + 2O₂ → CO₂ + 2H₂O (메테인 1몰당 약 890 kJ 방출)<br>철 가루의 산화 4Fe + 3O₂ → 2Fe₂O₃</td><td>질산 암모늄의 용해 NH₄NO₃(고체) → NH₄⁺ + NO₃⁻(수용액)<br>(1몰당 약 26 kJ 흡수)</td></tr>
+  </table>
+
+  <h2>② 손난로 설계 — 뜨겁지 않게, 오래가게</h2>
+  <ul>
+    <li>철 가루가 공기 중의 산소와 만나 <b class="blank" data-n="5">산화</b> → 열을 방출 · 소금물과 활성탄은 반응을 빠르게 한다</li>
+    <li>포장지의 미세한 구멍 → <b class="blank" data-n="6">산소</b>가 들어오는 속도를 정한다</li>
+    <li>조건: 최고 60 ℃ 이하 · 50 ℃ 이상 8시간 이상 · 철 가루 30 g 이하 (40 ℃대라도 맨살에 오래 대면 저온 화상 → 옷 위에)</li>
+    <li>구멍 단계(산소가 들어오는 속도) → <b class="blank" data-n="7">최고 온도</b> &nbsp;·&nbsp; 철 가루의 양 → <b class="blank" data-n="8">따뜻한 시간</b> (철이 다 산화되면 식는다)<br>단원 화면 모형의 예: 구멍 6단계 + 철 28 g → 최고 약 54 ℃, 50 ℃ 이상 약 8.7시간</li>
+  </ul>
+
+  <h2>③ 냉찜질 팩 설계 — 차갑게, 그러나 얼지 않게</h2>
+  <ul>
+    <li><b class="blank" data-n="9">질산 암모늄</b>이 물에 녹으며 물의 열을 흡수 → 물의 온도가 내려간다 (많이 녹일수록 더 차가워진다)</li>
+    <li>삔 발목에 알맞은 온도 <b class="blank" data-n="10">2~6</b> ℃ · 전체 150 g 이하 → 예: 20 ℃ 물 100 g + 질산 암모늄 25 g → 약 4.6 ℃</li>
+    <li>팩이 ‘냉기’를 내보내는 것이 아니라 발목의 <b class="blank" data-n="11">열</b>이 팩 쪽으로 흘러 들어간다 (온도가 높은 쪽 → 낮은 쪽)<br>에너지는 사라지지도 새로 생기지도 않고 물질과 주변 사이를 옮겨 다닐 뿐</li>
+    <li>에너지 방출: 연소(난방·조리), 발열 도시락(산화 칼슘 + 물), 중화 반응, 양분을 산화시키는 <b class="blank" data-n="12">세포 호흡</b><br>에너지 흡수: 냉찜질 팩, 탄산수소 나트륨 + 구연산, 빛에너지를 흡수하는 <b class="blank" data-n="13">광합성</b></li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 묽은 염산에 마그네슘 리본을 넣었더니 용액의 온도가 올라갔다. 이 반응은 발열 반응과 흡열 반응 가운데 무엇인가? <span class="ans">→ 발열 반응</span></p>
+    <p>2. 손난로가 너무 뜨겁다. 무엇을 바꿔야 할까? <span class="ans">→ ㉡</span><br>
+      ㉠ 철 가루를 더 넣는다 &nbsp; ㉡ 공기 구멍을 줄인다 &nbsp; ㉢ 공기 구멍을 늘린다</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>냉찜질 팩이 차가워지는 까닭을 ‘냉기’라는 말 없이 ‘흡수’와 ‘열’을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「불 없이 따뜻하게, 얼음 없이 차갑게」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

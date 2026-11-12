@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 과학 기술과 사회적 쟁점 (통합과학2 Ⅲ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes hallIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .hwrap { animation: hallIn 1.2s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card { padding: 20px 28px; }
+  .two .card h3 { font-size: 30px; margin: 0 0 8px; }
+  .two .card p { font-size: 26px; margin: 0 0 6px; line-height: 1.4; }
+  .eth .card { padding: 18px 24px; }
+  .eth .card h3 { font-size: 30px; margin: 4px 0 8px; }
+  .eth .card p { font-size: 26px; line-height: 1.38; margin: 0 0 10px; }
+  .eth .card svg { display: block; margin: 0 auto; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  .chk .opt { font-size: 28px; padding: 14px 24px; }
+  table.ledger td { font-size: 27px; padding: 10px 12px; }
+  table.ledger th { padding: 8px 12px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="통학로의 CCTV 카메라와 공청회장의 저울. 한쪽 접시에는 실종 아동 수색, 다른 쪽에는 얼굴 기록이 올라 있다">
+      <g class="hwrap">
+        <rect x="300" y="120" width="16" height="360" fill="#868e96"/>
+        <rect x="300" y="120" width="120" height="16" fill="#868e96"/>
+        <rect x="380" y="136" width="96" height="52" rx="10" fill="#dee2e6"/><circle cx="460" cy="162" r="16" fill="#1c7ed6" stroke="#fff" stroke-width="4"/>
+        <path d="M476 170 L620 330 L520 360 Z" fill="#74c0fc" opacity=".18"/>
+        <rect x="200" y="470" width="420" height="14" rx="6" fill="#495057"/>
+        <g fill="#adb5bd"><circle cx="540" cy="400" r="16"/><rect x="528" y="418" width="24" height="52" rx="10"/><circle cx="590" cy="410" r="13"/><rect x="580" y="425" width="20" height="45" rx="8"/></g>
+        <rect x="1060" y="160" width="14" height="300" fill="#ced4da"/>
+        <rect x="960" y="456" width="214" height="22" rx="8" fill="#868e96"/>
+        <g id="c1-beam">
+          <line x1="860" y1="190" x2="1274" y2="190" stroke="#f1f3f5" stroke-width="12" stroke-linecap="round"/>
+          <line x1="890" y1="190" x2="860" y2="300" stroke="#ced4da" stroke-width="3"/><line x1="890" y1="190" x2="920" y2="300" stroke="#ced4da" stroke-width="3"/>
+          <path d="M840 300 h100 a50 22 0 0 1 -100 0Z" fill="#74b6ff"/>
+          <line x1="1244" y1="190" x2="1214" y2="300" stroke="#ced4da" stroke-width="3"/><line x1="1244" y1="190" x2="1274" y2="300" stroke="#ced4da" stroke-width="3"/>
+          <path d="M1194 300 h100 a50 22 0 0 1 -100 0Z" fill="#ff8a80"/>
+          <text x="890" y="356" font-size="24" font-weight="900" fill="#74b6ff" text-anchor="middle">편익</text>
+          <text x="1244" y="356" font-size="24" font-weight="900" fill="#ff8a80" text-anchor="middle">위험</text>
+        </g>
+        <circle cx="1067" cy="190" r="14" fill="#ffd43b"/>
+      </g>
+      <g data-step="1" font-size="24" font-weight="800" fill="#c9d1df" text-anchor="middle">
+        <text x="890" y="400">실종 아동을 빨리 찾는다</text>
+        <text x="1244" y="400">모든 시민의 얼굴이 기록된다</text>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 가상의 도시 한빛시의 이야기를 그린 그림입니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅲ-2 과학 기술의 발전과 쟁점 · 02</p>
+    <h1>과학 기술과 사회적 쟁점</h1>
+    <p class="sub" data-step="1">통학로 CCTV에 안면 인식을 넣을지, 누가 어떻게 정해야 할까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 과학 기술이 사회에 들어올 때 생기는 논쟁을 어떻게 따지고 말해야 하는지 배웁니다. 여러분은 공청회의 학생 대표 발언자입니다.</p>
+    <p data-at="1">한쪽 접시에는 실종 아동을 빨리 찾는다는 기대가, 다른 쪽에는 모든 시민의 얼굴이 기록된다는 걱정이 올라 있습니다. 오늘 정해진 정답 입장은 없습니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="시의회에서 온 초대장" data-part="도입">
+  <p class="kicker">도입 · 가상의 도시 한빛시 시의회 안건</p>
+  <h2>“통학로와 학교 주변 CCTV 600대에 안면 인식 기능을 도입한다”</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b class="c-blue">기대</b> 실종 아동을 빨리 찾을 수 있다</p>
+      <p><b class="c-red">걱정</b> 모든 시민의 얼굴이 기록된다</p>
+      <p class="small mt">통학로를 매일 걷는 당사자인 학생 대표에게 발언을 부탁한다. 찬성이든 반대든 좋다. 다만 근거를 갖춰서.</p>
+    </div>
+    <div class="card yel">
+      <h3>어떻게 정해야 할까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 과학 기술 문제이니 전문가가 정확도만 확인해 정한다</div>
+        <div class="opt">㉡ 사실은 과학으로 확인하되, 무엇이 더 중요한지는 시민이 함께 따져 합의한다</div>
+        <div class="opt">㉢ 생각이 다 다르니 따질 것 없이 바로 다수결로 정한다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>가상의 도시 한빛시의 안건입니다. 기대와 걱정이 맞서자 시의회가 공청회를 열었습니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 공청회 순서를 따라가며 스스로 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>사회적 쟁점</b><span>과학 기술을 두고 의견이 갈리는 문제 (SSI)</span></div>
+    <div class="card"><b>사실과 가치</b><span>확인할 수 있는 말과 무엇이 중요한지에 대한 말</span></div>
+    <div class="card"><b>위험과 편익</b><span>같은 기술의 이로움과 해로움</span></div>
+    <div class="card"><b>과학 윤리</b><span>과학자·기술자가 지켜야 할 것</span></div>
+    <div class="card"><b>논증</b><span>주장·근거·반론·답을 갖춘 말하기</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~15번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 사회적 쟁점 -->
+<section class="slide" id="s-ssi" data-title="과학 관련 사회적 쟁점" data-part="① 사실과 가치">
+  <p class="kicker">① 사실과 가치 · 기술이 사회에 들어올 때</p>
+  <h2>기대와 걱정이 맞서는 기술들</h2>
+  <svg viewBox="0 0 1400 290" width="1400" height="290" aria-label="네 가지 쟁점의 기대와 걱정: 안면 인식 CCTV, 유전자 가위, 자율 주행차, 원자력 발전">
+    <g data-step="1">
+      <g font-weight="800" text-anchor="middle">
+        <rect x="0" y="0" width="332" height="290" rx="22" fill="#f2f5f9"/>
+        <text x="166" y="50" font-size="28" font-weight="900" fill="#161b28">안면 인식 CCTV</text>
+        <text x="166" y="118" font-size="22" fill="#1864ab">기대 · 실종 아동을</text><text x="166" y="148" font-size="22" fill="#1864ab">빨리 찾는다</text>
+        <text x="166" y="210" font-size="22" fill="#c92a2a">걱정 · 모든 시민의</text><text x="166" y="240" font-size="22" fill="#c92a2a">얼굴이 기록된다</text>
+        <rect x="356" y="0" width="332" height="290" rx="22" fill="#f2f5f9"/>
+        <text x="522" y="50" font-size="28" font-weight="900" fill="#161b28">유전자 가위</text>
+        <text x="522" y="118" font-size="22" fill="#1864ab">기대 · 유전 질환을</text><text x="522" y="148" font-size="22" fill="#1864ab">치료한다</text>
+        <text x="522" y="210" font-size="22" fill="#c92a2a">걱정 · 배아를 편집하면</text><text x="522" y="240" font-size="22" fill="#c92a2a">후손에게까지 유전된다</text>
+        <rect x="712" y="0" width="332" height="290" rx="22" fill="#f2f5f9"/>
+        <text x="878" y="50" font-size="28" font-weight="900" fill="#161b28">자율 주행차</text>
+        <text x="878" y="118" font-size="22" fill="#1864ab">기대 · 사람의 실수로</text><text x="878" y="148" font-size="22" fill="#1864ab">인한 사고가 준다</text>
+        <text x="878" y="210" font-size="22" fill="#c92a2a">걱정 · 사고가 나면</text><text x="878" y="240" font-size="22" fill="#c92a2a">책임이 불분명하다</text>
+        <rect x="1068" y="0" width="332" height="290" rx="22" fill="#f2f5f9"/>
+        <text x="1234" y="50" font-size="28" font-weight="900" fill="#161b28">원자력 발전</text>
+        <text x="1234" y="118" font-size="22" fill="#1864ab">기대 · 온실 기체</text><text x="1234" y="148" font-size="22" fill="#1864ab">배출이 적다</text>
+        <text x="1234" y="210" font-size="22" fill="#c92a2a">걱정 · 방사성 폐기물을</text><text x="1234" y="240" font-size="22" fill="#c92a2a">오래 보관해야 한다</text>
+      </g>
+      <g stroke="#adb5bd" stroke-width="3" stroke-dasharray="6 6"><line x1="30" y1="176" x2="302" y2="176"/><line x1="386" y1="176" x2="658" y2="176"/><line x1="742" y1="176" x2="1014" y2="176"/><line x1="1098" y1="176" x2="1370" y2="176"/></g>
+    </g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="2">과학 기술과 관련되어 사회 구성원의 의견이 갈리는 문제 → <b class="blank" data-n="1" data-step="2">과학 관련 사회적 쟁점(SSI)</b></p>
+    <p data-step="3">과학적 사실만으로 결론이 나지 않는다 → <b class="c-blue">사실은 확인하고, 가치는 저울질한다</b></p>
+  </div>
+  <aside class="script">
+    <p>공청회 안건인 안면 인식 CCTV만 그런 게 아닙니다.</p>
+    <p data-at="1">유전자 가위, 자율 주행차, 원자력 발전. 기술마다 기대와 걱정이 함께 있습니다.</p>
+    <p data-at="2">이렇게 과학 기술과 관련되어 사회 구성원의 의견이 갈리는 문제가 빈칸 1번, 과학 관련 사회적 쟁점, 영어 약자로 SSI입니다.</p>
+    <p data-at="3">이런 쟁점은 과학 지식만 많으면 정답이 나오는 문제가 아닙니다. 사실은 조사해서 확인하고, 무엇이 더 중요한지는 서로 드러내어 저울질해야 합니다.</p>
+  </aside>
+</section>
+
+<!-- 5 사실 주장과 가치 주장 -->
+<section class="slide soft" id="s-claims" data-title="사실인가, 가치인가" data-part="① 사실과 가치">
+  <p class="kicker">① 사실과 가치 · 공청회 발언을 가려 듣기</p>
+  <h2>조사하면 참·거짓을 가릴 수 있는 말인가?</h2>
+  <svg viewBox="0 0 1400 150" width="1400" height="150" aria-label="발언이 들어오면, 조사하면 참과 거짓을 가릴 수 있는지 묻고, 예이면 사실 주장, 아니요이면 가치 주장으로 나눈다">
+    <defs><marker id="s5-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <rect x="0" y="45" width="180" height="60" rx="14" fill="#fff" stroke="#495057" stroke-width="3"/><text x="90" y="84" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">발언</text>
+    <line x1="185" y1="75" x2="300" y2="75" stroke="#495057" stroke-width="5" marker-end="url(#s5-a)"/>
+    <path d="M310 75 L620 8 L930 75 L620 142 Z" fill="#fff6cc" stroke="#f08c00" stroke-width="3"/>
+    <text x="620" y="84" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">조사하면 참·거짓을 가릴 수 있나?</text>
+    <path d="M930 75 L1010 75 L1010 30 L1080 30" fill="none" stroke="#1c7ed6" stroke-width="5" marker-end="url(#s5-a)"/>
+    <path d="M930 75 L1010 75 L1010 120 L1080 120" fill="none" stroke="#e8590c" stroke-width="5" marker-end="url(#s5-a)"/>
+    <text x="1030" y="22" font-size="20" font-weight="900" fill="#1864ab">예</text><text x="1018" y="146" font-size="20" font-weight="900" fill="#d9480f">아니요</text>
+    <g data-step="1"><rect x="1090" y="5" width="300" height="50" rx="12" fill="#1c7ed6"/><text x="1240" y="39" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">사실 주장</text></g>
+    <g data-step="2"><rect x="1090" y="95" width="300" height="50" rx="12" fill="#e8590c"/><text x="1240" y="129" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">가치 주장</text></g>
+  </svg>
+  <div class="two mt">
+    <div class="card" data-step="1">
+      <h3><b class="blank" data-n="2" data-step="1">사실 주장</b></h3>
+      <p>👮 “실종 신고 1,240건, 영상 검색에 건당 평균 9시간”</p>
+      <p>👩‍🔬 “NIST 시험: 다수의 알고리즘이 일부 얼굴을 10~100배 더 자주 오인식”</p>
+      <p data-step="3"><b class="c-red">🙋 “범죄가 절반으로 줄 게 뻔하다”</b> → 예측이지만 통계로 확인할 수 있다</p>
+    </div>
+    <div class="card" data-step="2">
+      <h3><b class="blank" data-n="3" data-step="2">가치 주장</b></h3>
+      <p>👨‍👧 “아이들의 안전은 무엇보다 먼저 지켜야 한다”</p>
+      <p>✊ “감시받지 않고 거리를 걸을 자유는 포기할 수 없는 권리다”</p>
+      <p>🏙️ “새 기술을 앞서 받아들이는 도시가 좋은 도시다”</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>공청회의 의장이 먼저 발언을 두 종류로 나누자고 합니다. 기준은 하나, 조사하면 참과 거짓을 가릴 수 있느냐입니다.</p>
+    <p data-at="1">통계나 시험 보고서로 확인할 수 있는 말. 빈칸 2번, 사실 주장입니다.</p>
+    <p data-at="2">무엇이 옳고 중요한지에 대한 말. 빈칸 3번, 가치 주장입니다. 실험이나 통계로 참·거짓을 가릴 수 없고, 무게를 저울질해야 합니다.</p>
+    <p data-at="3">헷갈리는 것 하나. ‘범죄가 절반으로 줄 게 뻔하다’는 미래 예측이지만, 도입한 도시의 범죄 통계로 확인할 수 있으니 사실 주장입니다. 사실 주장이라는 말이 참이라는 뜻은 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 6 근거 -->
+<section class="slide" id="s-evid" data-title="근거를 댔는가" data-part="① 사실과 가치">
+  <p class="kicker">① 사실과 가치 · 사실 주장 다섯 개를 다시 따져 보면</p>
+  <h2>사실 주장이라면 근거를 댔는지 묻는다</h2>
+  <svg viewBox="0 0 1400 90" width="1400" height="90" aria-label="사실 주장에 출처와 자료가 있으면 확인하고, 없으면 자료를 요구한다">
+    <defs><marker id="s6-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <rect x="0" y="15" width="220" height="60" rx="14" fill="#1c7ed6"/><text x="110" y="54" font-size="24" font-weight="900" fill="#fff" text-anchor="middle">사실 주장</text>
+    <line x1="226" y1="45" x2="320" y2="45" stroke="#495057" stroke-width="5" marker-end="url(#s6-a)"/>
+    <rect x="330" y="15" width="330" height="60" rx="14" fill="#fff6cc" stroke="#f08c00" stroke-width="3"/><text x="495" y="54" font-size="24" font-weight="900" fill="#161b28" text-anchor="middle">출처·자료가 있나?</text>
+    <line x1="666" y1="45" x2="760" y2="45" stroke="#495057" stroke-width="5" marker-end="url(#s6-a)"/>
+    <g data-step="1"><rect x="770" y="15" width="300" height="60" rx="14" fill="#ebfbee" stroke="#2f9e44" stroke-width="3"/><text x="920" y="54" font-size="23" font-weight="900" fill="#2b8a3e" text-anchor="middle">있다 → 확인한다</text></g>
+    <g data-step="2"><rect x="1090" y="15" width="310" height="60" rx="14" fill="#fff0f0" stroke="#e03131" stroke-width="3"/><text x="1245" y="54" font-size="23" font-weight="900" fill="#c92a2a" text-anchor="middle">없다 → 자료를 요구</text></g>
+  </svg>
+  <table class="ledger mt">
+    <tr><th>사실 주장</th><th style="width:560px">근거</th></tr>
+    <tr data-step="1"><td>실종 신고 1,240건, 영상 검색 건당 평균 9시간</td><td>✓ 시 경찰서 통계</td></tr>
+    <tr data-step="1"><td>다수의 알고리즘이 일부 얼굴을 10~100배 더 자주 오인식</td><td>✓ 2019년 NIST 시험 보고서</td></tr>
+    <tr data-step="1"><td>100만 명 넘는 사람의 생체 정보가 노출됨</td><td>✓ 2019년 보안 연구자 조사·언론 보도</td></tr>
+    <tr data-step="2"><td>“우리 제품은 절대 틀리지 않는다” (업체)</td><td class="c-red">✗ 없음 → 독립 기관의 시험 성적 요구</td></tr>
+    <tr data-step="2"><td>“범죄가 절반으로 줄 게 뻔하다” (주민)</td><td class="c-red">✗ 없음 → 도입한 도시의 전후 통계 요구</td></tr>
+  </table>
+  <p class="mt" data-step="3" style="font-size:28px">근거를 댄 사실 주장은 <b class="blank" data-n="4" data-step="3">출처</b>와 자료로 확인할 수 있다. 근거 없는 말은 입장문의 근거가 될 수 없다.</p>
+  <aside class="script">
+    <p>사실 주장 다섯 개를 다시 봅니다. 사실 주장은 근거를 댔는지 따져야 합니다.</p>
+    <p data-at="1">위의 셋은 경찰서 통계, 시험 보고서, 조사와 보도처럼 확인할 자료가 있습니다. 찬성 쪽 근거도, 반대 쪽 근거도 있다는 점을 보세요.</p>
+    <p data-at="2">아래 둘은 말뿐입니다. ‘절대’, ‘뻔하다’는 근거가 아닙니다. 자료를 요구해야 합니다.</p>
+    <p data-at="3">빈칸 4번, 출처. 누가 언제 어떻게 조사했는지 확인할 수 있어야 근거입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 오인식률의 산수 -->
+<section class="slide soft" id="s-base" data-title="오인식률 1%의 산수" data-part="② 숫자 확인">
+  <p class="kicker">② 숫자 확인 · 하루 1만 명이 지나가고, 찾는 사람은 그중 1명 (단원 화면 모형)</p>
+  <h2>“오인식률 1%면 경보의 99%가 진짜”일까?</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg id="baseSvg" viewBox="0 0 640 480" width="640" height="480" aria-label="경보가 울린 사람 약 101명 가운데 관계 없는 시민 약 100명, 진짜 찾는 사람은 1명"></svg>
+    <div class="lines">
+      <p data-step="1">관계 없는 사람을 찾는 사람으로 착각할 확률 → <b class="blank" data-n="5" data-step="1">오인식률</b></p>
+      <p data-step="2">관계 없는 시민 약 1만 명 × 1% → 약 100명에게 경보 (억울한 경보)</p>
+      <p data-step="3">찾는 사람 1명 → 진짜 경보는 약 1건. 경보 약 101건 가운데 진짜는 약 1%</p>
+      <p data-step="4"><b class="c-blue">‘오인식률 1%’ ≠ ‘경보의 99%가 진짜’</b> · 무엇을 무엇으로 나눈 숫자인지 따진다</p>
+    </div>
+  </div>
+  <p class="note">⚠ 찾는 사람이 하루 1명 지나가고 99% 확률로 알아본다고 가정한 단순화한 모형입니다. 실제 오인식률은 조명·각도·마스크·명단 크기에 따라 크게 달라집니다.</p>
+  <aside class="script">
+    <p>업체 영업 사원은 ‘오인식률 1%, 그러니 경보가 울리면 99%는 진짜’라고 말했습니다. 통계학자와 직접 계산해 봅시다.</p>
+    <p data-at="1">빈칸 5번, 오인식률. 아무 관계 없는 사람을 찾는 사람으로 착각할 확률입니다.</p>
+    <p data-at="2">하루 1만 명이 지나가면 관계 없는 시민 약 1만 명의 1%, 약 100명에게 경보가 울립니다.</p>
+    <p data-at="3">찾는 사람은 1명뿐이니 진짜 경보는 많아야 1건. 경보 101건 가운데 진짜는 약 1%입니다. 99%가 아니라요.</p>
+    <p data-at="4">1%는 ‘관계 없는 사람 가운데 몇 명이 경보를 받느냐’이고, 우리가 궁금한 것은 ‘울린 경보 가운데 몇 건이 진짜냐’입니다. 나누는 기준이 다릅니다.</p>
+  </aside>
+</section>
+
+<!-- 8 오인식률을 낮추면 -->
+<section class="slide" id="s-fpr" data-title="오인식률을 낮추면" data-part="② 숫자 확인">
+  <p class="kicker">② 숫자 확인 · 하루 1만 명, 찾는 사람 1명일 때 (단원 화면 모형)</p>
+  <h2>경보가 진짜일 확률은 오인식률에 따라 크게 달라진다</h2>
+  <svg id="fprSvg" viewBox="0 0 1400 420" width="1400" height="420" aria-label="오인식률 1%, 0.1%, 0.01%, 0.001%일 때 경보가 진짜일 확률은 약 1.0%, 9.0%, 49.7%, 90.8%"></svg>
+  <div class="tight">
+    <p data-step="3">경보의 절반 넘게 진짜가 되려면 오인식률이 <b class="blank" data-n="6" data-step="3">0.001%</b> 수준까지 낮아져야 한다</p>
+    <p data-step="4">찾는 사람이 드물수록, 정확해 보이는 기술도 경보 대부분이 억울한 시민일 수 있다</p>
+  </div>
+  <aside class="script">
+    <p>오인식률을 낮추면 어떻게 될까요? 단원 화면 슬라이더의 값들입니다.</p>
+    <p data-at="1">1%면 경보의 약 1%만 진짜입니다.</p>
+    <p data-at="2">10분의 1로 줄인 0.1%에서도 약 9%. 0.01%까지 낮춰도 약 49.7%로 아직 절반이 안 됩니다.</p>
+    <p data-at="3">빈칸 6번, 0.001%. 이 수준이 되어야 경보 10건 가운데 9건쯤이 진짜가 됩니다. 이 값은 찬성 쪽이 근거로 쓸 수 있는 계산이기도 합니다.</p>
+    <p data-at="4">숫자 하나로 안심하거나 겁먹지 말고, 조건을 바꿔 가며 따져 보는 것. 그것이 사실을 확인하는 방법입니다.</p>
+  </aside>
+</section>
+
+<!-- 9 편향 -->
+<section class="slide soft" id="s-bias" data-title="오류는 어디에 몰리나" data-part="② 숫자 확인">
+  <p class="kicker">② 숫자 확인 · 하루 1만 명이 두 집단으로 절반씩, 집단 B의 오인식률이 10배라면 (단원 화면 모형)</p>
+  <h2>억울한 경보가 한 집단에 몰릴 수 있다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg id="biasSvg" viewBox="0 0 700 380" width="700" height="380" aria-label="집단 A 5,000명은 오인식률 1%로 억울한 경보 50건, 집단 B 5,000명은 오인식률 10%로 억울한 경보 500건"></svg>
+    <div class="lines">
+      <p data-step="1">집단 A(5,000명, 1%) → 억울한 경보 50건</p>
+      <p data-step="2">집단 B(5,000명, 10%) → 억울한 경보 500건, 10배</p>
+      <p data-step="3">실제 연구: 2019년 NIST 시험에서 다수의 알고리즘이 아시아계·아프리카계 얼굴을 백인 얼굴보다 10~100배 더 자주 잘못 알아봄</p>
+      <p data-step="4">학습 데이터가 치우쳐 오류가 특정 집단에 몰린다 → 알고리즘 <b class="blank" data-n="7" data-step="4">편향</b></p>
+    </div>
+  </div>
+  <p class="note" data-step="3">2018년 한 연구: 상용 얼굴 분석 프로그램의 성별 판별 오류율이 밝은 피부의 남성은 1% 미만, 어두운 피부의 여성은 최대 약 35%.</p>
+  <aside class="script">
+    <p>오인식이 모두에게 똑같이 일어날까요? 하루 1만 명이 두 집단으로 반씩 나뉜다고 해 봅시다.</p>
+    <p data-at="1">집단 A는 오인식률 1%, 억울한 경보 50건.</p>
+    <p data-at="2">집단 B의 오인식률이 10배라면 500건. 같은 길을 걸어도 B 집단 사람들이 열 배 자주 붙잡혀 확인을 받습니다.</p>
+    <p data-at="3">가정만이 아닙니다. 2019년 미국 국립표준기술연구소가 알고리즘 189개를 시험했더니, 다수에서 이런 차이가 10~100배였습니다. 2018년 연구에서는 어두운 피부 여성의 성별 판별 오류율이 최대 약 35%였어요.</p>
+    <p data-at="4">빈칸 7번, 편향. 1차시의 흰 딸기 사건과 같은 구조입니다. 다만 이번에는 딸기가 아니라 사람입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 위험과 편익 -->
+<section class="slide" id="s-scale" data-title="위험과 편익에 무게 달기" data-part="③ 저울질과 윤리">
+  <p class="kicker">③ 저울질과 윤리 · 안면 인식 CCTV 쟁점</p>
+  <h2>같은 사실을 보고도 무게는 사람마다 다르다</h2>
+  <div class="two">
+    <div class="card blue" data-step="1">
+      <h3><b class="blank" data-n="8" data-step="1">편익</b> (얻는 이로움)</h3>
+      <p>실종 아동·치매 어르신을 더 빨리 찾는다</p>
+      <p>용의자의 이동 경로를 찾는 시간이 준다</p>
+      <p>학교 출입 확인이 빠르고 편해진다</p>
+    </div>
+    <div class="card red" data-step="2">
+      <h3><b class="blank" data-n="9" data-step="2">위험</b> (생길 수 있는 해로움)</h3>
+      <p>모든 시민의 이동이 기록된다 (사생활)</p>
+      <p>오인식이 특정 집단에 몰린다 (편향)</p>
+      <p>얼굴 정보는 유출돼도 바꿀 수 없다</p>
+    </div>
+  </div>
+  <svg id="scaleSvg" viewBox="0 0 1400 290" width="1400" height="290" aria-label="학생 A는 편익 11, 위험 7로 저울이 편익 쪽으로 기울어 찬성 쪽, 학생 B는 편익 6, 위험 14로 위험 쪽으로 기울어 반대 쪽"></svg>
+  <aside class="script">
+    <p>단원 화면의 저울입니다. 편익과 위험 하나하나에 0~5의 무게를 답니다.</p>
+    <p data-at="1">빈칸 8번, 편익. 이 기술로 얻는 이로움입니다.</p>
+    <p data-at="2">빈칸 9번, 위험. 생길 수 있는 해로움입니다. 미션 조건은 여섯 가지 모두에 1 이상의 무게를 다는 것이었죠. 상대편의 근거도 0으로 두지 않고 검토한다는 뜻입니다.</p>
+    <p data-at="3">같은 여섯 가지를 보고도, 학생 A는 실종 아동 수색을 무겁게 달아 찬성 쪽으로, 학생 B는 사생활과 유출을 무겁게 달아 반대 쪽으로 기울었습니다. 누가 과학을 몰라서가 아니라 중요하게 여기는 가치가 다르기 때문입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 안전장치 -->
+<section class="slide soft" id="s-safe" data-title="안전장치를 걸면" data-part="③ 저울질과 윤리">
+  <p class="kicker">③ 저울질과 윤리 · 학생 B의 저울에 안전장치를 걸어 보면</p>
+  <h2>안전장치와 제도가 저울을 바꾼다</h2>
+  <div class="cols" style="grid-template-columns:560px 1fr;align-items:center">
+    <svg id="safeSvg" viewBox="0 0 560 400" width="560" height="400" aria-label="학생 B의 저울: 안전장치 셋을 걸자 위험 무게가 14에서 7로 줄어 편익 6과 거의 맞선다"></svg>
+    <div class="lines">
+      <p data-step="1">위험을 줄이는 <b class="blank" data-n="10" data-step="1">안전장치</b>와 제도를 함께 설계한다</p>
+      <p data-step="2" style="font-size:27px">· 법원 허가를 받은 실종·강력 범죄 수색에만 → 사생활<br>· 독립 기관이 정확도·편향 검증, 최종 확인은 사람 → 편향<br>· 기한 뒤 자동 삭제, 열람 기록 공개 → 유출·남용</p>
+      <p data-step="3">사실 확인 + 가치 저울질 + 안전장치 → <b class="blank" data-n="11" data-step="3">사회적 합의</b>를 만들어 간다</p>
+    </div>
+  </div>
+  <p class="note">⚠ 안전장치가 위험을 절반으로 줄인다는 것은 단원 화면 모형의 가정입니다. 저울은 결론을 내 주는 기계가 아니라 내 생각을 드러내는 도구입니다.</p>
+  <aside class="script">
+    <p>의장이 말했죠. 안전장치를 걸면 저울이 어떻게 달라지는지도 보라고요.</p>
+    <p data-at="1">빈칸 10번, 안전장치. 위험을 없애지는 못해도 줄이는 장치와 제도입니다.</p>
+    <p data-at="2">세 가지 안전장치가 각각 사생활, 편향, 유출이라는 위험을 겨냥합니다. 단원 화면 모형에서는 걸린 위험의 무게가 절반이 됩니다. 학생 B의 위험은 14에서 7로 줄어 저울이 팽팽해졌습니다.</p>
+    <p data-at="3">그래도 반대할 수 있고, 조건을 걸어 찬성할 수도 있습니다. 빈칸 11번, 사회적 합의. 사실을 확인하고 가치를 드러내고 안전장치를 설계하며, 서로 받아들일 수 있는 결정을 만들어 가는 과정입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 과학 윤리 -->
+<section class="slide" id="s-ethics" data-title="과학 윤리" data-part="③ 저울질과 윤리">
+  <p class="kicker">③ 저울질과 윤리 · 공청회의 숫자를 믿을 수 있었던 까닭</p>
+  <h2 data-step="1">과학자와 기술자가 지켜야 할 <b class="blank" data-n="12" data-step="1">과학 윤리</b></h2>
+  <div class="cols c3 eth">
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 160 80" width="160" height="80" aria-label="문서와 돋보기"><rect x="30" y="6" width="56" height="70" rx="6" fill="#fff" stroke="#495057" stroke-width="4"/><g stroke="#adb5bd" stroke-width="4"><line x1="40" y1="24" x2="76" y2="24"/><line x1="40" y1="38" x2="76" y2="38"/><line x1="40" y1="52" x2="66" y2="52"/></g><circle cx="104" cy="44" r="20" fill="none" stroke="#1c7ed6" stroke-width="6"/><line x1="118" y1="58" x2="138" y2="76" stroke="#1c7ed6" stroke-width="8" stroke-linecap="round"/></svg>
+      <h3><b class="blank" data-n="13" data-step="2">연구 진실성</b></h3>
+      <p>2005년 복제 배아 줄기세포 논문의 사진·데이터 조작 → 논문 철회</p>
+      <p>1912년 ‘필트다운인’ 화석 → 약 40년 뒤 짜 맞춘 가짜로 밝혀짐</p>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 160 80" width="160" height="80" aria-label="DNA와 방패"><g fill="none" stroke-width="5"><path d="M30 6 C70 26 30 54 70 74" stroke="#e03131"/><path d="M70 6 C30 26 70 54 30 74" stroke="#1c7ed6"/></g><path d="M110 8 L146 18 V40 C146 60 128 72 110 78 C92 72 74 60 74 40 V18 Z" fill="#69db9c" stroke="#2b8a3e" stroke-width="4"/></svg>
+      <h3><b class="blank" data-n="14" data-step="3">생명 윤리</b></h3>
+      <p>1932~1972년 터스키기: 매독 환자에게 병명도 알리지 않고 치료 없이 관찰</p>
+      <p>2018년 배아 유전자 편집 쌍둥이 출산 발표 → 비판·처벌</p>
+    </div>
+    <div class="card" data-step="4">
+      <svg viewBox="0 0 160 80" width="160" height="80" aria-label="높이가 크게 다른 막대 두 개"><line x1="20" y1="76" x2="140" y2="76" stroke="#495057" stroke-width="4"/><rect x="40" y="66" width="30" height="10" fill="#1c7ed6"/><rect x="92" y="10" width="30" height="66" fill="#e03131"/></svg>
+      <h3>데이터·알고리즘 윤리</h3>
+      <p>채용 인공지능이 ‘여성’이 든 이력서의 점수를 깎음 → 폐기 (2018년 보도)</p>
+      <p>얼굴 분석 오류율: 밝은 피부 남성 1% 미만, 어두운 피부 여성 최대 약 35%</p>
+    </div>
+  </div>
+  <p class="mt" data-step="5" style="font-size:28px"><b class="c-blue">‘할 수 있는가’보다 ‘해도 되는가’를 먼저 묻는다</b> → 그래야 사회가 과학의 숫자를 믿고 토론할 수 있다</p>
+  <aside class="script">
+    <p>공청회의 숫자들을 믿을 수 있었던 건 연구자들이 데이터를 정직하게 다루고 공개했기 때문입니다. 그 믿음이 깨진 실제 사건들입니다.</p>
+    <p data-at="1">빈칸 12번, 과학 윤리. 과학자와 기술자가 지켜야 할 것입니다.</p>
+    <p data-at="2">빈칸 13번, 연구 진실성. 없는 데이터를 만들거나 고치지 않는 것. 조작된 논문과 가짜 화석은 연구를 오랫동안 헷갈리게 했습니다.</p>
+    <p data-at="3">빈칸 14번, 생명 윤리. 연구 대상자와 다음 세대를 보호하는 것. 터스키기 사건 뒤 충분한 설명에 근거한 동의 같은 연구 대상자 보호 원칙이 세워졌습니다.</p>
+    <p data-at="4">데이터와 알고리즘의 편향을 점검하는 책임도 있습니다. 과거 데이터의 치우침을 인공지능이 그대로 배운 사례들입니다.</p>
+    <p data-at="5">과학 윤리는 과학을 가로막는 것이 아니라 사회가 과학을 믿을 수 있게 하는 바탕입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 논증 -->
+<section class="slide soft" id="s-arg" data-title="입장문의 네 요소" data-part="③ 저울질과 윤리">
+  <p class="kicker">③ 저울질과 윤리 · 학생 대표의 발언 차례</p>
+  <h2>어느 입장이든 네 가지를 갖춘다</h2>
+  <svg viewBox="0 0 1400 90" width="1400" height="90" aria-label="주장, 근거, 상대편의 반론, 반론에 대한 답의 네 단계">
+    <defs><marker id="s13-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+    <g data-step="1" font-size="25" font-weight="900" text-anchor="middle">
+      <rect x="0" y="10" width="290" height="70" rx="16" fill="#1c7ed6"/><text x="145" y="54" fill="#fff">① 분명한 주장</text>
+      <line x1="296" y1="45" x2="360" y2="45" stroke="#495057" stroke-width="5" marker-end="url(#s13-a)"/>
+      <rect x="370" y="10" width="290" height="70" rx="16" fill="#2f9e44"/><text x="515" y="54" fill="#fff">② 확인된 근거</text>
+      <line x1="666" y1="45" x2="730" y2="45" stroke="#495057" stroke-width="5" marker-end="url(#s13-a)"/>
+      <rect x="740" y="10" width="290" height="70" rx="16" fill="#e8590c"/><text x="885" y="54" fill="#fff">③ 가장 강한 반론</text>
+      <line x1="1036" y1="45" x2="1100" y2="45" stroke="#495057" stroke-width="5" marker-end="url(#s13-a)"/>
+      <rect x="1110" y="10" width="290" height="70" rx="16" fill="#7048e8"/><text x="1255" y="54" fill="#fff">④ 반론에 대한 답</text>
+    </g>
+  </svg>
+  <div class="two mt">
+    <div class="card" data-step="2">
+      <h3>예 1 · 조건부 찬성</h3>
+      <p><b class="c-blue">①</b> 조건을 걸고 도입에 찬성한다</p>
+      <p><b class="c-green">②</b> 실종 신고 1,240건, 영상 검색 건당 평균 9시간 (시 경찰서 통계)</p>
+      <p><b class="c-orange">③</b> “감시받지 않고 걸을 자유는 포기할 수 없다”</p>
+      <p><b class="c-violet">④</b> 법원 허가 수색에만 쓰고, 영상은 기한 뒤 자동 삭제</p>
+    </div>
+    <div class="card" data-step="3">
+      <h3>예 2 · 반대</h3>
+      <p><b class="c-blue">①</b> 도입에 반대한다</p>
+      <p><b class="c-green">②</b> 다수의 알고리즘이 일부 얼굴을 10~100배 더 자주 오인식 (2019년 NIST)</p>
+      <p><b class="c-orange">③</b> “실종자를 빨리 찾아 생명을 구할 수 있다”</p>
+      <p><b class="c-violet">④</b> 얼굴을 기록하지 않는 방법(CCTV 증설·인력 보강)으로 먼저 개선</p>
+    </div>
+  </div>
+  <p class="mt" data-step="4" style="font-size:28px">주장·근거·반론·답을 갖춘 말하기 → <b class="blank" data-n="15" data-step="4">논증</b> · 평가하는 것은 입장이 아니라 논증의 형식</p>
+  <aside class="script">
+    <p>의장이 말한 좋은 발언의 네 가지입니다.</p>
+    <p data-at="1">분명한 주장, 확인된 근거, 상대편의 가장 강한 반론, 그 반론에 대한 답. 반론을 피하지 않고 적어야 설득력이 생깁니다.</p>
+    <p data-at="2">조건부 찬성의 예입니다. 근거는 출처 있는 통계, 반론은 반대편의 가장 강한 가치, 답은 그 반론을 인정하면서 위험을 줄이는 조건입니다.</p>
+    <p data-at="3">반대의 예도 똑같은 네 가지를 갖췄습니다. 반대편이 내세우는 생명 구조라는 가치를 인정하고, 다른 방법을 제안합니다.</p>
+    <p data-at="4">빈칸 15번, 논증. 어느 입장을 골라도 됩니다. 평가하는 것은 입장이 아니라 논증의 형식입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 확인 -->
+<section class="slide chk" id="s-check" data-title="근거가 될 수 없는 것" data-part="③ 저울질과 윤리">
+  <p class="kicker">③ 저울질과 윤리 · 확인</p>
+  <h2>입장문의 근거로 쓸 수 <span class="c-red">없는</span> 것은?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">㉠ 실종 신고 1,240건, 영상 검색 건당 평균 9시간 (시 경찰서 통계)</div>
+    <div class="opt wrong" data-step="1">㉡ 다수의 알고리즘이 일부 얼굴을 10~100배 더 자주 오인식 (2019년 NIST 시험)</div>
+    <div class="opt right" data-step="1">㉢ “안면 인식을 달면 범죄가 절반으로 줄 게 뻔하다” (주민)</div>
+    <div class="opt wrong" data-step="1">㉣ 생체 정보 데이터베이스 노출로 100만 명 넘는 정보가 드러남 (2019년)</div>
+  </div>
+  <p data-step="1" style="margin-top:30px">㉠은 찬성 쪽, ㉡·㉣은 반대 쪽 근거. ㉢은 사실 주장이지만 <b>근거를 대지 않았다</b>.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 내 입장과 상관없이 고르게 합니다.</p>
+    <p data-at="1">정답은 ㉢. 찬성이든 반대든 확인된 근거는 쓸 수 있고, 확인되지 않은 말은 어느 쪽에서도 쓸 수 없습니다.</p>
+  </aside>
+</section>
+
+<!-- 15 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>사실은 확인하고, 가치는 저울질하고, 근거로 말한다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>과학 관련 사회적 쟁점(SSI)</b>: 과학 기술을 두고 의견이 갈리는 문제 · 과학적 사실만으로 결론이 나지 않는다</li>
+    <li data-k="2" data-step="2"><b>사실 주장</b>은 출처로 확인, <b>가치 주장</b>은 무게를 저울질 · 오인식률 1% ≠ 경보의 99%가 진짜</li>
+    <li data-k="3" data-step="3"><b>위험과 편익</b>에 무게를 달고 안전장치·제도를 설계해 사회적 합의를 만든다</li>
+    <li data-k="4" data-step="4"><b>과학 윤리</b>(연구 진실성·생명 윤리·데이터 윤리)가 바탕 · 입장은 주장·근거·반론·답을 갖춘 <b>논증</b>으로</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 16 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 다음 중 가치 주장은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 지난해 실종 신고는 1,240건이었다</div>
+        <div class="opt right" data-step="1">㉡ 감시받지 않고 걸을 자유는 포기할 수 없는 권리다</div>
+        <div class="opt wrong" data-step="1">㉢ 안면 인식을 달면 범죄가 절반으로 준다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 하루 1만 명, 오인식률 1%, 찾는 사람 1명이면 하루 억울한 경보는 약 몇 건?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 약 1건</div>
+        <div class="opt right" data-step="2">㉡ 약 100건</div>
+        <div class="opt wrong" data-step="2">㉢ 약 9,900건</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. ㉢은 예측이지만 통계로 확인할 수 있으니 사실 주장입니다.</p>
+    <p data-at="2">2번은 ㉡. 관계 없는 시민 약 1만 명의 1%입니다. ㉢처럼 99%를 거꾸로 적용하지 않도록 합니다.</p>
+  </aside>
+</section>
+
+<!-- 17 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「공청회에 서다」</h2>
+  <div class="cols">
+    <div class="card"><h3>학생 대표가 되어 보세요</h3><p>발언 가려 듣기, 오인식의 산수, 위험과 편익의 저울, 과학 윤리 사건 나누기, 입장문 조립이 기다립니다. 어느 입장을 골라도 됩니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 단원 정리</h3><p>수준별 문제와 응용 실험실(스마트 가로등의 문턱, 스팸 필터, 자율 주행차 시험 거리)로 Ⅲ-2 단원을 마무리합니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 단원 화면(episodes.js)과 같은 모형: 하루 N명(절반씩 집단 A·B), 찾는 사람 1명(99% 알아봄) */
+  function baseRate(N, fpr, ratio) {
+    var fA = fpr / 100, fB = Math.min(1, fA * ratio), faA = N / 2 * fA, faB = N / 2 * fB, tp = 0.99;
+    return { faA: faA, faB: faB, fa: faA + faB, tp: tp, prec: tp / (tp + faA + faB) };
+  }
+  function scaleNet(wb, wr, safe) { var B = 0, R = 0; for (var i = 0; i < 3; i++) { B += wb[i]; R += wr[i] * (safe[i] ? 0.5 : 1); } return { B: B, R: R, net: B - R }; }
+  function stance(net) { return net >= 3 ? "찬성 쪽" : (net <= -3 ? "반대 쪽" : "팽팽함"); }
+
+  /* 7 경보가 울린 사람들: 칸 하나 = 경보 1건 */
+  (function () {
+    var svg = document.getElementById("baseSvg"), r = baseRate(10000, 1, 1), h = "";
+    h += "<text x='0' y='26' font-size='22' font-weight='900' fill='#5f6b80'>하루 동안 울린 경보 (칸 하나 = 1건)</text>";
+    h += "<g data-step='2'>";
+    for (var k = 0; k < Math.round(r.fa); k++) {
+      var x = 30 + (k % 10) * 46, y = 60 + Math.floor(k / 10) * 40;
+      h += "<circle cx='" + (x + 16) + "' cy='" + (y + 10) + "' r='8' fill='#adb5bd'/><rect x='" + (x + 8) + "' y='" + (y + 20) + "' width='16' height='14' rx='5' fill='#adb5bd'/>";
+    }
+    h += "<text x='495' y='190' font-size='24' font-weight='900' fill='#495057'>억울한</text><text x='495' y='222' font-size='24' font-weight='900' fill='#495057'>경보</text><text x='495' y='256' font-size='30' font-weight='900' fill='#495057'>약 " + Math.round(r.fa) + "건</text></g>";
+    h += "<g data-step='3'><circle cx='570' cy='380' r='22' fill='#2f9e44'/><rect x='552' y='404' width='36' height='34' rx='10' fill='#2f9e44'/>";
+    h += "<text x='570' y='470' font-size='24' font-weight='900' fill='#2b8a3e' text-anchor='middle'>진짜 1건</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 8 오인식률별 경보가 진짜일 확률 */
+  (function () {
+    var svg = document.getElementById("fprSvg"), F = [1, 0.1, 0.01, 0.001], ST = [1, 2, 2, 3], X0 = 160, BW = 220, GAP = 90, Y0 = 40, Y1 = 330, h = "";
+    function Y(p) { return Y1 - p / 100 * (Y1 - Y0); }
+    h += "<line x1='" + X0 + "' y1='" + Y(50) + "' x2='1390' y2='" + Y(50) + "' stroke='#e03131' stroke-width='3' stroke-dasharray='10 7'/>";
+    h += "<text x='" + (X0 + 40) + "' y='" + (Y(50) - 10) + "' font-size='20' font-weight='900' fill='#c92a2a'>절반(50%)</text>";
+    [0, 25, 50, 75, 100].forEach(function (p) { h += "<text x='" + (X0 - 14) + "' y='" + (Y(p) + 7) + "' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='end'>" + p + "%</text>"; });
+    h += "<text x='0' y='22' font-size='20' font-weight='900' fill='#5f6b80'>경보가 진짜일 확률</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='1390' y2='" + Y1 + "' stroke='#161b28' stroke-width='3'/>";
+    F.forEach(function (f, i) {
+      var r = baseRate(10000, f, 1), p = r.prec * 100, x = X0 + 40 + i * (BW + GAP);
+      h += "<g data-step='" + ST[i] + "'><rect x='" + x + "' y='" + Y(p) + "' width='" + BW + "' height='" + (Y1 - Y(p)) + "' rx='8' fill='" + (p >= 50 ? "#2f9e44" : "#1c7ed6") + "'/>";
+      h += "<text x='" + (x + BW / 2) + "' y='" + (Y(p) - 12) + "' font-size='26' font-weight='900' fill='#161b28' text-anchor='middle'>약 " + p.toFixed(1) + "%</text>";
+      h += "<text x='" + (x + BW / 2) + "' y='" + (Y1 + 34) + "' font-size='23' font-weight='900' fill='#161b28' text-anchor='middle'>오인식률 " + f + "%</text>";
+      h += "<text x='" + (x + BW / 2) + "' y='" + (Y1 + 66) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>억울한 경보 약 " + (r.fa >= 1 ? Math.round(r.fa) : r.fa.toFixed(1)) + "건</text></g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* 9 두 집단의 억울한 경보 */
+  (function () {
+    var svg = document.getElementById("biasSvg"), r = baseRate(10000, 1, 10), X0 = 150, W = 520, mx = Math.max(r.faA, r.faB), h = "";
+    function bar(y, v, col, lab, sub, st) {
+      return "<g data-step='" + st + "'><text x='" + (X0 - 16) + "' y='" + (y + 34) + "' font-size='26' font-weight='900' fill='" + col + "' text-anchor='end'>" + lab + "</text>" +
+        "<text x='" + (X0 - 16) + "' y='" + (y + 62) + "' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='end'>" + sub + "</text>" +
+        "<rect x='" + X0 + "' y='" + y + "' width='" + Math.max(6, v / mx * W) + "' height='70' rx='10' fill='" + col + "'/>" +
+        "<text x='" + (X0 + Math.max(6, v / mx * W) + (v / mx > 0.8 ? -14 : 14)) + "' y='" + (y + 46) + "' font-size='28' font-weight='900' fill='" + (v / mx > 0.8 ? "#fff" : col) + "' text-anchor='" + (v / mx > 0.8 ? "end" : "start") + "'>" + Math.round(v) + "건</text></g>";
+    }
+    h += "<text x='0' y='26' font-size='22' font-weight='900' fill='#5f6b80'>하루 억울한 경보</text>";
+    h += bar(70, r.faA, "#1c7ed6", "집단 A", "오인식률 1%", 1) + bar(200, r.faB, "#e8590c", "집단 B", "오인식률 10%", 2);
+    h += "<text x='690' y='360' font-size='18' fill='#5f6b80' text-anchor='end'>⚠ 집단 B의 10배는 단원 화면 모형의 가정</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 저울 그리기: cx 가운데, 왼쪽 편익 · 오른쪽 위험, 무게 블록 */
+  function scale(tag, cx, top, B, R, title, ghostR) {
+    /* 편익이 무거우면(net > 0) 왼쪽 접시가 내려간다 */
+    var net = B - R, ang = Math.max(-12, Math.min(12, net * 1.6)) * Math.PI / 180, arm = 170, h = "";
+    var lx = cx - arm * Math.cos(ang), ly = top + 40 + arm * Math.sin(ang), rx = cx + arm * Math.cos(ang), ry = top + 40 - arm * Math.sin(ang);
+    h += "<text x='" + cx + "' y='" + (top - 4) + "' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>" + title + "</text>";
+    h += "<rect x='" + (cx - 7) + "' y='" + (top + 40) + "' width='14' height='170' fill='#868e96'/><rect x='" + (cx - 70) + "' y='" + (top + 206) + "' width='140' height='16' rx='6' fill='#868e96'/>";
+    h += "<line x1='" + lx + "' y1='" + ly + "' x2='" + rx + "' y2='" + ry + "' stroke='#495057' stroke-width='8' stroke-linecap='round'/><circle cx='" + cx + "' cy='" + (top + 40) + "' r='9' fill='#ffd43b'/>";
+    function pan(x, y, v, col, lab, ghost) {
+      var s = "<line x1='" + x + "' y1='" + y + "' x2='" + (x - 40) + "' y2='" + (y + 70) + "' stroke='#adb5bd' stroke-width='3'/><line x1='" + x + "' y1='" + y + "' x2='" + (x + 40) + "' y2='" + (y + 70) + "' stroke='#adb5bd' stroke-width='3'/>";
+      if (ghost) s += "<rect x='" + (x - 30) + "' y='" + (y + 70 - ghost * 5) + "' width='60' height='" + ghost * 5 + "' fill='none' stroke='" + col + "' stroke-width='3' stroke-dasharray='6 5'/>";
+      s += "<rect x='" + (x - 30) + "' y='" + (y + 70 - v * 5) + "' width='60' height='" + v * 5 + "' rx='4' fill='" + col + "'/>";
+      s += "<path d='M" + (x - 56) + " " + (y + 70) + " h112 a56 16 0 0 1 -112 0Z' fill='#ced4da'/>";
+      s += "<text x='" + x + "' y='" + (y + 118) + "' font-size='22' font-weight='900' fill='" + col + "' text-anchor='middle'>" + lab + " " + v + "</text>";
+      return s;
+    }
+    h += pan(lx, ly, B, "#1c7ed6", "편익") + pan(rx, ry, R, "#e03131", "위험", ghostR);
+    return h;
+  }
+
+  /* 10 같은 여섯 가지, 다른 무게 (예시 무게) */
+  (function () {
+    var svg = document.getElementById("scaleSvg");
+    var A = scaleNet([5, 4, 2], [2, 2, 3], [0, 0, 0]), Bs = scaleNet([3, 2, 1], [5, 4, 5], [0, 0, 0]);
+    var h = "<g data-step='3'>" + scale("s10a", 290, 40, A.B, A.R, "학생 A → " + stance(A.net)) + scale("s10b", 1110, 40, Bs.B, Bs.R, "학생 B → " + stance(Bs.net));
+    h += "<text x='700' y='150' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>⚠ 무게는 예시</text>";
+    h += "<text x='700' y='180' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>(0~5, 여섯 가지 모두 1 이상)</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 11 학생 B에 안전장치 셋 */
+  (function () {
+    var svg = document.getElementById("safeSvg");
+    var b0 = scaleNet([3, 2, 1], [5, 4, 5], [0, 0, 0]), b1 = scaleNet([3, 2, 1], [5, 4, 5], [1, 1, 1]);
+    var h = "<g data-hide='2'>" + scale("s11a", 280, 60, b0.B, b0.R, "학생 B · 안전장치 없음 → " + stance(b0.net)) + "</g>";
+    h += "<g data-step='2'>" + scale("s11b", 280, 60, b1.B, b1.R, "안전장치 셋을 걸면 → " + stance(b1.net), b0.R) + "</g>";
+    h += "<text x='280' y='392' font-size='18' fill='#5f6b80' text-anchor='middle' data-step='2'>점선 = 안전장치 전의 위험 무게</text>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

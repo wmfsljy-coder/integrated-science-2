@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 에너지 효율 (통합과학2 Ⅱ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-03.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  p, li { line-height: 1.72; } h2 { margin: 9px 0 4px; } .write { height: 48px; }  /* 한 쪽에 들어가도록 */
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-03.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅱ-2 에너지 전환과 활용 · 03 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 에너지 효율</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 에너지 효율</h2>
+  <p><span class="formula"><b class="blank" data-n="1">에너지 효율</b> = 쓸모 있게 쓰인 에너지 ÷ 공급한 에너지 × 100 (%)</span></p>
+  <ul>
+    <li>백열전구: 전기 에너지 100 J → 빛 5 J + 열 95 J → 효율 = 5 ÷ 100 × 100 = <b class="blank" data-n="2">5</b> %</li>
+  </ul>
+  <table>
+    <tr><th>석탄의 에너지</th><th>① 발전소 (× 40%)</th><th>② 송전·배전 (× 96%)</th><th>③ 백열전구 (× 5%)</th></tr>
+    <tr><td>100</td><td>전기 40 · 폐열 60</td><td>도착 38.4 · 전선의 열 1.6</td><td>빛 약 1.9 · 전구의 열 36.5</td></tr>
+  </table>
+  <ul>
+    <li>100 × 0.40 × 0.96 × 0.05 = 약 <b class="blank" data-n="3">1.9</b> → 전체 효율 = 단계별 효율을 모두 <b class="blank" data-n="4">곱한</b> 값 (더하는 것이 아니다)</li>
+    <li>흩어진 98은 대부분 <b class="blank" data-n="5">열</b>에너지 — 없어진 것이 아니다 (60 + 1.6 + 36.5 + 1.9 = 100)</li>
+    <li>에너지의 총량은 늘 같다 → <b class="blank" data-n="6">에너지 보존</b> 법칙</li>
+    <li>흩어진 열은 다시 모아 쓰기 어렵다 → 효율 <b class="blank" data-n="7">100</b> %인 기구는 없다 → 쓸 수 있는 에너지는 줄어든다</li>
+  </ul>
+
+  <h2>② 효율 높이기</h2>
+  <ul>
+    <li>한 단계만 10%p: 발전 40 → 50% ⇒ 2.4% · 송전 96 → 100% ⇒ 2.0% · 전구 5 → 15% ⇒ 약 5.8%</li>
+    <li>효율이 가장 <b class="blank" data-n="8">낮은</b> 단계를 고치는 것이 가장 효과적 → 전구 바꾸기</li>
+  </ul>
+  <table>
+    <tr><th>약 800 lm을 내는 전구</th><th>1 W당 밝기</th><th>빛 효율</th><th>소비 전력</th></tr>
+    <tr><td>백열전구</td><td>13.3 lm</td><td>약 5%</td><td>60 W</td></tr>
+    <tr><td>전구형 형광등</td><td>57 lm</td><td>약 21%</td><td>14 W</td></tr>
+    <tr><td>LED 전구</td><td>90 lm</td><td>약 34%</td><td><b class="blank" data-n="9">9</b> W</td></tr>
+  </table>
+  <ul>
+    <li>백열전구 → LED: 전기를 약 <b class="blank" data-n="10">85</b> % 덜 쓴다 (하루 5시간이면 1년에 약 110 kWh → 약 16 kWh)</li>
+    <li>발전소의 폐열로 지역난방까지 → <b class="blank" data-n="11">열병합</b> 발전 · 그 밖에 하이브리드 자동차, 단열재·이중창, 에너지 소비 효율 1등급 가전</li>
+  </ul>
+
+  <h2>③ 신재생 에너지와 지속가능한 발전</h2>
+  <ul>
+    <li><b class="blank" data-n="12">신재생 에너지</b> = 신에너지(연료 전지 등) + 재생 에너지(태양광·풍력·수력·바이오·조력·지열 등)</li>
+    <li>장점: 고갈되지 않고 온실 기체를 거의 내지 않는다 / 약점: 햇빛과 바람은 날씨와 시간에 따라 들쭉날쭉</li>
+    <li>남는 전기를 저장하는 <b class="blank" data-n="13">배터리</b> + 보조 전원(경유 발전기)을 함께 설계한다</li>
+    <li>덜 버리기(효율) + 깨끗하게 만들기(신재생) → 미래 세대의 몫을 남기는 <b class="blank" data-n="14">지속가능한 발전</b></li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 석탄 화력 발전소의 효율이 40%라는 뜻은? <span class="ans">→ ㉡</span><br>
+      ㉠ 석탄 에너지의 60%가 사라진다 &nbsp; ㉡ 40%가 전기가 되고 나머지는 주로 열로 흩어진다 &nbsp; ㉢ 넣은 석탄의 40%만 탄다</p>
+    <p>2. 효율 향상 기술이 <u>아닌</u> 것은? &nbsp; LED 전구 · 열병합 발전 · 해상 풍력 단지 · 단열재·이중창 <span class="ans">→ 해상 풍력 단지</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>사라진 98은 정말 사라졌을까? '에너지 보존'과 '효율'을 넣어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-03.html · 이야기 ③ 「사라진 98」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

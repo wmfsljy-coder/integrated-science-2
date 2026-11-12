@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 에너지 효율 (통합과학2 Ⅱ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  /* 이 강의에서만 쓰는 모양 */
+  .slide p.mid { font-size: 38px; font-weight: 900; letter-spacing: -.03em; line-height: 1.35; margin: 0 0 12px; }
+  .lamps { display: grid; gap: 14px; margin-top: 6px; }
+  .lamp { display: grid; grid-template-columns: 84px 360px 1fr 210px; gap: 18px; align-items: center; background: var(--soft); border-radius: 20px; padding: 12px 22px; }
+  .lamp .nm { font-size: 34px; font-weight: 900; letter-spacing: -.03em; line-height: 1.2; }
+  .lamp .nm small { display: block; font-size: 22px; font-weight: 600; color: var(--mute); margin-top: 4px; letter-spacing: -.01em; }
+  .lamp .w { font-size: 46px; font-weight: 900; text-align: right; white-space: nowrap; }
+  .lamp svg { display: block; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 18px 24px 18px 84px; margin-bottom: 16px; background: #fff; border-radius: 20px; font-size: 30px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 18px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 32px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+  .chips { margin-top: 18px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="석탄의 에너지 100이 발전소, 송전·배전, 백열전구를 지나며 띠가 가늘어지고, 새어 나간 에너지가 아래로 흘러내리는 그림">
+      <defs>
+        <linearGradient id="c3-band" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#ff922b"/><stop offset="1" stop-color="#ffd43b"/></linearGradient>
+        <linearGradient id="c3-leak" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fa5252" stop-opacity=".9"/><stop offset="1" stop-color="#c92a2a" stop-opacity=".35"/></linearGradient>
+        <radialGradient id="c3-glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff9db"/><stop offset=".5" stop-color="#ffe066" stop-opacity=".7"/><stop offset="1" stop-color="#ffd43b" stop-opacity="0"/></radialGradient>
+      </defs>
+      <rect x="150" y="160" width="270" height="200" fill="url(#c3-band)"/>
+      <path d="M420 240 C520 240 540 330 540 520 L420 520 L420 360 Z" fill="url(#c3-leak)"/>
+      <rect x="420" y="160" width="580" height="80" fill="#ffb347"/>
+      <path d="M1000 238.4 C1018 238.4 1022 300 1022 520" fill="none" stroke="#fa5252" stroke-width="3.2"/>
+      <rect x="1000" y="160" width="200" height="76.8" fill="#ffc043"/>
+      <path d="M1200 163.84 C1300 163.84 1330 300 1330 520 L1257 520 C1257 330 1250 236.8 1200 236.8 Z" fill="url(#c3-leak)"/>
+      <rect x="1200" y="160" width="120" height="3.84" fill="#ffe066"/>
+      <circle cx="1350" cy="162" r="70" fill="url(#c3-glow)"/>
+      <circle cx="1350" cy="162" r="22" fill="#fff3bf" stroke="#ffd43b" stroke-width="3"/>
+      <g font-size="24" font-weight="900" fill="#c9d1df" text-anchor="middle">
+        <text x="190" y="140">🪨 석탄</text><text x="420" y="140">🏭 발전소</text><text x="1000" y="140">🗼 송전·배전</text><text x="1210" y="140">💡 백열전구</text>
+      </g>
+      <text x="285" y="276" font-size="48" font-weight="900" fill="#3d1f00" text-anchor="middle">100</text>
+      <text x="710" y="214" font-size="40" font-weight="900" fill="#3d1f00" text-anchor="middle">40</text>
+      <text x="1100" y="212" font-size="34" font-weight="900" fill="#3d1f00" text-anchor="middle">38.4</text>
+      <text x="1400" y="210" font-size="30" font-weight="900" fill="#ffe066">빛 1.9</text>
+      <g font-size="22" font-weight="900" fill="#fff">
+        <text x="430" y="505">폐열 60</text><text x="1032" y="505">전선 1.6</text><text x="1340" y="505">전구의 열 36.5</text>
+      </g>
+      <text x="1560" y="80" fill="#7b8598" font-size="17" text-anchor="end">⚠ 띠의 굵기 = 에너지의 양 (단계별 효율 40% · 96% · 5%)</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅱ-2 에너지 전환과 활용 · 03</p>
+    <h1>에너지 효율</h1>
+    <p class="sub" data-step="1">사라진 98은 정말 사라졌을까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 발전소에서 우리 집 전구까지 에너지가 어떻게 새어 나가는지, 그리고 그것을 어떻게 줄이고 깨끗하게 만들지 봅니다. 학습지 빈칸 번호가 화면 번호와 같습니다.</p>
+    <p data-at="1">그림의 숫자는 아직 설명하지 않습니다. 부제의 '사라졌을까'라는 물음만 기억하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="석탄 100 중 빛은 얼마?" data-part="도입">
+  <p class="kicker">도입 · 햇살 마을 에너지 조사원의 첫 질문</p>
+  <h2>석탄 100이 전구의 빛이 되면 얼마?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>위원장: “마을 회관에는 아직 <b>백열전구</b>가 달려 있습니다. 석탄 화력 발전소에 석탄의 에너지 <b>100</b>을 넣었다면, 회관 백열전구의 <b>빛</b>이 되는 것은 얼마쯤일까요?”</p>
+      <table class="ledger mt">
+        <tr><td>경로</td><td class="v">석탄 → 발전소 → 송전·배전 → 백열전구 → 빛</td></tr>
+      </table>
+    </div>
+    <div class="card yel">
+      <h3>빛이 되는 에너지는?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 약 50</div>
+        <div class="opt">㉡ 약 20</div>
+        <div class="opt">㉢ 약 2</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 손을 들고, 고른 까닭을 한 문장으로 말해 보세요. 답은 단계별로 따라가며 확인합니다.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>지난 시간에 발전소가 터빈을 돌려 전기를 만드는 것을 봤습니다. 오늘은 그 전기가 우리 집에서 빛이 되기까지 에너지가 얼마나 남는지 따라갑니다.</p>
+    <p data-at="1">㉠㉡㉢ 가운데 하나에 손을 들게 하고 두세 명에게 까닭을 묻습니다. 답은 주지 않습니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 네 낱말로 오늘을 정리합니다</h2>
+  <div class="kw" style="grid-template-columns:repeat(4,1fr)">
+    <div class="card"><b>에너지 효율</b><span>공급한 에너지 가운데 쓸모 있게 쓰인 비율</span></div>
+    <div class="card"><b>에너지 보존</b><span>에너지의 형태는 바뀌어도 총량은 같다</span></div>
+    <div class="card"><b>신재생 에너지</b><span>고갈되지 않고 온실 기체를 거의 내지 않는 에너지</span></div>
+    <div class="card"><b>지속가능한 발전</b><span>미래 세대의 몫을 남기는 발전</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script">
+    <p>키워드 네 개를 읽어 주기만 하고 설명은 하지 않습니다. 수업 끝 정리에서 네 낱말이 모두 다시 나옵니다.</p>
+  </aside>
+</section>
+
+<!-- 4 효율의 뜻 -->
+<section class="slide" id="s-def" data-title="에너지 효율이란" data-part="① 에너지 효율">
+  <p class="kicker">① 에너지 효율 · 백열전구 하나로 보기</p>
+  <h2>들어간 100 가운데 쓸모 있는 것은?</h2>
+  <p class="formula" data-step="1" style="font-size:38px"><b class="blank" data-n="1" data-step="1">에너지 효율</b> = 쓸모 있게 쓰인 에너지 ÷ 공급한 에너지 × 100 (%)</p>
+  <svg viewBox="0 0 1400 310" width="1400" height="310" aria-label="백열전구에 들어간 전기 에너지 100 줄이 빛 5 줄과 열 95 줄로 나뉘는 띠그림">
+    <defs>
+      <linearGradient id="s4-heat" x1="0" x2="1" y1="0" y2="0"><stop offset="0" stop-color="#fa5252"/><stop offset="1" stop-color="#ffa8a8"/></linearGradient>
+      <radialGradient id="s4-bulb" cx="45%" cy="40%" r="60%"><stop offset="0" stop-color="#fff9db"/><stop offset="1" stop-color="#ffd43b"/></radialGradient>
+    </defs>
+    <rect x="40" y="70" width="560" height="160" fill="#d0bfff"/>
+    <text x="300" y="164" font-size="34" font-weight="900" fill="#3b2a80" text-anchor="middle">전기 에너지 100 J</text>
+    <g data-step="2">
+      <path d="M700 70 C880 70 920 30 1060 30 H1250 V38 H1060 C924 38 884 78 700 78 Z" fill="#fcc419"/>
+      <text x="1262" y="44" font-size="30" font-weight="900" fill="#b8860b">빛 5 J</text>
+      <path d="M700 78 C880 78 930 140 1080 140 H1250 V292 H1080 C930 292 880 230 700 230 Z" fill="url(#s4-heat)"/>
+      <text x="1170" y="228" font-size="36" font-weight="900" fill="#fff" text-anchor="middle">열 95 J</text>
+    </g>
+    <circle cx="650" cy="150" r="92" fill="url(#s4-bulb)" stroke="#f59f00" stroke-width="4"/>
+    <rect x="620" y="236" width="60" height="30" rx="4" fill="#adb5bd"/>
+    <text x="650" y="160" font-size="28" font-weight="900" fill="#7a4b00" text-anchor="middle">백열전구</text>
+    <text x="1395" y="306" font-size="18" fill="#7b8598" text-anchor="end">띠의 굵기 = 에너지의 양 (1초 동안)</text>
+  </svg>
+  <p class="big" data-step="2" style="margin-top:4px">백열전구의 효율 = 5 ÷ 100 × 100 = <b class="blank" data-n="2" data-step="2">5</b> %</p>
+  <aside class="script">
+    <p>전구가 하는 일은 빛을 내는 것이지요. 1초 동안 전기 에너지 100 J을 넣었다고 해 봅시다.</p>
+    <p data-at="1">공급한 에너지 가운데 목적에 맞게 쓰인 비율, 빈칸 1번, 에너지 효율입니다. 퍼센트로 나타냅니다.</p>
+    <p data-at="2">백열전구는 100 J 가운데 빛이 5 J, 나머지 95 J은 열이 됩니다. 효율은 빈칸 2번, 5 %. 백열전구가 뜨거운 까닭이에요.</p>
+  </aside>
+</section>
+
+<!-- 5 효율은 곱해진다 -->
+<section class="slide" id="s-chain" data-title="단계마다 곱해지는 효율" data-part="① 에너지 효율">
+  <p class="kicker">① 에너지 효율 · 석탄에서 빛까지 추적</p>
+  <h2>단계를 지날 때마다 남는 비율을 곱한다</h2>
+  <svg viewBox="0 0 1400 380" width="1400" height="380" aria-label="석탄 100이 발전소 40퍼센트, 송전·배전 96퍼센트, 백열전구 5퍼센트를 지나며 40, 38.4, 1.9로 줄어드는 띠그림">
+    <defs>
+      <linearGradient id="s5-leak" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#fa5252"/><stop offset="1" stop-color="#ffc9c9"/></linearGradient>
+    </defs>
+    <g font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">
+      <text x="60" y="44" text-anchor="start">🪨 석탄 100</text><text x="380" y="44">① 발전소 × 40%</text><text x="760" y="44">② 송전·배전 × 96%</text><text x="1100" y="44">③ 백열전구 × 5%</text>
+    </g>
+    <rect x="40" y="60" width="340" height="260" fill="#ff922b"/>
+    <text x="210" y="205" font-size="48" font-weight="900" fill="#fff" text-anchor="middle">100</text>
+    <g data-step="1">
+      <path d="M380 164 C470 164 536 260 536 380 L380 380 L380 320 Z" fill="url(#s5-leak)"/>
+      <rect x="380" y="60" width="380" height="104" fill="#ffa94d"/>
+      <text x="570" y="126" font-size="40" font-weight="900" fill="#fff" text-anchor="middle">40</text>
+      <text x="458" y="370" font-size="22" font-weight="900" fill="#fff" text-anchor="middle">폐열 60</text>
+    </g>
+    <g data-step="2">
+      <path d="M760 161.92 C792 161.92 800 230 800 380" fill="none" stroke="#fa5252" stroke-width="4.16"/>
+      <rect x="760" y="60" width="340" height="99.84" fill="#ffc043"/>
+      <text x="930" y="122" font-size="36" font-weight="900" fill="#fff" text-anchor="middle">38.4</text>
+      <text x="812" y="370" font-size="22" font-weight="900" fill="#c92a2a">전선의 열 1.6</text>
+    </g>
+    <g data-step="3">
+      <path d="M1100 65 C1190 65 1200 220 1200 380 L1105 380 C1105 260 1100 159.84 1100 159.84 Z" fill="url(#s5-leak)"/>
+      <rect x="1100" y="60" width="280" height="5" fill="#fcc419"/>
+      <text x="1300" y="112" font-size="36" font-weight="900" fill="#e8590c" text-anchor="middle">1.9</text>
+      <text x="1212" y="370" font-size="22" font-weight="900" fill="#c92a2a">전구의 열 36.5</text>
+    </g>
+  </svg>
+  <p class="formula" data-step="3" style="margin-top:6px">100 × 0.40 × 0.96 × 0.05 = 약 <b class="blank" data-n="3" data-step="3">1.9</b></p>
+  <p class="mid" data-step="4">전체 효율 = 단계별 효율을 모두 <b class="blank" data-n="4" data-step="4">곱한</b> 값 <span class="c-mute" style="font-size:28px">(더하는 것이 아니다)</span></p>
+  <aside class="script">
+    <p>위원장이 조사한 세 값입니다. 석탄 화력 발전소 약 40%, 송전·배전 약 96%, 백열전구 약 5%. 띠의 굵기가 에너지의 양이에요.</p>
+    <p data-at="1">발전소를 나올 때 100 가운데 40만 전기가 됩니다. 나머지 60은 굴뚝과 냉각수로 나가는 폐열이에요.</p>
+    <p data-at="2">전선을 지나며 40의 96%, 38.4가 집에 도착합니다. 1.6은 전선의 저항에서 열이 됩니다.</p>
+    <p data-at="3">백열전구는 그중 5%만 빛으로 바꿉니다. 100 × 0.40 × 0.96 × 0.05, 빈칸 3번, 약 1.9. 도입의 정답은 ㉢ 약 2였습니다.</p>
+    <p data-at="4">전체 효율은 단계별 효율을 빈칸 4번, 곱한 값입니다. 40 + 96 + 5처럼 더하거나 평균 내면 안 된다는 것을 짚어 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 6 사라진 98 -->
+<section class="slide" id="s-where" data-title="사라진 98은 어디로?" data-part="① 에너지 효율">
+  <p class="kicker">① 에너지 효율 · 장부를 맞춰 보면</p>
+  <h2>사라진 98은 어디로 갔을까</h2>
+  <svg viewBox="0 0 1400 210" width="1400" height="210" aria-label="에너지 100을 발전소 폐열 60, 전선의 열 1.6, 전구의 열 36.5, 빛 1.9로 나눈 띠">
+    <rect x="0" y="70" width="840" height="80" fill="#e8590c"/>
+    <rect x="840" y="70" width="22.4" height="80" fill="#f08c00"/>
+    <rect x="862.4" y="70" width="511" height="80" fill="#d9302c"/>
+    <rect x="1373.4" y="70" width="26.6" height="80" fill="#fcc419"/>
+    <text x="420" y="122" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">발전소 폐열 60</text>
+    <text x="1118" y="122" font-size="32" font-weight="900" fill="#fff" text-anchor="middle">전구의 열 36.5</text>
+    <line x1="851" y1="48" x2="851" y2="70" stroke="#161b28" stroke-width="2"/><text x="851" y="40" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">전선의 열 1.6</text>
+    <line x1="1387" y1="48" x2="1387" y2="70" stroke="#161b28" stroke-width="2"/><text x="1400" y="40" font-size="22" font-weight="900" fill="#b8860b" text-anchor="end">빛 1.9</text>
+    <text x="700" y="196" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle" data-step="2">60 + 1.6 + 36.5 + 1.9 = 100 → 처음 넣은 에너지와 같다</text>
+  </svg>
+  <p class="mid mt" data-step="1">흩어진 98은 대부분 <b class="blank" data-n="5" data-step="1">열</b>에너지 — 없어진 것이 아니다</p>
+  <p class="mid" data-step="2">에너지의 총량은 늘 같다 → <b class="blank" data-n="6" data-step="2">에너지 보존</b> 법칙</p>
+  <p class="mid" data-step="3">흩어진 열은 다시 모아 쓰기 어렵다 → 효율 <b class="blank" data-n="7" data-step="3">100</b> %인 기구는 없다</p>
+  <aside class="script">
+    <p>석탄 100의 장부를 정리해 봅니다. 폐열 60, 전선 1.6, 전구의 열 36.5, 빛 1.9.</p>
+    <p data-at="1">빛이 되지 못한 98은 대부분 빈칸 5번, 열에너지가 되어 주변으로 흩어졌습니다. 없어진 것이 아니에요.</p>
+    <p data-at="2">모두 더하면 다시 100. 형태는 바뀌어도 총량은 그대로입니다. 빈칸 6번, 에너지 보존 법칙.</p>
+    <p data-at="3">그런데 공기 중으로 흩어진 열을 다시 모아 전기로 쓰기는 아주 어렵습니다. 그래서 효율 빈칸 7번, 100 %인 기구는 만들 수 없고, 우리가 쓸 수 있는 에너지는 쓸수록 줄어듭니다. 에너지가 보존되는데도 아껴야 하는 까닭이에요.</p>
+  </aside>
+</section>
+
+<!-- 7 확인 -->
+<section class="slide" id="s-check1" data-title="빛이 되지 못한 에너지" data-part="① 에너지 효율">
+  <p class="kicker">① 에너지 효율 · 확인</p>
+  <h2>백열전구에서 빛이 되지 못한 95는?</h2>
+  <div class="opts" style="max-width:1150px">
+    <div class="opt wrong" data-step="1">① 전구 속에서 사라져 없어진다</div>
+    <div class="opt right" data-step="1">② 주로 열이 되어 주변 공기로 흩어진다</div>
+    <div class="opt wrong" data-step="1">③ 전구 속에 쌓였다가 다음에 켤 때 쓰인다</div>
+    <div class="opt wrong" data-step="1">④ 전선을 따라 발전소로 되돌아간다</div>
+  </div>
+  <p class="why mt" data-step="2">에너지는 새로 생기거나 없어지지 않습니다(에너지 보존). 효율이 낮다는 것은 에너지가 사라진다는 뜻이 아니라, 원하지 않는 형태(주로 열)로 바뀌어 다시 쓰기 어려워진다는 뜻입니다.</p>
+  <aside class="script">
+    <p>30초 동안 짝과 이야기하게 한 뒤 번호를 손가락으로 들게 합니다.</p>
+    <p data-at="1">정답은 ②. ①을 고른 학생은 '효율이 낮으면 에너지가 사라진다'는 오개념이 남은 것이니 에너지 보존을 다시 짚습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 어느 단계를 고칠까 -->
+<section class="slide soft" id="s-lever" data-title="어느 단계를 고쳐야 할까" data-part="② 효율 높이기">
+  <p class="kicker">② 효율 높이기 · 한 단계만 10%p 올릴 수 있다면</p>
+  <h2>어느 단계를 고쳐야 가장 좋아질까</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="한 단계만 효율을 높였을 때 전체 효율 막대: 지금 1.9, 발전 50퍼센트 2.4, 송전 100퍼센트 2.0, 전구 15퍼센트 5.8">
+    <line x1="728" y1="10" x2="728" y2="320" stroke="#5f6b80" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="440" y="20" font-size="20" font-weight="800" fill="#5f6b80">전체 효율 (%) · 1% = 150 px</text>
+    <g>
+      <text x="420" y="66" font-size="26" font-weight="900" fill="#161b28" text-anchor="end">지금 (40 · 96 · 5%)</text>
+      <rect x="440" y="36" width="288" height="50" rx="8" fill="#9aa4b5"/><text x="742" y="72" font-size="28" font-weight="900" fill="#161b28">1.9%</text>
+    </g>
+    <g data-step="1">
+      <text x="420" y="141" font-size="26" font-weight="900" fill="#161b28" text-anchor="end">① 발전 40 → 50%</text>
+      <rect x="440" y="111" width="360" height="50" rx="8" fill="#e8590c"/><text x="814" y="147" font-size="28" font-weight="900" fill="#161b28">2.4%</text>
+    </g>
+    <g data-step="2">
+      <text x="420" y="216" font-size="26" font-weight="900" fill="#161b28" text-anchor="end">② 송전·배전 96 → 100%</text>
+      <rect x="440" y="186" width="300" height="50" rx="8" fill="#0b7f99"/><text x="754" y="222" font-size="28" font-weight="900" fill="#161b28">2.0%</text>
+    </g>
+    <g data-step="3">
+      <text x="420" y="291" font-size="26" font-weight="900" fill="#161b28" text-anchor="end">③ 전구 5 → 15%</text>
+      <rect x="440" y="261" width="864" height="50" rx="8" fill="#198a4a"/><text x="1292" y="297" font-size="28" font-weight="900" fill="#fff" text-anchor="end">5.8% (약 3배)</text>
+    </g>
+  </svg>
+  <p class="mid mt" data-step="4">효율이 가장 <b class="blank" data-n="8" data-step="4">낮은</b> 단계를 고치는 것이 가장 효과적 → 전구 바꾸기</p>
+  <aside class="script">
+    <p>세 단계 가운데 하나만 10%p 올릴 수 있다면 어디를 고칠까요? 먼저 예상을 묻습니다. 점선이 지금의 1.9%입니다.</p>
+    <p data-at="1">발전 효율을 40에서 50%로 올리면 50 × 0.96 × 0.05 = 2.4%.</p>
+    <p data-at="2">송전·배전은 이미 96%라 100%까지 올려도 2.0%뿐입니다.</p>
+    <p data-at="3">전구를 5에서 15%로 올리면 40 × 0.96 × 0.15 ≈ 5.8%, 세 배가 됩니다. 곱셈이라서 가장 작은 수를 키울 때 효과가 가장 큽니다.</p>
+    <p data-at="4">효율이 가장 빈칸 8번, 낮은 단계를 고치는 것이 가장 효과적입니다. 그래서 다음 장면에서 전구를 바꿉니다.</p>
+  </aside>
+</section>
+
+<!-- 9 전구 바꾸기 -->
+<section class="slide" id="s-lamp" data-title="같은 밝기, 다른 전구" data-part="② 효율 높이기">
+  <p class="kicker">② 효율 높이기 · 회관에 알맞은 밝기 약 800 lm(루멘)</p>
+  <h2>같은 밝기를 내는 데 필요한 전력</h2>
+  <div class="lamps">
+    <div class="lamp" data-step="1">
+      <svg viewBox="0 0 84 96" width="84" height="96" aria-label="백열전구"><circle cx="42" cy="38" r="30" fill="#ffe066" stroke="#f59f00" stroke-width="3"/><path d="M30 44 L36 30 L42 44 L48 30 L54 44" fill="none" stroke="#e8590c" stroke-width="3"/><rect x="30" y="68" width="24" height="20" rx="3" fill="#adb5bd"/></svg>
+      <div class="nm">💡 백열전구<small>1 W당 13.3 lm · 빛 효율 약 5%</small></div>
+      <svg viewBox="0 0 760 56" width="100%" height="56" aria-label="소비 전력 60와트 막대"><rect x="0" y="6" width="720" height="44" rx="8" fill="#d9302c"/></svg>
+      <div class="w">60 W</div>
+    </div>
+    <div class="lamp" data-step="2">
+      <svg viewBox="0 0 84 96" width="84" height="96" aria-label="전구형 형광등"><g fill="none" stroke="#e7f5ff" stroke-width="9"><path d="M30 70 V22 Q30 10 42 10 Q54 10 54 22 V70"/></g><g fill="none" stroke="#74c0fc" stroke-width="3"><path d="M30 70 V22 Q30 10 42 10 Q54 10 54 22 V70"/></g><rect x="26" y="70" width="32" height="18" rx="3" fill="#adb5bd"/></svg>
+      <div class="nm">🌀 전구형 형광등<small>1 W당 57 lm · 빛 효율 약 21%</small></div>
+      <svg viewBox="0 0 760 56" width="100%" height="56" aria-label="소비 전력 14와트 막대"><rect x="0" y="6" width="168" height="44" rx="8" fill="#0b7f99"/></svg>
+      <div class="w">14 W</div>
+    </div>
+    <div class="lamp" data-step="3">
+      <svg viewBox="0 0 84 96" width="84" height="96" aria-label="LED 전구"><path d="M14 40 A28 28 0 0 1 70 40 L62 62 H22 Z" fill="#f8f9fa" stroke="#868e96" stroke-width="3"/><rect x="24" y="62" width="36" height="12" fill="#ced4da"/><rect x="30" y="74" width="24" height="14" rx="3" fill="#adb5bd"/></svg>
+      <div class="nm">✨ LED 전구<small>1 W당 90 lm · 빛 효율 약 34%</small></div>
+      <svg viewBox="0 0 760 56" width="100%" height="56" aria-label="소비 전력 막대 (값은 빈칸)"><rect x="0" y="6" width="108" height="44" rx="8" fill="#198a4a"/></svg>
+      <div class="w"><b class="blank" data-n="9" data-step="3">9</b> W</div>
+    </div>
+  </div>
+  <p class="mid mt" data-step="4">백열전구 → LED: 전기를 약 <b class="blank" data-n="10" data-step="4">85</b> % 덜 쓴다</p>
+  <p class="small" data-step="4" style="margin:0">하루 5시간씩 1년 켜면 약 110 kWh → 약 16 kWh. 발전소에서 태우는 석탄도 그만큼 줄어든다.</p>
+  <p class="note">밝기(lm) = 소비 전력(W) × 1 W당 밝기(lm/W) · 빛 효율은 백열전구를 5%로 놓고 환산한 값 (단원 화면)</p>
+  <aside class="script">
+    <p>회관 전구는 60 W 백열전구, 밝기는 약 800 lm입니다. 같은 밝기를 내려면 전구마다 전력이 얼마나 필요할까요?</p>
+    <p data-at="1">백열전구는 1 W당 13.3 lm. 60 W × 13.3 ≈ 800 lm.</p>
+    <p data-at="2">전구형 형광등은 1 W당 57 lm이라 14 W면 됩니다.</p>
+    <p data-at="3">LED 전구는 1 W당 90 lm. 빈칸 9번, 9 W면 약 810 lm으로 같은 밝기입니다. 막대 길이를 비교해 보세요.</p>
+    <p data-at="4">60 W에서 9 W, 1 − 9/60 = 0.85, 빈칸 10번, 약 85 % 덜 씁니다. 하루 5시간 켜면 1년에 약 110 kWh가 약 16 kWh로 줄어요.</p>
+  </aside>
+</section>
+
+<!-- 10 효율을 높이는 기술 -->
+<section class="slide" id="s-tech" data-title="버리던 에너지를 되살리는 기술" data-part="② 효율 높이기">
+  <p class="kicker">② 효율 높이기 · 가장 큰 손실은 발전소 폐열 60</p>
+  <h2>버리던 열을 다시 쓸 수 있다면</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="왼쪽은 폐열을 냉각탑으로 버리는 보통 발전소, 오른쪽은 폐열을 관으로 보내 아파트 난방에 쓰는 발전소">
+    <defs>
+      <marker id="s10-v" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#6741d9"/></marker>
+      <marker id="s10-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#d9302c"/></marker>
+      <marker id="s10-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e8590c"/></marker>
+    </defs>
+    <rect x="0" y="0" width="660" height="300" rx="20" fill="#f2f5f9"/>
+    <rect x="40" y="120" width="180" height="120" rx="10" fill="#dee2e6" stroke="#495057" stroke-width="3"/><text x="130" y="188" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">발전소</text>
+    <path d="M305 190 Q330 130 312 66 H388 Q370 130 395 190 Z" fill="#ced4da" stroke="#868e96" stroke-width="2"/>
+    <circle cx="335" cy="46" r="18" fill="#e9ecef"/><circle cx="362" cy="36" r="22" fill="#e9ecef"/><circle cx="392" cy="48" r="16" fill="#e9ecef"/>
+    <line x1="224" y1="150" x2="296" y2="150" stroke="#d9302c" stroke-width="10" marker-end="url(#s10-r)"/>
+    <text x="410" y="112" font-size="26" font-weight="900" fill="#d9302c">폐열 → 버림</text>
+    <line x1="224" y1="216" x2="620" y2="216" stroke="#6741d9" stroke-width="7" marker-end="url(#s10-v)"/>
+    <text x="430" y="206" font-size="26" font-weight="900" fill="#6741d9" text-anchor="middle">전기</text>
+    <text x="330" y="282" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">보통 화력 발전소</text>
+    <g data-step="1">
+      <rect x="740" y="0" width="660" height="300" rx="20" fill="#fff4e6"/>
+      <rect x="780" y="120" width="180" height="120" rx="10" fill="#dee2e6" stroke="#495057" stroke-width="3"/><text x="870" y="188" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">발전소</text>
+      <rect x="1190" y="40" width="150" height="150" rx="6" fill="#ffd8a8" stroke="#e8590c" stroke-width="3"/>
+      <g fill="#fff3bf"><rect x="1210" y="60" width="28" height="22"/><rect x="1252" y="60" width="28" height="22"/><rect x="1294" y="60" width="28" height="22"/><rect x="1210" y="100" width="28" height="22"/><rect x="1252" y="100" width="28" height="22"/><rect x="1294" y="100" width="28" height="22"/><rect x="1210" y="140" width="28" height="22"/><rect x="1252" y="140" width="28" height="22"/><rect x="1294" y="140" width="28" height="22"/></g>
+      <path d="M964 150 H1080 V115 H1180" fill="none" stroke="#e8590c" stroke-width="10" marker-end="url(#s10-o)"/>
+      <text x="975" y="192" font-size="24" font-weight="900" fill="#e8590c">폐열 → 난방·온수</text>
+      <line x1="964" y1="216" x2="1360" y2="216" stroke="#6741d9" stroke-width="7" marker-end="url(#s10-v)"/>
+      <text x="1170" y="248" font-size="26" font-weight="900" fill="#6741d9" text-anchor="middle">전기</text>
+      <text x="1070" y="282" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">폐열로 지역난방까지</text>
+    </g>
+  </svg>
+  <p class="mid mt" data-step="2">발전소의 폐열로 지역난방까지 → <b class="blank" data-n="11" data-step="2">열병합</b> 발전</p>
+  <div class="chips" data-step="3">
+    <span class="chip">💡 LED 전구</span><span class="chip">🚗 하이브리드 자동차 (브레이크 때 버리던 운동 에너지로 충전)</span>
+    <span class="chip">🏠 단열재·이중창</span><span class="chip">🏷️ 에너지 소비 효율 1등급 가전</span>
+  </div>
+  <aside class="script">
+    <p>석탄 100의 장부에서 가장 큰 손실은 무엇이었나요? 발전소 폐열 60이었지요. 보통 발전소는 이 열을 냉각탑이나 바닷물로 버립니다.</p>
+    <p data-at="1">이 열을 관으로 보내 아파트의 난방과 온수에 쓰면 어떨까요?</p>
+    <p data-at="2">전기와 열을 함께 쓰는 빈칸 11번, 열병합 발전입니다. 버리던 에너지를 쓸모 있게 바꾸니 효율이 높아집니다.</p>
+    <p data-at="3">같은 생각으로 만든 기술들입니다. LED 전구, 브레이크를 밟을 때 버리던 운동 에너지로 배터리를 충전하는 하이브리드 자동차, 새는 열을 막는 단열, 그리고 에너지 소비 효율 등급. 모두 같은 일을 더 적은 에너지로 하는 '효율 향상 기술'입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 신재생 에너지 -->
+<section class="slide" id="s-renew" data-title="신재생 에너지" data-part="③ 신재생 에너지와 지속가능한 발전">
+  <p class="kicker">③ 신재생 에너지와 지속가능한 발전 · 덜 버리는 것만으로는 부족하다</p>
+  <h2>고갈되지 않고, 깨끗하게 만든다</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="신에너지 상자에 연료 전지, 재생 에너지 상자에 태양광·풍력·수력·바이오·조력·지열">
+    <rect x="0" y="0" width="420" height="300" rx="22" fill="#ece5ff"/>
+    <text x="210" y="50" font-size="30" font-weight="900" fill="#5f3dc4" text-anchor="middle">신에너지</text>
+    <text x="210" y="150" font-size="72" text-anchor="middle">🔋</text>
+    <text x="210" y="200" font-size="26" font-weight="900" fill="#161b28" text-anchor="middle">연료 전지</text>
+    <text x="210" y="240" font-size="22" font-weight="700" fill="#5f6b80" text-anchor="middle">수소 + 산소 → 물 + 전기</text>
+    <rect x="460" y="0" width="940" height="300" rx="22" fill="#ddf5e6"/>
+    <text x="930" y="50" font-size="30" font-weight="900" fill="#198a4a" text-anchor="middle">재생 에너지</text>
+    <g font-size="56" text-anchor="middle"><text x="610" y="140">☀️</text><text x="930" y="140">💨</text><text x="1250" y="140">💧</text><text x="610" y="250">🌾</text><text x="930" y="250">🌊</text><text x="1250" y="250">🌋</text></g>
+    <g font-size="26" font-weight="900" fill="#161b28" text-anchor="start"><text x="660" y="130">태양광</text><text x="980" y="130">풍력</text><text x="1300" y="130">수력</text><text x="660" y="240">바이오</text><text x="980" y="240">조력</text><text x="1300" y="240">지열</text></g>
+  </svg>
+  <p class="mid mt" data-step="1"><b class="blank" data-n="12" data-step="1">신재생 에너지</b> = 신에너지 + 재생 에너지</p>
+  <div class="cols" data-step="2" style="gap:30px">
+    <div class="card green"><p style="margin:0"><b>장점</b> · 고갈되지 않는다 · 온실 기체를 거의 내지 않는다</p></div>
+    <div class="card red"><p style="margin:0"><b>약점</b> · 햇빛과 바람은 날씨와 시간에 따라 들쭉날쭉</p></div>
+  </div>
+  <aside class="script">
+    <p>새는 에너지를 막았으니 이제 '어떻게 만들지'입니다. 화석 연료는 고갈되고 온실 기체를 내보내지요.</p>
+    <p data-at="1">수소로 전기를 만드는 연료 전지 같은 신에너지와, 햇빛·바람·물·생물 자원처럼 다시 얻을 수 있는 재생 에너지를 합쳐 빈칸 12번, 신재생 에너지라고 합니다. 우리나라에는 시화호 조력 발전소도 있어요.</p>
+    <p data-at="2">장점은 분명하지만 약점도 있습니다. 해가 지거나 바람이 멈추면 발전량이 줄어요. 다음 장면에서 그 약점을 직접 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 12 에너지 자립 마을 -->
+<section class="slide soft" id="s-village" data-title="에너지 자립 마을, 이틀을 버텨라" data-part="③ 신재생 에너지와 지속가능한 발전">
+  <p class="kicker">③ 신재생 에너지와 지속가능한 발전 · 단원 화면의 마을 설계</p>
+  <h2>햇빛만으로 이틀을 버틸 수 있을까</h2>
+  <svg viewBox="0 0 1400 340" width="1400" height="340" id="s12-chart" aria-label="이틀 동안 마을이 쓰는 전력 선과 태양광 발전량. 첫날은 맑아 낮에 남고, 둘째 날은 흐려 모자라며, 밤에는 두 날 모두 모자란다">
+    <rect x="90" y="30" width="1300" height="260" fill="#fff"/>
+    <g id="s12-night"></g>
+    <g id="s12-grid"></g>
+    <g id="s12-sun1"></g>
+    <g data-step="1" id="s12-sun2"></g>
+    <g data-step="2" id="s12-short"></g>
+    <g data-step="3" id="s12-store"></g>
+    <path id="s12-dem" fill="none" stroke="#6741d9" stroke-width="5"/>
+    <g font-size="22" font-weight="900"><text x="110" y="58" fill="#b8860b">1일째 ☀️ 맑음</text><text x="760" y="58" fill="#5f6b80">2일째 ☁️ 흐림</text></g>
+    <g font-size="20" font-weight="800"><text x="1380" y="58" fill="#6741d9" text-anchor="end">— 마을이 쓰는 전력</text></g>
+    <text x="1390" y="334" font-size="18" fill="#7b8598" text-anchor="end">⚠ 단원 화면 모형의 모양 · 태양광 1,500 kW만 둔 경우 (kW)</text>
+  </svg>
+  <p class="mid mt" data-step="2">밤과 흐린 날에는 모자라고, 맑은 낮에는 남는다</p>
+  <p class="mid" data-step="3">남는 전기를 저장하는 <b class="blank" data-n="13" data-step="3">배터리</b> + 보조 전원(경유 발전기)</p>
+  <p class="note" data-step="3">설계 조건: 이틀 동안 정전 0시간 · 설치비 55억 원 이하 · CO₂ 배출량이 지금(경유 발전기만)의 40% 이하</p>
+  <aside class="script">
+    <p>단원 화면의 마을 설계입니다. 보라색 선이 마을이 쓰는 전력, 노란색이 태양광 1,500 kW만 두었을 때 만드는 전력입니다. 첫날은 맑고 둘째 날은 흐립니다.</p>
+    <p data-at="1">둘째 날의 노란 산은 첫날보다 훨씬 낮습니다. 같은 설비라도 날씨에 따라 발전량이 크게 달라져요.</p>
+    <p data-at="2">빨간 부분이 모자라는 전기, 곧 정전입니다. 밤에는 두 날 모두, 흐린 둘째 날은 낮에도 모자랍니다. 반대로 맑은 첫날 낮에는 남아요.</p>
+    <p data-at="3">그래서 남는 전기를 저장했다가 쓰는 빈칸 13번, 배터리와, 오래 흐릴 때를 대비한 보조 전원을 함께 설계해야 합니다. 세 조건을 모두 만족하는 설계는 단원 화면에서 직접 찾아보게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 13 지속가능한 발전 -->
+<section class="slide" id="s-sustain" data-title="덜 버리고, 깨끗하게 만든다" data-part="③ 신재생 에너지와 지속가능한 발전">
+  <p class="kicker">③ 신재생 에너지와 지속가능한 발전 · 결말</p>
+  <h2>덜 버리고, 깨끗하게 만든다</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="효율 향상과 신재생 에너지 두 갈래 길이 미래 세대의 몫을 남기는 발전으로 모인다">
+    <defs><marker id="s13-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker></defs>
+    <g data-step="1">
+      <rect x="0" y="10" width="520" height="120" rx="20" fill="#dce9ff" stroke="#1462d8" stroke-width="3"/>
+      <text x="260" y="58" font-size="30" font-weight="900" fill="#1462d8" text-anchor="middle">덜 버리기 · 에너지 효율</text>
+      <text x="260" y="100" font-size="24" font-weight="700" fill="#161b28" text-anchor="middle">LED · 열병합 발전 · 단열</text>
+      <path d="M524 70 C700 70 760 150 880 150" fill="none" stroke="#161b28" stroke-width="6" marker-end="url(#s13-ar)"/>
+    </g>
+    <g data-step="2">
+      <rect x="0" y="170" width="520" height="120" rx="20" fill="#ddf5e6" stroke="#198a4a" stroke-width="3"/>
+      <text x="260" y="218" font-size="30" font-weight="900" fill="#198a4a" text-anchor="middle">깨끗하게 만들기 · 신재생</text>
+      <text x="260" y="260" font-size="24" font-weight="700" fill="#161b28" text-anchor="middle">태양광 · 풍력 + 배터리</text>
+      <path d="M524 230 C700 230 760 150 880 150" fill="none" stroke="#161b28" stroke-width="6" marker-end="url(#s13-ar)"/>
+    </g>
+    <g data-step="3">
+      <rect x="890" y="70" width="510" height="160" rx="24" fill="#fff6cc" stroke="#f59f00" stroke-width="4"/>
+      <text x="1145" y="138" font-size="30" font-weight="900" fill="#161b28" text-anchor="middle">지금 세대의 필요를 채우고</text>
+      <text x="1145" y="182" font-size="30" font-weight="900" fill="#161b28" text-anchor="middle">미래 세대의 몫을 남긴다</text>
+    </g>
+  </svg>
+  <p class="big mt" data-step="3">이런 발전 → <b class="blank" data-n="14" data-step="3">지속가능한 발전</b></p>
+  <p class="small" data-step="3" style="margin:0">화석 연료는 고갈되고 온실 기체를 내보낸다 · 효율을 높이고 신재생 에너지로 바꿔 간다</p>
+  <aside class="script">
+    <p>위원장이 공모 신청서에 기술을 두 갈래로 나눠 적으라고 했지요.</p>
+    <p data-at="1">첫째 갈래, 같은 일을 더 적은 에너지로 하는 효율 향상 기술입니다.</p>
+    <p data-at="2">둘째 갈래, 고갈되지 않고 온실 기체를 거의 내지 않는 신재생 에너지 기술입니다. 날씨를 타는 약점은 배터리로 보완합니다.</p>
+    <p data-at="3">두 길이 모이는 곳, 지금 세대의 필요를 채우면서 미래 세대의 몫을 남기는 발전이 빈칸 14번, 지속가능한 발전입니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>에너지는 사라지지 않는다, 쓸모없어질 뿐</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>에너지 효율</b> = 쓸모 있게 쓰인 에너지 ÷ 공급한 에너지 × 100 · 단계마다 곱해져 석탄 100 → 빛 약 <b>1.9</b></li>
+    <li data-k="2" data-step="2">흩어진 에너지는 주로 열 · 총량은 그대로(<b>에너지 보존</b>)지만 다시 쓰기 어려워 효율 100%는 없다</li>
+    <li data-k="3" data-step="3">가장 낮은 단계부터: 백열전구 60 W → LED 9 W (약 85% 절약) · 열병합 발전 · 단열</li>
+    <li data-k="4" data-step="4"><b>신재생 에너지</b> + 배터리·보조 전원으로 <b>지속가능한 발전</b></li>
+  </ul>
+  <aside class="script">
+    <p>학습지를 덮고 한 줄씩 말로 먼저 떠올리게 한 다음 열어 줍니다.</p>
+    <p data-at="4">표지의 질문, 사라진 98은 정말 사라졌을까요? 한 문장으로 답하게 하고 마칩니다.</p>
+  </aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 석탄 화력 발전소의 효율이 40%라는 뜻은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 석탄 에너지의 60%가 사라진다</div>
+        <div class="opt right" data-step="1">㉡ 40%가 전기가 되고 나머지는 주로 열로 흩어진다</div>
+        <div class="opt wrong" data-step="1">㉢ 넣은 석탄의 40%만 탄다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 효율 향상 기술이 <u>아닌</u> 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">LED 전구</div>
+        <div class="opt wrong" data-step="2">열병합 발전</div>
+        <div class="opt right" data-step="2">해상 풍력 단지</div>
+        <div class="opt wrong" data-step="2">단열재·이중창</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. ㉠은 에너지가 사라진다는 오개념입니다. 에너지는 보존됩니다.</p>
+    <p data-at="2">2번은 해상 풍력 단지. 효율을 높이는 것이 아니라 깨끗한 에너지원을 쓰는 신재생 에너지 기술입니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·단원 마무리 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 단원 마무리" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「사라진 98」</h2>
+  <div class="cols">
+    <div class="card"><h3>슬라이더로 직접 설계하세요</h3><p>세 단계의 효율을 바꿔 보고, 세 전구의 밝기를 760~840&nbsp;lm에 맞추고, 정전 0시간 · 55억&nbsp;원 이하 · CO₂ 40% 이하의 마을을 설계하는 미션이 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>단원 마무리</h3><p>Ⅱ-2의 이야기 세 편이 끝났습니다. 단원 화면의 수준별 문제와 응용 실험실(손으로 돌리는 충전기, 송전선, 소수력 발전)로 정리합니다.</p></div>
+  </div>
+  <aside class="script">
+    <p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다. 마을 설계는 정답이 여럿이니 모둠마다 설치비와 CO₂를 비교하게 하면 좋습니다.</p>
+  </aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+  /* 마을 장면 그래프: 단원 화면의 모형(태양광 1,500 kW, 1일째 맑음 · 2일째 흐림)과 같은 식으로 48시간을 그린다 */
+  (function () {
+    var DEM = [300, 280, 270, 260, 260, 280, 350, 450, 500, 520, 530, 540, 550, 540, 530, 520, 540, 600, 700, 750, 720, 620, 480, 360];
+    var X0 = 90, X1 = 1390, Y0 = 30, Y1 = 290, MAXP = 1300, bw = (X1 - X0) / 48, NS = "http://www.w3.org/2000/svg";
+    function sun(h) { var hh = h % 24, d = h >= 24; return 1500 * Math.max(0, Math.sin(Math.PI * (hh - 6) / 12)) * (d ? 0.2 : 0.8); }
+    function y(p) { return Y1 - p / MAXP * (Y1 - Y0); }
+    function add(id, tag, at) { var e = document.createElementNS(NS, tag); for (var k in at) e.setAttribute(k, at[k]); document.getElementById(id).appendChild(e); return e; }
+    for (var h = 0; h < 48; h++) {
+      var hh = h % 24, x = X0 + h * bw, S = sun(h), D = DEM[hh];
+      if (hh < 6 || hh >= 18) add("s12-night", "rect", { x: x, y: Y0, width: bw + .5, height: Y1 - Y0, fill: "rgba(20,40,90,.07)" });
+      if (S > 0) add(h < 24 ? "s12-sun1" : "s12-sun2", "rect", { x: x + 1, y: y(S), width: bw - 2, height: Y1 - y(S), fill: "#fcc419" });
+      if (D > S) add("s12-short", "rect", { x: x + 1, y: y(D), width: bw - 2, height: y(S) - y(D), fill: "rgba(217,48,44,.55)" });
+      else add("s12-store", "rect", { x: x + 1, y: y(S), width: bw - 2, height: y(D) - y(S), fill: "#20c997" });
+    }
+    var d = "";
+    for (h = 0; h < 48; h++) d += (h ? " L" : "M") + (X0 + (h + .5) * bw).toFixed(1) + " " + y(DEM[h % 24]).toFixed(1);
+    document.getElementById("s12-dem").setAttribute("d", d);
+    [0, 500, 1000].forEach(function (p) {
+      add("s12-grid", "line", { x1: X0, x2: X1, y1: y(p), y2: y(p), stroke: "#d5dbe6", "stroke-width": 2 });
+      add("s12-grid", "text", { x: X0 - 10, y: y(p) + 7, "font-size": 20, fill: "#5f6b80", "text-anchor": "end" }).textContent = p;
+    });
+    [0, 6, 12, 18, 24, 30, 36, 42].forEach(function (t) {
+      add("s12-grid", "text", { x: X0 + t * bw, y: Y1 + 24, "font-size": 20, fill: "#5f6b80", "text-anchor": t ? "middle" : "start" }).textContent = (t % 24) + "시";
+    });
+    var lg = add("s12-store", "text", { x: X0 + 12 * bw, y: y(820), "font-size": 22, "font-weight": 900, fill: "#fff", stroke: "#0b7285", "stroke-width": 5, "paint-order": "stroke", "text-anchor": "middle" }); lg.textContent = "남는 전기 → 저장";
+    var ls = add("s12-short", "text", { x: X0 + 38 * bw, y: y(1000), "font-size": 22, "font-weight": 900, fill: "#c92a2a", "text-anchor": "middle" }); ls.textContent = "빨강 = 모자람(정전)";
+  })();
+</script>
+</body>
+</html>

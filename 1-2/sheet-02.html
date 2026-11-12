@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 산과 염기 (통합과학2 Ⅰ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격을 조금 줄인다 */ p, li { line-height: 1.7; } td, th { padding: 2px 8px; line-height: 1.45; } h2 { margin: 8px 0 4px; } .write { height: 44px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅰ-2 화학 변화 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 산과 염기</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~13)</p>
+
+  <h2>① 산과 염기 — 물에 녹아 내놓는 이온</h2>
+  <ul>
+    <li>산: 물에 녹아 <b class="blank" data-n="1">수소 이온</b>(H⁺)을 내놓는 물질 <span class="formula">HCl → H⁺ + Cl⁻</span></li>
+    <li>염기: 물에 녹아 <b class="blank" data-n="2">수산화 이온</b>(OH⁻)을 내놓는 물질 <span class="formula">NaOH → Na⁺ + OH⁻</span> <span class="formula">Ca(OH)₂ → Ca²⁺ + 2OH⁻</span></li>
+    <li>용액의 성질에 따라 색이 변하는 물질 → <b class="blank" data-n="3">지시약</b></li>
+  </ul>
+  <table>
+    <tr><th style="width:22%">검사</th><th>산 (염산·식초)</th><th>에탄올 수용액</th><th>염기 (NaOH·석회수·암모니아수)</th></tr>
+    <tr><td>BTB 용액</td><td>노란색</td><td>초록색</td><td>파란색</td></tr>
+    <tr><td>페놀프탈레인 용액</td><td>무색</td><td>무색</td><td>붉은색</td></tr>
+    <tr><td>리트머스 종이</td><td>푸른 종이 → 붉게</td><td>변화 없음</td><td>붉은 종이 → 푸르게</td></tr>
+    <tr><td>마그네슘 조각</td><td><b class="blank" data-n="4">수소 기체</b> 발생</td><td>기체 없음</td><td>기체 없음</td></tr>
+    <tr><td>전류</td><td>흐른다 (식초는 약하게)</td><td>흐르지 않는다</td><td>흐른다 (암모니아수는 약하게)</td></tr>
+  </table>
+  <ul>
+    <li>에탄올 C₂H₅OH는 OH가 있어도 OH⁻을 내놓지 않는다 → 염기가 아니다 · 암모니아 NH₃는 물과 반응해 OH⁻을 만든다 → 염기<br>기준은 화학식의 글자가 아니라 물에 녹아 실제로 내놓는 <b class="blank" data-n="5">이온</b></li>
+  </ul>
+
+  <h2>② 중화 반응 — 묽은 염산 20 mL + 수산화 나트륨 수용액 (단원 화면 모형)</h2>
+  <ul>
+    <li>산의 H⁺과 염기의 OH⁻이 만나 물이 생기는 반응 → <b class="blank" data-n="6">중화 반응</b> <span class="formula">H⁺ + OH⁻ → H₂O</span></li>
+    <li>H⁺과 OH⁻은 언제나 <b class="blank" data-n="7">1 : 1</b>의 개수비로 반응한다 · Na⁺과 Cl⁻은 반응하지 않고 그대로 남는다</li>
+    <li>H⁺도 OH⁻도 남지 않는 지점 → <b class="blank" data-n="8">중화점</b> (16 mL, BTB 초록색)</li>
+    <li>중화 반응에서 나오는 열 → <b class="blank" data-n="9">중화열</b> → 반응한 H⁺·OH⁻ 수가 가장 많은 중화점에서 온도가 가장 높다(약 27 ℃)<br>중화점 뒤에는 더 반응할 H⁺이 없어 온도가 내려간다</li>
+  </ul>
+
+  <h2>③ 중화 작전 — 호수를 되살리기</h2>
+  <ul>
+    <li>pH 7은 중성, 7보다 작으면 <b class="blank" data-n="10">산성</b>, 크면 염기성 · 물고기가 사는 범위 pH 6.5~8.5</li>
+    <li>pH 4.0인 호수 물 1,000 L를 정확히 중화하는 소석회 Ca(OH)₂ <b class="blank" data-n="11">3.7</b> g (중화점 근처에서 pH가 가파르게 변한다)</li>
+    <li>호수 약 200만 m³: 3.7 g × 2,000,000 = 7,400,000 g → 약 <b class="blank" data-n="12">7.4</b> t</li>
+    <li>생활 속 중화: 문제를 일으킨 물질과 <b class="blank" data-n="13">반대</b> 성질의 물질을 쓴다<br>(속쓰림 → 제산제, 산성화된 밭 → 석회 가루, 생선 비린내 → 레몬즙·식초)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. BTB 용액을 넣은 묽은 염산에 수산화 나트륨 수용액을 넣어 중화점에 이르면 용액의 색은? <span class="ans">→ ㉡ 초록색</span><br>
+      ㉠ 노란색 &nbsp; ㉡ 초록색 &nbsp; ㉢ 파란색</p>
+    <p>2. 위산이 너무 많아 속이 쓰릴 때 먹는 제산제는 산성과 염기성 가운데 어떤 성질일까? <span class="ans">→ 염기성</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>조수 올레에게 “에탄올을 호수에 부으면 안 되는 까닭”을 ‘OH⁻’라는 말을 넣어 한 문장으로 말해 주세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「물고기가 사라진 호수」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

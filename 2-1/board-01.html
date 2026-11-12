@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 생태계의 구성 (통합과학2 Ⅱ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes leafIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .twrap { animation: leafIn 1.2s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two p { margin: 0; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 29px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger { font-size: 26px; }
+  .rel3 .card { padding: 22px 26px; }
+  .rel3 .card h3 { font-size: 30px; margin-bottom: 8px; }
+  .rel3 .card p { font-size: 26px; margin: 0; }
+  .recs { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; margin-top: 18px; }
+  .recs .card { padding: 24px 26px; min-height: 230px; display: flex; flex-direction: column; justify-content: space-between; }
+  .recs .card p { font-size: 28px; font-weight: 700; margin: 0 0 14px; line-height: 1.45; }
+  .recs .tg { align-self: flex-start; font-size: 25px; font-weight: 900; padding: 6px 16px; border-radius: 999px; color: #fff; }
+  .tg.x { background: #e8590c; } .tg.y { background: #1462d8; } .tg.z { background: #2b8a3e; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="햇빛을 받는 느티나무 한 그루와 그 나무에서 주운 작고 두꺼운 잎, 넓고 얇은 잎">
+      <defs>
+        <radialGradient id="c1-sun" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#fff3bf"/><stop offset=".6" stop-color="#ffd43b"/><stop offset="1" stop-color="#ffd43b" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="230" cy="110" r="110" fill="url(#c1-sun)"/>
+      <g class="twrap">
+        <rect x="738" y="300" width="44" height="220" rx="10" fill="#8d6e63"/>
+        <ellipse cx="760" cy="320" rx="270" ry="120" fill="#8ce99a" opacity=".85"/>
+        <ellipse cx="760" cy="180" rx="190" ry="125" fill="#2b8a3e"/>
+      </g>
+      <g data-step="1">
+        <g stroke="#ced4da" stroke-width="3" stroke-dasharray="10 8" fill="none"><path d="M900 130 L1160 170"/><path d="M1010 330 L1110 370"/></g>
+        <path d="M1175 170 Q1250 100 1325 170 Q1250 240 1175 170Z" fill="#2b8a3e" stroke="#b2f2bb" stroke-width="3"/>
+        <line x1="1180" y1="170" x2="1320" y2="170" stroke="#b2f2bb" stroke-width="3"/>
+        <text x="1250" y="112" fill="#fff" font-size="28" font-weight="900" text-anchor="middle">A · 약 230 µm</text>
+        <path d="M1120 370 Q1250 250 1380 370 Q1250 490 1120 370Z" fill="#b2f2bb" opacity=".9"/>
+        <line x1="1125" y1="370" x2="1375" y2="370" stroke="#2b8a3e" stroke-width="3"/>
+        <text x="1250" y="292" fill="#fff" font-size="28" font-weight="900" text-anchor="middle">B · 약 100 µm</text>
+      </g>
+      <text x="1560" y="24" fill="#7b8598" font-size="17" text-anchor="end">⚠ 잎은 크게 확대해 그렸습니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅱ-1 생태계와 환경 변화 · 01</p>
+    <h1>생태계의 구성</h1>
+    <p class="sub" data-step="1">한 나무에서 주운 두께가 다른 두 잎, 범인은 누구일까</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 생태계가 무엇으로 이루어져 있는지, 그리고 생물과 환경이 어떻게 영향을 주고받는지 봅니다. 여러분은 생태 동아리의 조사관입니다.</p>
+    <p data-at="1">학교 뒤뜰 느티나무 아래에서 주운 잎 두 장, 두께가 두 배 넘게 다릅니다. 이 수수께끼를 끝까지 풀어 봅시다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="두 장의 잎" data-part="도입">
+  <p class="kicker">도입 · 학교 뒤뜰 느티나무 아래</p>
+  <h2>모양은 둘 다 느티나무 잎인데 두께가 너무 다르다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <table class="ledger">
+        <tr><th></th><th>증거물 A</th><th>증거물 B</th></tr>
+        <tr><td>두께</td><td class="v">약 230 µm</td><td class="v">약 100 µm</td></tr>
+        <tr><td>넓이</td><td class="v">약 18 cm²</td><td class="v">약 41 cm²</td></tr>
+        <tr><td>색</td><td>짙은 녹색</td><td>연한 녹색</td></tr>
+      </table>
+      <p class="big mt">두께가 이렇게 다른 두 잎, <span class="c-red">어떻게 된 일</span>일까?</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 추리는?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 서로 다른 종류의 나무에서 온 잎이다</div>
+        <div class="opt">㉡ 같은 나무지만 오래된 잎과 새잎이다</div>
+        <div class="opt">㉢ 같은 나무지만 달려 있던 자리의 빛이 달랐다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>하람이가 주워 온 잎 두 장입니다. A는 작고 도톰하고, B는 넓고 얇아서 햇빛에 비추면 속이 비칠 정도예요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않고, 조사와 실험으로 확인한다고만 말합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>생물적 요인</b><span>생태계 안의 살아 있는 것들</span></div>
+    <div class="card"><b>비생물적 요인</b><span>생물을 둘러싼 빛·온도·물·토양·공기</span></div>
+    <div class="card"><b>생산자·소비자·분해자</b><span>생물이 생태계에서 맡은 세 역할</span></div>
+    <div class="card"><b>작용·반작용·상호 작용</b><span>영향이 오가는 세 방향</span></div>
+    <div class="card"><b>양엽과 음엽</b><span>빛에 따라 달라지는 두 가지 잎</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 생태계의 구성 요소 -->
+<section class="slide" id="s-eco" data-title="뒤뜰에는 무엇이 있나" data-part="① 구성 요소">
+  <p class="kicker">① 생태계의 구성 요소 · 뒤뜰 현장 조사</p>
+  <h2>살아 있는 것과 살아 있지 않은 것</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg viewBox="0 0 760 480" width="760" height="480" aria-label="학교 뒤뜰 단면: 느티나무, 박새, 애벌레, 이끼 낀 바위, 버섯, 토끼풀, 물웅덩이, 흙과 햇빛">
+      <defs>
+        <linearGradient id="s4-sky" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e7f5ff"/><stop offset="1" stop-color="#f8f9fa"/></linearGradient>
+        <linearGradient id="s4-soil" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#94d82d"/><stop offset=".12" stop-color="#a47148"/><stop offset="1" stop-color="#6f4a2e"/></linearGradient>
+      </defs>
+      <rect x="0" y="0" width="760" height="480" rx="18" fill="url(#s4-sky)"/>
+      <circle cx="70" cy="70" r="40" fill="#ffd43b"/>
+      <g stroke="#fab005" stroke-width="5" stroke-linecap="round"><line x1="125" y1="70" x2="150" y2="70"/><line x1="110" y1="110" x2="128" y2="128"/><line x1="70" y1="125" x2="70" y2="150"/></g>
+      <rect x="0" y="360" width="760" height="120" fill="url(#s4-soil)"/>
+      <rect x="380" y="200" width="36" height="165" rx="8" fill="#8d6e63"/>
+      <ellipse cx="398" cy="170" rx="150" ry="110" fill="#40c057"/>
+      <ellipse cx="398" cy="130" rx="95" ry="60" fill="#2f9e44"/>
+      <g fill="#94d82d"><circle cx="482" cy="252" r="8"/><circle cx="496" cy="248" r="8"/><circle cx="510" cy="252" r="8"/></g>
+      <g><ellipse cx="290" cy="128" rx="26" ry="16" fill="#495057"/><circle cx="312" cy="118" r="11" fill="#212529"/><path d="M322 118 l12 4 l-12 3z" fill="#fab005"/><path d="M276 124 q-14 -14 -24 -4 q10 4 24 10z" fill="#343a40"/></g>
+      <ellipse cx="620" cy="362" rx="70" ry="34" fill="#adb5bd"/>
+      <path d="M560 350 q20 -22 44 -18 q22 -14 40 0 q24 -6 34 16 q-60 -8 -118 2z" fill="#2f9e44"/>
+      <rect x="512" y="336" width="12" height="26" rx="4" fill="#f1e3d3"/><path d="M496 340 q22 -34 44 0z" fill="#e8590c"/>
+      <g fill="#51cf66"><circle cx="242" cy="352" r="9"/><circle cx="258" cy="352" r="9"/><circle cx="250" cy="340" r="9"/></g>
+      <ellipse cx="100" cy="372" rx="70" ry="13" fill="#74c0fc"/>
+      <g fill="#ffe8cc"><circle cx="300" cy="420" r="4"/><circle cx="318" cy="432" r="4"/><circle cx="336" cy="418" r="4"/></g>
+      <g data-step="1" font-size="23" font-weight="900" fill="#2b8a3e" stroke="#fff" stroke-width="6" paint-order="stroke">
+        <text x="560" y="96">느티나무</text><text x="236" y="98" text-anchor="middle">박새</text><text x="526" y="282">애벌레</text>
+        <text x="650" y="318" text-anchor="middle">이끼</text><text x="518" y="322" text-anchor="middle">버섯</text><text x="250" y="322" text-anchor="middle">토끼풀</text>
+        <text x="360" y="462" text-anchor="middle">흙 속 세균</text>
+      </g>
+      <g data-step="2" font-size="23" font-weight="900" fill="#1462d8" stroke="#fff" stroke-width="6" paint-order="stroke">
+        <text x="160" y="56">빛</text><text x="700" y="40" text-anchor="middle">공기·온도</text>
+        <text x="100" y="350" text-anchor="middle">물</text><text x="640" y="455" text-anchor="middle">흙(토양)</text>
+      </g>
+      <text x="745" y="474" font-size="17" fill="#fff" text-anchor="end">⚠ 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">나무·이끼·애벌레·박새·버섯·세균 → <b class="blank" data-n="1" data-step="1">생물적 요인</b></p>
+      <p data-step="2">빛·온도·물·토양·공기 → <b class="blank" data-n="2" data-step="2">비생물적 요인</b></p>
+      <p data-step="3">생물과 환경이 서로 영향을 주고받는 하나의 체계 → <b class="blank" data-n="3" data-step="3">생태계</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>하람이가 뒤뜰에 있는 것을 모두 적어 왔습니다. 잎에 영향을 줄 만한 용의자를 가려내려면 먼저 둘로 나눠야 해요.</p>
+    <p data-at="1">살아 있는 것들, 빈칸 1번, 생물적 요인. 작은 이끼와 눈에 보이지 않는 흙 속 세균도 들어갑니다.</p>
+    <p data-at="2">생물을 둘러싼 빛, 온도, 물, 토양, 공기. 빈칸 2번, 비생물적 요인입니다.</p>
+    <p data-at="3">이 둘이 따로 있는 게 아니라 서로 영향을 주고받으며 하나로 움직입니다. 빈칸 3번, 생태계.</p>
+  </aside>
+</section>
+
+<!-- 5 생산자·소비자·분해자 -->
+<section class="slide" id="s-roles" data-title="생물의 세 역할" data-part="① 구성 요소">
+  <p class="kicker">① 생태계의 구성 요소 · 생물적 요인을 역할로 나누면</p>
+  <h2>만드는 생물, 먹는 생물, 되돌리는 생물</h2>
+  <div class="cols" style="grid-template-columns:900px 1fr;align-items:center">
+    <svg viewBox="0 0 900 400" width="900" height="400" aria-label="생산자에서 소비자로, 둘의 죽은 몸과 낙엽이 분해자로, 분해자가 만든 무기물이 다시 생산자로 가는 흐름">
+      <defs>
+        <marker id="s5-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker>
+        <marker id="s5-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#8a6a45"/></marker>
+      </defs>
+      <g data-step="1"><rect x="0" y="20" width="380" height="130" rx="20" fill="#d3f9d8" stroke="#2f9e44" stroke-width="4"/>
+        <text x="190" y="76" font-size="32" font-weight="900" fill="#2b8a3e" text-anchor="middle">🌳 생산자</text>
+        <text x="190" y="118" font-size="23" font-weight="800" fill="#2b8a3e" text-anchor="middle">느티나무 · 이끼 · 토끼풀</text></g>
+      <g data-step="2"><rect x="520" y="20" width="380" height="130" rx="20" fill="#ffe8cc" stroke="#e8590c" stroke-width="4"/>
+        <text x="710" y="76" font-size="32" font-weight="900" fill="#d9480f" text-anchor="middle">🐦 소비자</text>
+        <text x="710" y="118" font-size="23" font-weight="800" fill="#d9480f" text-anchor="middle">애벌레(1차) → 박새(2차)</text>
+        <path d="M388 85 H510" stroke="#495057" stroke-width="6" marker-end="url(#s5-a)"/>
+        <text x="450" y="70" font-size="22" font-weight="900" fill="#495057" text-anchor="middle">먹힘</text></g>
+      <g data-step="3"><rect x="520" y="250" width="380" height="130" rx="20" fill="#f1e3d3" stroke="#8a6a45" stroke-width="4"/>
+        <text x="710" y="306" font-size="32" font-weight="900" fill="#6f4a2e" text-anchor="middle">🍄 분해자</text>
+        <text x="710" y="348" font-size="23" font-weight="800" fill="#6f4a2e" text-anchor="middle">버섯 · 곰팡이 · 세균</text>
+        <path d="M710 158 V240" stroke="#8a6a45" stroke-width="6" marker-end="url(#s5-b)"/>
+        <text x="724" y="206" font-size="22" font-weight="900" fill="#8a6a45">죽은 몸·배설물</text>
+        <path d="M300 158 L540 244" stroke="#8a6a45" stroke-width="6" marker-end="url(#s5-b)"/>
+        <text x="372" y="226" font-size="22" font-weight="900" fill="#8a6a45" text-anchor="middle">낙엽</text></g>
+      <g data-step="4"><rect x="0" y="250" width="380" height="130" rx="20" fill="#fff" stroke="#adb5bd" stroke-width="4" stroke-dasharray="12 8"/>
+        <text x="190" y="306" font-size="30" font-weight="900" fill="#495057" text-anchor="middle">흙 속 무기물</text>
+        <text x="190" y="348" font-size="23" font-weight="800" fill="#5f6b80" text-anchor="middle">뿌리로 다시 흡수</text>
+        <path d="M512 315 H392" stroke="#495057" stroke-width="6" marker-end="url(#s5-a)"/>
+        <path d="M120 242 V160" stroke="#495057" stroke-width="6" marker-end="url(#s5-a)"/></g>
+    </svg>
+    <div class="lines">
+      <p data-step="1">광합성으로 양분을 스스로 만든다 → <b class="blank" data-n="4" data-step="1">생산자</b></p>
+      <p data-step="2">다른 생물을 먹어 양분을 얻는다 → <b class="blank" data-n="5" data-step="2">소비자</b></p>
+      <p data-step="3">죽은 생물·배설물을 분해한다 → <b class="blank" data-n="6" data-step="3">분해자</b></p>
+      <p data-step="4">분해해서 나온 <b class="blank" data-n="7" data-step="4">무기물</b>을 생산자가 다시 쓴다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>생물적 요인은 하는 일에 따라 셋으로 나눕니다.</p>
+    <p data-at="1">빛을 받아 광합성으로 양분을 스스로 만드는 생물, 빈칸 4번, 생산자. 느티나무, 이끼, 토끼풀이에요.</p>
+    <p data-at="2">다른 생물을 먹는 생물, 빈칸 5번, 소비자. 잎을 갉는 애벌레가 1차, 애벌레를 먹는 박새가 2차 소비자입니다.</p>
+    <p data-at="3">낙엽과 죽은 몸, 배설물을 분해하는 생물, 빈칸 6번, 분해자. 버섯은 식물처럼 보이지만 광합성을 못 하는 균류, 분해자예요.</p>
+    <p data-at="4">분해자가 만든 빈칸 7번, 무기물을 생산자가 뿌리로 다시 흡수합니다. 분해자가 없으면 이 고리가 끊깁니다.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="조사 기록 분류 확인" data-part="① 구성 요소">
+  <p class="kicker">① 생태계의 구성 요소 · 확인</p>
+  <h2>뒤뜰 조사 기록을 바르게 분류한 것은?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">① 썩은 가지의 버섯은 식물이므로 생산자다</div>
+    <div class="opt wrong" data-step="1">② 흙 속 세균은 흙의 일부이므로 비생물적 요인이다</div>
+    <div class="opt right" data-step="1">③ 바위의 이끼는 작아도 광합성을 하므로 생산자다</div>
+    <div class="opt wrong" data-step="1">④ 햇빛은 생물에게 꼭 필요하므로 생물적 요인이다</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ③. 버섯은 광합성을 못 하는 분해자, 흙 속 세균도 살아 있는 분해자입니다. 흙 자체와 흙 속 세균은 달라요. 햇빛은 생물에게 필요해도 살아 있지 않으니 비생물적 요인입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 가지 높이와 잎 두께 -->
+<section class="slide" id="s-leaf" data-title="가지 높이와 잎 두께" data-part="② 빛과 잎">
+  <p class="kicker">② 빛과 잎 · 사다리차로 높이를 바꿔 잎을 따 보면 (단원 화면 모형)</p>
+  <h2>높은 가지일수록 잎이 두껍다</h2>
+  <div class="cols" style="grid-template-columns:760px 1fr;align-items:center">
+    <svg id="leafSvg" viewBox="0 0 760 470" width="760" height="470" aria-label="가지 높이가 높아질수록 잎 두께가 약 100 µm에서 약 250 µm로 두꺼워지는 곡선과 증거물 A, B의 위치"></svg>
+    <div class="lines">
+      <p data-step="1">아래 가지 → 꼭대기로 갈수록 빛이 강하고 잎이 두껍다</p>
+      <p data-step="2">A(약 230 µm)는 꼭대기, B(약 100 µm)는 아래 가지에서 나왔다 → 같은 나무</p>
+      <p data-step="3">잎의 두께를 바꾼 범인: 비생물적 요인인 <b class="blank" data-n="8" data-step="3">빛</b></p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>빛이 수상하다는 하람이의 말대로, 같은 나무에서 가지 높이를 바꿔 가며 잎을 따 봤습니다. 꼭대기는 하루 내내 해를 받고, 아래 가지는 윗잎 그늘에 가려요.</p>
+    <p data-at="1">곡선을 보세요. 높이 올라갈수록 잎이 두꺼워집니다.</p>
+    <p data-at="2">증거물 A와 두께가 같은 잎은 꼭대기에서, B와 같은 잎은 아래 가지에서 나왔습니다. 다른 나무에서 날아온 잎이 아니었어요.</p>
+    <p data-at="3">범인은 빈칸 8번, 빛. 비생물적 요인입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 양엽과 음엽 -->
+<section class="slide" id="s-cell" data-title="양엽과 음엽의 단면" data-part="② 빛과 잎">
+  <p class="kicker">② 빛과 잎 · 잎을 잘라 현미경으로 보면</p>
+  <h2>두께의 차이는 울타리 조직의 층수에서 온다</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="양엽 단면은 울타리 조직이 세 층으로 두껍고, 음엽 단면은 울타리 조직이 한 층으로 얇다">
+    <defs>
+      <pattern id="s8-pal" width="30" height="50" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="26" height="46" rx="9" fill="#b2f2bb" stroke="#2b8a3e" stroke-width="2"/><circle cx="10" cy="14" r="3.5" fill="#2b8a3e"/><circle cx="19" cy="26" r="3.5" fill="#2b8a3e"/><circle cx="11" cy="37" r="3.5" fill="#2b8a3e"/></pattern>
+      <pattern id="s8-pal1" width="30" height="40" patternUnits="userSpaceOnUse"><rect x="2" y="2" width="26" height="36" rx="9" fill="#b2f2bb" stroke="#2b8a3e" stroke-width="2"/><circle cx="10" cy="13" r="3.5" fill="#2b8a3e"/><circle cx="19" cy="26" r="3.5" fill="#2b8a3e"/></pattern>
+      <pattern id="s8-spg" width="44" height="34" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r="10" fill="#d8f5a2" stroke="#5c940d" stroke-width="2"/><circle cx="34" cy="24" r="9" fill="#d8f5a2" stroke="#5c940d" stroke-width="2"/></pattern>
+    </defs>
+    <g data-step="1">
+      <text x="330" y="32" font-size="28" font-weight="900" fill="#2b8a3e" text-anchor="middle">꼭대기 잎 (빛이 강한 곳)</text>
+      <rect x="60" y="50" width="540" height="16" fill="#e9ecef" stroke="#868e96" stroke-width="2"/>
+      <rect x="60" y="66" width="540" height="150" fill="url(#s8-pal)"/>
+      <rect x="60" y="216" width="540" height="68" fill="url(#s8-spg)"/>
+      <rect x="60" y="284" width="540" height="16" fill="#e9ecef" stroke="#868e96" stroke-width="2"/>
+    </g>
+    <g data-step="2">
+      <text x="1070" y="32" font-size="28" font-weight="900" fill="#1864ab" text-anchor="middle">아래 가지 잎 (그늘)</text>
+      <rect x="800" y="50" width="540" height="16" fill="#e9ecef" stroke="#868e96" stroke-width="2"/>
+      <rect x="800" y="66" width="540" height="40" fill="url(#s8-pal1)"/>
+      <rect x="800" y="106" width="540" height="51" fill="url(#s8-spg)"/>
+      <rect x="800" y="157" width="540" height="16" fill="#e9ecef" stroke="#868e96" stroke-width="2"/>
+    </g>
+    <g data-step="3" fill="none" stroke="#e8590c" stroke-width="5">
+      <rect x="54" y="62" width="552" height="158" rx="8"/><rect x="794" y="62" width="552" height="48" rx="8"/>
+    </g>
+    <g data-step="3" font-size="24" font-weight="900" fill="#e8590c">
+      <text x="612" y="140">← 울타리</text><text x="632" y="172">조직 3층</text><text x="1070" y="214" text-anchor="middle">↑ 울타리 조직 1층</text>
+    </g>
+    <text x="1395" y="324" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 세포의 수와 크기를 단순화한 모식도</text>
+  </svg>
+  <div class="two mt">
+    <p data-step="1">빛이 강한 곳: 작고 두꺼운 잎 → <b class="blank" data-n="9" data-step="1">양엽</b></p>
+    <p data-step="2">빛이 약한 곳: 넓고 얇은 잎 → <b class="blank" data-n="10" data-step="2">음엽</b></p>
+  </div>
+  <p class="mt" data-step="3">양엽은 <b class="blank" data-n="11" data-step="3">울타리 조직</b>이 여러 층으로 쌓여 두껍다 · 음엽은 약한 빛을 넓게 받는다</p>
+  <aside class="script">
+    <p>두께가 왜 다른지 잎을 잘라 봅시다. 맨 위아래는 표피, 그 사이에 엽록체가 가득한 세포들이 있어요.</p>
+    <p data-at="1">빛을 강하게 받는 꼭대기의 작고 두꺼운 잎, 빈칸 9번, 양엽.</p>
+    <p data-at="2">그늘진 아래 가지의 넓고 얇은 잎, 빈칸 10번, 음엽. 약한 빛을 넓은 면으로 받아 냅니다.</p>
+    <p data-at="3">차이는 길쭉한 세포가 빽빽이 늘어선 빈칸 11번, 울타리 조직. 양엽에서는 여러 층으로 겹겹이 쌓여 있어요.</p>
+  </aside>
+</section>
+
+<!-- 9 확인: 오개념 -->
+<section class="slide" id="s-check2" data-title="양엽과 음엽 확인" data-part="② 빛과 잎">
+  <p class="kicker">② 빛과 잎 · 확인</p>
+  <h2>양엽과 음엽에 대한 설명으로 옳은 것은?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">① 양엽은 양지 식물에만, 음엽은 음지 식물에만 달린다</div>
+    <div class="opt right" data-step="1">② 한 나무에서도 햇빛 받는 곳엔 양엽, 그늘엔 음엽이 달린다</div>
+    <div class="opt wrong" data-step="1">③ 음엽은 울타리 조직이 더 많은 층이라 양엽보다 두껍다</div>
+    <div class="opt wrong" data-step="1">④ 잎이 오래될수록 두꺼워져 양엽이 된다</div>
+  </div>
+  <aside class="script">
+    <p>여기서 많이 헷갈립니다. 손으로 번호를 들게 합니다.</p>
+    <p data-at="1">정답은 ②. 양엽과 음엽을 양지 식물, 음지 식물로 나눠 생각하기 쉽지만 한 식물 안에서도 둘 다 생깁니다. ④는 첫 추리의 ㉡이었죠. 두께를 정한 것은 잎의 나이가 아니라 빛이었습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 작용·반작용·상호 작용 -->
+<section class="slide" id="s-rel" data-title="영향의 세 방향" data-part="③ 영향의 방향">
+  <p class="kicker">③ 생물과 환경의 관계 · 누가 누구에게 영향을 주었나</p>
+  <h2>영향이 오가는 방향은 세 가지</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="비생물적 요인에서 생물로 향하는 작용, 생물에서 비생물적 요인으로 향하는 반작용, 생물끼리 주고받는 상호 작용">
+    <defs>
+      <marker id="s10-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e8590c"/></marker>
+      <marker id="s10-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker>
+      <marker id="s10-g" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 Z" fill="#2b8a3e"/></marker>
+    </defs>
+    <rect x="0" y="40" width="420" height="220" rx="22" fill="#e7f5ff" stroke="#74c0fc" stroke-width="4"/>
+    <text x="210" y="110" font-size="32" font-weight="900" fill="#1864ab" text-anchor="middle">비생물적 요인</text>
+    <text x="210" y="165" font-size="26" font-weight="800" fill="#1864ab" text-anchor="middle">☀️ 빛 · 🌡️ 온도 · 💧 물</text>
+    <text x="210" y="210" font-size="26" font-weight="800" fill="#1864ab" text-anchor="middle">🟤 토양 · 공기</text>
+    <rect x="880" y="20" width="520" height="260" rx="22" fill="#ebfbee" stroke="#69db7c" stroke-width="4"/>
+    <text x="1140" y="70" font-size="32" font-weight="900" fill="#2b8a3e" text-anchor="middle">생물적 요인</text>
+    <circle cx="990" cy="170" r="66" fill="#fff" stroke="#2b8a3e" stroke-width="3"/><text x="990" y="164" font-size="34" text-anchor="middle">🐦</text><text x="990" y="202" font-size="25" font-weight="900" fill="#2b8a3e" text-anchor="middle">박새</text>
+    <circle cx="1290" cy="170" r="66" fill="#fff" stroke="#2b8a3e" stroke-width="3"/><text x="1290" y="164" font-size="34" text-anchor="middle">🐛</text><text x="1290" y="202" font-size="25" font-weight="900" fill="#2b8a3e" text-anchor="middle">애벌레</text>
+    <g data-step="1"><path d="M430 100 H866" stroke="#e8590c" stroke-width="8" marker-end="url(#s10-o)"/><text x="650" y="80" font-size="30" font-weight="900" fill="#e8590c" text-anchor="middle">환경 → 생물</text></g>
+    <g data-step="2"><path d="M870 220 H434" stroke="#1462d8" stroke-width="8" marker-end="url(#s10-b)"/><text x="650" y="270" font-size="30" font-weight="900" fill="#1462d8" text-anchor="middle">생물 → 환경</text></g>
+    <g data-step="3"><path d="M1066 170 H1214" stroke="#2b8a3e" stroke-width="7" marker-start="url(#s10-g)" marker-end="url(#s10-g)"/><text x="1140" y="258" font-size="26" font-weight="900" fill="#2b8a3e" text-anchor="middle">생물 ↔ 생물</text></g>
+  </svg>
+  <div class="cols c3 rel3 mt">
+    <div class="card" data-step="1"><h3>환경 → 생물</h3><p><b class="blank" data-n="12" data-step="1">작용</b> · 빛이 잎의 두께를 바꿨다</p></div>
+    <div class="card" data-step="2"><h3>생물 → 환경</h3><p><b class="blank" data-n="13" data-step="2">반작용</b> · 생물이 흙·공기를 바꾼다</p></div>
+    <div class="card" data-step="3"><h3>생물 ↔ 생물</h3><p><b class="blank" data-n="14" data-step="3">상호 작용</b> · 먹고 먹히기, 꽃가루받이</p></div>
+  </div>
+  <aside class="script">
+    <p>동아리 선생님 말씀처럼, 생태계에서는 영향의 방향을 세 가지로 나눕니다. 화살표의 출발점과 도착점을 보세요.</p>
+    <p data-at="1">환경이 생물에 영향을 주면 빈칸 12번, 작용. 방금 본 빛과 잎이 바로 작용입니다.</p>
+    <p data-at="2">거꾸로 생물이 환경을 바꾸면 빈칸 13번, 반작용.</p>
+    <p data-at="3">생물끼리 주고받으면 빈칸 14번, 상호 작용입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 관찰 기록 분류 -->
+<section class="slide soft" id="s-relex" data-title="관찰 기록 나누기" data-part="③ 영향의 방향">
+  <p class="kicker">③ 생물과 환경의 관계 · 뒤뜰 관찰 기록 6개</p>
+  <h2>영향을 주는 쪽과 받는 쪽을 찾으면 방향이 보인다</h2>
+  <div class="recs">
+    <div class="card"><p>낙엽이 썩어 흙이 기름지게 된다</p><span class="tg y" data-step="2">반작용 · 생물 → 흙</span></div>
+    <div class="card"><p>박새가 늘자 애벌레가 줄었다</p><span class="tg z" data-step="3">상호 작용 · 생물 ↔ 생물</span></div>
+    <div class="card"><p>빛이 강한 꼭대기 가지의 잎이 두껍다</p><span class="tg x" data-step="1">작용 · 빛 → 잎</span></div>
+    <div class="card"><p>지렁이가 땅속을 다녀 흙에 공기가 잘 통한다</p><span class="tg y" data-step="2">반작용 · 생물 → 흙</span></div>
+    <div class="card"><p>기온이 내려가자 느티나무가 잎을 떨군다</p><span class="tg x" data-step="1">작용 · 온도 → 나무</span></div>
+    <div class="card"><p>토끼풀 꽃에 벌이 찾아와 꽃가루를 옮긴다</p><span class="tg z" data-step="3">상호 작용 · 생물 ↔ 생물</span></div>
+  </div>
+  <aside class="script">
+    <p>먼저 혼자 여섯 개를 작용, 반작용, 상호 작용으로 나눠 보게 합니다. 1분 줍니다.</p>
+    <p data-at="1">작용 둘. 빛과 기온, 환경이 생물을 바꿨습니다.</p>
+    <p data-at="2">반작용 둘. 영향을 받은 쪽이 흙입니다. 낙엽도 지렁이도 생물이에요.</p>
+    <p data-at="3">상호 작용 둘. 박새와 애벌레, 벌과 토끼풀. 생물끼리입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 결말 -->
+<section class="slide" id="s-end" data-title="사건 해결" data-part="③ 영향의 방향">
+  <p class="kicker">결말 · 사건 파일 ① 해결</p>
+  <h2>범인은 ‘다른 나무’가 아니라 ‘빛’이었다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg viewBox="0 0 640 470" width="640" height="470" aria-label="한 그루 느티나무에서 햇빛을 받는 꼭대기에는 작고 짙은 양엽, 그늘진 아래 가지에는 넓고 연한 음엽이 달린다">
+      <defs><marker id="s12-y" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="3.5" markerHeight="3.5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#f59f00"/></marker></defs>
+      <rect x="0" y="0" width="640" height="470" rx="18" fill="#f8f9fa"/>
+      <circle cx="60" cy="56" r="36" fill="#ffd43b"/>
+      <g stroke="#f59f00" stroke-width="6" marker-end="url(#s12-y)"><line x1="104" y1="70" x2="230" y2="120"/><line x1="96" y1="96" x2="200" y2="170"/></g>
+      <rect x="300" y="300" width="40" height="160" rx="8" fill="#8d6e63"/>
+      <ellipse cx="320" cy="300" rx="250" ry="80" fill="#b2f2bb"/>
+      <ellipse cx="320" cy="170" rx="160" ry="100" fill="#2b8a3e"/>
+      <g fill="#1b5e20"><path d="M250 120 q16 -18 32 0 q-16 18 -32 0z"/><path d="M330 100 q16 -18 32 0 q-16 18 -32 0z"/><path d="M380 150 q16 -18 32 0 q-16 18 -32 0z"/></g>
+      <g fill="#8ce99a" stroke="#2f9e44" stroke-width="2"><path d="M120 300 q40 -40 80 0 q-40 40 -80 0z"/><path d="M420 310 q40 -40 80 0 q-40 40 -80 0z"/></g>
+      <g data-step="2" font-size="25" font-weight="900" stroke="#fff" stroke-width="6" paint-order="stroke">
+        <text x="490" y="96" fill="#2b8a3e">양엽</text><text x="490" y="126" fill="#2b8a3e" font-size="20">작고 두껍다</text>
+        <text x="40" y="410" fill="#1864ab">음엽</text><text x="40" y="440" fill="#1864ab" font-size="20">넓고 얇다 · 윗잎 그늘</text>
+      </g>
+      <text x="630" y="462" font-size="17" fill="#5f6b80" text-anchor="end">⚠ 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">두 잎은 <b>같은 느티나무</b>에서 나왔다</p>
+      <p data-step="2">꼭대기는 강한 빛 → 양엽 · 아래 가지는 약한 빛 → 음엽</p>
+      <p data-step="3">빛(비생물적 요인)이 잎(생물)에 영향을 준 <b class="c-orange">작용</b>의 예</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>사건을 정리합시다.</p>
+    <p data-at="1">두 잎은 다른 나무에서 날아온 것이 아니었습니다.</p>
+    <p data-at="2">빛을 많이 받는 꼭대기에는 울타리 조직이 여러 겹인 양엽, 윗잎 그늘에 가린 아래 가지에는 음엽이 자랍니다.</p>
+    <p data-at="3">환경이 생물에 영향을 준 것이니 작용입니다. 처음에 ㉢을 고른 학생은 처음부터 정확히 짚었어요.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>생태계는 생물과 환경이 주고받는 하나의 체계</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>생물적 요인</b>(생산자·소비자·분해자) + <b>비생물적 요인</b>(빛·온도·물·토양·공기)</li>
+    <li data-k="2" data-step="2">분해자가 죽은 생물을 분해해 만든 무기물을 생산자가 다시 쓴다</li>
+    <li data-k="3" data-step="3">빛이 강한 곳엔 울타리 조직이 여러 층인 <b>양엽</b>, 그늘엔 넓고 얇은 <b>음엽</b> · 한 나무에서도</li>
+    <li data-k="4" data-step="4">환경 → 생물 <b>작용</b> · 생물 → 환경 <b>반작용</b> · 생물 ↔ 생물 <b>상호 작용</b></li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 하람이에게 두 잎의 정체를 한 문장으로 답하게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. ‘숲이 우거지자 숲 바닥에 닿는 빛이 줄었다’는?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 작용</div>
+        <div class="opt right" data-step="1">㉡ 반작용</div>
+        <div class="opt wrong" data-step="1">㉢ 상호 작용</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 흙 속 세균은 어디에 속할까?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 비생물적 요인</div>
+        <div class="opt wrong" data-step="2">㉡ 생산자</div>
+        <div class="opt right" data-step="2">㉢ 분해자</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡ 반작용. 숲(생물)이 빛(환경)을 바꿨습니다. 영향을 받은 쪽이 환경이에요.</p>
+    <p data-at="2">2번은 ㉢ 분해자. 흙은 비생물적 요인이지만 흙 속에 사는 세균은 생물입니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「한 나무, 두 가지 잎」</h2>
+  <div class="cols">
+    <div class="card"><h3>사다리차를 직접 움직여 보세요</h3><p>조사 기록 13개 분류, 가지 높이를 바꿔 증거물 A·B와 같은 잎 찾기, 관찰 기록 6개를 방향별로 나누기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 생태계 평형</h3><p>늑대가 사라진 옐로스톤의 숲에서 무슨 일이 벌어졌는지, 먹이 관계를 따라 추적합니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 가지 높이와 잎 두께 — 단원 화면 모형: 빛 L = 10 + 90 × (높이/100)^1.6 (%), 두께 = 80 + 1.7 × L (µm) */
+  (function () {
+    var svg = document.getElementById("leafSvg"), X0 = 100, X1 = 730, Y0 = 380, Y1 = 40;
+    function X(h) { return X0 + h / 100 * (X1 - X0); }
+    function Y(t) { return Y0 - (t - 60) / 200 * (Y0 - Y1); }
+    function L(h) { return 10 + 90 * Math.pow(h / 100, 1.6); }
+    function T(h) { return 80 + 1.7 * L(h); }
+    function hOf(t) { return 100 * Math.pow(((t - 80) / 1.7 - 10) / 90, 1 / 1.6); }
+    var h = "<defs><linearGradient id='lf-bg' x1='0' x2='1' y1='0' y2='0'><stop offset='0' stop-color='#e9ecef'/><stop offset='1' stop-color='#fff3bf'/></linearGradient></defs>";
+    h += "<rect x='" + X0 + "' y='" + Y1 + "' width='" + (X1 - X0) + "' height='" + (Y0 - Y1) + "' fill='url(#lf-bg)'/>";
+    [100, 150, 200, 250].forEach(function (t) { h += "<line x1='" + X0 + "' y1='" + Y(t) + "' x2='" + X1 + "' y2='" + Y(t) + "' stroke='#dee2e6' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(t) + 8) + "' font-size='21' font-weight='800' fill='#5f6b80' text-anchor='end'>" + t + "</text>"; });
+    h += "<text x='" + X0 + "' y='26' font-size='21' font-weight='900' fill='#5f6b80'>잎 두께 (µm)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 50, 100].forEach(function (v) { h += "<line x1='" + X(v) + "' y1='" + Y0 + "' x2='" + X(v) + "' y2='" + (Y0 + 12) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(v) + "' y='" + (Y0 + 38) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + v + "%</text>"; });
+    h += "<text x='" + X0 + "' y='" + (Y0 + 70) + "' font-size='21' font-weight='900' fill='#1864ab'>← 아래 가지 (그늘)</text>";
+    h += "<text x='" + X1 + "' y='" + (Y0 + 70) + "' font-size='21' font-weight='900' fill='#e8590c' text-anchor='end'>꼭대기 (햇빛) →</text>";
+    h += "<text x='" + ((X0 + X1) / 2) + "' y='" + (Y0 + 70) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>가지 높이</text>";
+    var pts = [], v;
+    for (v = 0; v <= 100; v += 2) pts.push(X(v).toFixed(1) + " " + Y(T(v)).toFixed(1));
+    h += "<g data-step='1'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#2b8a3e' stroke-width='6' stroke-linecap='round'/></g>";
+    var ha = hOf(230), hb = hOf(100);
+    h += "<g data-step='2'>";
+    h += "<line x1='" + X0 + "' y1='" + Y(230) + "' x2='" + X(ha) + "' y2='" + Y(230) + "' stroke='#2b8a3e' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += "<circle cx='" + X(ha) + "' cy='" + Y(230) + "' r='11' fill='#2b8a3e'/><text x='" + (X(ha) - 18) + "' y='" + (Y(230) - 18) + "' font-size='25' font-weight='900' fill='#2b8a3e' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>A 약 230 µm</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y(100) + "' x2='" + X(hb) + "' y2='" + Y(100) + "' stroke='#1864ab' stroke-width='3' stroke-dasharray='8 6'/>";
+    h += "<circle cx='" + X(hb) + "' cy='" + Y(100) + "' r='11' fill='#1864ab'/><text x='" + (X(hb) + 20) + "' y='" + (Y(100) - 18) + "' font-size='25' font-weight='900' fill='#1864ab' stroke='#fff' stroke-width='6' paint-order='stroke'>B 약 100 µm</text></g>";
+    h += "<text x='" + X1 + "' y='26' font-size='18' fill='#7b8598' text-anchor='end'>⚠ 단원 화면 모형으로 그린 곡선</text>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

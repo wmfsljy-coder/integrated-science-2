@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 산화와 환원 (통합과학2 Ⅰ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .formula { font-weight: 800; background: #f8fafc; border: 1px dashed #c9d1dd; border-radius: 6px; padding: 2px 10px; display: inline-block; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격을 조금 줄인다 */ p, li { line-height: 1.8; } h2 { margin: 9px 0 4px; } .write { height: 48px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅰ-2 화학 변화 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 산화와 환원</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 산소의 이동 — 용광로에서 철을 꺼내기</h2>
+  <ul>
+    <li>철광석의 주성분은 산화 철(Ⅲ) Fe₂O₃ (질량의 약 70%가 철, 30%가 산소) → 철을 얻으려면 철에 붙은 <b class="blank" data-n="1">산소</b>를 떼어 가야 한다</li>
+    <li>코크스(C) + 공기의 산소 → <b class="blank" data-n="2">일산화 탄소</b>(CO) <span class="formula">2C + O₂ → 2CO</span></li>
+    <li>CO가 철광석의 산소를 떼어 가 CO₂가 된다 <span class="formula">Fe₂O₃ + 3CO → 2Fe + 3CO₂</span></li>
+    <li>산소를 얻는 반응 → <b class="blank" data-n="3">산화</b> (CO → CO₂) &nbsp;·&nbsp; 산소를 잃는 반응 → <b class="blank" data-n="4">환원</b> (Fe₂O₃ → Fe)</li>
+    <li>한쪽이 잃은 산소는 다른 쪽이 얻는다 → 산화와 환원은 항상 <b class="blank" data-n="5">동시</b>에 일어난다</li>
+    <li>용광로 장부(단원 화면 모형): 철광석 160 kg을 남김없이 철로 바꾸는 코크스 최소 <b class="blank" data-n="6">36</b> kg → 얻는 철 <b class="blank" data-n="7">112</b> kg<br>철 280 kg이 필요하면 모두 2.5배: 철광석 400 kg + 코크스 90 kg</li>
+  </ul>
+
+  <h2>② 역사를 바꾼 세 사건 — 공통점은 산소의 이동</h2>
+  <table>
+    <tr><th style="width:17%">사건</th><th style="width:37%">반응식</th><th>산화되는 것 / 환원되는 것</th></tr>
+    <tr><td>철의 제련</td><td>Fe₂O₃ + 3CO → 2Fe + 3CO₂</td><td>산화: CO → CO₂ / 환원: Fe₂O₃ → Fe</td></tr>
+    <tr><td>화석 연료의 연소</td><td>CH₄ + 2O₂ → CO₂ + 2H₂O</td><td>산화: 메테인이 산소를 얻는다 (연소 = 빠른 산화)</td></tr>
+    <tr><td>광합성</td><td>6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂</td><td>환원: <b class="blank" data-n="8">이산화 탄소</b> → 포도당 / 산화: 물 → 산소 기체</td></tr>
+  </table>
+  <ul>
+    <li>산화: 녹, 손난로(철 가루 → 산화 철), 세포 호흡(포도당 → CO₂) · 환원: 구리 제련(CuO → Cu)</li>
+  </ul>
+
+  <h2>③ 전자의 이동 — 철 못에 구리를 입히기</h2>
+  <ul>
+    <li>파란 황산 구리(Ⅱ) 수용액에 철 못 → 못 표면에 붉은 구리, 파란색(Cu²⁺)이 옅어짐<br>산소가 없어도 <b class="blank" data-n="9">전자</b>를 잃으면 산화, 얻으면 환원</li>
+    <li>산화: Fe → <b class="blank" data-n="10">Fe²⁺</b> + 2e⁻ &nbsp;·&nbsp; 환원: Cu²⁺ + 2e⁻ → <b class="blank" data-n="11">Cu</b> &nbsp;·&nbsp; 전체: Fe + Cu²⁺ → Fe²⁺ + Cu</li>
+    <li>구리 선 + 질산 은 수용액: Cu + 2Ag⁺ → Cu²⁺ + 2Ag → 구리 원자 1개당 은 이온 <b class="blank" data-n="12">2</b>개가 은이 된다</li>
+    <li>전자를 잃고 양이온이 되려는 정도 → 금속의 <b class="blank" data-n="13">반응성</b> &nbsp; 큰 것부터: <b class="blank" data-n="14">Mg &gt; Zn &gt; Fe &gt; Cu &gt; Ag</b></li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 아연 조각을 푸른 황산 구리(Ⅱ) 수용액에 넣으면? <span class="ans">→ ㉠</span><br>
+      ㉠ 아연 표면에 구리가 달라붙는다 &nbsp; ㉡ 아무 변화가 없다 &nbsp; ㉢ 용액의 파란색이 더 진해진다</p>
+    <p>2. CH₄ + 2O₂ → CO₂ + 2H₂O 에서 산소를 얻어 산화되는 물질은? <span class="ans">→ ㉠ CH₄</span><br>
+      ㉠ CH₄ &nbsp; ㉡ CO₂ &nbsp; ㉢ H₂O</p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>서진이의 질문 “장인은 왜 꼭 숯을 철광석과 섞어 넣을까?”에 ‘산소’와 ‘환원’이라는 말을 넣어 한 문장으로 답하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「붉은 돌에서 철을 꺼내라」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

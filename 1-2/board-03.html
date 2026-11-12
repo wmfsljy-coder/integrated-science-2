@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 반응과 에너지 출입 (통합과학2 Ⅰ-2 03)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  /* 이 강의에서만 쓰는 모양 */
+  @keyframes packIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .pwrap { animation: packIn 1.2s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .lines p.eqs { font-size: 27px; font-weight: 800; color: var(--ink); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card { padding: 20px 28px; }
+  .two .card h3 { font-size: 30px; margin-bottom: 8px; }
+  .two .card .it { font-size: 25px; font-weight: 700; padding: 5px 14px; border-radius: 12px; background: var(--soft); margin-bottom: 6px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 29px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+  #s-check1 .opt { font-size: 29px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="열을 내놓는 손난로와 열을 빨아들이는 냉찜질 팩">
+      <defs>
+        <linearGradient id="c3-warm" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#ffa94d"/><stop offset="1" stop-color="#e8590c"/></linearGradient>
+        <linearGradient id="c3-cold" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#d0ebff"/><stop offset="1" stop-color="#4dabf7"/></linearGradient>
+        <marker id="c3-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff8787"/></marker>
+        <marker id="c3-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#ff8787"/></marker>
+      </defs>
+      <g class="pwrap">
+        <rect x="360" y="250" width="300" height="200" rx="36" fill="url(#c3-warm)"/>
+        <g fill="#7c2d12" opacity=".55"><circle cx="420" cy="290" r="6"/><circle cx="470" cy="290" r="6"/><circle cx="520" cy="290" r="6"/><circle cx="570" cy="290" r="6"/><circle cx="620" cy="290" r="6"/></g>
+        <text x="510" y="380" font-size="40" font-weight="900" fill="#fff" text-anchor="middle">손난로</text>
+        <rect x="940" y="250" width="300" height="200" rx="36" fill="url(#c3-cold)"/>
+        <g stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"><path d="M990 280 l14 14 M1004 280 l-14 14"/><path d="M1190 300 l14 14 M1204 300 l-14 14"/><path d="M1060 420 l14 14 M1074 420 l-14 14"/></g>
+        <text x="1090" y="380" font-size="40" font-weight="900" fill="#0b3d6e" text-anchor="middle">냉찜질 팩</text>
+      </g>
+      <g data-step="1">
+        <g stroke="#ff8787" stroke-width="7" fill="none" marker-end="url(#c3-r)">
+          <path d="M440 240 q-14 -26 0 -52 q14 -26 0 -52"/><path d="M510 240 q-14 -26 0 -52 q14 -26 0 -52 q-14 -26 0 -40"/><path d="M580 240 q-14 -26 0 -52 q14 -26 0 -52"/>
+        </g>
+        <text x="510" y="60" font-size="30" font-weight="900" fill="#ffa8a8" text-anchor="middle">열이 나온다</text>
+        <g stroke="#ff8787" stroke-width="7" fill="none" marker-end="url(#c3-b)">
+          <path d="M1020 110 q-14 26 0 52 q14 26 0 52 q-14 20 0 30"/><path d="M1090 100 q-14 26 0 52 q14 26 0 52 q-14 26 0 36"/><path d="M1160 110 q-14 26 0 52 q14 26 0 52 q-14 20 0 30"/>
+        </g>
+        <text x="1090" y="60" font-size="30" font-weight="900" fill="#ffa8a8" text-anchor="middle">열이 들어간다</text>
+      </g>
+      <text x="1560" y="24" fill="#7b8598" font-size="18" text-anchor="end">⚠ 모식도</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅰ-2 화학 변화 · 03</p>
+    <h1>반응과 에너지 출입</h1>
+    <p class="sub" data-step="1">불 없이 따뜻하게, 얼음 없이 차갑게</p>
+  </div>
+  <aside class="script">
+    <p>1월의 운동장, 축구부 주장 도윤이가 팩 두 개를 들고 왔습니다. 흔들면 몇 시간이고 따뜻한 손난로, 꾹 누르면 곧바로 차가워지는 냉찜질 팩이에요. 둘 다 전기도 불도 얼음도 없습니다.</p>
+    <p data-at="1">오늘은 화학 반응에서 에너지가 어느 쪽으로 드나드는지 보고, 알맞은 온도의 두 팩을 설계합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="냉찜질 팩 속에서는?" data-part="도입">
+  <p class="kicker">도입 · 과학 동아리실</p>
+  <h2>“전기도 불도 얼음도 없는데 왜 차가워지지?”</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>냉찜질 팩 성분표: 질산 암모늄, 물 주머니. 눌러서 물 주머니가 터지면 차가워진다.</p>
+      <p class="big mt">냉찜질 팩이 차가워질 때, 팩 속에서는 <span class="c-blue">무슨 일</span>이 일어나고 있을까?</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 답은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 팩 속 물질이 ‘냉기’를 만들어 밖으로 내보낸다</div>
+        <div class="opt">㉡ 팩 속에서 일어나는 변화가 주변의 열을 흡수한다</div>
+        <div class="opt">㉢ 팩 속의 에너지가 사라져 없어진다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>손난로는 공기와 닿으면 따뜻해지고, 냉찜질 팩은 물 주머니가 터지면 차가워집니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않고, 에너지 장부를 본 뒤 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>발열 반응</b><span>에너지를 내놓아 주변 온도가 오르는 반응</span></div>
+    <div class="card"><b>흡열 반응</b><span>에너지를 빨아들여 주변 온도가 내려가는 반응</span></div>
+    <div class="card"><b>에너지의 방출</b><span>물질에서 주변으로 나가는 에너지</span></div>
+    <div class="card"><b>에너지의 흡수</b><span>주변에서 물질로 들어오는 에너지</span></div>
+    <div class="card"><b>손난로와 냉찜질 팩</b><span>에너지 출입을 골라 쓰는 제품</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 발열 반응 -->
+<section class="slide" id="s-exo" data-title="에너지를 내놓는 반응" data-part="① 에너지 장부">
+  <p class="kicker">① 에너지 장부 · 반응물과 생성물의 에너지를 비교하면</p>
+  <h2>내려온 만큼 주변으로 나간다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg viewBox="0 0 700 460" width="700" height="460" aria-label="발열 반응의 에너지 그림: 반응물이 생성물보다 에너지가 높고 그 차이만큼 열이 주변으로 나간다">
+      <defs>
+        <marker id="s4-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+        <marker id="s4-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker>
+      </defs>
+      <path d="M60 420 V30" stroke="#161b28" stroke-width="4" marker-end="url(#s4-k)"/>
+      <text x="74" y="40" font-size="22" font-weight="900" fill="#161b28">에너지</text>
+      <line x1="60" y1="420" x2="680" y2="420" stroke="#161b28" stroke-width="4"/>
+      <text x="680" y="452" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="end">반응 진행 →</text>
+      <rect x="110" y="110" width="200" height="16" rx="8" fill="#e8590c"/>
+      <text x="210" y="96" font-size="24" font-weight="900" fill="#e8590c" text-anchor="middle">반응물</text>
+      <text x="210" y="158" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">CH₄ + 2O₂</text>
+      <g data-step="1">
+        <rect x="430" y="330" width="200" height="16" rx="8" fill="#868e96"/>
+        <text x="530" y="316" font-size="24" font-weight="900" fill="#495057" text-anchor="middle">생성물</text>
+        <text x="530" y="378" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">CO₂ + 2H₂O</text>
+        <line x1="310" y1="118" x2="430" y2="338" stroke="#adb5bd" stroke-width="3" stroke-dasharray="8 6"/>
+      </g>
+      <g data-step="2">
+        <path d="M375 124 V318" stroke="#e03131" stroke-width="8" marker-end="url(#s4-a)"/>
+        <g stroke="#e03131" stroke-width="4" fill="none" opacity=".8"><path d="M560 250 q-10 -18 0 -36 q10 -18 0 -36"/><path d="M600 260 q-10 -18 0 -36 q10 -18 0 -36 q-10 -18 0 -30"/><path d="M640 250 q-10 -18 0 -36 q10 -18 0 -36"/></g>
+        <text x="395" y="200" font-size="26" font-weight="900" fill="#c92a2a">방출</text>
+        <text x="395" y="232" font-size="20" font-weight="800" fill="#c92a2a">메테인 1몰당</text>
+        <text x="395" y="258" font-size="20" font-weight="800" fill="#c92a2a">약 890 kJ</text>
+      </g>
+      <text x="690" y="24" font-size="18" fill="#7b8598" text-anchor="end">⚠ 높이는 크기를 나타낸 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">반응물의 에너지 &gt; 생성물의 에너지</p>
+      <p data-step="2">그 차이만큼 에너지를 주변으로 <b class="blank" data-n="1" data-step="2">방출</b> → 주변 온도가 오른다</p>
+      <p data-step="3">이런 반응 → <b class="blank" data-n="2" data-step="3">발열 반응</b></p>
+      <p class="eqs" data-step="3">메테인의 연소 · 철 가루의 산화(4Fe + 3O₂ → 2Fe₂O₃)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>동아리 선생님의 말입니다. 화학 반응이 일어나면 물질만 바뀌는 게 아니라 에너지도 드나듭니다. 반응물이 가진 에너지와 생성물이 가진 에너지가 다르기 때문이에요. 메테인의 연소를 예로 봅시다.</p>
+    <p data-at="1">메테인과 산소가 가진 에너지보다 이산화 탄소와 물이 가진 에너지가 낮습니다.</p>
+    <p data-at="2">높은 곳에서 낮은 곳으로 내려온 만큼 에너지가 주변으로 나옵니다. 빈칸 1번, 방출. 메테인 1몰이 탈 때 약 890 kJ이에요. 그래서 주변 온도가 오릅니다.</p>
+    <p data-at="3">빈칸 2번, 발열 반응. 손난로 속 철 가루의 산화도 발열 반응입니다.</p>
+  </aside>
+</section>
+
+<!-- 5 흡열 반응 -->
+<section class="slide" id="s-endo" data-title="에너지를 빨아들이는 변화" data-part="① 에너지 장부">
+  <p class="kicker">① 에너지 장부 · 질산 암모늄이 물에 녹을 때</p>
+  <h2>올라간 만큼 주변에서 가져온다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg viewBox="0 0 700 460" width="700" height="460" aria-label="흡열 반응의 에너지 그림: 생성물이 반응물보다 에너지가 높고 그 차이만큼 열을 주변에서 흡수한다">
+      <defs>
+        <marker id="s5-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker>
+        <marker id="s5-k" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker>
+      </defs>
+      <path d="M60 420 V30" stroke="#161b28" stroke-width="4" marker-end="url(#s5-k)"/>
+      <text x="74" y="40" font-size="22" font-weight="900" fill="#161b28">에너지</text>
+      <line x1="60" y1="420" x2="680" y2="420" stroke="#161b28" stroke-width="4"/>
+      <text x="680" y="452" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="end">반응 진행 →</text>
+      <rect x="110" y="300" width="200" height="16" rx="8" fill="#4dabf7"/>
+      <text x="210" y="286" font-size="24" font-weight="900" fill="#1864ab" text-anchor="middle">반응물</text>
+      <text x="210" y="350" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">NH₄NO₃(고체) + 물</text>
+      <g data-step="1">
+        <rect x="430" y="180" width="200" height="16" rx="8" fill="#868e96"/>
+        <text x="530" y="166" font-size="24" font-weight="900" fill="#495057" text-anchor="middle">생성물</text>
+        <text x="530" y="228" font-size="20" font-weight="800" fill="#5f6b80" text-anchor="middle">NH₄⁺ + NO₃⁻ (수용액)</text>
+        <line x1="310" y1="308" x2="430" y2="188" stroke="#adb5bd" stroke-width="3" stroke-dasharray="8 6"/>
+      </g>
+      <g data-step="2">
+        <path d="M375 302 V204" stroke="#1462d8" stroke-width="8" marker-end="url(#s5-a)"/>
+        <g stroke="#1462d8" stroke-width="5" fill="none"><path d="M230 120 H330" marker-end="url(#s5-a)"/></g>
+        <text x="180" y="128" font-size="22" font-weight="900" fill="#1462d8" text-anchor="middle">주변의 열</text>
+        <text x="395" y="262" font-size="26" font-weight="900" fill="#1462d8">흡수</text>
+        <text x="395" y="294" font-size="20" font-weight="800" fill="#1462d8">1몰당 약 26 kJ</text>
+      </g>
+      <text x="690" y="24" font-size="18" fill="#7b8598" text-anchor="end">⚠ 높이는 크기를 나타낸 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">생성물의 에너지 &gt; 반응물의 에너지</p>
+      <p data-step="2">그 차이만큼 주변의 에너지를 <b class="blank" data-n="3" data-step="2">흡수</b> → 주변 온도가 내려간다</p>
+      <p data-step="3">이런 반응 → <b class="blank" data-n="4" data-step="3">흡열 반응</b></p>
+      <p class="eqs" data-step="3">NH₄NO₃(고체) → NH₄⁺ + NO₃⁻ (수용액)</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이번에는 냉찜질 팩 속 질산 암모늄이 물에 녹는 경우입니다.</p>
+    <p data-at="1">녹은 뒤의 에너지가 녹기 전보다 높습니다. 높은 곳으로 올라가려면 에너지를 어디선가 받아 와야 하죠.</p>
+    <p data-at="2">그 에너지를 주변, 곧 물에서 가져옵니다. 빈칸 3번, 흡수. 질산 암모늄 1몰이 녹을 때 약 26 kJ입니다. 열을 빼앗긴 물은 차가워집니다.</p>
+    <p data-at="3">빈칸 4번, 흡열 반응. 단원 화면에서도 이 용해를 흡열 반응으로 다룹니다.</p>
+  </aside>
+</section>
+
+<!-- 6 확인 -->
+<section class="slide" id="s-check1" data-title="그림 보고 고르기" data-part="① 에너지 장부">
+  <p class="kicker">① 에너지 장부 · 확인</p>
+  <h2>생성물이 반응물보다 ‘위에’ 있는 변화는?</h2>
+  <p class="small" style="margin:-18px 0 22px">에너지 그림(세로축 = 에너지)을 떠올려 고르세요</p>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">① 메테인의 연소</div>
+    <div class="opt wrong" data-step="1">② 손난로 속 철 가루의 산화</div>
+    <div class="opt right" data-step="1">③ 질산 암모늄이 물에 녹는 것</div>
+    <div class="opt wrong" data-step="1">④ 산과 염기의 중화 반응</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 생성물이 위에 있다는 것은 에너지를 흡수한다는 뜻입니다.</p>
+    <p data-at="1">정답은 ③. 나머지는 모두 열을 내놓는 발열 반응이에요. ④ 중화 반응은 지난 시간 온도 그래프에서 온도가 올라갔던 것을 떠올리게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 7 손난로의 원리 -->
+<section class="slide" id="s-warm" data-title="손난로의 원리" data-part="② 손난로">
+  <p class="kicker">② 손난로 설계 · 잘라 본 손난로</p>
+  <h2>철이 녹스는 반응을 빠르게 일으킨다</h2>
+  <div class="cols" style="grid-template-columns:680px 1fr;align-items:center">
+    <svg id="warmSvg" viewBox="0 0 680 450" width="680" height="450" aria-label="손난로 주머니 단면: 공기 구멍으로 산소가 들어와 철 가루와 반응하고 열이 나온다">
+      <defs>
+        <marker id="s7-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1c7ed6"/></marker>
+        <marker id="s7-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+        <clipPath id="s7-clip"><rect x="100" y="150" width="440" height="230" rx="40"/></clipPath>
+      </defs>
+      <rect x="100" y="150" width="440" height="230" rx="40" fill="#fff4e6" stroke="#e8590c" stroke-width="6"/>
+      <g clip-path="url(#s7-clip)"><g id="warmGrains"></g></g>
+      <g fill="#fff" stroke="#e8590c" stroke-width="3"><circle cx="170" cy="150" r="7"/><circle cx="250" cy="150" r="7"/><circle cx="330" cy="150" r="7"/><circle cx="410" cy="150" r="7"/><circle cx="490" cy="150" r="7"/></g>
+      <text x="560" y="140" font-size="22" font-weight="900" fill="#e8590c">공기 구멍</text>
+      <text x="320" y="420" font-size="22" font-weight="900" fill="#495057" text-anchor="middle">철 가루 + 소금물 + 활성탄</text>
+      <g data-step="1">
+        <g stroke="#1c7ed6" stroke-width="6" marker-end="url(#s7-b)"><path d="M170 60 V128"/><path d="M330 60 V128"/><path d="M490 60 V128"/></g>
+        <text x="250" y="48" font-size="24" font-weight="900" fill="#1c7ed6" text-anchor="middle">O₂</text><text x="410" y="48" font-size="24" font-weight="900" fill="#1c7ed6" text-anchor="middle">O₂</text>
+        <g stroke="#e03131" stroke-width="5" fill="none" marker-end="url(#s7-r)"><path d="M60 330 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40"/><path d="M600 330 q-14 -20 0 -40 q14 -20 0 -40 q-14 -20 0 -40"/></g>
+        <text x="60" y="360" font-size="22" font-weight="900" fill="#e03131" text-anchor="middle">열</text><text x="600" y="360" font-size="22" font-weight="900" fill="#e03131" text-anchor="middle">열</text>
+      </g>
+      <text x="675" y="446" font-size="18" fill="#7b8598" text-anchor="end">⚠ 단면 모식도 · 알갱이 크기 과장</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">철 가루가 공기 중의 산소와 만나 <b class="blank" data-n="5" data-step="1">산화</b> → 열을 방출</p>
+      <p class="eqs" data-step="1">4Fe + 3O₂ → 2Fe₂O₃</p>
+      <p data-step="2">소금물·활성탄: 반응을 빠르게 한다</p>
+      <p data-step="3">포장지의 미세한 구멍 → <b class="blank" data-n="6" data-step="3">산소</b>가 들어오는 속도를 정한다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>손난로 주머니를 잘라 보면 검은 철 가루와 소금물, 활성탄이 들어 있습니다. 포장을 뜯어 공기와 닿아야 따뜻해지죠.</p>
+    <p data-at="1">철 가루가 공기 중의 산소와 만나 빈칸 5번, 산화됩니다. 철이 녹스는 반응과 같은 발열 반응이에요. 지난 첫 시간의 산화와 이어집니다.</p>
+    <p data-at="2">녹은 보통 아주 천천히 슬지만, 소금물과 활성탄이 반응을 빠르게 해 몇 시간 만에 열을 내놓습니다.</p>
+    <p data-at="3">포장지의 미세한 구멍이 빈칸 6번, 산소가 들어오는 속도를 정합니다. 구멍이 많을수록 반응이 빨라져요.</p>
+  </aside>
+</section>
+
+<!-- 8 손난로 설계 -->
+<section class="slide" id="s-design" data-title="손난로 설계" data-part="② 손난로">
+  <p class="kicker">② 손난로 설계 · 뜨겁지 않게, 오래가게 (단원 화면 모형)</p>
+  <h2>구멍은 온도를, 철 가루의 양은 시간을 정한다</h2>
+  <div class="cols" style="grid-template-columns:820px 1fr;align-items:center">
+    <svg id="designSvg" viewBox="0 0 820 460" width="820" height="460" aria-label="공기 구멍 단계와 철 가루 양에 따른 손난로 온도 변화 그래프"></svg>
+    <div class="lines">
+      <p class="small" style="font-size:26px;color:var(--ink)">조건: 최고 60 ℃ 이하 · 50 ℃ 이상 8시간 이상 · 철 가루 30 g 이하</p>
+      <p data-step="1">구멍 단계(산소가 들어오는 속도) → <b class="blank" data-n="7" data-step="1">최고 온도</b></p>
+      <p data-step="2">철 가루의 양 → <b class="blank" data-n="8" data-step="2">따뜻한 시간</b> (철이 다 산화되면 식는다)</p>
+      <p data-step="3">예: 구멍 6단계 + 철 28 g → 최고 약 54 ℃, 50 ℃ 이상 약 8.7시간</p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 철 1 g당 약 7.4 kJ 방출, 산소가 들어오는 속도만큼만 일정하게 반응한다고 가정했습니다. 40 ℃대라도 맨살에 오래 대면 저온 화상을 입을 수 있어 옷 위에 붙입니다.</p>
+  <aside class="script">
+    <p>단원 화면의 손난로 설계 미션입니다. 60 ℃를 넘으면 화상 위험, 50 ℃가 안 되면 추운 벤치에서 소용이 없어요. 철 가루는 주머니에 들어가야 하니 30 g 이하입니다.</p>
+    <p data-at="1">철 가루 28 g으로 구멍만 바꿔 봤습니다. 4단계는 미지근하고 8단계는 60 ℃를 넘습니다. 구멍, 곧 산소가 들어오는 속도가 빈칸 7번, 최고 온도를 정합니다.</p>
+    <p data-at="2">구멍 6단계에서 철 가루를 20 g에서 28 g으로 늘리면 최고 온도는 그대로인데 따뜻한 시간이 늘어납니다. 빈칸 8번, 따뜻한 시간. 철이 다 산화되면 더 열이 나오지 않아 식어요.</p>
+    <p data-at="3">그래서 순서는 먼저 구멍 단계로 온도를 맞추고, 그다음 철 가루 양으로 시간을 맞추는 것입니다. 6단계에 26~30 g이면 세 조건을 모두 만족합니다.</p>
+  </aside>
+</section>
+
+<!-- 9 냉찜질 팩 설계 -->
+<section class="slide" id="s-cold" data-title="냉찜질 팩 설계" data-part="③ 냉찜질 팩">
+  <p class="kicker">③ 냉찜질 팩 설계 · 차갑게, 그러나 얼지 않게 (단원 화면 모형)</p>
+  <h2>녹이는 양이 많을수록 더 차가워진다</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="coldSvg" viewBox="0 0 780 460" width="780" height="460" aria-label="20 도의 물 100 g에 녹인 질산 암모늄 양에 따른 다 녹았을 때의 온도"></svg>
+    <div class="lines">
+      <p data-step="1"><b class="blank" data-n="9" data-step="1">질산 암모늄</b>이 물에 녹으며 물의 열을 흡수 → 물의 온도가 내려간다</p>
+      <p data-step="2">삔 발목에 알맞은 온도 <b class="blank" data-n="10" data-step="2">2~6</b> ℃ · 전체 150 g 이하</p>
+      <p data-step="3">예: 물 100 g + 질산 암모늄 25 g → 약 4.6 ℃ (흡수한 열 약 8.0 kJ)</p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 질산 암모늄의 용해열(1몰당 약 26 kJ 흡수)과 물의 비열만으로 계산했고, 밖에서 들어오는 열은 넣지 않았습니다.</p>
+  <aside class="script">
+    <p>냉찜질 팩은 반대입니다. 20 ℃의 물 100 g에 질산 암모늄을 녹여 다 녹았을 때의 온도를 봅니다.</p>
+    <p data-at="1">빈칸 9번, 질산 암모늄이 물에 녹으면서 물의 열을 흡수합니다. 많이 녹일수록 흡수하는 열이 많아 더 차가워집니다.</p>
+    <p data-at="2">삔 발목에는 빈칸 10번, 2~6 ℃가 알맞습니다. 그보다 차가우면 피부가 상할 수 있고, 미지근하면 부기가 안 빠져요. 팩은 한 손에 잡혀야 하니 전체 150 g 이하.</p>
+    <p data-at="3">물 100 g이면 질산 암모늄 23~30 g이 조건에 듭니다. 25 g을 녹이면 약 8.0 kJ을 흡수해 약 4.6 ℃가 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 10 냉기는 없다 -->
+<section class="slide" id="s-flow" data-title="냉기는 없다" data-part="③ 냉찜질 팩">
+  <p class="kicker">③ 냉찜질 팩 · 발목에 댔을 때 열의 길</p>
+  <h2>‘냉기’는 없다 — 열이 들어가거나 나올 뿐</h2>
+  <svg viewBox="0 0 1400 320" width="1400" height="320" aria-label="따뜻한 발목에서 차가운 냉찜질 팩 쪽으로 열이 이동한다">
+    <defs>
+      <linearGradient id="s10-leg" x1="0" x2="1"><stop offset="0" stop-color="#ffc9a9"/><stop offset="1" stop-color="#ff8787"/></linearGradient>
+      <linearGradient id="s10-pack" x1="0" x2="1"><stop offset="0" stop-color="#a5d8ff"/><stop offset="1" stop-color="#339af0"/></linearGradient>
+      <marker id="s10-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+    </defs>
+    <rect x="40" y="40" width="500" height="220" rx="80" fill="url(#s10-leg)"/>
+    <text x="280" y="140" font-size="34" font-weight="900" fill="#7c2d12" text-anchor="middle">발목</text>
+    <text x="280" y="186" font-size="26" font-weight="800" fill="#7c2d12" text-anchor="middle">따뜻하다</text>
+    <rect x="860" y="60" width="440" height="180" rx="34" fill="url(#s10-pack)"/>
+    <text x="1080" y="140" font-size="34" font-weight="900" fill="#0b3d6e" text-anchor="middle">냉찜질 팩</text>
+    <text x="1080" y="186" font-size="26" font-weight="800" fill="#0b3d6e" text-anchor="middle">약 2~6 ℃</text>
+    <g data-step="1">
+      <g stroke="#e03131" stroke-width="9" marker-end="url(#s10-a)"><path d="M570 110 H830"/><path d="M570 190 H830"/></g>
+      <text x="700" y="90" font-size="28" font-weight="900" fill="#c92a2a" text-anchor="middle">열</text>
+      <text x="700" y="240" font-size="24" font-weight="800" fill="#c92a2a" text-anchor="middle">온도가 높은 쪽 → 낮은 쪽</text>
+    </g>
+    <g data-step="2"><text x="1080" y="290" font-size="24" font-weight="900" fill="#1462d8" text-anchor="middle">팩 속 흡열 과정이 열을 흡수</text></g>
+    <text x="1395" y="316" font-size="18" fill="#7b8598" text-anchor="end">⚠ 모식도</text>
+  </svg>
+  <div class="lines" style="margin-top:20px">
+    <p data-step="1">팩이 ‘냉기’를 내보내는 것이 아니다 → 발목의 <b class="blank" data-n="11" data-step="1">열</b>이 팩 쪽으로 흘러 들어간다</p>
+    <p data-step="2">팩 속 흡열 과정이 그 열을 흡수한다 → 발목이 시원해진다</p>
+    <p data-step="3" style="font-weight:900">에너지는 사라지지도 새로 생기지도 않고, 물질과 주변 사이를 옮겨 다닐 뿐</p>
+  </div>
+  <aside class="script">
+    <p>완성한 냉찜질 팩을 삔 발목에 댑니다. 시원해지는 동안 무엇이 어디로 움직일까요?</p>
+    <p data-at="1">‘냉기’라는 물질이나 에너지는 없습니다. 빈칸 11번, 열이 온도가 높은 발목에서 낮은 팩으로 이동합니다. 시원하다는 느낌은 열을 빼앗기고 있다는 뜻이에요.</p>
+    <p data-at="2">팩 속 흡열 과정이 그 열을 받아들입니다. 첫 추리에서 ㉡을 고른 학생이 맞았습니다.</p>
+    <p data-at="3">에너지는 사라지지 않습니다. ㉢처럼 에너지가 없어지는 것도 아니고, 옮겨 다닐 뿐입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 생활 속 에너지 출입 -->
+<section class="slide soft" id="s-life" data-title="생활 속 에너지 출입" data-part="③ 냉찜질 팩">
+  <p class="kicker">③ 냉찜질 팩 · 대회 준비하며 본 것들</p>
+  <h2>우리는 에너지 출입을 골라 쓴다</h2>
+  <svg viewBox="0 0 1400 90" width="1400" height="90" aria-label="왼쪽은 에너지를 방출해 주변 온도가 오르고, 오른쪽은 에너지를 흡수해 주변 온도가 내려간다">
+    <defs>
+      <marker id="s11-r" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#e03131"/></marker>
+      <marker id="s11-b" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker>
+    </defs>
+    <rect x="120" y="20" width="190" height="56" rx="16" fill="#ffe3e3"/><text x="215" y="57" font-size="24" font-weight="900" fill="#c92a2a" text-anchor="middle">물질</text>
+    <path d="M320 48 H470" stroke="#e03131" stroke-width="7" marker-end="url(#s11-r)"/><text x="482" y="57" font-size="24" font-weight="900" fill="#c92a2a">주변 🔥</text>
+    <rect x="1090" y="20" width="190" height="56" rx="16" fill="#dbe4ff"/><text x="1185" y="57" font-size="24" font-weight="900" fill="#1462d8" text-anchor="middle">물질</text>
+    <path d="M920 48 H1070" stroke="#1462d8" stroke-width="7" marker-end="url(#s11-b)"/><text x="908" y="57" font-size="24" font-weight="900" fill="#1462d8" text-anchor="end">주변 ❄️</text>
+  </svg>
+  <div class="two" style="margin-top:14px">
+    <div class="card" data-step="1"><h3>🔥 에너지 방출 → 주변 온도 상승</h3>
+      <div class="it">연료의 연소 → 난방·조리</div><div class="it">발열 도시락: 산화 칼슘 + 물</div><div class="it">산과 염기의 중화 반응</div>
+      <div class="it">양분을 산화시키는 <b class="blank" data-n="12" data-step="1">세포 호흡</b> → 체온 유지</div></div>
+    <div class="card" data-step="2"><h3>❄️ 에너지 흡수 → 주변 온도 하강</h3>
+      <div class="it">냉찜질 팩: 질산 암모늄 용해</div><div class="it">탄산수소 나트륨 + 구연산</div><div class="it">얼음 위에 뿌린 소금</div>
+      <div class="it">빛에너지를 흡수하는 <b class="blank" data-n="13" data-step="2">광합성</b></div></div>
+  </div>
+  <aside class="script">
+    <p>단원 화면 결말의 분류 활동입니다. 도윤이가 대회 준비하며 본 것들을 열을 내놓는 쪽과 빨아들이는 쪽으로 나눕니다.</p>
+    <p data-at="1">연소, 발열 도시락, 중화 반응은 열을 내놓습니다. 우리 몸은 양분을 빈칸 12번, 세포 호흡으로 산화시켜 나오는 에너지로 체온을 유지해요.</p>
+    <p data-at="2">질산 암모늄 용해, 탄산수소 나트륨과 구연산은 열을 흡수합니다. 식물은 빛에너지를 흡수하는 빈칸 13번, 광합성으로 양분을 만듭니다. 빛이 없으면 광합성이 일어나지 않죠.</p>
+  </aside>
+</section>
+
+<!-- 12 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>‘냉기’는 없다 — 열이 들어가거나 나올 뿐</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>발열 반응</b>: 반응물 에너지 &gt; 생성물 에너지 → 방출, 주변 온도 상승 (연소, 철의 산화)</li>
+    <li data-k="2" data-step="2"><b>흡열 반응</b>: 생성물 에너지 &gt; 반응물 에너지 → 흡수, 주변 온도 하강 (질산 암모늄 용해)</li>
+    <li data-k="3" data-step="3">손난로: 구멍은 최고 온도, 철 가루 양은 시간 · 냉찜질 팩: 녹이는 양으로 2~6 ℃</li>
+    <li data-k="4" data-step="4">에너지는 사라지지 않고 옮겨 다닌다 · 세포 호흡은 방출, 광합성은 흡수</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 냉찜질 팩이 차가워지는 까닭을 ‘냉기’라는 말 없이 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 13 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 묽은 염산에 마그네슘 리본을 넣었더니 용액의 온도가 올라갔다. 이 반응은?</p>
+      <div class="opts">
+        <div class="opt right" data-step="1">㉠ 발열 반응</div>
+        <div class="opt wrong" data-step="1">㉡ 흡열 반응</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 손난로가 너무 뜨겁다. 무엇을 바꿔야 할까?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 철 가루를 더 넣는다</div>
+        <div class="opt right" data-step="2">㉡ 공기 구멍을 줄인다</div>
+        <div class="opt wrong" data-step="2">㉢ 공기 구멍을 늘린다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉠. 주변 온도가 올라갔으니 에너지를 방출한 발열 반응입니다.</p>
+    <p data-at="2">2번은 ㉡. 산소가 들어오는 속도를 줄이면 반응이 느려져 최고 온도가 낮아집니다. 철 가루를 더 넣으면 시간만 길어져요.</p>
+  </aside>
+</section>
+
+<!-- 14 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ③ 「불 없이 따뜻하게, 얼음 없이 차갑게」</h2>
+  <div class="cols">
+    <div class="card"><h3>두 팩을 직접 설계해 보세요</h3><p>에너지 장부로 반응 세 가지 비교하기, 세 조건을 만족하는 손난로와 2~6 ℃ 냉찜질 팩 설계하기, 생활 속 변화 열 가지 나누기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>단원 정리</h3><p>산소와 전자, H⁺과 OH⁻, 열. 세 이야기에서 무엇이 옮겨 갔고 그 양이 어떻게 맞아떨어졌는지 정리하기 탭에서 한 문장으로 묶어 봅니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ③을 열어 미션을 하게 합니다. 단원을 마치며 정리하기 탭의 ‘세 사건을 꿰는 한 문장’도 함께 씁니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  /* 7 — 손난로 속 알갱이(고정된 배치) */
+  (function () {
+    var g = document.getElementById("warmGrains"), s = "", seed = 11;
+    function rnd() { seed = seed * 16807 % 2147483647; return (seed - 1) / 2147483646; }
+    for (var i = 0; i < 150; i++) {
+      var x = 110 + rnd() * 420, y = 230 + rnd() * 145, k = rnd();
+      s += "<circle cx='" + x.toFixed(1) + "' cy='" + y.toFixed(1) + "' r='" + (5 + rnd() * 4).toFixed(1) + "' fill='" + (k < .62 ? "#343a40" : (k < .82 ? "#212529" : "#a5d8ff")) + "'/>";
+    }
+    g.innerHTML = s;
+  })();
+
+  /* 8 — 손난로 모형(단원 화면과 같은 식): C dT/dt = P − k(T − 10 ℃), P = 0.5 × 구멍 단계 × 7.38 kJ/h (철이 남아 있는 동안) */
+  (function () {
+    function warm(m, lv) {
+      var r = 0.5 * lv, k = 0.5, C = 0.15, Te = 10, T = Te, dt = 0.01, left = m, pts = [];
+      for (var i = 0; i <= 1400; i++) {
+        if (i % 5 === 0) pts.push([i * dt, T]);
+        T += ((left > 0 ? r * 7.38 : 0) - k * (T - Te)) / C * dt;
+        left = Math.max(0, left - r * dt);
+      }
+      return pts;
+    }
+    var X0 = 90, X1 = 800, Y0 = 390, Y1 = 40;
+    function X(h) { return X0 + h / 14 * (X1 - X0); }
+    function Y(t) { return Y0 - (t - 10) / 70 * (Y0 - Y1); }
+    var s = "";
+    [10, 20, 30, 40, 50, 60, 70, 80].forEach(function (t) { s += "<line x1='" + X0 + "' y1='" + Y(t) + "' x2='" + X1 + "' y2='" + Y(t) + "' stroke='#e9ecef' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(t) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + t + "</text>"; });
+    s += "<rect x='" + X0 + "' y='" + Y(60) + "' width='" + (X1 - X0) + "' height='" + (Y(50) - Y(60)) + "' fill='#40c057' opacity='.18'/>";
+    s += "<text x='" + (X1 - 8) + "' y='" + (Y(60) - 8) + "' font-size='20' font-weight='900' fill='#2b8a3e' text-anchor='end'>목표 50~60 ℃</text>";
+    s += "<text x='" + X0 + "' y='26' font-size='20' font-weight='900' fill='#5f6b80'>온도 (℃)</text>";
+    s += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 2, 4, 6, 8, 10, 12, 14].forEach(function (h) { s += "<line x1='" + X(h) + "' y1='" + Y0 + "' x2='" + X(h) + "' y2='" + (Y0 + 10) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(h) + "' y='" + (Y0 + 36) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + h + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y0 + 64) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>시간 (시간)</text>";
+    function line(m, lv, col, dash, step, lab, lx, ly) {
+      var p = warm(m, lv).map(function (q) { return X(q[0]).toFixed(1) + "," + Y(q[1]).toFixed(1); }).join(" ");
+      return "<g data-step='" + step + "'><polyline points='" + p + "' fill='none' stroke='" + col + "' stroke-width='5'" + (dash ? " stroke-dasharray='12 8'" : "") + "/><text x='" + lx + "' y='" + ly + "' font-size='21' font-weight='900' fill='" + col + "' stroke='#fff' stroke-width='5' paint-order='stroke'>" + lab + "</text></g>";
+    }
+    s += line(28, 8, "#e03131", false, 1, "8단계: 너무 뜨거움", X(0.3), Y(72));
+    s += line(28, 4, "#868e96", false, 1, "4단계: 미지근함", X(10.2), Y(44));
+    s += line(20, 6, "#1462d8", true, 2, "6단계 · 20 g", X(3.2), Y(44));
+    s += line(28, 6, "#1462d8", false, 2, "6단계 · 28 g ✓", X(5.2), Y(62));
+    s += "<text x='" + X1 + "' y='" + (Y1 - 14) + "' font-size='18' fill='#7b8598' text-anchor='end'>철 가루 28 g (6단계는 20 g도 함께)</text>";
+    document.getElementById("designSvg").innerHTML = s;
+  })();
+
+  /* 9 — 냉찜질 팩 모형(단원 화면과 같은 식): T = 20 − (a ÷ 80.04) × 25,700 ÷ ((물 + a) × 4.18), 물 100 g */
+  (function () {
+    function cold(w, a) { return 20 - (a / 80.04) * 25700 / ((w + a) * 4.18); }
+    var X0 = 90, X1 = 760, Y0 = 380, Y1 = 40;
+    function X(a) { return X0 + a / 40 * (X1 - X0); }
+    function Y(t) { return Y0 - (t + 5) / 25 * (Y0 - Y1); }
+    var s = "";
+    [-5, 0, 5, 10, 15, 20].forEach(function (t) { s += "<line x1='" + X0 + "' y1='" + Y(t) + "' x2='" + X1 + "' y2='" + Y(t) + "' stroke='#e9ecef' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(t) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + (t < 0 ? "−" + (-t) : t) + "</text>"; });
+    s += "<text x='" + X0 + "' y='26' font-size='20' font-weight='900' fill='#5f6b80'>다 녹았을 때의 온도 (℃)</text>";
+    s += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 10, 20, 30, 40].forEach(function (a) { s += "<line x1='" + X(a) + "' y1='" + Y0 + "' x2='" + X(a) + "' y2='" + (Y0 + 10) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(a) + "' y='" + (Y0 + 36) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + a + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y0 + 64) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>20 ℃ 물 100 g에 녹인 질산 암모늄 (g)</text>";
+    s += "<g data-step='2'><rect x='" + X0 + "' y='" + Y(6) + "' width='" + (X1 - X0) + "' height='" + (Y(2) - Y(6)) + "' fill='#40c057' opacity='.2'/><text x='" + (X0 + 12) + "' y='" + (Y(2) + 26) + "' font-size='20' font-weight='900' fill='#2b8a3e'>목표 2~6 ℃</text></g>";
+    var pts = [], a;
+    for (a = 0; a <= 40; a += 0.5) pts.push(X(a).toFixed(1) + "," + Y(cold(100, a)).toFixed(1));
+    s += "<g data-step='1'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#1c7ed6' stroke-width='5'/>";
+    for (a = 0; a <= 40; a += 5) s += "<circle cx='" + X(a) + "' cy='" + Y(cold(100, a)) + "' r='7' fill='#1c7ed6'/>";
+    s += "</g>";
+    s += "<g data-step='3'><circle cx='" + X(25) + "' cy='" + Y(cold(100, 25)) + "' r='12' fill='none' stroke='#c92a2a' stroke-width='4'/><text x='" + (X(25) + 18) + "' y='" + (Y(cold(100, 25)) - 14) + "' font-size='23' font-weight='900' fill='#c92a2a' stroke='#fff' stroke-width='6' paint-order='stroke'>25 g → 약 4.6 ℃</text></g>";
+    document.getElementById("coldSvg").innerHTML = s;
+  })();
+})();
+</script>
+</body>
+</html>

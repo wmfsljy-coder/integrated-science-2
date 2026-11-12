@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 미래를 바꿀 과학 기술 (통합과학2 Ⅲ-2 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.62; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 40px; } .foot { margin-top: 6px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅲ-2 과학 기술의 발전과 쟁점 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 미래를 바꿀 과학 기술</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 사물 인터넷 — 할머니의 스마트 온실</h2>
+  <ul>
+    <li>온도·토양 수분·카메라 <b class="blank" data-n="1">센서</b>가 쉬지 않고 잰다 → 제어기가 규칙과 견주어 → 환기창 모터·물 밸브·로봇 팔을 움직인다</li>
+    <li>사물에 센서와 통신 기능을 넣어 서로 정보를 주고받게 하는 기술 → <b class="blank" data-n="2">사물 인터넷(IoT)</b></li>
+    <li>‘35℃ 이상이면 연다’ → 한낮에 30℃를 넘는 시간 약 8시간 · ‘24℃ 이상이면 연다’ → 알맞은 온도(18~28℃) 15시간</li>
+    <li>센서 값을 사람이 정해 둔 <b class="blank" data-n="3">규칙</b>과 견주어 장치를 움직인다 (기준값은 사람이 정한다)</li>
+    <li>물 주기(한 번에 30 L): 타이머 방식 하루 8번 240 L → 센서 규칙 하루 3번 90 L · 물·에너지 같은 <b class="blank" data-n="4">자원</b>의 낭비를 줄인다</li>
+  </ul>
+
+  <h2>② 인공지능 — 익은 딸기를 가려내는 선</h2>
+  <ul>
+    <li>사람처럼 학습·추론·판단하도록 만든 컴퓨터 기술 → <b class="blank" data-n="5">인공지능</b></li>
+    <li>할머니가 익음/안 익음을 표시한 딸기 40개(가로 붉은 정도, 세로 크기) → 기계가 배우는 <b class="blank" data-n="6">학습 데이터</b></li>
+    <li>선을 그어 놓고 틀린 만큼 조금씩 옮기기를 되풀이 → 40개 중 38개를 맞히는 선. 데이터에서 규칙(선)을 스스로 찾는 방법 → <b class="blank" data-n="7">기계 학습</b></li>
+  </ul>
+
+  <h2>③ 유용성과 한계</h2>
+  <table>
+    <tr><th style="width:30%">시험</th><th style="width:22%">정확도</th><th>무슨 일이?</th></tr>
+    <tr><td>처음 보는 빨간 품종 40개</td><td>98%</td><td>학습한 것과 비슷한 상황에서는 잘 맞는다</td></tr>
+    <tr><td>흰 딸기 품종 30개</td><td>50%</td><td>다 익은 흰 딸기 15개를 모두 ‘안 익음’으로 판단</td></tr>
+    <tr><td>흰 딸기 표본 20개를 더해 다시 학습</td><td>빨강 98% · 흰 87%</td><td>선이 누웠다 (붉은 정도보다 크기를 더 본다)</td></tr>
+  </table>
+  <ul>
+    <li>학습 데이터에 흰 딸기가 없었다. 데이터가 치우치면 판단도 치우친다 → 데이터 <b class="blank" data-n="8">편향</b></li>
+    <li>무엇이 빠졌는지 알아채고, 결과를 점검하고, 책임지는 일 → <b class="blank" data-n="9">사람</b>의 몫</li>
+    <li>기술이 삶과 환경을 개선하는 쓸모 → <b class="blank" data-n="10">유용성</b></li>
+    <li>삶의 개선: 의료 영상 판독, 재난 수색 로봇, 유전 정보에 맞춰 치료하는 <b class="blank" data-n="11">맞춤형 의료</b></li>
+    <li>환경 개선: 스마트팜, 지능형 전력망, 태양광·풍력 전기를 모았다가 쓰는 <b class="blank" data-n="12">에너지 저장 장치</b></li>
+    <li>함께 대비해야 할 <b class="blank" data-n="13">한계</b>·우려: 연결된 기기의 <b class="blank" data-n="14">해킹</b>(사생활·안전), 데이터 편향, 일자리 변화, 데이터 센터의 많은 전력</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 센서 규칙으로 물을 준 온실이 타이머 방식보다 물을 적게 쓴 까닭은? (한 번에 주는 양은 같다) <span class="ans">→ ㉡</span><br>
+      ㉠ 한 번에 주는 물의 양을 줄여서 &nbsp; ㉡ 흙이 마를 때에만 물을 줘서 &nbsp; ㉢ 환기창을 닫아 두어서</p>
+    <p>2. 빨간 딸기 40개로만 학습한 로봇이 흰 딸기에서 50%만 맞힌 까닭은? <span class="ans">→ 학습 데이터에 흰 딸기가 없어서(데이터 편향)</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘인공지능은 쓸모없지도, 완벽하지도 않다’는 말을 흰 딸기 사건을 예로 들어 한 문장으로 설명하세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「할머니의 딸기 온실」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

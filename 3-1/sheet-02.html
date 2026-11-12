@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 기술 발전과 빅데이터 (통합과학2 Ⅲ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-02.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.52; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 6px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 34px; } .foot { margin-top: 6px; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-02.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅲ-1 과학 기술의 활용 · 02 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 기술 발전과 빅데이터</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~12)</p>
+
+  <h2>① 과학 기술의 발전과 확산</h2>
+  <table>
+    <tr><th style="width:16%">시대</th><th style="width:20%">기술</th><th>사회의 변화</th></tr>
+    <tr><td>18세기</td><td>증기 기관</td><td>사람·가축의 힘을 기계의 힘으로 → <b class="blank" data-n="1">산업 혁명</b></td></tr>
+    <tr><td>19세기</td><td>전기의 활용</td><td>발전·송전으로 조명·통신·온갖 기기</td></tr>
+    <tr><td>20세기 중반</td><td>컴퓨터</td><td>계산·정보 처리 자동화 → 정보화 사회의 바탕</td></tr>
+    <tr><td>20세기 말</td><td>인터넷</td><td>전 세계 연결, 정보와 지식을 실시간으로 공유</td></tr>
+    <tr><td>21세기</td><td><b class="blank" data-n="2">인공지능</b></td><td>방대한 데이터에서 스스로 학습하고 판단</td></tr>
+  </table>
+  <ul>
+    <li>새 기술의 보급률: 처음 천천히 → 어느 때부터 빠르게 → 다시 완만 = <b class="blank" data-n="3">S자</b> 곡선 (단원 모형: 90%에 닿는 데 스마트폰형 22년 · 인터넷형 24년 · 전기형 30년)</li>
+    <li>곡선의 중간에서는 가진 사람과 못 가진 사람이 갈린다 (1936년 미국: 전화 발명 60년 뒤에도 전화 있는 집은 절반 미만)</li>
+  </ul>
+
+  <h2>② 표본과 편향 — 240만 장의 엽서 (1936년 미국 대통령 선거)</h2>
+  <ul>
+    <li>다이제스트: 전화번호부·자동차 등록 명부·잡지 구독자 명단으로 약 240만 명 → 루스벨트 43% 예측 · 갤럽: 약 5만 명 → 루스벨트 승리 예측</li>
+    <li>가상 유권자(단원 모형): 보유층 35%(지지 40%) + 비보유층 65%(지지 72%) → 0.35 × 40 + 0.65 × 72 = 60.8%</li>
+    <li>보유층 90% 명부: 0.9 × 40 + 0.1 × 72 = 43.2% → 데이터를 모으는 길목이 치우쳐 생긴 오차 = <b class="blank" data-n="4">편향</b></li>
+    <li>표본이 커지면 예측의 흔들림이 줄어든다 = <b class="blank" data-n="5">오차 범위</b> (≈ 1.96 × √(p(1 − p) ÷ n)): 1,000명 ±3.0%p · 1만 명 ±1.0%p · 5만 명 ±0.4%p · 240만 명 ±0.06%p</li>
+    <li>실제 결과: 루스벨트 약 61%(60.8%), 48개 주 중 46개 주 승리 → 다이제스트는 약 17.8%p 빗나감</li>
+    <li>빗나간 까닭: ① 명부의 치우침 ② 엽서를 돌려보낸 사람만 집계(1,000만 통 중 약 240만 장 회수) → <b class="blank" data-n="6">무응답 편향</b> · 크기는 흔들림만 줄이고 편향은 그대로</li>
+  </ul>
+
+  <h2>③ 빅데이터의 활용과 문제점</h2>
+  <ul>
+    <li>센서·SNS·카드 결제·위치 기록처럼 너무 크고 빠르고 다양해 예전 방식으로 다룰 수 없는 데이터 → <b class="blank" data-n="7">빅데이터</b></li>
+    <li>수집 → 저장·정리 → 분석 → 활용: 흩어진 데이터에서 새로운 정보와 지식을 끌어냄 = <b class="blank" data-n="8">정보 산출</b></li>
+    <li>더 빠르고 정확한 예측과 <b class="blank" data-n="9">의사 결정</b> (감염병 확산 예측, 동네 날씨 예보, 심야 버스 노선) · 첫 단계(수집)가 치우치면 소용없다</li>
+    <li>이름을 지운 기록도 여러 정보가 <b class="blank" data-n="10">결합</b>되면 <b class="blank" data-n="11">개인 정보</b>가 드러난다 (우편 번호·성별·생년월일 → 미국인 약 87% 특정)</li>
+  </ul>
+  <table>
+    <tr><th>공개 항목 (가상 주민 2,000명, 단원 모형)</th><th style="width:16%">정보량</th><th style="width:30%">단 한 명으로 특정</th></tr>
+    <tr><td>동 · 생년월일 · 성별</td><td>5점</td><td>99.7%</td></tr>
+    <tr><td>동 · 출생 연도 · 성별</td><td>4점</td><td>44.9%</td></tr>
+    <tr><td>구 · 출생 연도 · 성별</td><td>3점</td><td>0.15% (3명)</td></tr>
+  </table>
+  <ul>
+    <li>쓸모와 안전의 균형: 덜 자세히 공개 · <b class="blank" data-n="12">가명 처리</b> · 개인 정보 보호 제도</li>
+    <li>장점: 예측·숨은 규칙 발견·맞춤형 서비스 · 문제점: 개인 정보 침해·편향된 결론·치우친 인공지능</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 같은 방법으로 표본을 1,000명에서 1만 명으로 늘리면 줄어드는 것은? <span class="ans">→ 오차 범위 (편향은 그대로)</span></p>
+    <p>2. 보유층 35%(지지 40%)·비보유층 65%(지지 72%)인 유권자에서 보유층만 뽑으면 예측 지지율은? <span class="ans">→ 40%</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘240만 명은 틀리고 5만 명은 맞혔다’는 사건이 빅데이터 시대에 주는 교훈을 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-02.html · 이야기 ② 「240만 장의 엽서」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 기술 발전과 빅데이터 (통합과학2 Ⅲ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt, #s-hook .opt { font-size: 27px; padding: 14px 22px; }
+  #s-check .opt { font-size: 29px; }
+  .pc ul { margin: 0; padding-left: 26px; }
+  .pc li { font-size: 26px; line-height: 1.45; margin-bottom: 10px; }
+  .pc h3 { font-size: 32px; margin-bottom: 10px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="왼쪽에 산더미처럼 쌓인 엽서 약 240만 장, 오른쪽에 작게 고르게 놓인 점 약 5만 명"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅲ-1 과학 기술의 활용 · 02</p>
+    <h1>기술 발전과 빅데이터</h1>
+    <p class="sub" data-step="1">1936년 미국, 사상 최대의 여론 조사는 무엇을 놓쳤나</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 과학 기술이 사회를 어떻게 바꿔 왔는지, 그리고 그 끝에 나타난 빅데이터의 쓸모와 그림자를 봅니다. 여러분은 데이터 분석 팀의 신입 분석가입니다.</p>
+    <p data-at="1">우리 팀 첫 교육은 늘 1936년 미국 대통령 선거 여론 조사로 시작합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="240만 명 대 5만 명" data-part="도입">
+  <p class="kicker">도입 · 1936년 미국 대통령 선거</p>
+  <h2>240만 명과 5만 명, 누가 맞혔을까?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>《리터러리 다이제스트》</b> 1,000만 명에게 엽서 → 약 240만 장 회수 → 랜던 57% : 루스벨트 43%</p>
+      <p><b>조지 갤럽</b> 약 5만 명 조사 → 루스벨트 승리 예고</p>
+      <p class="small mt">주소는 전화번호부, 자동차 등록 명부, 잡지 구독자 명단에서 뽑았습니다. 당시는 대공황이 한창이었습니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>어느 쪽 예측이 맞았을까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 다이제스트 — 데이터가 50배 가까이 많다</div>
+        <div class="opt">㉡ 갤럽 — 누구에게 묻느냐가 중요하다</div>
+        <div class="opt">㉢ 둘 다 비슷하게 맞혔다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>240만 장의 엽서는 당시로서는 상상하기 힘든 ‘빅데이터’였습니다. 갤럽은 그 50분의 1쯤인 5만 명에게 물었고요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 오늘 직접 재현해 보고 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>과학 기술 발전</b><span>증기 기관에서 인공지능까지 사회를 바꾼 흐름</span></div>
+    <div class="card"><b>S자 곡선</b><span>새 기술이 사람들 사이에 퍼지는 모양</span></div>
+    <div class="card"><b>편향</b><span>모으는 길목이 치우쳐 생기는 오차</span></div>
+    <div class="card"><b>빅데이터</b><span>너무 크고 빠르고 다양한 데이터</span></div>
+    <div class="card"><b>개인 정보</b><span>이름을 지워도 드러날 수 있는 나</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~12번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 과학 기술 발전의 흐름 -->
+<section class="slide" id="s-hist" data-title="과학 기술 발전의 흐름" data-part="① 기술 발전">
+  <p class="kicker">① 과학 기술의 발전 · 다섯 장면을 시대 순서로</p>
+  <h2>과학 기술이 사회를 바꿔 왔다</h2>
+  <svg id="histSvg" viewBox="0 0 1400 400" width="1400" height="400" aria-label="18세기 증기 기관, 19세기 전기, 20세기 중반 컴퓨터, 20세기 말 인터넷, 21세기 인공지능으로 이어지는 시간 띠"></svg>
+  <div class="lines mt">
+    <p data-step="1">증기 기관: 사람·가축의 힘을 기계의 힘으로 → <b class="blank" data-n="1" data-step="1">산업 혁명</b></p>
+    <p data-step="5">방대한 데이터에서 스스로 학습하고 판단하는 <b class="blank" data-n="2" data-step="5">인공지능</b> → 데이터가 곧 자원</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면 장면 2의 첫 미션처럼, 다섯 장면을 시대 순서로 놓아 봅니다. 학생에게 다음 기술을 먼저 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">18세기 증기 기관. 사람과 가축의 힘을 기계의 힘으로 바꿨습니다. 빈칸 1번, 산업 혁명.</p>
+    <p data-at="2">19세기에는 발전과 송전으로 전기를 쓰게 되어 조명, 통신, 온갖 기기가 생겼습니다.</p>
+    <p data-at="3">20세기 중반 컴퓨터는 복잡한 계산과 정보 처리를 자동화해 정보화 사회의 바탕이 되었습니다.</p>
+    <p data-at="4">20세기 말 인터넷으로 전 세계가 연결되어 정보를 실시간으로 나누게 됩니다.</p>
+    <p data-at="5">그리고 21세기, 빈칸 2번, 인공지능. 방대한 데이터에서 스스로 학습합니다. 기술이 바뀔 때마다 다룰 수 있는 데이터의 양도 달라졌습니다.</p>
+  </aside>
+</section>
+
+<!-- 5 S자 곡선 -->
+<section class="slide" id="s-scurve" data-title="새 기술은 S자로 퍼진다" data-part="① 기술 발전">
+  <p class="kicker">① 과학 기술의 발전 · 보급률이 시간에 따라 늘어나는 모양 (단원 화면 모형)</p>
+  <h2>새 기술은 S자 곡선을 그리며 퍼진다</h2>
+  <div class="cols" style="grid-template-columns:860px 1fr;align-items:center">
+    <svg id="scvSvg" viewBox="0 0 860 470" width="860" height="470" aria-label="도입 후 연수에 따른 보급률 곡선 세 개. 모두 S자 모양이고, 90%에 닿는 해는 스마트폰형 22년, 인터넷형 24년, 전기형 30년"></svg>
+    <div class="lines">
+      <p data-step="1">처음 천천히 → 어느 때부터 빠르게 → 다시 완만: <b class="blank" data-n="3" data-step="1">S자</b> 곡선</p>
+      <p data-step="3" style="font-size:28px">90%에 닿는 데: 스마트폰형 22년 · 인터넷형 24년 · 전기형 30년</p>
+      <p data-step="4" style="font-size:28px">곡선의 중간: 가진 사람과 못 가진 사람이 갈린다 (1936년 미국의 전화)</p>
+    </div>
+  </div>
+  <p class="note">세 곡선은 확산 속도만 다르게 정한 단원 화면의 단순화한 모형입니다. 전화는 1876년에 발명되었지만, 60년 뒤인 1936년에도 미국에서 전화가 있는 집은 절반이 되지 않았습니다.</p>
+  <aside class="script">
+    <p>실마리는 ‘전화’와 ‘자동차’에 있습니다. 새 기술 하나가 사람들 사이에 어떤 모양으로 퍼지는지 봅시다.</p>
+    <p data-at="1">빠른 스마트폰형부터. 처음에는 천천히, 어느 때부터 폭발적으로, 그 뒤 다시 완만해집니다. 빈칸 3번, S자 곡선.</p>
+    <p data-at="2">느린 전기형, 중간인 인터넷형도 빠르기만 다를 뿐 모양은 같습니다.</p>
+    <p data-at="3">보급률 90%에 닿는 해를 읽어 봅니다. 22년, 24년, 30년.</p>
+    <p data-at="4">곡선의 중간에서는 그 기술을 가진 사람과 못 가진 사람이 갈립니다. 1936년의 전화가 그랬습니다. 그렇다면 전화번호부에서 뽑은 사람들은 국민 전체를 닮았을까요?</p>
+  </aside>
+</section>
+
+<!-- 6 표본의 구성 -->
+<section class="slide" id="s-pop" data-title="누구에게서 모았나" data-part="② 표본과 편향">
+  <p class="kicker">② 표본과 편향 · 가상의 유권자 집단으로 재현 (단원 화면 모형)</p>
+  <h2>명부가 이미 한쪽으로 기울어 있었다</h2>
+  <svg id="popSvg" viewBox="0 0 1400 280" width="1400" height="280" aria-label="전체 유권자는 전화·자동차 보유층 35%, 비보유층 65%. 다이제스트 명부는 보유층 90%, 비보유층 10%"></svg>
+  <div class="lines mt">
+    <p data-step="1" style="font-size:29px">전체: 0.35 × 40 + 0.65 × 72 = <b class="c-green">60.8%</b> (루스벨트 지지)</p>
+    <p data-step="2" style="font-size:29px">명부(보유층 90%): 0.9 × 40 + 0.1 × 72 = <b class="c-red">43.2%</b></p>
+    <p data-step="3">데이터를 모으는 길목이 한쪽으로 치우쳐 생긴 오차 → <b class="blank" data-n="4" data-step="3">편향</b></p>
+  </div>
+  <p class="note">집단 비율(35%)과 지지율(40%·72%)은 결과가 실제 선거와 비슷하게 나오도록 정한 가상의 값입니다.</p>
+  <aside class="script">
+    <p>1936년은 대공황 한가운데였고, 전화나 자동차가 있는 집은 형편이 넉넉한 쪽이었습니다. 단원 화면의 가상 유권자 집단으로 재현합니다.</p>
+    <p data-at="1">전체 유권자 중 전화·자동차 보유층은 35%, 이들의 루스벨트 지지율은 40%. 나머지 65%는 72%가 지지합니다. 가중 평균하면 60.8%.</p>
+    <p data-at="2">그런데 전화번호부·자동차 등록 명부에서 뽑으면 보유층이 90%쯤 됩니다. 계산하면 43.2%. 실제 다이제스트 예측 43%와 거의 같죠.</p>
+    <p data-at="3">빈칸 4번, 편향. 엽서를 아무리 많이 보내도 같은 명부에서 뽑으면 이 기울기는 그대로입니다.</p>
+  </aside>
+</section>
+
+<!-- 7 오차 범위 -->
+<section class="slide" id="s-moe" data-title="크게 뽑으면 무엇이 줄어드나" data-part="② 표본과 편향">
+  <p class="kicker">② 표본과 편향 · 표본의 크기를 바꿔 가며 (단원 화면 모형)</p>
+  <h2>표본이 커지면 흔들림만 줄어든다</h2>
+  <div class="cols" style="grid-template-columns:860px 1fr;align-items:center">
+    <svg id="moeSvg" viewBox="0 0 860 470" width="860" height="470" aria-label="표본 크기에 따른 예측 지지율과 오차 막대. 보유층 90% 표본은 43.2%, 보유층 35% 표본은 60.8% 둘레에 찍히고, 표본이 커질수록 막대가 짧아진다"></svg>
+    <div class="lines">
+      <p data-step="1">표본이 커지면 예측의 흔들림이 줄어든다 → <b class="blank" data-n="5" data-step="1">오차 범위</b></p>
+      <p data-step="2" style="font-size:27px">고른 표본: 1,000명 ±3.0%p · 1만 명 ±1.0%p · 5만 명 ±0.4%p</p>
+      <p data-step="3" style="font-size:28px">240만 명: ±0.06%p로 아주 ‘정밀’하지만 실제보다 17.6%p 낮다</p>
+    </div>
+  </div>
+  <p class="note">오차 범위 = 1.96 × √(p(1 − p) ÷ n) (단원 화면과 같은 식, 무작위로 뽑았다고 볼 때). 크기는 우연한 흔들림을 줄일 뿐 편향을 고치지 못합니다.</p>
+  <aside class="script">
+    <p>가로축은 표본의 크기, 세로축은 예측한 루스벨트 지지율입니다. 초록 선이 실제 60.8%, 회색 점선이 당선선 50%입니다.</p>
+    <p data-at="1">빨강은 다이제스트식, 보유층 90% 명부에서 뽑은 표본입니다. 크기를 키울수록 막대가 짧아지죠. 빈칸 5번, 오차 범위.</p>
+    <p data-at="2">파랑은 갤럽식, 보유층 비율을 전체와 같은 35%로 맞춘 표본입니다. 1,000명이면 ±3.0%p, 1만 명이면 ±1.0%p, 5만 명이면 ±0.4%p.</p>
+    <p data-at="3">240만 명의 다이제스트식은 오차 범위가 ±0.06%p로 아주 정밀합니다. 그런데 과녁이 아닌 곳, 43.2%에 모여 있어요. 틀린 답을 아주 정밀하게 맞힌 셈입니다.</p>
+  </aside>
+</section>
+
+<!-- 8 실제 결과 -->
+<section class="slide soft" id="s-real" data-title="실제 결과와 두 가지 편향" data-part="② 표본과 편향">
+  <p class="kicker">② 표본과 편향 · 1936년 11월, 실제 결과</p>
+  <h2>루스벨트 약 61%, 48개 주 중 46개 주 승리</h2>
+  <svg id="realSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="왼쪽: 엽서 1,000만 통 발송 중 약 240만 장 회수. 오른쪽: 다이제스트 예측 43%와 실제 60.8%의 차이 약 17.8%p"></svg>
+  <div class="lines mt">
+    <p data-step="2" style="font-size:29px">① 명부의 치우침: 전화·자동차·잡지 구독자 = 형편이 넉넉한 쪽</p>
+    <p data-step="3" style="font-size:29px">② 엽서를 돌려보낸 사람만 집계됨 → <b class="blank" data-n="6" data-step="3">무응답 편향</b></p>
+  </div>
+  <p class="note">다이제스트는 이 일로 신뢰를 잃어 얼마 뒤 다른 잡지에 합쳐졌습니다. 갤럽의 방법도 오늘날의 무작위 추출과는 달랐고, 1948년 선거 예측에서는 갤럽도 틀렸습니다.</p>
+  <aside class="script">
+    <p>실제 결과입니다. 루스벨트가 전체 투표의 약 61%를 얻어 48개 주 가운데 46개 주에서 이겼습니다.</p>
+    <p data-at="1">다이제스트 예측 43%와 실제 60.8%의 차이는 약 17.8%p. 엽서 1,000만 통을 보냈지만 돌아온 것은 약 240만 장, 4분의 1이 안 됩니다.</p>
+    <p data-at="2">빗나간 까닭 첫째, 명부 자체가 넉넉한 쪽으로 치우쳤습니다.</p>
+    <p data-at="3">둘째, 엽서를 돌려보낸 사람만 집계되었습니다. 대답하는 사람과 안 하는 사람의 생각이 다르면 생기는 빈칸 6번, 무응답 편향. 실제 분석에서는 이것도 컸다고 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 9 확인 -->
+<section class="slide" id="s-check" data-title="1,000만 장을 모두 받았다면" data-part="② 표본과 편향">
+  <p class="kicker">② 표본과 편향 · 확인</p>
+  <h2>다이제스트가 같은 명부의 1,000만 명에게서 모두 답을 받았다면?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">㉠ 표본이 약 4배 커졌으니 실제(약 61%)에 가까워졌을 것이다</div>
+    <div class="opt right" data-step="1">㉡ 무응답 편향은 없어져도 명부의 치우침이 남아 여전히 빗나갔을 것이다</div>
+    <div class="opt wrong" data-step="1">㉢ 표본이 너무 커서 오차 범위가 오히려 늘었을 것이다</div>
+  </div>
+  <p data-step="1" style="margin-top:36px">크기를 키우면 오차 범위는 줄지만, 길목이 치우친 편향은 그대로 남는다.</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. ‘데이터가 충분히 많으면 치우쳐도 정확하다’는 오개념을 겨냥한 문제입니다.</p>
+    <p data-at="1">정답은 ㉡. 모두 답했다면 무응답 편향은 사라지지만, 보유층이 몰린 명부라는 첫 단추는 그대로입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 빅데이터 -->
+<section class="slide" id="s-bd" data-title="빅데이터란" data-part="③ 빅데이터">
+  <p class="kicker">③ 빅데이터 · 엽서 대신 센서와 기록이 쉼 없이</p>
+  <h2>오늘의 데이터는 크고, 빠르고, 다양하다</h2>
+  <svg id="bdSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="센서, SNS, 카드 결제, 위치 기록, 기상 관측소와 위성에서 나온 데이터가 가운데 저장소로 모인다"></svg>
+  <div class="lines mt">
+    <p data-step="2">너무 크고 빠르고 다양해서 예전 방식으로는 다룰 수 없는 데이터 → <b class="blank" data-n="7" data-step="2">빅데이터</b></p>
+  </div>
+  <aside class="script">
+    <p>1936년의 240만 장은 사람이 손으로 셌습니다. 지금은 어떨까요?</p>
+    <p data-at="1">센서, 누리 소통망(SNS), 카드 결제, 휴대 전화의 위치 기록, 기상 관측소와 위성에서 데이터가 쉼 없이 쏟아집니다.</p>
+    <p data-at="2">양이 너무 많고, 너무 빨리 쌓이고, 글·숫자·사진·위치처럼 종류도 다양합니다. 빈칸 7번, 빅데이터.</p>
+  </aside>
+</section>
+
+<!-- 11 수집에서 활용까지 -->
+<section class="slide soft" id="s-flow" data-title="수집에서 활용까지" data-part="③ 빅데이터">
+  <p class="kicker">③ 빅데이터 · 쓸모 있는 정보가 되기까지</p>
+  <h2>수집 → 저장·정리 → 분석 → 활용</h2>
+  <svg id="flowSvg" viewBox="0 0 1400 280" width="1400" height="280" aria-label="수집, 저장·정리, 분석, 활용 네 단계 상자가 화살표로 이어지고 단계마다 예가 적혀 있다"></svg>
+  <div class="lines mt">
+    <p data-step="3" style="font-size:29px">흩어진 데이터에서 새로운 정보와 지식을 끌어낸다 → <b class="blank" data-n="8" data-step="3">정보 산출</b></p>
+    <p data-step="4" style="font-size:29px">더 빠르고 정확한 예측과 <b class="blank" data-n="9" data-step="4">의사 결정</b> (감염병 확산 예측, 동네 날씨 예보, 심야 버스 노선)</p>
+  </div>
+  <div class="card red" data-step="5" style="padding:14px 26px"><p style="margin:0;font-size:27px">다이제스트의 실패는 맨 앞 <b>수집</b> 단계에서 이미 정해졌다. 첫 단계가 치우치면 뒤 단계가 아무리 뛰어나도 소용없다.</p></div>
+  <aside class="script">
+    <p>빅데이터가 쓸모 있는 정보가 되기까지 네 단계를 거칩니다. 단원 화면에서 업무 기록 8건을 나눠 본 그 단계입니다.</p>
+    <p data-at="1">수집: 여러 경로에서 데이터를 모읍니다.</p>
+    <p data-at="2">저장·정리: 중복되거나 빠진 값을 걸러 내고 형식을 맞춥니다. 아직 규칙을 찾는 단계는 아닙니다.</p>
+    <p data-at="3">분석: 통계와 인공지능으로 규칙과 패턴을 찾습니다. 빈칸 8번, 정보 산출.</p>
+    <p data-at="4">활용: 분석 결과로 예측하고 결정합니다. 빈칸 9번, 의사 결정. 서울의 심야 버스 노선이 심야 통화량 분석으로 정해진 것이 한 예입니다.</p>
+    <p data-at="5">240만 장의 엽서로 돌아가 봅시다. 어느 단계에서 실패했나요? 맨 앞, 수집입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 익명 데이터의 함정 -->
+<section class="slide" id="s-priv" data-title="이름을 지웠는데" data-part="③ 빅데이터">
+  <p class="kicker">③ 빅데이터 · 가상 주민 2,000명의 진료 기록을 공개한다면 (단원 화면 모형)</p>
+  <h2>이름을 지워도 누구인지 드러난다</h2>
+  <div class="cols" style="grid-template-columns:1fr 660px;align-items:center">
+    <div class="lines" style="font-size:29px">
+      <p data-step="1" style="font-size:27px">1990년대 미국: ‘익명’ 진료 기록 + 선거인 명부 → 주지사의 기록을 찾아냄 (스위니)</p>
+      <p data-step="1" style="font-size:27px">우편 번호·성별·생년월일만으로 미국인 약 87%가 단 한 명으로</p>
+      <p data-step="2" style="font-size:29px">여러 정보가 <b class="blank" data-n="10" data-step="2">결합</b>되면 <b class="blank" data-n="11" data-step="2">개인 정보</b>가 드러난다</p>
+      <p data-step="4" style="font-size:29px">규칙: 덜 자세히 공개 · <b class="blank" data-n="12" data-step="4">가명 처리</b> · 보호 제도</p>
+    </div>
+    <svg id="privSvg" viewBox="0 0 720 440" width="660" height="403" aria-label="공개 항목 조합별로 단 한 명으로 특정되는 사람의 비율: 동·생년월일·성별 99.7%, 동·출생 연도·성별 44.9%, 구·출생 연도·성별 0.15%"></svg>
+  </div>
+  <aside class="script">
+    <p>가상의 도시 주민 2,000명의 진료 기록을 감염병 연구자에게 공개하려 합니다. 이름과 주민 번호는 지웠어요.</p>
+    <p data-at="1">1990년대 미국에서 연구자 라타냐 스위니는 ‘익명’ 진료 기록을 선거인 명부와 맞춰 보아 주지사의 기록을 찾아냈습니다. 우편 번호, 성별, 생년월일 세 가지만으로 미국인의 약 87%가 단 한 명으로 특정된다는 것도 보였죠.</p>
+    <p data-at="2">사는 동, 생년월일, 성별을 모두 자세히 공개하면 우리 가상 도시에서는 99.7%가 단 한 명으로 좁혀집니다. 이웃의 생일만 알면 병명을 알 수 있다는 뜻이에요. 빈칸 10번 결합, 11번 개인 정보.</p>
+    <p data-at="3">생년월일 대신 출생 연도만 공개해도 아직 44.9%가 특정됩니다.</p>
+    <p data-at="4">사는 곳을 동 대신 구로 바꾸면 2,000명 중 3명, 0.15%로 줄고 연구에 쓸 정보는 남습니다. 너무 자세하면 개인이 드러나고, 너무 감추면 쓸모가 없어요. 빈칸 12번, 가명 처리 같은 규칙이 함께 필요합니다.</p>
+  </aside>
+</section>
+
+<!-- 13 두 얼굴 -->
+<section class="slide soft" id="s-two" data-title="빅데이터의 두 얼굴" data-part="③ 빅데이터">
+  <p class="kicker">③ 빅데이터 · 오늘 직접 겪은 일을 갈라 보면</p>
+  <h2>쓸모와 그림자는 함께 온다</h2>
+  <div class="cols pc" style="grid-template-columns:1fr 240px 1fr;align-items:start;gap:30px">
+    <div class="card green" data-step="1">
+      <h3>👍 장점</h3>
+      <ul><li>감염병이 번질 지역을 미리 예측</li><li>사람이 볼 수 없는 자료 속 숨은 규칙 발견</li><li>개인 맞춤형 추천·의료 서비스</li><li>감이 아니라 근거로 정책 결정</li></ul>
+    </div>
+    <svg viewBox="0 0 240 320" width="240" height="320" aria-label="장점과 문제점을 양쪽에 올린 저울">
+      <path d="M120 40 V290" stroke="#495057" stroke-width="8"/><path d="M70 300 H170" stroke="#495057" stroke-width="12" stroke-linecap="round"/>
+      <path d="M20 80 L220 80" stroke="#495057" stroke-width="6" stroke-linecap="round"/><circle cx="120" cy="40" r="12" fill="#495057"/>
+      <path d="M20 80 L0 150 H40 Z" fill="none" stroke="#2f9e44" stroke-width="5" data-step="1"/><path d="M0 150 Q20 168 40 150" fill="#d3f9d8" stroke="#2f9e44" stroke-width="5" data-step="1"/>
+      <path d="M220 80 L200 150 H240 Z" fill="none" stroke="#e03131" stroke-width="5" data-step="2"/><path d="M200 150 Q220 168 240 150" fill="#ffe3e3" stroke="#e03131" stroke-width="5" data-step="2"/>
+    </svg>
+    <div class="card red" data-step="2">
+      <h3>⚠️ 문제점</h3>
+      <ul><li>이름을 지워도 결합하면 개인이 드러남</li><li>치우친 데이터 → 전체에 대한 잘못된 결론</li><li>치우친 데이터로 학습한 인공지능의 불리한 판단</li><li>내 위치·검색 기록이 모르게 수집됨</li></ul>
+    </div>
+  </div>
+  <p data-step="3" style="font-size:30px;margin-top:44px">분석의 첫걸음: 데이터가 <b class="c-blue">어디서, 누구에게서, 어떻게</b> 모였는지 묻기</p>
+  <aside class="script">
+    <p>단원 화면의 결말 미션처럼, 빅데이터 활용의 장점과 문제점을 갈라 봅니다. 학생에게 먼저 하나씩 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">장점: 빠르고 정확한 예측, 새로운 정보 산출, 맞춤형 서비스, 근거에 바탕을 둔 결정.</p>
+    <p data-at="2">문제점: 개인 정보 침해, 편향된 데이터가 만드는 잘못된 결론. 데이터의 편향은 그것을 학습한 인공지능에도 그대로 옮겨 갑니다.</p>
+    <p data-at="3">240만 장의 엽서가 남긴 교훈입니다. 많다고 옳은 것은 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 14 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>많다고 옳은 것은 아니다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>과학 기술 발전</b>: 증기 기관 → 전기 → 컴퓨터 → 인터넷 → 인공지능 · 새 기술은 S자 곡선으로 퍼진다</li>
+    <li data-k="2" data-step="2"><b>표본</b>: 크기를 키우면 오차 범위는 줄지만 편향은 남는다 (240만 명 → 43%, 실제 60.8%)</li>
+    <li data-k="3" data-step="3"><b>빅데이터</b>: 수집 → 저장·정리 → 분석 → 활용 · 정보 산출로 빠르고 정확한 예측과 의사 결정</li>
+    <li data-k="4" data-step="4"><b>그림자</b>: 결합하면 개인이 드러나고, 치우친 데이터는 잘못된 결론으로 → 균형을 잡는 규칙이 필요</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 예상을 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 15 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 같은 방법으로 표본을 1,000명에서 1만 명으로 늘리면 줄어드는 것은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 편향</div>
+        <div class="opt right" data-step="1">㉡ 오차 범위</div>
+        <div class="opt wrong" data-step="1">㉢ 편향과 오차 범위 둘 다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 보유층 35%(지지 40%)·비보유층 65%(지지 72%)인 유권자에서 보유층만 뽑으면 예측 지지율은?</p>
+      <div class="opts">
+        <div class="opt right" data-step="2">㉠ 40%</div>
+        <div class="opt wrong" data-step="2">㉡ 60.8%</div>
+        <div class="opt wrong" data-step="2">㉢ 72%</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 크기는 우연한 흔들림만 줄입니다. 편향은 모으는 방법을 바꿔야 줄어듭니다.</p>
+    <p data-at="2">2번은 ㉠. 보유층만 뽑으면 아무리 많이 뽑아도 보유층의 지지율 40% 둘레에 찍힙니다.</p>
+  </aside>
+</section>
+
+<!-- 16 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「240만 장의 엽서」</h2>
+  <div class="cols">
+    <div class="card"><h3>신입 분석가 교육이 기다립니다</h3><p>S자 곡선에서 90%에 닿는 해 찾기, 240만 명 대 5만 명 표본 뽑기, 업무 기록 분류, 단 한 명으로 특정되는 사람을 1% 이하로 줄이기.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>정리하기 · 두 사건을 하나로</h3><p>1854년의 지도와 1936년의 엽서. 데이터로 문제를 푼 일과 데이터에 속은 일을 한 문장으로 꿰어 봅시다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 하고, 정리하기 탭에서 두 사건을 꿰는 한 문장을 쓰게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function rng(seed) {                                   /* 단원 화면(episodes.js)과 같은 mulberry32 */
+    var a = seed >>> 0;
+    return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  /* 표지 — 엽서 더미와 작은 고른 표본 */
+  (function () {
+    var svg = document.getElementById("coverSvg"), r = rng(1936), h = "";
+    for (var i = 0; i < 260; i++) {
+      var u = r(), v = r(), x = 300 + u * 620, top = 440 - 320 * Math.sin(Math.PI * u), y = top + v * (440 - top), a = (r() - 0.5) * 50;
+      h += "<rect x='" + (x - 22).toFixed(0) + "' y='" + (y - 14).toFixed(0) + "' width='44' height='28' rx='3' fill='" + (r() < 0.5 ? "#f1e9d8" : "#e3d8c1") + "' stroke='#a8977a' stroke-width='1.5' transform='rotate(" + a.toFixed(0) + " " + x.toFixed(0) + " " + y.toFixed(0) + ")'/>";
+    }
+    h += "<text x='610' y='494' font-size='28' font-weight='900' fill='#ffd43b' text-anchor='middle'>엽서 약 240만 장</text>";
+    for (var j = 0; j < 50; j++) h += "<circle cx='" + (1130 + (j % 10) * 30) + "' cy='" + (310 + Math.floor(j / 10) * 30) + "' r='9' fill='#74b6ff'/>";
+    h += "<text x='1265' y='494' font-size='28' font-weight='900' fill='#74b6ff' text-anchor='middle'>약 5만 명</text>";
+    h += "<text x='1560' y='40' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 엽서·점의 수는 실제 비율이 아닌 모식도</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 과학 기술 발전의 흐름 — 단원 화면 장면 2의 다섯 장면 */
+  (function () {
+    var svg = document.getElementById("histSvg"), h = "";
+    var S = [["18세기", "⚙️", "증기 기관", ["사람·가축의 힘을", "기계의 힘으로"]], ["19세기", "💡", "전기의 활용", ["발전·송전으로", "조명·통신·기기"]], ["20세기 중반", "🖥️", "컴퓨터", ["계산·정보 처리", "자동화"]], ["20세기 말", "🌐", "인터넷", ["전 세계 연결,", "실시간 정보 공유"]], ["21세기", "🤖", "인공지능", ["데이터에서 스스로", "학습하고 판단"]]];
+    h += "<defs><marker id='h4-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#9aa4b5'/></marker></defs>";
+    h += "<line x1='20' y1='140' x2='1385' y2='140' stroke='#9aa4b5' stroke-width='6' marker-end='url(#h4-a)'/>";
+    S.forEach(function (s, i) {
+      var cx = 140 + i * 280;
+      h += "<g data-step='" + (i + 1) + "'><text x='" + cx + "' y='40' font-size='24' font-weight='900' fill='#5f6b80' text-anchor='middle'>" + s[0] + "</text>";
+      h += "<circle cx='" + cx + "' cy='140' r='62' fill='#fff' stroke='#1462d8' stroke-width='6'/><text x='" + cx + "' y='162' font-size='60' text-anchor='middle'>" + s[1] + "</text>";
+      h += "<text x='" + cx + "' y='250' font-size='30' font-weight='900' fill='#161b28' text-anchor='middle'>" + s[2] + "</text>";
+      s[3].forEach(function (t, k) { h += "<text x='" + cx + "' y='" + (296 + k * 32) + "' font-size='23' font-weight='700' fill='#5f6b80' text-anchor='middle'>" + t + "</text>"; });
+      h += "</g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* S자 곡선 — 단원 화면 M.adopt(t, k) = 100 / (1 + e^(−k(t − 15))) */
+  (function () {
+    var svg = document.getElementById("scvSvg"), X0 = 90, X1 = 830, Y0 = 30, Y1 = 400, h = "";
+    var T = [["스마트폰형", 0.35, "#1462d8", 1], ["인터넷형", 0.25, "#6741d9", 2], ["전기형", 0.15, "#e8590c", 2]];
+    function A(t, k) { return 100 / (1 + Math.exp(-k * (t - 15))); }
+    function f90(k) { for (var t = 0; t <= 40; t++) if (A(t, k) >= 90) return t; return null; }
+    function X(t) { return X0 + t / 40 * (X1 - X0); }
+    function Y(v) { return Y1 - v / 100 * (Y1 - Y0); }
+    [25, 50, 75, 100].forEach(function (v) { h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(v) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + v + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 10, 20, 30, 40].forEach(function (t) { h += "<text x='" + X(t) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + t + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 60) + "' font-size='21' font-weight='900' fill='#5f6b80' text-anchor='end'>도입 후 경과 연수 (년)</text>";
+    h += "<text x='" + (X0 + 10) + "' y='" + (Y0 - 6) + "' font-size='21' font-weight='900' fill='#5f6b80'>보급률 (%)</text>";
+    h += "<g data-step='4'><rect x='" + X(11) + "' y='" + Y0 + "' width='" + (X(19) - X(11)) + "' height='" + (Y1 - Y0) + "' fill='#fff3bf' opacity='.8'/><text x='" + X(15) + "' y='" + (Y0 + 30) + "' font-size='21' font-weight='900' fill='#e67700' text-anchor='middle'>곡선의 중간</text></g>";
+    T.forEach(function (c, i) {
+      var p = [], t; for (t = 0; t <= 40; t += 0.25) p.push(X(t).toFixed(1) + " " + Y(A(t, c[1])).toFixed(1));
+      h += "<g data-step='" + c[3] + "'><polyline points='" + p.join(" ") + "' fill='none' stroke='" + c[2] + "' stroke-width='5'/>";
+      h += "<rect x='" + (X(31) + 6) + "' y='" + (Y(46 - i * 10) - 12) + "' width='26' height='6' fill='" + c[2] + "'/><text x='" + (X(31) + 40) + "' y='" + (Y(46 - i * 10) - 2) + "' font-size='21' font-weight='900' fill='" + c[2] + "'>" + c[0] + "</text></g>";
+    });
+    h += "<g data-step='3'><line x1='" + X0 + "' y1='" + Y(90) + "' x2='" + X1 + "' y2='" + Y(90) + "' stroke='#198a4a' stroke-width='3' stroke-dasharray='10 7'/><text x='" + (X0 + 10) + "' y='" + (Y(90) - 10) + "' font-size='20' font-weight='900' fill='#198a4a'>90%</text>";
+    T.forEach(function (c) { var t = f90(c[1]); h += "<line x1='" + X(t) + "' y1='" + Y(A(t, c[1])) + "' x2='" + X(t) + "' y2='" + Y1 + "' stroke='" + c[2] + "' stroke-width='3' stroke-dasharray='5 5'/><circle cx='" + X(t) + "' cy='" + Y(A(t, c[1])) + "' r='8' fill='" + c[2] + "'/><text x='" + (t === 22 ? X(t) - 6 : (t === 24 ? X(t) + 6 : X(t))) + "' y='" + (Y1 - 10) + "' font-size='21' font-weight='900' fill='" + c[2] + "' text-anchor='" + (t === 22 ? "end" : (t === 24 ? "start" : "middle")) + "' stroke='#fff' stroke-width='5' paint-order='stroke'>" + t + "년</text>"; });
+    h += "</g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 유권자 구성 막대 */
+  (function () {
+    var svg = document.getElementById("popSvg"), X0 = 250, W = 930, h = "";
+    var rows = [["전체 유권자", 35, "60.8%", "#198a4a", 1, 30], ["다이제스트 명부", 90, "43.2%", "#d9302c", 2, 160]];
+    rows.forEach(function (rw) {
+      var y = rw[5], a = W * rw[1] / 100;
+      h += "<g data-step='" + rw[4] + "'><text x='0' y='" + (y + 48) + "' font-size='27' font-weight='900' fill='#161b28'>" + rw[0] + "</text>";
+      h += "<rect x='" + X0 + "' y='" + y + "' width='" + a + "' height='72' fill='#4c6ef5'/><rect x='" + (X0 + a) + "' y='" + y + "' width='" + (W - a) + "' height='72' fill='#f59f00'/>";
+      h += "<text x='" + (X0 + 14) + "' y='" + (y + 46) + "' font-size='23' font-weight='900' fill='#fff'>보유층 " + rw[1] + "% · 지지 40%</text>";
+      h += "<text x='" + (X0 + W - 14) + "' y='" + (y + 46) + "' font-size='23' font-weight='900' fill='#fff' text-anchor='end'>" + (rw[1] < 50 ? "비보유층 " + (100 - rw[1]) + "% · 지지 72%" : (100 - rw[1]) + "%") + "</text>";
+      h += "<text x='" + (X0 + W + 24) + "' y='" + (y + 50) + "' font-size='36' font-weight='900' fill='" + rw[3] + "'>→ " + rw[2] + "</text></g>";
+    });
+    h += "<text x='" + X0 + "' y='270' font-size='19' fill='#5f6b80'>파랑 = 전화·자동차 보유층 · 주황 = 비보유층 · 지지 = 루스벨트 지지율 (가상의 값)</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 표본 크기와 오차 범위 — 단원 화면 M.poll: moe = 1.96·√(p(1−p)/n) */
+  (function () {
+    var svg = document.getElementById("moeSvg"), X0 = 90, X1 = 830, Y0 = 30, Y1 = 400, h = "";
+    var NS = [100, 300, 1000, 3000, 10000, 50000, 300000, 2400000];
+    function X(n) { return X0 + (Math.log(n) / Math.LN10 - 2) / (Math.log(2400000) / Math.LN10 - 2) * (X1 - X0); }
+    function Y(v) { return Y1 - (v - 30) / 50 * (Y1 - Y0); }
+    function poll(n, sh) { var e = sh / 100 * 40 + (1 - sh / 100) * 72, p = e / 100; return { e: e, m: 1.96 * Math.sqrt(p * (1 - p) / n) * 100 }; }
+    [40, 50, 60, 70, 80].forEach(function (v) { h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(v) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + v + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [[100, "100"], [1000, "1천"], [10000, "1만"], [100000, "10만"], [2400000, "240만"]].forEach(function (t) { h += "<text x='" + X(t[0]) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + t[1] + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 60) + "' font-size='21' font-weight='900' fill='#5f6b80' text-anchor='end'>표본의 크기 (명, 눈금은 10배씩)</text>";
+    h += "<text x='" + (X0 + 10) + "' y='" + (Y0 - 6) + "' font-size='21' font-weight='900' fill='#5f6b80'>예측한 루스벨트 지지율 (%)</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y(60.8) + "' x2='" + X1 + "' y2='" + Y(60.8) + "' stroke='#198a4a' stroke-width='3'/><text x='" + (X1 - 4) + "' y='" + (Y(60.8) - 34) + "' font-size='21' font-weight='900' fill='#198a4a' text-anchor='end'>실제 60.8%</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y(50) + "' x2='" + X1 + "' y2='" + Y(50) + "' stroke='#9aa4b5' stroke-width='3' stroke-dasharray='8 6'/><text x='" + (X(3000) + 30) + "' y='" + (Y(50) - 10) + "' font-size='20' font-weight='800' fill='#5f6b80'>당선선 50%</text>";
+    [[90, "#e03131", 1, "보유층 90% 표본"], [35, "#1462d8", 2, "보유층 35% 표본"]].forEach(function (s) {
+      var g = "<g data-step='" + s[2] + "'>";
+      NS.forEach(function (n) {
+        var r = poll(n, s[0]), x = X(n);
+        g += "<line x1='" + x + "' y1='" + Y(r.e + r.m) + "' x2='" + x + "' y2='" + Y(r.e - r.m) + "' stroke='" + s[1] + "' stroke-width='4'/>";
+        g += "<line x1='" + (x - 9) + "' y1='" + Y(r.e + r.m) + "' x2='" + (x + 9) + "' y2='" + Y(r.e + r.m) + "' stroke='" + s[1] + "' stroke-width='4'/><line x1='" + (x - 9) + "' y1='" + Y(r.e - r.m) + "' x2='" + (x + 9) + "' y2='" + Y(r.e - r.m) + "' stroke='" + s[1] + "' stroke-width='4'/>";
+        g += "<circle cx='" + x + "' cy='" + Y(r.e) + "' r='8' fill='" + s[1] + "'/>";
+      });
+      g += "<text x='" + X(1500) + "' y='" + (s[0] > 50 ? Y(36) : Y(67)) + "' font-size='21' font-weight='900' fill='" + s[1] + "'>" + s[3] + "</text></g>";
+      h += g;
+    });
+    var d = poll(2400000, 90);
+    h += "<g data-step='3'><circle cx='" + X(2400000) + "' cy='" + Y(d.e) + "' r='24' fill='none' stroke='#f08c00' stroke-width='5'/>";
+    h += "<path d='M" + (X(2400000) - 40) + " " + Y(60.8) + " V" + Y(d.e) + "' stroke='#161b28' stroke-width='3' stroke-dasharray='4 4'/>";
+    h += "<text x='" + (X(2400000) - 50) + "' y='" + ((Y(60.8) + Y(d.e)) / 2 + 8) + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>17.6%p 빗나감</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 실제 결과 */
+  (function () {
+    var svg = document.getElementById("realSvg"), h = "";
+    h += "<g data-step='1'><text x='0' y='34' font-size='24' font-weight='900' fill='#5f6b80'>엽서</text>";
+    h += "<rect x='0' y='56' width='600' height='60' rx='8' fill='#dee2e6'/><text x='16' y='96' font-size='24' font-weight='900' fill='#161b28'>발송 1,000만 통</text>";
+    h += "<rect x='0' y='136' width='144' height='60' rx='8' fill='#a8977a'/><text x='160' y='176' font-size='24' font-weight='900' fill='#161b28'>회수 약 240만 장 (약 24%)</text>";
+    var XB = 760, WB = 600;
+    function XP(v) { return XB + v / 100 * WB; }
+    h += "<text x='" + XB + "' y='34' font-size='24' font-weight='900' fill='#5f6b80'>루스벨트 득표율</text>";
+    h += "<line x1='" + XP(50) + "' y1='46' x2='" + XP(50) + "' y2='210' stroke='#161b28' stroke-width='3' stroke-dasharray='8 6'/><text x='" + XP(50) + "' y='236' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='middle'>50%</text>";
+    h += "<rect x='" + XB + "' y='56' width='" + (XP(43) - XB) + "' height='60' rx='8' fill='#e03131'/><text x='" + (XP(43) + 12) + "' y='96' font-size='24' font-weight='900' fill='#c92a2a' stroke='#f2f5f9' stroke-width='8' paint-order='stroke'>다이제스트 예측 43%</text>";
+    h += "<rect x='" + XB + "' y='136' width='" + (XP(60.8) - XB) + "' height='60' rx='8' fill='#2f9e44'/><text x='" + (XP(60.8) + 12) + "' y='176' font-size='24' font-weight='900' fill='#198a4a'>실제 60.8%</text>";
+    h += "<path d='M" + XP(43) + " 270 H" + XP(60.8) + " M" + XP(43) + " 258 v24 M" + XP(60.8) + " 258 v24' stroke='#161b28' stroke-width='4'/><text x='" + XP(43) + "' y='256' font-size='22' font-weight='900' fill='#161b28' text-anchor='end' dx='-10'>약 17.8%p</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 빅데이터 — 여러 경로에서 모인다 */
+  (function () {
+    var svg = document.getElementById("bdSvg"), h = "";
+    var S = [["📡", "센서", 130, 60], ["💬", "SNS", 130, 260], ["💳", "카드 결제", 400, 30], ["📍", "위치 기록", 1000, 30], ["🛰️", "기상 관측소·위성", 1270, 60], ["🛒", "구매 기록", 1270, 260]];
+    h += "<defs><marker id='b10-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#1462d8'/></marker></defs>";
+    h += "<g data-step='1'>";
+    S.forEach(function (s) {
+      var dx = 700 - s[2], dy = 165 - s[3], L = Math.sqrt(dx * dx + dy * dy), sx = s[2] + dx / L * 70, sy = s[3] + dy / L * 50, ex = 700 - dx / L * 150, ey = 165 - dy / L * 90;
+      h += "<line x1='" + sx.toFixed(0) + "' y1='" + sy.toFixed(0) + "' x2='" + ex.toFixed(0) + "' y2='" + ey.toFixed(0) + "' stroke='#1462d8' stroke-width='5' marker-end='url(#b10-a)'/>";
+      h += "<text x='" + s[2] + "' y='" + (s[3] + 20) + "' font-size='48' text-anchor='middle'>" + s[0] + "</text><text x='" + s[2] + "' y='" + (s[3] + 56) + "' font-size='23' font-weight='900' fill='#161b28' text-anchor='middle'>" + s[1] + "</text>";
+    });
+    h += "</g>";
+    h += "<ellipse cx='700' cy='100' rx='120' ry='30' fill='#dce9ff' stroke='#1462d8' stroke-width='5'/><path d='M580 100 V240 A120 30 0 0 0 820 240 V100' fill='#dce9ff' stroke='#1462d8' stroke-width='5'/><path d='M580 150 A120 30 0 0 0 820 150 M580 195 A120 30 0 0 0 820 195' fill='none' stroke='#1462d8' stroke-width='3'/>";
+    h += "<text x='700' y='300' font-size='24' font-weight='900' fill='#1462d8' text-anchor='middle' data-step='2'>크고 · 빠르고 · 다양하다</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 수집 → 저장·정리 → 분석 → 활용 */
+  (function () {
+    var svg = document.getElementById("flowSvg"), h = "", W = 290, G = 70;
+    var S = [["📥 수집", "#1462d8", ["관측소·위성 자료가", "시시각각 들어온다"]], ["🗂️ 저장·정리", "#6741d9", ["중복·빠진 값을 걸러", "형식을 맞춘다"]], ["🔍 분석", "#e8590c", ["통계·인공지능으로", "규칙과 패턴을 찾는다"]], ["💡 활용", "#198a4a", ["번질 지역을 예측해", "인력·물자를 배치"]]];
+    h += "<defs><marker id='f11-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker></defs>";
+    S.forEach(function (s, i) {
+      var x = 10 + i * (W + G);
+      h += "<g data-step='" + (i + 1) + "'><rect x='" + x + "' y='20' width='" + W + "' height='230' rx='20' fill='#fff' stroke='" + s[1] + "' stroke-width='5'/>";
+      h += "<text x='" + (x + W / 2) + "' y='84' font-size='32' font-weight='900' fill='" + s[1] + "' text-anchor='middle'>" + s[0] + "</text>";
+      s[2].forEach(function (t, k) { h += "<text x='" + (x + W / 2) + "' y='" + (150 + k * 36) + "' font-size='23' font-weight='700' fill='#161b28' text-anchor='middle'>" + t + "</text>"; });
+      if (i < 3) h += "<line x1='" + (x + W + 8) + "' y1='135' x2='" + (x + W + G - 10) + "' y2='135' stroke='#495057' stroke-width='6' marker-end='url(#f11-a)'/>";
+      h += "</g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* 익명 데이터 — 단원 화면 M.people·M.priv 그대로(가상 주민 2,000명, 씨앗 87) */
+  var PEOPLE = (function () {
+    var r = rng(87), a = [];
+    for (var i = 0; i < 2000; i++) a.push({ dong: Math.floor(r() * 40), yr: 1960 + Math.floor(r() * 30), doy: Math.floor(r() * 365), sex: Math.floor(r() * 2) });
+    return a;
+  })();
+  function priv(loc, bir, sex) {
+    var cnt = {}, keys = PEOPLE.map(function (p) {
+      var k = (loc === 2 ? "d" + p.dong : (loc === 1 ? "g" + Math.floor(p.dong / 8) : "")) + "|" + (bir === 2 ? p.yr + "-" + p.doy : (bir === 1 ? p.yr : "")) + "|" + (sex ? p.sex : "");
+      cnt[k] = (cnt[k] || 0) + 1; return k;
+    });
+    var u = 0; keys.forEach(function (k) { if (cnt[k] === 1) u++; });
+    return { uniq: u / 20, n: u, util: loc + bir + sex };
+  }
+  (function () {
+    var svg = document.getElementById("privSvg"), h = "", X0 = 20, W = 520;
+    var R = [["동 · 생년월일 · 성별", 2, 2, 1, 2], ["동 · 출생 연도 · 성별", 2, 1, 1, 3], ["구 · 출생 연도 · 성별", 1, 1, 1, 4], ["공개 안 함 (병명만)", 0, 0, 0, 4]];
+    h += "<text x='" + X0 + "' y='24' font-size='21' font-weight='900' fill='#5f6b80'>단 한 명으로 특정되는 사람 (2,000명 중)</text>";
+    R.forEach(function (rw, i) {
+      var r = priv(rw[1], rw[2], rw[3]), y = 50 + i * 96, w = Math.max(4, r.uniq / 100 * W), col = r.uniq > 1 ? "#e03131" : "#2f9e44";
+      var val = (r.uniq < 1 && r.uniq > 0 ? r.uniq.toFixed(2) : r.uniq.toFixed(1)) + "%" + (r.n > 0 && r.n < 20 ? " (" + r.n + "명)" : "");
+      h += "<g data-step='" + rw[4] + "'><text x='" + X0 + "' y='" + (y + 24) + "' font-size='23' font-weight='900' fill='#161b28'>" + rw[0] + "</text><text x='" + (X0 + W + 160) + "' y='" + (y + 24) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>정보량 " + r.util + "점</text>";
+      h += "<rect x='" + X0 + "' y='" + (y + 36) + "' width='" + W + "' height='34' rx='6' fill='#e8edf4'/><rect x='" + X0 + "' y='" + (y + 36) + "' width='" + w.toFixed(1) + "' height='34' rx='6' fill='" + col + "'/>";
+      h += "<text x='" + (X0 + W + 14) + "' y='" + (y + 62) + "' font-size='25' font-weight='900' fill='" + col + "'>" + val + "</text></g>";
+    });
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@
     <button class="tab-btn" data-tab="4"><span class="num">04</span> 응용 실험실</button>
     <button class="tab-btn" data-tab="5"><span class="num">05</span> 정리하기</button>
     <button class="tab-btn" data-tab="6"><span class="num">06</span> 우리 반</button>
+    <button class="tab-btn" data-tab="7"><span class="num">07</span> 칠판모드</button>
   </nav>
 
   <main>
@@ -127,7 +128,7 @@
           </div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-01.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-01.html">개념정리 학습지</a>(<a href="sheet-01.html?key=1">정답</a>) · <a href="form-01.html">형성평가</a>(<a href="form-01.html?key=1">정답</a> · <a href="form-01.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- =====================================================================
@@ -227,7 +228,7 @@
           </div>
         </section>
       </div>
-      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다.</p>
+      <p class="teacher-note">교사용: 주소 끝에 <a href="?open=1">?open=1</a>을 붙이면 교사 미리 보기로 열립니다. · 전자칠판용 <a href="board-02.html">칠판 강의 화면</a> · 빈칸 번호가 같은 <a href="sheet-02.html">개념정리 학습지</a>(<a href="sheet-02.html?key=1">정답</a>) · <a href="form-02.html">형성평가</a>(<a href="form-02.html?key=1">정답</a> · <a href="form-02.html?show=1">칠판에 띄우기</a>)</p>
     </section>
 
     <!-- ===================================================================== 03 수준별 문제 -->
@@ -268,6 +269,15 @@
         <p>내가 설계한 온실과 공청회에서 밝힌 입장을 우리 반에 올리고, 친구들은 어떤 입장을 골랐는지 살펴보세요. <b>올리기 버튼을 눌렀을 때만</b> 공유됩니다. 실명 대신 별명을 쓰세요.</p>
       </div>
       <div class="stage-card"><div id="share"></div></div>
+    </section>
+    <!-- ===================================================================== 07 칠판모드 -->
+    <section class="tab-panel" data-panel="7" hidden>
+      <div class="stage-head">
+        <div class="eyebrow">07 · 전자칠판으로 정리하기</div>
+        <h2 class="display">칠판모드</h2>
+        <p>소단원마다 전자칠판용 <b>칠판 강의 화면</b>, 혼자 넘겨 보는 <b>혼자 복습하기</b>, 빈칸 번호가 같은 <b>개념정리 학습지</b>, 10분 동안 확인하는 <b>형성평가</b>를 모았습니다. 칠판에 열리는 빈칸 번호와 학습지 빈칸 번호가 같아, 수업하며 함께 채우거나 수업 끝에 학습지로 확인할 수 있습니다.</p>
+      </div>
+      <div class="info-card" id="board-wrap" style="margin:0 0 16px"><span class="tag">칠판 정리</span>이야기 두 편을 소단원마다 칠판 강의 화면과 개념정리 학습지로 정리하고, 형성평가로 확인합니다.<div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>01 미래를 바꿀 과학 기술 (사물 인터넷 · 인공지능 · 유용성과 한계)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-01.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-01.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-01.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-01.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div><div class="board-row" style="margin-top:12px;padding-top:10px;border-top:1px solid rgba(128,128,128,.25)"><b>02 과학 기술과 사회적 쟁점 (사실과 가치 · 위험과 편익 · 과학 윤리)</b><div class="btn-row" style="margin-top:8px"><a class="btn" href="board-02.html" target="_blank" rel="noopener" style="text-decoration:none">📺 칠판 강의 화면</a><a class="btn" href="board-02.html?s=1" target="_blank" rel="noopener" style="text-decoration:none">🔁 혼자 복습하기</a><a class="btn" href="sheet-02.html" target="_blank" rel="noopener" style="text-decoration:none">📝 개념정리 학습지</a><a class="btn" href="form-02.html" target="_blank" rel="noopener" style="text-decoration:none">✅ 형성평가</a></div></div></div>
     </section>
   </main>
 </div>

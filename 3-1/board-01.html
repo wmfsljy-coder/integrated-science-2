@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 감염병을 추적하라 (통합과학2 Ⅲ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  table.ledger td { font-size: 28px; padding: 12px 12px; }
+  table.ledger th { padding: 8px 12px; }
+  table.ledger td.n { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .roles .card { padding: 24px 26px; }
+  .roles .card h3 { font-size: 32px; margin-bottom: 8px; }
+  .roles .card p { font-size: 26px; line-height: 1.45; margin-bottom: 8px; }
+  .roles .card svg { display: block; margin: 0 auto 8px; }
+  #s-hook .opt { font-size: 28px; padding: 14px 22px; }
+  #s-ct .lines p { font-size: 29px; }
+  .bignum { font-size: 64px; font-weight: 900; color: var(--red); letter-spacing: -.03em; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg id="coverSvg" viewBox="0 0 1600 520" aria-label="거리 지도 위 한 펌프 둘레에 붉은 사망자 막대가 몰려 있고, 펌프의 손잡이가 떼어진다"></svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅲ-1 과학 기술의 활용 · 01</p>
+    <h1>감염병을 추적하라</h1>
+    <p class="sub" data-step="1">지도 한 장과 펌프 손잡이 하나, 그리고 170년 뒤의 진단과 예측</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 과학이 감염병을 어떻게 찾아내고, 쫓고, 막는지 봅니다. 여러분은 1854년 런던 의사의 조수이자 20XX년 질병 대응 센터 직원입니다.</p>
+    <p data-at="1">병원체를 한 번도 보지 못한 의사가 지도 한 장으로 유행을 멈춘 이야기부터 시작합니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="브로드가의 콜레라" data-part="도입">
+  <p class="kicker">도입 · 1854년 8월 31일 밤, 런던 소호 브로드가</p>
+  <h2>열흘 사이에 500명 넘게 숨졌다</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p><b>증상</b> 심한 설사와 탈수, 하루 만에 숨지기도</p>
+      <p><b>피해</b> 열흘 사이 500명 이상 (최종 616명)</p>
+      <p><b>단서</b> 집에 수도가 없어 <b>길거리 공동 펌프</b>의 물을 길어 마심</p>
+      <p class="small mt">세균이 병을 일으킨다는 사실이 밝혀지기 전. 의사들 대부분은 썩은 것에서 피어오르는 ‘나쁜 공기’가 병을 옮긴다고 믿었습니다.</p>
+    </div>
+    <div class="card yel">
+      <h3>콜레라는 무엇을 타고 퍼졌을까?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 썩은 것에서 나는 나쁜 공기(악취)</div>
+        <div class="opt">㉡ 오염된 마실 물</div>
+        <div class="opt">㉢ 환자와 몸이 닿는 접촉</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>의사 존 스노는 공기 탓이라는 말을 믿지 않았습니다. 콜레라 환자는 폐가 아니라 장부터 탈이 난다는 점이 마음에 걸렸거든요.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 지도라는 증거를 보고 스스로 판단하게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>역학 조사</b><span>병이 어디서 어떻게 퍼지는지 데이터로 쫓는 일</span></div>
+    <div class="card"><b>PCR · Ct 값</b><span>유전자를 2배씩 불려 아주 적은 병원체도 찾는다</span></div>
+    <div class="card"><b>민감도 · 특이도</b><span>검사가 얼마나 잘 잡아내고 잘 걸러 내는가</span></div>
+    <div class="card"><b>양성 예측도</b><span>양성인 사람이 진짜 감염자일 확률</span></div>
+    <div class="card"><b>감염 재생산 지수 R</b><span>환자 한 명이 평균 몇 명에게 옮기는가</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~14번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 오늘은 과학이 감염병에 맞서는 세 가지 일, 추적·진단·예측을 차례로 봅니다.</p></aside>
+</section>
+
+<!-- 4 스노의 지도 -->
+<section class="slide" id="s-map" data-title="스노의 지도" data-part="① 추적">
+  <p class="kicker">① 추적 · 사망자가 나온 집을 지도에 옮기면 (단원 화면 모형)</p>
+  <h2>사망자가 한 펌프 둘레에 몰려 있다</h2>
+  <div class="cols" style="grid-template-columns:810px 1fr;align-items:start">
+    <svg id="mapSvg" viewBox="0 0 900 440" width="810" height="396" aria-label="소호 거리 지도: 펌프 다섯 개와 집, 사망자 막대. 막대는 브로드가 펌프 둘레에 몰려 있다"></svg>
+    <div>
+      <p class="tight" data-step="1" style="font-size:28px;margin-bottom:8px">사망자 1명 = 막대 1개 (그 사람이 살던 집 앞)</p>
+      <svg id="rateSvg" viewBox="0 0 550 300" width="550" height="300" data-step="2" aria-label="펌프별로 그 펌프가 가장 가까운 집 100채당 사망자 수 막대그래프. 브로드가가 가장 높다"></svg>
+      <p data-step="3" style="font-size:29px;margin-top:8px">‘어디서 몇 명’이 가리킨 <b class="blank" data-n="1" data-step="3">감염원</b>: 브로드가 펌프</p>
+    </div>
+  </div>
+  <p class="note">사람들은 보통 가장 가까운 펌프에서 물을 길었습니다. 지도는 실제 지도의 경향을 본뜬 단순화한 가상 분포(단원 화면과 같은 모형)입니다.</p>
+  <aside class="script">
+    <p>스노는 집집을 돌며 사망자가 나온 주소를 모두 적었습니다. 사람들은 대개 가장 가까운 펌프의 물을 마셨죠.</p>
+    <p data-at="1">사망자 한 명을 막대 하나로, 살던 집 앞에 그렸습니다. 어디에 몰려 있나요?</p>
+    <p data-at="2">펌프마다 그 펌프가 가장 가까운 집들을 묶어 집 100채당 사망자를 셉니다. 브로드가가 다른 펌프의 3배가 넘습니다.</p>
+    <p data-at="3">빈칸 1번, 감염원. 병원체를 보지 못해도 ‘어디서 몇 명’이라는 데이터가 브로드가 펌프를 가리켰습니다.</p>
+  </aside>
+</section>
+
+<!-- 5 같은 공기, 다른 물 -->
+<section class="slide" id="s-why" data-title="같은 공기, 다른 물" data-part="① 추적">
+  <p class="kicker">① 추적 · 지도의 이상한 점</p>
+  <h2>펌프 바로 옆인데 무사한 사람들</h2>
+  <svg viewBox="0 0 1400 300" width="1400" height="300" aria-label="같은 거리의 공기 아래 양조장과 구빈원은 자체 우물을 써서 사망자가 거의 없고, 브로드가 펌프 물을 마신 집과 멀리 햄스테드의 부인은 숨졌다">
+    <defs>
+      <marker id="s5-ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#c92a2a"/></marker>
+      <marker id="s5-ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#1462d8"/></marker>
+    </defs>
+    <rect x="0" y="0" width="1400" height="50" rx="12" fill="#e7f3ff"/>
+    <text x="700" y="34" font-size="24" font-weight="900" fill="#1462d8" text-anchor="middle">같은 거리 · 같은 공기</text>
+    <rect x="0" y="250" width="1400" height="14" fill="#cdd3dc"/>
+    <!-- 브로드가 펌프와 이웃 집 -->
+    <g>
+      <rect x="560" y="150" width="70" height="100" fill="#e9ecef" stroke="#868e96" stroke-width="3"/><path d="M552 150 L595 112 L638 150Z" fill="#adb5bd"/>
+      <rect x="770" y="150" width="70" height="100" fill="#e9ecef" stroke="#868e96" stroke-width="3"/><path d="M762 150 L805 112 L848 150Z" fill="#adb5bd"/>
+      <rect x="690" y="150" width="20" height="100" rx="4" fill="#495057"/><path d="M710 168 h26 v10 h-26z" fill="#495057"/>
+      <path d="M690 160 L660 138" stroke="#495057" stroke-width="8" stroke-linecap="round"/>
+      <text x="700" y="290" font-size="22" font-weight="900" fill="#c92a2a" text-anchor="middle">브로드가 펌프 물 → 사망자 몰림</text>
+      <path d="M736 182 Q760 200 770 210" fill="none" stroke="#c92a2a" stroke-width="5" marker-end="url(#s5-ar)"/>
+      <path d="M690 190 Q660 200 632 210" fill="none" stroke="#c92a2a" stroke-width="5" marker-end="url(#s5-ar)"/>
+    </g>
+    <g data-step="1">
+      <rect x="120" y="110" width="250" height="140" fill="#fff4e6" stroke="#e8590c" stroke-width="3"/>
+      <text x="245" y="160" font-size="24" font-weight="900" fill="#e8590c" text-anchor="middle">🍺 양조장</text>
+      <text x="245" y="194" font-size="21" font-weight="800" fill="#495057" text-anchor="middle">일꾼 70여 명</text>
+      <circle cx="400" cy="222" r="20" fill="#d0ebff" stroke="#1462d8" stroke-width="4"/><text x="400" y="230" font-size="19" font-weight="900" fill="#1462d8" text-anchor="middle">井</text>
+      <text x="245" y="290" font-size="23" font-weight="900" fill="#198a4a" text-anchor="middle">자체 우물 · 맥주 → 사망 0명</text>
+    </g>
+    <g data-step="2">
+      <rect x="1000" y="110" width="250" height="140" fill="#f3f0ff" stroke="#6741d9" stroke-width="3"/>
+      <text x="1125" y="160" font-size="24" font-weight="900" fill="#6741d9" text-anchor="middle">🏚 구빈원</text>
+      <text x="1125" y="194" font-size="21" font-weight="800" fill="#495057" text-anchor="middle">수용자 500명 넘게</text>
+      <circle cx="970" cy="222" r="20" fill="#d0ebff" stroke="#1462d8" stroke-width="4"/><text x="970" y="230" font-size="19" font-weight="900" fill="#1462d8" text-anchor="middle">井</text>
+      <text x="1125" y="290" font-size="23" font-weight="900" fill="#198a4a" text-anchor="middle">자체 우물 → 사망 5명</text>
+    </g>
+    <g data-step="3">
+      <path d="M736 160 Q1000 60 1390 100" fill="none" stroke="#c92a2a" stroke-width="4" stroke-dasharray="12 8" marker-end="url(#s5-ar)"/>
+      <text x="1395" y="72" font-size="21" font-weight="900" fill="#c92a2a" text-anchor="end">멀리 햄스테드의 부인: 이 물을 길어다 마심 → 사망</text>
+    </g>
+    <text x="0" y="84" font-size="18" fill="#5f6b80">⚠ 거리·크기 모식도</text>
+  </svg>
+  <div class="lines mt">
+    <p data-step="4">같은 공기를 마셨어도 물이 다르면 결과가 달랐다 → 콜레라는 <b class="blank" data-n="2" data-step="4">오염된 물</b>로 퍼진다</p>
+    <p data-step="5" style="font-size:28px">9월 8일 손잡이 제거 · 우물 옆 40번지 정화조가 샘 · 콜레라균 확인은 약 30년 뒤(1883년, 코흐)</p>
+    <p data-step="5">병원체를 보지 못하고도 데이터로 감염원을 찾음 → <b class="blank" data-n="3" data-step="5">역학</b>의 출발점</p>
+  </div>
+  <aside class="script">
+    <p>그런데 지도에 이상한 곳이 있습니다. 펌프 바로 옆인데 사망자가 거의 없는 건물들이에요.</p>
+    <p data-at="1">브로드가 펌프 바로 옆 양조장의 일꾼 70여 명은 아무도 콜레라로 죽지 않았습니다. 양조장에는 자체 우물이 있었고, 일꾼들은 물 대신 맥주를 마셨어요.</p>
+    <p data-at="2">수용자가 500명이 넘던 구빈원도 자체 우물을 써서 사망자가 5명뿐이었습니다.</p>
+    <p data-at="3">반대로 멀리 햄스테드에 살던 부인은 이 펌프의 물맛을 좋아해 날마다 길어다 마셨고, 콜레라로 숨졌습니다.</p>
+    <p data-at="4">공기는 이웃과 똑같았는데 마신 물이 달랐습니다. 빈칸 2번, 오염된 물.</p>
+    <p data-at="5">9월 8일 손잡이가 떼어졌고, 우물 바로 옆 40번지 정화조가 새고 있었다는 사실이 밝혀집니다. 콜레라균은 약 30년 뒤에야 확인되죠. 빈칸 3번, 역학. 스노의 조사는 역학의 출발점으로 꼽힙니다. 다만 손잡이를 뗄 무렵 유행은 이미 수그러들고 있었다는 점도 스노 자신이 기록했습니다.</p>
+  </aside>
+</section>
+
+<!-- 6 PCR -->
+<section class="slide" id="s-pcr" data-title="PCR — 2배씩 불리기" data-part="② 진단">
+  <p class="kicker">② 진단 · 20XX년, 신종 감염병 X의 검체</p>
+  <h2>보이지 않을 만큼 적은 유전자를 불린다</h2>
+  <div class="cols" style="grid-template-columns:640px 1fr;align-items:center">
+    <svg id="dblSvg" viewBox="0 0 640 470" width="640" height="470" aria-label="주기마다 유전자 가닥이 1개, 2개, 4개, 8개로 2배씩 늘어나는 모식도"></svg>
+    <div class="lines">
+      <p data-step="1">중합 효소 연쇄 반응(PCR): 온도를 올렸다 내리는 한 주기마다 표적 유전자가 <b class="blank" data-n="4" data-step="1">2배</b></p>
+      <p data-step="2">n번 돌면 2ⁿ배 · 10번이면 2¹⁰ = 1,024배 (약 1,000배)</p>
+      <p data-step="3">30번이면 약 10억 배 → 겨우 10개도 30여 번 불리면 천억 개를 넘어 검출된다</p>
+    </div>
+  </div>
+  <p class="note">그림은 처음 1개에서 시작한 모식도입니다. 2³⁰ = 1,073,741,824 ≈ 10억.</p>
+  <aside class="script">
+    <p>스노는 병원체를 끝내 보지 못했습니다. 지금은 면봉에 묻은 바이러스 유전자를 찾아냅니다. 문제는 그 양이 너무 적다는 것이죠.</p>
+    <p data-at="1">PCR, 중합 효소 연쇄 반응은 온도를 올렸다 내리는 주기를 한 번 돌 때마다 표적 유전자를 복제합니다. 빈칸 4번, 2배.</p>
+    <p data-at="2">두 배를 거듭하면 거듭제곱이 됩니다. 10번이면 1,024배, 약 천 배예요.</p>
+    <p data-at="3">30번이면 약 10억 배. 그래서 유전자가 10개뿐인 검체도 30여 번 돌리면 기계가 알아챌 만큼 많아집니다.</p>
+  </aside>
+</section>
+
+<!-- 7 Ct 값 -->
+<section class="slide" id="s-ct" data-title="Ct 값 읽기" data-part="② 진단">
+  <p class="kicker">② 진단 · 형광 신호가 기준선을 넘는 순간 (단원 화면 모형)</p>
+  <h2>처음 양이 많을수록 일찍 기준선을 넘는다</h2>
+  <div class="cols" style="grid-template-columns:860px 1fr;align-items:center">
+    <svg id="ctSvg" viewBox="0 0 860 470" width="860" height="470" aria-label="증폭 주기에 따른 형광 신호 곡선. 처음 유전자 10개인 검체는 34주기, 1만 개인 검체는 24주기에 기준선을 넘는다"></svg>
+    <div class="lines">
+      <p data-step="2">기준선을 처음 넘는 주기 수 → <b class="blank" data-n="5" data-step="2">Ct 값</b> (10개 → 34)</p>
+      <p data-step="3">처음 1만 개 → Ct 24</p>
+      <p data-step="4">Ct 값이 <b class="blank" data-n="6" data-step="4">작을수록</b> 처음 유전자가 많다</p>
+      <p data-step="4" class="small">Ct 10 차이 = 2¹⁰ ≈ 1,000배</p>
+    </div>
+  </div>
+  <p class="note">기준선은 끝에 닿는 신호(고원)의 10%로 정한 단원 화면 모형입니다. 실제 Ct 값은 장비와 시약에 따라 달라 서로 다른 검사끼리 그대로 비교할 수 없습니다.</p>
+  <aside class="script">
+    <p>복제된 유전자가 많아지면 형광 신호가 밝아집니다. 가로축은 주기 수, 세로축은 신호 세기입니다.</p>
+    <p data-at="1">기계가 ‘검출’이라고 판단하는 기준선입니다.</p>
+    <p data-at="2">유전자가 10개뿐인 검체는 34번째 주기에 기준선을 처음 넘습니다. 이 주기 수가 빈칸 5번, Ct 값입니다.</p>
+    <p data-at="3">처음 유전자가 1만 개면? 24번째 주기에 넘습니다.</p>
+    <p data-at="4">처음 양이 1,000배 많으니 2를 열 번 곱한 만큼, 10주기 일찍 넘은 거예요. 빈칸 6번, Ct 값이 작을수록 처음 유전자가 많습니다. Ct가 크면 많다고 거꾸로 생각하기 쉬우니 짚어 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 8 신속항원검사 결과표 -->
+<section class="slide" id="s-rt" data-title="1만 명 검사 결과표" data-part="② 진단">
+  <p class="kicker">② 진단 · 15분 신속항원검사를 시민 1만 명에게 (유병률 1% 가정)</p>
+  <h2>감염자 100명, 비감염자 9,900명</h2>
+  <div class="cols" style="grid-template-columns:500px 1fr;align-items:center">
+    <svg id="wafSvg" viewBox="0 0 500 540" width="500" height="540" aria-label="1만 명을 칸 하나씩 그린 그림. 맨 윗줄 100칸이 감염자이고 그중 80칸이 양성, 나머지 9,900칸 사이에 위양성 198칸이 흩어져 있다"></svg>
+    <div>
+      <table class="ledger">
+        <tr><th>시민 10,000명</th><th style="text-align:right">검사 양성</th><th style="text-align:right">검사 음성</th></tr>
+        <tr data-step="1"><td><b class="c-red">감염자</b> 100명</td><td class="n"><span data-step="2">80</span></td><td class="n"><span data-step="2">20 <span class="small">위음성</span></span></td></tr>
+        <tr data-step="1"><td><b>비감염자</b> 9,900명</td><td class="n"><span data-step="3" class="c-orange">198 <span class="small">위양성</span></span></td><td class="n"><span data-step="3">9,702</span></td></tr>
+      </table>
+      <div class="lines mt">
+        <p data-step="2">감염자를 양성으로 잡아내는 비율 → <b class="blank" data-n="7" data-step="2">민감도</b> 80%</p>
+        <p data-step="3">비감염자를 음성으로 걸러 내는 비율 → <b class="blank" data-n="8" data-step="3">특이도</b> 98%</p>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>PCR은 정확하지만 몇 시간이 걸립니다. 그래서 15분이면 되는 신속항원검사를 시민 1만 명에게 돌립니다. 시민의 1%가 감염되어 있다고 합시다.</p>
+    <p data-at="1">1만 명의 1%, 감염자는 100명. 그림의 맨 윗줄입니다. 나머지 9,900명은 비감염자예요.</p>
+    <p data-at="2">이 검사는 감염자 100명 중 80명을 양성으로 잡아냅니다. 빈칸 7번, 민감도 80%. 놓친 20명은 위음성입니다.</p>
+    <p data-at="3">비감염자 9,900명 중 98%, 9,702명은 음성으로 걸러 냅니다. 빈칸 8번, 특이도 98%. 그런데 남은 2%, 198명이 양성으로 나옵니다. 위양성이에요. 그림의 주황 칸을 세어 보세요.</p>
+  </aside>
+</section>
+
+<!-- 9 양성 예측도 -->
+<section class="slide" id="s-ppv" data-title="양성이면 정말 감염일까" data-part="② 진단">
+  <p class="kicker">② 진단 · 결과표를 거꾸로 읽으면</p>
+  <h2>양성인 사람 가운데 진짜 감염자는?</h2>
+  <div class="cols" style="grid-template-columns:1fr 720px;align-items:center">
+    <div class="lines">
+      <p data-step="1">양성 278명 = 진짜 80명 + 위양성 198명</p>
+      <p data-step="2">80 ÷ 278 ≈ <span class="bignum" id="ppvNum">28.8</span><b class="c-red" style="font-size:40px">%</b></p>
+      <p data-step="2">양성인 사람이 진짜 감염자일 확률 → <b class="blank" data-n="9" data-step="2">양성 예측도</b></p>
+      <p data-step="3">같은 검사도 <b class="blank" data-n="10" data-step="3">유병률</b>이 높은 집단에서는 양성 예측도가 높다</p>
+    </div>
+    <svg id="ppvSvg" viewBox="0 0 720 470" width="720" height="470" aria-label="민감도 80%, 특이도 98% 검사에서 유병률에 따른 양성 예측도 곡선. 유병률 1%에서 28.8%, 19%에서 처음 90%를 넘는다"></svg>
+  </div>
+  <div class="card red" data-step="4" style="padding:16px 28px;margin-top:6px"><p style="margin:0;font-size:27px"><b>‘특이도 98%니까 양성이면 98% 감염’?</b> 아니다. 감염자가 드물면 위양성이 진짜 양성보다 많아진다.</p></div>
+  <aside class="script">
+    <p>이제 표를 거꾸로 읽습니다. 양성 판정을 받은 사람은 모두 몇 명이죠?</p>
+    <p data-at="1">진짜 감염자 80명과 위양성 198명, 합해서 278명입니다.</p>
+    <p data-at="2">그 가운데 진짜 감염자는 80명, 약 28.8%뿐입니다. 빈칸 9번, 양성 예측도. ‘정확도 98%’처럼 들리는 검사인데 왜 이럴까요?</p>
+    <p data-at="3">감염자가 1%로 드물면 9,900명의 2%가 80명보다 많기 때문입니다. 유병률을 높이면 곡선처럼 올라가고, 19%부터 90%를 넘습니다. 빈칸 10번, 유병률.</p>
+    <p data-at="4">흔한 오해를 짚습니다. 같은 검사라도 누구를 검사하느냐에 따라 결과의 믿음직함이 달라집니다. 그래서 양성이 나오면 PCR로 다시 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 10 확인 -->
+<section class="slide" id="s-check" data-title="증상자에게 쓰면" data-part="② 진단">
+  <p class="kicker">② 진단 · 확인</p>
+  <h2>같은 검사를 증상이 있어 찾아온 사람들(유병률 20%)에게 쓰면, 양성 예측도는?</h2>
+  <div class="opts" style="max-width:1200px">
+    <div class="opt wrong" data-step="1">㉠ 검사가 같으니 그대로 28.8%</div>
+    <div class="opt wrong" data-step="1">㉡ 검사받는 사람이 적어 더 낮아진다</div>
+    <div class="opt right" data-step="1">㉢ 약 91%로 높아진다</div>
+  </div>
+  <p data-step="1" style="margin-top:36px">감염자 2,000명 중 양성 1,600명 · 비감염자 8,000명 중 위양성 160명 → 1,600 ÷ 1,760 ≈ 91%</p>
+  <aside class="script">
+    <p>민감도 80%, 특이도 98%는 그대로입니다. 짝과 30초 이야기하고 손가락으로 답하게 합니다. 1만 명 기준으로 계산해 보게 합니다.</p>
+    <p data-at="1">정답은 ㉢. 1만 명이면 감염자 2,000명 중 1,600명이 양성, 비감염자 8,000명의 2%인 160명이 위양성. 1,600을 1,760으로 나누면 약 91%입니다.</p>
+  </aside>
+</section>
+
+<!-- 11 감염 재생산 지수 -->
+<section class="slide" id="s-r" data-title="한 명이 몇 명에게" data-part="③ 예측·예방">
+  <p class="kicker">③ 예측·예방 · 역학 조사 결과: 대책이 없으면 환자 한 명이 평균 3명에게</p>
+  <h2>R이 1보다 크면 번지고, 작으면 꺼진다</h2>
+  <svg id="rSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="왼쪽: 한 명이 3명, 9명, 27명으로 늘어나는 전파 나무. 오른쪽: R이 0.9이면 100명이 90, 81, 73, 66명으로 줄어드는 막대"></svg>
+  <div class="lines mt">
+    <p data-step="1">환자 한 명이 평균 몇 명에게 옮기나 → <b class="blank" data-n="11" data-step="1">감염 재생산 지수</b> R</p>
+    <p data-step="2" style="font-size:28px">대책이 없을 때(기초 감염 재생산 지수 R₀) = 3 → 1 → 3 → 9 → 27 → 81 …</p>
+    <p data-step="3">R이 <b class="blank" data-n="12" data-step="3">1 미만</b>이면 세대마다 환자가 줄어 유행이 스스로 꺼진다</p>
+  </div>
+  <aside class="script">
+    <p>센터장이 역학 조사 결과를 알려 줍니다. 감염병 X는 대책이 없으면 환자 한 명이 평균 3명을 감염시킵니다.</p>
+    <p data-at="1">이 값이 빈칸 11번, 감염 재생산 지수 R입니다.</p>
+    <p data-at="2">아무 대책이 없을 때의 값을 기초 감염 재생산 지수 R₀라고 합니다. 3이면 한 세대마다 3배, 1, 3, 9, 27로 불어납니다.</p>
+    <p data-at="3">R이 0.9라면? 100명이 90명, 81명, 73명으로 줄어듭니다. 빈칸 12번, R이 1 미만이면 유행이 스스로 꺼집니다. 방역의 목표는 결국 R을 낮추는 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 12 유행 곡선 -->
+<section class="slide" id="s-sir" data-title="유행 곡선을 눌러라" data-part="③ 예측·예방">
+  <p class="kicker">③ 예측·예방 · 인구 10만 명 도시의 전파 모형 (단원 화면 모형)</p>
+  <h2>대책은 유행 곡선의 정점을 낮추고 늦춘다</h2>
+  <svg id="sirSvg" viewBox="0 0 1400 440" width="1400" height="440" aria-label="날짜에 따른 동시 환자 수 곡선 세 개와 의료 역량 5,000명 선. 대책이 없으면 약 3만 명, 접촉 40% 감소면 약 1만 2천 명, 여기에 접종 20%를 더하면 약 4천 명으로 역량 아래"></svg>
+  <div class="lines">
+    <p data-step="1" style="font-size:28px">병상·의료진이 동시에 감당할 수 있는 환자 5,000명 → <b class="blank" data-n="13" data-step="1">의료 역량</b></p>
+    <p data-step="4" style="font-size:28px">정점이 늦춰진 시간 = 백신과 치료제를 준비할 시간</p>
+  </div>
+  <p class="note">모형 가정: R₀ = 3, 감염 기간 7일, 접종자는 모두 면역, 모든 사람이 고르게 섞인다고 단순화했습니다.</p>
+  <aside class="script">
+    <p>인구 10만 명인 우리 시의 병상과 의료진으로 감당할 수 있는 환자에는 한계가 있습니다.</p>
+    <p data-at="1">동시에 앓는 환자 5,000명까지. 빈칸 13번, 의료 역량입니다.</p>
+    <p data-at="2">그대로 두면 36일째쯤 동시 환자가 3만 명을 넘습니다. 의료 역량의 6배예요. 병상이 모자라면 살릴 수 있던 환자도 잃습니다.</p>
+    <p data-at="3">거리 두기·마스크·격리로 접촉을 40% 줄이면 정점이 약 1만 2천 명으로 낮아지고 77일째로 늦춰집니다. 그래도 역량을 넘네요.</p>
+    <p data-at="4">일상이 멈추지 않게 접촉 감소는 40%에 두고 백신 접종 20%를 더하면, 정점이 약 4,200명으로 역량 아래로 내려옵니다. 늦춰진 시간은 백신과 치료제를 준비할 시간이 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 13 R 계산과 집단 면역 -->
+<section class="slide soft" id="s-herd" data-title="R 계산과 집단 면역" data-part="③ 예측·예방">
+  <p class="kicker">③ 예측·예방 · 대책마다 R이 얼마나 줄어드나</p>
+  <p class="formula" data-step="1" style="margin:0 0 10px">R = R₀ × (1 − 접촉 감소) × (1 − 접종률)</p>
+  <svg id="herdSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="R 막대: 대책 없음 3.00, 접촉 40% 감소 1.80, 접종 20% 더하면 1.44, 접종 45%면 0.99로 1 아래"></svg>
+  <div class="lines mt">
+    <p data-step="5">접촉을 줄이지 않아도 면역을 가진 비율이 1 − 1/R₀ = 1 − 1/3 ≈ 67%를 넘으면 R &lt; 1 → <b class="blank" data-n="14" data-step="5">집단 면역</b></p>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 전파 모형에서 실제 재생산 지수는 이렇게 계산됩니다. 접촉을 줄이면 옮길 기회가, 접종하면 옮겨 받을 사람이 줄어듭니다.</p>
+    <p data-at="1">공식을 먼저 읽어 줍니다.</p>
+    <p data-at="2">대책이 없으면 R₀ 그대로 3입니다.</p>
+    <p data-at="3">접촉을 40% 줄이면 3 곱하기 0.6, 1.8입니다.</p>
+    <p data-at="4">접종 20%를 더하면 1.8 곱하기 0.8, 1.44. 곡선은 역량 아래로 내려왔지만 아직 1보다 커서 유행은 계속됩니다. 접종률을 45%까지 올리면 3 곱하기 0.6 곱하기 0.55, 0.99로 1 아래가 됩니다.</p>
+    <p data-at="5">접촉을 전혀 줄이지 않는다면 면역을 가진 사람이 3분의 2, 약 67%를 넘어야 합니다. 빈칸 14번, 집단 면역. 접종하지 못하는 사람까지 함께 보호됩니다.</p>
+  </aside>
+</section>
+
+<!-- 14 과학의 세 역할 -->
+<section class="slide soft" id="s-roles" data-title="과학의 세 역할" data-part="③ 예측·예방">
+  <p class="kicker">③ 예측·예방 · 1854년과 오늘을 역할별로</p>
+  <h2>찾아내고, 쫓고, 내다본다</h2>
+  <div class="cols c3 roles">
+    <div class="card" data-step="1">
+      <svg viewBox="0 0 200 110" width="200" height="110" aria-label="시험관"><rect x="84" y="8" width="32" height="90" rx="16" fill="#fff" stroke="#1462d8" stroke-width="5"/><rect x="88" y="54" width="24" height="40" rx="12" fill="#74c0fc"/><rect x="76" y="4" width="48" height="10" rx="4" fill="#1462d8"/></svg>
+      <h3 class="c-blue">🧪 진단</h3>
+      <p>감염 여부를 알아낸다</p>
+      <p class="small">PCR로 유전자 증폭 · 검사 결과를 민감도·특이도로 해석</p>
+    </div>
+    <div class="card" data-step="2">
+      <svg viewBox="0 0 200 110" width="200" height="110" aria-label="지도 위의 위치 표시"><rect x="20" y="20" width="160" height="84" rx="8" fill="#fff" stroke="#e8590c" stroke-width="4"/><path d="M20 62 H180 M100 20 V104" stroke="#ffd8a8" stroke-width="8"/><path d="M100 70 C80 46 84 22 100 22 C116 22 120 46 100 70Z" fill="#e8590c"/><circle cx="100" cy="38" r="7" fill="#fff"/></svg>
+      <h3 class="c-orange">🗺️ 추적</h3>
+      <p>어디서 어떻게 퍼지는지 밝힌다</p>
+      <p class="small">스노의 사망자 지도 · 확진자의 접촉자 조사</p>
+    </div>
+    <div class="card" data-step="3">
+      <svg viewBox="0 0 200 110" width="200" height="110" aria-label="낮아진 유행 곡선"><path d="M20 100 H184" stroke="#495057" stroke-width="4"/><path d="M24 98 C60 98 70 14 96 14 C122 14 132 98 170 98" fill="none" stroke="#e03131" stroke-width="5"/><path d="M24 98 C70 98 90 70 116 70 C142 70 156 98 184 98" fill="none" stroke="#198a4a" stroke-width="5"/><path d="M20 78 H184" stroke="#1462d8" stroke-width="3" stroke-dasharray="8 6"/></svg>
+      <h3 class="c-green">📈 예측·예방</h3>
+      <p>앞일을 계산하고 미리 막는다</p>
+      <p class="small">R로 유행 곡선 계산 · 백신으로 R을 1 아래로</p>
+    </div>
+  </div>
+  <p data-step="4" style="font-size:30px;margin-top:40px">감염병·기후 변화·식량 같은 미래 사회의 문제는 ‘느낌’이 아니라 <b class="c-blue">측정·데이터·모형</b>으로 푼다 → 과학이 필요한 까닭</p>
+  <aside class="script">
+    <p>단원 화면의 결말 미션처럼, 오늘 쓴 도구를 역할별로 나눕니다. 학생에게 먼저 예를 말하게 한 뒤 엽니다.</p>
+    <p data-at="1">진단: 병에 걸렸는지 알아냅니다. 검사 결과를 올바로 읽는 것도 진단의 일부예요.</p>
+    <p data-at="2">추적: 어디서 어떻게 퍼지는지 밝힙니다. 스노가 한 일이죠.</p>
+    <p data-at="3">예측·예방: 모형으로 앞일을 계산하고, 백신 같은 대책으로 미리 막습니다.</p>
+    <p data-at="4">이것이 오늘 논증의 결론입니다. 미래 사회의 문제를 푸는 데 과학이 왜 필요한지, 오늘 본 숫자 하나를 근거로 들어 말해 보게 합니다.</p>
+  </aside>
+</section>
+
+<!-- 15 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>과학은 감염병을 찾고, 쫓고, 내다본다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>추적</b>: 스노의 지도 → 사망자 위치 데이터로 감염원(브로드가 펌프)을 찾음 → 역학의 출발점</li>
+    <li data-k="2" data-step="2"><b>진단</b>: PCR은 주기마다 2배 → Ct 값이 작을수록 처음 유전자가 많다 (Ct 10 차이 ≈ 1,000배)</li>
+    <li data-k="3" data-step="3"><b>검사 해석</b>: 민감도·특이도가 같아도 유병률이 낮으면 양성 예측도가 낮다 (1% → 28.8%)</li>
+    <li data-k="4" data-step="4"><b>예측·예방</b>: R = R₀ × (1 − 접촉 감소) × (1 − 접종률), R &lt; 1이면 유행이 꺼진다 · 집단 면역</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 처음 고른 첫 추리를 다시 보며, 생각이 바뀌었다면 무엇 때문인지 한 문장으로 말하게 합니다.</p></aside>
+</section>
+
+<!-- 16 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 같은 PCR 검사에서 Ct 값이 22인 검체와 32인 검체가 있다. 처음 유전자가 약 1,000배 많은 것은?</p>
+      <div class="opts">
+        <div class="opt right" data-step="1">㉠ Ct 22인 검체</div>
+        <div class="opt wrong" data-step="1">㉡ Ct 32인 검체</div>
+        <div class="opt wrong" data-step="1">㉢ 두 검체가 같다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. R₀ = 3인 감염병에서 접촉을 40% 줄이면(접종 없음) R은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 1.2</div>
+        <div class="opt right" data-step="2">㉡ 1.8</div>
+        <div class="opt wrong" data-step="2">㉢ 2.6</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉠. Ct가 작을수록 처음 양이 많습니다. 10 차이는 2¹⁰, 약 1,000배입니다.</p>
+    <p data-at="2">2번은 ㉡. 3 × (1 − 0.4) = 1.8. 아직 1보다 커서 유행은 계속됩니다.</p>
+  </aside>
+</section>
+
+<!-- 17 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ① 「펌프의 손잡이를 떼어라」</h2>
+  <div class="cols">
+    <div class="card"><h3>질병 대응 센터에 배치되었습니다</h3><p>다섯 펌프 조사, PCR의 Ct 주기에 멈추기, 결과표 채우기, 유행 곡선을 의료 역량 아래로 누르기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 02 기술 발전과 빅데이터</h3><p>240만 명에게 물은 조사가 5만 명에게 물은 조사에 졌습니다. 데이터는 많을수록 좋은 것 아니었을까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ①을 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function rng(seed) {                                   /* 단원 화면(episodes.js)과 같은 mulberry32 */
+    var a = seed >>> 0;
+    return function () { a = (a + 0x6D2B79F5) >>> 0; var t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  }
+
+  /* 표지 — 거리와 사망자 막대, 손잡이 */
+  (function () {
+    var svg = document.getElementById("coverSvg"), r = rng(31), h = "", x, y;
+    [[180, 250, 1420, 250], [800, 40, 800, 500], [260, 90, 1340, 150], [240, 430, 1380, 380], [470, 40, 420, 500], [1130, 40, 1090, 500]].forEach(function (l) {
+      h += "<line x1='" + l[0] + "' y1='" + l[1] + "' x2='" + l[2] + "' y2='" + l[3] + "' stroke='#2c3548' stroke-width='22' stroke-linecap='round'/>";
+    });
+    for (var i = 0; i < 220; i++) {
+      x = 200 + r() * 1200; y = 50 + r() * 440;
+      if (Math.abs(x - 800) < 70 && Math.abs(y - 250) < 70) continue;
+      h += "<rect x='" + (x - 7).toFixed(0) + "' y='" + (y - 7).toFixed(0) + "' width='14' height='14' fill='#3a4459'/>";
+      var d = Math.sqrt((x - 800) * (x - 800) + (y - 250) * (y - 250));
+      if (r() < Math.exp(-Math.pow(d / 230, 2))) { var n = 1 + Math.floor(r() * 3); for (var k = 0; k < n; k++) h += "<rect x='" + (x - 9).toFixed(0) + "' y='" + (y - 14 - k * 7).toFixed(0) + "' width='18' height='5' fill='#ff8a80'/>"; }
+    }
+    h += "<rect x='786' y='200' width='28' height='100' rx='6' fill='#adb5bd'/><path d='M814 222 h34 v12 h-34z' fill='#adb5bd'/><circle cx='800' cy='196' r='14' fill='#adb5bd'/>";
+    h += "<path d='M786 212 L742 178' stroke='#ffd43b' stroke-width='12' stroke-linecap='round' data-hide='1'/>";
+    h += "<g data-step='1'><path d='M690 330 L736 300' stroke='#ffd43b' stroke-width='12' stroke-linecap='round'/><text x='640' y='372' font-size='26' font-weight='900' fill='#ffd43b' text-anchor='middle'>1854년 9월 8일, 손잡이를 떼다</text></g>";
+    h += "<text x='1560' y='510' fill='#9aa4b5' font-size='18' text-anchor='end'>⚠ 모식도 · 막대 하나 = 사망자</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 스노의 지도 — 단원 화면 M.map 과 같은 가상 분포(씨앗 1854) */
+  var PUMPS = [{ n: "브로드가", x: 450, y: 215 }, { n: "말버러가", x: 290, y: 70 }, { n: "워릭가", x: 200, y: 330 }, { n: "루퍼트가", x: 650, y: 365 }, { n: "딘가", x: 740, y: 140 }];
+  var BLD = [{ n: "양조장", x: 492, y: 168, w: 96, h: 36 }, { n: "구빈원", x: 340, y: 112, w: 104, h: 42 }];
+  function snowMap() {
+    var r = rng(1854), houses = [], guard = 0;
+    while (houses.length < 300 && guard++ < 20000) {
+      var x = 40 + r() * 820, y = 44 + r() * 346, ok = true, i;
+      for (i = 0; i < BLD.length; i++) { var b = BLD[i]; if (x > b.x - 8 && x < b.x + b.w + 8 && y > b.y - 12 && y < b.y + b.h + 8) ok = false; }
+      for (i = 0; i < PUMPS.length; i++) { if (Math.abs(x - PUMPS[i].x) < 50 && y > PUMPS[i].y - 16 && y < PUMPS[i].y + 34) ok = false; }
+      for (i = 0; i < houses.length; i++) { if (Math.abs(x - houses[i].x) < 13 && Math.abs(y - houses[i].y) < 15) { ok = false; break; } }
+      if (!ok) continue;
+      var near = 0, best = 1e9;
+      for (i = 0; i < PUMPS.length; i++) { var d = Math.sqrt(Math.pow(x - PUMPS[i].x, 2) + Math.pow(y - PUMPS[i].y, 2)); if (d < best) { best = d; near = i; } }
+      var dB = Math.sqrt(Math.pow(x - 450, 2) + Math.pow(y - 215, 2)), dead = 0;
+      if (r() < Math.exp(-Math.pow(dB / 150, 2))) dead = 1 + Math.floor(r() * r() * 4);
+      else if (r() < 0.04) dead = 1;
+      houses.push({ x: x, y: y, p: near, d: dead });
+    }
+    var stats = PUMPS.map(function () { return { h: 0, d: 0 }; });
+    houses.forEach(function (h) { stats[h.p].h++; stats[h.p].d += h.d; });
+    stats.forEach(function (s) { s.rate = s.h ? s.d / s.h * 100 : 0; });
+    return { houses: houses, stats: stats };
+  }
+  (function () {
+    var svg = document.getElementById("mapSvg"), D = snowMap(), h = "";
+    h += "<rect x='0' y='0' width='900' height='440' rx='14' fill='#f1f3f5'/>";
+    [[40, 215, 860, 215], [450, 40, 450, 395], [120, 60, 800, 120], [100, 340, 820, 300], [230, 40, 180, 395], [700, 40, 660, 395]].forEach(function (l) {
+      h += "<line x1='" + l[0] + "' y1='" + l[1] + "' x2='" + l[2] + "' y2='" + l[3] + "' stroke='#d5dbe6' stroke-width='14' stroke-linecap='round'/>";
+    });
+    BLD.forEach(function (b) {
+      h += "<rect x='" + b.x + "' y='" + b.y + "' width='" + b.w + "' height='" + b.h + "' rx='4' fill='#e9ecef' stroke='#868e96' stroke-width='2'/>";
+      h += "<text x='" + (b.x + b.w / 2) + "' y='" + (b.y + b.h / 2 + 8) + "' font-size='21' font-weight='800' fill='#495057' text-anchor='middle'>" + b.n + "</text>";
+    });
+    D.houses.forEach(function (o) { h += "<rect x='" + (o.x - 4.5).toFixed(1) + "' y='" + (o.y - 4.5).toFixed(1) + "' width='9' height='9' fill='#adb5bd'/>"; });
+    h += "<g data-step='1'>";
+    D.houses.forEach(function (o) { for (var k = 0; k < o.d; k++) h += "<rect x='" + (o.x - 6).toFixed(1) + "' y='" + (o.y - 10 - k * 5).toFixed(1) + "' width='12' height='3.6' fill='#161b28'/>"; });
+    h += "</g>";
+    h += "<circle cx='450' cy='215' r='30' fill='none' stroke='#f08c00' stroke-width='6' data-step='3'/>";
+    PUMPS.forEach(function (p, i) {
+      h += "<circle cx='" + p.x + "' cy='" + p.y + "' r='12' fill='" + (i === 0 ? "#d9302c" : "#1462d8") + "' stroke='#fff' stroke-width='3'/>";
+      h += "<text x='" + p.x + "' y='" + (p.y + 34) + "' font-size='22' font-weight='900' fill='" + (i === 0 ? "#c92a2a" : "#1462d8") + "' text-anchor='middle' stroke='#fff' stroke-width='6' paint-order='stroke'>" + p.n + "</text>";
+    });
+    h += "<text x='14' y='432' font-size='21' fill='#5f6b80'>⚠ 단순화한 가상 분포 · ● 공동 펌프</text>";
+    svg.innerHTML = h;
+    var c = document.getElementById("rateSvg"), g = "", mx = 0;
+    D.stats.forEach(function (s) { mx = Math.max(mx, s.rate); });
+    g += "<text x='0' y='22' font-size='21' font-weight='900' fill='#5f6b80'>집 100채당 사망자 (명)</text>";
+    D.stats.forEach(function (s, i) {
+      var y = 44 + i * 50, w = s.rate / mx * 300;
+      g += "<text x='0' y='" + (y + 30) + "' font-size='24' font-weight='800' fill='#161b28'>" + PUMPS[i].n + "</text>";
+      g += "<rect x='120' y='" + (y + 6) + "' width='" + w.toFixed(1) + "' height='32' rx='6' fill='" + (i === 0 ? "#e03131" : "#9aa4b5") + "'/>";
+      g += "<text x='" + (130 + w).toFixed(1) + "' y='" + (y + 31) + "' font-size='24' font-weight='900' fill='" + (i === 0 ? "#c92a2a" : "#495057") + "'>" + s.rate.toFixed(0) + "</text>";
+    });
+    c.innerHTML = g;
+  })();
+
+  /* PCR 2배 모식도 */
+  (function () {
+    var svg = document.getElementById("dblSvg"), h = "";
+    function strand(x, y, col) {
+      var s = "<g transform='translate(" + x + "," + (y - 8) + ")'><path d='M0 14 C8 -4 16 32 24 14 C32 -4 40 32 48 14' fill='none' stroke='" + col + "' stroke-width='5'/>";
+      s += "<path d='M0 14 C8 32 16 -4 24 14 C32 32 40 -4 48 14' fill='none' stroke='" + col + "' stroke-width='5' opacity='.5'/></g>";
+      return s;
+    }
+    var rows = [[0, 1, ""], [1, 2, "1"], [2, 4, "2"], [3, 8, "2"]];
+    rows.forEach(function (rw, i) {
+      var y = 40 + i * 112, st = rw[2] ? " data-step='" + rw[2] + "'" : "";
+      h += "<g" + st + "><text x='0' y='" + (y + 14) + "' font-size='24' font-weight='900' fill='#5f6b80'>" + rw[0] + "주기</text>";
+      for (var k = 0; k < rw[1]; k++) h += strand(112 + (k % 8) * 56, y, i === 0 ? "#e03131" : "#1462d8");
+      h += "<text x='636' y='" + (y + 14) + "' font-size='26' font-weight='900' fill='#161b28' text-anchor='end'>" + rw[1] + "개</text></g>";
+      if (i > 0) h += "<text x='30' y='" + (y - 38) + "' font-size='22' font-weight='900' fill='#f08c00'" + st + ">↓ ×2</text>";
+    });
+    h += "<text x='0' y='462' font-size='19' fill='#5f6b80'>⚠ 모식도 · 빨강 = 처음 검체의 유전자</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* Ct 곡선 — 단원 화면 모형: 고원 P = 10¹², 신호 = N/P, 기준선 = 10% */
+  (function () {
+    var svg = document.getElementById("ctSvg"), P = 1e12, X0 = 90, X1 = 840, Y0 = 30, Y1 = 400, h = "";
+    function N(n0, c) { return P / (1 + (P / n0 - 1) * Math.pow(2, -c)); }
+    function ct(n0) { for (var c = 0; c <= 45; c++) if (N(n0, c) >= 0.1 * P) return c; return null; }
+    function X(c) { return X0 + c / 45 * (X1 - X0); }
+    function Y(f) { return Y1 - f * (Y1 - Y0); }
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 10, 20, 30, 40].forEach(function (c) { h += "<text x='" + X(c) + "' y='" + (Y1 + 30) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + c + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 60) + "' font-size='21' font-weight='900' fill='#5f6b80' text-anchor='end'>증폭 주기 수</text>";
+    h += "<text x='" + (X0 - 12) + "' y='" + (Y(1) + 8) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>최대</text><text x='" + (X0 - 12) + "' y='" + (Y1 + 6) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>0</text>";
+    h += "<text x='" + (X0 + 10) + "' y='" + (Y0 + 4) + "' font-size='21' font-weight='900' fill='#5f6b80'>형광 신호</text>";
+    h += "<g data-step='1'><line x1='" + X0 + "' y1='" + Y(0.1) + "' x2='" + X1 + "' y2='" + Y(0.1) + "' stroke='#f08c00' stroke-width='4' stroke-dasharray='12 8'/><text x='" + (X0 + 10) + "' y='" + (Y(0.1) - 12) + "' font-size='22' font-weight='900' fill='#e8590c'>검출 기준선</text></g>";
+    [[10, "#e03131", 2, "처음 10개"], [1e4, "#1462d8", 3, "처음 1만 개"]].forEach(function (s) {
+      var pts = [], c; for (c = 0; c <= 45; c += 0.25) pts.push(X(c).toFixed(1) + " " + Y(N(s[0], c) / P).toFixed(1));
+      var k = ct(s[0]);
+      h += "<g data-step='" + s[2] + "'><polyline points='" + pts.join(" ") + "' fill='none' stroke='" + s[1] + "' stroke-width='5'/>";
+      h += "<line x1='" + X(k) + "' y1='" + Y(0.1) + "' x2='" + X(k) + "' y2='" + Y1 + "' stroke='" + s[1] + "' stroke-width='3' stroke-dasharray='6 6'/>";
+      h += "<circle cx='" + X(k) + "' cy='" + Y(N(s[0], k) / P) + "' r='9' fill='" + s[1] + "'/>";
+      h += "<text x='" + (X(k) + 10) + "' y='" + (Y1 - 14) + "' font-size='23' font-weight='900' fill='" + s[1] + "'>Ct " + k + "</text>";
+      h += "<text x='" + (s[0] > 100 ? X(k) + 8 : X(38)) + "' y='" + (s[0] > 100 ? Y(0.85) : Y(0.55)) + "' font-size='21' font-weight='900' fill='" + s[1] + "' text-anchor='" + (s[0] > 100 ? "end" : "start") + "' stroke='#fff' stroke-width='5' paint-order='stroke'>" + s[3] + "</text></g>";
+    });
+    h += "<g data-step='4'><path d='M" + X(24) + " " + Y(0.32) + " H" + X(34) + "' stroke='#161b28' stroke-width='4'/><path d='M" + X(24) + " " + (Y(0.32) - 12) + " v24 M" + X(34) + " " + (Y(0.32) - 12) + " v24' stroke='#161b28' stroke-width='4'/>";
+    h += "<text x='" + X(29) + "' y='" + (Y(0.32) - 18) + "' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle' stroke='#fff' stroke-width='6' paint-order='stroke'>10주기 = 약 1,000배</text></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 1만 명 칸 그림 — 맨 윗줄 100칸 = 감염자, 위양성 198칸 */
+  (function () {
+    var svg = document.getElementById("wafSvg"), S = 4.8, X0 = 10, Y0 = 34, h = "", r = rng(98), used = {}, n = 0;
+    h += "<rect x='" + X0 + "' y='" + Y0 + "' width='" + (100 * S) + "' height='" + (100 * S) + "' fill='#e9ecef'/>";
+    h += "<text x='" + X0 + "' y='24' font-size='21' font-weight='900' fill='#5f6b80'>칸 하나 = 시민 1명 (10,000칸)</text>";
+    h += "<g data-step='1'><rect x='" + X0 + "' y='" + Y0 + "' width='" + (100 * S) + "' height='" + S + "' fill='#ffc9c9'/></g>";
+    h += "<g data-step='2'><rect x='" + X0 + "' y='" + Y0 + "' width='" + (80 * S) + "' height='" + S + "' fill='#c92a2a'/></g>";
+    h += "<g data-step='3'>";
+    while (n < 198) {
+      var cx = Math.floor(r() * 100), cy = 1 + Math.floor(r() * 99), key = cx + "," + cy;
+      if (used[key]) continue; used[key] = 1; n++;
+      h += "<rect x='" + (X0 + cx * S).toFixed(1) + "' y='" + (Y0 + cy * S).toFixed(1) + "' width='" + S + "' height='" + S + "' fill='#f76707'/>";
+    }
+    h += "</g>";
+    var ly = Y0 + 100 * S + 26;
+    h += "<g font-size='20' font-weight='800'><g data-step='2'><rect x='" + X0 + "' y='" + (ly - 15) + "' width='16' height='16' fill='#c92a2a'/><text x='" + (X0 + 22) + "' y='" + ly + "' fill='#161b28'>진짜 양성 80</text>";
+    h += "<rect x='" + (X0 + 160) + "' y='" + (ly - 15) + "' width='16' height='16' fill='#ffc9c9'/><text x='" + (X0 + 182) + "' y='" + ly + "' fill='#161b28'>위음성 20</text></g>";
+    h += "<g data-step='3'><rect x='" + (X0 + 300) + "' y='" + (ly - 15) + "' width='16' height='16' fill='#f76707'/><text x='" + (X0 + 322) + "' y='" + ly + "' fill='#161b28'>위양성 198</text></g></g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 양성 예측도 곡선 — 민감도 80%, 특이도 98% */
+  function ppv(p) { return 0.8 * p / (0.8 * p + 0.02 * (1 - p)); }
+  (function () {
+    var svg = document.getElementById("ppvSvg"), X0 = 90, X1 = 700, Y0 = 30, Y1 = 390, h = "";
+    function X(p) { return X0 + p / 50 * (X1 - X0); }
+    function Y(v) { return Y1 - v / 100 * (Y1 - Y0); }
+    [25, 50, 75, 100].forEach(function (v) { h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(v) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + v + "</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 10, 20, 30, 40, 50].forEach(function (p) { h += "<text x='" + X(p) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + p + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y1 + 62) + "' font-size='21' font-weight='900' fill='#5f6b80' text-anchor='end'>유병률 (%)</text>";
+    h += "<text x='" + (X0 + 10) + "' y='" + (Y0 - 6) + "' font-size='21' font-weight='900' fill='#5f6b80'>양성 예측도 (%)</text>";
+    var pts = [], p; for (p = 0.5; p <= 50; p += 0.5) pts.push(X(p).toFixed(1) + " " + Y(ppv(p / 100) * 100).toFixed(1));
+    h += "<g data-step='2'><circle cx='" + X(1) + "' cy='" + Y(ppv(0.01) * 100) + "' r='10' fill='#e03131'/><text x='" + (X(1) + 16) + "' y='" + (Y(ppv(0.01) * 100) + 8) + "' font-size='23' font-weight='900' fill='#c92a2a'>유병률 1% → " + (ppv(0.01) * 100).toFixed(1) + "%</text></g>";
+    h += "<g data-step='3'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#1462d8' stroke-width='5'/>";
+    h += "<line x1='" + X0 + "' y1='" + Y(90) + "' x2='" + X1 + "' y2='" + Y(90) + "' stroke='#198a4a' stroke-width='3' stroke-dasharray='10 7'/>";
+    h += "<circle cx='" + X(19) + "' cy='" + Y(ppv(0.19) * 100) + "' r='10' fill='#198a4a'/><text x='" + (X(19) + 14) + "' y='" + (Y(ppv(0.19) * 100) + 36) + "' font-size='23' font-weight='900' fill='#198a4a'>19%부터 90% 넘음 (" + (ppv(0.19) * 100).toFixed(1) + "%)</text></g>";
+    svg.innerHTML = h;
+  })();
+  Board.on("s-ppv", function (step, slide, forward) {
+    var el = document.getElementById("ppvNum"), f = function (v) { return v.toFixed(1); };
+    if (step === 2 && forward) Board.count(el, 80 / 278 * 100, { fmt: f, ms: 1100 });
+    else Board.count(el, 80 / 278 * 100, { fmt: f, instant: true });
+  });
+
+  /* 전파 나무 R₀ = 3 · R = 0.9 막대 */
+  (function () {
+    var svg = document.getElementById("rSvg"), h = "", gens = [1, 3, 9, 27], ys = [36, 120, 204, 288], W = 960, pos = [];
+    gens.forEach(function (n, g) { pos[g] = []; for (var k = 0; k < n; k++) pos[g].push(W / n * (k + 0.5)); });
+    for (var g = 1; g < 4; g++) {
+      var st = g === 1 ? "" : " data-step='2'", gh = "<g" + st + ">";
+      pos[g].forEach(function (x, k) { var px = pos[g - 1][Math.floor(k / 3)]; gh += "<line x1='" + px + "' y1='" + (ys[g - 1] + 14) + "' x2='" + x + "' y2='" + (ys[g] - 14) + "' stroke='#ffa8a8' stroke-width='3'/>"; });
+      pos[g].forEach(function (x) { gh += "<circle cx='" + x + "' cy='" + ys[g] + "' r='14' fill='#e03131'/>"; });
+      h += gh + "<text x='" + (W + 6) + "' y='" + (ys[g] + 8) + "' font-size='22' font-weight='900' fill='#c92a2a'>" + gens[g] + "명</text></g>";
+    }
+    h += "<circle cx='" + pos[0][0] + "' cy='" + ys[0] + "' r='16' fill='#161b28'/><text x='" + (pos[0][0] + 26) + "' y='" + (ys[0] + 8) + "' font-size='22' font-weight='900' fill='#161b28'>첫 환자</text>";
+    h += "<text x='0' y='" + (ys[0] + 8) + "' font-size='22' font-weight='900' fill='#c92a2a'>R₀ = 3</text>";
+    h += "<g data-step='3'><rect x='1060' y='0' width='340' height='330' rx='16' fill='#ebfbee'/><text x='1080' y='36' font-size='24' font-weight='900' fill='#198a4a'>R = 0.9 이면</text>";
+    [100, 90, 81, 73, 66].forEach(function (v, i) {
+      var x = 1086 + i * 62, bh = v * 2.2;
+      h += "<rect x='" + x + "' y='" + (290 - bh) + "' width='44' height='" + bh + "' rx='5' fill='#2f9e44'/><text x='" + (x + 22) + "' y='" + (282 - bh) + "' font-size='20' font-weight='900' fill='#198a4a' text-anchor='middle'>" + v + "</text>";
+      h += "<text x='" + (x + 22) + "' y='318' font-size='19' font-weight='800' fill='#5f6b80' text-anchor='middle'>" + (i + 1) + "세대</text>";
+    });
+    h += "</g>";
+    svg.innerHTML = h;
+  })();
+
+  /* 유행 곡선 — 단원 화면 M.sir 그대로(인구 10만, R₀ 3, 감염 기간 7일) */
+  function sir(cut, vac) {
+    var N = 100000, R0 = 3, g = 1 / 7, b = R0 * g * (1 - cut / 100), dt = 0.25;
+    var S = N * (1 - vac / 100) - 10, I = 10, cum = 10, peak = 10, peakDay = 0, arr = [];
+    for (var k = 0; k <= 1500 * 4; k++) {
+      if (k % 4 === 0) arr.push(I);
+      var ni = b * S * I / N * dt, nr = g * I * dt;
+      if (ni > S) ni = S;
+      S -= ni; I += ni - nr; cum += ni;
+      if (I > peak) { peak = I; peakDay = k * dt; }
+    }
+    return { I: arr, peak: peak, peakDay: peakDay, total: cum, reff: R0 * (1 - cut / 100) * (1 - vac / 100) };
+  }
+  (function () {
+    var svg = document.getElementById("sirSvg"), X0 = 110, X1 = 1350, Y0 = 50, Y1 = 380, DAYS = 240, YM = 32000, h = "";
+    function X(d) { return X0 + d / DAYS * (X1 - X0); }
+    function Y(v) { return Y1 - v / YM * (Y1 - Y0); }
+    [10000, 20000, 30000].forEach(function (v) { h += "<line x1='" + X0 + "' y1='" + Y(v) + "' x2='" + X1 + "' y2='" + Y(v) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(v) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + (v / 10000) + "만</text>"; });
+    h += "<line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X1 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X0 + "' y2='" + Y1 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 60, 120, 180, 240].forEach(function (d) { h += "<text x='" + X(d) + "' y='" + (Y1 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + d + "일</text>"; });
+    h += "<text x='" + (X0 - 100) + "' y='22' font-size='21' font-weight='900' fill='#5f6b80'>동시에 앓는 환자 (명)</text>";
+    h += "<g data-step='1'><rect x='" + X0 + "' y='" + Y(5000) + "' width='" + (X1 - X0) + "' height='" + (Y1 - Y(5000)) + "' fill='#d3f9d8' opacity='.7'/><line x1='" + X0 + "' y1='" + Y(5000) + "' x2='" + X1 + "' y2='" + Y(5000) + "' stroke='#198a4a' stroke-width='4' stroke-dasharray='12 8'/>";
+    h += "<text x='" + (X1 - 8) + "' y='" + (Y(5000) + 30) + "' font-size='22' font-weight='900' fill='#198a4a' text-anchor='end'>의료 역량 5,000명</text></g>";
+    [[0, 0, "#e03131", 2, "대책 없음"], [40, 0, "#f08c00", 3, "접촉 −40%"], [40, 20, "#1462d8", 4, "접촉 −40% + 접종 20%"]].forEach(function (c) {
+      var r = sir(c[0], c[1]), pts = [], d;
+      for (d = 0; d <= DAYS; d++) pts.push(X(d).toFixed(1) + " " + Y(r.I[d]).toFixed(1));
+      var px = X(r.peakDay), py = Y(r.peak), lab = c[4] + " · 최대 " + Math.round(r.peak).toLocaleString() + "명 (" + Math.round(r.peakDay) + "일째)";
+      h += "<g data-step='" + c[3] + "'><polyline points='" + pts.join(" ") + "' fill='none' stroke='" + c[2] + "' stroke-width='5'/><circle cx='" + px + "' cy='" + py + "' r='9' fill='" + c[2] + "'/>";
+      h += "<text x='" + (px + 16) + "' y='" + (c[1] ? Y(5000) - 16 : (c[0] ? py - 10 : py + 8)) + "' font-size='22' font-weight='900' fill='" + c[2] + "' stroke='#fff' stroke-width='6' paint-order='stroke'>" + lab + "</text></g>";
+    });
+    svg.innerHTML = h;
+  })();
+
+  /* R 막대 */
+  (function () {
+    var svg = document.getElementById("herdSvg"), X0 = 420, SC = 240, h = "";
+    var rows = [["대책 없음", 0, 0, 1], ["접촉 −40%", 40, 0, 2], ["접촉 −40% + 접종 20%", 40, 20, 4], ["접촉 −40% + 접종 45%", 40, 45, 4]];
+    rows.forEach(function (rw, i) {
+      var R = 3 * (1 - rw[1] / 100) * (1 - rw[2] / 100), y = 20 + i * 72, ok = R < 1, step = i === 3 ? 4 : rw[3];
+      var eq = i === 0 ? "R₀" : (i === 1 ? "3 × 0.6" : (i === 2 ? "3 × 0.6 × 0.8" : "3 × 0.6 × 0.55"));
+      h += "<g data-step='" + (i === 0 ? 2 : (i === 1 ? 3 : 4)) + "'><text x='0' y='" + (y + 36) + "' font-size='25' font-weight='800' fill='#161b28'>" + rw[0] + "</text>";
+      h += "<rect x='" + X0 + "' y='" + (y + 8) + "' width='" + (R * SC).toFixed(1) + "' height='40' rx='8' fill='" + (ok ? "#2f9e44" : "#e03131") + "'/>";
+      h += "<text x='" + (X0 + R * SC + 14).toFixed(1) + "' y='" + (y + 37) + "' font-size='25' font-weight='900' fill='" + (ok ? "#198a4a" : "#c92a2a") + "'>" + eq + " = " + R.toFixed(2) + "</text></g>";
+    });
+    h += "<line x1='" + (X0 + SC) + "' y1='6' x2='" + (X0 + SC) + "' y2='310' stroke='#161b28' stroke-width='4' stroke-dasharray='10 7'/><text x='" + (X0 + SC + 8) + "' y='326' font-size='22' font-weight='900' fill='#161b28'>R = 1</text>";
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

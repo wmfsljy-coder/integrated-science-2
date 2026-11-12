@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 산과 염기 (통합과학2 Ⅰ-2 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  /* 이 강의에서만 쓰는 모양 */
+  @keyframes lakeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .lwrap { animation: lakeIn 1.2s ease both; }
+  .lines p { margin-bottom: 14px; }
+  .lines p.eqs { font-size: 27px; font-weight: 800; color: var(--ink); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .two .card h3 { font-size: 30px; margin-bottom: 8px; }
+  .two .card .it { font-size: 25px; font-weight: 700; padding: 5px 14px; border-radius: 12px; background: var(--soft); margin-bottom: 6px; }
+  #s-life .two .card { padding: 20px 28px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 29px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 27px; padding: 14px 22px; }
+  #s-check1 .opt { font-size: 29px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="산성비가 내린 맑은 호수에 배가 석회 가루를 뿌린다">
+      <defs>
+        <linearGradient id="c2-w" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#63e6be"/><stop offset="1" stop-color="#0b7285"/></linearGradient>
+        <linearGradient id="c2-g" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#2b8a3e"/><stop offset="1" stop-color="#1b4332"/></linearGradient>
+      </defs>
+      <g class="lwrap">
+        <g fill="#495057"><circle cx="460" cy="90" r="46"/><circle cx="520" cy="70" r="58"/><circle cx="590" cy="92" r="44"/><circle cx="1050" cy="80" r="40"/><circle cx="1100" cy="62" r="52"/><circle cx="1160" cy="84" r="40"/></g>
+        <g stroke="#74c0fc" stroke-width="4" stroke-linecap="round">
+          <line x1="470" y1="150" x2="460" y2="185"/><line x1="520" y1="160" x2="510" y2="195"/><line x1="575" y1="150" x2="565" y2="185"/>
+          <line x1="1070" y1="135" x2="1060" y2="170"/><line x1="1120" y1="140" x2="1110" y2="175"/>
+        </g>
+        <text x="520" y="230" font-size="26" font-weight="900" fill="#ffa8a8" text-anchor="middle">산성비</text>
+        <path d="M120 300 Q300 270 500 290 L1100 290 Q1300 270 1480 300 L1480 330 L120 330 Z" fill="url(#c2-g)"/>
+        <path d="M260 300 L1340 300 Q1240 470 800 480 Q360 470 260 300 Z" fill="url(#c2-w)"/>
+        <g fill="#1b4332"><polygon points="170,300 200,200 230,300"/><polygon points="220,300 250,220 280,300"/><polygon points="1330,300 1360,210 1390,300"/><polygon points="1380,300 1410,230 1440,300"/></g>
+        <rect x="660" y="330" width="280" height="56" rx="28" fill="#fff" opacity=".92"/>
+        <text x="800" y="368" font-size="30" font-weight="900" fill="#0b7285" text-anchor="middle">호수 pH 4.0</text>
+      </g>
+      <g data-step="1">
+        <path d="M1000 300 L1180 300 L1150 330 L1030 330 Z" fill="#fd7e14"/>
+        <rect x="1060" y="270" width="50" height="30" fill="#fff4e6"/>
+        <g fill="#f8f9fa" opacity=".9"><circle cx="980" cy="318" r="6"/><circle cx="960" cy="330" r="5"/><circle cx="940" cy="322" r="6"/><circle cx="950" cy="342" r="5"/><circle cx="925" cy="335" r="4"/></g>
+        <text x="1090" y="250" font-size="24" font-weight="900" fill="#ffe066" text-anchor="middle">석회 가루</text>
+      </g>
+      <text x="1560" y="24" fill="#7b8598" font-size="18" text-anchor="end">⚠ 모식도 · 크기는 실제 비율이 아님</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅰ-2 화학 변화 · 02</p>
+    <h1>산과 염기</h1>
+    <p class="sub" data-step="1">물고기가 사라진 호수 — 중화 작전으로 되살려라</p>
+  </div>
+  <aside class="script">
+    <p>1970년대 스웨덴과 노르웨이에서는 호수 수천 곳에서 물고기가 사라졌습니다. 물은 오히려 이상할 만큼 맑았어요. 공장과 발전소에서 나온 황 산화물과 질소 산화물이 빗물에 녹아 내린 산성비 때문이었습니다.</p>
+    <p data-at="1">오늘은 산과 염기가 무엇인지, 둘을 섞으면 무슨 일이 일어나는지 보고 호수를 되살릴 양을 정해 봅니다.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="에탄올은 염기일까?" data-part="도입">
+  <p class="kicker">도입 · 창고에서 찾아온 병</p>
+  <h2>“OH가 붙어 있으니까 이걸 부으면 되지 않을까요?”</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>호수는 pH 4.0. 산성을 없애려면 염기를 넣어 중화해야 합니다. 조수 올레가 창고에서 에탄올을 찾아왔습니다.</p>
+      <p class="big mt">에탄올의 화학식은 C₂H₅<span class="c-red">OH</span>. 에탄올은 <span class="c-red">염기</span>일까?</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 판단은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ OH가 있으므로 염기다</div>
+        <div class="opt">㉡ 염기가 아니다</div>
+        <div class="opt">㉢ 물에 녹으면 염기가 된다</div>
+        <div class="opt">㉣ 산이면서 염기다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>수질 연구원 엘사의 호수는 pH 4.0입니다. 물이 pH 5 아래로 내려가면 대부분의 물고기는 알이 깨어나지 못합니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않고, 검사대 결과로 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>산과 염기</b><span>물에 녹아 내놓는 이온으로 가른다</span></div>
+    <div class="card"><b>지시약</b><span>산성·염기성에 따라 색이 변하는 물질</span></div>
+    <div class="card"><b>중화 반응</b><span>산과 염기가 만나 물이 생기는 반응</span></div>
+    <div class="card"><b>중화점</b><span>H⁺도 OH⁻도 남지 않는 지점</span></div>
+    <div class="card"><b>중화열</b><span>중화 반응에서 나오는 열</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 산과 염기의 이온 -->
+<section class="slide" id="s-ions" data-title="산과 염기가 내놓는 이온" data-part="① 산과 염기">
+  <p class="kicker">① 산과 염기 · 비커 속을 입자로 보면</p>
+  <h2>산은 H⁺을, 염기는 OH⁻을 내놓는다</h2>
+  <svg id="ionSvg" viewBox="0 0 1400 360" width="1400" height="360" aria-label="염산은 물에 녹아 수소 이온과 염화 이온으로, 수산화 나트륨은 나트륨 이온과 수산화 이온으로 나뉜다"></svg>
+  <div class="two" style="margin-top:14px">
+    <div class="lines">
+      <p data-step="1">산: 물에 녹아 <b class="blank" data-n="1" data-step="1">수소 이온</b>(H⁺)을 내놓는 물질</p>
+      <p class="eqs" data-step="1">HCl → H⁺ + Cl⁻</p>
+    </div>
+    <div class="lines">
+      <p data-step="2">염기: 물에 녹아 <b class="blank" data-n="2" data-step="2">수산화 이온</b>(OH⁻)을 내놓는 물질</p>
+      <p class="eqs" data-step="2">NaOH → Na⁺ + OH⁻ · Ca(OH)₂ → Ca²⁺ + 2OH⁻</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>묽은 염산과 수산화 나트륨 수용액을 입자로 그려 봤습니다. 물 분자는 너무 많아 그리지 않았어요.</p>
+    <p data-at="1">염화 수소는 물에 녹아 거의 모두 H⁺과 Cl⁻으로 나뉩니다. 이렇게 물에 녹아 빈칸 1번, 수소 이온을 내놓는 물질이 산입니다.</p>
+    <p data-at="2">수산화 나트륨은 Na⁺과 OH⁻으로 나뉩니다. 빈칸 2번, 수산화 이온을 내놓는 물질이 염기예요. 석회수의 수산화 칼슘은 하나가 OH⁻을 2개 내놓습니다.</p>
+  </aside>
+</section>
+
+<!-- 5 검사대 -->
+<section class="slide" id="s-test" data-title="검사대" data-part="① 산과 염기">
+  <p class="kicker">① 산과 염기 · 창고의 여섯 병을 검사대에 (단원 화면 실험)</p>
+  <h2>지시약 색과 반응으로 성질을 가린다</h2>
+  <svg id="tubeSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="BTB 용액은 산에서 노란색, 에탄올에서 초록색, 염기에서 파란색. 페놀프탈레인은 염기에서만 붉은색"></svg>
+  <div class="two" style="margin-top:16px">
+    <div class="lines">
+      <p data-step="1">용액의 성질에 따라 색이 변하는 물질 → <b class="blank" data-n="3" data-step="1">지시약</b></p>
+      <p class="small" data-step="1" style="font-size:26px;color:var(--ink)">리트머스: 산은 푸른 종이를 붉게, 염기는 붉은 종이를 푸르게</p>
+    </div>
+    <div class="lines">
+      <p data-step="2">산 + 마그네슘 → <b class="blank" data-n="4" data-step="2">수소 기체</b> 발생</p>
+      <p data-step="3">이온이 있으면 전류가 흐른다 · 에탄올 수용액은 흐르지 않는다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>단원 화면 검사대의 결과를 모았습니다. 여섯 병은 묽은 염산, 식초, 수산화 나트륨, 석회수, 암모니아수, 에탄올입니다.</p>
+    <p data-at="1">BTB 용액은 산성에서 노란색, 중성에서 초록색, 염기성에서 파란색. 페놀프탈레인은 염기성에서만 붉어집니다. 이렇게 색으로 성질을 알려 주는 물질이 빈칸 3번, 지시약입니다. 에탄올은 어느 지시약의 색도 바꾸지 못했어요.</p>
+    <p data-at="2">마그네슘 조각을 넣으면 산에서만 거품이 납니다. 산의 H⁺이 마그네슘에게서 전자를 얻어 빈칸 4번, 수소 기체가 되기 때문이에요. 지난 시간의 전자 이동과 이어집니다.</p>
+    <p data-at="3">전류는 이온이 있어야 흐릅니다. 식초와 암모니아수는 약하게, 에탄올 수용액은 전혀 흐르지 않았습니다.</p>
+  </aside>
+</section>
+
+<!-- 6 글자가 아니라 이온 -->
+<section class="slide" id="s-ethanol" data-title="글자가 아니라 이온" data-part="① 산과 염기">
+  <p class="kicker">① 산과 염기 · 화학식의 생김새에 속지 않기</p>
+  <h2>OH가 있어도 OH⁻을 내놓지 않으면 염기가 아니다</h2>
+  <svg id="ethSvg" viewBox="0 0 1400 340" width="1400" height="340" aria-label="에탄올은 분자 그대로 녹아 있고, 암모니아는 물과 반응해 OH 이온을 만들고, 아세트산은 일부만 H 이온을 내놓는다"></svg>
+  <p data-step="4" style="margin-top:20px">기준은 화학식의 글자가 아니라 물에 녹아 실제로 내놓는 <b class="blank" data-n="5" data-step="4">이온</b></p>
+  <aside class="script">
+    <p>올레의 생각처럼 화학식만 보고 판단하면 어떻게 될까요? 세 병을 입자로 봅시다.</p>
+    <p data-at="1">에탄올은 물에 녹아도 분자 그대로 섞여 있습니다. OH가 탄소에 단단히 붙어 있어 OH⁻로 떨어져 나오지 않아요. 그래서 지시약 색도 안 바뀌고 전류도 안 흐릅니다.</p>
+    <p data-at="2">암모니아는 화학식에 OH가 없는데도 일부 분자가 물과 반응해 NH₄⁺과 OH⁻을 만듭니다. 염기예요.</p>
+    <p data-at="3">아세트산은 H가 4개지만 일부 분자만, 그것도 H⁺ 하나만 내놓습니다.</p>
+    <p data-at="4">빈칸 5번, 이온. 첫 판단에서 ㉡을 고른 학생이 맞았습니다. 에탄올은 염기가 아닙니다.</p>
+  </aside>
+</section>
+
+<!-- 7 확인 -->
+<section class="slide" id="s-check1" data-title="염기인 병 고르기" data-part="① 산과 염기">
+  <p class="kicker">① 산과 염기 · 확인</p>
+  <h2>검사 결과로 ‘염기’에 넣어야 할 병만 고르면?</h2>
+  <div class="opts" style="max-width:1250px">
+    <div class="opt wrong" data-step="1">① 수산화 나트륨, 석회수, 에탄올</div>
+    <div class="opt right" data-step="1">② 수산화 나트륨, 석회수, 암모니아수</div>
+    <div class="opt wrong" data-step="1">③ 석회수, 에탄올</div>
+    <div class="opt wrong" data-step="1">④ 수산화 나트륨만</div>
+  </div>
+  <p class="small mt" data-step="1">페놀프탈레인이 붉어진 병 = 수산화 나트륨, 석회수, 암모니아수</p>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 화학식이 아니라 검사 결과로 고르라고 강조합니다.</p>
+    <p data-at="1">정답은 ②. 에탄올은 OH가 있어도 지시약 색이 변하지 않았고, 암모니아수는 OH가 없어도 페놀프탈레인을 붉게 했습니다.</p>
+  </aside>
+</section>
+
+<!-- 8 중화 반응 -->
+<section class="slide" id="s-neut" data-title="중화 반응" data-part="② 중화 반응">
+  <p class="kicker">② 중화 반응 · 묽은 염산 20 mL에 수산화 나트륨 수용액을 조금씩 (단원 화면 모형)</p>
+  <h2>H⁺ 하나와 OH⁻ 하나가 만나 물 분자 하나</h2>
+  <svg id="neutSvg" viewBox="0 0 1400 380" width="1400" height="380" aria-label="수산화 나트륨 수용액을 넣을수록 수소 이온이 물로 바뀌고, 16 mL에서 모두 사라지며, 그 뒤로는 수산화 이온이 남는다"></svg>
+  <div class="lines" style="margin-top:16px">
+    <p data-step="1">산의 H⁺과 염기의 OH⁻이 만나 물이 생기는 반응 → <b class="blank" data-n="6" data-step="1">중화 반응</b> <span style="font-weight:900">H⁺ + OH⁻ → H₂O</span></p>
+    <p data-step="2">H⁺과 OH⁻은 언제나 <b class="blank" data-n="7" data-step="2">1 : 1</b>의 개수비로 반응한다 · Na⁺과 Cl⁻은 그대로</p>
+  </div>
+  <aside class="script">
+    <p>단원 화면의 이온 모형입니다. 묽은 염산 20 mL 속 H⁺을 8개로 나타냈어요. BTB 용액을 넣어 두어 색도 함께 봅니다.</p>
+    <p data-at="1">수산화 나트륨 수용액 8 mL를 넣으면 OH⁻ 4개가 H⁺ 4개와 만나 물 분자 4개가 됩니다. 빈칸 6번, 중화 반응. 아직 H⁺이 남아 노란색입니다.</p>
+    <p data-at="2">16 mL에서 H⁺ 8개가 모두 물이 됩니다. 넣은 OH⁻ 수와 사라진 H⁺ 수가 늘 같죠. 빈칸 7번, 1 대 1. Na⁺과 Cl⁻은 반응하지 않고 그대로 남습니다.</p>
+    <p data-at="3">24 mL가 되면 짝을 찾지 못한 OH⁻이 남아 염기성, 파란색이 됩니다.</p>
+  </aside>
+</section>
+
+<!-- 9 중화점과 중화열 -->
+<section class="slide" id="s-curve" data-title="중화점과 중화열" data-part="② 중화 반응">
+  <p class="kicker">② 중화 반응 · 넣은 양마다 온도를 기록하면 (단원 화면 모형)</p>
+  <h2>온도가 가장 높은 곳이 중화점이다</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="curveSvg" viewBox="0 0 780 470" width="780" height="470" aria-label="수산화 나트륨 수용액을 넣은 부피에 따른 혼합 용액의 온도: 16 mL에서 약 27 도로 가장 높다"></svg>
+    <div class="lines">
+      <p data-step="1">H⁺도 OH⁻도 남지 않는 지점 → <b class="blank" data-n="8" data-step="1">중화점</b> (16 mL, BTB 초록)</p>
+      <p data-step="2">중화 반응에서 나오는 열 → <b class="blank" data-n="9" data-step="2">중화열</b></p>
+      <p data-step="2">반응한 H⁺·OH⁻ 수가 가장 많은 중화점에서 온도가 가장 높다</p>
+      <p data-step="3">중화점 뒤: 더 반응할 H⁺이 없어 식은 용액만 더해진다</p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 두 용액 모두 20 ℃이고 열이 밖으로 새지 않는다고 가정했습니다.</p>
+  <aside class="script">
+    <p>온도계를 꽂아 두고 넣은 양마다 온도를 기록했습니다. 미션에서는 중화점 앞뒤를 포함해 7개 지점 이상을 찍게 했어요.</p>
+    <p data-at="1">16 mL에서 BTB가 초록색이 되었습니다. H⁺도 OH⁻도 남지 않는 이 지점이 빈칸 8번, 중화점입니다.</p>
+    <p data-at="2">H⁺과 OH⁻이 만나 물이 될 때 열이 나옵니다. 빈칸 9번, 중화열. 물이 가장 많이 생긴 중화점에서 약 27 ℃로 가장 높아요.</p>
+    <p data-at="3">16 mL를 넘으면 반응할 H⁺이 없어 열은 더 나오지 않고, 20 ℃의 용액만 더해져 온도가 내려갑니다. 염기를 많이 넣을수록 뜨거워진다는 생각을 여기서 바로잡습니다.</p>
+  </aside>
+</section>
+
+<!-- 10 시험 수조 -->
+<section class="slide" id="s-lake" data-title="소석회를 얼마나" data-part="③ 중화 작전">
+  <p class="kicker">③ 중화 작전 · 호수 물 1,000 L 시험 수조 (단원 화면 모형)</p>
+  <h2>모자라도 넘쳐도 물고기는 못 산다</h2>
+  <div class="cols" style="grid-template-columns:800px 1fr;align-items:center">
+    <svg id="lakeSvg" viewBox="0 0 800 470" width="800" height="470" aria-label="소석회 양에 따른 수조 물의 pH: 3.7 g 근처에서 pH가 매우 가파르게 4에서 8 넘게 오른다"></svg>
+    <div class="lines">
+      <p data-step="1">pH 7은 중성, 7보다 작으면 <b class="blank" data-n="10" data-step="1">산성</b>, 크면 염기성</p>
+      <p data-step="2">염기인 소석회 Ca(OH)₂를 넣으면 pH가 오르다가 어느 순간 가파르게 뛴다</p>
+      <p data-step="3">pH 4.0인 물 1,000 L를 정확히 중화: 소석회 <b class="blank" data-n="11" data-step="3">3.7</b> g</p>
+    </div>
+  </div>
+  <p class="note">이 화면 모형: 호수 물을 ‘센 산만 녹아 있는 물’로 계산했습니다. 실제 호수에는 pH 변화를 누그러뜨리는 물질(탄산 등)이 녹아 있어 이렇게 가파르지 않습니다.</p>
+  <aside class="script">
+    <p>이제 진짜 호수 물입니다. 호수 물 1,000 L를 담은 시험 수조에 염기인 소석회 가루를 뿌립니다. 물고기가 살려면 pH 6.5~8.5여야 해요.</p>
+    <p data-at="1">pH는 산성과 염기성의 정도를 나타내는 수입니다. 7이 중성이고, 빈칸 10번, 7보다 작으면 산성. 이 호수는 pH 4.0입니다.</p>
+    <p data-at="2">소석회를 넣어도 한동안은 pH가 조금씩만 오르다가 3.7 g 근처에서 갑자기 뜁니다. 조금만 넘쳐도 염기성이 되니 조심해야 해요.</p>
+    <p data-at="3">빈칸 11번, 3.7 g에서 정확히 중화되어 pH 7이 됩니다. 단원 화면에서는 0.1 g 단위로 넣어 3.7~3.8 g이 pH 6.5~8.5에 듭니다.</p>
+  </aside>
+</section>
+
+<!-- 11 호수 전체 -->
+<section class="slide" id="s-scale" data-title="호수 전체에 뿌릴 양" data-part="③ 중화 작전">
+  <p class="kicker">③ 중화 작전 · 수조에서 호수로</p>
+  <h2>없앨 H⁺이 물의 양에 비례하니 소석회도 비례한다</h2>
+  <svg id="scaleSvg" viewBox="0 0 1400 300" width="1400" height="300" aria-label="물 1 세제곱미터에 소석회 3.7 g, 호수 200만 세제곱미터에는 그 200만 배"></svg>
+  <div class="two" style="margin-top:18px">
+    <div class="lines">
+      <p data-step="2">3.7 g × 2,000,000 = 7,400,000 g</p>
+      <p data-step="2">호수 전체에 소석회 약 <b class="blank" data-n="12" data-step="2">7.4</b> t</p>
+    </div>
+    <div class="card" data-step="3" style="padding:22px 28px">
+      <p style="margin:0 0 6px">실제 살포에는 천천히 녹아 pH가 지나치게 오르지 않는 석회석(탄산 칼슘) 가루를 주로 쓴다</p>
+      <p style="margin:0;font-weight:900">근본 해결: 산성비의 원인 물질을 줄이기</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>수조는 1,000 L, 곧 1 m³입니다. 호수 전체의 물은 약 200만 m³예요.</p>
+    <p data-at="1">물이 200만 배이면 없애야 할 H⁺도 200만 배, 필요한 OH⁻도 200만 배입니다.</p>
+    <p data-at="2">3.7 g에 2,000,000을 곱하면 7,400,000 g. 1 t은 1,000,000 g이니 빈칸 12번, 약 7.4 t입니다. 자릿수를 꼭 함께 확인합니다.</p>
+    <p data-at="3">실제 스웨덴은 1970년대부터 수천 개의 호수에 석회 가루를 뿌려 왔고 많은 호수에 물고기가 돌아왔습니다. 그래도 더 근본적인 해결은 산성비의 원인 물질을 줄이는 것이었어요.</p>
+  </aside>
+</section>
+
+<!-- 12 생활 속 중화 -->
+<section class="slide soft" id="s-life" data-title="생활 속 중화" data-part="③ 중화 작전">
+  <p class="kicker">③ 중화 작전 · 호수 말고도</p>
+  <h2>문제를 일으킨 물질과 반대 성질로 맞선다</h2>
+  <svg viewBox="0 0 1400 120" width="1400" height="120" aria-label="pH 막대: 산성 쪽 문제에는 염기를, 염기성 쪽 문제에는 산을 넣어 중성 쪽으로 옮긴다">
+    <defs>
+      <linearGradient id="s12-ph" x1="0" x2="1"><stop offset="0" stop-color="#e03131"/><stop offset=".25" stop-color="#ff922b"/><stop offset=".45" stop-color="#ffd43b"/><stop offset=".5" stop-color="#40c057"/><stop offset=".7" stop-color="#4dabf7"/><stop offset="1" stop-color="#5f3dc4"/></linearGradient>
+      <marker id="s12-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#161b28"/></marker>
+    </defs>
+    <rect x="100" y="60" width="1200" height="40" rx="20" fill="url(#s12-ph)"/>
+    <g font-size="22" font-weight="900" fill="#161b28" text-anchor="middle"><text x="100" y="50">pH 0</text><text x="700" y="50">7 중성</text><text x="1300" y="50">14</text></g>
+    <path d="M230 30 H560" stroke="#161b28" stroke-width="5" marker-end="url(#s12-a)"/><text x="395" y="22" font-size="22" font-weight="900" fill="#c92a2a" text-anchor="middle">염기를 넣는다</text>
+    <path d="M1170 30 H840" stroke="#161b28" stroke-width="5" marker-end="url(#s12-a)"/><text x="1005" y="22" font-size="22" font-weight="900" fill="#1864ab" text-anchor="middle">산을 넣는다</text>
+  </svg>
+  <div class="two" style="margin-top:14px">
+    <div class="card" data-step="1"><h3>원인이 산성 → 염기성 물질</h3>
+      <div class="it">속쓰림(위산) → 제산제</div><div class="it">산성화된 밭 → 석회 가루</div><div class="it">벌레 물림 → 묽은 암모니아수가 든 약</div><div class="it">이산화 황 배기가스 → 산화 칼슘</div></div>
+    <div class="card" data-step="2"><h3>원인이 염기성 → 산성 물질</h3>
+      <div class="it">생선 비린내 → 레몬즙·식초</div><div class="it">비누로 뻣뻣한 머리 → 식초·구연산 물</div></div>
+  </div>
+  <p class="center" data-step="3" style="font-weight:900;margin-top:18px">문제를 일으킨 물질과 <b class="blank" data-n="13" data-step="3">반대</b> 성질의 물질을 쓴다</p>
+  <aside class="script">
+    <p>단원 화면 결말의 분류 활동입니다. 호수 말고도 우리는 중화를 자주 씁니다.</p>
+    <p data-at="1">위산이 많아 속이 쓰리면 수산화 마그네슘 같은 약한 염기가 든 제산제를 먹습니다. 산성화된 밭에는 호수처럼 석회 가루를 뿌리고요.</p>
+    <p data-at="2">생선 비린내의 원인 물질은 염기성이라 레몬즙이나 식초로 중화합니다.</p>
+    <p data-at="3">빈칸 13번, 반대. 문제를 일으킨 물질의 성질부터 따지면 무엇을 쓸지 바로 보입니다.</p>
+  </aside>
+</section>
+
+<!-- 13 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>호수를 살린 것은 ‘OH라는 글자’가 아니라 ‘OH⁻ 이온’</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1">산은 물에 녹아 H⁺을, 염기는 OH⁻을 내놓는다 → 에탄올은 염기가 아니고 암모니아는 염기</li>
+    <li data-k="2" data-step="2">지시약: BTB 산성 노랑·중성 초록·염기성 파랑, 페놀프탈레인은 염기성에서 붉은색</li>
+    <li data-k="3" data-step="3"><b>중화 반응</b> H⁺ + OH⁻ → H₂O (1 : 1) · 중화점에서 중화열로 온도가 가장 높다</li>
+    <li data-k="4" data-step="4">1,000 L에 소석회 3.7 g → 호수 200만 m³에 약 7.4 t · 생활 속 중화는 반대 성질로</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 올레에게 에탄올을 붓지 말아야 하는 까닭을 한 문장으로 말해 주게 합니다.</p></aside>
+</section>
+
+<!-- 14 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. BTB 용액을 넣은 묽은 염산에 수산화 나트륨 수용액을 넣어 중화점에 이르면 용액의 색은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 노란색</div>
+        <div class="opt right" data-step="1">㉡ 초록색</div>
+        <div class="opt wrong" data-step="1">㉢ 파란색</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 위산이 너무 많아 속이 쓰릴 때 먹는 제산제는 어떤 성질일까?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="2">㉠ 산성</div>
+        <div class="opt right" data-step="2">㉡ 염기성</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. 중화점에서는 H⁺도 OH⁻도 남지 않아 중성, BTB는 초록색입니다.</p>
+    <p data-at="2">2번은 ㉡. 원인이 위산, 곧 산성이니 반대 성질인 염기성 물질로 중화합니다.</p>
+  </aside>
+</section>
+
+<!-- 15 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「물고기가 사라진 호수」</h2>
+  <div class="cols">
+    <div class="card"><h3>검사대와 시험 수조를 직접 다뤄 보세요</h3><p>여섯 병 검사하고 나누기, 중화점 찾고 온도 그래프 완성하기, 소석회 양을 정해 물고기 풀어 보기가 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 03 반응과 에너지 출입</h3><p>불 없이 따뜻하게, 얼음 없이 차갑게. 손난로와 냉찜질 팩 속에서 열은 어느 쪽으로 움직일까요?</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function ion(x, y, t, fill, ink, r) {
+    r = r || 30;
+    return "<circle cx='" + x + "' cy='" + y + "' r='" + r + "' fill='" + fill + "'/><text x='" + x + "' y='" + (y + 8) + "' font-size='" + (t.length > 3 ? 18 : 22) + "' font-weight='900' fill='" + (ink || "#fff") + "' text-anchor='middle'>" + t + "</text>";
+  }
+  var C = { h: "#ff6b6b", cl: "#ced4da", na: "#9775fa", oh: "#4c6ef5", w: "#20c997", m: "#868e96", nh4: "#f783ac" };
+  function beaker(x0, w, top, bot, liquid, tag) {
+    var h = "<path d='M" + x0 + " " + top + " V" + (bot - 20) + " Q" + x0 + " " + bot + " " + (x0 + 20) + " " + bot + " H" + (x0 + w - 20) + " Q" + (x0 + w) + " " + bot + " " + (x0 + w) + " " + (bot - 20) + " V" + top + "' fill='none' stroke='#adb5bd' stroke-width='5'/>";
+    h += "<path d='M" + (x0 + 3) + " " + (top + 40) + " V" + (bot - 20) + " Q" + (x0 + 3) + " " + (bot - 3) + " " + (x0 + 20) + " " + (bot - 3) + " H" + (x0 + w - 20) + " Q" + (x0 + w - 3) + " " + (bot - 3) + " " + (x0 + w - 3) + " " + (bot - 20) + " V" + (top + 40) + " Z' fill='" + liquid + "'" + (tag ? " class='" + tag + "'" : "") + "/>";
+    return h;
+  }
+
+  /* 4 — 염산과 수산화 나트륨 수용액 속 입자 */
+  (function () {
+    var s = "";
+    s += "<g data-step='1'>" + beaker(80, 520, 20, 318, "#fff5f5");
+    [[150, 120], [270, 100], [400, 130], [520, 110], [200, 230], [330, 260], [460, 220], [540, 270]].forEach(function (p, i) { s += ion(p[0], p[1] + 8, i % 2 ? "Cl⁻" : "H⁺", i % 2 ? C.cl : C.h, i % 2 ? "#343a40" : "#fff"); });
+    s += "<text x='340' y='352' font-size='24' font-weight='900' fill='#c92a2a' text-anchor='middle'>묽은 염산 (HCl)</text></g>";
+    s += "<g data-step='2'>" + beaker(800, 520, 20, 318, "#edf2ff");
+    [[870, 120], [990, 100], [1120, 130], [1240, 110], [920, 230], [1050, 260], [1180, 220], [1260, 270]].forEach(function (p, i) { s += ion(p[0], p[1] + 8, i % 2 ? "OH⁻" : "Na⁺", i % 2 ? C.oh : C.na); });
+    s += "<text x='1060' y='352' font-size='24' font-weight='900' fill='#3b5bdb' text-anchor='middle'>수산화 나트륨 수용액 (NaOH)</text></g>";
+    s += "<text x='1400' y='16' font-size='18' fill='#7b8598' text-anchor='end'>⚠ 물 분자는 생략 · 입자 수는 모형</text>";
+    document.getElementById("ionSvg").innerHTML = s;
+  })();
+
+  /* 5 — 시험관: BTB와 페놀프탈레인 */
+  (function () {
+    var groups = [{ n: "산 (염산·식초)", btb: "#ffd43b", pp: "#f8f9fa", ppn: "무색" , btn: "노랑" },
+                  { n: "에탄올", btb: "#51cf66", pp: "#f8f9fa", ppn: "무색", btn: "초록" },
+                  { n: "염기 (NaOH·석회수·암모니아수)", btb: "#4c6ef5", pp: "#f06595", ppn: "붉은색", btn: "파랑" }];
+    var s = "";
+    function tube(x, col, lab) {
+      return "<rect x='" + (x - 28) + "' y='30' width='56' height='170' rx='28' fill='#fff' stroke='#adb5bd' stroke-width='4'/>" +
+             "<rect x='" + (x - 24) + "' y='90' width='48' height='106' rx='24' fill='" + col + "'/>" +
+             "<text x='" + x + "' y='230' font-size='22' font-weight='900' fill='#161b28' text-anchor='middle'>" + lab + "</text>";
+    }
+    groups.forEach(function (g, i) {
+      var cx = 230 + i * 470;
+      s += "<g data-step='1'>" + tube(cx - 70, g.btb, "BTB " + g.btn) + tube(cx + 80, g.pp, "PP " + g.ppn) + "</g>";
+      s += "<text x='" + cx + "' y='275' font-size='24' font-weight='900' fill='#495057' text-anchor='middle'>" + g.n + "</text>";
+    });
+    s += "<text x='1400' y='20' font-size='18' fill='#7b8598' text-anchor='end'>PP = 페놀프탈레인 용액</text>";
+    document.getElementById("tubeSvg").innerHTML = s;
+  })();
+
+  /* 6 — 에탄올 · 암모니아수 · 식초 */
+  (function () {
+    function pill(x, y, t, fill, ink) {
+      var w = t.length * 13 + 26;
+      return "<rect x='" + (x - w / 2) + "' y='" + (y - 20) + "' width='" + w + "' height='40' rx='20' fill='" + fill + "'/><text x='" + x + "' y='" + (y + 7) + "' font-size='20' font-weight='900' fill='" + (ink || "#fff") + "' text-anchor='middle'>" + t + "</text>";
+    }
+    var P = [
+      { st: 1, x: 0, title: "에탄올 C₂H₅OH", col: "#2b8a3e", items: [["C₂H₅OH", C.m], ["C₂H₅OH", C.m], ["C₂H₅OH", C.m], ["C₂H₅OH", C.m]], cap1: "분자 그대로 · OH⁻ 없음", cap2: "지시약 변화 없음 · 전류 ×" },
+      { st: 2, x: 480, title: "암모니아수 NH₃", col: "#3b5bdb", items: [["NH₃", C.m], ["NH₃", C.m], ["NH₄⁺", C.nh4], ["OH⁻", C.oh]], cap1: "NH₃ + H₂O → NH₄⁺ + OH⁻", cap2: "OH가 없어도 염기" },
+      { st: 3, x: 960, title: "식초 CH₃COOH", col: "#c92a2a", items: [["CH₃COOH", C.m], ["CH₃COOH", C.m], ["H⁺", C.h], ["CH₃COO⁻", "#adb5bd", "#161b28"]], cap1: "H가 4개지만 일부만 H⁺ 하나", cap2: "약한 산" }
+    ];
+    var s = "";
+    P.forEach(function (p) {
+      var x = p.x;
+      s += "<g data-step='" + p.st + "'><rect x='" + x + "' y='0' width='440' height='340' rx='22' fill='#f2f5f9'/>";
+      s += "<text x='" + (x + 220) + "' y='42' font-size='28' font-weight='900' fill='" + p.col + "' text-anchor='middle'>" + p.title + "</text>";
+      var pos = [[x + 120, 110], [x + 320, 110], [x + 120, 180], [x + 320, 180]];
+      p.items.forEach(function (it, i) { s += pill(pos[i][0], pos[i][1], it[0], it[1], it[2]); });
+      s += "<text x='" + (x + 220) + "' y='262' font-size='23' font-weight='900' fill='#161b28' text-anchor='middle'>" + p.cap1 + "</text>";
+      s += "<text x='" + (x + 220) + "' y='300' font-size='23' font-weight='800' fill='" + p.col + "' text-anchor='middle'>" + p.cap2 + "</text></g>";
+    });
+    document.getElementById("ethSvg").innerHTML = s;
+  })();
+
+  /* 8 — 이온 모형: HCl 20 mL(H⁺ 8개) + NaOH v mL(2 mL마다 OH⁻ 1개) → 중화점 16 mL (단원 화면 모형) */
+  (function () {
+    var vols = [0, 8, 16, 24], s = "";
+    vols.forEach(function (v, k) {
+      var n = v / 2, hL = Math.max(0, 8 - n), ohL = Math.max(0, n - 8), water = Math.min(8, n);
+      var x0 = 20 + k * 350, liq = hL > 0 ? "#fff3bf" : (ohL > 0 ? "#dbe4ff" : "#d3f9d8");
+      var lab = hL > 0 ? "산성 · BTB 노랑" : (ohL > 0 ? "염기성 · BTB 파랑" : "중성 · BTB 초록");
+      var labc = hL > 0 ? "#e67700" : (ohL > 0 ? "#3b5bdb" : "#2b8a3e");
+      s += "<g" + (k ? " data-step='" + k + "'" : "") + ">";
+      s += "<text x='" + (x0 + 155) + "' y='26' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>NaOH " + v + " mL</text>";
+      s += beaker(x0, 310, 40, 290, liq);
+      var list = [], i;
+      for (i = 0; i < 8; i++) list.push(C.cl);
+      for (i = 0; i < hL; i++) list.push(C.h);
+      for (i = 0; i < water; i++) list.push(C.w);
+      for (i = 0; i < n; i++) list.push(C.na);
+      for (i = 0; i < ohL; i++) list.push(C.oh);
+      /* 자리를 섞어 놓는다(고정된 순서) */
+      list.forEach(function (c, j) {
+        var slot = (j * 13) % 32, cx = x0 + 34 + (slot % 8) * 35 + (Math.floor(slot / 8) % 2) * 10, cy = 120 + Math.floor(slot / 8) * 42;
+        s += "<circle cx='" + cx + "' cy='" + cy + "' r='14' fill='" + c + "' stroke='rgba(0,0,0,.25)' stroke-width='1.5'/>";
+      });
+      s += "<text x='" + (x0 + 155) + "' y='322' font-size='22' font-weight='900' fill='" + labc + "' text-anchor='middle'>" + lab + "</text>";
+      s += "<text x='" + (x0 + 155) + "' y='350' font-size='20' font-weight='800' fill='#495057' text-anchor='middle'>H⁺ " + hL + " · OH⁻ " + ohL + " · 물 " + water + "</text></g>";
+    });
+    var lg = [["H⁺", C.h], ["Cl⁻", C.cl], ["Na⁺", C.na], ["OH⁻", C.oh], ["H₂O(새로 생긴 물)", C.w]], lx = 330;
+    lg.forEach(function (g) { s += "<circle cx='" + lx + "' cy='372' r='9' fill='" + g[1] + "'/><text x='" + (lx + 16) + "' y='379' font-size='19' font-weight='800' fill='#495057'>" + g[0] + "</text>"; lx += g[0].length > 4 ? 260 : 120; });
+    document.getElementById("neutSvg").innerHTML = s;
+  })();
+
+  /* 9 — 온도 그래프: T = 20 + 56,000 × min(0.02, 0.00125v) ÷ (4.2 × (20 + v)) (단원 화면 모형, 최고 16 mL에서 약 27.4 ℃) */
+  (function () {
+    function T(v) { return 20 + 56000 * Math.min(0.02, 0.00125 * v) / (4.2 * (20 + v)); }
+    var X0 = 90, X1 = 750, Y0 = 380, Y1 = 50;
+    function X(v) { return X0 + v / 32 * (X1 - X0); }
+    function Y(t) { return Y0 - (t - 20) / 8 * (Y0 - Y1); }
+    var s = "<rect x='" + X0 + "' y='" + Y1 + "' width='" + (X(16) - X0) + "' height='" + (Y0 - Y1) + "' fill='#fff9db'/>";
+    s += "<rect x='" + X(16) + "' y='" + Y1 + "' width='" + (X1 - X(16)) + "' height='" + (Y0 - Y1) + "' fill='#edf2ff'/>";
+    [20, 22, 24, 26, 28].forEach(function (t) { s += "<line x1='" + X0 + "' y1='" + Y(t) + "' x2='" + X1 + "' y2='" + Y(t) + "' stroke='#dee2e6' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(t) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + t + "</text>"; });
+    s += "<text x='" + X0 + "' y='34' font-size='20' font-weight='900' fill='#5f6b80'>온도 (℃)</text>";
+    s += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 8, 16, 24, 32].forEach(function (v) { s += "<line x1='" + X(v) + "' y1='" + Y0 + "' x2='" + X(v) + "' y2='" + (Y0 + 10) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(v) + "' y='" + (Y0 + 36) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + v + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y0 + 66) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>넣은 수산화 나트륨 수용액 (mL)</text>";
+    s += "<text x='" + (X0 + 14) + "' y='" + (Y0 - 14) + "' font-size='20' font-weight='900' fill='#e67700'>산성 · 노랑</text>";
+    s += "<text x='" + (X1 - 14) + "' y='" + (Y0 - 14) + "' font-size='20' font-weight='900' fill='#3b5bdb' text-anchor='end'>염기성 · 파랑</text>";
+    function poly(a, b, step) {
+      var pts = [], v; for (v = a; v <= b + 1e-9; v += 0.5) pts.push(X(v).toFixed(1) + "," + Y(T(v)).toFixed(1));
+      var h = "<g data-step='" + step + "'><polyline points='" + pts.join(" ") + "' fill='none' stroke='#e03131' stroke-width='5'/>";
+      for (v = a; v <= b; v += 4) h += "<circle cx='" + X(v) + "' cy='" + Y(T(v)) + "' r='8' fill='#e03131'/>";
+      return h + "</g>";
+    }
+    s += poly(0, 16, 1);
+    s += "<g data-step='1'><line x1='" + X(16) + "' y1='" + Y1 + "' x2='" + X(16) + "' y2='" + Y0 + "' stroke='#2b8a3e' stroke-width='4' stroke-dasharray='10 6'/><text x='" + (X(16) + 10) + "' y='" + (Y1 + 26) + "' font-size='22' font-weight='900' fill='#2b8a3e'>중화점 16 mL · 초록</text></g>";
+    s += "<g data-step='2'><circle cx='" + X(16) + "' cy='" + Y(T(16)) + "' r='13' fill='none' stroke='#c92a2a' stroke-width='4'/><text x='" + (X(16) - 18) + "' y='" + (Y(T(16)) - 4) + "' font-size='24' font-weight='900' fill='#c92a2a' text-anchor='end' stroke='#fff' stroke-width='6' paint-order='stroke'>약 27 ℃ (최고)</text></g>";
+    s += poly(16, 32, 3);
+    document.getElementById("curveSvg").innerHTML = s;
+  })();
+
+  /* 10 — 시험 수조 pH: pH 4.0 물 1,000 L(H⁺ 0.1 mol) + Ca(OH)₂ m g(74 g/mol, OH⁻ 2개) (단원 화면 모형) */
+  (function () {
+    function pH(m) { var c = (0.1 - 2 * m / 74) / 1000, h = (c + Math.sqrt(c * c + 4e-14)) / 2; return -Math.log(h) / Math.LN10; }
+    var X0 = 90, X1 = 770, Y0 = 400, Y1 = 40;
+    function X(m) { return X0 + m / 6 * (X1 - X0); }
+    function Y(p) { return Y0 - (p - 3) / 8 * (Y0 - Y1); }
+    var s = "";
+    [3, 5, 7, 9, 11].forEach(function (p) { s += "<line x1='" + X0 + "' y1='" + Y(p) + "' x2='" + X1 + "' y2='" + Y(p) + "' stroke='#dee2e6' stroke-width='2'/><text x='" + (X0 - 10) + "' y='" + (Y(p) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + p + "</text>"; });
+    s += "<text x='" + X0 + "' y='26' font-size='20' font-weight='900' fill='#5f6b80'>pH</text>";
+    s += "<g data-step='1'><line x1='" + X0 + "' y1='" + Y(7) + "' x2='" + X1 + "' y2='" + Y(7) + "' stroke='#2b8a3e' stroke-width='3' stroke-dasharray='10 6'/><text x='" + (X1 - 6) + "' y='" + (Y(7) - 10) + "' font-size='20' font-weight='900' fill='#2b8a3e' text-anchor='end'>중성 pH 7</text>";
+    s += "<text x='" + (X1 - 6) + "' y='" + (Y(4.5) + 6) + "' font-size='20' font-weight='900' fill='#e67700' text-anchor='end'>산성 쪽</text><text x='" + (X1 - 6) + "' y='" + (Y(10.3) + 6) + "' font-size='20' font-weight='900' fill='#3b5bdb' text-anchor='end'>염기성 쪽</text></g>";
+    s += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [0, 1, 2, 3, 4, 5, 6].forEach(function (m) { s += "<line x1='" + X(m) + "' y1='" + Y0 + "' x2='" + X(m) + "' y2='" + (Y0 + 10) + "' stroke='#161b28' stroke-width='3'/><text x='" + X(m) + "' y='" + (Y0 + 36) + "' font-size='21' font-weight='800' fill='#161b28' text-anchor='middle'>" + m + "</text>"; });
+    s += "<text x='" + X1 + "' y='" + (Y0 + 64) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>넣은 소석회 Ca(OH)₂ (g)</text>";
+    var pts = [], m;
+    for (m = 0; m <= 6.0001; m += (m > 3.5 && m < 3.9 ? 0.002 : 0.02)) pts.push(X(m).toFixed(1) + "," + Y(Math.min(11, pH(m))).toFixed(1));
+    s += "<g data-step='2'><rect x='" + X0 + "' y='" + Y(8.5) + "' width='" + (X1 - X0) + "' height='" + (Y(6.5) - Y(8.5)) + "' fill='#40c057' opacity='.18'/>";
+    s += "<text x='" + (X0 + 10) + "' y='" + (Y(8.5) - 10) + "' font-size='20' font-weight='900' fill='#2b8a3e'>물고기가 사는 범위 pH 6.5~8.5</text>";
+    s += "<polyline points='" + pts.join(" ") + "' fill='none' stroke='#e03131' stroke-width='5'/></g>";
+    s += "<g data-step='3'><circle cx='" + X(3.7) + "' cy='" + Y(7) + "' r='11' fill='#1462d8'/><text x='" + (X(3.7) + 18) + "' y='" + (Y(7) + 34) + "' font-size='24' font-weight='900' fill='#1462d8' stroke='#fff' stroke-width='6' paint-order='stroke'>3.7 g → pH 7</text></g>";
+    document.getElementById("lakeSvg").innerHTML = s;
+  })();
+
+  /* 11 — 수조에서 호수로 */
+  (function () {
+    var s = "<defs><marker id='s11-a' viewBox='0 0 10 10' refX='8' refY='5' markerWidth='4' markerHeight='4' orient='auto'><path d='M0 0 L10 5 L0 10 Z' fill='#495057'/></marker>";
+    s += "<linearGradient id='s11-w' x1='0' x2='0' y1='0' y2='1'><stop offset='0' stop-color='#63e6be'/><stop offset='1' stop-color='#0b7285'/></linearGradient></defs>";
+    s += "<polygon points='110,110 190,70 270,110 190,150' fill='#99e9f2'/><polygon points='110,110 190,150 190,240 110,200' fill='#3bc9db'/><polygon points='190,150 270,110 270,200 190,240' fill='#15aabf'/>";
+    s += "<text x='190' y='280' font-size='24' font-weight='900' fill='#161b28' text-anchor='middle'>시험 수조 1 m³ (1,000 L)</text>";
+    s += "<text x='190' y='42' font-size='24' font-weight='900' fill='#1462d8' text-anchor='middle'>소석회 3.7 g</text>";
+    s += "<g data-step='1'><path d='M330 160 H560' stroke='#495057' stroke-width='7' marker-end='url(#s11-a)'/><text x='445' y='140' font-size='28' font-weight='900' fill='#495057' text-anchor='middle'>× 2,000,000</text>";
+    s += "<path d='M620 120 Q760 60 1000 80 Q1300 90 1360 150 Q1330 240 1050 250 Q760 260 640 210 Q590 170 620 120 Z' fill='url(#s11-w)'/>";
+    s += "<text x='990' y='170' font-size='28' font-weight='900' fill='#fff' text-anchor='middle'>호수 약 200만 m³</text>";
+    s += "<text x='990' y='42' font-size='24' font-weight='900' fill='#1462d8' text-anchor='middle'>소석회도 200만 배</text></g>";
+    s += "<text x='1400' y='296' font-size='18' fill='#7b8598' text-anchor='end'>⚠ 수조와 호수의 크기 비율은 실제와 다름</text>";
+    document.getElementById("scaleSvg").innerHTML = s;
+  })();
+})();
+</script>
+</body>
+</html>

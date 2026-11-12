@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>칠판 강의 · 자연선택과 진화 (통합과학2 Ⅰ-1 02)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="../assets/board.css">
+<style>
+  @keyframes isleIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+  .current .art .iwrap { animation: isleIn 1.2s ease both; }
+  .lines p { margin-bottom: 12px; }
+  .tight p { font-size: 28px; margin-bottom: 8px; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+  .sumlist { list-style: none; padding: 0; margin: 0; }
+  .sumlist li { position: relative; padding: 16px 24px 16px 84px; margin-bottom: 14px; background: #fff; border-radius: 20px; font-size: 28px; }
+  .sumlist li::before { content: attr(data-k); position: absolute; left: 24px; top: 16px; width: 44px; height: 44px; border-radius: 50%; background: var(--ink); color: #fff; font-weight: 900; font-size: 24px; text-align: center; line-height: 44px; }
+  .q { font-size: 31px !important; font-weight: 800; margin-bottom: 14px !important; }
+  #s-quiz .opt { font-size: 26px; padding: 14px 22px; }
+  #s-check1 .opt { font-size: 29px; padding: 14px 24px; }
+</style>
+</head>
+<body>
+<div class="deck"><div class="stage">
+
+<!-- 1 표지 -->
+<section class="slide dark cover" id="s-cover" data-title="표지">
+  <div class="art">
+    <svg viewBox="0 0 1600 520" aria-label="바다 위 작은 화산섬과 부리 두께가 다른 핀치 두 마리">
+      <defs>
+        <linearGradient id="c2-sea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#1864ab"/><stop offset="1" stop-color="#0b2a4a"/></linearGradient>
+        <linearGradient id="c2-isl" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#c49a6c"/><stop offset="1" stop-color="#7b5233"/></linearGradient>
+      </defs>
+      <g class="iwrap">
+        <circle cx="1260" cy="110" r="56" fill="#ffd43b" opacity=".9"/>
+        <rect x="0" y="400" width="1600" height="120" fill="url(#c2-sea)"/>
+        <path d="M520 402 L640 250 Q720 210 800 240 L860 262 Q940 230 1000 270 L1100 402Z" fill="url(#c2-isl)"/>
+        <path d="M720 250 Q760 285 800 252" fill="none" stroke="#5c4330" stroke-width="6"/>
+      </g>
+      <g data-step="1">
+        <g transform="translate(330 270)"><circle cx="0" cy="0" r="56" fill="#343a40"/><circle cx="16" cy="-14" r="8" fill="#fff"/><path d="M48 -16 L110 4 L48 18Z" fill="#ffa94d"/></g>
+        <g transform="translate(1290 290)"><circle cx="0" cy="0" r="56" fill="#343a40"/><circle cx="-16" cy="-14" r="8" fill="#fff"/><path d="M-46 -34 Q-118 2 -46 36Z" fill="#ffa94d"/></g>
+        <text x="330" y="370" font-size="24" font-weight="800" fill="#c9d1df" text-anchor="middle">얇은 부리</text>
+        <text x="1290" y="390" font-size="24" font-weight="800" fill="#c9d1df" text-anchor="middle">두꺼운 부리</text>
+      </g>
+      <text x="1560" y="510" fill="#9aa4b5" font-size="18" text-anchor="end">⚠ 새와 부리는 섬에 비해 크게 그렸습니다</text>
+    </svg>
+  </div>
+  <div class="ttl">
+    <p class="kicker">통합과학2 · Ⅰ-1 지구 환경 변화와 생물다양성 · 02</p>
+    <h1>자연선택과 진화</h1>
+    <p class="sub" data-step="1">1977년 다프네메이저섬, 핀치 열 마리 중 여덟 마리 이상이 굶어 죽었다</p>
+  </div>
+  <aside class="script">
+    <p>오늘은 생물이 어떻게 진화하는지, 그리고 그 결과 어떻게 다양해지는지 봅니다. 여러분은 갈라파고스의 현장 조사원입니다.</p>
+    <p data-at="1">피터·로즈메리 그랜트 부부의 실제 연구를 따라갑니다. 같은 종인데 부리 모양이 조금씩 다르다는 점을 기억해 두세요.</p>
+  </aside>
+</section>
+
+<!-- 2 도입 -->
+<section class="slide soft" id="s-hook" data-title="가뭄 뒤의 새끼들" data-part="도입">
+  <p class="kicker">도입 · 갈라파고스 제도 다프네메이저섬</p>
+  <h2>가뭄에서 살아남은 핀치, 그 새끼들은?</h2>
+  <div class="cols w64">
+    <div class="card">
+      <p>1977년 우기에 비가 거의 오지 않았다. 작고 부드러운 씨앗은 금방 동나고, 크고 딱딱한 <b>남가새</b> 씨앗만 남았다.</p>
+      <p class="big mt">어떤 핀치가 살아남았고, 이듬해 새끼들의 부리는?</p>
+    </div>
+    <div class="card yel">
+      <h3>여러분의 답은?</h3>
+      <div class="opts">
+        <div class="opt">㉠ 운 좋은 새들이 무작위로 살아남았고, 새끼의 부리는 예전과 같았다</div>
+        <div class="opt">㉡ 씨앗을 깨려고 애쓰는 동안 부리가 두꺼워졌고, 그 부리가 새끼에게 전해졌다</div>
+        <div class="opt">㉢ 원래 부리가 두꺼웠던 새가 더 많이 살아남았고, 새끼 세대는 평균 부리가 두꺼워졌다</div>
+      </div>
+      <p class="small mt" data-step="1">하나를 골라 까닭을 한 문장으로 말해 보세요.</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>그랜트 부부는 1973년부터 이 섬의 중간땅핀치를 한 마리씩 잡아 부리를 쟀습니다. 그러다 1977년 가뭄이 옵니다.</p>
+    <p data-at="1">손을 들게 하고 까닭을 묻습니다. 답은 주지 않습니다. 특히 ㉡을 고른 학생의 까닭을 잘 들어 두세요. 오늘 내내 확인합니다.</p>
+  </aside>
+</section>
+
+<!-- 3 키워드 -->
+<section class="slide" id="s-kw" data-title="오늘의 키워드" data-part="도입">
+  <p class="kicker">오늘의 키워드</p>
+  <h2>이 다섯 낱말로 오늘을 정리합니다</h2>
+  <div class="kw">
+    <div class="card"><b>변이</b><span>같은 종 안에서 개체마다 다른 형질</span></div>
+    <div class="card"><b>자연선택</b><span>환경이 살아남을 개체를 고르는 것</span></div>
+    <div class="card"><b>유전</b><span>형질이 자손에게 전해지는 것</span></div>
+    <div class="card"><b>진화</b><span>세대를 거치며 집단이 달라지는 것</span></div>
+    <div class="card"><b>항생제 내성</b><span>병원에서 빠르게 일어나는 같은 원리</span></div>
+  </div>
+  <div class="card blue mt2 row" style="gap:30px"><span class="blank on" style="font-size:34px;font-weight:900;flex:none"><i class="bn">1</i>빈칸</span>
+    <p style="margin:0">화면에 번호가 열리면 <b>학습지의 같은 번호</b>에 받아 적으세요. 오늘 빈칸은 <b>1~13번</b>입니다.</p></div>
+  <aside class="script"><p>키워드 다섯 개를 읽어 주기만 합니다. 정리 장면에서 모두 다시 나옵니다.</p></aside>
+</section>
+
+<!-- 4 1977년 가뭄 -->
+<section class="slide" id="s-drought" data-title="비가 오지 않은 해" data-part="① 변이">
+  <p class="kicker">① 같은 종 안의 차이, 변이 · 1977년 사건 기록</p>
+  <h2>섬이 바싹 말랐다</h2>
+  <svg viewBox="0 0 1400 356" width="1400" height="356" aria-label="평년보다 크게 줄어든 1977년 강수량, 작은 씨앗이 사라지고 큰 가시 씨앗만 남은 땅, 약 1,200마리에서 약 180마리로 줄어든 핀치 수">
+    <rect x="0" y="0" width="420" height="330" rx="18" fill="#f2f5f9"/>
+    <rect x="490" y="0" width="420" height="330" rx="18" fill="#f2f5f9"/>
+    <rect x="980" y="0" width="420" height="330" rx="18" fill="#f2f5f9"/>
+    <g font-size="24" font-weight="900" fill="#161b28" text-anchor="middle"><text x="210" y="40">우기 강수량</text><text x="700" y="40">땅에 남은 먹이</text><text x="1190" y="40">중간땅핀치 수</text></g>
+    <g data-step="1">
+      <rect x="90" y="80" width="100" height="200" rx="8" fill="#74c0fc"/><rect x="240" y="240" width="100" height="40" rx="8" fill="#1462d8"/>
+      <g font-size="21" font-weight="800" fill="#161b28" text-anchor="middle"><text x="140" y="310">평년</text><text x="290" y="310">1977년</text></g>
+      <text x="290" y="228" font-size="21" font-weight="900" fill="#1462d8" text-anchor="middle">약 24 mm</text>
+    </g>
+    <g data-step="2">
+      <g fill="#ffe066" stroke="#e8a900" stroke-width="2" opacity=".55">
+        <circle cx="560" cy="120" r="9"/><circle cx="600" cy="150" r="9"/><circle cx="650" cy="110" r="9"/><circle cx="700" cy="160" r="9"/><circle cx="750" cy="120" r="9"/><circle cx="800" cy="150" r="9"/><circle cx="845" cy="115" r="9"/>
+      </g>
+      <g><path d="M540 100 L870 180 M870 100 L540 180" stroke="#e03131" stroke-width="6"/><text x="700" y="88" font-size="20" font-weight="900" fill="#c92a2a" text-anchor="middle">작고 부드러운 씨앗 고갈</text></g>
+      <g fill="#8a6a45"><circle cx="600" cy="250" r="22"/><circle cx="700" cy="262" r="22"/><circle cx="800" cy="248" r="22"/></g>
+      <g stroke="#5c4330" stroke-width="5"><path d="M600 222 V214 M622 250 H630 M578 250 H570 M600 278 V286"/><path d="M700 234 V226 M722 262 H730 M678 262 H670 M700 290 V298"/><path d="M800 220 V212 M822 248 H830 M778 248 H770 M800 276 V284"/></g>
+      <text x="700" y="320" font-size="20" font-weight="900" fill="#5c4330" text-anchor="middle">크고 딱딱한 남가새 씨앗</text>
+    </g>
+    <g data-step="3">
+      <rect x="1060" y="70" width="110" height="210" rx="8" fill="#adb5bd"/><rect x="1220" y="248" width="110" height="32" rx="8" fill="#e8590c"/>
+      <g font-size="21" font-weight="800" fill="#161b28" text-anchor="middle"><text x="1115" y="310">가뭄 전 약 1,200</text><text x="1275" y="310">가뭄 뒤 약 180</text></g>
+    </g>
+    <text x="1395" y="352" font-size="18" fill="#5f6b80" text-anchor="end">⚠ 막대 높이는 비율만 맞춘 모식도</text>
+  </svg>
+  <div class="tight mt">
+    <p data-step="1">1977년 우기 강수량 약 24 mm (평년의 5분의 1 수준)</p>
+    <p data-step="2">작고 부드러운 씨앗은 동나고, 크고 딱딱한 가시투성이 씨앗만 남았다</p>
+    <p data-step="3">약 1,200마리 → 약 180마리: 약 <b class="blank" data-n="1" data-step="3">15</b>%만 살아남았다</p>
+  </div>
+  <aside class="script">
+    <p>현장 연구원의 사건 기록입니다.</p>
+    <p data-at="1">1977년 우기 강수량은 약 24 mm, 평년의 5분의 1 수준이었습니다.</p>
+    <p data-at="2">풀과 작은 나무가 씨앗을 맺지 못했어요. 작은 씨앗은 금방 동나고, 남가새의 크고 딱딱한 씨앗만 굴러다녔습니다.</p>
+    <p data-at="3">약 1,200마리이던 핀치가 약 180마리로. 빈칸 1번, 약 15%만 살아남았습니다. 누가 살아남았을까요?</p>
+  </aside>
+</section>
+
+<!-- 5 변이 -->
+<section class="slide" id="s-var" data-title="같은 종인데 부리가 다 다르다" data-part="① 변이">
+  <p class="kicker">① 같은 종 안의 차이, 변이 · 가뭄 전에 잰 부리 두께 (단원 화면 모형)</p>
+  <h2>같은 종인데 부리가 다 다르다</h2>
+  <div class="cols" style="grid-template-columns:780px 1fr;align-items:center">
+    <svg id="varSvg" viewBox="0 0 780 460" width="780" height="460" aria-label="핀치 200마리의 부리 두께 분포: 평균 약 9.4 mm를 중심으로 7 mm대부터 11 mm대까지 넓게 퍼져 있다"></svg>
+    <div class="lines">
+      <p data-step="1">막대가 하나가 아니라 넓게 퍼져 있다</p>
+      <p data-step="2">같은 종의 개체 사이에 나타나는 형질의 차이 → <b class="blank" data-n="2" data-step="2">변이</b></p>
+      <p data-step="3">까닭: <b class="blank" data-n="3" data-step="3">돌연변이</b>로 새로운 유전자가 생기고, <b class="blank" data-n="4" data-step="3">유성 생식</b> 과정에서 부모의 유전자가 다양하게 조합된다</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>가뭄 전에 그물로 잡아 잰 부리 두께, 그러니까 부리의 위아래 높이입니다. 단원 화면의 모형 집단 200마리를 0.5 mm 간격으로 쌓았어요.</p>
+    <p data-at="1">모두 중간땅핀치 한 종인데 7 mm대부터 11 mm대까지 퍼져 있습니다.</p>
+    <p data-at="2">이 차이가 빈칸 2번, 변이입니다. 가뭄이 오기 전부터 이미 있었다는 점이 중요해요.</p>
+    <p data-at="3">변이는 왜 생길까요? 빈칸 3번, 돌연변이로 새 유전자가 생기고, 빈칸 4번, 유성 생식 과정에서 부모의 유전자가 다양하게 섞여 자손에게 전해지기 때문입니다.</p>
+  </aside>
+</section>
+
+<!-- 6 자연선택 -->
+<section class="slide" id="s-sel" data-title="가뭄은 누구를 남겼나" data-part="② 자연선택과 유전">
+  <p class="kicker">② 자연선택과 유전 · 가뭄 전 집단과 살아남은 새의 비교</p>
+  <h2>가뭄은 누구를 남겼나</h2>
+  <svg id="selSvg" viewBox="0 0 1400 350" width="1400" height="350" aria-label="가뭄 전 집단(회색)과 살아남은 새(주황)의 부리 두께 분포. 살아남은 새의 분포가 약 0.5 mm 두꺼운 쪽으로 옮겨 가 있다"></svg>
+  <div class="tight">
+    <p data-step="1">딱딱한 씨앗을 깰 수 있는 <b class="blank" data-n="5" data-step="1">두꺼운</b> 부리가 살아남기에 유리하다</p>
+    <p data-step="2">살아남은 새의 평균 부리 두께가 가뭄 전 집단보다 약 0.5 mm 크다 (그랜트 부부의 기록)</p>
+    <p data-step="3">환경에 유리한 형질을 가진 개체가 더 많이 살아남아 자손을 남긴다 → <b class="blank" data-n="6" data-step="3">자연선택</b></p>
+  </div>
+  <p class="note">두 분포는 각각 전체를 100%로 놓고 그린 모식도(가뭄 전 평균 9.4 mm는 단원 화면 모형 값). 실제 섬에서는 몸 크기, 우연 등도 함께 작용합니다.</p>
+  <aside class="script">
+    <p>가뭄이 심할수록 작은 씨앗이 빨리 동나서, 딱딱한 남가새 씨앗을 깰 수 있는 부리가 아니면 버티기 어렵습니다.</p>
+    <p data-at="1">회색이 가뭄 전 집단입니다. 빈칸 5번, 두꺼운 부리가 유리했어요.</p>
+    <p data-at="2">주황이 살아남은 새입니다. 분포 전체가 두꺼운 쪽으로 옮겨 갔죠. 실제 기록으로 평균이 약 0.5 mm 컸습니다.</p>
+    <p data-at="3">환경이 살아남을 개체를 고른 것, 빈칸 6번, 자연선택입니다. 얇은 부리의 새도 일부 살아남았다는 점에 주의하세요. 운도 작용합니다.</p>
+  </aside>
+</section>
+
+<!-- 7 확인 -->
+<section class="slide" id="s-check1" data-title="부리가 자란 걸까" data-part="② 자연선택과 유전">
+  <p class="kicker">② 자연선택과 유전 · 확인</p>
+  <h2>가뭄 동안 한 마리 한 마리의 부리가 두꺼워졌을까?</h2>
+  <div class="opts" style="max-width:1300px">
+    <div class="opt wrong" data-step="1">① 그렇다. 딱딱한 씨앗을 먹다 보니 부리가 자랐다</div>
+    <div class="opt right" data-step="1">② 아니다. 각 개체의 부리는 그대로이고, 부리가 얇은 개체가 더 많이 죽어 ‘집단의 평균’이 달라졌다</div>
+    <div class="opt wrong" data-step="1">③ 그렇다. 살아남으려는 의지가 부리를 바꿨다</div>
+    <div class="opt wrong" data-step="1">④ 아니다. 평균은 달라지지 않았다</div>
+  </div>
+  <aside class="script">
+    <p>짝과 30초 이야기한 뒤 번호를 들게 합니다. 첫 추리에서 ㉡을 고른 학생에게 먼저 물어봅니다.</p>
+    <p data-at="1">정답은 ②. 다 자란 핀치의 부리 두께는 거의 변하지 않습니다. 생물의 필요나 의지가 형질을 바꾸지는 않아요.</p>
+  </aside>
+</section>
+
+<!-- 8 유전과 진화 -->
+<section class="slide" id="s-her" data-title="자손에게 전해질까" data-part="② 자연선택과 유전">
+  <p class="kicker">② 자연선택과 유전 · 세대를 거듭하면 (단원 화면 모형)</p>
+  <h2>자손에게 전해져야 집단이 바뀐다</h2>
+  <div class="cols" style="grid-template-columns:700px 1fr;align-items:center">
+    <svg id="herSvg" viewBox="0 0 700 440" width="700" height="440" aria-label="가뭄 세대를 거듭할 때 평균 부리 두께: 유전되는 비율 0%이면 그대로, 80%이면 세대마다 커진다"></svg>
+    <div class="lines">
+      <p data-step="1">유전되는 비율 0% → 몇 세대를 거듭해도 평균이 그대로</p>
+      <p data-step="2">형질이 자손에게 <b class="blank" data-n="7" data-step="2">유전</b>되어야 다음 세대가 달라진다</p>
+      <p data-step="3">개체가 아니라 <b class="blank" data-n="8" data-step="3">집단</b>의 형질 구성이 세대를 거치며 달라짐 → <b class="blank" data-n="9" data-step="3">진화</b></p>
+      <p class="small" data-step="4">핀치 부리 두께의 유전되는 비율은 약 0.8. 나머지는 자라는 동안의 먹이 같은 환경의 몫 → 형질은 유전과 환경이 함께 정한다</p>
+    </div>
+  </div>
+  <p class="note">단원 화면 모형: 자손 평균의 변화 = 유전되는 비율 × (살아남은 부모 평균 − 전체 평균). 그림은 변화의 방향만 나타냅니다.</p>
+  <aside class="script">
+    <p>살아남은 새의 부리가 평균적으로 두껍다는 건 확인했습니다. 그런데 이게 진화가 되려면 조건이 하나 더 필요해요.</p>
+    <p data-at="1">부리 두께의 차이가 자손에게 전혀 전해지지 않는다면, 가뭄을 몇 번 겪어도 다음 세대 평균은 그대로입니다.</p>
+    <p data-at="2">빈칸 7번, 유전. 차이가 자손에게 전해져야 다음 세대가 달라집니다.</p>
+    <p data-at="3">이렇게 세대를 거치며 빈칸 8번, 집단의 형질 구성이 달라지는 것이 빈칸 9번, 진화입니다. 한 마리가 진화하는 것이 아니에요.</p>
+    <p data-at="4">실제로 잰 핀치의 유전되는 비율은 약 0.8입니다. 형질은 유전이나 환경 하나로만 정해지지 않는다는 오개념도 여기서 짚어 줍니다.</p>
+  </aside>
+</section>
+
+<!-- 9 환경이 바뀌면 -->
+<section class="slide soft" id="s-rain" data-title="큰비가 내린 뒤" data-part="② 자연선택과 유전">
+  <p class="kicker">② 자연선택과 유전 · 1983년, 엘니뇨로 큰비가 내리자</p>
+  <h2>유리한 형질은 환경이 정한다</h2>
+  <svg id="rainSvg" viewBox="0 0 1400 330" width="1400" height="330" aria-label="가뭄 세대에는 평균 부리 두께가 커지고, 큰비가 내린 세대에는 다시 작아지는 모식 그래프"></svg>
+  <div class="tight">
+    <p data-step="1">가뭄: 크고 딱딱한 씨앗만 남음 → 두꺼운 부리가 유리 → 평균이 커진다</p>
+    <p data-step="2">큰비: 작고 부드러운 씨앗이 넘침 → 이번에는 부리가 작은 새가 유리 → 평균이 다시 작아진다</p>
+    <p data-step="3">어떤 형질이 유리한지는 <b class="blank" data-n="10" data-step="3">환경</b>이 정한다 · 진화에 정해진 방향은 없다</p>
+  </div>
+  <aside class="script">
+    <p>1983년에는 반대 일이 일어났습니다. 엘니뇨로 큰비가 내려 작고 부드러운 씨앗이 넘쳐 났어요.</p>
+    <p data-at="1">가뭄 세대에는 평균 부리가 커집니다.</p>
+    <p data-at="2">큰비 뒤에는 거꾸로 부리가 작은 새가 유리해져 평균이 다시 작아집니다.</p>
+    <p data-at="3">빈칸 10번, 환경. 진화는 ‘더 좋은 쪽’으로 정해진 길을 가는 것이 아니라, 그때그때 환경에 맞는 쪽으로 집단이 바뀌는 것입니다.</p>
+  </aside>
+</section>
+
+<!-- 10 항생제 내성 -->
+<section class="slide" id="s-abx" data-title="항생제가 듣지 않는 세균" data-part="③ 내성과 다양성">
+  <p class="kicker">③ 항생제 내성과 생물다양성 · 세균 100만 마리 배양 접시 실험 (단원 화면)</p>
+  <h2>같은 원리가 병원에서 훨씬 빠르게</h2>
+  <svg viewBox="0 0 1400 330" width="1400" height="330" aria-label="배양 접시 세 개: 내성 세균이 없을 때 항생제를 넣으면 모두 죽고, 내성 세균이 조금 섞였을 때 항생제가 없으면 보통 세균이 가득하며, 항생제를 넣으면 내성 세균이 접시를 차지한다">
+    <defs>
+      <pattern id="s10-n" width="26" height="22" patternUnits="userSpaceOnUse"><ellipse cx="8" cy="7" rx="7" ry="4" fill="#4dabf7"/><ellipse cx="20" cy="17" rx="7" ry="4" fill="#74c0fc"/></pattern>
+      <pattern id="s10-r" width="26" height="22" patternUnits="userSpaceOnUse"><ellipse cx="8" cy="7" rx="7" ry="4" fill="#e03131"/><ellipse cx="20" cy="17" rx="7" ry="4" fill="#ff6b6b"/></pattern>
+      <clipPath id="s10-c1"><circle cx="230" cy="150" r="120"/></clipPath>
+      <clipPath id="s10-c2"><circle cx="700" cy="150" r="120"/></clipPath>
+      <clipPath id="s10-c3"><circle cx="1170" cy="150" r="120"/></clipPath>
+    </defs>
+    <g data-step="1">
+      <circle cx="230" cy="150" r="120" fill="#f8f9fa" stroke="#868e96" stroke-width="6"/>
+      <g fill="#ced4da"><ellipse cx="190" cy="120" rx="7" ry="4"/><ellipse cx="250" cy="170" rx="7" ry="4"/><ellipse cx="220" cy="200" rx="7" ry="4"/></g>
+      <text x="230" y="300" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">(가) 내성 0마리 + 💊 항생제</text>
+      <text x="230" y="326" font-size="21" font-weight="800" fill="#5f6b80" text-anchor="middle">모두 죽고 내성 세균은 생기지 않음</text>
+    </g>
+    <g data-step="2">
+      <rect x="580" y="30" width="240" height="240" fill="url(#s10-n)" clip-path="url(#s10-c2)"/>
+      <g fill="#e03131"><ellipse cx="660" cy="110" rx="7" ry="4"/><ellipse cx="750" cy="200" rx="7" ry="4"/></g>
+      <circle cx="700" cy="150" r="120" fill="none" stroke="#868e96" stroke-width="6"/>
+      <text x="700" y="300" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">(나) 내성 조금 + 항생제 없음</text>
+      <text x="700" y="326" font-size="21" font-weight="800" fill="#5f6b80" text-anchor="middle">보통 세균이 가득, 내성 비율은 아주 낮음</text>
+    </g>
+    <g data-step="3">
+      <rect x="1050" y="30" width="240" height="240" fill="url(#s10-r)" clip-path="url(#s10-c3)"/>
+      <circle cx="1170" cy="150" r="120" fill="none" stroke="#868e96" stroke-width="6"/>
+      <text x="1170" y="300" font-size="22" font-weight="900" fill="#161b28" text-anchor="middle">(다) 내성 조금 + 💊 항생제</text>
+      <text x="1170" y="326" font-size="21" font-weight="800" fill="#c92a2a" text-anchor="middle">내성 세균이 접시를 차지</text>
+    </g>
+    <g font-size="20" font-weight="900"><rect x="1240" y="0" width="22" height="14" rx="7" fill="#4dabf7"/><text x="1270" y="13" fill="#1864ab">보통</text><rect x="1320" y="0" width="22" height="14" rx="7" fill="#e03131"/><text x="1350" y="13" fill="#c92a2a">내성</text></g>
+  </svg>
+  <div class="tight mt">
+    <p data-step="3">이미 섞여 있던 소수만 살아남아 불어남 → <b class="blank" data-n="11" data-step="3">항생제 내성</b> 세균이 접시를 차지</p>
+    <p data-step="4">항생제가 내성을 만든 것이 아니라, 이미 있던 변이를 골랐다 = 자연선택 (세균은 20~30분마다 분열)</p>
+  </div>
+  <aside class="script">
+    <p>감염내과 의사의 실험입니다. 세균 100만 마리가 든 접시에 항생제를 넣습니다. 열쇠는 항생제를 넣기 전에 내성 돌연변이 세균이 이미 섞여 있었느냐입니다.</p>
+    <p data-at="1">(가) 내성 세균이 0마리면, 항생제를 넣어도 내성 세균이 새로 생기지 않습니다.</p>
+    <p data-at="2">(나) 내성 세균이 조금 섞였어도 항생제가 없으면 보통 세균이 접시를 채워요. 내성을 유지하는 데 에너지가 들어 오히려 조금 느리게 자랍니다.</p>
+    <p data-at="3">(다) 항생제를 넣으면 보통 세균은 죽고, 처음 몇 마리뿐이던 내성 세균이 불어나 접시를 차지합니다. 빈칸 11번, 항생제 내성.</p>
+    <p data-at="4">변이가 먼저 있었고, 항생제라는 환경이 그것을 골랐습니다. 핀치와 같은 자연선택이에요. 세균은 20~30분마다 분열하니 훨씬 빨리 일어납니다.</p>
+  </aside>
+</section>
+
+<!-- 11 진화와 생물다양성 -->
+<section class="slide soft" id="s-tree" data-title="진화가 쌓이면" data-part="③ 내성과 다양성">
+  <p class="kicker">③ 항생제 내성과 생물다양성 · 한 조상에서 여러 종으로</p>
+  <h2>변이와 자연선택이 쌓여 다양해졌다</h2>
+  <div class="cols" style="grid-template-columns:720px 1fr;align-items:center">
+    <svg viewBox="0 0 720 470" width="720" height="470" aria-label="한 조상 집단이 세 갈래로 나뉘어 먹이에 맞게 부리가 두껍거나, 작거나, 가늘고 뾰족한 서로 다른 종이 된다">
+      <defs><marker id="s11-a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0 L10 5 L0 10 Z" fill="#495057"/></marker></defs>
+      <g transform="translate(360 410)"><circle r="40" fill="#495057"/><path d="M34 -10 L70 2 L34 14Z" fill="#ffa94d"/></g>
+      <text x="360" y="466" font-size="21" font-weight="900" fill="#161b28" text-anchor="middle">한 조상 집단</text>
+      <g data-step="1" stroke="#495057" stroke-width="6" fill="none" marker-end="url(#s11-a)">
+        <path d="M330 365 Q200 300 130 190"/><path d="M360 362 V200"/><path d="M390 365 Q520 300 590 190"/>
+      </g>
+      <g data-step="2">
+        <g transform="translate(120 120)"><circle r="44" fill="#343a40"/><path d="M36 -30 Q96 2 36 34Z" fill="#ffa94d"/></g>
+        <g transform="translate(360 120)"><circle r="44" fill="#343a40"/><path d="M38 -8 L66 2 L38 12Z" fill="#ffa94d"/></g>
+        <g transform="translate(600 120)"><circle r="44" fill="#343a40"/><path d="M38 -6 L112 2 L38 8Z" fill="#ffa94d"/></g>
+      </g>
+      <g data-step="3" font-size="21" font-weight="900" fill="#161b28" text-anchor="middle">
+        <text x="120" y="40">딱딱한 큰 씨앗</text><text x="360" y="40">작은 씨앗</text><text x="600" y="40">곤충</text>
+      </g>
+      <text x="0" y="466" font-size="18" fill="#5f6b80">⚠ 부리 모양 모식도</text>
+    </svg>
+    <div class="lines">
+      <p data-step="1">한 조상 집단이 서로 다른 환경으로 나뉜다</p>
+      <p data-step="2">환경마다 다른 형질이 자연선택되고 차이가 쌓여 서로 다른 <b class="blank" data-n="12" data-step="2">종</b>이 된다</p>
+      <p data-step="3">갈라파고스 핀치 10여 종 · 지구의 <b class="blank" data-n="13" data-step="3">생물다양성</b>은 변이와 자연선택이 쌓인 결과</p>
+    </div>
+  </div>
+  <aside class="script">
+    <p>이런 과정이 서로 다른 환경에서 오랜 세월 되풀이되면 어떻게 될까요?</p>
+    <p data-at="1">한 조상에서 갈라져 나온 집단들이 저마다 다른 섬, 다른 먹이 환경에 놓입니다.</p>
+    <p data-at="2">환경마다 유리한 부리가 달라 차이가 쌓이고, 결국 빈칸 12번, 서로 다른 종이 됩니다.</p>
+    <p data-at="3">갈라파고스의 핀치 10여 종이 섬마다 먹이에 맞는 부리를 갖게 된 것처럼, 빈칸 13번, 생물다양성은 변이와 자연선택이 쌓여 만들어졌습니다. 지난 시간 대멸종 뒤 다시 다양해진 과정도 이것이에요.</p>
+  </aside>
+</section>
+
+<!-- 12 정리 -->
+<section class="slide soft" id="s-sum" data-title="오늘의 정리" data-part="정리">
+  <p class="kicker">오늘의 정리</p>
+  <h2>가뭄은 부리를 키우지 않았다. 골랐을 뿐이다</h2>
+  <ul class="sumlist">
+    <li data-k="1" data-step="1"><b>변이</b>: 같은 종 안에서 개체마다 다른 형질 · 돌연변이와 유성 생식의 유전자 조합에서 생긴다</li>
+    <li data-k="2" data-step="2"><b>자연선택</b>: 환경에 유리한 형질의 개체가 더 많이 살아남아 자손을 남긴다 (가뭄 → 두꺼운 부리)</li>
+    <li data-k="3" data-step="3">그 형질이 <b>유전</b>되면 세대를 거치며 집단이 달라진다 → <b>진화</b> · 유리한 형질은 환경이 정한다</li>
+    <li data-k="4" data-step="4"><b>항생제 내성</b>도 같은 원리 · 변이와 자연선택이 쌓여 <b>생물다양성</b>이 만들어졌다</li>
+  </ul>
+  <aside class="script"><p>학습지를 덮고 한 줄씩 먼저 말로 떠올리게 한 다음 엽니다. 마지막에 첫 추리 ㉠㉡㉢ 가운데 무엇이 맞았는지, 다른 두 개는 왜 틀렸는지 말하게 합니다.</p></aside>
+</section>
+
+<!-- 13 문제 -->
+<section class="slide" id="s-quiz" data-title="문제로 확인하기" data-part="정리">
+  <p class="kicker">문제로 확인하기</p>
+  <h2>두 문제만 풀어 봅시다</h2>
+  <div class="cols">
+    <div class="card">
+      <p class="q">1. 항생제를 쓴 뒤 내성 세균이 늘어난 까닭은?</p>
+      <div class="opts">
+        <div class="opt wrong" data-step="1">㉠ 항생제가 보통 세균을 내성 세균으로 바꾸었다</div>
+        <div class="opt right" data-step="1">㉡ 이미 섞여 있던 내성 세균만 살아남아 불어났다</div>
+        <div class="opt wrong" data-step="1">㉢ 세균이 살아남으려고 스스로 내성을 길렀다</div>
+      </div>
+    </div>
+    <div class="card">
+      <p class="q">2. 진화가 일어나려면, 살아남는 데 유리한 형질이</p>
+      <div class="opts">
+        <div class="opt right" data-step="2">㉠ 자손에게 유전되어야 한다</div>
+        <div class="opt wrong" data-step="2">㉡ 개체가 노력해서 더 커져야 한다</div>
+        <div class="opt wrong" data-step="2">㉢ 모든 개체에서 똑같아야 한다</div>
+      </div>
+    </div>
+  </div>
+  <aside class="script">
+    <p>1분 동안 풀게 하고 손가락으로 답을 들게 합니다.</p>
+    <p data-at="1">1번은 ㉡. ㉠과 ㉢은 (가) 접시, 내성 세균 0마리 실험으로 반박할 수 있습니다.</p>
+    <p data-at="2">2번은 ㉠. 변이가 없으면(㉢) 고를 것도 없습니다.</p>
+  </aside>
+</section>
+
+<!-- 14 활동·다음 -->
+<section class="slide dark" id="s-next" data-title="직접 해 보기 · 다음 시간" data-part="정리">
+  <p class="kicker">직접 해 보기</p>
+  <h2>이야기 ② 「가뭄이 지나간 섬」</h2>
+  <div class="cols">
+    <div class="card"><h3>직접 세대를 돌려 보세요</h3><p>핀치 100마리 재기, 1977년 생존율 재현, 유전되는 비율을 바꿔 세대 진행, 배양 접시 세 가지 실험이 기다립니다.</p>
+      <p class="mt"><a href="index.html" style="color:#74b6ff;font-weight:900">단원 화면 열기 →</a></p></div>
+    <div class="card"><h3>다음 시간 · 03 생물다양성의 의미</h3><p>1845년 아일랜드의 감자밭은 왜 병 하나에 한꺼번에 무너졌을까요? 다양성이 왜 중요한지 밭과 숲과 들판에서 확인합니다.</p></div>
+  </div>
+  <aside class="script"><p>남은 시간에는 단원 화면의 이야기 ②를 열어 미션을 하게 합니다.</p></aside>
+</section>
+
+</div></div>
+<script src="../assets/board.js"></script>
+<script>
+(function () {
+  "use strict";
+  function erf(x) { var s = x < 0 ? -1 : 1; x = Math.abs(x); var t = 1 / (1 + 0.3275911 * x); var y = 1 - (((((1.061405429 * t - 1.453152027) * t) + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x); return s * y; }
+  function cdf(x, m, sd) { return 0.5 * (1 + erf((x - m) / (sd * Math.SQRT2))); }
+  /* 부리 두께 분포 — 단원 화면 모형: 200마리, 평균 9.4 mm, 표준 편차 0.8 mm, 0.5 mm 간격 */
+  (function () {
+    var svg = document.getElementById("varSvg"), X0 = 90, X1 = 750, Y0 = 380, Y1 = 50;
+    function X(v) { return X0 + (v - 7) / 5 * (X1 - X0); }
+    function Y(c) { return Y0 - c / 50 * (Y0 - Y1); }
+    var h = "";
+    [10, 20, 30, 40, 50].forEach(function (c) { h += "<line x1='" + X0 + "' y1='" + Y(c) + "' x2='" + X1 + "' y2='" + Y(c) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(c) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + c + "</text>"; });
+    h += "<text x='" + (X0 - 60) + "' y='24' font-size='20' font-weight='900' fill='#5f6b80'>마리 수</text>";
+    h += "<g data-step='1'>";
+    for (var b = 7; b < 12; b += 0.5) {
+      var c = 200 * (cdf(b + 0.5, 9.4, 0.8) - cdf(b, 9.4, 0.8));
+      h += "<rect x='" + (X(b) + 3) + "' y='" + Y(c) + "' width='" + (X(b + 0.5) - X(b) - 6) + "' height='" + (Y0 - Y(c)) + "' rx='4' fill='#1462d8'/>";
+    }
+    h += "<line x1='" + X(9.4) + "' y1='" + (Y1 + 10) + "' x2='" + X(9.4) + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='3' stroke-dasharray='8 6'/><text x='" + (X(9.4) + 8) + "' y='" + (Y1 + 6) + "' font-size='21' font-weight='900' fill='#161b28'>평균 약 9.4 mm</text></g>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [7, 8, 9, 10, 11, 12].forEach(function (v) { h += "<text x='" + X(v) + "' y='" + (Y0 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + v + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y0 + 58) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>부리 두께 (mm)</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 가뭄 전 집단과 살아남은 새 — 각각 100%로 놓은 분포, 생존자 평균 +0.5 mm(실제 기록의 차이) */
+  (function () {
+    var svg = document.getElementById("selSvg"), X0 = 120, X1 = 1300, Y0 = 290, Y1 = 40;
+    function X(v) { return X0 + (v - 7) / 5.5 * (X1 - X0); }
+    function Y(p) { return Y0 - p / 28 * (Y0 - Y1); }
+    var h = "<text x='" + (X0 - 100) + "' y='24' font-size='20' font-weight='900' fill='#5f6b80'>비율 (%)</text>";
+    [10, 20].forEach(function (p) { h += "<line x1='" + X0 + "' y1='" + Y(p) + "' x2='" + X1 + "' y2='" + Y(p) + "' stroke='#e8edf4' stroke-width='2'/><text x='" + (X0 - 12) + "' y='" + (Y(p) + 7) + "' font-size='20' font-weight='800' fill='#5f6b80' text-anchor='end'>" + p + "</text>"; });
+    function bars(m, fill, stroke, step) {
+      var s = "<g data-step='" + step + "'>";
+      for (var b = 7; b < 12.5; b += 0.5) { var p = 100 * (cdf(b + 0.5, m, 0.8) - cdf(b, m, 0.8)); s += "<rect x='" + (X(b) + 4) + "' y='" + Y(p) + "' width='" + (X(b + 0.5) - X(b) - 8) + "' height='" + (Y0 - Y(p)) + "' rx='4' fill='" + fill + "' stroke='" + stroke + "' stroke-width='4'/>"; }
+      return s + "</g>";
+    }
+    h += bars(9.4, "#ced4da", "#adb5bd", 1) + bars(9.9, "rgba(232,89,12,.28)", "#e8590c", 2);
+    h += "<g data-step='1'><line x1='" + X(9.4) + "' y1='" + (Y1 - 6) + "' x2='" + X(9.4) + "' y2='" + Y0 + "' stroke='#495057' stroke-width='3' stroke-dasharray='8 6'/><text x='" + (X(9.4) - 10) + "' y='" + (Y1 + 2) + "' font-size='22' font-weight='900' fill='#495057' text-anchor='end'>가뭄 전 평균</text></g>";
+    h += "<g data-step='2'><line x1='" + X(9.9) + "' y1='" + (Y1 - 6) + "' x2='" + X(9.9) + "' y2='" + Y0 + "' stroke='#e8590c' stroke-width='3' stroke-dasharray='8 6'/><text x='" + (X(9.9) + 10) + "' y='" + (Y1 + 2) + "' font-size='22' font-weight='900' fill='#e8590c'>살아남은 새 평균 (약 +0.5 mm)</text></g>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    [7, 8, 9, 10, 11, 12].forEach(function (v) { h += "<text x='" + X(v) + "' y='" + (Y0 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + v + "</text>"; });
+    h += "<text x='" + X1 + "' y='" + (Y0 + 56) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>부리 두께 (mm)</text>";
+    svg.innerHTML = h;
+  })();
+
+  /* 세대별 평균 — 유전되는 비율 0% 와 80% (방향만 나타낸 모식도) */
+  (function () {
+    var svg = document.getElementById("herSvg"), X0 = 80, X1 = 660, Y0 = 370, Y1 = 50;
+    function X(g) { return X0 + g / 5 * (X1 - X0); }
+    function Y(d) { return Y0 - 40 - d / 2.4 * (Y0 - Y1 - 60); }
+    var h = "<text x='" + (X0 - 50) + "' y='26' font-size='20' font-weight='900' fill='#5f6b80'>평균 부리 두께 ↑</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/><line x1='" + X0 + "' y1='" + Y1 + "' x2='" + X0 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    for (var g = 0; g <= 5; g++) h += "<text x='" + X(g) + "' y='" + (Y0 + 30) + "' font-size='20' font-weight='800' fill='#161b28' text-anchor='middle'>" + g + "</text>";
+    h += "<text x='" + X1 + "' y='" + (Y0 + 58) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>가뭄 세대</text>";
+    function line(k, col, step, lab) {
+      var p = [], s; for (var g = 0; g <= 5; g++) p.push(X(g) + " " + Y(k * g));
+      s = "<g data-step='" + step + "'><polyline points='" + p.join(" ") + "' fill='none' stroke='" + col + "' stroke-width='6'/>";
+      for (g = 0; g <= 5; g++) s += "<circle cx='" + X(g) + "' cy='" + Y(k * g) + "' r='8' fill='" + col + "'/>";
+      return s + "<text x='" + (X(5) - 6) + "' y='" + (Y(k * 5) - 18) + "' font-size='22' font-weight='900' fill='" + col + "' text-anchor='end'>" + lab + "</text></g>";
+    }
+    h += line(0, "#868e96", 1, "유전되는 비율 0%") + line(0.4, "#1462d8", 2, "유전되는 비율 80%");
+    svg.innerHTML = h;
+  })();
+
+  /* 가뭄 → 큰비: 평균 부리 두께의 오르내림 (모식도) */
+  (function () {
+    var svg = document.getElementById("rainSvg"), X0 = 80, X1 = 1380, Y0 = 280, Y1 = 50;
+    var v = [0, 0.4, 0.8, 1.2, 1.6, 1.3, 1.0, 0.7, 0.4];
+    function X(g) { return X0 + g / 8 * (X1 - X0); }
+    function Y(d) { return Y0 - 20 - d / 1.8 * (Y0 - Y1 - 40); }
+    var h = "<rect x='" + X(0) + "' y='" + Y1 + "' width='" + (X(4) - X(0)) + "' height='" + (Y0 - Y1) + "' fill='#fff4e6'/><rect x='" + X(4) + "' y='" + Y1 + "' width='" + (X(8) - X(4)) + "' height='" + (Y0 - Y1) + "' fill='#e7f5ff'/>";
+    h += "<text x='" + ((X(0) + X(4)) / 2) + "' y='" + (Y1 + 32) + "' font-size='24' font-weight='900' fill='#d9480f' text-anchor='middle'>☀️ 가뭄이 이어진 세대</text>";
+    h += "<text x='" + ((X(4) + X(8)) / 2) + "' y='" + (Y1 + 32) + "' font-size='24' font-weight='900' fill='#1864ab' text-anchor='middle'>🌧️ 큰비가 내린 세대</text>";
+    h += "<line x1='" + X0 + "' y1='" + Y0 + "' x2='" + X1 + "' y2='" + Y0 + "' stroke='#161b28' stroke-width='4'/>";
+    h += "<text x='" + X1 + "' y='" + (Y0 + 32) + "' font-size='20' font-weight='900' fill='#5f6b80' text-anchor='end'>세대 →</text><text x='" + X0 + "' y='" + (Y0 + 32) + "' font-size='20' font-weight='900' fill='#5f6b80'>평균 부리 두께 (높을수록 두꺼움)</text>";
+    function seg(a, b, col, step) { var p = []; for (var g = a; g <= b; g++) p.push(X(g) + " " + Y(v[g])); var s = "<g data-step='" + step + "'><polyline points='" + p.join(" ") + "' fill='none' stroke='" + col + "' stroke-width='6'/>"; for (g = a; g <= b; g++) s += "<circle cx='" + X(g) + "' cy='" + Y(v[g]) + "' r='9' fill='" + col + "'/>"; return s + "</g>"; }
+    h += seg(0, 4, "#e8590c", 1) + seg(4, 8, "#1462d8", 2);
+    svg.innerHTML = h;
+  })();
+})();
+</script>
+</body>
+</html>

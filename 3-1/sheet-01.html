@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개념정리 학습지 · 감염병을 추적하라 (통합과학2 Ⅲ-1 01)</title>
+<link rel="icon" href="https://wmfsljy-coder.github.io/science-teacher-hub-qtrqwc/assets/hub-icon.svg" type="image/svg+xml">
+<style>
+  /* 개념정리 학습지 — 칠판 강의 화면(board-01.html)의 빈칸 번호와 1:1. 주소 끝 ?key=1 이면 교사용 정답이 보인다. */
+  @import url('https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;700;800;900&display=swap');
+  @page { size: A4; margin: 13mm 14mm; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e9edf2; font-family: "Gothic A1", "Malgun Gothic", sans-serif; color: #161b28; }
+  .paper { width: 210mm; min-height: 297mm; margin: 18px auto; background: #fff; padding: 13mm 14mm; box-shadow: 0 4px 24px rgba(0,0,0,.12); }
+  .tools { width: 210mm; margin: 18px auto 0; display: flex; gap: 10px; justify-content: flex-end; font-size: 14px; }
+  .tools a, .tools button { font: inherit; font-weight: 800; padding: 8px 14px; border-radius: 10px; border: 2px solid #c9d1dd; background: #fff; color: #161b28; text-decoration: none; cursor: pointer; }
+  .tools button.main { background: #1462d8; border-color: #1462d8; color: #fff; }
+  header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 3px solid #161b28; padding-bottom: 8px; margin-bottom: 12px; }
+  header .k { font-size: 11.5px; font-weight: 800; color: #5f6b80; }
+  header h1 { font-size: 22px; font-weight: 900; margin: 2px 0 0; letter-spacing: -.03em; }
+  header .who { display: flex; gap: 8px; font-size: 12px; font-weight: 800; }
+  header .who span { border: 1.5px solid #9aa4b5; border-radius: 6px; padding: 6px 10px; min-width: 92px; }
+  .key-mark { display: none; color: #d9302c; font-weight: 900; font-size: 12px; }
+  .key .key-mark { display: inline; }
+  .guide { font-size: 11.5px; color: #5f6b80; margin: 0 0 10px; }
+  h2 { font-size: 15.5px; font-weight: 900; margin: 11px 0 5px; padding: 4px 10px; background: #eef2f8; border-left: 5px solid #1462d8; border-radius: 4px; }
+  p, li { font-size: 13.5px; line-height: 1.88; margin: 0; }
+  ul { margin: 0; padding-left: 18px; }
+  .blank { position: relative; display: inline-block; min-width: 4.4em; padding: 0 1.1em 0 1.7em; margin: 0 2px; border-bottom: 1.6px solid #161b28; color: transparent; line-height: 1.5; text-align: center; font-weight: 800; }
+  .blank::before { content: attr(data-n); position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; border-radius: 50%; background: #1462d8; color: #fff; font-size: 9.5px; font-weight: 900; line-height: 15px; text-align: center; }
+  .key .blank { color: #d9302c; }
+  table { border-collapse: collapse; width: 100%; font-size: 12.5px; margin: 4px 0 2px; }
+  td, th { border: 1px solid #c9d1dd; padding: 4px 8px; text-align: left; line-height: 1.6; }
+  th { background: #f4f6fa; font-weight: 800; }
+  .q { margin-top: 6px; }
+  .q p { line-height: 1.7; }
+  .q .ans { display: none; color: #d9302c; font-weight: 900; }
+  .key .q .ans { display: inline; }
+  .write { border: 1.5px solid #9aa4b5; border-radius: 8px; height: 54px; margin-top: 4px; }
+  .foot { margin-top: 10px; font-size: 10.5px; color: #8a94a6; display: flex; justify-content: space-between; }
+  @media print {
+    body { background: #fff; }
+    .tools { display: none; }
+    .paper { margin: 0; box-shadow: none; width: auto; min-height: 0; padding: 0; }
+  }
+</style>
+<style>/* A4 한 장에 맞게 줄 간격·여백을 줄인다 */ p, li { font-size: 12.8px; line-height: 1.55; } table { font-size: 12px; } td, th { padding: 2px 7px; line-height: 1.42; } h2 { font-size: 14.5px; margin: 7px 0 3px; padding: 3px 10px; } header { margin-bottom: 8px; } .guide { margin-bottom: 6px; } .write { height: 36px; } .foot { margin-top: 6px; } td.n { text-align: right; }</style>
+</head>
+<body>
+<div class="tools">
+  <a href="board-01.html">칠판 강의 화면</a>
+  <a id="keyLink" href="?key=1" hidden>교사용 정답 보기</a>
+  <button class="main" onclick="window.print()">인쇄하기</button>
+</div>
+<div class="paper">
+  <header>
+    <div>
+      <div class="k">통합과학2 · Ⅲ-1 과학 기술의 활용 · 01 &nbsp;<span class="key-mark">[교사용 정답]</span></div>
+      <h1>개념정리 학습지 · 감염병을 추적하라</h1>
+    </div>
+    <div class="who"><span>학번</span><span>이름</span></div>
+  </header>
+  <p class="guide">칠판 화면에 번호가 열리면 같은 번호 빈칸에 받아 적으세요. (빈칸 1~14)</p>
+
+  <h2>① 추적 — 1854년 런던 브로드가의 콜레라</h2>
+  <ul>
+    <li>열흘 사이 500명 이상 사망(최종 616명). 당시에는 ‘나쁜 공기’가 병을 옮긴다고 믿음</li>
+    <li>존 스노: 사망자가 나온 집을 지도에 표시 → 브로드가 펌프 둘레에 몰림. ‘어디서 몇 명’이 가리킨 <b class="blank" data-n="1">감염원</b></li>
+    <li>펌프 옆 양조장(자체 우물·맥주) 사망 0명, 구빈원(자체 우물) 5명, 멀리 살아도 이 물을 마신 부인은 사망 → 콜레라는 <b class="blank" data-n="2">오염된 물</b>로 퍼진다</li>
+    <li>9월 8일 손잡이 제거 · 콜레라균 확인은 약 30년 뒤(1883년). 병원체를 보지 못하고 데이터로 감염원을 찾음 → <b class="blank" data-n="3">역학</b>의 출발점</li>
+  </ul>
+
+  <h2>② 진단 — PCR과 신속항원검사</h2>
+  <ul>
+    <li>PCR(중합 효소 연쇄 반응): 온도를 올렸다 내리는 한 주기마다 표적 유전자가 <b class="blank" data-n="4">2배</b> → 10주기면 2¹⁰ = 1,024배(약 1,000배)</li>
+    <li>형광 신호가 검출 기준선을 처음 넘는 주기 수 → <b class="blank" data-n="5">Ct 값</b> (단원 모형: 처음 10개 → 34, 처음 1만 개 → 24)</li>
+    <li>Ct 값이 <b class="blank" data-n="6">작을수록</b> 처음 유전자가 많다 (Ct 10 차이 ≈ 1,000배)</li>
+  </ul>
+  <table>
+    <tr><th style="width:30%">시민 10,000명 (유병률 1%)</th><th>검사 양성</th><th>검사 음성</th></tr>
+    <tr><td>감염자 100명</td><td>80명</td><td>20명 (위음성)</td></tr>
+    <tr><td>비감염자 9,900명</td><td>198명 (위양성)</td><td>9,702명</td></tr>
+  </table>
+  <ul>
+    <li>감염자를 양성으로 잡아내는 비율 → <b class="blank" data-n="7">민감도</b> 80% · 비감염자를 음성으로 걸러 내는 비율 → <b class="blank" data-n="8">특이도</b> 98%</li>
+    <li>양성 278명 중 진짜 감염자 80명 → 80 ÷ 278 ≈ 28.8% : 양성인 사람이 진짜 감염자일 확률 = <b class="blank" data-n="9">양성 예측도</b></li>
+    <li>같은 검사도 <b class="blank" data-n="10">유병률</b>이 높은 집단에서는 양성 예측도가 높다 (단원 모형: 19%부터 90% 이상)</li>
+  </ul>
+
+  <h2>③ 예측·예방 — 감염 재생산 지수와 유행 곡선</h2>
+  <ul>
+    <li>환자 한 명이 평균 몇 명에게 옮기나 → <b class="blank" data-n="11">감염 재생산 지수</b> R · 대책이 없을 때의 값 R₀ (감염병 X는 3)</li>
+    <li>R이 <b class="blank" data-n="12">1 미만</b>이면 세대마다 환자가 줄어 유행이 스스로 꺼진다</li>
+    <li>병상·의료진이 동시에 감당할 수 있는 환자 수 → <b class="blank" data-n="13">의료 역량</b> (인구 10만 도시에서 5,000명)</li>
+  </ul>
+  <table>
+    <tr><th style="width:24%">대책</th><th style="width:26%">R = R₀ × (1 − 접촉 감소) × (1 − 접종률)</th><th>동시 환자 최대 (단원 모형)</th></tr>
+    <tr><td>대책 없음</td><td>3.00</td><td>약 30,464명 (36일째) · 의료 역량의 약 6배</td></tr>
+    <tr><td>접촉 −40%</td><td>3 × 0.6 = 1.80</td><td>약 11,880명 (77일째) · 아직 역량 초과</td></tr>
+    <tr><td>접촉 −40% + 접종 20%</td><td>3 × 0.6 × 0.8 = 1.44</td><td>약 4,212명 (121일째) · 역량 아래 (정점이 낮아지고 늦춰짐)</td></tr>
+  </table>
+  <ul>
+    <li>접촉을 줄이지 않아도 면역을 가진 비율이 1 − 1/R₀ = 1 − 1/3 ≈ 67%를 넘으면 R &lt; 1 → <b class="blank" data-n="14">집단 면역</b></li>
+    <li>과학의 세 역할: 진단(감염 여부) · 추적(퍼지는 경로) · 예측·예방(모형으로 계산하고 미리 막기)</li>
+  </ul>
+
+  <h2>문제로 확인하기</h2>
+  <div class="q">
+    <p>1. 같은 PCR 검사에서 Ct 값이 22인 검체와 32인 검체 가운데 처음 유전자가 약 1,000배 많은 것은? <span class="ans">→ Ct 22인 검체</span></p>
+    <p>2. R₀ = 3인 감염병에서 접촉을 40% 줄이면(접종 없음) R은? <span class="ans">→ 3 × 0.6 = 1.8</span></p>
+  </div>
+  <h2>한 문장 정리</h2>
+  <p>‘미래 사회의 문제를 푸는 데 과학이 필요하다’는 주장을 오늘 본 숫자 하나를 근거로 들어 한 문장으로 쓰세요.</p>
+  <div class="write"></div>
+  <div class="foot"><span>칠판 강의 화면: board-01.html · 이야기 ① 「펌프의 손잡이를 떼어라」</span><span>과학 수업 도구</span></div>
+</div>
+<script>
+  if (new URLSearchParams(location.search).get("key") === "1") {
+    document.body.classList.add("key");
+    var a = document.getElementById("keyLink"); a.textContent = "학생용으로 보기"; a.href = "?"; a.hidden = false;
+  }
+</script>
+</body>
+</html>
